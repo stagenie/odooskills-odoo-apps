@@ -1,0 +1,54 @@
+from odoo.tests.common import TransactionCase
+
+
+class TestOskiAppStore(TransactionCase):
+
+    def test_category_create(self):
+        cat = self.env["oski.module.category"].create({"name": "Ventes"})
+        self.assertEqual(cat.name, "Ventes")
+        self.assertEqual(cat.sequence, 10)
+
+    def test_version_unique_per_odoo_version(self):
+        from psycopg2 import IntegrityError
+        from odoo.tools import mute_logger
+        module = self.env["oski.module"].create(
+            {"name": "Mon Module", "technical_name": "oski_demo"}
+        )
+        self.env["oski.module.version"].create(
+            {"module_id": module.id, "odoo_version": "19.0", "module_version": "19.0.1.0.0"}
+        )
+        with self.assertRaises(IntegrityError), mute_logger("odoo.sql_db"):
+            self.env["oski.module.version"].create(
+                {"module_id": module.id, "odoo_version": "19.0", "module_version": "19.0.1.0.1"}
+            )
+            self.env.flush_all()
+
+    def test_technical_name_unique(self):
+        from psycopg2 import IntegrityError
+        from odoo.tools import mute_logger
+        self.env["oski.module"].create({"name": "A", "technical_name": "oski_a"})
+        with self.assertRaises(IntegrityError), mute_logger("odoo.sql_db"):
+            self.env["oski.module"].create({"name": "B", "technical_name": "oski_a"})
+            self.env.flush_all()
+
+    def test_website_url_uses_apps_prefix(self):
+        module = self.env["oski.module"].create(
+            {"name": "Mon Module", "technical_name": "oski_demo2"}
+        )
+        self.assertTrue(module.website_url.startswith("/apps/"))
+        self.assertIn(str(module.id), module.website_url)
+
+    def test_default_not_published(self):
+        module = self.env["oski.module"].create(
+            {"name": "Brouillon", "technical_name": "oski_draft"}
+        )
+        self.assertFalse(module.is_published)
+
+    def test_product_reverse_link(self):
+        product = self.env["product.template"].create(
+            {"name": "Module Demo", "type": "service", "list_price": 0.0}
+        )
+        module = self.env["oski.module"].create(
+            {"name": "Demo", "technical_name": "oski_demo3", "product_tmpl_id": product.id}
+        )
+        self.assertEqual(product.oski_module_id, module)
