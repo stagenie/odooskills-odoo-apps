@@ -14,11 +14,23 @@ from odoo.http import request
 class OskiAppStore(http.Controller):
     """Contrôleur principal du store OdooSkills App Store."""
 
+    # Versions Odoo supportées par le store (source : oski.module.version).
+    SUPPORTED_VERSIONS = ["19.0", "18.0", "17.0", "16.0", "15.0"]
+    DEFAULT_VERSION = "19.0"
+
     @http.route(["/apps"], type="http", auth="public", website=True, sitemap=True)
-    def apps_catalog(self, category=None, search=None, **kw):
-        """Catalogue public des modules publiés (filtre catégorie + recherche)."""
+    def apps_catalog(self, category=None, search=None, v=None, **kw):
+        """Catalogue public des modules publiés (filtre catégorie + recherche + version).
+
+        `v` = version Odoo cible (15.0..19.0). Filtre les modules ayant une
+        version pour `v` et adapte le sous-titre. Défaut : DEFAULT_VERSION.
+        """
+        version = v if v in self.SUPPORTED_VERSIONS else self.DEFAULT_VERSION
         Module = request.env["oski.module"]
-        domain = [("is_published", "=", True)]
+        domain = [
+            ("is_published", "=", True),
+            ("version_line_ids.odoo_version", "=", version),
+        ]
         if category:
             domain.append(("category_id", "=", int(category)))
         if search:
@@ -30,6 +42,8 @@ class OskiAppStore(http.Controller):
             "categories": categories,
             "search": search or "",
             "active_category": int(category) if category else False,
+            "version": version,
+            "versions": self.SUPPORTED_VERSIONS,
         }
         return request.render("oski_app_store.catalog_page", values)
 

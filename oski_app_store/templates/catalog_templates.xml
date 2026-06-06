@@ -6,7 +6,7 @@
                 <div class="container my-5">
                     <div class="oski-hero">
                         <h1 class="mb-2">OdooSkills Apps</h1>
-                        <p>Modules Odoo 19 prêts à l'emploi — gratuits et premium, signés OdooSkills.</p>
+                        <p>Modules Odoo <t t-out="version"/> prêts à l'emploi — gratuits et premium, signés OdooSkills.</p>
                     </div>
                     <form method="get" action="/apps" class="oski-search mb-4">
                         <div class="input-group">
