@@ -99,3 +99,20 @@ class TestDownloadController(HttpCase):
         hidden.is_published = False
         resp = self.url_open("/apps")
         self.assertNotIn("oski_catalog_hidden", resp.text)
+
+    def test_module_page_published_ok(self):
+        """La page /apps/<slug> d'un module publié répond 200."""
+        self.authenticate(None, None)
+        module, _ = self._make_module("oski_page_pub", is_free=True, published=True)
+        resp = self.url_open(module.website_url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("oski_page_pub", resp.text)
+
+    def test_module_page_unpublished_404(self):
+        """La page d'un module non publié est invisible au public (404)."""
+        self.authenticate(None, None)
+        module, _ = self._make_module(
+            "oski_page_hidden", is_free=True, published=False
+        )
+        resp = self.url_open("/apps/oski_page_hidden-%s" % module.id)
+        self.assertEqual(resp.status_code, 404)

@@ -34,6 +34,21 @@ class OskiAppStore(http.Controller):
         return request.render("oski_app_store.catalog_page", values)
 
     @http.route(
+        ['/apps/<model("oski.module"):module>'],
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=True,
+    )
+    def apps_module_page(self, module, **kw):
+        """Page détail d'un module. Non publié → 404 sauf gestionnaire."""
+        if not module.is_published and not request.env.user.has_group(
+            "oski_app_store.group_manager"
+        ):
+            return request.not_found()
+        return request.render("oski_app_store.module_page", {"module": module})
+
+    @http.route(
         ["/apps/download/<int:version_id>"],
         type="http",
         auth="public",

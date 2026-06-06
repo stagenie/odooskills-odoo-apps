@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="module_page" name="Page module">
+        <t t-call="website.layout">
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1><t t-out="module.name"/></h1>
+                        <p class="lead text-muted"><t t-out="module.summary"/></p>
+                        <div class="my-4"><t t-out="module.description_html"/></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <span t-if="module.is_free" class="badge text-bg-success mb-2">Gratuit</span>
+                                <span t-else="" class="badge text-bg-warning mb-2">Premium</span>
+                                <p class="mb-1"><strong>Nom technique :</strong> <t t-out="module.technical_name"/></p>
+                                <p class="mb-1"><strong>Licence :</strong> <t t-out="module.license"/></p>
+                                <p class="mb-3"><strong>Auteur :</strong> <t t-out="module.author"/></p>
+                                <t t-set="v19" t-value="module.latest_version('19.0')"/>
+                                <t t-if="v19 and v19.attachment_id">
+                                    <a t-if="module.is_free"
+                                       t-attf-href="/apps/download/#{v19.id}"
+                                       class="btn btn-success w-100">Télécharger (v19)</a>
+                                    <a t-else=""
+                                       t-attf-href="/shop/cart/update?product_id=#{module.product_tmpl_id.product_variant_id.id}"
+                                       class="btn btn-warning w-100">Acheter</a>
+                                </t>
+                                <t t-else="">
+                                    <p class="text-muted">Aucune archive disponible.</p>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
