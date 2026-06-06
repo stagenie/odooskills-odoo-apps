@@ -52,3 +52,15 @@ class TestOskiAppStore(TransactionCase):
             {"name": "Demo", "technical_name": "oski_demo3", "product_tmpl_id": product.id}
         )
         self.assertEqual(product.oski_module_id, module)
+
+    def test_public_sees_only_published(self):
+        pub = self.env["oski.module"].create(
+            {"name": "Publié", "technical_name": "oski_pub", "is_published": True}
+        )
+        self.env["oski.module"].create(
+            {"name": "Brouillon", "technical_name": "oski_hidden", "is_published": False}
+        )
+        public_user = self.env.ref("base.public_user")
+        visible = self.env["oski.module"].with_user(public_user).search([])
+        self.assertIn(pub, visible)
+        self.assertTrue(all(m.is_published for m in visible))

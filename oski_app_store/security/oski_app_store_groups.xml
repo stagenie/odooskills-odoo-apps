@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Privilege (category) pour le store de modules OdooSkills -->
+    <record model="res.groups.privilege" id="res_groups_privilege_oski_app_store">
+        <field name="name">OdooSkills App Store</field>
+        <field name="sequence">50</field>
+        <field name="category_id" ref="base.module_category_website"/>
+    </record>
+
+    <!-- Groupe gestionnaire : droits CRUD complets sur les modèles du store -->
+    <record id="group_manager" model="res.groups">
+        <field name="name">Gestionnaire</field>
+        <field name="privilege_id" ref="res_groups_privilege_oski_app_store"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>

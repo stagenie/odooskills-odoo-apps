@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_module_public,oski.module public,model_oski_module,base.group_public,1,0,0,0
+access_oski_module_portal,oski.module portal,model_oski_module,base.group_portal,1,0,0,0
+access_oski_module_manager,oski.module manager,model_oski_module,oski_app_store.group_manager,1,1,1,1
+access_oski_module_version_public,oski.module.version public,model_oski_module_version,base.group_public,1,0,0,0
+access_oski_module_version_portal,oski.module.version portal,model_oski_module_version,base.group_portal,1,0,0,0
+access_oski_module_version_manager,oski.module.version manager,model_oski_module_version,oski_app_store.group_manager,1,1,1,1
+access_oski_module_category_public,oski.module.category public,model_oski_module_category,base.group_public,1,0,0,0
+access_oski_module_category_portal,oski.module.category portal,model_oski_module_category,base.group_portal,1,0,0,0
+access_oski_module_category_manager,oski.module.category manager,model_oski_module_category,oski_app_store.group_manager,1,1,1,1

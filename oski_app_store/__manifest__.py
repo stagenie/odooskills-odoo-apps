@@ -9,7 +9,11 @@
     "website": "https://apps.odooskills.com",
     "license": "LGPL-3",
     "depends": ["website_sale"],
-    "data": [],
+    "data": [
+        "security/oski_app_store_groups.xml",
+        "security/ir.model.access.csv",
+        "security/oski_app_store_rules.xml",
+    ],
     "assets": {},
     "installable": True,
     "application": True,
