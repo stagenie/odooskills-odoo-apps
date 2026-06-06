@@ -1,0 +1,430 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_app_store
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-06 11:22+0000\n"
+"PO-Revision-Date: 2026-06-06 11:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_version__odoo_version__15_0
+msgid "15.0"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_version__odoo_version__16_0
+msgid "16.0"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_version__odoo_version__17_0
+msgid "17.0"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_version__odoo_version__18_0
+msgid "18.0"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_version__odoo_version__19_0
+msgid "19.0"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "<strong>Auteur :</strong>"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "<strong>Licence :</strong>"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "<strong>Nom technique :</strong>"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Acheter"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_app_store_root
+msgid "App Store"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__attachment_id
+msgid "Archive .zip"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_module_version
+msgid "Archive d'un module pour une version Odoo donnée"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Aucun module disponible pour l'instant."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Aucune archive disponible."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__author
+msgid "Auteur"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__can_publish
+msgid "Can Publish"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__category_id
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
+msgid "Catégorie"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_module_category
+msgid "Catégorie de module du store"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__parent_id
+msgid "Catégorie parente"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_category_action
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_categories
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_category_view_list
+msgid "Catégories"
+msgstr ""
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_accounting
+msgid "Comptabilité & Finance"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__create_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__create_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__create_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__create_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__released_date
+msgid "Date de publication"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__description_html
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Description"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_product_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__dependency_ids
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Dépendances"
+msgstr ""
+
+#. module: oski_app_store
+#: model:res.groups,name:oski_app_store.group_manager
+msgid "Gestionnaire"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_free
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Gratuit"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
+msgid "Gratuits"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__id
+#: model:ir.model.fields,field_description:oski_app_store.field_product_template__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__image_1920
+msgid "Icône"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_published
+msgid "Is Published"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__lgpl-3
+msgid "LGPL-3"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__write_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__write_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__write_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__write_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_technical_name_uniq
+msgid "Le nom technique du module doit être unique."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__license
+msgid "Licence"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__maintainer
+msgid "Mainteneur"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__module_id
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Module"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_module
+msgid "Module du store OdooSkills"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_product_product__oski_module_id
+#: model:ir.model.fields,field_description:oski_app_store.field_product_template__oski_module_id
+msgid "Module store"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_action
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__module_ids
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_modules
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list
+msgid "Modules"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Modules OdooSkills"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__name
+msgid "Nom"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__name
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Nom affiché"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__technical_name
+msgid "Nom technique"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__changelog
+msgid "Notes de version"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__opl-1
+msgid "OPL-1"
+msgstr ""
+
+#. module: oski_app_store
+#: model:res.groups.privilege,name:oski_app_store.res_groups_privilege_oski_app_store
+msgid "OdooSkills App Store"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Premium"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_productivity
+msgid "Productivité"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__product_tmpl_id
+msgid "Produit lié"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__other
+msgid "Propriétaire"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
+msgid "Publiés"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Rechercher"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Rechercher un module…"
+msgstr ""
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_hr
+msgid "Ressources Humaines"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__summary
+msgid "Résumé"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Résumé court"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_website
+msgid "Site web & eCommerce"
+msgstr ""
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_technical
+msgid "Technique & Outils"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__website_absolute_url
+msgid "The full absolute URL to access the document through the website."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__website_url
+msgid "The full relative URL to access the document through the website."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Toutes les catégories"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Télécharger (v19)"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_version_version_uniq
+msgid "Une seule archive par version Odoo pour un module donné."
+msgstr ""
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_sales
+msgid "Ventes & CRM"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__odoo_version
+msgid "Version Odoo"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__module_version
+msgid "Version du module"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__version_line_ids
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Versions"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_published
+msgid "Visible on current website"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_absolute_url
+msgid "Website Absolute URL"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_url
+msgid "Website URL"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "oski_xxx"
+msgstr ""
