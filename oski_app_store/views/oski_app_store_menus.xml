@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_oski_app_store_root" name="App Store"
+              web_icon="oski_app_store,static/description/icon.png"
+              sequence="50"
+              groups="oski_app_store.group_manager"/>
+    <menuitem id="menu_oski_modules" name="Modules"
+              parent="menu_oski_app_store_root"
+              action="oski_module_action" sequence="10"/>
+    <menuitem id="menu_oski_categories" name="Catégories"
+              parent="menu_oski_app_store_root"
+              action="oski_module_category_action" sequence="20"/>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cat_sales" model="oski.module.category">
+        <field name="name">Ventes &amp; CRM</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="cat_accounting" model="oski.module.category">
+        <field name="name">Comptabilité &amp; Finance</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="cat_hr" model="oski.module.category">
+        <field name="name">Ressources Humaines</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="cat_website" model="oski.module.category">
+        <field name="name">Site web &amp; eCommerce</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="cat_productivity" model="oski.module.category">
+        <field name="name">Productivité</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="cat_technical" model="oski.module.category">
+        <field name="name">Technique &amp; Outils</field>
+        <field name="sequence">60</field>
+    </record>
+</odoo>

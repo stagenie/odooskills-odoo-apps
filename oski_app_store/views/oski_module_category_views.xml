@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_module_category_view_list" model="ir.ui.view">
+        <field name="name">oski.module.category.list</field>
+        <field name="model">oski.module.category</field>
+        <field name="arch" type="xml">
+            <list string="Catégories" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_module_category_action" model="ir.actions.act_window">
+        <field name="name">Catégories</field>
+        <field name="res_model">oski.module.category</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>
