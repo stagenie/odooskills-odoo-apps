@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="catalog_page" name="Catalogue des modules">
+        <t t-call="website.layout">
+            <div class="container my-5">
+                <h1 class="mb-4">Modules OdooSkills</h1>
+                <form method="get" action="/apps" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control"
+                               placeholder="Rechercher un module…" t-att-value="search"/>
+                        <button type="submit" class="btn btn-primary">Rechercher</button>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="list-group">
+                            <a href="/apps" t-attf-class="list-group-item list-group-item-action #{'active' if not active_category else ''}">
+                                Toutes les catégories
+                            </a>
+                            <t t-foreach="categories" t-as="cat">
+                                <a t-attf-href="/apps?category=#{cat.id}"
+                                   t-attf-class="list-group-item list-group-item-action #{'active' if active_category == cat.id else ''}">
+                                    <t t-out="cat.name"/>
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <t t-foreach="modules" t-as="module">
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <a t-att-href="module.website_url"><t t-out="module.name"/></a>
+                                            </h5>
+                                            <p class="card-text text-muted"><t t-out="module.summary"/></p>
+                                            <span t-if="module.is_free" class="badge text-bg-success">Gratuit</span>
+                                            <span t-else="" class="badge text-bg-warning">Premium</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <t t-if="not modules">
+                                <p class="text-muted">Aucun module disponible pour l'instant.</p>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

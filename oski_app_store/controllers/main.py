@@ -14,6 +14,25 @@ from odoo.http import request
 class OskiAppStore(http.Controller):
     """Contrôleur principal du store OdooSkills App Store."""
 
+    @http.route(["/apps"], type="http", auth="public", website=True, sitemap=True)
+    def apps_catalog(self, category=None, search=None, **kw):
+        """Catalogue public des modules publiés (filtre catégorie + recherche)."""
+        Module = request.env["oski.module"]
+        domain = [("is_published", "=", True)]
+        if category:
+            domain.append(("category_id", "=", int(category)))
+        if search:
+            domain.append(("name", "ilike", search))
+        modules = Module.search(domain)
+        categories = request.env["oski.module.category"].search([])
+        values = {
+            "modules": modules,
+            "categories": categories,
+            "search": search or "",
+            "active_category": int(category) if category else False,
+        }
+        return request.render("oski_app_store.catalog_page", values)
+
     @http.route(
         ["/apps/download/<int:version_id>"],
         type="http",

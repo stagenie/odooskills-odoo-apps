@@ -77,3 +77,25 @@ class TestDownloadController(HttpCase):
         _, version = self._make_module("oski_hidden", is_free=True, published=False)
         resp = self.url_open("/apps/download/%s" % version.id)
         self.assertEqual(resp.status_code, 404)
+
+    def test_catalog_lists_published(self):
+        """Le catalogue /apps affiche les modules publiés."""
+        self.authenticate(None, None)
+        self._make_module("oski_catalog_pub", is_free=True, published=True)
+        resp = self.url_open("/apps")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("oski_catalog_pub", resp.text)
+
+    def test_catalog_hides_unpublished(self):
+        """Le catalogue /apps masque les modules non publiés."""
+        self.authenticate(None, None)
+        self._make_module("oski_catalog_hidden", is_free=True, published=True)
+        resp = self.url_open("/apps")
+        self.assertIn("oski_catalog_hidden", resp.text)
+        # Une fois dépublié, le module disparaît du catalogue.
+        hidden = self.env["oski.module"].search(
+            [("technical_name", "=", "oski_catalog_hidden")]
+        )
+        hidden.is_published = False
+        resp = self.url_open("/apps")
+        self.assertNotIn("oski_catalog_hidden", resp.text)
