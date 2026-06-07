@@ -18,11 +18,17 @@
                                 <p class="mb-1"><strong>Nom technique :</strong> <t t-out="module.technical_name"/></p>
                                 <p class="mb-1"><strong>Licence :</strong> <t t-out="module.license"/></p>
                                 <p class="mb-3"><strong>Auteur :</strong> <t t-out="module.author"/></p>
-                                <t t-set="v19" t-value="module.latest_version('19.0')"/>
-                                <t t-if="v19 and v19.attachment_id">
+                                <div class="oski-pastilles mb-3" aria-label="Compatibilité">
+                                    <t t-set="avail" t-value="module.available_versions()"/>
+                                    <t t-foreach="pill_versions" t-as="pv">
+                                        <span t-attf-class="oski-dot #{'on' if pv in avail else 'off'} #{'sel' if pv == version else ''}" t-out="pv"/>
+                                    </t>
+                                </div>
+                                <t t-set="target" t-value="module.download_target(version)"/>
+                                <t t-if="target and target.attachment_id">
                                     <a t-if="module.is_free"
-                                       t-attf-href="/apps/download/#{v19.id}"
-                                       class="btn btn-success w-100">Télécharger (v19)</a>
+                                       t-attf-href="/apps/download/#{target.id}"
+                                       class="btn btn-success w-100">Télécharger (<t t-out="target.odoo_version"/>)</a>
                                     <a t-else=""
                                        t-attf-href="/shop/cart/update?product_id=#{module.product_tmpl_id.product_variant_id.id}"
                                        class="btn btn-warning w-100">Acheter</a>

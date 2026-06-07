@@ -55,13 +55,21 @@ class OskiAppStore(http.Controller):
         website=True,
         sitemap=True,
     )
-    def apps_module_page(self, module, **kw):
+    def apps_module_page(self, module, v=None, **kw):
         """Page détail d'un module. Non publié → 404 sauf gestionnaire."""
         if not module.is_published and not request.env.user.has_group(
             "oski_app_store.group_manager"
         ):
             return request.not_found()
-        return request.render("oski_app_store.module_page", {"module": module})
+        version = v if v in self.SUPPORTED_VERSIONS else self.DEFAULT_VERSION
+        return request.render(
+            "oski_app_store.module_page",
+            {
+                "module": module,
+                "version": version,
+                "pill_versions": list(reversed(self.SUPPORTED_VERSIONS)),
+            },
+        )
 
     @http.route(
         ["/apps/download/<int:version_id>"],

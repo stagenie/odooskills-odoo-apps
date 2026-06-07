@@ -103,3 +103,30 @@ class TestCatalogVersionSelector(HttpCase):
         _make_module(self.env, "oski_grey", ["19.0"])
         resp = self.url_open("/apps?v=18.0")
         self.assertIn("is-incompatible", resp.text)
+
+
+@tagged("post_install", "-at_install")
+class TestModulePageCTA(HttpCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.registry.clear_cache("routing")
+        cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
+
+    def test_cta_fallback_label(self):
+        """Module 19.0-only à ?v=17.0 → bouton 'Télécharger (19.0)'."""
+        self.authenticate(None, None)
+        module, versions = _make_module(self.env, "oski_cta_fb", ["19.0"])
+        resp = self.url_open("%s?v=17.0" % module.website_url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("Télécharger (19.0)", resp.text)
+        self.assertIn("/apps/download/%s" % versions["19.0"].id, resp.text)
+
+    def test_cta_exact_label(self):
+        """Module 18.0+19.0 à ?v=18.0 → bouton 'Télécharger (18.0)'."""
+        self.authenticate(None, None)
+        module, versions = _make_module(self.env, "oski_cta_ex", ["18.0", "19.0"])
+        resp = self.url_open("%s?v=18.0" % module.website_url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("Télécharger (18.0)", resp.text)
+        self.assertIn("/apps/download/%s" % versions["18.0"].id, resp.text)
