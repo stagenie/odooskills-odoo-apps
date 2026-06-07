@@ -10,4 +10,7 @@
     <menuitem id="menu_oski_categories" name="Catégories"
               parent="menu_oski_app_store_root"
               action="oski_module_category_action" sequence="20"/>
+    <menuitem id="menu_oski_tags" name="Tags"
+              parent="menu_oski_app_store_root"
+              action="oski_module_tag_action" sequence="30"/>
 </odoo>

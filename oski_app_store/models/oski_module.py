@@ -31,6 +31,13 @@ class OskiModule(models.Model):
         "dependency_id",
         string="Dépendances",
     )
+    tag_ids = fields.Many2many(
+        "oski.module.tag",
+        "oski_module_tag_rel",
+        "module_id",
+        "tag_id",
+        string="Tags",
+    )
     image_1920 = fields.Image(string="Icône")
     product_tmpl_id = fields.Many2one(
         "product.template", string="Produit lié", ondelete="restrict", copy=False

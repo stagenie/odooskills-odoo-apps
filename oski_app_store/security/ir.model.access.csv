@@ -8,3 +8,6 @@ access_oski_module_version_manager,oski.module.version manager,model_oski_module
 access_oski_module_category_public,oski.module.category public,model_oski_module_category,base.group_public,1,0,0,0
 access_oski_module_category_portal,oski.module.category portal,model_oski_module_category,base.group_portal,1,0,0,0
 access_oski_module_category_manager,oski.module.category manager,model_oski_module_category,oski_app_store.group_manager,1,1,1,1
+access_oski_module_tag_public,oski.module.tag public,model_oski_module_tag,base.group_public,1,0,0,0
+access_oski_module_tag_portal,oski.module.tag portal,model_oski_module_tag,base.group_portal,1,0,0,0
+access_oski_module_tag_manager,oski.module.tag manager,model_oski_module_tag,oski_app_store.group_manager,1,1,1,1
