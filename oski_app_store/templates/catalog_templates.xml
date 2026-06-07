@@ -7,6 +7,16 @@
                     <div class="oski-hero">
                         <h1 class="mb-2">OdooSkills Apps</h1>
                         <p>Modules Odoo <t t-out="version"/> prêts à l'emploi — gratuits et premium, signés OdooSkills.</p>
+                        <div class="oski-version-pills" role="navigation" aria-label="Version Odoo">
+                            <t t-foreach="pill_versions" t-as="pv">
+                                <t t-set="q" t-value="'/apps?v=' + pv"/>
+                                <t t-if="active_category" t-set="q" t-value="q + '&amp;category=' + str(active_category)"/>
+                                <t t-if="search" t-set="q" t-value="q + '&amp;search=' + search"/>
+                                <a t-att-href="q" t-attf-class="oski-pill #{'is-active' if pv == version else ''}">
+                                    <t t-out="pv"/>
+                                </a>
+                            </t>
+                        </div>
                     </div>
                     <form method="get" action="/apps" class="oski-search mb-4">
                         <div class="input-group">

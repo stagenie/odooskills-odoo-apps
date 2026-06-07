@@ -60,3 +60,31 @@ class TestVersionHelpers(TransactionCase):
             {"name": "oski_empty", "technical_name": "oski_empty"}
         )
         self.assertFalse(module.download_target("19.0"))
+
+
+@tagged("post_install", "-at_install")
+class TestCatalogVersionSelector(HttpCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.registry.clear_cache("routing")
+        cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
+
+    def test_module_never_disappears(self):
+        """Behavior B : un module 19.0-only reste affiché à ?v=18.0."""
+        self.authenticate(None, None)
+        _make_module(self.env, "oski_only19", ["19.0"])
+        # garde-fou : présent à v=19.0 (évite faux positif sur 404)
+        resp = self.url_open("/apps?v=19.0")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("oski_only19", resp.text)
+        # toujours présent à v=18.0
+        resp = self.url_open("/apps?v=18.0")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("oski_only19", resp.text)
+
+    def test_pill_active_marked(self):
+        """La pastille de la version sélectionnée porte is-active."""
+        self.authenticate(None, None)
+        resp = self.url_open("/apps?v=17.0")
+        self.assertIn("oski-pill is-active", resp.text)

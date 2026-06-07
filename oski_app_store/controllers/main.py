@@ -20,22 +20,22 @@ class OskiAppStore(http.Controller):
 
     @http.route(["/apps"], type="http", auth="public", website=True, sitemap=True)
     def apps_catalog(self, category=None, search=None, v=None, **kw):
-        """Catalogue public des modules publiés (filtre catégorie + recherche + version).
+        """Catalogue public (behavior B : aucun module masqué par la version).
 
-        `v` = version Odoo cible (15.0..19.0). Filtre les modules ayant une
-        version pour `v` et adapte le sous-titre. Défaut : DEFAULT_VERSION.
+        `v` = version Odoo sélectionnée (pastilles + tri compatibles-d'abord +
+        sous-titre). Le filtrage ne porte que sur catégorie et recherche.
         """
         version = v if v in self.SUPPORTED_VERSIONS else self.DEFAULT_VERSION
         Module = request.env["oski.module"]
-        domain = [
-            ("is_published", "=", True),
-            ("version_line_ids.odoo_version", "=", version),
-        ]
+        domain = [("is_published", "=", True)]
         if category:
             domain.append(("category_id", "=", int(category)))
         if search:
             domain.append(("name", "ilike", search))
         modules = Module.search(domain)
+        modules = modules.sorted(
+            key=lambda m: (not m.supports(version), m.name.lower())
+        )
         categories = request.env["oski.module.category"].search([])
         values = {
             "modules": modules,
@@ -44,6 +44,7 @@ class OskiAppStore(http.Controller):
             "active_category": int(category) if category else False,
             "version": version,
             "versions": self.SUPPORTED_VERSIONS,
+            "pill_versions": list(reversed(self.SUPPORTED_VERSIONS)),
         }
         return request.render("oski_app_store.catalog_page", values)
 
