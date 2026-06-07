@@ -54,3 +54,28 @@ class OskiModule(models.Model):
         return self.version_line_ids.filtered(
             lambda v: v.odoo_version == odoo_version
         )[:1]
+
+    def available_versions(self):
+        """Set des versions Odoo pour lesquelles ce module a une archive."""
+        self.ensure_one()
+        return set(self.version_line_ids.mapped("odoo_version"))
+
+    def supports(self, odoo_version):
+        """True si le module a une archive pour cette version Odoo."""
+        self.ensure_one()
+        return odoo_version in self.available_versions()
+
+    def download_target(self, selected):
+        """Version à servir : exacte si supportée, sinon dernière dispo.
+
+        Retourne un recordset oski.module.version (vide si aucune version).
+        """
+        self.ensure_one()
+        exact = self.version_line_ids.filtered(
+            lambda v: v.odoo_version == selected
+        )
+        if exact:
+            return exact[:1]
+        return self.version_line_ids.sorted(
+            lambda v: v.odoo_version, reverse=True
+        )[:1]
