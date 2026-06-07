@@ -142,3 +142,21 @@ class TestFacets(HttpCase):
         self.env["oski.module.tag"].create({"name": "Tpanel"})
         resp = self.url_open("/apps")
         self.assertIn("oski-facets", resp.text)
+
+
+@tagged("post_install", "-at_install")
+class TestModulePageChips(HttpCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.registry.clear_cache("routing")
+        cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
+
+    def test_page_shows_tag_chips(self):
+        self.authenticate(None, None)
+        tag = self.env["oski.module.tag"].create({"name": "Tpage"})
+        module = _make_module(self.env, "oski_pagetag", tags=[tag])
+        resp = self.url_open(module.website_url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("oski-chip", resp.text)
+        self.assertIn('href="/apps?tag=%s"' % tag.id, resp.text)

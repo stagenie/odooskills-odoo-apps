@@ -24,6 +24,11 @@
                                         <span t-attf-class="oski-dot #{'on' if pv in avail else 'off'} #{'sel' if pv == version else ''}" t-out="pv"/>
                                     </t>
                                 </div>
+                                <div class="oski-chips mb-3" t-if="module.tag_ids">
+                                    <t t-foreach="module.tag_ids" t-as="tag">
+                                        <a t-attf-href="/apps?tag=#{tag.id}" class="oski-chip"><t t-out="tag.name"/></a>
+                                    </t>
+                                </div>
                                 <t t-set="target" t-value="module.download_target(version)"/>
                                 <t t-if="target and target.attachment_id">
                                     <a t-if="module.is_free"
