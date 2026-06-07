@@ -102,4 +102,59 @@
         border-radius: 0.9rem;
         background: var(--oski-soft);
     }
+
+    // ---- Barre de sélection de version (hero) ----
+    .oski-version-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 1.25rem;
+
+        .oski-pill {
+            display: inline-block;
+            min-width: 2.6rem;
+            text-align: center;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.15s ease, color 0.15s ease;
+
+            &:hover { background: rgba(255, 255, 255, 0.18); }
+            &.is-active {
+                background: #fff;
+                color: var(--oski-ink);
+                border-color: #fff;
+            }
+        }
+    }
+
+    // ---- Pastilles de compatibilité (carte + page) ----
+    .oski-pastilles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+
+        .oski-dot {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.1rem 0.45rem;
+            border-radius: 0.4rem;
+            line-height: 1.4;
+
+            &.on  { background: var(--oski-accent); color: #fff; }
+            &.off { background: #e7ecea; color: #9bb0a8; text-decoration: line-through; }
+            &.sel { box-shadow: 0 0 0 2px var(--oski-accent-2); }
+        }
+    }
+
+    // ---- Carte incompatible avec la version sélectionnée ----
+    .oski-card.is-incompatible {
+        opacity: 0.55;
+        transition: opacity 0.15s ease;
+        &:hover { opacity: 0.85; }
+    }
 }
