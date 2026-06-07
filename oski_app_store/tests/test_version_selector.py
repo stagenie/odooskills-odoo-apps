@@ -88,3 +88,18 @@ class TestCatalogVersionSelector(HttpCase):
         self.authenticate(None, None)
         resp = self.url_open("/apps?v=17.0")
         self.assertIn("oski-pill is-active", resp.text)
+
+    def test_card_pastilles_on_off(self):
+        """Carte : dot 'on' pour version présente, 'off' pour absente."""
+        self.authenticate(None, None)
+        _make_module(self.env, "oski_dots", ["19.0"])
+        resp = self.url_open("/apps?v=19.0")
+        self.assertIn("oski-dot on", resp.text)
+        self.assertIn("oski-dot off", resp.text)
+
+    def test_card_greyed_when_incompatible(self):
+        """Carte d'un module 19.0-only grisée à ?v=18.0."""
+        self.authenticate(None, None)
+        _make_module(self.env, "oski_grey", ["19.0"])
+        resp = self.url_open("/apps?v=18.0")
+        self.assertIn("is-incompatible", resp.text)

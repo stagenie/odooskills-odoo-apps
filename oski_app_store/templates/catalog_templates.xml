@@ -43,7 +43,8 @@
                             <div class="row">
                                 <t t-foreach="modules" t-as="module">
                                     <div class="col-md-4 mb-4">
-                                        <div class="card oski-card h-100">
+                                        <t t-set="avail" t-value="module.available_versions()"/>
+                                        <div t-attf-class="card oski-card h-100 #{'is-incompatible' if version not in avail else ''}">
                                             <div class="card-body">
                                                 <h5 class="card-title">
                                                     <a t-att-href="module.website_url"><t t-out="module.name"/></a>
@@ -51,6 +52,11 @@
                                                 <p class="card-text text-muted"><t t-out="module.summary"/></p>
                                                 <span t-if="module.is_free" class="badge text-bg-success">Gratuit</span>
                                                 <span t-else="" class="badge text-bg-warning">Premium</span>
+                                                <div class="oski-pastilles mt-2" aria-label="Compatibilité">
+                                                    <t t-foreach="pill_versions" t-as="pv">
+                                                        <span t-attf-class="oski-dot #{'on' if pv in avail else 'off'}" t-out="pv"/>
+                                                    </t>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
