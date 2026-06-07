@@ -9,6 +9,7 @@ Route Task 9 : /apps/download/<version_id>
 """
 from odoo import http
 from odoo.http import request
+from odoo.addons.oski_app_store.controllers.url_state import build_query, toggle
 
 
 class OskiAppStore(http.Controller):
@@ -19,32 +20,115 @@ class OskiAppStore(http.Controller):
     DEFAULT_VERSION = "19.0"
 
     @http.route(["/apps"], type="http", auth="public", website=True, sitemap=True)
-    def apps_catalog(self, category=None, search=None, v=None, **kw):
-        """Catalogue public (behavior B : aucun module masqué par la version).
+    def apps_catalog(self, **kw):
+        """Catalogue public avec facettes (catégorie/tags/prix), tri et version.
 
-        `v` = version Odoo sélectionnée (pastilles + tri compatibles-d'abord +
-        sous-titre). Le filtrage ne porte que sur catégorie et recherche.
+        Behavior B : aucun module masqué par la version (pills + tri compatibles-d'abord).
+        Filtrage : OR intra-groupe (ORM `in`), AND inter-groupes (conjonction).
+        État partageable + encodé via url_state.build_query.
         """
+        args = request.httprequest.args
+
+        def _ints(key):
+            out = []
+            for raw in args.getlist(key):
+                try:
+                    out.append(int(raw))
+                except (TypeError, ValueError):
+                    continue
+            return out
+
+        cats = _ints("category")
+        tags = _ints("tag")
+        pricing = args.get("pricing", "all")
+        sort = args.get("sort", "name")
+        search = args.get("search", "")
+        v = args.get("v")
         version = v if v in self.SUPPORTED_VERSIONS else self.DEFAULT_VERSION
-        Module = request.env["oski.module"]
+
         domain = [("is_published", "=", True)]
-        if category:
-            domain.append(("category_id", "=", int(category)))
+        if cats:
+            domain.append(("category_id", "in", cats))
+        if tags:
+            domain.append(("tag_ids", "in", tags))
+        if pricing == "free":
+            domain.append(("is_free", "=", True))
+        elif pricing == "premium":
+            domain.append(("is_free", "=", False))
         if search:
             domain.append(("name", "ilike", search))
-        modules = Module.search(domain)
-        modules = modules.sorted(
-            key=lambda m: (not m.supports(version), m.name.lower())
-        )
+
+        modules = request.env["oski.module"].search(domain)
+        if sort == "recent":
+            modules = modules.sorted(
+                key=lambda m: (not m.supports(version), -m.create_date.timestamp())
+            )
+        else:
+            modules = modules.sorted(
+                key=lambda m: (not m.supports(version), m.name.lower())
+            )
+
         categories = request.env["oski.module.category"].search([])
+        all_tags = request.env["oski.module.tag"].search([])
+
+        category_options = [
+            {
+                "id": c.id,
+                "name": c.name,
+                "selected": c.id in cats,
+                "href": build_query(toggle(cats, c.id), tags, pricing, sort, search, version, self.DEFAULT_VERSION),
+            }
+            for c in categories
+        ]
+        tag_options = [
+            {
+                "id": t.id,
+                "name": t.name,
+                "color": t.color,
+                "selected": t.id in tags,
+                "href": build_query(cats, toggle(tags, t.id), pricing, sort, search, version, self.DEFAULT_VERSION),
+            }
+            for t in all_tags
+        ]
+        pricing_options = [
+            {
+                "key": key,
+                "label": label,
+                "selected": pricing == key,
+                "href": build_query(cats, tags, key, sort, search, version, self.DEFAULT_VERSION),
+            }
+            for key, label in (("all", "Tous"), ("free", "Gratuit"), ("premium", "Premium"))
+        ]
+        sort_options = [
+            {
+                "key": key,
+                "label": label,
+                "selected": sort == key,
+                "href": build_query(cats, tags, pricing, key, search, version, self.DEFAULT_VERSION),
+            }
+            for key, label in (("name", "Nom"), ("recent", "Récents"))
+        ]
+        version_pills = [
+            {
+                "label": pv,
+                "selected": pv == version,
+                "href": build_query(cats, tags, pricing, sort, search, pv, self.DEFAULT_VERSION),
+            }
+            for pv in reversed(self.SUPPORTED_VERSIONS)
+        ]
+
         values = {
             "modules": modules,
-            "categories": categories,
-            "search": search or "",
-            "active_category": int(category) if category else False,
+            "category_options": category_options,
+            "tag_options": tag_options,
+            "pricing_options": pricing_options,
+            "sort_options": sort_options,
+            "version_pills": version_pills,
             "version": version,
-            "versions": self.SUPPORTED_VERSIONS,
-            "pill_versions": list(reversed(self.SUPPORTED_VERSIONS)),
+            "search": search,
+            "sort": sort,
+            "has_filters": bool(cats or tags or pricing != "all" or search),
+            "clear_url": "/apps",
         }
         return request.render("oski_app_store.catalog_page", values)
 
