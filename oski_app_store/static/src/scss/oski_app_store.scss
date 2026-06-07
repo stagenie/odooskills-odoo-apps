@@ -157,4 +157,83 @@
         transition: opacity 0.15s ease;
         &:hover { opacity: 0.85; }
     }
+
+    // ---- Panneau de facettes ----
+    .oski-facets {
+        .oski-facet-group {
+            margin-bottom: 1.25rem;
+
+            h6 {
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                font-size: 0.72rem;
+                color: #6b8079;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .oski-facet,
+        .oski-sort-link {
+            display: block;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.5rem;
+            color: var(--oski-ink);
+            text-decoration: none;
+            font-size: 0.92rem;
+            margin-bottom: 0.2rem;
+            border: 1px solid transparent;
+            transition: background 0.12s ease, border-color 0.12s ease;
+
+            &:hover { background: var(--oski-soft); }
+            &.is-selected {
+                background: var(--oski-soft);
+                border-color: var(--oski-accent);
+                font-weight: 600;
+                &::before { content: "✓ "; color: var(--oski-accent); }
+            }
+        }
+
+        .oski-facet-tag {
+            display: inline-block;
+            margin-right: 0.3rem;
+        }
+    }
+
+    // ---- Barre de filtres actifs ----
+    .oski-active-filters {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        color: #6b8079;
+
+        .oski-clear {
+            color: var(--oski-accent-2);
+            font-weight: 600;
+            text-decoration: none;
+            &:hover { text-decoration: underline; }
+        }
+    }
+
+    // ---- Chips tags (carte + page) ----
+    .oski-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+
+        .oski-chip {
+            display: inline-block;
+            padding: 0.1rem 0.55rem;
+            border-radius: 999px;
+            background: var(--oski-soft);
+            border: 1px solid var(--oski-border);
+            color: var(--oski-accent-2);
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.12s ease;
+
+            &:hover { background: var(--oski-accent); color: #fff; border-color: var(--oski-accent); }
+        }
+    }
 }
