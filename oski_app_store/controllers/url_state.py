@@ -2,7 +2,7 @@
 
 Fonctions sans dépendance Odoo/HTTP : unit-testables isolément.
 """
-from werkzeug.urls import url_encode
+from urllib.parse import urlencode
 
 
 def toggle(values, value):
@@ -39,4 +39,4 @@ def build_query(categories, tags, pricing, sort, search, version, default_versio
         params["v"] = version
     if not params:
         return "/apps"
-    return "/apps?" + url_encode(params)
+    return "/apps?" + urlencode(params, doseq=True)

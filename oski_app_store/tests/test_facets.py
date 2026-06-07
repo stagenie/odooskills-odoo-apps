@@ -107,9 +107,19 @@ class TestFacets(HttpCase):
 
     def test_sort_recent(self):
         self.authenticate(None, None)
-        _make_module(self.env, "oski_old")
-        _make_module(self.env, "oski_new")
+        old = _make_module(self.env, "oski_old")
+        new = _make_module(self.env, "oski_new")
+        self.env.cr.execute(
+            "UPDATE oski_module SET create_date = '2020-01-01 00:00:00' WHERE id = %s",
+            (old.id,),
+        )
+        self.env.cr.execute(
+            "UPDATE oski_module SET create_date = '2024-01-01 00:00:00' WHERE id = %s",
+            (new.id,),
+        )
+        self.env.invalidate_all()
         resp = self.url_open("/apps?sort=recent")
+        # le plus récent (oski_new) apparaît avant oski_old
         self.assertLess(resp.text.index("oski_new"), resp.text.index("oski_old"))
 
     def test_chip_present_and_linked(self):
