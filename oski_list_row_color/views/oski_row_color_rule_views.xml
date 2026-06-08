@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_oski_row_color_rule_list" model="ir.ui.view">
+        <field name="name">oski.row.color.rule.list</field>
+        <field name="model">oski.row.color.rule</field>
+        <field name="arch" type="xml">
+            <tree string="Règles de couleur">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="expression"/>
+                <field name="decoration"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_oski_row_color_rule_form" model="ir.ui.view">
+        <field name="name">oski.row.color.rule.form</field>
+        <field name="model">oski.row.color.rule</field>
+        <field name="arch" type="xml">
+            <form string="Règle de couleur">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="model_id"/>
+                        <field name="expression"
+                               placeholder="state == 'done'"/>
+                        <field name="decoration"/>
+                        <field name="active"/>
+                        <field name="view_id" readonly="1"/>
+                    </group>
+                    <p class="text-muted">
+                        La condition est une expression Python évaluée pour chaque ligne
+                        (mêmes règles que les attributs <code>decoration-*</code> d'Odoo).
+                    </p>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_oski_row_color_rule" model="ir.actions.act_window">
+        <field name="name">Couleurs de lignes</field>
+        <field name="res_model">oski.row.color.rule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_oski_row_color_rule"
+              name="Couleurs de lignes"
+              parent="base.menu_custom"
+              action="action_oski_row_color_rule"
+              sequence="50"/>
+</odoo>

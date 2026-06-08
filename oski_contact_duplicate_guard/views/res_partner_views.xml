@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_oski_dup" model="ir.ui.view">
+        <field name="name">res.partner.form.oski.duplicate</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <div class="alert alert-warning m-0" role="alert"
+                     attrs="{'invisible': [('oski_duplicate_id', '=', False)]}">
+                    <i class="fa fa-exclamation-triangle me-1"/>
+                    Doublon possible :
+                    <field name="oski_duplicate_id" readonly="1" nolabel="1"
+                           class="oe_inline" options="{'no_open': False}"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

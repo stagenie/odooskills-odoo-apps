@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_row_color_rule_user,oski.row.color.rule.user,model_oski_row_color_rule,base.group_user,1,0,0,0
+access_oski_row_color_rule_admin,oski.row.color.rule.admin,model_oski_row_color_rule,base.group_system,1,1,1,1
