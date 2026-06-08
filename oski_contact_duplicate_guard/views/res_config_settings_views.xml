@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_oski_dup" model="ir.ui.view">
+        <field name="name">res.config.settings.form.oski.dup</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='contacts_setting_container']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="oski_dup_check_email"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="oski_dup_check_email"/>
+                        <div class="text-muted">
+                            Avertit si un contact a le même email qu'un autre.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="oski_dup_check_phone"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="oski_dup_check_phone"/>
+                        <div class="text-muted">
+                            Avertit si un contact a le même téléphone qu'un autre.
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
