@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_oski_qr" model="ir.ui.view">
+        <field name="name">res.partner.form.oski.qr.vcard</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="oski_qr_vcard" string="QR vCard">
+                    <group>
+                        <field name="oski_qr_vcard" widget="image"
+                               options="{'size': [220, 220]}" nolabel="1"/>
+                    </group>
+                    <p class="text-muted">
+                        Scannez ce code avec l'appareil photo d'un smartphone
+                        pour ajouter le contact au carnet d'adresses.
+                    </p>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
