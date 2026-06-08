@@ -11,6 +11,7 @@ class TestArchiveReason(TransactionCase):
         action = self.partner.action_archive()
         self.assertIsInstance(action, dict)
         self.assertEqual(action.get("res_model"), "oski.archive.reason.wizard")
+        self.assertTrue(action.get("views"), "L'action doit fournir 'views' (sinon crash client).")
         self.assertTrue(self.partner.active, "Le contact ne doit pas être archivé sans motif.")
 
     def test_confirmed_archive_sets_inactive_and_logs(self):

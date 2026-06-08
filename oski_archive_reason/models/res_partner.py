@@ -18,6 +18,7 @@ class ResPartner(models.Model):
             "name": "Motif d'archivage",
             "res_model": "oski.archive.reason.wizard",
             "view_mode": "form",
+            "views": [(False, "form")],
             "target": "new",
             "context": {
                 "active_model": self._name,
