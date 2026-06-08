@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_oski_login" model="ir.ui.view">
+        <field name="name">res.config.settings.form.oski.login</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='integration']" position="after">
+                <block title="Personnalisation de la page de connexion"
+                       name="oski_login_branding">
+                    <setting string="Couleur de fond"
+                             help="Couleur d'arrière-plan de la page de connexion.">
+                        <field name="oski_login_bg_color" widget="color"/>
+                    </setting>
+                    <setting string="Couleur d'accent"
+                             help="Couleur des boutons et liens de la page de connexion.">
+                        <field name="oski_login_accent_color" widget="color"/>
+                    </setting>
+                    <setting string="Logo"
+                             help="Le logo se règle sur chaque société (Réglages &gt; Sociétés).">
+                        <button name="%(base.action_res_company_form)d" type="action"
+                                string="Configurer le logo par société" class="btn-link"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
