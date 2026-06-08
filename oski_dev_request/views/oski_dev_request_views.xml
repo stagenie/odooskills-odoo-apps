@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Liste -->
+    <record id="oski_dev_request_view_list" model="ir.ui.view">
+        <field name="name">oski.dev.request.list</field>
+        <field name="model">oski.dev.request</field>
+        <field name="arch" type="xml">
+            <list string="Demandes de développement">
+                <field name="name"/>
+                <field name="create_date"/>
+                <field name="requester_name"/>
+                <field name="company_name"/>
+                <field name="subject"/>
+                <field name="category_id"/>
+                <field name="budget_range"/>
+                <field name="delivery_mode"/>
+                <field name="assigned_id"/>
+                <field name="state"
+                       decoration-info="state == 'new'"
+                       decoration-success="state == 'delivered'"
+                       decoration-muted="state == 'rejected'"
+                       widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Formulaire -->
+    <record id="oski_dev_request_view_form" model="ir.ui.view">
+        <field name="name">oski.dev.request.form</field>
+        <field name="model">oski.dev.request</field>
+        <field name="arch" type="xml">
+            <form string="Demande de développement">
+                <header>
+                    <button name="action_set_analysis" type="object" string="En analyse"
+                            class="btn-primary" invisible="state != 'new'"/>
+                    <button name="action_set_quoted" type="object" string="Devis envoyé"
+                            class="btn-primary" invisible="state != 'analysis'"/>
+                    <button name="action_accept" type="object" string="Accepter"
+                            class="btn-primary" invisible="state != 'quoted'"/>
+                    <button name="action_set_delivered" type="object" string="Marquer livré"
+                            class="btn-primary" invisible="state != 'accepted'"/>
+                    <button name="action_reject" type="object" string="Refuser"
+                            invisible="state in ('rejected', 'delivered')"/>
+                    <field name="state" widget="statusbar"
+                           options="{'clickable': '0'}"
+                           statusbar_visible="new,analysis,quoted,accepted,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Demandeur">
+                            <field name="requester_name"/>
+                            <field name="company_name"/>
+                            <field name="email" widget="email"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group string="Demande">
+                            <field name="subject"/>
+                            <field name="category_id"/>
+                            <field name="odoo_version"/>
+                            <field name="budget_range"/>
+                            <field name="delivery_mode"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="assigned_id"/>
+                            <field name="module_id"/>
+                        </group>
+                    </group>
+                    <group string="Description du besoin">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                    <group string="Pièces jointes">
+                        <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban -->
+    <record id="oski_dev_request_view_kanban" model="ir.ui.view">
+        <field name="name">oski.dev.request.kanban</field>
+        <field name="model">oski.dev.request</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_title">
+                                <strong><field name="name"/></strong> — <field name="subject"/>
+                            </div>
+                            <div class="text-muted">
+                                <field name="requester_name"/>
+                                <span t-if="record.company_name.raw_value"> · <field name="company_name"/></span>
+                            </div>
+                            <div>
+                                <field name="category_id"/>
+                                <span class="float-end"><field name="budget_range"/></span>
+                            </div>
+                            <div>
+                                <field name="delivery_mode" widget="badge"/>
+                                <field name="assigned_id" widget="many2one_avatar_user" class="float-end"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Recherche -->
+    <record id="oski_dev_request_view_search" model="ir.ui.view">
+        <field name="name">oski.dev.request.search</field>
+        <field name="model">oski.dev.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="requester_name"/>
+                <field name="company_name"/>
+                <field name="subject"/>
+                <field name="category_id"/>
+                <filter name="store" string="Store" domain="[('delivery_mode', '=', 'store')]"/>
+                <filter name="exclusive" string="Exclusif" domain="[('delivery_mode', '=', 'exclusive')]"/>
+                <separator/>
+                <filter name="open" string="En cours"
+                        domain="[('state', 'not in', ('rejected', 'delivered'))]"/>
+                <group>
+                    <filter name="group_state" string="État" context="{'group_by': 'state'}"/>
+                    <filter name="group_category" string="Catégorie" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_assigned" string="Assigné à" context="{'group_by': 'assigned_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="oski_dev_request_action" model="ir.actions.act_window">
+        <field name="name">Demandes de dev</field>
+        <field name="res_model">oski.dev.request</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="oski_dev_request_view_search"/>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiley_face">Aucune demande pour le moment</p>
+            <p>Les demandes de développement soumises depuis le site apparaîtront ici.</p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_oski_dev_request"
+              name="Demandes de dev"
+              parent="oski_app_store.menu_oski_app_store_root"
+              action="oski_dev_request_action"
+              sequence="40"/>
+</odoo>

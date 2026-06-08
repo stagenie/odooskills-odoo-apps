@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Accusé de réception au demandeur -->
+    <record id="mail_template_dev_request_ack" model="mail.template">
+        <field name="name">Demande de dev : accusé de réception</field>
+        <field name="model_id" ref="model_oski_dev_request"/>
+        <field name="subject">Votre demande de développement {{ object.name }}</field>
+        <field name="email_from">{{ (object.env.company.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ object.email }}</field>
+        <field name="auto_delete" eval="False"/>
+        <field name="body_html" type="html">
+            <div style="font-family:Arial,sans-serif;color:#21112E;">
+                <p>Bonjour <t t-out="object.requester_name or ''"/>,</p>
+                <p>Nous avons bien reçu votre demande de développement
+                    <strong t-out="object.name or ''"/> : « <t t-out="object.subject or ''"/> ».</p>
+                <p>Notre équipe l'analyse et reviendra vers vous rapidement.</p>
+                <p t-if="object.delivery_mode == 'exclusive'">
+                    Vous avez choisi une livraison <strong>exclusive</strong> : le module ne sera pas
+                    publié sur le store et le tarif sera nettement supérieur à une app publiée.
+                </p>
+                <p t-else="">
+                    Le module développé sera publié sur le store OdooSkills (tarif standard).
+                </p>
+                <p>— L'équipe OdooSkills</p>
+            </div>
+        </field>
+    </record>
+
+    <!-- Notification interne -->
+    <record id="mail_template_dev_request_notify" model="mail.template">
+        <field name="name">Demande de dev : notification interne</field>
+        <field name="model_id" ref="model_oski_dev_request"/>
+        <field name="subject">Nouvelle demande de dev {{ object.name }} — {{ object.subject }}</field>
+        <field name="email_from">{{ (object.env.company.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ object.env['ir.config_parameter'].sudo().get_param('oski_dev_request.notify_email') }}</field>
+        <field name="auto_delete" eval="False"/>
+        <field name="body_html" type="html">
+            <div style="font-family:Arial,sans-serif;">
+                <p>Nouvelle demande <strong t-out="object.name or ''"/>.</p>
+                <ul>
+                    <li>Demandeur : <t t-out="object.requester_name or ''"/>
+                        (<t t-out="object.company_name or '—'"/>)</li>
+                    <li>Email : <t t-out="object.email or ''"/></li>
+                    <li>Objet : <t t-out="object.subject or ''"/></li>
+                    <li>Catégorie : <t t-out="object.category_id.name or '—'"/></li>
+                    <li>Budget : <t t-out="object.budget_range or '—'"/></li>
+                    <li>Mode : <t t-out="object.delivery_mode or ''"/></li>
+                    <li>Version : <t t-out="object.odoo_version or '—'"/></li>
+                </ul>
+            </div>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_dev_request_manager,oski.dev.request.manager,model_oski_dev_request,oski_app_store.group_manager,1,1,1,1
+access_oski_dev_request_portal,oski.dev.request.portal,model_oski_dev_request,base.group_portal,1,0,0,0
+access_oski_dev_request_user,oski.dev.request.user,model_oski_dev_request,base.group_user,1,0,0,0
