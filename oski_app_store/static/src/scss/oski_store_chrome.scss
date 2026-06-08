@@ -1,0 +1,78 @@
+// ============================================================
+// Chrome GLOBAL apps.odooskills.com — harmonisé avec le blog
+// odooskills.com (palette plum/pink Odoo). NON scopé : cible la
+// navbar, le footer, les boutons et CTA du site entier.
+// Le catalogue /apps garde sa mise en page propre via .oski-store
+// (oski_app_store.scss) qui réutilise les mêmes teintes.
+// ============================================================
+
+$os-plum:       #714B67; // plum Odoo (accent principal)
+$os-plum-dark:  #21112E; // plum très foncé (titres / fond footer)
+$os-plum-soft:  #9B6A8F; // plum mat (accent secondaire)
+$os-pink:       #E8A0BF; // pink
+$os-pink-light: #FCD3E2; // pink clair (liens sur fond foncé)
+$os-bg-soft:    #f8f4f7; // fond rosé doux
+
+// ---- Navbar ----
+#wrapwrap > header {
+    .navbar {
+        background-color: #fff;
+        border-bottom: 3px solid $os-plum;
+        box-shadow: 0 2px 10px rgba(33, 17, 46, 0.06);
+    }
+    .navbar-brand {
+        color: $os-plum-dark;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+    }
+    .nav-link,
+    .navbar .dropdown-toggle {
+        color: $os-plum-dark;
+        font-weight: 600;
+        &:hover,
+        &:focus { color: $os-plum; }
+    }
+    .nav-item.active > .nav-link,
+    .nav-link.active { color: $os-plum; }
+}
+
+// ---- Boutons primaires globaux ----
+.btn-primary {
+    background-color: $os-plum;
+    border-color: $os-plum;
+    &:hover,
+    &:focus,
+    &:active { background-color: $os-plum-dark; border-color: $os-plum-dark; }
+}
+.btn-outline-primary {
+    color: $os-plum;
+    border-color: $os-plum;
+    &:hover,
+    &:focus { background-color: $os-plum; border-color: $os-plum; color: #fff; }
+}
+.btn-secondary {
+    background-color: $os-plum-soft;
+    border-color: $os-plum-soft;
+    &:hover,
+    &:focus { background-color: $os-plum; border-color: $os-plum; }
+}
+
+// ---- Footer ----
+#wrapwrap .o_footer,
+footer.o_footer {
+    background-color: $os-plum-dark;
+    color: rgba(255, 255, 255, 0.88);
+
+    h1, h2, h3, h4, h5, h6 { color: #fff; }
+    a {
+        color: $os-pink-light;
+        &:hover,
+        &:focus { color: #fff; }
+    }
+    .text-muted { color: rgba(255, 255, 255, 0.6) !important; }
+}
+#wrapwrap .o_footer_copyright {
+    background-color: #1a0d24;
+    color: rgba(255, 255, 255, 0.65);
+    a { color: rgba(255, 255, 255, 0.65); &:hover { color: #fff; } }
+}

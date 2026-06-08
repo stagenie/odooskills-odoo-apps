@@ -25,6 +25,7 @@
     ],
     "assets": {
         "web.assets_frontend": [
+            "oski_app_store/static/src/scss/oski_store_chrome.scss",
             "oski_app_store/static/src/scss/oski_app_store.scss",
         ],
     },
