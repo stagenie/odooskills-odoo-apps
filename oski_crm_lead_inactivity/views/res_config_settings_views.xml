@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_oski_crm_inactivity" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.oski.crm.inactivity</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="crm.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='crm']//block[1]" position="inside">
+                <setting string="Pistes dormantes"
+                         help="Seuil de jours sans mouvement au-delà duquel une piste est considérée comme dormante">
+                    <field name="oski_crm_idle_days"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
