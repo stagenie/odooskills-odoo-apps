@@ -63,6 +63,7 @@
                                 <t t-foreach="screenshots" t-as="shot">
                                     <button type="button" data-bs-target="#oskiGallery"
                                             t-att-data-bs-slide-to="shot_index"
+                                            t-attf-aria-label="Capture #{shot_index + 1}"
                                             t-attf-class="#{'active' if shot_index == 0 else ''}"/>
                                 </t>
                             </div>
@@ -90,14 +91,15 @@
                                 </button>
                             </t>
                         </div>
-                        <!-- Lightbox plein écran -->
-                        <div class="modal fade oski-lightbox" id="oskiLightbox" tabindex="-1">
-                            <div class="modal-dialog modal-fullscreen">
-                                <div class="modal-content">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"/>
-                                    <img src="" alt="Capture agrandie" class="oski-lightbox-img"/>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <!-- Lightbox plein écran (hors colonne : évite tout ancêtre transformé
+                     qui piégerait le backdrop position:fixed du modal) -->
+                <div t-if="has_shots" class="modal fade oski-lightbox" id="oskiLightbox" tabindex="-1">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"/>
+                            <img src="" alt="Capture agrandie" class="oski-lightbox-img"/>
                         </div>
                     </div>
                 </div>

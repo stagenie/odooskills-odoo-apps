@@ -76,6 +76,8 @@ class TestModulePage(HttpCase):
             }
         )
         self.authenticate(None, None)
-        html = self.url_open(module_no_shots.website_url).text
+        resp = self.url_open(module_no_shots.website_url)
+        self.assertEqual(resp.status_code, 200)  # garde anti faux-positif 404
+        html = resp.text
         self.assertNotIn("oski-gallery", html)
         self.assertIn("oski-techcard-wide", html)  # carte pleine largeur

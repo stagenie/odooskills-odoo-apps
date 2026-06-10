@@ -10,6 +10,9 @@ class OskiModule(models.Model):
     name = fields.Char(string="Nom affiché", required=True, translate=True)
     technical_name = fields.Char(string="Nom technique", required=True)
     summary = fields.Char(string="Résumé", translate=True)
+    # sanitize=False requis : la doc importée (format apps.odoo.com) repose sur des
+    # styles inline que le sanitizer dégraderait. Écriture réservée aux managers
+    # (ACL) + scripts de seed — ne jamais exposer en écriture portail/public.
     description_html = fields.Html(string="Description", translate=True, sanitize=False)
     category_id = fields.Many2one("oski.module.category", string="Catégorie")
     license = fields.Selection(
