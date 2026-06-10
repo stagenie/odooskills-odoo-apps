@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_oski_line_number" model="ir.ui.view">
+        <field name="name">sale.order.form.oski.line.number</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Insère la colonne N° en première position de la liste des lignes. -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                <field name="oski_line_number" string="N°" readonly="1" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

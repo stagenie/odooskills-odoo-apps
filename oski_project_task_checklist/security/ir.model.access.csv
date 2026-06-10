@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_task_checklist_item_project_user,oski.task.checklist.item.project.user,model_oski_task_checklist_item,project.group_project_user,1,1,1,1
+access_oski_task_checklist_item_user,oski.task.checklist.item.user,model_oski_task_checklist_item,base.group_user,1,0,0,0

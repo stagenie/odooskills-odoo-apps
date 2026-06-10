@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="oski_invoice_comment_template_view_list" model="ir.ui.view">
+        <field name="name">oski.invoice.comment.template.list</field>
+        <field name="model">oski.invoice.comment.template</field>
+        <field name="arch" type="xml">
+            <tree string="Modèles de remarque">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="move_types"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="oski_invoice_comment_template_view_form" model="ir.ui.view">
+        <field name="name">oski.invoice.comment.template.form</field>
+        <field name="model">oski.invoice.comment.template</field>
+        <field name="arch" type="xml">
+            <form string="Modèle de remarque">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Ex. : Mentions légales"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="move_types"/>
+                        <field name="sequence"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </group>
+                    <separator string="Remarque"/>
+                    <field name="body"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="oski_invoice_comment_template_view_search" model="ir.ui.view">
+        <field name="name">oski.invoice.comment.template.search</field>
+        <field name="model">oski.invoice.comment.template</field>
+        <field name="arch" type="xml">
+            <search string="Modèles de remarque">
+                <field name="name"/>
+                <filter name="filter_active" string="Actifs" domain="[('active', '=', True)]"/>
+                <filter name="filter_archived" string="Archivés" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_move_types" string="Type de facture" domain="[]" context="{'group_by': 'move_types'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oski_invoice_comment_template_action" model="ir.actions.act_window">
+        <field name="name">Modèles de remarque</field>
+        <field name="res_model">oski.invoice.comment.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="oski_invoice_comment_template_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez un modèle de remarque réutilisable
+            </p>
+            <p>
+                Les modèles de remarque permettent d'insérer rapidement un texte
+                récurrent dans la note d'une facture, qui sera imprimée dans le PDF.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="oski_invoice_comment_template_menu"
+              name="Modèles de remarque"
+              parent="account.menu_finance_configuration"
+              action="oski_invoice_comment_template_action"
+              sequence="90"/>
+
+</odoo>

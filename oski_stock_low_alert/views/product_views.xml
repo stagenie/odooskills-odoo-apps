@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Formulaire produit : seuil d'alerte dans l'onglet Inventaire. -->
+    <record id="oski_product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form.oski.low.stock</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='inventory']/group[@name='inventory']" position="inside">
+                <group name="oski_low_stock_alert" string="Alerte de stock bas">
+                    <field name="oski_alert_threshold"/>
+                    <field name="oski_low_stock"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Liste produits : lignes rouges quand le stock est bas. -->
+    <record id="oski_product_template_tree_view" model="ir.ui.view">
+        <field name="name">product.template.list.oski.low.stock</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <!-- decoration-danger exige que le champ soit présent dans la liste. -->
+            <tree position="attributes">
+                <attribute name="decoration-danger">oski_low_stock</attribute>
+            </tree>
+            <field name="name" position="after">
+                <field name="oski_low_stock" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Recherche produit : filtre « Stock bas ». -->
+    <record id="oski_product_template_search_view" model="ir.ui.view">
+        <field name="name">product.template.search.oski.low.stock</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <filter name="favorites" position="after">
+                <separator/>
+                <filter string="Stock bas" name="oski_low_stock"
+                        domain="[('oski_low_stock', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>
