@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_oski_crm_inactivity" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.oski.crm.inactivity</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="crm.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- v16 ne dispose pas des balises <app>/<block>/<setting> (v17+) :
+                 on ajoute une boîte de réglage au format historique
+                 (o_setting_box) dans le bloc « CRM » repéré par data-key
+                 (cf. core addons/crm/views/res_config_settings_views.xml
+                 l.11 data-key="crm" + l.14 o_setting_box). -->
+            <xpath expr="//div[@data-key='crm']" position="inside">
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="oski_crm_idle_days" string="Pistes dormantes"/>
+                            <div class="text-muted">
+                                Seuil de jours sans mouvement au-delà duquel une piste
+                                est considérée comme dormante
+                            </div>
+                            <div class="content-group mt16">
+                                <field name="oski_crm_idle_days" class="oe_inline"/>
+                                <span class="ms-1">jours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
