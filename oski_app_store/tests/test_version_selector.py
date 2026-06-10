@@ -91,10 +91,10 @@ class TestCatalogVersionSelector(HttpCase):
         self.assertIn("oski_only19", resp.text)
 
     def test_pill_active_marked(self):
-        """La pastille de la version sélectionnée porte is-active."""
+        """La version sélectionnée est marquée active dans le dropdown Version."""
         self.authenticate(None, None)
         resp = self.url_open("/apps?v=17.0")
-        self.assertIn("oski-pill is-active", resp.text)
+        self.assertIn("dropdown-item active", resp.text)
 
     def test_card_pastilles_on_off(self):
         """Carte : dot 'on' pour version présente, 'off' pour absente."""
@@ -105,11 +105,12 @@ class TestCatalogVersionSelector(HttpCase):
         self.assertIn("oski-dot off", resp.text)
 
     def test_card_greyed_when_incompatible(self):
-        """Carte d'un module 19.0-only grisée à ?v=18.0."""
+        """Carte d'un module 19.0-only : dot 'off' pour 18.0 à ?v=18.0."""
         self.authenticate(None, None)
         _make_module(self.env, "oski_grey", ["19.0"])
         resp = self.url_open("/apps?v=18.0")
-        self.assertIn("is-incompatible", resp.text)
+        # La grille dense affiche oski-dot off pour les versions non supportées
+        self.assertIn("oski-dot off", resp.text)
 
 
 @tagged("post_install", "-at_install")

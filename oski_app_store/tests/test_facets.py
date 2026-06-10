@@ -138,17 +138,19 @@ class TestFacets(HttpCase):
         self.assertIn('href="/apps?tag=%s"' % tag.id, resp.text)
 
     def test_active_filters_bar(self):
+        """Quand des filtres sont actifs, le lien 'Tout effacer' est affiché."""
         self.authenticate(None, None)
         tag = self.env["oski.module.tag"].create({"name": "Tactive"})
         _make_module(self.env, "oski_af", tags=[tag])
         resp = self.url_open("/apps?tag=%s" % tag.id)
-        self.assertIn("oski-active-filters", resp.text)
+        self.assertIn("oski-clear", resp.text)
 
     def test_facet_panel_rendered(self):
+        """La barre de filtres (toolbar) est présente dans le catalogue."""
         self.authenticate(None, None)
         self.env["oski.module.tag"].create({"name": "Tpanel"})
         resp = self.url_open("/apps")
-        self.assertIn("oski-facets", resp.text)
+        self.assertIn("oski-toolbar", resp.text)
 
 
 @tagged("post_install", "-at_install")
