@@ -81,3 +81,31 @@ class TestModulePage(HttpCase):
         html = resp.text
         self.assertNotIn("oski-gallery", html)
         self.assertIn("oski-techcard-wide", html)  # carte pleine largeur
+
+    def test_gallery_sorted_by_name(self):
+        """Les captures doivent apparaître triées par nom de fichier (01 avant 02)."""
+        v19 = self.env["oski.odoo.version"].search([("name", "=", "19.0")])
+        # Créer screenshot_01 EN PREMIER → id inférieur
+        # Sans .sorted("name"), id desc placerait screenshot_02 (id supérieur) avant screenshot_01
+        shot1 = self.env["ir.attachment"].create(
+            {"name": "screenshot_01.png", "datas": base64.b64encode(b"a"), "public": True}
+        )
+        shot2 = self.env["ir.attachment"].create(
+            {"name": "screenshot_02.png", "datas": base64.b64encode(b"b"), "public": True}
+        )
+        module = self.env["oski.module"].create(
+            {
+                "name": "Gallery Order",
+                "technical_name": "oski_gallery_order",
+                "is_published": True,
+                "screenshot_ids": [(6, 0, [shot2.id, shot1.id])],
+            }
+        )
+        self.authenticate(None, None)
+        resp = self.url_open(module.website_url)
+        self.assertEqual(resp.status_code, 200)
+        html = resp.text
+        self.assertLess(
+            html.find("screenshot_01.png"), html.find("screenshot_02.png"),
+            "Galerie triée par nom de fichier",
+        )

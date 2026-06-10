@@ -19,3 +19,18 @@ class TestScreenshots(TransactionCase):
         module.screenshot_ids = [(6, 0, [att.id])]
         self.assertEqual(len(module.screenshot_ids), 1)
         self.assertTrue(module.screenshot_ids.public)
+
+    def test_screenshots_forced_public(self):
+        """Une capture liée non publique devient publique (galerie visiteur)."""
+        module = self.env["oski.module"].create(
+            {"name": "Test Pub", "technical_name": "oski_test_pub"}
+        )
+        att = self.env["ir.attachment"].create(
+            {
+                "name": "screenshot_02.png",
+                "datas": base64.b64encode(b"fakepng"),
+                "public": False,
+            }
+        )
+        module.write({"screenshot_ids": [(4, att.id)]})
+        self.assertTrue(att.public)

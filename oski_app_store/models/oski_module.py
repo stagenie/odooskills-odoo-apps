@@ -97,3 +97,21 @@ class OskiModule(models.Model):
         return self.version_line_ids.sorted(
             lambda v: v.odoo_version_id.sequence, reverse=True
         )[:1]
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._sync_screenshots_public()
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        if "screenshot_ids" in vals:
+            self._sync_screenshots_public()
+        return res
+
+    def _sync_screenshots_public(self):
+        """Les captures de la galerie publique doivent être servies aux visiteurs."""
+        shots = self.sudo().screenshot_ids.filtered(lambda a: not a.public)
+        if shots:
+            shots.write({"public": True})
