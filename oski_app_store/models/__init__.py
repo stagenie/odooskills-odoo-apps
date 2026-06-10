@@ -1,3 +1,4 @@
+from . import oski_odoo_version
 from . import oski_module_category
 from . import oski_module_tag
 from . import oski_module_version

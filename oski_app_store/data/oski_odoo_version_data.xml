@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="odoo_version_15" model="oski.odoo.version">
+        <field name="name">15.0</field>
+        <field name="sequence">150</field>
+    </record>
+    <record id="odoo_version_16" model="oski.odoo.version">
+        <field name="name">16.0</field>
+        <field name="sequence">160</field>
+    </record>
+    <record id="odoo_version_17" model="oski.odoo.version">
+        <field name="name">17.0</field>
+        <field name="sequence">170</field>
+    </record>
+    <record id="odoo_version_18" model="oski.odoo.version">
+        <field name="name">18.0</field>
+        <field name="sequence">180</field>
+    </record>
+    <record id="odoo_version_19" model="oski.odoo.version">
+        <field name="name">19.0</field>
+        <field name="sequence">190</field>
+        <field name="is_default" eval="True"/>
+    </record>
+</odoo>
