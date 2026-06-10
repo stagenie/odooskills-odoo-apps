@@ -18,11 +18,12 @@ def toggle(values, value):
     return result
 
 
-def build_query(categories, tags, pricing, sort, search, version, default_version="19.0"):
+def build_query(categories, tags, pricing, sort, search, version,
+                default_version="19.0"):
     """Construit l'URL `/apps` reflétant l'état de filtrage, querystring encodée.
 
     Omet les valeurs par défaut (pricing='all', sort='name', version=default,
-    search vide, listes vides) pour des URLs propres et stables.
+    search vide, listes vides) pour des URLs propres.
     """
     params = {}
     if categories:

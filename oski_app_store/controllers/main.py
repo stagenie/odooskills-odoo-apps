@@ -15,9 +15,13 @@ from odoo.addons.oski_app_store.controllers.url_state import build_query, toggle
 class OskiAppStore(http.Controller):
     """Contrôleur principal du store OdooSkills App Store."""
 
-    # Versions Odoo supportées par le store (source : oski.module.version).
-    SUPPORTED_VERSIONS = ["19.0", "18.0", "17.0", "16.0", "15.0"]
-    DEFAULT_VERSION = "19.0"
+    def _version_state(self):
+        """(supported, default) depuis le référentiel oski.odoo.version."""
+        Versions = request.env["oski.odoo.version"].sudo()
+        supported = Versions.get_supported()
+        if not supported:
+            return ["19.0"], "19.0"  # garde-fou base vide
+        return supported, Versions.get_default()
 
     @http.route(["/apps"], type="http", auth="public", website=True, sitemap=True)
     def apps_catalog(self, **kw):
@@ -27,6 +31,8 @@ class OskiAppStore(http.Controller):
         Filtrage : OR intra-groupe (ORM `in`), AND inter-groupes (conjonction).
         État partageable + encodé via url_state.build_query.
         """
+        supported_versions, default_version = self._version_state()
+
         args = request.httprequest.args
 
         def _ints(key):
@@ -44,7 +50,7 @@ class OskiAppStore(http.Controller):
         sort = args.get("sort", "name")
         search = args.get("search", "")
         v = args.get("v")
-        version = v if v in self.SUPPORTED_VERSIONS else self.DEFAULT_VERSION
+        version = v if v in supported_versions else default_version
 
         domain = [("is_published", "=", True)]
         if cats:
@@ -76,7 +82,7 @@ class OskiAppStore(http.Controller):
                 "id": c.id,
                 "name": c.name,
                 "selected": c.id in cats,
-                "href": build_query(toggle(cats, c.id), tags, pricing, sort, search, version, self.DEFAULT_VERSION),
+                "href": build_query(toggle(cats, c.id), tags, pricing, sort, search, version, default_version),
             }
             for c in categories
         ]
@@ -86,7 +92,7 @@ class OskiAppStore(http.Controller):
                 "name": t.name,
                 "color": t.color,
                 "selected": t.id in tags,
-                "href": build_query(cats, toggle(tags, t.id), pricing, sort, search, version, self.DEFAULT_VERSION),
+                "href": build_query(cats, toggle(tags, t.id), pricing, sort, search, version, default_version),
             }
             for t in all_tags
         ]
@@ -95,7 +101,7 @@ class OskiAppStore(http.Controller):
                 "key": key,
                 "label": label,
                 "selected": pricing == key,
-                "href": build_query(cats, tags, key, sort, search, version, self.DEFAULT_VERSION),
+                "href": build_query(cats, tags, key, sort, search, version, default_version),
             }
             for key, label in (("all", "Tous"), ("free", "Gratuit"), ("premium", "Premium"))
         ]
@@ -104,7 +110,7 @@ class OskiAppStore(http.Controller):
                 "key": key,
                 "label": label,
                 "selected": sort == key,
-                "href": build_query(cats, tags, pricing, key, search, version, self.DEFAULT_VERSION),
+                "href": build_query(cats, tags, pricing, key, search, version, default_version),
             }
             for key, label in (("name", "Nom"), ("recent", "Récents"))
         ]
@@ -112,9 +118,9 @@ class OskiAppStore(http.Controller):
             {
                 "label": pv,
                 "selected": pv == version,
-                "href": build_query(cats, tags, pricing, sort, search, pv, self.DEFAULT_VERSION),
+                "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
             }
-            for pv in reversed(self.SUPPORTED_VERSIONS)
+            for pv in reversed(supported_versions)
         ]
 
         values = {
@@ -145,13 +151,15 @@ class OskiAppStore(http.Controller):
             "oski_app_store.group_manager"
         ):
             return request.not_found()
-        version = v if v in self.SUPPORTED_VERSIONS else self.DEFAULT_VERSION
+        supported_versions, default_version = self._version_state()
+        version = v if v in supported_versions else default_version
         return request.render(
             "oski_app_store.module_page",
             {
                 "module": module,
                 "version": version,
-                "pill_versions": list(reversed(self.SUPPORTED_VERSIONS)),
+                "pill_versions": list(reversed(supported_versions)),
+                "screenshots": module.screenshot_ids,
             },
         )
 

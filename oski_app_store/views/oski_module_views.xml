@@ -58,6 +58,9 @@
                                 </list>
                             </field>
                         </page>
+                        <page string="Captures d'écran" name="screenshots">
+                            <field name="screenshot_ids" widget="many2many_binary"/>
+                        </page>
                         <page string="Dépendances" name="dependencies">
                             <field name="dependency_ids" widget="many2many_tags"/>
                         </page>

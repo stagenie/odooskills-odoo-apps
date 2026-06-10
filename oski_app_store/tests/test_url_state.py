@@ -34,3 +34,8 @@ class TestUrlState(TransactionCase):
         self.assertIn("pricing=free", url)
         self.assertIn("sort=recent", url)
         self.assertIn("v=18.0", url)
+
+    def test_no_view_param(self):
+        import inspect
+        from odoo.addons.oski_app_store.controllers.url_state import build_query
+        self.assertNotIn("view", inspect.signature(build_query).parameters)

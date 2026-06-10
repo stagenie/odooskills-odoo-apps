@@ -39,6 +39,14 @@ class OskiModule(models.Model):
         string="Tags",
     )
     image_1920 = fields.Image(string="Icône")
+    screenshot_ids = fields.Many2many(
+        "ir.attachment",
+        "oski_module_screenshot_rel",
+        "module_id",
+        "attachment_id",
+        string="Captures d'écran",
+        help="Images de la galerie de la fiche publique (attachments publics).",
+    )
     product_tmpl_id = fields.Many2one(
         "product.template", string="Produit lié", ondelete="restrict", copy=False
     )
