@@ -84,5 +84,5 @@ class OskiModule(models.Model):
         if exact:
             return exact[:1]
         return self.version_line_ids.sorted(
-            lambda v: v.odoo_version, reverse=True
+            lambda v: v.odoo_version_id.sequence, reverse=True
         )[:1]

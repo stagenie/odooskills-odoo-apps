@@ -2,6 +2,10 @@ from odoo.tests import tagged
 from odoo.tests.common import HttpCase, TransactionCase
 
 
+def _ver(env, name):
+    return env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+
+
 def _make_module(env, technical_name, odoo_versions, is_free=True, published=True):
     """Crée un oski.module avec une oski.module.version (+ zip) par version Odoo.
 
@@ -27,7 +31,7 @@ def _make_module(env, technical_name, odoo_versions, is_free=True, published=Tru
         versions[ov] = env["oski.module.version"].create(
             {
                 "module_id": module.id,
-                "odoo_version": ov,
+                "odoo_version_id": _ver(env, ov).id,
                 "module_version": "%s.1.0.0" % ov,
                 "attachment_id": attachment.id,
             }

@@ -3,6 +3,9 @@ from odoo.tests.common import TransactionCase
 
 class TestOskiAppStore(TransactionCase):
 
+    def _ver(self, name):
+        return self.env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+
     def test_category_create(self):
         cat = self.env["oski.module.category"].create({"name": "Ventes"})
         self.assertEqual(cat.name, "Ventes")
@@ -15,11 +18,11 @@ class TestOskiAppStore(TransactionCase):
             {"name": "Mon Module", "technical_name": "oski_demo"}
         )
         self.env["oski.module.version"].create(
-            {"module_id": module.id, "odoo_version": "19.0", "module_version": "19.0.1.0.0"}
+            {"module_id": module.id, "odoo_version_id": self._ver("19.0").id, "module_version": "19.0.1.0.0"}
         )
         with self.assertRaises(IntegrityError), mute_logger("odoo.sql_db"):
             self.env["oski.module.version"].create(
-                {"module_id": module.id, "odoo_version": "19.0", "module_version": "19.0.1.0.1"}
+                {"module_id": module.id, "odoo_version_id": self._ver("19.0").id, "module_version": "19.0.1.0.1"}
             )
             self.env.flush_all()
 

@@ -50,7 +50,7 @@
                         <page string="Versions" name="versions">
                             <field name="version_line_ids">
                                 <list editable="bottom">
-                                    <field name="odoo_version"/>
+                                    <field name="odoo_version_id" required="1"/>
                                     <field name="module_version"/>
                                     <field name="attachment_id"/>
                                     <field name="released_date"/>

@@ -23,6 +23,9 @@ class TestDownloadController(HttpCase):
         cls.env.registry.clear_cache('routing')
         cls.addClassCleanup(cls.env.registry.clear_cache, 'routing')
 
+    def _ver(self, name):
+        return self.env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+
     def _make_module(self, technical_name, is_free=True, published=True):
         """Crée une fixture (oski.module + version + pièce jointe zip).
 
@@ -47,7 +50,7 @@ class TestDownloadController(HttpCase):
         version = self.env["oski.module.version"].create(
             {
                 "module_id": module.id,
-                "odoo_version": "19.0",
+                "odoo_version_id": self._ver("19.0").id,
                 "module_version": "19.0.1.0.0",
                 "attachment_id": attachment.id,
             }
