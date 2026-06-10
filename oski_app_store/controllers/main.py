@@ -159,7 +159,7 @@ class OskiAppStore(http.Controller):
                 "module": module,
                 "version": version,
                 "pill_versions": list(reversed(supported_versions)),
-                "screenshots": module.screenshot_ids,
+                "screenshots": module.sudo().screenshot_ids,
             },
         )
 

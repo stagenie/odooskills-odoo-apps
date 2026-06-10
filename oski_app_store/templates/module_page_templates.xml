@@ -3,47 +3,107 @@
     <template id="module_page" name="Page module">
         <t t-call="website.layout">
             <div class="oski-store">
-            <div class="container my-5">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h1><t t-out="module.name"/></h1>
-                        <p class="lead text-muted"><t t-out="module.summary"/></p>
-                        <div class="my-4"><t t-out="module.description_html"/></div>
+            <div class="container py-5">
+                <t t-set="has_shots" t-value="bool(screenshots)"/>
+                <div class="row g-4 mb-4">
+                    <!-- Carte fiche technique (haut gauche) -->
+                    <div t-attf-class="#{'col-lg-5' if has_shots else 'col-12 oski-techcard-wide'}">
+                        <div class="oski-techcard">
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <t t-call="oski_app_store.module_icon"/>
+                                <div>
+                                    <h1 class="oski-module-title" t-out="module.name"/>
+                                    <span t-if="module.is_free" class="oski-badge oski-badge-free">Gratuit</span>
+                                    <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
+                                </div>
+                            </div>
+                            <p class="oski-module-summary" t-out="module.summary"/>
+                            <table class="oski-techtable">
+                                <tr><th>Nom technique</th><td><code t-out="module.technical_name"/></td></tr>
+                                <tr><th>Licence</th><td t-out="dict(module._fields['license'].selection).get(module.license)"/></tr>
+                                <tr><th>Auteur</th><td t-out="module.author"/></tr>
+                            </table>
+                            <div class="oski-version-select mb-3" aria-label="Version Odoo">
+                                <t t-set="avail" t-value="module.available_versions()"/>
+                                <t t-foreach="pill_versions" t-as="pv">
+                                    <a t-attf-href="#{module.website_url}?v=#{pv}"
+                                       t-attf-class="oski-vpill #{'on' if pv in avail else 'off'} #{'sel' if pv == version else ''}"
+                                       t-out="pv"/>
+                                </t>
+                            </div>
+                            <div class="oski-chips mb-3" t-if="module.tag_ids">
+                                <t t-foreach="module.tag_ids" t-as="tag">
+                                    <a t-attf-href="/apps?tag=#{tag.id}" class="oski-chip" t-out="tag.name"/>
+                                </t>
+                            </div>
+                            <t t-set="target" t-value="module.download_target(version)"/>
+                            <t t-if="target and target.attachment_id">
+                                <a t-if="module.is_free"
+                                   t-attf-href="/apps/download/#{target.id}"
+                                   class="btn oski-btn-download w-100">
+                                    &#x2B07; Télécharger (<t t-out="target.odoo_version"/>)
+                                </a>
+                                <a t-else=""
+                                   t-attf-href="/shop/cart/update?product_id=#{module.product_tmpl_id.product_variant_id.id}"
+                                   class="btn oski-btn-buy w-100">Acheter</a>
+                                <p t-if="target.odoo_version != version" class="oski-fallback-note">
+                                    Indisponible en <t t-out="version"/> — dernière version proposée :
+                                    <t t-out="target.odoo_version"/>.
+                                </p>
+                            </t>
+                            <t t-else="">
+                                <p class="text-muted">Aucune archive disponible.</p>
+                            </t>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card oski-sidecard">
-                            <div class="card-body">
-                                <span t-if="module.is_free" class="badge text-bg-success mb-2">Gratuit</span>
-                                <span t-else="" class="badge text-bg-warning mb-2">Premium</span>
-                                <p class="mb-1"><strong>Nom technique :</strong> <t t-out="module.technical_name"/></p>
-                                <p class="mb-1"><strong>Licence :</strong> <t t-out="module.license"/></p>
-                                <p class="mb-3"><strong>Auteur :</strong> <t t-out="module.author"/></p>
-                                <div class="oski-pastilles mb-3" aria-label="Compatibilité">
-                                    <t t-set="avail" t-value="module.available_versions()"/>
-                                    <t t-foreach="pill_versions" t-as="pv">
-                                        <span t-attf-class="oski-dot #{'on' if pv in avail else 'off'} #{'sel' if pv == version else ''}" t-out="pv"/>
-                                    </t>
-                                </div>
-                                <div class="oski-chips mb-3" t-if="module.tag_ids">
-                                    <t t-foreach="module.tag_ids" t-as="tag">
-                                        <a t-attf-href="/apps?tag=#{tag.id}" class="oski-chip"><t t-out="tag.name"/></a>
-                                    </t>
-                                </div>
-                                <t t-set="target" t-value="module.download_target(version)"/>
-                                <t t-if="target and target.attachment_id">
-                                    <a t-if="module.is_free"
-                                       t-attf-href="/apps/download/#{target.id}"
-                                       class="btn btn-success w-100">Télécharger (<t t-out="target.odoo_version"/>)</a>
-                                    <a t-else=""
-                                       t-attf-href="/shop/cart/update?product_id=#{module.product_tmpl_id.product_variant_id.id}"
-                                       class="btn btn-warning w-100">Acheter</a>
+                    <!-- Galerie de captures (haut droite) -->
+                    <div t-if="has_shots" class="col-lg-7">
+                        <div id="oskiGallery" class="carousel slide oski-gallery" data-bs-ride="false">
+                            <div class="carousel-indicators" t-if="len(screenshots) > 1">
+                                <t t-foreach="screenshots" t-as="shot">
+                                    <button type="button" data-bs-target="#oskiGallery"
+                                            t-att-data-bs-slide-to="shot_index"
+                                            t-attf-class="#{'active' if shot_index == 0 else ''}"/>
                                 </t>
-                                <t t-else="">
-                                    <p class="text-muted">Aucune archive disponible.</p>
+                            </div>
+                            <div class="carousel-inner">
+                                <t t-foreach="screenshots" t-as="shot">
+                                    <div t-attf-class="carousel-item #{'active' if shot_index == 0 else ''}">
+                                        <img t-attf-src="/web/image/#{shot.id}"
+                                             t-att-alt="shot.name"
+                                             class="d-block w-100 oski-shot"
+                                             data-bs-toggle="modal"
+                                             t-attf-data-bs-target="#oskiLightbox"
+                                             t-attf-data-shot-src="/web/image/#{shot.id}"
+                                             loading="lazy"/>
+                                    </div>
                                 </t>
+                            </div>
+                            <t t-if="len(screenshots) > 1">
+                                <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#oskiGallery" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"/>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                        data-bs-target="#oskiGallery" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"/>
+                                </button>
+                            </t>
+                        </div>
+                        <!-- Lightbox plein écran -->
+                        <div class="modal fade oski-lightbox" id="oskiLightbox" tabindex="-1">
+                            <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"/>
+                                    <img src="" alt="Capture agrandie" class="oski-lightbox-img"/>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- Description pleine largeur -->
+                <div class="oski-desc">
+                    <t t-out="module.description_html"/>
                 </div>
             </div>
             </div>

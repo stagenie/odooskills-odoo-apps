@@ -5,3 +5,4 @@ from . import test_facets
 from . import test_url_state
 from . import test_odoo_version_registry
 from . import test_screenshots
+from . import test_module_page
