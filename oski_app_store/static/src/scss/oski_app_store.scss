@@ -124,14 +124,6 @@ $oski-green: #2e7d32;
             filter: invert(1) grayscale(1) brightness(.3); }
         .carousel-indicators button { background-color: $oski-plum; }
     }
-    .oski-lightbox .modal-content { background: rgba(17, 24, 39, .96);
-        align-items: center; justify-content: center;
-        .btn-close { position: absolute; top: 1rem; right: 1rem;
-            filter: invert(1); z-index: 5; }
-        .oski-lightbox-img { max-width: 95vw; max-height: 92vh;
-            object-fit: contain; }
-    }
-
     // ---- Description pleine largeur ----
     .oski-desc {
         max-width: 920px; margin: 0 auto; padding-top: 1rem;
@@ -145,4 +137,14 @@ $oski-green: #2e7d32;
         code { background: $oski-bg-soft; padding: .1rem .35rem;
             border-radius: 5px; }
     }
+}
+
+// Lightbox hors scope .oski-store : robuste même si le modal est déplacé
+// vers <body> (comportement possible selon intégrations Bootstrap).
+.oski-lightbox .modal-content { background: rgba(17, 24, 39, .96);
+    align-items: center; justify-content: center;
+    .btn-close { position: absolute; top: 1rem; right: 1rem;
+        filter: invert(1); z-index: 5; }
+    .oski-lightbox-img { max-width: 95vw; max-height: 92vh;
+        object-fit: contain; }
 }
