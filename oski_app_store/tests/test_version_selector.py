@@ -3,7 +3,10 @@ from odoo.tests.common import HttpCase, TransactionCase
 
 
 def _ver(env, name):
-    return env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+    rec = env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+    if not rec:
+        raise ValueError("oski.odoo.version %r absente du référentiel" % name)
+    return rec
 
 
 def _make_module(env, technical_name, odoo_versions, is_free=True, published=True):

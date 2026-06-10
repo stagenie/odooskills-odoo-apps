@@ -4,7 +4,9 @@ from odoo import fields, models
 class OskiModuleVersion(models.Model):
     _name = "oski.module.version"
     _description = "Archive d'un module pour une version Odoo donnée"
-    _order = "odoo_version_id desc, released_date desc"
+    # m2o dans _order : délègue à l'ordre du comodèle ("sequence desc"),
+    # inversé si DESC — donc "asc" ici = plus récente d'abord.
+    _order = "odoo_version_id asc, released_date desc"
 
     module_id = fields.Many2one(
         "oski.module", string="Module", required=True, ondelete="cascade"

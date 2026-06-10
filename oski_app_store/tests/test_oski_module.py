@@ -4,7 +4,10 @@ from odoo.tests.common import TransactionCase
 class TestOskiAppStore(TransactionCase):
 
     def _ver(self, name):
-        return self.env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+        rec = self.env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+        if not rec:
+            raise ValueError("oski.odoo.version %r absente du référentiel" % name)
+        return rec
 
     def test_category_create(self):
         cat = self.env["oski.module.category"].create({"name": "Ventes"})
@@ -67,3 +70,22 @@ class TestOskiAppStore(TransactionCase):
         visible = self.env["oski.module"].with_user(public_user).search([])
         self.assertIn(pub, visible)
         self.assertTrue(all(m.is_published for m in visible))
+
+    def test_version_lines_order_newest_first(self):
+        module = self.env["oski.module"].create(
+            {"name": "Order Test", "technical_name": "oski_order_test"}
+        )
+        for v in ("15.0", "19.0", "17.0"):
+            self.env["oski.module.version"].create(
+                {
+                    "module_id": module.id,
+                    "odoo_version_id": self._ver(v).id,
+                    "module_version": v + ".1.0.0",
+                }
+            )
+        module.invalidate_recordset()
+        self.assertEqual(
+            module.version_line_ids.mapped("odoo_version"),
+            ["19.0", "17.0", "15.0"],
+            "Lignes de version ordonnées plus récente d'abord",
+        )

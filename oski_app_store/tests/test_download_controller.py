@@ -24,7 +24,10 @@ class TestDownloadController(HttpCase):
         cls.addClassCleanup(cls.env.registry.clear_cache, 'routing')
 
     def _ver(self, name):
-        return self.env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+        rec = self.env["oski.odoo.version"].search([("name", "=", name)], limit=1)
+        if not rec:
+            raise ValueError("oski.odoo.version %r absente du référentiel" % name)
+        return rec
 
     def _make_module(self, technical_name, is_free=True, published=True):
         """Crée une fixture (oski.module + version + pièce jointe zip).
