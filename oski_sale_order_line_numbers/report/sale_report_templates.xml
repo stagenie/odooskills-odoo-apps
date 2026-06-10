@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_document_oski_line_number"
+              inherit_id="sale.report_saleorder_document">
+
+        <!-- En-tête : colonne « N° » en tête du tableau. -->
+        <xpath expr="//th[@name='th_description']" position="before">
+            <th name="th_oski_line_number" class="text-end text-nowrap">N°</th>
+        </xpath>
+
+        <!-- Ligne produit : affiche le numéro calculé. -->
+        <xpath expr="//td[@name='td_product_name']" position="before">
+            <td name="td_oski_line_number" class="text-end text-nowrap">
+                <span t-out="line.oski_line_number"/>
+            </td>
+        </xpath>
+
+        <!-- Ligne section : cellule vide (la cellule suivante porte un colspan). -->
+        <xpath expr="//td[@name='td_section_name']" position="before">
+            <td name="td_oski_line_number_section"/>
+        </xpath>
+
+        <!-- Ligne note : cellule vide. -->
+        <xpath expr="//td[@name='td_note_name']" position="before">
+            <td name="td_oski_line_number_note"/>
+        </xpath>
+
+        <!-- Ligne combo : cellule vide. -->
+        <xpath expr="//td[@name='td_combo_name']" position="before">
+            <td name="td_oski_line_number_combo"/>
+        </xpath>
+
+    </template>
+
+</odoo>

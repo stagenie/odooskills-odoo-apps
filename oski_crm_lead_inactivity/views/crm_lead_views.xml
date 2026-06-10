@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Liste du pipeline : colonne « Jours d'inactivité » + surlignage des dormantes -->
+    <record id="oski_crm_case_tree_view_oppor" model="ir.ui.view">
+        <field name="name">oski.crm.lead.list.inactivity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <!-- Surlignage des lignes dormantes -->
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-warning">oski_is_idle</attribute>
+            </xpath>
+            <!-- Champ booléen requis pour la decoration, masqué en colonne -->
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="oski_is_idle" column_invisible="1"/>
+                <field name="oski_idle_days" string="Jours d'inactivité" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Formulaire de la piste : indicateur discret de l'inactivité -->
+    <record id="oski_crm_lead_view_form" model="ir.ui.view">
+        <field name="name">oski.crm.lead.form.inactivity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='probability']" position="after">
+                <field name="oski_is_idle" invisible="1"/>
+                <field name="oski_idle_days" invisible="1"/>
+                <span class="badge text-bg-warning ms-2" invisible="not oski_is_idle"
+                      title="Cette piste n'a connu aucun mouvement depuis le seuil configuré.">
+                    Dormante depuis <field name="oski_idle_days" class="oe_inline"/> j
+                </span>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Recherche : filtre « Dormantes » -->
+    <record id="oski_view_crm_case_opportunities_filter" model="ir.ui.view">
+        <field name="name">oski.crm.lead.search.inactivity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_rotting']" position="after">
+                <filter string="Dormantes" name="oski_filter_idle"
+                        domain="[('oski_is_idle', '=', True)]"
+                        help="Pistes et opportunités sans mouvement depuis le seuil configuré"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

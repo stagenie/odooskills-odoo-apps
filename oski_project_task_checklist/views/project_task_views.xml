@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Formulaire tâche : onglet Checklist avec barre de progression + liste inline -->
+    <record id="view_task_form2_oski_checklist" model="ir.ui.view">
+        <field name="name">project.task.form.oski.checklist</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <page name="description_page" position="after">
+                <page name="oski_checklist_page" string="Checklist">
+                    <field name="oski_checklist_progress" widget="progressbar"
+                           readonly="1" string="Avancement"/>
+                    <field name="oski_checklist_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="user_id" widget="many2one_avatar_user"
+                                   optional="show"/>
+                            <field name="done" widget="boolean_toggle"/>
+                        </list>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <!-- Liste des tâches : colonne avancement checklist -->
+    <record id="view_task_tree2_oski_checklist" model="ir.ui.view">
+        <field name="name">project.task.list.oski.checklist</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <field name="stage_id" position="after">
+                <field name="oski_checklist_progress" widget="progressbar"
+                       string="Checklist" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
