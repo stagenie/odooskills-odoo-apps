@@ -20,7 +20,7 @@
                 <span t-if="module.is_free" class="oski-badge oski-badge-free">Gratuit</span>
                 <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
             </div>
-            <h3 class="oski-card-title" t-out="module.name"/>
+            <h2 class="oski-card-title" t-out="module.name"/>
             <p class="oski-card-summary" t-out="module.summary"/>
             <div class="oski-card-versions" aria-label="Compatibilité">
                 <t t-foreach="version_pills" t-as="pv">
@@ -86,7 +86,7 @@
                             <t t-set="filter_label">Tri</t>
                             <t t-set="filter_options" t-value="sort_options"/>
                         </t>
-                        <div class="oski-tag-chips d-flex flex-wrap gap-1">
+                        <div t-if="tag_options" class="oski-tag-chips d-flex flex-wrap gap-1">
                             <t t-foreach="tag_options" t-as="to">
                                 <a t-att-href="to['href']"
                                    t-attf-class="oski-chip #{'is-selected' if to['selected'] else ''}">
