@@ -7,6 +7,8 @@ Route Task 9 : /apps/download/<version_id>
   - module payant, connecté sans achat confirmé → redirect vers la page module
   - module payant, acheteur confirmé (sale.order.line state='sale') → zip servi
 """
+from urllib.parse import urlparse
+
 from odoo import http
 from odoo.http import request
 from odoo.addons.oski_app_store.controllers.url_state import build_query, toggle
@@ -138,6 +140,20 @@ class OskiAppStore(http.Controller):
         }
         return request.render("oski_app_store.catalog_page", values)
 
+    def _catalog_back_url(self):
+        """URL de retour vers le catalogue, filtres conservés.
+
+        N'accepte que les Referer du même host pointant exactement sur /apps
+        (anti open-redirect) ; sinon fallback /apps nu.
+        """
+        referer = request.httprequest.headers.get("Referer", "")
+        parsed = urlparse(referer)
+        if parsed.path == "/apps" and (
+            not parsed.netloc or parsed.netloc == request.httprequest.host
+        ):
+            return "/apps?%s" % parsed.query if parsed.query else "/apps"
+        return "/apps"
+
     @http.route(
         ['/apps/<model("oski.module"):module>'],
         type="http",
@@ -160,6 +176,7 @@ class OskiAppStore(http.Controller):
                 "version": version,
                 "pill_versions": list(reversed(supported_versions)),
                 "screenshots": module.sudo().screenshot_ids.sorted("name"),
+                "back_url": self._catalog_back_url(),
             },
         )
 

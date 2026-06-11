@@ -81,6 +81,13 @@ $oski-green: #2e7d32;
         background: $oski-plum; color: #fff; font-weight: 700; font-size: 1.2rem;
     }
 
+    // ---- Fiche : lien retour catalogue ----
+    .oski-back {
+        display: inline-block; margin-bottom: 1rem; text-decoration: none;
+        color: $oski-muted; font-size: .9rem; font-weight: 500;
+        &:hover { color: $oski-plum; }
+    }
+
     // ---- Fiche : carte technique ----
     .oski-techcard {
         background: $oski-bg-soft; border: 1px solid $oski-line;

@@ -4,6 +4,7 @@
         <t t-call="website.layout">
             <div class="oski-store">
             <div class="container py-5">
+                <a class="oski-back" t-att-href="back_url">&#8592; Retour au catalogue</a>
                 <t t-set="has_shots" t-value="bool(screenshots)"/>
                 <div class="row g-4 mb-4">
                     <!-- Carte fiche technique (haut gauche) -->

@@ -82,6 +82,34 @@ class TestModulePage(HttpCase):
         self.assertNotIn("oski-gallery", html)
         self.assertIn("oski-techcard-wide", html)  # carte pleine largeur
 
+    def test_back_link_default(self):
+        """Sans Referer, le lien retour pointe vers /apps."""
+        module = self._make_module_with_shot("oski_back_default")
+        self.authenticate(None, None)
+        resp = self.url_open(module.website_url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn('class="oski-back" href="/apps"', resp.text)
+
+    def test_back_link_keeps_catalog_filters(self):
+        """Referer catalogue avec filtres → lien retour conserve la query string."""
+        module = self._make_module_with_shot("oski_back_filters")
+        self.authenticate(None, None)
+        referer = self.base_url() + "/apps?tag=3&pricing=free"
+        resp = self.url_open(module.website_url, headers={"Referer": referer})
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn('href="/apps?tag=3', resp.text)
+
+    def test_back_link_ignores_foreign_referer(self):
+        """Referer externe ou hors catalogue → fallback /apps (anti open-redirect)."""
+        module = self._make_module_with_shot("oski_back_foreign")
+        self.authenticate(None, None)
+        resp = self.url_open(
+            module.website_url,
+            headers={"Referer": "https://evil.example/apps?x=1"},
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn('class="oski-back" href="/apps"', resp.text)
+
     def test_gallery_sorted_by_name(self):
         """Les captures doivent apparaître triées par nom de fichier (01 avant 02)."""
         v19 = self.env["oski.odoo.version"].search([("name", "=", "19.0")])
