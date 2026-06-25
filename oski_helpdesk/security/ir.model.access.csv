@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_helpdesk_tag_user,helpdesk.tag user,model_helpdesk_tag,group_helpdesk_user,1,0,0,0
 access_helpdesk_tag_manager,helpdesk.tag manager,model_helpdesk_tag,group_helpdesk_manager,1,1,1,1
+access_helpdesk_stage_user,helpdesk.stage user,model_helpdesk_stage,group_helpdesk_user,1,0,0,0
+access_helpdesk_stage_manager,helpdesk.stage manager,model_helpdesk_stage,group_helpdesk_manager,1,1,1,1

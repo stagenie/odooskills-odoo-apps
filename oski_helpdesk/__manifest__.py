@@ -10,7 +10,9 @@
     "data": [
         "security/helpdesk_security.xml",
         "security/ir.model.access.csv",
+        "data/helpdesk_stage_data.xml",
         "views/helpdesk_tag_views.xml",
+        "views/helpdesk_stage_views.xml",
     ],
     "installable": True,
     "application": True,
