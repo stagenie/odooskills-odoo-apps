@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class HelpdeskTicket(models.Model):
@@ -37,6 +37,15 @@ class HelpdeskTicket(models.Model):
     @api.model
     def _read_group_stage_ids(self, stages, domain):
         return self.env["helpdesk.stage"].search([], order="sequence, id")
+
+    @api.model
+    def message_new(self, msg_dict, custom_values=None):
+        custom_values = dict(custom_values or {})
+        custom_values.setdefault("name", msg_dict.get("subject") or _("Sans sujet"))
+        custom_values.setdefault("partner_email", msg_dict.get("email_from"))
+        if not custom_values.get("description") and msg_dict.get("body"):
+            custom_values["description"] = msg_dict["body"]
+        return super().message_new(msg_dict, custom_values)
 
     def _assign_balanced(self, team):
         members = team.member_ids

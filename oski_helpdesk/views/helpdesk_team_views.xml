@@ -11,6 +11,9 @@
                     </div>
                     <group>
                         <field name="assignment_method"/>
+                        <field name="use_alias"/>
+                        <field name="alias_name" invisible="not use_alias"
+                               placeholder="ex. support"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                     </group>
                     <notebook>
