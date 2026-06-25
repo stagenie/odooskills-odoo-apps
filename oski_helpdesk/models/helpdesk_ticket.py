@@ -38,10 +38,33 @@ class HelpdeskTicket(models.Model):
     def _read_group_stage_ids(self, stages, domain):
         return self.env["helpdesk.stage"].search([], order="sequence, id")
 
+    def _assign_balanced(self, team):
+        members = team.member_ids
+        if not members:
+            return self.env["res.users"]
+        counts = {m.id: 0 for m in members}
+        data = self._read_group(
+            [("team_id", "=", team.id),
+             ("user_id", "in", members.ids),
+             ("stage_id.is_close", "=", False)],
+            ["user_id"], ["__count"])
+        for user, count in data:
+            counts[user.id] = count
+        best_id = min(members.ids, key=lambda uid: counts.get(uid, 0))
+        return self.env["res.users"].browse(best_id)
+
     @api.model_create_multi
     def create(self, vals_list):
+        teams = self.env["helpdesk.team"].browse(
+            [v.get("team_id") for v in vals_list if v.get("team_id")])
+        team_map = {t.id: t for t in teams}
         for vals in vals_list:
             if not vals.get("number") or vals["number"] == "/":
                 vals["number"] = self.env["ir.sequence"].sudo().next_by_code(
                     "helpdesk.ticket") or "/"
+            team = team_map.get(vals.get("team_id"))
+            if team and team.assignment_method == "balanced" and not vals.get("user_id"):
+                user = self._assign_balanced(team)
+                if user:
+                    vals["user_id"] = user.id
         return super().create(vals_list)
