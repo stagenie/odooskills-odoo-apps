@@ -16,7 +16,7 @@ class OskiAccessLineMixin(models.AbstractModel):
     user_id = fields.Many2one("res.users", string="Utilisateur", ondelete="cascade")
     group_id = fields.Many2one("res.groups", string="Groupe", ondelete="cascade")
 
-    @api.constrains("user_id", "group_id")
+    @api.constrains("user_id", "group_id", "level")
     def _check_user_xor_group(self):
         for line in self:
             if bool(line.user_id) == bool(line.group_id):
