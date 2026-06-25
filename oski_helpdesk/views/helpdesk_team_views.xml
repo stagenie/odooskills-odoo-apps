@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="helpdesk_team_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.team.form</field>
+        <field name="model">helpdesk.team</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nom de l'équipe"/></h1>
+                    </div>
+                    <group>
+                        <field name="assignment_method"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <notebook>
+                        <page name="members" string="Membres">
+                            <field name="member_ids"/>
+                        </page>
+                        <page name="stages" string="Étapes">
+                            <field name="stage_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="helpdesk_team_view_list" model="ir.ui.view">
+        <field name="name">helpdesk.team.list</field>
+        <field name="model">helpdesk.team</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="assignment_method"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="helpdesk_team_action" model="ir.actions.act_window">
+        <field name="name">Équipes</field>
+        <field name="res_model">helpdesk.team</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
