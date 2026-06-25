@@ -15,6 +15,8 @@
         "views/helpdesk_tag_views.xml",
         "views/helpdesk_stage_views.xml",
         "views/helpdesk_team_views.xml",
+        "views/helpdesk_ticket_views.xml",
+        "views/helpdesk_menus.xml",
     ],
     "installable": True,
     "application": True,
