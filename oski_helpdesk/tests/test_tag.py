@@ -6,10 +6,10 @@ from .common import HelpdeskCase
 class TestTag(HelpdeskCase):
 
     def test_tag_unique_name(self):
-        self.env["helpdesk.tag"].create({"name": "Bug"})
+        self.env["helpdesk.tag"].create({"name": "ZzTestUnique"})
         with self.assertRaises(Exception):
-            self.env["helpdesk.tag"].create({"name": "Bug"})
+            self.env["helpdesk.tag"].create({"name": "ZzTestUnique"})
 
     def test_tag_create(self):
-        tag = self.env["helpdesk.tag"].create({"name": "Question", "color": 3})
+        tag = self.env["helpdesk.tag"].create({"name": "ZzTestColor", "color": 3})
         self.assertEqual(tag.color, 3)
