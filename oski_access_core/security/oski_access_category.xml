@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_oski_access" model="ir.module.category">
+        <field name="name">Oski Access</field>
+        <field name="description">Restriction d'accès granulaire par dimension.</field>
+        <field name="sequence">90</field>
+    </record>
+
+    <!-- v19 : un groupe se rattache à une res.groups.privilege (category_id supprimé sur res.groups) -->
+    <record id="privilege_oski_access" model="res.groups.privilege">
+        <field name="name">Oski Access</field>
+        <field name="sequence">90</field>
+        <field name="category_id" ref="module_category_oski_access"/>
+    </record>
+</odoo>
