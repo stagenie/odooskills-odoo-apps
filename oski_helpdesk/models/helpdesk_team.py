@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class HelpdeskTeam(models.Model):
@@ -15,3 +15,11 @@ class HelpdeskTeam(models.Model):
     company_id = fields.Many2one(
         "res.company", string="Société",
         default=lambda self: self.env.company)
+    ticket_count = fields.Integer(string="Tickets", compute="_compute_ticket_count")
+
+    def _compute_ticket_count(self):
+        data = self.env["helpdesk.ticket"]._read_group(
+            [("team_id", "in", self.ids)], ["team_id"], ["__count"])
+        mapped = {team.id: count for team, count in data}
+        for team in self:
+            team.ticket_count = mapped.get(team.id, 0)
