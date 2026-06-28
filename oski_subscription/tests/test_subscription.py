@@ -111,3 +111,34 @@ class TestSubscription(TransactionCase):
         sub.action_close()
         self.assertEqual(sub.state, "closed")
         self.assertEqual(sub.date_closed, fields.Date.today())
+
+    def test_generate_invoice_draft(self):
+        sub = self._make_sub(lines=[(2, 50.0, 0.0)])
+        sub.action_start()
+        move = sub._generate_invoice()
+        self.assertEqual(move.move_type, "out_invoice")
+        self.assertEqual(move.partner_id, self.partner)
+        self.assertEqual(move.state, "draft")
+        self.assertEqual(len(move.invoice_line_ids), 1)
+        self.assertAlmostEqual(move.invoice_line_ids.price_unit, 50.0)
+        self.assertIn(move, sub.invoice_ids)
+        # facturation d'avance : démarrée aujourd'hui, prochaine = +1 mois
+        self.assertEqual(
+            sub.next_invoice_date, self.plan_month._get_next_date(fields.Date.today())
+        )
+
+    def test_generate_invoice_autopost(self):
+        plan = self.Plan.create(
+            {"name": "Auto", "billing_unit": "month", "auto_post_invoice": True}
+        )
+        sub = self._make_sub(plan=plan)
+        sub.action_start()
+        move = sub._generate_invoice()
+        self.assertEqual(move.state, "posted")
+
+    def test_generate_invoice_closes_on_date_end(self):
+        sub = self._make_sub()
+        sub.action_start()
+        sub.date_end = fields.Date.today()  # toute prochaine échéance dépasse
+        sub._generate_invoice()
+        self.assertEqual(sub.state, "closed")

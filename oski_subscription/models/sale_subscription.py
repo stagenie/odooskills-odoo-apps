@@ -114,3 +114,54 @@ class SaleSubscription(models.Model):
 
     def action_close(self):
         self.write({"state": "closed", "date_closed": fields.Date.today()})
+
+    def _prepare_invoice_line_vals(self, line):
+        return {
+            "product_id": line.product_id.id,
+            "name": line.name or line.product_id.display_name,
+            "quantity": line.quantity,
+            "price_unit": line.price_unit,
+            "discount": line.discount,
+            "tax_ids": [fields.Command.set(line.tax_ids.ids)],
+        }
+
+    def _prepare_invoice_vals(self):
+        return {
+            "move_type": "out_invoice",
+            "partner_id": self.partner_id.id,
+            "currency_id": self.currency_id.id,
+            "invoice_date": fields.Date.today(),
+            "invoice_origin": self.name,
+            "company_id": self.company_id.id,
+            "invoice_line_ids": [
+                fields.Command.create(self._prepare_invoice_line_vals(line))
+                for line in self.line_ids
+            ],
+        }
+
+    def _generate_invoice(self):
+        self.ensure_one()
+        move = self.env["account.move"].create(self._prepare_invoice_vals())
+        if self.plan_id.auto_post_invoice:
+            move.action_post()
+        self.invoice_ids = [fields.Command.link(move.id)]
+        self.next_invoice_date = self.plan_id._get_next_date(self.next_invoice_date)
+        if self.date_end and self.next_invoice_date > self.date_end:
+            self.action_close()
+        self.message_post(body="Facture générée : %s" % (move.name or move.id))
+        return move
+
+    def action_generate_invoice(self):
+        self.ensure_one()
+        self._generate_invoice()
+        return self.action_view_invoices()
+
+    def action_view_invoices(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Factures",
+            "res_model": "account.move",
+            "view_mode": "list,form",
+            "domain": [("id", "in", self.invoice_ids.ids)],
+        }
