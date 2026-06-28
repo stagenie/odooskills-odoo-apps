@@ -1,0 +1,20 @@
+{
+    "name": "Rendez-vous",
+    "version": "19.0.1.0.0",
+    "category": "Services/Appointment",
+    "summary": "Types de RDV, créneaux et prise de rendez-vous interne (Odoo CE)",
+    "author": "OdooSkills",
+    "license": "LGPL-3",
+    "depends": ["calendar", "resource", "mail"],
+    "data": [
+        "security/appointment_security.xml",
+        "security/ir.model.access.csv",
+        "data/mail_template_data.xml",
+        "views/appointment_type_views.xml",
+        "views/calendar_event_views.xml",
+        "views/appointment_booking_wizard_views.xml",
+        "views/appointment_menus.xml",
+    ],
+    "application": True,
+    "installable": True,
+}

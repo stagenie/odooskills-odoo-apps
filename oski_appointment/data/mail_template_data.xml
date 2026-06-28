@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_appointment_confirmation" model="mail.template">
+        <field name="name">Rendez-vous : confirmation</field>
+        <field name="model_id" ref="calendar.model_calendar_event"/>
+        <field name="subject">Confirmation de votre rendez-vous : {{ object.name }}</field>
+        <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ object.partner_ids[:1].email }}</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Bonjour,</p>
+                <p>Votre rendez-vous <strong t-out="object.name">RDV</strong> est confirmé.</p>
+                <ul>
+                    <li>Date : <span t-out="object.start">date</span></li>
+                    <li t-if="object.location">Lieu : <span t-out="object.location">lieu</span></li>
+                </ul>
+                <p>À bientôt.</p>
+            </div>
+        </field>
+    </record>
+</odoo>

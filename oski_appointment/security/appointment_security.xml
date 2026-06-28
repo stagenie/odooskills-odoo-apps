@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_appointment" model="ir.module.category">
+        <field name="name">Rendez-vous</field>
+        <field name="sequence">55</field>
+    </record>
+
+    <record id="privilege_appointment" model="res.groups.privilege">
+        <field name="name">Rendez-vous</field>
+        <field name="sequence">55</field>
+        <field name="category_id" ref="module_category_appointment"/>
+    </record>
+
+    <record id="group_appointment_user" model="res.groups">
+        <field name="name">Rendez-vous / Utilisateur</field>
+        <field name="privilege_id" ref="privilege_appointment"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="group_appointment_manager" model="res.groups">
+        <field name="name">Rendez-vous / Responsable</field>
+        <field name="privilege_id" ref="privilege_appointment"/>
+        <field name="implied_ids" eval="[(4, ref('group_appointment_user'))]"/>
+    </record>
+</odoo>
