@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="plan_monthly" model="sale.subscription.plan">
+        <field name="name">Mensuel</field>
+        <field name="billing_unit">month</field>
+        <field name="billing_interval">1</field>
+    </record>
+    <record id="plan_yearly" model="sale.subscription.plan">
+        <field name="name">Annuel</field>
+        <field name="billing_unit">year</field>
+        <field name="billing_interval">1</field>
+    </record>
+</odoo>

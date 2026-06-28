@@ -12,10 +12,12 @@
         "security/ir.model.access.csv",
         "data/ir_sequence_data.xml",
         "data/ir_cron_data.xml",
+        "data/subscription_plan_data.xml",
         "views/sale_subscription_views.xml",
         "views/sale_subscription_plan_views.xml",
         "views/subscription_menus.xml",
     ],
+    "demo": ["demo/subscription_demo.xml"],
     "installable": True,
     "application": True,
 }
