@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_subscription_form" model="ir.ui.view">
+        <field name="name">sale.subscription.form</field>
+        <field name="model">sale.subscription</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" string="Démarrer" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_generate_invoice" string="Facturer maintenant"
+                            type="object" invisible="state != 'progress'"/>
+                    <button name="action_pause" string="Suspendre" type="object"
+                            invisible="state != 'progress'"/>
+                    <button name="action_resume" string="Reprendre" type="object"
+                            invisible="state != 'paused'"/>
+                    <button name="action_close" string="Résilier" type="object"
+                            invisible="state not in ('progress', 'paused')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,progress,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoices" type="object"
+                                class="oe_stat_button" icon="fa-pencil-square-o">
+                            <field name="invoice_count" widget="statinfo" string="Factures"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="plan_id"/>
+                            <field name="pricelist_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="date_start" readonly="1"/>
+                            <field name="next_invoice_date"/>
+                            <field name="date_end"/>
+                            <field name="date_closed" readonly="1"
+                                   invisible="state != 'closed'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="lines" string="Lignes">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount"/>
+                                    <field name="tax_ids" widget="many2many_tags"/>
+                                    <field name="price_subtotal"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer">
+                                <field name="recurring_total"/>
+                                <field name="mrr"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sale_subscription_list" model="ir.ui.view">
+        <field name="name">sale.subscription.list</field>
+        <field name="model">sale.subscription</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'progress'"
+                  decoration-muted="state in ('paused', 'closed')">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="plan_id"/>
+                <field name="mrr"/>
+                <field name="next_invoice_date"/>
+                <field name="state"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sale_subscription_search" model="ir.ui.view">
+        <field name="name">sale.subscription.search</field>
+        <field name="model">sale.subscription</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="plan_id"/>
+                <filter name="f_progress" string="En cours" domain="[('state','=','progress')]"/>
+                <filter name="f_paused" string="Suspendu" domain="[('state','=','paused')]"/>
+                <filter name="f_closed" string="Résilié" domain="[('state','=','closed')]"/>
+                <separator/>
+                <filter name="f_to_invoice" string="À facturer"
+                        domain="[('state','=','progress'),('next_invoice_date','&lt;=',context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter name="g_plan" string="Plan" context="{'group_by': 'plan_id'}"/>
+                <filter name="g_partner" string="Client" context="{'group_by': 'partner_id'}"/>
+                <filter name="g_state" string="État" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_sale_subscription_pivot" model="ir.ui.view">
+        <field name="name">sale.subscription.pivot</field>
+        <field name="model">sale.subscription</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="plan_id" type="row"/>
+                <field name="next_invoice_date" interval="month" type="col"/>
+                <field name="mrr" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_sale_subscription_graph" model="ir.ui.view">
+        <field name="name">sale.subscription.graph</field>
+        <field name="model">sale.subscription</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="plan_id"/>
+                <field name="mrr" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_sale_subscription" model="ir.actions.act_window">
+        <field name="name">Abonnements</field>
+        <field name="res_model">sale.subscription</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+    </record>
+</odoo>

@@ -167,3 +167,34 @@ class TestSubscription(TransactionCase):
         self.assertEqual(len(future.invoice_ids), 0)
         self.assertEqual(len(draft.invoice_ids), 0)
         self.assertEqual(len(paused.invoice_ids), 0)
+
+    def test_access_user_cannot_create_plan(self):
+        from odoo.exceptions import AccessError
+        user = self.env["res.users"].create(
+            {
+                "name": "Sub User",
+                "login": "sub_user",
+                "group_ids": [
+                    Command.set([self.env.ref("oski_subscription.group_subscription_user").id])
+                ],
+            }
+        )
+        with self.assertRaises(AccessError):
+            self.env["sale.subscription.plan"].with_user(user).create(
+                {"name": "X", "billing_unit": "month"}
+            )
+
+    def test_access_manager_can_create_plan(self):
+        manager = self.env["res.users"].create(
+            {
+                "name": "Sub Mgr",
+                "login": "sub_mgr",
+                "group_ids": [
+                    Command.set([self.env.ref("oski_subscription.group_subscription_manager").id])
+                ],
+            }
+        )
+        plan = self.env["sale.subscription.plan"].with_user(manager).create(
+            {"name": "Mgr Plan", "billing_unit": "month"}
+        )
+        self.assertTrue(plan.id)
