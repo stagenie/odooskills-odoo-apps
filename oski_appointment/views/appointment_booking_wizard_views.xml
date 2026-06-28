@@ -1,2 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo/>
+<odoo>
+    <record id="view_appointment_booking_wizard_form" model="ir.ui.view">
+        <field name="name">appointment.booking.wizard.form</field>
+        <field name="model">appointment.booking.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Prendre rendez-vous">
+                <group>
+                    <field name="appointment_type_id"/>
+                    <field name="partner_id"/>
+                    <field name="staff_user_id" options="{'no_create': True}"/>
+                    <field name="slot_start"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirmer"
+                            class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_appointment_booking_wizard" model="ir.actions.act_window">
+        <field name="name">Prendre rendez-vous</field>
+        <field name="res_model">appointment.booking.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

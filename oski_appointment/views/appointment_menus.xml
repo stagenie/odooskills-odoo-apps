@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo/>
+<odoo>
+    <menuitem id="menu_appointment_root" name="Rendez-vous"
+              web_icon="calendar,static/description/icon.png"
+              sequence="55"/>
+    <menuitem id="menu_appointment_event" name="Rendez-vous"
+              parent="menu_appointment_root"
+              action="action_appointment_event" sequence="10"/>
+    <menuitem id="menu_appointment_type" name="Types de RDV"
+              parent="menu_appointment_root"
+              action="action_appointment_type"
+              groups="group_appointment_manager" sequence="20"/>
+    <menuitem id="menu_appointment_config" name="Configuration"
+              parent="menu_appointment_root"
+              groups="group_appointment_manager" sequence="90"/>
+</odoo>

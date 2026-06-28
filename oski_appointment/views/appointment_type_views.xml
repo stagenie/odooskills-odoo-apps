@@ -1,2 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo/>
+<odoo>
+    <record id="view_appointment_type_list" model="ir.ui.view">
+        <field name="name">appointment.type.list</field>
+        <field name="model">appointment.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="duration"/>
+                <field name="staff_user_ids" widget="many2many_tags"/>
+                <field name="appointment_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_appointment_type_form" model="ir.ui.view">
+        <field name="name">appointment.type.form</field>
+        <field name="model">appointment.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="%(action_appointment_booking_wizard)d" type="action"
+                            string="Prendre RDV" class="btn-primary"
+                            context="{'default_appointment_type_id': id}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="duration"/>
+                            <field name="resource_calendar_id"/>
+                            <field name="min_notice_hours"/>
+                            <field name="max_days_ahead"/>
+                        </group>
+                        <group>
+                            <field name="location"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Personnel">
+                        <field name="staff_user_ids" widget="many2many_tags" nolabel="1"/>
+                    </group>
+                    <group string="Rappels">
+                        <field name="reminder_ids" widget="many2many_tags" nolabel="1"/>
+                    </group>
+                    <field name="description"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_appointment_type" model="ir.actions.act_window">
+        <field name="name">Types de RDV</field>
+        <field name="res_model">appointment.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
