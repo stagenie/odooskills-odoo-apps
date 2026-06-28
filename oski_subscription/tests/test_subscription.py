@@ -142,3 +142,28 @@ class TestSubscription(TransactionCase):
         sub.date_end = fields.Date.today()  # toute prochaine échéance dépasse
         sub._generate_invoice()
         self.assertEqual(sub.state, "closed")
+
+    def test_cron_only_due_progress(self):
+        SaleSub = self.env["sale.subscription"]
+        # éligible : progress + échu
+        due = self._make_sub()
+        due.action_start()
+        due.next_invoice_date = date(2020, 1, 1)
+        # non éligible : progress mais futur
+        future = self._make_sub()
+        future.action_start()
+        future.next_invoice_date = date(2999, 1, 1)
+        # non éligible : draft
+        draft = self._make_sub()
+        # non éligible : paused échu
+        paused = self._make_sub()
+        paused.action_start()
+        paused.next_invoice_date = date(2020, 1, 1)
+        paused.action_pause()
+
+        SaleSub._cron_generate_invoices()
+
+        self.assertEqual(len(due.invoice_ids), 1)
+        self.assertEqual(len(future.invoice_ids), 0)
+        self.assertEqual(len(draft.invoice_ids), 0)
+        self.assertEqual(len(paused.invoice_ids), 0)

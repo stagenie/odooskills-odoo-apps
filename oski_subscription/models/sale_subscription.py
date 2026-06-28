@@ -1,5 +1,9 @@
+import logging
+
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 # facteur de normalisation mensuelle par unité, pour intervalle 1
 _MRR_FACTOR = {
@@ -165,3 +169,17 @@ class SaleSubscription(models.Model):
             "view_mode": "list,form",
             "domain": [("id", "in", self.invoice_ids.ids)],
         }
+
+    @api.model
+    def _cron_generate_invoices(self):
+        today = fields.Date.today()
+        subs = self.search(
+            [("state", "=", "progress"), ("next_invoice_date", "<=", today)]
+        )
+        for sub in subs:
+            try:
+                sub._generate_invoice()
+            except Exception:
+                _logger.exception(
+                    "Échec génération facture abonnement %s", sub.id
+                )
