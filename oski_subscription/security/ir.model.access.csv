@@ -2,3 +2,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_plan_user,sale.subscription.plan user,model_sale_subscription_plan,group_subscription_user,1,0,0,0
 access_plan_manager,sale.subscription.plan manager,model_sale_subscription_plan,group_subscription_manager,1,1,1,1
 access_plan_base,sale.subscription.plan base,model_sale_subscription_plan,base.group_user,1,0,0,0
+access_sub_user,sale.subscription user,model_sale_subscription,group_subscription_user,1,1,1,1
+access_sub_manager,sale.subscription manager,model_sale_subscription,group_subscription_manager,1,1,1,1
+access_subline_user,sale.subscription.line user,model_sale_subscription_line,group_subscription_user,1,1,1,1
+access_subline_manager,sale.subscription.line manager,model_sale_subscription_line,group_subscription_manager,1,1,1,1
