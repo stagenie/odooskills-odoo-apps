@@ -88,3 +88,29 @@ class SaleSubscription(models.Model):
                 raise ValidationError(
                     "La fin d'engagement ne peut précéder le début."
                 )
+
+    def action_start(self):
+        for sub in self:
+            if sub.name in (False, "New"):
+                sub.name = (
+                    self.env["ir.sequence"]
+                    .sudo()
+                    .next_by_code("sale.subscription")
+                    or "New"
+                )
+            sub.state = "progress"
+            sub.date_start = fields.Date.today()
+            sub.next_invoice_date = fields.Date.today()
+
+    def action_pause(self):
+        self.write({"state": "paused"})
+
+    def action_resume(self):
+        today = fields.Date.today()
+        for sub in self:
+            sub.state = "progress"
+            if sub.next_invoice_date and sub.next_invoice_date < today:
+                sub.next_invoice_date = today
+
+    def action_close(self):
+        self.write({"state": "closed", "date_closed": fields.Date.today()})

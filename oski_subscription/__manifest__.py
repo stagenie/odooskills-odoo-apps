@@ -10,6 +10,7 @@
     "data": [
         "security/subscription_security.xml",
         "security/ir.model.access.csv",
+        "data/ir_sequence_data.xml",
     ],
     "installable": True,
     "application": True,

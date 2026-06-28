@@ -1,6 +1,6 @@
 from datetime import date
 
-from odoo import Command
+from odoo import Command, fields
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
@@ -86,3 +86,28 @@ class TestSubscription(TransactionCase):
         with self.assertRaises(ValidationError):
             sub = self._make_sub()
             sub.write({"date_start": date(2026, 5, 1), "date_end": date(2026, 1, 1)})
+
+    def test_action_start(self):
+        sub = self._make_sub()
+        sub.action_start()
+        self.assertEqual(sub.state, "progress")
+        self.assertEqual(sub.date_start, fields.Date.today())
+        self.assertEqual(sub.next_invoice_date, fields.Date.today())
+        self.assertTrue(sub.name.startswith("SUB/"))
+
+    def test_pause_resume(self):
+        sub = self._make_sub()
+        sub.action_start()
+        sub.action_pause()
+        self.assertEqual(sub.state, "paused")
+        sub.next_invoice_date = date(2020, 1, 1)
+        sub.action_resume()
+        self.assertEqual(sub.state, "progress")
+        self.assertEqual(sub.next_invoice_date, fields.Date.today())
+
+    def test_close(self):
+        sub = self._make_sub()
+        sub.action_start()
+        sub.action_close()
+        self.assertEqual(sub.state, "closed")
+        self.assertEqual(sub.date_closed, fields.Date.today())
