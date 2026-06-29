@@ -1,14 +1,55 @@
-<section class="oe_container">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan">Prise de rendez-vous pour Odoo 19 Community</h2>
-        <h3 class="oe_slogan">Types de RDV, créneaux et agenda — sans Enterprise</h3>
-        <div class="oe_span12">
-            <p class="oe_mt32">
-                Définissez vos types de rendez-vous, leurs disponibilités et leur
-                personnel. Générez les créneaux libres et réservez en quelques
-                clics : chaque rendez-vous devient un événement d'agenda Odoo
-                natif. Sans module externe, 100 % Community.
-            </p>
-        </div>
-    </div>
+<!--
+  Fiche produit OdooSkills — oski_appointment
+  Styles inline uniquement (Odoo rend ce HTML sans <head>/<script>).
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Rendez-vous — Prise de RDV interne</h1>
+    <p style="color: #6b7280; font-size: 17px;">Gérez vos types de rendez-vous, calculez les créneaux libres et réservez en quelques clics — sans quitter Odoo Community.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">
+    Odoo Community n'embarque aucun module de prise de rendez-vous. Résultat : chaque consultation, séance ou intervention est saisie à la main dans le calendrier, sans vérification des disponibilités du personnel. Les doubles réservations arrivent, les confirmations par e-mail sont oubliées, et le suivi "Honoré / Absent / Annulé" n'existe tout simplement pas. Chaque équipe bricole sa propre solution dans un tableur ou un outil externe.
+  </p>
+
+  <!-- 3. FONCTIONNALITÉS (bénéfices) -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">📋 <strong>Types de RDV configurables</strong> — définissez durée, personnel habilité, horaires (agenda de travail), préavis minimum et horizon de réservation pour chaque type de prestation.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">⚡ <strong>Créneaux disponibles calculés automatiquement</strong> — le module croise l'agenda de travail et les événements existants pour ne proposer que les créneaux réellement libres, par membre du personnel.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">🖱️ <strong>Réservation en un clic depuis la fiche</strong> — un wizard intégré permet de sélectionner le client, le créneau et le collaborateur, puis de confirmer le RDV sans quitter Odoo.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">📊 <strong>Suivi des états du rendez-vous</strong> — chaque événement porte un statut (Réservé, Honoré, Annulé, Absent) pour piloter votre activité et filtrer les agendas.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">✉️ <strong>E-mail de confirmation automatique</strong> — un modèle d'e-mail est envoyé au client et au collaborateur à chaque nouvelle réservation.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">🗓️ <strong>Intégration native au calendrier Odoo</strong> — chaque RDV devient un événement calendrier standard, visible dans l'agenda, avec rappels configurables.</li>
+  </ul>
+
+  <!-- 5. VALEUR -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Fonctionnalité de prise de rendez-vous structurée, réservée à Odoo Enterprise, disponible en Community — gratuitement.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Aucune dépendance externe : tout reste dans votre Odoo existant (contacts, calendrier, e-mails).</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Base extensible : ajoutez la réservation publique en ligne, les paiements à la réservation ou la gestion de ressources (salles, équipements) avec les add-ons pro de la suite.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Convient à tout type d'équipe : cabinets de conseil, centres de services, ressources humaines, maintenance — dès lors qu'un collaborateur reçoit des clients sur créneau.</li>
+  </ul>
+
+  <!-- 6. CROSS-SELL SUITE -->
+  <div style="background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 28px 0;">
+    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">Fait partie de la suite Appointment OdooSkills</h3>
+    <p style="line-height: 1.6; color: #374151; margin: 0;">
+      Ce module est le cœur gratuit. Complétez-le selon vos besoins :
+    </p>
+    <ul style="padding-left: 20px; margin-top: 8px;">
+      <li style="line-height: 1.6; color: #374151;"><strong>oski_appointment_website</strong> — page de réservation publique sur votre site Odoo (vos clients réservent seuls, 24h/24).</li>
+      <li style="line-height: 1.6; color: #374151;"><strong>oski_appointment_payment</strong> — encaissement en ligne à la réservation (acompte ou paiement complet).</li>
+      <li style="line-height: 1.6; color: #374151;"><strong>oski_appointment_resource</strong> — gestion de ressources physiques (salles, cabines, équipements) avec capacité et planning.</li>
+    </ul>
+    <p style="line-height: 1.6; color: #374151; margin: 8px 0 0;">Voir la suite complète sur <a href="https://apps.odooskills.com" style="color: #714B67;">apps.odooskills.com</a>.</p>
+  </div>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 (gratuit) — compatible Odoo 19.0 Community. Support : support@odooskills.com.</p>
+
 </section>

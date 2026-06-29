@@ -2,14 +2,16 @@
     "name": "OdooSkills — Couleur de lignes de liste",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Colorer les lignes des listes selon une règle, sans code",
+    "summary": "Surlignez vos listes Odoo selon vos règles métier — sans toucher une seule ligne de code.",
     "description": """
-Définissez des règles « si <expression> alors couleur » par modèle. Le module
-génère automatiquement une vue liste héritée appliquant la décoration Bootstrap
-correspondante (info, succès, avertissement, danger, etc.). Aucun code requis.
+Repérez en un coup d'œil vos commandes urgentes, factures en retard ou articles critiques.
+Définissez une condition Python (ex : state == 'done'), choisissez une couleur (rouge, vert,
+orange…) et le module génère automatiquement la vue liste héritée — aucun XML à modifier.
+Fonctionne sur n'importe quel modèle Odoo, Community ou Enterprise.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base"],
     "data": [

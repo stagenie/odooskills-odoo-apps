@@ -2,9 +2,10 @@
     "name": "Abonnements — Oski",
     "version": "19.0.1.0.0",
     "category": "Sales/Subscriptions",
-    "summary": "Facturation récurrente d'abonnements (Community) : plans, cron, MRR",
+    "summary": "Gérez vos abonnements et facturez automatiquement chaque client au bon rythme — sans Enterprise.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
     "depends": ["sale", "account"],
     "data": [

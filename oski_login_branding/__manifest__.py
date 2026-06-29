@@ -2,13 +2,16 @@
     "name": "OdooSkills — Personnalisation Login",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Personnalise la page de connexion (fond, couleur, logo)",
+    "summary": "Affichez votre marque dès la connexion : couleur de fond, couleur d'accent et logo personnalisés sans code.",
     "description": """
-Personnalise la page de connexion Odoo depuis les Réglages : couleur de
-fond, couleur d'accent (boutons, liens) et logo. Aucun code requis.
+La page de connexion Odoo affiche par défaut les couleurs du framework.
+Ce module permet à tout administrateur de choisir une couleur de fond,
+une couleur d'accent (boutons, liens) et un logo propre à chaque société
+— directement depuis les Réglages, sans modifier le code source.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
     "depends": ["web", "base_setup"],
     "data": [

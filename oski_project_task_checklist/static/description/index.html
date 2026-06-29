@@ -1,41 +1,49 @@
+<!--
+  Fiche produit OdooSkills — oski_project_task_checklist
+  Licence LGPL-3 · Free · Odoo 19.0
+-->
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
-    <div style="text-align: center; padding: 28px 16px;">
-        <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Checklist de tâches projet</h1>
-        <p style="color: #6b7280; font-size: 17px;">Checklist d'étapes sur chaque tâche avec barre de progression, sans quitter la fiche.</p>
-    </div>
 
-    <p style="line-height: 1.6; color: #374151;">Une tâche de projet cache souvent cinq ou six étapes concrètes. Plutôt que de créer des
-    sous-tâches lourdes, ce module ajoute une checklist directement dans la tâche : des étapes à cocher,
-    une barre de progression, et une colonne d'avancement dans la liste des tâches.</p>
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Checklist d'étapes sur les tâches de projet</h1>
+    <p style="color: #6b7280; font-size: 17px;">Découpez chaque tâche en sous-étapes cochables, suivez l'avancement en temps réel et ne laissez plus rien passer.</p>
+  </div>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Fonctionnalités</h2>
-    <ul style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Onglet <strong>« Checklist »</strong> sur chaque tâche : étapes ordonnées (glisser-déposer), case à cocher, assignation facultative.</li>
-        <li style="line-height: 1.6; color: #374151;"><strong>Barre de progression</strong> calculée automatiquement (% d'étapes terminées).</li>
-        <li style="line-height: 1.6; color: #374151;">Colonne « Avancement checklist » dans la vue liste des tâches.</li>
-        <li style="line-height: 1.6; color: #374151;">Édition en ligne, sans assistant ni fenêtre intermédiaire.</li>
-        <li style="line-height: 1.6; color: #374151;">Droits alignés sur ceux du projet (utilisateur projet : création/édition).</li>
-    </ul>
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Une tâche de projet contient rarement une seule action : rédiger, valider, notifier, livrer… Mais la tâche reste à l'état « En cours » tant que personne ne la marque terminée. Il n'existe pas de moyen natif dans Odoo Community pour lister ces micro-étapes, voir ce qui est fait, ce qui reste, et qui s'en charge. Résultat : les relances passent par la messagerie, les oublis s'accumulent, et l'avancement réel reste invisible jusqu'à la dernière minute.</p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Grandes opérations</h2>
+  <!-- 3. FONCTIONNALITÉS (bénéfices) -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">✅ <strong>Onglet Checklist dédié</strong> — chaque tâche dispose d'une liste d'étapes éditable inline, réordonnable par glisser-déposer, sans configuration préalable.</li>
+    <li style="line-height: 1.6; color: #374151;">📊 <strong>Barre de progression automatique</strong> — le pourcentage d'étapes cochées se calcule et s'affiche en temps réel, sans saisie manuelle.</li>
+    <li style="line-height: 1.6; color: #374151;">👤 <strong>Assignation par étape</strong> — chaque sous-étape peut être attribuée à un utilisateur différent, identifiable d'un coup d'œil grâce à son avatar.</li>
+    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Colonne d'avancement dans la liste des tâches</strong> — visualisez le taux de complétion directement depuis la vue liste, sans ouvrir chaque tâche.</li>
+  </ul>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Dérouler la checklist d'une tâche</h3>
-    <p style="line-height: 1.6; color: #374151;">Dans l'onglet Checklist, ajoutez vos étapes ligne par ligne et cochez-les au fil de l'eau :
-    la progression se met à jour instantanément.</p>
-    <p>
-        <img src="screenshot_01_onglet_checklist.png" alt="Onglet Checklist avec barre de progression" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Suivre l'avancement depuis la liste des tâches</h3>
-    <p style="line-height: 1.6; color: #374151;">La colonne « Avancement checklist » donne au chef de projet une lecture d'ensemble sans ouvrir chaque tâche.</p>
-    <p>
-        <img src="screenshot_02_progression_liste.png" alt="Colonne d'avancement dans la liste des tâches" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Onglet Checklist dans la fiche tâche</h3>
+  <p style="line-height: 1.6; color: #374151;">La barre de progression et la liste des étapes apparaissent dans un onglet dédié — chaque ligne est cochable, réordonnable et assignable sans quitter la tâche.</p>
+  <p><img src="screenshot_01_onglet_checklist.png" alt="Onglet Checklist avec barre de progression et liste d'étapes assignées dans une tâche Odoo Project" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Installation</h2>
-    <ol style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Décompresser l'archive dans votre <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">addons_path</code>.</li>
-        <li style="line-height: 1.6; color: #374151;">Mettre à jour la liste des applications puis installer <em>Checklist de tâches projet</em>.</li>
-    </ol>
-    <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 15.0 à 19.0.</p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Colonne d'avancement dans la liste des tâches</h3>
+  <p style="line-height: 1.6; color: #374151;">La colonne « Checklist » (optionnelle) affiche la barre de progression directement dans la vue liste — idéal pour piloter un sprint ou un lot de tâches d'un seul regard.</p>
+  <p><img src="screenshot_02_progression_liste.png" alt="Colonne de progression checklist dans la vue liste des tâches Odoo Project" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Fonctionne dès l'installation — aucune configuration requise, aucune dépendance payante.</li>
+    <li style="line-height: 1.6; color: #374151;">Remplace les checklists gérées par e-mail ou dans les commentaires de tâche, principales sources d'oublis.</li>
+    <li style="line-height: 1.6; color: #374151;">L'avancement calculé automatiquement donne une visibilité objective sur l'état réel de la tâche, utile pour les réunions de suivi ou le reporting projet.</li>
+    <li style="line-height: 1.6; color: #374151;">La colonne d'avancement est optionnelle dans la vue liste — elle s'ajoute sans perturber les équipes qui n'utilisent pas encore les checklists.</li>
+    <li style="line-height: 1.6; color: #374151;">Gratuit et open-source (LGPL-3) — utilisable sans limite de nombre d'utilisateurs ou de projets.</li>
+  </ul>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE (module utilitaire standalone — pas de cross-sell suite) -->
+  <p style="line-height: 1.6; color: #6b7280; margin-top: 28px;">Licence LGPL-3 — compatible Odoo 19.0. Gratuit, sans abonnement. Support : <a href="mailto:support@odooskills.com" style="color: #714B67;">support@odooskills.com</a>.</p>
+
 </section>

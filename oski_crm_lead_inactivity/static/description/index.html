@@ -1,46 +1,53 @@
+<!--
+  Fiche produit OdooSkills — oski_crm_lead_inactivity
+  Sections : Hero → Problème → Ce que ça apporte → En images → Pourquoi l'adopter → Compat & licence
+-->
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
-    <div style="text-align: center; padding: 28px 16px;">
-        <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Opportunités dormantes</h1>
-        <p style="color: #6b7280; font-size: 17px;">Détecte les opportunités sans mouvement : seuil configurable, colonne d'inactivité et filtre de relance.</p>
-    </div>
 
-    <p style="line-height: 1.6; color: #374151;">Un pipeline en bonne santé est un pipeline qui bouge. Ce module mesure l'inactivité de chaque
-    opportunité (jours écoulés depuis le dernier changement d'étape) et met en évidence celles qui dorment,
-    avec un seuil réglable par vos soins — indépendant du mécanisme interne d'Odoo.</p>
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Pistes dormantes CRM</h1>
+    <p style="color: #6b7280; font-size: 17px;">Repérez en un coup d'œil les opportunités que votre pipeline a oubliées — avant qu'elles soient définitivement perdues.</p>
+  </div>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Fonctionnalités</h2>
-    <ul style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Colonne <strong>« Jours d'inactivité »</strong> dans la liste du pipeline.</li>
-        <li style="line-height: 1.6; color: #374151;">Indicateur <strong>« Dormante »</strong> : opportunité active, non gagnée, sans mouvement depuis X jours.</li>
-        <li style="line-height: 1.6; color: #374151;"><strong>Seuil configurable</strong> dans Réglages → CRM (14 jours par défaut).</li>
-        <li style="line-height: 1.6; color: #374151;">Filtre « Dormantes » pour lancer une séance de relance en deux clics.</li>
-        <li style="line-height: 1.6; color: #374151;">Lignes surlignées (warning) dans la liste pour une lecture immédiate.</li>
-    </ul>
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Dans un pipeline actif, les opportunités s'accumulent et certaines glissent dans l'angle mort : personne ne les touche depuis des semaines, aucun commercial ne s'en souvient. Le CRM natif d'Odoo ne signale pas cette immobilité — pas de couleur d'alerte, pas de filtre dédié, pas de compteur visible. Ces affaires dormantes représentent du chiffre d'affaires à portée de main que l'équipe commerciale ne relance tout simplement pas.</p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Grandes opérations</h2>
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">📊 <strong>Colonne « Jours d'inactivité »</strong> — affiche dans la liste du pipeline le nombre de jours écoulés depuis le dernier changement d'étape de chaque opportunité.</li>
+    <li style="line-height: 1.6; color: #374151;">⚠️ <strong>Surlignage visuel immédiat</strong> — les lignes dormantes ressortent en orange dans la liste, repérables sans lire les chiffres.</li>
+    <li style="line-height: 1.6; color: #374151;">⚙️ <strong>Seuil configurable dans les Réglages CRM</strong> — définissez vous-même le nombre de jours (14 par défaut) qui correspond à votre cycle de vente réel.</li>
+    <li style="line-height: 1.6; color: #374151;">🔎 <strong>Filtre « Dormantes » en un clic</strong> — isolez instantanément toutes les affaires à relancer pour une session de suivi efficace.</li>
+    <li style="line-height: 1.6; color: #374151;">🏷️ <strong>Badge sur la fiche de l'opportunité</strong> — un indicateur discret « Dormante depuis X j » apparaît directement sur le formulaire tant que l'affaire est en jeu.</li>
+  </ul>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Régler le seuil d'inactivité</h3>
-    <p style="line-height: 1.6; color: #374151;">Dans Réglages → CRM, définissez le nombre de jours au-delà duquel une opportunité est considérée comme dormante.</p>
-    <p>
-        <img src="screenshot_01_reglages_seuil.png" alt="Seuil d'inactivité dans les réglages CRM" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <!-- 4. EN IMAGES -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Lire l'inactivité dans le pipeline</h3>
-    <p style="line-height: 1.6; color: #374151;">La vue liste affiche les jours d'inactivité de chaque opportunité ; les dormantes ressortent en surbrillance.</p>
-    <p>
-        <img src="screenshot_02_pipeline_dormantes.png" alt="Pipeline avec colonne jours d'inactivité" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Régler le seuil d'inactivité</h3>
+  <p style="line-height: 1.6; color: #374151;">Dans Réglages → CRM, un seul champ suffit : indiquez le nombre de jours au-delà duquel une piste ou une opportunité est considérée dormante.</p>
+  <p><img src="screenshot_01_reglages_seuil.png" alt="Réglages CRM avec le champ Seuil d'inactivité en jours" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. Filtrer pour relancer</h3>
-    <p style="line-height: 1.6; color: #374151;">Le filtre « Dormantes » isole les opportunités à réveiller : idéal pour une routine de relance hebdomadaire.</p>
-    <p>
-        <img src="screenshot_03_filtre_dormantes.png" alt="Filtre Dormantes appliqué" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Lire l'inactivité dans le pipeline</h3>
+  <p style="line-height: 1.6; color: #374151;">La liste du pipeline affiche la colonne « Jours d'inactivité » et surligne en orange les opportunités qui dépassent le seuil configuré : les affaires à risque sautent aux yeux.</p>
+  <p><img src="screenshot_02_pipeline_dormantes.png" alt="Vue liste du pipeline CRM avec colonne Jours d'inactivité et lignes surlignées en orange" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Installation</h2>
-    <ol style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Décompresser l'archive dans votre <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">addons_path</code>.</li>
-        <li style="line-height: 1.6; color: #374151;">Mettre à jour la liste des applications puis installer <em>Opportunités dormantes</em>.</li>
-    </ol>
-    <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 15.0 à 19.0.</p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. Filtrer pour relancer</h3>
+  <p style="line-height: 1.6; color: #374151;">Le filtre « Dormantes » isole en un clic toutes les affaires immobiles : idéal pour organiser une routine de relance hebdomadaire sans chercher dans le pipeline complet.</p>
+  <p><img src="screenshot_03_filtre_dormantes.png" alt="Filtre Dormantes appliqué dans la barre de recherche du CRM" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Aucune affaire oubliée — chaque opportunité en jeu est surveillée automatiquement, sans configuration supplémentaire après l'installation.</li>
+    <li style="line-height: 1.6; color: #374151;">Adapté à votre rythme — le seuil d'inactivité reflète votre cycle de vente, pas un paramètre générique imposé.</li>
+    <li style="line-height: 1.6; color: #374151;">Zéro friction pour l'équipe — le surlignage et la colonne sont visibles directement dans les vues existantes, sans changer les habitudes de travail.</li>
+    <li style="line-height: 1.6; color: #374151;">Gratuit et léger — dépend uniquement du module CRM standard d'Odoo, compatible Community et Enterprise.</li>
+  </ul>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280; margin-top: 28px;">Licence LGPL-3 — compatible Odoo 19.0. Support : <a href="mailto:support@odooskills.com" style="color: #714B67;">support@odooskills.com</a>.</p>
+
 </section>

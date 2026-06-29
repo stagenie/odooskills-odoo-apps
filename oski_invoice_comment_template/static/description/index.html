@@ -1,46 +1,53 @@
+<!--
+  Fiche produit OdooSkills — oski_invoice_comment_template
+  Modèles de remarque sur factures — LGPL-3 — Free
+-->
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
-    <div style="text-align: center; padding: 28px 16px;">
-        <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Modèles de remarques de facture</h1>
-        <p style="color: #6b7280; font-size: 17px;">Bibliothèque de remarques réutilisables insérées dans les conditions des factures et leur PDF.</p>
-    </div>
 
-    <p style="line-height: 1.6; color: #374151;">Pénalités de retard, escompte, mentions légales : les mêmes remarques reviennent sur toutes
-    les factures, et chacun les retape à sa façon. Ce module crée une bibliothèque de remarques validées une
-    fois pour toutes, insérables en un clic sur la facture — et donc sur son PDF.</p>
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Modèles de remarque sur factures</h1>
+    <p style="color: #6b7280; font-size: 17px;">Fini les copier-coller manuels : insérez vos mentions récurrentes en un clic, imprimées directement dans le PDF de la facture.</p>
+  </div>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Fonctionnalités</h2>
-    <ul style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Modèles de remarques en <strong>HTML riche</strong> (gras, listes, mentions légales…).</li>
-        <li style="line-height: 1.6; color: #374151;">Menu de configuration dédié : Comptabilité → Configuration → Modèles de remarques.</li>
-        <li style="line-height: 1.6; color: #374151;">Champ « Modèle de remarque » sur la facture : la sélection remplit les conditions (<em>narration</em>).</li>
-        <li style="line-height: 1.6; color: #374151;">La remarque apparaît <strong>nativement dans le PDF</strong> de la facture — aucun rapport modifié.</li>
-        <li style="line-height: 1.6; color: #374151;">Le texte reste éditable au cas par cas après insertion.</li>
-    </ul>
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Pénalités de retard, escompte pour paiement anticipé, mentions légales TVA, consignes de livraison… Les mêmes remarques reviennent sur toutes vos factures, et chaque comptable les retape à sa manière. Résultat : des libellés incohérents, des mentions parfois oubliées, et du temps perdu à chaque saisie. Un texte mal formulé sur une facture envoyée, c'est une relance ou un litige en plus à gérer.</p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Grandes opérations</h2>
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">📋 <strong>Bibliothèque de modèles validés</strong> — rédigez chaque mention une seule fois (HTML riche : gras, listes, mise en forme), gérez-les depuis Comptabilité → Configuration → Modèles de remarque.</li>
+    <li style="line-height: 1.6; color: #374151;">🎯 <strong>Ciblage par type de facture</strong> — chaque modèle peut être limité aux factures clients, aux factures fournisseurs, ou ouvert aux deux : le bon texte au bon endroit.</li>
+    <li style="line-height: 1.6; color: #374151;">⚡ <strong>Insertion automatique en un clic</strong> — un champ déroulant sur la facture suffit ; la remarque se copie instantanément dans la note (narration), modifiable au cas par cas si besoin.</li>
+    <li style="line-height: 1.6; color: #374151;">📄 <strong>Impression native dans le PDF</strong> — la narration Odoo est déjà imprimée en pied de facture ; aucune personnalisation de rapport QWeb n'est requise.</li>
+    <li style="line-height: 1.6; color: #374151;">🗂️ <strong>Archivage sans suppression</strong> — désactivez les modèles saisonniers pour les masquer sans perdre leur contenu ; réactivez-les d'une case à cocher.</li>
+  </ul>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Constituer la bibliothèque</h3>
-    <p style="line-height: 1.6; color: #374151;">Créez vos remarques types une seule fois : pénalités B2B, escompte, TVA sur les débits…</p>
-    <p>
-        <img src="screenshot_01_config_modeles.png" alt="Liste des modèles de remarques" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <!-- 4. EN IMAGES -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Appliquer un modèle sur la facture</h3>
-    <p style="line-height: 1.6; color: #374151;">Sur la facture, choisissez le modèle : les conditions se remplissent automatiquement, prêtes à ajuster si besoin.</p>
-    <p>
-        <img src="screenshot_02_facture_selection.png" alt="Sélection d'un modèle sur la facture" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Constituer la bibliothèque de remarques</h3>
+  <p style="line-height: 1.6; color: #374151;">Créez et ordonnez vos modèles types — pénalités de retard, escompte, mentions légales — depuis le menu de configuration dédié.</p>
+  <p><img src="screenshot_01_config_modeles.png" alt="Liste des modèles de remarque dans la configuration Comptabilité" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. Le PDF reprend la remarque</h3>
-    <p style="line-height: 1.6; color: #374151;">La remarque est imprimée en pied de facture, sans configuration de rapport.</p>
-    <p>
-        <img src="screenshot_03_pdf_remarque.png" alt="PDF de facture avec la remarque" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Sélectionner le modèle sur la facture</h3>
+  <p style="line-height: 1.6; color: #374151;">Un champ déroulant apparaît directement sur le formulaire de facture ; choisir un modèle copie immédiatement le texte dans la note.</p>
+  <p><img src="screenshot_02_facture_selection.png" alt="Champ Modèle de remarque sur le formulaire de facture Odoo" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Installation</h2>
-    <ol style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Décompresser l'archive dans votre <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">addons_path</code>.</li>
-        <li style="line-height: 1.6; color: #374151;">Mettre à jour la liste des applications puis installer <em>Modèles de remarques de facture</em>.</li>
-    </ol>
-    <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 15.0 à 19.0.</p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. La remarque imprimée dans le PDF</h3>
+  <p style="line-height: 1.6; color: #374151;">La narration s'affiche en pied de facture dans le PDF généré par Odoo — sans aucune modification du rapport QWeb.</p>
+  <p><img src="screenshot_03_pdf_remarque.png" alt="PDF de facture Odoo avec la remarque imprimée en pied de page" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;"><strong>Cohérence garantie</strong> : toute l'équipe utilise les mêmes libellés validés — fini les variantes de formulation d'un comptable à l'autre.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Zéro développement</strong> : fonctionne avec le PDF natif Odoo, sans toucher aux rapports QWeb ni aux vues de mise en page.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Déploiement immédiat</strong> : installez, créez vos premiers modèles en 5 minutes, et l'équipe compta gagne du temps dès la première facture.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Module libre (LGPL-3)</strong> : code source ouvert, utilisable sans restriction sur votre instance Community ou Enterprise.</li>
+  </ul>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0. Support : <a href="mailto:support@odooskills.com" style="color: #714B67;">support@odooskills.com</a>.</p>
+
 </section>

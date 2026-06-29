@@ -3,7 +3,7 @@
     "name": "Pistes dormantes CRM",
     "version": "19.0.1.0.0",
     "category": "Sales/CRM",
-    "summary": "Détecte les pistes et opportunités sans mouvement depuis X jours",
+    "summary": "Repérez les opportunités oubliées : surlignage, compteur de jours et filtre dormantes dans votre pipeline CRM.",
     "description": """
 Pistes dormantes CRM
 ====================
@@ -18,13 +18,14 @@ pipeline, et un filtre « Dormantes » permet d'isoler les affaires à relancer.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
     "depends": ["crm"],
     "data": [
         "views/crm_lead_views.xml",
         "views/res_config_settings_views.xml",
     ],
-    "images": ["static/description/icon.png"],
+    "images": ["static/description/screenshot_02_pipeline_dormantes.png"],
     "installable": True,
     "application": False,
 }

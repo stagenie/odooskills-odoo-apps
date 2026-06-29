@@ -3,9 +3,10 @@
     "name": "OdooSkills — Socle d'accès granulaire (Oski Access)",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Socle commun pour la restriction d'accès par dimension (journaux, entrepôts…)",
+    "summary": "Installez ce socle gratuit pour restreindre l'accès Odoo par journal, entrepôt, département ou équipe — sans modifier le code source.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base"],
     "data": [

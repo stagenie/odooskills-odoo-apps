@@ -3,7 +3,7 @@
     "name": "Numérotation des lignes de devis/commande",
     "version": "19.0.1.0.0",
     "category": "Sales",
-    "summary": "Numérote automatiquement les lignes produit des devis et commandes",
+    "summary": "Numérotez chaque ligne produit de vos devis et commandes — à l'écran et sur le PDF — pour des échanges client sans ambiguïté.",
     "description": """
 Numérotation automatique des lignes de devis et de commande
 ===========================================================
@@ -23,7 +23,9 @@ installation.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
+    "images": ["static/description/screenshot_01_devis_colonne_numero.png"],
     "depends": ["sale_management"],
     "data": [
         "views/sale_order_views.xml",

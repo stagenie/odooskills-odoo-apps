@@ -2,9 +2,10 @@
     "name": "Assistance (Helpdesk) — Oski",
     "version": "19.0.1.0.0",
     "category": "Services/Helpdesk",
-    "summary": "Tickets d'assistance : équipes, étapes, alias email, assignation",
+    "summary": "Gérez les demandes client sans en perdre une seule : tickets numérotés, alias email, assignation équilibrée, kanban par étape.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base", "mail"],
     "data": [

@@ -2,8 +2,10 @@
     "name": "Rendez-vous",
     "version": "19.0.1.0.0",
     "category": "Services/Appointment",
-    "summary": "Types de RDV, créneaux et prise de rendez-vous interne (Odoo CE)",
+    "summary": "Réservez des créneaux sans double réservation — prise de RDV structurée pour Odoo Community",
     "author": "OdooSkills",
+    "website": "https://apps.odooskills.com",
+    "support": "support@odooskills.com",
     "license": "LGPL-3",
     "depends": ["calendar", "resource", "mail"],
     "data": [

@@ -1,48 +1,49 @@
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
-    <div style="text-align: center; padding: 28px 16px;">
-        <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Alerte stock bas</h1>
-        <p style="color: #6b7280; font-size: 17px;">Seuil d'alerte de stock par produit : filtre, surlignage et activité quotidienne au responsable.</p>
-    </div>
 
-    <p style="line-height: 1.6; color: #374151;">Les règles de réapprovisionnement d'Odoo déclenchent des achats — mais qui prévient simplement
-    un humain qu'un produit passe sous son seuil ? Ce module ajoute une alerte de stock bas légère et sans
-    paramétrage complexe : un seuil par produit, un filtre, et une activité quotidienne pour le responsable.</p>
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Alerte de stock bas</h1>
+    <p style="color: #6b7280; font-size: 17px;">Soyez prévenu avant la rupture — seuil par produit, lignes rouges et activité quotidienne pour le responsable inventaire, sans aucun paramétrage technique.</p>
+  </div>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Fonctionnalités</h2>
-    <ul style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Champ <strong>« Seuil d'alerte stock »</strong> sur chaque fiche produit (0 = désactivé).</li>
-        <li style="line-height: 1.6; color: #374151;">Indicateur calculé <strong>« Stock bas »</strong> dès que la quantité disponible passe sous le seuil.</li>
-        <li style="line-height: 1.6; color: #374151;">Filtre de recherche « Stock bas » + lignes <span style="color: #dc2626;">surlignées en rouge</span> dans la liste des produits.</li>
-        <li style="line-height: 1.6; color: #374151;"><strong>Cron quotidien</strong> : crée une activité « À faire » sur le produit, assignée au responsable inventaire.</li>
-        <li style="line-height: 1.6; color: #374151;">Anti-doublon : tant que l'activité n'est pas traitée, aucune nouvelle alerte n'est créée.</li>
-    </ul>
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Les règles de réapprovisionnement d'Odoo déclenchent des bons de commande — mais elles ne préviennent pas un humain quand un produit glisse sous son seuil critique. Résultat : des ruptures silencieuses découvertes trop tard, après un refus de livraison ou une ligne de commande bloquée. Il manque simplement un signal visible et un rappel quotidien pour la bonne personne.</p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Grandes opérations</h2>
+  <!-- 3. FONCTIONNALITÉS (bénéfices) -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🎯 <strong>Seuil personnalisable par produit</strong> — un simple champ numérique dans l'onglet Inventaire ; mettre 0 désactive l'alerte.</li>
+    <li style="line-height: 1.6; color: #374151;">🔴 <strong>Lignes rouges dans la liste</strong> — dès que la quantité disponible passe sous le seuil, la ligne se surligne en rouge pour une lecture immédiate.</li>
+    <li style="line-height: 1.6; color: #374151;">🔍 <strong>Filtre « Stock bas » dédié</strong> — isolez en un clic tous les produits en alerte, sans requête personnalisée.</li>
+    <li style="line-height: 1.6; color: #374151;">📅 <strong>Activité quotidienne automatique</strong> — un cron crée chaque jour une activité « À faire » sur chaque produit en alerte, assignée au responsable inventaire.</li>
+    <li style="line-height: 1.6; color: #374151;">✅ <strong>Anti-doublon intégré</strong> — tant que l'activité précédente n'est pas traitée, aucune nouvelle alerte n'est créée pour ce produit.</li>
+  </ul>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Définir le seuil sur la fiche produit</h3>
-    <p style="line-height: 1.6; color: #374151;">Dans l'onglet Inventaire de la fiche produit, indiquez la quantité plancher en dessous de laquelle
-    vous voulez être alerté.</p>
-    <p>
-        <img src="screenshot_01_seuil_produit.png" alt="Seuil d'alerte sur la fiche produit" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <!-- 4. APERÇUS RÉELS (le résultat final, en images) -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Repérer les produits en alerte</h3>
-    <p style="line-height: 1.6; color: #374151;">Le filtre « Stock bas » isole les produits sous leur seuil ; les lignes passent en rouge pour une lecture immédiate.</p>
-    <p>
-        <img src="screenshot_02_liste_stock_bas.png" alt="Liste des produits filtrée Stock bas" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Définir le seuil sur la fiche produit</h3>
+  <p style="line-height: 1.6; color: #374151;">Dans l'onglet Inventaire, indiquez la quantité plancher en dessous de laquelle vous souhaitez être alerté. L'indicateur « Stock bas » se met à jour en temps réel.</p>
+  <p><img src="screenshot_01_seuil_produit.png" alt="Fiche produit — onglet Inventaire avec le seuil d'alerte et l'indicateur Stock bas" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-    <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. L'activité quotidienne du responsable</h3>
-    <p style="line-height: 1.6; color: #374151;">Chaque jour, le cron crée une activité sur les produits en alerte : le responsable inventaire retrouve
-    sa liste de réassorts directement dans ses activités Odoo.</p>
-    <p>
-        <img src="screenshot_03_activite_responsable.png" alt="Activité Stock bas planifiée" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/>
-    </p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Repérer instantanément les produits en alerte</h3>
+  <p style="line-height: 1.6; color: #374151;">Le filtre « Stock bas » isole tous les produits sous leur seuil ; les lignes passent en rouge pour une lecture immédiate sans ouvrir chaque fiche.</p>
+  <p><img src="screenshot_02_liste_stock_bas.png" alt="Liste des produits filtrée sur Stock bas — lignes surlignées en rouge" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-    <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Installation</h2>
-    <ol style="padding-left: 20px;">
-        <li style="line-height: 1.6; color: #374151;">Décompresser l'archive dans votre <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">addons_path</code>.</li>
-        <li style="line-height: 1.6; color: #374151;">Mettre à jour la liste des applications puis installer <em>Alerte stock bas</em>.</li>
-    </ol>
-    <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 15.0 à 19.0.</p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. L'activité quotidienne du responsable</h3>
+  <p style="line-height: 1.6; color: #374151;">Chaque matin, le cron planifie une activité sur les produits en alerte. Le responsable inventaire retrouve sa liste de réassorts directement dans ses activités Odoo, sans chercher.</p>
+  <p><img src="screenshot_03_activite_responsable.png" alt="Activité Stock bas créée automatiquement sur le produit, assignée au responsable inventaire" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. VALEUR -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Gratuit et autonome — aucune dépendance externe, aucun abonnement à un service tiers.</li>
+    <li style="line-height: 1.6; color: #374151;">Zéro formation : le seuil s'installe dans l'onglet Inventaire déjà connu de vos équipes.</li>
+    <li style="line-height: 1.6; color: #374151;">Les alertes arrivent dans les activités Odoo natives — pas de notification email supplémentaire à configurer.</li>
+    <li style="line-height: 1.6; color: #374151;">Le mécanisme anti-doublon évite le bruit : une activité par produit jusqu'à traitement, pas de flood quotidien.</li>
+  </ul>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280; margin-top: 28px;">Licence LGPL-3 — compatible Odoo 19.0. Support : <a href="mailto:support@odooskills.com" style="color: #714B67;">support@odooskills.com</a>.</p>
+
 </section>

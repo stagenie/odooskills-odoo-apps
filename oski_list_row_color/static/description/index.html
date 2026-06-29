@@ -1,0 +1,47 @@
+<!--
+  Fiche produit OdooSkills — oski_list_row_color
+  Styles INLINE uniquement. Accent = #714B67.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Couleur de lignes de liste</h1>
+    <p style="color: #6b7280; font-size: 17px;">Surlignez vos commandes urgentes, vos factures en retard ou vos articles critiques — sans toucher une seule ligne de code.</p>
+    <!--
+    <p style="margin-top: 16px;">
+      <a href="{{LIVE_TEST_URL}}" style="display:inline-block; background:#714B67; color:#fff; text-decoration:none; font-weight:600; padding:11px 22px; border-radius:8px;">▶ Tester en ligne</a>
+    </p>
+    -->
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Dans Odoo, colorer une ligne de liste nécessite d'éditer du XML et de connaître la syntaxe des attributs <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">decoration-*</code> — une tâche réservée aux développeurs. Résultat : les équipes opérationnelles voient des listes uniformes et doivent ouvrir chaque enregistrement pour distinguer les urgences des cas normaux. Le tri ne suffit pas : il faut une lecture instantanée de l'état à la couleur.</p>
+
+  <!-- 3. CE QUE CA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🎨 <strong>Règles visuelles sans code</strong> — définissez une condition Python simple (<code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">state == 'done'</code>, <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">amount_total &gt; 1000</code>) et choisissez la couleur : bleu, vert, orange, <span style="color: #dc2626;">rouge</span> ou gris.</li>
+    <li style="line-height: 1.6; color: #374151;">⚡ <strong>Application instantanée sur n'importe quel modèle</strong> — ventes, achats, factures, stock, projets… chaque liste Odoo est configurable depuis une interface unique, sans modifier les vues XML existantes.</li>
+    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Vue héritée générée et gérée automatiquement</strong> — à la sauvegarde d'une règle, le module crée (ou met à jour) la vue d'héritage correspondante ; à la suppression, elle disparaît proprement.</li>
+    <li style="line-height: 1.6; color: #374151;">✅ <strong>Activation/désactivation à la volée</strong> — basculez une règle sans la supprimer grâce au bouton toggle, idéal pour les colorisations saisonnières ou les campagnes ponctuelles.</li>
+    <li style="line-height: 1.6; color: #374151;">📊 <strong>Règles ordonnées par séquence</strong> — glissez-déposez l'ordre des règles pour contrôler la priorité quand plusieurs conditions s'appliquent au même modèle.</li>
+  </ul>
+
+  <!-- 4. EN IMAGES — OMIS (aucune capture réelle disponible) -->
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Économisez un aller-retour développeur pour chaque demande de mise en couleur — configurez vous-même en 30 secondes depuis Paramètres.</li>
+    <li style="line-height: 1.6; color: #374151;">Réduisez les erreurs de traitement : les équipes repèrent visuellement les enregistrements à traiter avant même d'ouvrir un filtre.</li>
+    <li style="line-height: 1.6; color: #374151;">Aucune dépendance extérieure — le module utilise uniquement le mécanisme natif <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">decoration-*</code> d'Odoo, garanti compatible avec toutes les vues liste de la plateforme.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong> — fonctionne en Community et Enterprise sans aucun abonnement supplémentaire.</li>
+  </ul>
+
+  <!-- 6. CROSS-SELL — OMIS (module utilitaire standalone) -->
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0. Support : support@odooskills.com.</p>
+
+</section>

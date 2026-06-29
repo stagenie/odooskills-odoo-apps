@@ -1,14 +1,56 @@
-<section class="oe_container">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan">Abonnements récurrents</h2>
-        <h3 class="oe_slogan">Facturation automatique pour Odoo 19 Community</h3>
-        <div class="oe_span12">
-            <p class="oe_mt32">
-                Gérez vos abonnements de bout en bout : plans réutilisables,
-                facturation récurrente automatique par cron, suivi du MRR en
-                vues pivot et graphique, clôture à l'échéance d'engagement.
-                100 % Community, sans module externe.
-            </p>
-        </div>
-    </div>
+<!--
+  Fiche produit OdooSkills — oski_subscription
+  Styles inline uniquement (Odoo rend ce HTML sans <head>/<script>).
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Abonnements — Oski</h1>
+    <p style="color: #6b7280; font-size: 17px;">Facturation récurrente automatique pour Odoo 19 Community — sans module Enterprise.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">
+    Odoo Community ne propose pas de gestion native des abonnements : chaque mois, il faut créer les factures à la main, se souvenir des clients à relancer, et calculer à la calculette combien de revenus récurrents entrent réellement. Pour les éditeurs de logiciels, les prestataires de services ou toute entreprise avec des forfaits mensuels, cette friction coûte du temps — et des oublis qui coûtent de l'argent.
+  </p>
+
+  <!-- 3. FONCTIONNALITÉS (bénéfices) -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">📅 <strong>Plans de facturation configurables</strong> — créez autant de plans que nécessaire (mensuel, trimestriel, annuel, ou tout autre rythme jour/semaine/mois/année) et réutilisez-les sur tous vos abonnés.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">⚡ <strong>Facturation automatique par tâche planifiée</strong> — un cron génère (et, si activé, valide) les factures le jour J pour chaque abonnement actif dont l'échéance est atteinte, sans intervention humaine.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">📊 <strong>MRR calculé automatiquement</strong> — le Revenu Mensuel Récurrent est normalisé quelle que soit la périodicité (quotidien, annuel…) et visible en liste, en tableau croisé et en graphique.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">🔁 <strong>Cycle de vie complet</strong> — démarrer, suspendre, reprendre ou résilier un abonnement en un clic ; les dates de début, de prochaine facture et de fin d'engagement sont suivies automatiquement.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">✅ <strong>Historique des factures lié</strong> — toutes les factures générées sont accessibles directement depuis la fiche abonnement, avec un compteur visible en haut de page.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">🔒 <strong>Filtre « À facturer »</strong> — identifiez d'un clic les abonnements actifs dont la date de facturation est passée, pour lancer une facturation manuelle groupée si nécessaire.</li>
+  </ul>
+
+  <!-- 4. EN IMAGES — omise : aucune capture disponible -->
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;"><strong>Gratuit et open source (LGPL-3)</strong> — zéro coût de licence, pas de dépendance externe, déployable sur votre instance Community sans restriction.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;"><strong>Fonctionnalité habituellement réservée à Enterprise</strong> — la gestion des abonnements récurrents est native dans Odoo Enterprise ; ce module l'apporte nativement en Community sans coût supplémentaire de souscription.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;"><strong>Extensible avec les add-ons Pro</strong> — ajoutez le tableau de bord MRR, le paiement récurrent en ligne, le portail abonné ou les workflows de renouvellement selon vos besoins (voir suite ci-dessous).</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;"><strong>Intégration native Odoo</strong> — s'appuie sur les modèles standards (res.partner, account.move, product.product) et le chatter pour la traçabilité ; aucune dépendance hors Odoo.</li>
+  </ul>
+
+  <!-- 6. CROSS-SELL SUITE -->
+  <div style="background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 28px 0;">
+    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">Fait partie de la suite Subscription Pro</h3>
+    <p style="line-height: 1.6; color: #374151; margin: 0 0 8px;">Ce module est le cœur gratuit de la suite. Enrichissez-le avec :</p>
+    <ul style="padding-left: 20px; margin: 0;">
+      <li style="line-height: 1.6; color: #374151; margin-bottom: 4px;"><strong>oski_subscription_dashboard</strong> — tableau de bord MRR, churn et ARR en temps réel.</li>
+      <li style="line-height: 1.6; color: #374151; margin-bottom: 4px;"><strong>oski_subscription_payment</strong> — paiement récurrent automatique (carte, virement SEPA…).</li>
+      <li style="line-height: 1.6; color: #374151; margin-bottom: 4px;"><strong>oski_subscription_portal</strong> — espace abonné sur le site pour consulter et gérer l'abonnement.</li>
+      <li style="line-height: 1.6; color: #374151; margin-bottom: 4px;"><strong>oski_subscription_renewal</strong> — workflow de renouvellement et relances automatiques avant échéance.</li>
+    </ul>
+    <p style="line-height: 1.6; color: #374151; margin: 10px 0 0;">Voir la suite complète sur <a href="https://apps.odooskills.com" style="color:#714B67;">apps.odooskills.com</a>.</p>
+  </div>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0. Support : support@odooskills.com.</p>
+
 </section>
