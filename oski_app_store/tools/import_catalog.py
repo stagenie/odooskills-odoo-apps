@@ -130,6 +130,7 @@ for sub, default_license in APPS:
                 if f.lower().startswith("screenshot") and f.lower().endswith((".png", ".jpg", ".jpeg"))
             ) if os.path.isdir(descdir) else []
             att_ids = []
+            shot_by_file = {}
             for s in shots:
                 name = "%s/%s" % (tech, s)
                 a = Attach.search([("name", "=", name), ("res_model", "=", "oski.module"),
@@ -144,8 +145,22 @@ for sub, default_license in APPS:
                         "mimetype": "image/png",
                     })
                 att_ids.append(a.id)
+                shot_by_file[s] = a.id
             if att_ids:
                 rec.write({"screenshot_ids": [(6, 0, att_ids)]})
+
+            # Réécrit les <img src="screenshot_NN.png"> (relatifs, cassés sur le store)
+            # vers l'URL publique de l'attachment /web/image/<id>.
+            if description_html and shot_by_file:
+                new_html = description_html
+                for fname, att_id in shot_by_file.items():
+                    new_html = new_html.replace(
+                        'src="%s"' % fname, 'src="/web/image/%s"' % att_id
+                    ).replace(
+                        'src="./%s"' % fname, 'src="/web/image/%s"' % att_id
+                    )
+                if new_html != description_html:
+                    rec.write({"description_html": new_html})
 
             # zip version 19.0
             zip_path = "/tmp/oski_%s.zip" % tech

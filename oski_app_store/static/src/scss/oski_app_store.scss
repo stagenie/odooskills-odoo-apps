@@ -213,8 +213,16 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
 
     // ---- Galerie ----
     .oski-gallery {
+        position: relative;
         border: 1px solid $oski-line; border-radius: 14px; overflow: hidden;
         background: $oski-bg-soft;
+        .oski-gallery-counter {
+            position: absolute; top: .7rem; right: .7rem; z-index: 3;
+            padding: .15rem .6rem; border-radius: 999px;
+            background: rgba($oski-ink-deep, .72); color: #fff;
+            font-size: .78rem; font-weight: 600; letter-spacing: .02em;
+            backdrop-filter: blur(2px);
+        }
         .oski-shot { object-fit: contain; max-height: 420px; cursor: zoom-in;
             background: #fff; }
         .carousel-control-prev-icon, .carousel-control-next-icon {

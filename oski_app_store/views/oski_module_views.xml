@@ -20,9 +20,14 @@
         <field name="arch" type="xml">
             <form string="Module">
                 <header>
-                    <field name="is_published" widget="boolean_toggle"/>
+                    <field name="is_published" widget="boolean_toggle"
+                           string="Publier sur le store"/>
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" title="Publié" bg_color="text-bg-success"
+                            invisible="not is_published"/>
+                    <widget name="web_ribbon" title="Non publié" bg_color="text-bg-secondary"
+                            invisible="is_published"/>
                     <field name="image_1920" widget="image" class="oe_avatar"/>
                     <div class="oe_title">
                         <label for="name"/>

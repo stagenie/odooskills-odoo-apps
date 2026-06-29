@@ -59,15 +59,13 @@
                     </div>
                     <!-- Galerie de captures (haut droite) -->
                     <div t-if="has_shots" class="col-lg-7">
-                        <div id="oskiGallery" class="carousel slide oski-gallery" data-bs-ride="false">
-                            <div class="carousel-indicators" t-if="len(screenshots) > 1">
-                                <t t-foreach="screenshots" t-as="shot">
-                                    <button type="button" data-bs-target="#oskiGallery"
-                                            t-att-data-bs-slide-to="shot_index"
-                                            t-attf-aria-label="Capture #{shot_index + 1}"
-                                            t-attf-class="#{'active' if shot_index == 0 else ''}"/>
-                                </t>
-                            </div>
+                        <div id="oskiGallery" class="carousel slide oski-gallery"
+                             data-bs-ride="false" data-bs-interval="false">
+                            <!-- Compteur de position (remplace carousel-indicators :
+                                 Bootstrap plantait sur _setActiveIndicatorElement). -->
+                            <span t-if="len(screenshots) &gt; 1" class="oski-gallery-counter">
+                                <span class="oski-cur">1</span> / <t t-out="len(screenshots)"/>
+                            </span>
                             <div class="carousel-inner">
                                 <t t-foreach="screenshots" t-as="shot">
                                     <div t-attf-class="carousel-item #{'active' if shot_index == 0 else ''}">
