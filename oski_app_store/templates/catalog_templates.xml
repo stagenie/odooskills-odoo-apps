@@ -22,11 +22,14 @@
             </div>
             <h2 class="oski-card-title" t-out="module.name"/>
             <p class="oski-card-summary" t-out="module.summary"/>
-            <div class="oski-card-versions" aria-label="Compatibilité">
-                <t t-foreach="version_pills" t-as="pv">
-                    <span t-attf-class="oski-dot #{'on' if pv['label'] in avail else 'off'}"
-                          t-out="pv['label'].split('.')[0]"/>
-                </t>
+            <div class="oski-card-foot">
+                <div class="oski-card-versions" aria-label="Compatibilité">
+                    <t t-foreach="version_pills" t-as="pv">
+                        <span t-attf-class="oski-dot #{'on' if pv['label'] in avail else 'off'}"
+                              t-out="pv['label'].split('.')[0]"/>
+                    </t>
+                </div>
+                <span class="oski-card-go" aria-hidden="true">Voir →</span>
             </div>
         </a>
     </template>
@@ -53,22 +56,46 @@
 
     <template id="catalog_page" name="Catalogue des modules">
         <t t-call="website.layout">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+            <link rel="stylesheet"
+                  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;display=swap"/>
             <div class="oski-store">
-                <div class="container py-5">
-                    <header class="oski-hero text-center mb-4">
-                        <h1>OdooSkills Apps</h1>
-                        <p class="oski-hero-sub">Modules Odoo prêts à l'emploi, du
-                            <t t-out="version_pills[0]['label']"/> au
-                            <t t-out="version_pills[-1]['label']"/> — signés OdooSkills.</p>
-                        <form method="get" action="/apps" class="oski-search mx-auto">
+                <!-- Hero pleine largeur : thèse + recherche + spectre de versions.
+                     Balise <header> conservée : oski_dev_request y injecte un CTA via xpath. -->
+                <header class="oski-hero">
+                    <div class="oski-hero-glow" aria-hidden="true"/>
+                    <div class="container oski-hero-inner">
+                        <span class="oski-eyebrow">Marketplace OdooSkills</span>
+                        <h1 class="oski-hero-title">Donnez à Odoo<br/>
+                            <em>ce qui lui manque.</em></h1>
+                        <p class="oski-hero-lead">Une collection de modules signés OdooSkills —
+                            compatibles de la <t t-out="version_spectrum[0]['label']"/> à la
+                            <t t-out="version_spectrum[-1]['label']"/>, du gratuit au premium,
+                            prêts à installer.</p>
+                        <form method="get" action="/apps" class="oski-search">
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control"
-                                       placeholder="Rechercher un module…" t-att-value="search"/>
+                                       placeholder="Rechercher un module, une fonctionnalité…"
+                                       t-att-value="search"/>
                                 <button type="submit" class="btn oski-btn-primary">Rechercher</button>
                             </div>
                         </form>
-                    </header>
+                        <div class="oski-spectrum" aria-label="Versions Odoo compatibles">
+                            <span class="oski-spectrum-label">Compatibilité</span>
+                            <div class="oski-spectrum-scale">
+                                <t t-foreach="version_spectrum" t-as="sv">
+                                    <a t-att-href="sv['href']"
+                                       t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''}">
+                                        <span t-out="sv['label'].split('.')[0]"/>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </header>
 
+                <div class="container oski-catalog py-5">
                     <div class="oski-toolbar d-flex flex-wrap align-items-center gap-2 mb-4">
                         <t t-call="oski_app_store.filter_dropdown">
                             <t t-set="filter_label">Catégorie</t>
@@ -105,9 +132,22 @@
                             </div>
                         </t>
                     </div>
-                    <p t-if="not modules" class="text-muted text-center py-5">
+                    <p t-if="not modules and has_filters" class="oski-empty text-center py-5">
                         Aucun module ne correspond à ces filtres.
+                        <a t-att-href="clear_url" class="oski-clear">Réinitialiser</a>
                     </p>
+                    <div t-if="not modules and not has_filters" class="oski-launch text-center">
+                        <div class="oski-spectrum-scale oski-launch-scale" aria-hidden="true">
+                            <t t-foreach="version_spectrum" t-as="sv">
+                                <span t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''}"
+                                      t-out="sv['label'].split('.')[0]"/>
+                            </t>
+                        </div>
+                        <h2 class="oski-launch-title">Le catalogue ouvre bientôt.</h2>
+                        <p class="oski-launch-lead">Les modules sont en cours de finalisation.
+                            Revenez très vite, ou écrivez-nous pour un accès anticipé.</p>
+                        <a href="/contactus" class="btn oski-btn-primary">Nous contacter</a>
+                    </div>
                 </div>
             </div>
         </t>

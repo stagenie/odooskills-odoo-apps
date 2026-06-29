@@ -125,8 +125,21 @@ class OskiAppStore(http.Controller):
             for pv in reversed(supported_versions)
         ]
 
+        version_spectrum = [
+            {
+                "label": pv,
+                "selected": pv == version,
+                "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
+            }
+            for pv in reversed(supported_versions)
+        ]
+        OskiModule = request.env["oski.module"].sudo()
+
         values = {
             "modules": modules,
+            "version_spectrum": version_spectrum,
+            "catalog_count": OskiModule.search_count([]),
+            "free_count": OskiModule.search_count([("is_free", "=", True)]),
             "category_options": category_options,
             "tag_options": tag_options,
             "pricing_options": pricing_options,

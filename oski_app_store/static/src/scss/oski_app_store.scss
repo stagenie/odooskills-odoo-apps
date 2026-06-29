@@ -1,4 +1,6 @@
-// Store OdooSkills — thème clair minimaliste, accents plum Odoo.
+// Store OdooSkills — thème clair, hero plum profond, accent pink.
+// Police display 'Space Grotesk' chargée via <link> dans le template
+// (un @import url() ici casserait la compilation du bundle SCSS concaténé).
 $oski-plum: #714B67;
 $oski-plum-dark: #5a3c52;
 $oski-ink: #111827;
@@ -6,18 +8,78 @@ $oski-muted: #6b7280;
 $oski-line: #e5e7eb;
 $oski-bg-soft: #f8f9fb;
 $oski-green: #2e7d32;
+$oski-ink-deep: #21112E;   // plum très foncé — fond hero
+$oski-pink: #E8A0BF;       // accent pop (réservé)
+$oski-pink-light: #FCD3E2;
+$oski-display: 'Space Grotesk', system-ui, sans-serif;
 
 .oski-store {
     background: #fff;
     color: $oski-ink;
 
-    // ---- Hero ----
-    .oski-hero h1 { font-weight: 700; letter-spacing: -0.02em; }
-    .oski-hero-sub { color: $oski-muted; }
-    .oski-search { max-width: 540px;
-        .form-control { border-color: $oski-line; border-radius: 10px 0 0 10px; }
-        .btn { background: $oski-plum; color: #fff; border-radius: 0 10px 10px 0;
-            &:hover { background: $oski-plum-dark; } }
+    // ---- Hero pleine largeur ----
+    .oski-hero {
+        position: relative; overflow: hidden;
+        background: radial-gradient(120% 140% at 15% 0%, #3a1f4d 0%, $oski-ink-deep 55%, #190b22 100%);
+        color: #fff; padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 4.5rem);
+        text-align: center;
+    }
+    .oski-hero-glow {
+        position: absolute; inset: auto -10% -60% auto; width: 60vw; height: 60vw;
+        background: radial-gradient(circle, rgba($oski-pink, .22) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .oski-hero-inner { position: relative; z-index: 1; }
+    .oski-eyebrow {
+        display: inline-block; font-size: .78rem; font-weight: 600;
+        letter-spacing: .22em; text-transform: uppercase;
+        color: $oski-pink; margin-bottom: 1.1rem;
+    }
+    .oski-hero-title {
+        font-family: $oski-display; font-weight: 700;
+        font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.02;
+        letter-spacing: -.03em; margin: 0 0 1.1rem;
+        em { font-style: normal; color: $oski-pink; }
+    }
+    .oski-hero-lead {
+        max-width: 620px; margin: 0 auto 2rem; font-size: 1.08rem;
+        line-height: 1.6; color: rgba(255,255,255,.78);
+    }
+    .oski-search { max-width: 560px; margin: 0 auto;
+        .form-control {
+            border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08);
+            color: #fff; border-radius: 12px 0 0 12px; padding: .7rem 1rem;
+            &::placeholder { color: rgba(255,255,255,.55); }
+            &:focus { background: rgba(255,255,255,.14); border-color: $oski-pink;
+                box-shadow: none; color: #fff; }
+        }
+        .btn { background: $oski-pink; color: $oski-ink-deep; font-weight: 700;
+            border-radius: 0 12px 12px 0; padding: .7rem 1.4rem;
+            &:hover { background: #fff; color: $oski-ink-deep; } }
+    }
+
+    // ---- Signature : spectre de versions ----
+    .oski-spectrum {
+        display: inline-flex; align-items: center; gap: 1rem;
+        margin-top: 2.4rem;
+    }
+    .oski-spectrum-label {
+        font-size: .72rem; font-weight: 600; letter-spacing: .18em;
+        text-transform: uppercase; color: rgba(255,255,255,.5);
+    }
+    .oski-spectrum-scale { display: inline-flex; align-items: center; gap: .4rem; }
+    .oski-spectrum-node {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 2.6rem; height: 2.6rem; border-radius: 10px;
+        font-family: $oski-display; font-weight: 600; font-size: .95rem;
+        text-decoration: none; color: rgba(255,255,255,.7);
+        background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+        transition: transform .15s ease, background .15s ease, color .15s ease;
+        &:hover { background: rgba(255,255,255,.14); color: #fff; transform: translateY(-2px); }
+        &.is-active {
+            background: $oski-pink; color: $oski-ink-deep; border-color: $oski-pink;
+            box-shadow: 0 8px 22px rgba($oski-pink, .35); transform: translateY(-2px);
+        }
     }
 
     // ---- Toolbar filtres ----
@@ -42,23 +104,36 @@ $oski-green: #2e7d32;
 
     // ---- Cartes catalogue ----
     .oski-card {
-        display: flex; flex-direction: column; height: 100%;
-        background: #fff; border: 1px solid $oski-line; border-radius: 12px;
-        padding: 1rem; text-decoration: none; color: inherit;
+        position: relative; display: flex; flex-direction: column; height: 100%;
+        background: #fff; border: 1px solid $oski-line; border-radius: 14px;
+        padding: 1.15rem; text-decoration: none; color: inherit; overflow: hidden;
         box-shadow: 0 1px 3px rgba(0,0,0,.04);
-        transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease;
-        &:hover { box-shadow: 0 8px 24px rgba(0,0,0,.09);
-            transform: translateY(-2px); border-color: darken($oski-line, 8%); }
+        transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+        &::before {
+            content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+            background: $oski-plum; transform: scaleY(0); transform-origin: top;
+            transition: transform .18s ease;
+        }
+        &:hover { box-shadow: 0 14px 30px rgba($oski-ink-deep,.12);
+            transform: translateY(-3px); border-color: rgba($oski-plum,.4);
+            &::before { transform: scaleY(1); }
+            .oski-card-go { opacity: 1; color: $oski-plum; }
+        }
     }
     .oski-card-top { display: flex; justify-content: space-between;
-        align-items: flex-start; margin-bottom: .6rem; }
-    .oski-card-title { font-size: 1rem; font-weight: 600; margin: 0 0 .25rem; }
+        align-items: flex-start; margin-bottom: .7rem; }
+    .oski-card-title { font-family: $oski-display; font-size: 1.02rem;
+        font-weight: 600; letter-spacing: -.01em; margin: 0 0 .3rem; }
     .oski-card-summary {
-        color: $oski-muted; font-size: .85rem; margin-bottom: .6rem;
+        color: $oski-muted; font-size: .85rem; margin-bottom: .9rem; line-height: 1.5;
         display: -webkit-box; -webkit-line-clamp: 2;
         -webkit-box-orient: vertical; overflow: hidden;
     }
-    .oski-card-versions { margin-top: auto; }
+    .oski-card-foot { margin-top: auto; display: flex; align-items: center;
+        justify-content: space-between; gap: .5rem; }
+    .oski-card-versions { display: inline-flex; }
+    .oski-card-go { font-size: .8rem; font-weight: 600; color: $oski-muted;
+        opacity: 0; transition: opacity .18s ease, color .18s ease; white-space: nowrap; }
 
     // ---- Badges / pastilles ----
     .oski-badge { padding: .15rem .55rem; border-radius: 999px;
@@ -71,6 +146,21 @@ $oski-green: #2e7d32;
         font-size: .72rem; font-weight: 600; margin-right: .2rem;
         &.on { background: rgba($oski-plum, .12); color: $oski-plum; }
         &.off { background: $oski-bg-soft; color: #c3c8d2; }
+    }
+
+    // ---- États vides ----
+    .oski-empty { color: $oski-muted;
+        .oski-clear { margin-left: .4rem; font-weight: 600; } }
+    .oski-launch {
+        max-width: 560px; margin: 1rem auto; padding: 3rem 1.5rem;
+        .oski-launch-scale { justify-content: center; margin-bottom: 1.6rem;
+            .oski-spectrum-node { color: $oski-muted; background: $oski-bg-soft;
+                border-color: $oski-line;
+                &.is-active { background: $oski-plum; color: #fff;
+                    border-color: $oski-plum; box-shadow: 0 8px 22px rgba($oski-plum,.25); } } }
+        .oski-launch-title { font-family: $oski-display; font-weight: 700;
+            font-size: 1.7rem; letter-spacing: -.02em; margin: 0 0 .6rem; }
+        .oski-launch-lead { color: $oski-muted; line-height: 1.6; margin: 0 0 1.6rem; }
     }
 
     // ---- Icône / monogramme ----
