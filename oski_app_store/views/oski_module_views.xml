@@ -9,8 +9,49 @@
                 <field name="technical_name"/>
                 <field name="category_id"/>
                 <field name="is_free"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="price" widget="monetary" optional="show"/>
                 <field name="is_published"/>
             </list>
+        </field>
+    </record>
+
+    <record id="oski_module_view_kanban" model="ir.ui.view">
+        <field name="name">oski.module.kanban</field>
+        <field name="model">oski.module</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="is_free"/>
+                <field name="currency_id"/>
+                <field name="is_published"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-start">
+                            <field name="image_1920" widget="image"
+                                   class="o_image_64_cover me-2 rounded" alt="Icône"/>
+                            <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <strong class="text-truncate"><field name="name"/></strong>
+                                    <span t-if="record.is_free.raw_value"
+                                          class="badge text-bg-success ms-1">Gratuit</span>
+                                    <span t-else="" class="badge text-bg-primary ms-1">Premium</span>
+                                </div>
+                                <small class="text-muted d-block text-truncate">
+                                    <field name="technical_name"/>
+                                </small>
+                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                    <small class="text-muted"><field name="category_id"/></small>
+                                    <strong t-if="!record.is_free.raw_value" class="text-primary">
+                                        <field name="price" widget="monetary"/>
+                                    </strong>
+                                </div>
+                                <span t-if="!record.is_published.raw_value"
+                                      class="badge text-bg-secondary mt-1">Non publié</span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -96,6 +137,6 @@
     <record id="oski_module_action" model="ir.actions.act_window">
         <field name="name">Modules</field>
         <field name="res_model">oski.module</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
     </record>
 </odoo>

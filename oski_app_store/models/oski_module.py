@@ -22,6 +22,16 @@ class OskiModule(models.Model):
         required=True,
     )
     is_free = fields.Boolean(string="Gratuit", default=True)
+    currency_id = fields.Many2one(
+        "res.currency",
+        string="Devise",
+        default=lambda self: self.env.ref("base.EUR", raise_if_not_found=False),
+    )
+    price = fields.Monetary(
+        string="Prix",
+        currency_field="currency_id",
+        help="Prix de vente du module premium (issu du manifeste). Vide si gratuit.",
+    )
     author = fields.Char(string="Auteur", default="OdooSkills")
     maintainer = fields.Char(string="Mainteneur", default="ADICOPS")
     version_line_ids = fields.One2many(

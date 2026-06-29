@@ -71,6 +71,18 @@ ov19 = env["oski.odoo.version"].sudo().search([("name", "=", "19.0")], limit=1)
 if not ov19:
     ov19 = env["oski.odoo.version"].sudo().create({"name": "19.0", "sequence": 190})
 
+Currency = env["res.currency"].sudo()
+_cur_cache = {}
+
+
+def currency_id(code):
+    code = (code or "EUR").upper()
+    if code not in _cur_cache:
+        c = Currency.with_context(active_test=False).search([("name", "=", code)], limit=1)
+        _cur_cache[code] = c.id if c else False
+    return _cur_cache[code]
+
+
 created, updated, skipped, errors = [], [], [], []
 
 for sub, default_license in APPS:
@@ -108,6 +120,8 @@ for sub, default_license in APPS:
                 "category_id": env.ref("oski_app_store.%s" % category_xmlid(env, man.get("category"))).id,
                 "license": lic,
                 "is_free": is_free,
+                "price": 0.0 if is_free else price,
+                "currency_id": currency_id(man.get("currency", "EUR")),
                 "author": man.get("author") or "OdooSkills",
             }
 
