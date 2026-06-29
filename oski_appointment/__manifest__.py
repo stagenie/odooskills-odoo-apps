@@ -17,6 +17,7 @@
         "views/calendar_event_views.xml",
         "views/appointment_menus.xml",
     ],
+    "images": ["static/description/screenshot_01_type_form.png"],
     "application": True,
     "installable": True,
 }

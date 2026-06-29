@@ -18,6 +18,11 @@ sont affichés. Email et téléphone activables séparément depuis les Réglage
         "views/res_config_settings_views.xml",
         "views/res_partner_views.xml",
     ],
+    "images": [
+        "static/description/screenshot_01_bandeau_doublon.png",
+        "static/description/screenshot_02_alerte_email_doublon.png",
+        "static/description/screenshot_03_liste_doublons.png",
+    ],
     "installable": True,
     "application": False,
 }

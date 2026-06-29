@@ -19,6 +19,7 @@ en un tap — aucune application tierce requise.
     "data": [
         "views/res_partner_views.xml",
     ],
+    "images": ["static/description/screenshot_01_qr_vcard_tab.png"],
     "installable": True,
     "application": False,
 }

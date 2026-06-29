@@ -19,6 +19,7 @@ une couleur d'accent (boutons, liens) et un logo propre à chaque société
         "views/res_company_views.xml",
         "views/login_templates.xml",
     ],
+    "images": ["static/description/screenshot_01_login_branded.png"],
     "installable": True,
     "application": False,
 }

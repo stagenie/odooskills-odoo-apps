@@ -28,7 +28,26 @@
     <li style="line-height: 1.6; color: #374151;">📊 <strong>Règles ordonnées par séquence</strong> — glissez-déposez l'ordre des règles pour contrôler la priorité quand plusieurs conditions s'appliquent au même modèle.</li>
   </ul>
 
-  <!-- 4. EN IMAGES — OMIS (aucune capture réelle disponible) -->
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Liste de devis colorée selon deux règles métier</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">En rouge, les commandes dépassant 5 000 € (Wood Corner, Lumber Grand, Azure Interior) ; en orange, les devis encore à l'état Quotation (S00002, S00009) — repérage visuel instantané sans filtre supplémentaire.</p>
+  <img src="screenshot_01_sale_orders_colored.png"
+       alt="Liste des devis Odoo avec lignes en rouge (montant supérieur à 5 000 €) et en orange (devis non confirmé) — clients Azure Interior, Deco Addict, Wood Corner, Lumber Grand"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Formulaire de configuration d'une règle</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois champs suffisent : le modèle cible (Sales Order), l'expression Python de déclenchement (<code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">amount_total &gt; 5000</code>) et la couleur — la vue héritée est créée automatiquement et affichée en lecture seule.</p>
+  <img src="screenshot_02_rule_form_config.png"
+       alt="Formulaire d'une règle de couleur : modèle Sales Order, condition amount_total > 5000, couleur Rouge (danger), vue générée oski.row.color.sale.order.1"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">3. Vue d'ensemble des règles actives</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">L'interface liste toutes les règles avec leur modèle, condition et couleur — chaque règle peut être activée ou désactivée en un clic sans la supprimer.</p>
+  <img src="screenshot_03_rules_list.png"
+       alt="Liste des deux règles de couleur : Rouge danger pour amount_total > 5000 et Orange avertissement pour state == 'draft', toutes deux actives sur Sales Order"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
   <!-- 5. POURQUOI L'ADOPTER -->
   <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>

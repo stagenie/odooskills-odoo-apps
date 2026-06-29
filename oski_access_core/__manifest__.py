@@ -12,6 +12,7 @@
     "data": [
         "security/oski_access_category.xml",
     ],
+    "images": ["static/description/screenshot_01_groupes_oski_access.png"],
     "installable": True,
     "application": False,
 }

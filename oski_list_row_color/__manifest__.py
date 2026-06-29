@@ -18,6 +18,11 @@ Fonctionne sur n'importe quel modèle Odoo, Community ou Enterprise.
         "security/ir.model.access.csv",
         "views/oski_row_color_rule_views.xml",
     ],
+    "images": [
+        "static/description/screenshot_01_sale_orders_colored.png",
+        "static/description/screenshot_02_rule_form_config.png",
+        "static/description/screenshot_03_rules_list.png",
+    ],
     "installable": True,
     "application": False,
 }

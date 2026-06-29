@@ -23,6 +23,7 @@ Accusé de réception automatique. Lien vers le module livré à la clôture.
         "views/oski_dev_request_views.xml",
         "templates/dev_request_templates.xml",
     ],
+    "images": ["static/description/screenshot_01_pipeline_kanban.png"],
     "installable": True,
     "application": False,
 }

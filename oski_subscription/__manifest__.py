@@ -19,6 +19,7 @@
         "views/subscription_menus.xml",
     ],
     "demo": ["demo/subscription_demo.xml"],
+    "images": ["static/description/screenshot_01_liste_abonnements.png"],
     "installable": True,
     "application": True,
 }

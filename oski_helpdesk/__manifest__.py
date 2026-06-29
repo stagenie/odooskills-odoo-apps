@@ -20,6 +20,7 @@
         "views/helpdesk_menus.xml",
     ],
     "demo": ["demo/helpdesk_demo.xml"],
+    "images": ["static/description/screenshot_01_kanban-pipeline.png"],
     "installable": True,
     "application": True,
 }
