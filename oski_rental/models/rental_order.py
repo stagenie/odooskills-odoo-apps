@@ -93,3 +93,63 @@ class RentalOrder(models.Model):
             raise UserError(
                 "Seule une location en devis ou annulée peut être supprimée.")
         return super().unlink()
+
+    def action_reserve(self):
+        for order in self:
+            if order.state != 'draft':
+                raise UserError("Seul un devis peut être réservé.")
+            if not order.line_ids:
+                raise UserError("Ajoutez au moins une ligne de location.")
+            order._check_conflicts()
+            order.write({
+                'state': 'reserved',
+                'deposit_state': 'to_collect' if order.deposit_total else 'none',
+            })
+
+    def action_cancel(self):
+        for order in self:
+            if order.state not in ('draft', 'reserved'):
+                raise UserError(
+                    "Seule une location en devis ou réservée peut être annulée.")
+            order.write({'state': 'cancelled'})
+
+    def _check_conflicts(self):
+        self.ensure_one()
+        for line in self.line_ids:
+            if not line.asset_id.check_availability(
+                    line.date_start, line.date_end,
+                    exclude_line_ids=self.line_ids.ids):
+                raise UserError(
+                    "Conflit : « %s » est indisponible du %s au %s "
+                    "(réservation ou indisponibilité existante)." % (
+                        line.asset_id.name, line.date_start, line.date_end))
+            siblings = self.line_ids.filtered(
+                lambda l: l.id != line.id and l.asset_id == line.asset_id)
+            for other in siblings:
+                if line.date_start < other.date_end \
+                        and line.date_end > other.date_start:
+                    raise UserError(
+                        "Conflit interne : « %s » figure deux fois sur des "
+                        "périodes qui se chevauchent." % line.asset_id.name)
+
+    def action_open_checkout(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Départ — état des lieux',
+            'res_model': 'oski.rental.checkout.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_order_id': self.id},
+        }
+
+    def action_open_checkin(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Retour — état des lieux',
+            'res_model': 'oski.rental.checkin.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_order_id': self.id},
+        }
