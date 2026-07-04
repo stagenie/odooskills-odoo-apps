@@ -5,3 +5,5 @@ access_oski_treasury_cash_user,oski.treasury.cash.user,model_oski_treasury_cash,
 access_oski_treasury_cash_manager,oski.treasury.cash.manager,model_oski_treasury_cash,group_treasury_manager,1,1,1,1
 access_oski_treasury_cash_operation_user,oski.treasury.cash.operation.user,model_oski_treasury_cash_operation,group_treasury_user,1,1,1,1
 access_oski_treasury_cash_operation_manager,oski.treasury.cash.operation.manager,model_oski_treasury_cash_operation,group_treasury_manager,1,1,1,1
+access_oski_treasury_cash_closing_user,oski.treasury.cash.closing.user,model_oski_treasury_cash_closing,group_treasury_user,1,1,0,0
+access_oski_treasury_cash_closing_manager,oski.treasury.cash.closing.manager,model_oski_treasury_cash_closing,group_treasury_manager,1,1,1,1
