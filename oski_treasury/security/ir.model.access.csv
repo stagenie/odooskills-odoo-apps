@@ -7,3 +7,7 @@ access_oski_treasury_cash_operation_user,oski.treasury.cash.operation.user,model
 access_oski_treasury_cash_operation_manager,oski.treasury.cash.operation.manager,model_oski_treasury_cash_operation,group_treasury_manager,1,1,1,1
 access_oski_treasury_cash_closing_user,oski.treasury.cash.closing.user,model_oski_treasury_cash_closing,group_treasury_user,1,1,0,0
 access_oski_treasury_cash_closing_manager,oski.treasury.cash.closing.manager,model_oski_treasury_cash_closing,group_treasury_manager,1,1,1,1
+access_oski_treasury_safe_user,oski.treasury.safe.user,model_oski_treasury_safe,group_treasury_user,1,0,0,0
+access_oski_treasury_safe_manager,oski.treasury.safe.manager,model_oski_treasury_safe,group_treasury_manager,1,1,1,1
+access_oski_treasury_safe_operation_user,oski.treasury.safe.operation.user,model_oski_treasury_safe_operation,group_treasury_user,1,1,1,0
+access_oski_treasury_safe_operation_manager,oski.treasury.safe.operation.manager,model_oski_treasury_safe_operation,group_treasury_manager,1,1,1,1
