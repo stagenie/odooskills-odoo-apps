@@ -3,6 +3,14 @@ from datetime import timedelta
 from odoo import api, fields, models
 
 
+PRICE_TIERS = [
+    ('price_month', 30 * 86400),
+    ('price_week', 7 * 86400),
+    ('price_day', 86400),
+    ('price_hour', 3600),
+]
+
+
 class RentalAsset(models.Model):
     _name = 'oski.rental.asset'
     _description = 'Ressource de location'
@@ -55,3 +63,34 @@ class RentalAsset(models.Model):
         self.ensure_one()
         # Implémentation complétée en Task 4 (dépend de order.line et unavailability).
         return True
+
+    def _get_rental_price(self, date_start, date_end):
+        """Prix glouton par paliers de durée. Reste arrondi au palier
+        le plus fin disponible (+1 unité). Pas d'optimisation meilleur-prix (v1)."""
+        self.ensure_one()
+        if not date_start or not date_end:
+            return 0.0
+        seconds = (date_end - date_start).total_seconds()
+        if seconds <= 0:
+            return 0.0
+        granularity = self.env['ir.config_parameter'].sudo().get_param(
+            'oski_rental.min_granularity', 'hour')
+        tiers = [
+            (field_name, duration)
+            for field_name, duration in PRICE_TIERS
+            if self[field_name] > 0
+            and not (granularity == 'day' and field_name == 'price_hour')
+        ]
+        if not tiers:
+            return 0.0
+        amount = 0.0
+        remaining = seconds
+        for field_name, duration in tiers:
+            count = int(remaining // duration)
+            if count:
+                amount += count * self[field_name]
+                remaining -= count * duration
+        if remaining > 0:
+            finest_field = tiers[-1][0]
+            amount += self[finest_field]
+        return amount

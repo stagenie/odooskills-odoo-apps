@@ -1,1 +1,1 @@
-from . import test_asset
+from . import test_asset, test_pricing
