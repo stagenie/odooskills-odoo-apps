@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_rental" model="ir.module.category">
+        <field name="name">Location</field>
+        <field name="sequence">25</field>
+    </record>
+
+    <record id="group_rental_user" model="res.groups">
+        <field name="name">Utilisateur</field>
+        <field name="category_id" ref="module_category_rental"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_rental_manager" model="res.groups">
+        <field name="name">Responsable</field>
+        <field name="category_id" ref="module_category_rental"/>
+        <field name="implied_ids" eval="[(4, ref('group_rental_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>
