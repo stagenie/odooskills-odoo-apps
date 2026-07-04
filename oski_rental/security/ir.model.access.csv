@@ -1,1 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rental_category_user,rental.category.user,model_oski_rental_category,group_rental_user,1,0,0,0
+access_rental_category_manager,rental.category.manager,model_oski_rental_category,group_rental_manager,1,1,1,1
+access_rental_asset_user,rental.asset.user,model_oski_rental_asset,group_rental_user,1,1,1,0
+access_rental_asset_manager,rental.asset.manager,model_oski_rental_asset,group_rental_manager,1,1,1,1

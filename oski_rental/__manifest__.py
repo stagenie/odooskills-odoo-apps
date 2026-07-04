@@ -12,6 +12,8 @@
     'data': [
         'security/rental_security.xml',
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
+        'data/product_data.xml',
     ],
     'demo': [],
     'installable': True,

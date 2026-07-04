@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_rental_asset" model="ir.sequence">
+            <field name="name">Ressource de location</field>
+            <field name="code">oski.rental.asset</field>
+            <field name="prefix">OSKA/</field>
+            <field name="padding">5</field>
+        </record>
+        <record id="seq_rental_order" model="ir.sequence">
+            <field name="name">Location</field>
+            <field name="code">oski.rental.order</field>
+            <field name="prefix">OSKR/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>
