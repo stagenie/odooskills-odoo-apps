@@ -9,6 +9,15 @@ class IrUiMenu(models.Model):
     def _visible_menu_ids(self, debug=False):
         visible = super()._visible_menu_ids(debug=debug)
         user = self.env.user
+        # Query-neutral early return for users outside the treasury groups:
+        # the treasury menus are group-restricted, so super() already filtered
+        # them out, and touching env.ref / the has_treasury_* computes here
+        # would add queries to every native menu load (breaks the query
+        # budgets asserted by web's TestPerfSessionInfo). has_group relies on
+        # ormcaches already warmed by super(), so it costs 0 extra queries.
+        if not user.has_group('oski_treasury.group_treasury_user'):
+            return visible
+        # Managers always see everything: no dynamic hiding.
         if user.has_group('oski_treasury.group_treasury_manager'):
             return visible
         # menu_treasury_cash / menu_treasury_safe: "Operations" sub-menus

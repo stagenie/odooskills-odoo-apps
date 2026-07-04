@@ -22,8 +22,12 @@ class AccountPayment(models.Model):
 
     @api.depends('journal_id', 'company_id')
     def _compute_cash_id(self):
+        # Silent no-op for users without treasury access: this stored compute
+        # runs for ANY user creating a payment (native flows included), and
+        # searching our models would raise AccessError for them.
+        can_read = self.env['oski.treasury.cash'].has_access('read')
         for payment in self:
-            if payment.journal_id and payment.journal_id.type == 'cash':
+            if can_read and payment.journal_id and payment.journal_id.type == 'cash':
                 cash = self.env['oski.treasury.cash'].search([
                     ('journal_id', '=', payment.journal_id.id),
                     ('state', '=', 'open'),
@@ -36,6 +40,11 @@ class AccountPayment(models.Model):
     def action_post(self):
         """Override to automatically create a cash operation."""
         res = super().action_post()
+        # Silent no-op for users without treasury access: the module must be
+        # behaviorally invisible to vanilla payment flows (no AccessError, no
+        # hidden record creation on their behalf).
+        if not self.env['oski.treasury.cash.operation'].has_access('read'):
+            return res
         for payment in self:
             if payment.treasury_operation_id:
                 continue
@@ -129,6 +138,10 @@ class AccountPayment(models.Model):
 
     def action_cancel(self):
         """Override to cancel the associated cash operation."""
+        # Silent no-op for users without treasury access: reading the linked
+        # operation (state/closing) would raise AccessError for them.
+        if not self.env['oski.treasury.cash.operation'].has_access('read'):
+            return super().action_cancel()
         for payment in self:
             if payment.treasury_operation_id and payment.treasury_operation_id.state == 'posted':
                 op = payment.treasury_operation_id
@@ -143,6 +156,9 @@ class AccountPayment(models.Model):
 
     def action_draft(self):
         """Override to handle the reset to draft."""
+        # Silent no-op for users without treasury access (see action_cancel).
+        if not self.env['oski.treasury.cash.operation'].has_access('read'):
+            return super().action_draft()
         for payment in self:
             if payment.treasury_operation_id:
                 op = payment.treasury_operation_id
