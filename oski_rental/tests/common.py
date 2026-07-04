@@ -20,3 +20,18 @@ class RentalCase(TransactionCase):
         }
         vals.update(kw)
         return cls.env['oski.rental.asset'].create(vals)
+
+    @classmethod
+    def _make_order(cls, assets, date_start, date_end, **kw):
+        vals = {
+            'partner_id': cls.partner.id,
+            'date_start': date_start,
+            'date_end': date_end,
+            'line_ids': [(0, 0, {
+                'asset_id': asset.id,
+                'date_start': date_start,
+                'date_end': date_end,
+            }) for asset in assets],
+        }
+        vals.update(kw)
+        return cls.env['oski.rental.order'].create(vals)
