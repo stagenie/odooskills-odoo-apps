@@ -1,1 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_treasury_operation_category_user,oski.treasury.operation.category.user,model_oski_treasury_operation_category,group_treasury_user,1,0,0,0
+access_oski_treasury_operation_category_manager,oski.treasury.operation.category.manager,model_oski_treasury_operation_category,group_treasury_manager,1,1,1,1
+access_oski_treasury_cash_user,oski.treasury.cash.user,model_oski_treasury_cash,group_treasury_user,1,1,0,0
+access_oski_treasury_cash_manager,oski.treasury.cash.manager,model_oski_treasury_cash,group_treasury_manager,1,1,1,1
+access_oski_treasury_cash_operation_user,oski.treasury.cash.operation.user,model_oski_treasury_cash_operation,group_treasury_user,1,1,1,1
+access_oski_treasury_cash_operation_manager,oski.treasury.cash.operation.manager,model_oski_treasury_cash_operation,group_treasury_manager,1,1,1,1

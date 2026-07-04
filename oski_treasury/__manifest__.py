@@ -13,6 +13,8 @@
     'data': [
         'security/treasury_groups.xml',
         'security/ir.model.access.csv',
+        'data/treasury_sequence_data.xml',
+        'data/treasury_category_data.xml',
     ],
     'installable': True,
     'application': True,
