@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -153,3 +153,76 @@ class RentalOrder(models.Model):
             'target': 'new',
             'context': {'default_order_id': self.id},
         }
+
+    def _get_default_rental_product(self):
+        param = self.env['ir.config_parameter'].sudo().get_param(
+            'oski_rental.default_product_id')
+        product = self.env['product.product']
+        if param and param.isdigit():
+            product = product.browse(int(param)).exists()
+        if not product:
+            product = self.env.ref(
+                'oski_rental.product_rental_default', raise_if_not_found=False)
+        if not product:
+            raise UserError(
+                "Aucun article de facturation configuré "
+                "(Paramètres > Location).")
+        return product
+
+    def action_create_invoice(self):
+        self.ensure_one()
+        if self.state != 'returned':
+            raise UserError("Seule une location retournée peut être facturée.")
+        default_product = self._get_default_rental_product()
+        invoice_lines = []
+        for line in self.line_ids:
+            product = line.asset_id.product_id or default_product
+            label = "%s — du %s au %s" % (
+                line.asset_id.name,
+                line.date_start.strftime('%d/%m/%Y %H:%M'),
+                line.date_end.strftime('%d/%m/%Y %H:%M'))
+            invoice_lines.append(Command.create({
+                'product_id': product.id,
+                'name': label,
+                'quantity': 1.0,
+                'price_unit': line.price_subtotal,
+            }))
+            if line.late_amount:
+                invoice_lines.append(Command.create({
+                    'product_id': product.id,
+                    'name': "Retard — %s" % line.asset_id.name,
+                    'quantity': 1.0,
+                    'price_unit': line.late_amount,
+                }))
+        move = self.env['account.move'].create({
+            'move_type': 'out_invoice',
+            'partner_id': self.partner_id.id,
+            'invoice_origin': self.name,
+            'company_id': self.company_id.id,
+            'invoice_line_ids': invoice_lines,
+        })
+        self.write({
+            'state': 'done',
+            'invoice_ids': [Command.link(move.id)],
+        })
+        return self.action_view_invoices()
+
+    def action_view_invoices(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Factures',
+            'res_model': 'account.move',
+            'view_mode': 'list,form',
+            'domain': [('id', 'in', self.invoice_ids.ids)],
+            'context': {'create': False},
+        }
+
+    def action_refund_deposit(self):
+        for order in self:
+            if order.state not in ('returned', 'done') \
+                    or order.deposit_state != 'collected':
+                raise UserError(
+                    "La caution ne peut être remboursée qu'après retour, "
+                    "si elle a été perçue.")
+            order.write({'deposit_state': 'refunded'})
