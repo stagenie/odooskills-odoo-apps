@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import AccessError, UserError, ValidationError
 
 
 class TreasuryCash(models.Model):
@@ -205,6 +205,29 @@ class TreasuryCash(models.Model):
                     _("The minimum balance cannot be negative if negative "
                       "balance is not allowed.")
                 )
+
+    # --- ORM lock: authorized users/responsible (D2 hardening, same
+    # lesson as the safe's responsible_ids -- a view-level readonly is
+    # not enough). Reserved to Treasury Managers. ---
+
+    def _check_user_assignment_lock(self):
+        if self.env.su or self.env.user.has_group(
+                'oski_treasury.group_treasury_manager'):
+            return
+        raise AccessError(
+            _("Only Treasury Managers may assign cash register users/responsible.")
+        )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        if any('user_ids' in vals or 'responsible_id' in vals for vals in vals_list):
+            self._check_user_assignment_lock()
+        return super().create(vals_list)
+
+    def write(self, vals):
+        if 'user_ids' in vals or 'responsible_id' in vals:
+            self._check_user_assignment_lock()
+        return super().write(vals)
 
     # --- Actions ---
 

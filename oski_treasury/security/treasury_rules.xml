@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <!-- D2 hardening: every rule below is scoped by company_id (never a
+         permissive [(1, '=', 1)] for managers, per treasury-constraints
+         Task 8). User rules AND the existing assignment domain with the
+         company scope; manager rules become a pure company scope. -->
+
     <!-- ============================================ -->
     <!-- Record Rules: Cash Registers -->
     <!-- ============================================ -->
     <record id="rule_treasury_cash_user" model="ir.rule">
-        <field name="name">Cash Registers: Authorized Users</field>
+        <field name="name">Cash Registers: Authorized Users (company-scoped)</field>
         <field name="model_id" ref="model_oski_treasury_cash"/>
         <field name="domain_force">[
+            '&amp;', ('company_id', 'in', company_ids),
             '|', '|',
             ('user_ids', 'in', user.id),
             ('responsible_id', '=', user.id),
@@ -15,9 +21,9 @@
         <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
     </record>
     <record id="rule_treasury_cash_manager" model="ir.rule">
-        <field name="name">Cash Registers: Manager (sees all)</field>
+        <field name="name">Cash Registers: Manager (company scope)</field>
         <field name="model_id" ref="model_oski_treasury_cash"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
         <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
     </record>
 
@@ -25,9 +31,10 @@
     <!-- Record Rules: Cash Operations -->
     <!-- ============================================ -->
     <record id="rule_treasury_cash_operation_user" model="ir.rule">
-        <field name="name">Cash Operations: By Authorized Cash Register</field>
+        <field name="name">Cash Operations: By Authorized Cash Register (company-scoped)</field>
         <field name="model_id" ref="model_oski_treasury_cash_operation"/>
         <field name="domain_force">[
+            '&amp;', ('company_id', 'in', company_ids),
             '|', '|',
             ('cash_id.user_ids', 'in', user.id),
             ('cash_id.responsible_id', '=', user.id),
@@ -36,9 +43,9 @@
         <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
     </record>
     <record id="rule_treasury_cash_operation_manager" model="ir.rule">
-        <field name="name">Cash Operations: Manager (sees all)</field>
+        <field name="name">Cash Operations: Manager (company scope)</field>
         <field name="model_id" ref="model_oski_treasury_cash_operation"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
         <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
     </record>
 
@@ -46,9 +53,10 @@
     <!-- Record Rules: Cash Closings -->
     <!-- ============================================ -->
     <record id="rule_treasury_cash_closing_user" model="ir.rule">
-        <field name="name">Cash Closings: By Authorized Cash Register</field>
+        <field name="name">Cash Closings: By Authorized Cash Register (company-scoped)</field>
         <field name="model_id" ref="model_oski_treasury_cash_closing"/>
         <field name="domain_force">[
+            '&amp;', ('company_id', 'in', company_ids),
             '|', '|',
             ('cash_id.user_ids', 'in', user.id),
             ('cash_id.responsible_id', '=', user.id),
@@ -57,9 +65,9 @@
         <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
     </record>
     <record id="rule_treasury_cash_closing_manager" model="ir.rule">
-        <field name="name">Cash Closings: Manager (sees all)</field>
+        <field name="name">Cash Closings: Manager (company scope)</field>
         <field name="model_id" ref="model_oski_treasury_cash_closing"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
         <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
     </record>
 
@@ -67,9 +75,10 @@
     <!-- Record Rules: Safes -->
     <!-- ============================================ -->
     <record id="rule_treasury_safe_user" model="ir.rule">
-        <field name="name">Safes: Responsible/Authorized Only</field>
+        <field name="name">Safes: Responsible/Authorized Only (company-scoped)</field>
         <field name="model_id" ref="model_oski_treasury_safe"/>
         <field name="domain_force">[
+            '&amp;', ('company_id', 'in', company_ids),
             '|', '|',
             ('responsible_ids', 'in', user.id),
             ('user_ids', 'in', user.id),
@@ -78,9 +87,9 @@
         <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
     </record>
     <record id="rule_treasury_safe_manager" model="ir.rule">
-        <field name="name">Safes: Manager (sees all)</field>
+        <field name="name">Safes: Manager (company scope)</field>
         <field name="model_id" ref="model_oski_treasury_safe"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
         <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
     </record>
 
@@ -88,9 +97,10 @@
     <!-- Record Rules: Safe Operations -->
     <!-- ============================================ -->
     <record id="rule_treasury_safe_operation_user" model="ir.rule">
-        <field name="name">Safe Operations: By Authorized Safe</field>
+        <field name="name">Safe Operations: By Authorized Safe (company-scoped)</field>
         <field name="model_id" ref="model_oski_treasury_safe_operation"/>
         <field name="domain_force">[
+            '&amp;', ('company_id', 'in', company_ids),
             '|', '|',
             ('safe_id.responsible_ids', 'in', user.id),
             ('safe_id.user_ids', 'in', user.id),
@@ -99,9 +109,9 @@
         <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
     </record>
     <record id="rule_treasury_safe_operation_manager" model="ir.rule">
-        <field name="name">Safe Operations: Manager (sees all)</field>
+        <field name="name">Safe Operations: Manager (company scope)</field>
         <field name="model_id" ref="model_oski_treasury_safe_operation"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
         <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
     </record>
 
@@ -109,9 +119,10 @@
     <!-- Record Rules: Transfers -->
     <!-- ============================================ -->
     <record id="rule_treasury_transfer_user" model="ir.rule">
-        <field name="name">Transfers: By Authorized Entities</field>
+        <field name="name">Transfers: By Authorized Entities (company-scoped)</field>
         <field name="model_id" ref="model_oski_treasury_transfer"/>
         <field name="domain_force">[
+            '&amp;', ('company_id', 'in', company_ids),
             '|', '|', '|', '|', '|',
             ('cash_from_id.user_ids', 'in', user.id),
             ('cash_to_id.user_ids', 'in', user.id),
@@ -123,9 +134,9 @@
         <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
     </record>
     <record id="rule_treasury_transfer_manager" model="ir.rule">
-        <field name="name">Transfers: Manager (sees all)</field>
+        <field name="name">Transfers: Manager (company scope)</field>
         <field name="model_id" ref="model_oski_treasury_transfer"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
         <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
     </record>
 </odoo>

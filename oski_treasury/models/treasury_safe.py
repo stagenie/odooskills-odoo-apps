@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, ValidationError
 
 
 class TreasurySafe(models.Model):
@@ -88,6 +88,28 @@ class TreasurySafe(models.Model):
     def _compute_display_name(self):
         for safe in self:
             safe.display_name = f"[{safe.code}] {safe.name}"
+
+    # --- ORM lock: safe responsibles (D2 hardening, lesson v15
+    # safe_access_fix -- a view-level readonly is not enough). ---
+
+    def _check_responsible_ids_lock(self):
+        if self.env.su or self.env.user.has_group(
+                'oski_treasury.group_treasury_safe_admin'):
+            return
+        raise AccessError(
+            _("Only Safe Administrators may change safe responsibles.")
+        )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        if any('responsible_ids' in vals for vals in vals_list):
+            self._check_responsible_ids_lock()
+        return super().create(vals_list)
+
+    def write(self, vals):
+        if 'responsible_ids' in vals:
+            self._check_responsible_ids_lock()
+        return super().write(vals)
 
     # --- Actions ---
 
