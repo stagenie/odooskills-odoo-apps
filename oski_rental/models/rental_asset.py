@@ -59,10 +59,25 @@ class RentalAsset(models.Model):
                 now, now + timedelta(hours=1))
 
     def check_availability(self, date_start, date_end, exclude_line_ids=None):
-        """True si aucune ligne réservée/en cours ni indisponibilité ne chevauche."""
+        """True si aucune ligne réservée/en cours ni indisponibilité ne chevauche
+        [date_start, date_end) (bords exclusifs)."""
         self.ensure_one()
-        # Implémentation complétée en Task 4 (dépend de order.line et unavailability).
-        return True
+        if 'oski.rental.order.line' in self.env:
+            domain = [
+                ('asset_id', '=', self.id),
+                ('state', 'in', ('reserved', 'ongoing')),
+                ('date_start', '<', date_end),
+                ('date_end', '>', date_start),
+            ]
+            if exclude_line_ids:
+                domain.append(('id', 'not in', exclude_line_ids))
+            if self.env['oski.rental.order.line'].search_count(domain):
+                return False
+        return not self.env['oski.rental.unavailability'].search_count([
+            ('asset_id', '=', self.id),
+            ('date_start', '<', date_end),
+            ('date_end', '>', date_start),
+        ])
 
     def _get_rental_price(self, date_start, date_end):
         """Prix glouton par paliers de durée. Reste arrondi au palier
