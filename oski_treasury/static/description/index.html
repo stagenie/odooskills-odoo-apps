@@ -1,46 +1,64 @@
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
 
-  <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 12px;">Treasury &mdash; Cash &amp; Safe Management</h1>
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Trésorerie — Caisses &amp; Coffres</h1>
+    <p style="color: #6b7280; font-size: 17px;">Chaque euro qui entre ou sort de vos caisses est tracé, clôturé et justifié — sans Excel, sans carnet.</p>
+  </div>
 
+  <!-- 2. LE PROBLÈME -->
   <p style="line-height: 1.6; color: #374151;">
-    A complete, self-contained treasury layer for physical cash: cash registers
-    with a running balance, chained (sequential) closings, safes, nine transfer
-    routes between registers and safes, configurable operation categories and
-    accounting entries, and automatic mirroring of Odoo payments into treasury
-    operations &mdash; all built free, on top of standard <code>account</code>.
+    La caisse est le point aveugle de la comptabilité : les paiements en espèces s'enregistrent
+    dans Odoo, mais personne ne sait combien il y a <em>réellement</em> dans le tiroir, qui a fait
+    la dernière sortie, ni pourquoi il manque 20&nbsp;€ à la fin de la semaine. Le contrôle se fait
+    sur un cahier ou un tableur — jamais rapproché, jamais verrouillé.
   </p>
 
-  <h2 style="font-size: 20px; font-weight: 700; margin: 24px 0 10px; color: #0F6B5C;">Key features</h2>
-  <ul style="padding-left: 20px; line-height: 1.7; color: #374151;">
-    <li>Cash registers with a live running balance and per-register authorized users.</li>
-    <li>Chained closings: each closing starts from the previous validated balance, with a lock once validated.</li>
-    <li>Safes with responsible users and their own operation history.</li>
-    <li>Four transfer routes (register &harr; register, register &harr; safe, safe &harr; register, safe &harr; safe) &mdash; five more bank routes with the Bank pro module with balance controls and an optional manager override.</li>
-    <li>Configurable operation categories mapped to accounting entries.</li>
-    <li>Automatic mirror operation created when a treasury-enabled user posts a payment on a cash journal.</li>
+  <!-- 3. FONCTIONNALITÉS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">💶 <strong>Caisses avec solde en temps réel</strong> — chaque paiement Odoo enregistré sur un journal espèces crée automatiquement l'opération de caisse miroir.</li>
+    <li style="line-height: 1.6; color: #374151;">🔗 <strong>Clôtures chaînées</strong> — chaque clôture repart du solde validé de la précédente : écart affiché, verrouillage une fois validée, rapport PDF signable.</li>
+    <li style="line-height: 1.6; color: #374151;">🔒 <strong>Coffres-forts</strong> — responsables désignés, historique d'opérations propre, solde séparé des caisses.</li>
+    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Transferts contrôlés</strong> — caisse ↔ caisse, caisse ↔ coffre, avec simulation des soldes avant/après et contrôle à 3 niveaux (blocage, avertissement, libre).</li>
+    <li style="line-height: 1.6; color: #374151;">🧾 <strong>Catégories d'opérations configurables</strong> — ventes, frais, transferts… chacune reliée à son écriture comptable.</li>
+    <li style="line-height: 1.6; color: #374151;">👥 <strong>Utilisateurs autorisés par caisse</strong> — un caissier ne voit que ses caisses ; menus masqués pour les autres utilisateurs.</li>
   </ul>
 
-  <h2 style="font-size: 20px; font-weight: 700; margin: 24px 0 10px; color: #0F6B5C;">Design notes</h2>
-  <p style="line-height: 1.6; color: #374151;">
-    <strong>Payments and treasury access.</strong> A payment posted by a user
-    who has no treasury access group creates no mirror treasury operation.
-    The register balance and the accounting journal balance stay in sync
-    only for payments recorded by users who belong to a treasury group;
-    grant the relevant group before their payments should feed the cash
-    register / safe balances.
-  </p>
-  <p style="line-height: 1.6; color: #374151;">
-    <strong>Closing locks and mirror cleanup.</strong> Cancelling or resetting
-    a payment to draft always enforces the closing locks, for every user: a
-    payment attached to a validated or confirmed closing cannot be
-    cancelled or reset. The mirror-operation cleanup that follows runs under
-    a payment-scoped <code>sudo()</code> &mdash; the treasury record rules
-    (per-assignment access to registers/safes) govern who can operate the
-    treasury directly, not a payment's own mirror maintenance.
-  </p>
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
 
-  <footer style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
-    Part of the OdooSkills Treasury Suite &mdash; odooskills.com
-  </footer>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Vos caisses en un coup d'œil</h3>
+  <p style="line-height: 1.6; color: #374151;">Solde courant, clôture en cours et montant « en mouvement » sur chaque carte.</p>
+  <p><img src="screenshot_01_caisses.png" alt="Vue kanban des caisses avec soldes et clôture en cours" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Toutes les opérations, entrées et sorties</h3>
+  <p style="line-height: 1.6; color: #374151;">Paiements clients, paiements fournisseurs, bons de caisse et transferts — catégorisés et comptabilisés.</p>
+  <p><img src="screenshot_02_operations.png" alt="Liste des opérations de caisse avec catégories et montants" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. La clôture qui verrouille la journée</h3>
+  <p style="line-height: 1.6; color: #374151;">Solde théorique calculé, solde réel saisi, écart mis en évidence — puis validation et verrouillage.</p>
+  <p><img src="screenshot_03_cloture.png" alt="Clôture de caisse validée avec soldes et opérations rattachées" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">4. Le transfert qui simule avant d'exécuter</h3>
+  <p style="line-height: 1.6; color: #374151;">Dépôt au coffre en fin de journée : soldes source et destination affichés avant/après, vérification tracée.</p>
+  <p><img src="screenshot_04_transfert.png" alt="Transfert caisse vers coffre avec simulation des soldes" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. VALEUR -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">La gestion physique des espèces n'existe pas dans Odoo standard — même en Enterprise. Ce module la fournit, gratuitement.</li>
+    <li style="line-height: 1.6; color: #374151;">Fini les écarts découverts des semaines plus tard : la clôture chaînée les montre le jour même.</li>
+    <li style="line-height: 1.6; color: #374151;">Un paiement rattaché à une clôture validée ne peut plus être annulé ni remis en brouillon — l'historique de caisse est fiable.</li>
+  </ul>
+
+  <!-- 6. CROSS-SELL -->
+  <div style="background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 28px 0;">
+    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">Cœur de la suite Trésorerie OdooSkills</h3>
+    <p style="line-height: 1.6; color: #374151; margin: 0;">Étendez-le avec <strong>Banques</strong> (comptes manuels + rapprochement), <strong>Comptage</strong> (billets &amp; pièces), <strong>Dépenses</strong> (avances employés), <strong>Tableau de bord</strong> et <strong>Clôture+</strong>. Pack complet à prix réduit sur <a href="https://apps.odooskills.com" style="color:#714B67;">apps.odooskills.com</a>.</p>
+  </div>
+
+  <!-- 7. COMPATIBILITÉ -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community &amp; Enterprise. Support : support@odooskills.com.</p>
 
 </section>

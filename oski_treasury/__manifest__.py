@@ -1,6 +1,6 @@
 {
     'name': 'Treasury — Cash & Safe Management',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Accounting/Treasury',
     'summary': 'Cash registers, safes, closings, transfers, configurable GL entries',
     'description': 'Complete physical treasury management: cash registers with running '
@@ -20,8 +20,16 @@
                    '(per-assignment access to registers/safes/banks) are not meant to '
                    'restrict a payment from maintaining its own mirror operation.',
     'author': 'OdooSkills',
-    'website': 'https://odooskills.com',
+    'website': 'https://apps.odooskills.com',
+    'support': 'support@odooskills.com',
     'license': 'LGPL-3',
+    'images': [
+        'static/description/banner.png',
+        'static/description/screenshot_01_caisses.png',
+        'static/description/screenshot_02_operations.png',
+        'static/description/screenshot_03_cloture.png',
+        'static/description/screenshot_04_transfert.png',
+    ],
     'depends': ['account', 'mail'],
     'data': [
         'security/treasury_groups.xml',

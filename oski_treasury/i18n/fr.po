@@ -1004,7 +1004,7 @@ msgstr "Nom d'affichage"
 #: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
 #: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
 msgid "Done"
-msgstr "Terminer"
+msgstr "Terminé"
 
 #. module: oski_treasury
 #: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_closing__state__draft
