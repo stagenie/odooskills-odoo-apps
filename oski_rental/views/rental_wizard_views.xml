@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rental_checkout_wizard_form" model="ir.ui.view">
+        <field name="name">oski.rental.checkout.wizard.form</field>
+        <field name="model">oski.rental.checkout.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="order_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="deposit_total" invisible="deposit_total == 0"/>
+                    <field name="deposit_collected" invisible="deposit_total == 0"/>
+                    <field name="checkout_note"
+                           placeholder="État de la ressource au départ…"/>
+                </group>
+                <footer>
+                    <button name="action_validate" type="object"
+                            string="Confirmer le départ" class="btn-primary"/>
+                    <button string="Annuler" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rental_checkin_wizard_form" model="ir.ui.view">
+        <field name="name">oski.rental.checkin.wizard.form</field>
+        <field name="model">oski.rental.checkin.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="order_id" invisible="1"/>
+                    <field name="actual_return_date"/>
+                    <field name="invoice_late"/>
+                    <field name="checkin_note"
+                           placeholder="État de la ressource au retour…"/>
+                </group>
+                <footer>
+                    <button name="action_validate" type="object"
+                            string="Confirmer le retour" class="btn-primary"/>
+                    <button string="Annuler" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

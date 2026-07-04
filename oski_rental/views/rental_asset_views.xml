@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rental_asset_list" model="ir.ui.view">
+        <field name="name">oski.rental.asset.list</field>
+        <field name="model">oski.rental.asset</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="price_day"/>
+                <field name="deposit_amount"/>
+                <field name="is_available_now" widget="boolean_toggle" readonly="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rental_asset_kanban" model="ir.ui.view">
+        <field name="name">oski.rental.asset.kanban</field>
+        <field name="model">oski.rental.asset</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex">
+                            <field name="image_1920" widget="image"
+                                   class="o_kanban_image me-2"
+                                   options="{'size': [80, 80]}"/>
+                            <div>
+                                <strong><field name="name"/></strong>
+                                <div class="text-muted">
+                                    <field name="code"/> · <field name="category_id"/>
+                                </div>
+                                <div>
+                                    <field name="price_day" widget="monetary"/>/jour
+                                </div>
+                                <field name="is_available_now" widget="boolean"
+                                       class="badge"/>
+                                <field name="currency_id" invisible="1"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_rental_asset_form" model="ir.ui.view">
+        <field name="name">oski.rental.asset.form</field>
+        <field name="model">oski.rental.asset</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_orders" type="object"
+                                class="oe_stat_button" icon="fa-calendar">
+                            <field name="order_count" widget="statinfo"
+                                   string="Locations"/>
+                        </button>
+                        <button name="action_view_unavailabilities" type="object"
+                                class="oe_stat_button" icon="fa-wrench">
+                            <field name="unavailability_count" widget="statinfo"
+                                   string="Indispos"/>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nom de la ressource"/></h1>
+                        <h3><field name="code"/></h3>
+                    </div>
+                    <group>
+                        <group name="main">
+                            <field name="category_id"/>
+                            <field name="active" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="product_id"/>
+                        </group>
+                        <group name="pricing" string="Tarifs">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="price_hour"/>
+                            <field name="price_day"/>
+                            <field name="price_week"/>
+                            <field name="price_month"/>
+                            <field name="deposit_amount"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="description" string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rental_asset_search" model="ir.ui.view">
+        <field name="name">oski.rental.asset.search</field>
+        <field name="model">oski.rental.asset</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category_id"/>
+                <filter name="archived" string="Archivées"
+                        domain="[('active', '=', False)]"/>
+                <group name="group_by">
+                    <filter name="group_category" string="Catégorie"
+                            context="{'group_by': 'category_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_rental_asset" model="ir.actions.act_window">
+        <field name="name">Ressources</field>
+        <field name="res_model">oski.rental.asset</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Créez votre première ressource louable</p>
+            <p>Véhicule, salle, engin, matériel : tout ce qui se loue.</p>
+        </field>
+    </record>
+</odoo>

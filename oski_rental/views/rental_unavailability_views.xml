@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rental_unavailability_list" model="ir.ui.view">
+        <field name="name">oski.rental.unavailability.list</field>
+        <field name="model">oski.rental.unavailability</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="asset_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="reason"/>
+                <field name="note" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rental_unavailability_calendar" model="ir.ui.view">
+        <field name="name">oski.rental.unavailability.calendar</field>
+        <field name="model">oski.rental.unavailability</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date_start" date_stop="date_end"
+                      color="asset_id" mode="month">
+                <field name="asset_id"/>
+                <field name="reason"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_rental_unavailability" model="ir.actions.act_window">
+        <field name="name">Indisponibilités</field>
+        <field name="res_model">oski.rental.unavailability</field>
+        <field name="view_mode">list,calendar,form</field>
+    </record>
+</odoo>

@@ -39,6 +39,10 @@ class RentalAsset(models.Model):
              "À défaut, l'article configuré dans les paramètres est utilisé.")
     is_available_now = fields.Boolean(
         string='Disponible', compute='_compute_is_available_now')
+    order_line_ids = fields.One2many('oski.rental.order.line', 'asset_id')
+    order_count = fields.Integer(compute='_compute_counts')
+    unavailability_ids = fields.One2many('oski.rental.unavailability', 'asset_id')
+    unavailability_count = fields.Integer(compute='_compute_counts')
 
     _code_company_uniq = models.Constraint(
         'UNIQUE (code, company_id)',
@@ -57,6 +61,32 @@ class RentalAsset(models.Model):
         for asset in self:
             asset.is_available_now = asset.check_availability(
                 now, now + timedelta(hours=1))
+
+    def _compute_counts(self):
+        for asset in self:
+            asset.order_count = len(asset.order_line_ids.mapped('order_id'))
+            asset.unavailability_count = len(asset.unavailability_ids)
+
+    def action_view_orders(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Locations',
+            'res_model': 'oski.rental.order',
+            'view_mode': 'list,form',
+            'domain': [('line_ids.asset_id', '=', self.id)],
+        }
+
+    def action_view_unavailabilities(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Indisponibilités',
+            'res_model': 'oski.rental.unavailability',
+            'view_mode': 'list,form',
+            'domain': [('asset_id', '=', self.id)],
+            'context': {'default_asset_id': self.id},
+        }
 
     def check_availability(self, date_start, date_end, exclude_line_ids=None):
         """True si aucune ligne réservée/en cours ni indisponibilité ne chevauche

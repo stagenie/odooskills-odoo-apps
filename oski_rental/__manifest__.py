@@ -15,8 +15,17 @@
         'data/ir_sequence_data.xml',
         'data/product_data.xml',
         'data/ir_cron_data.xml',
+        'views/rental_category_views.xml',
+        'views/rental_asset_views.xml',
+        'views/rental_unavailability_views.xml',
+        'views/rental_order_views.xml',
+        'views/rental_wizard_views.xml',
+        'views/res_config_settings_views.xml',
+        'views/rental_menus.xml',
     ],
-    'demo': [],
+    'demo': [
+        'demo/rental_demo.xml',
+    ],
     'installable': True,
     'application': True,
 }
