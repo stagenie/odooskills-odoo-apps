@@ -78,6 +78,18 @@ class TreasuryCashOperation(models.Model):
     is_this_week = fields.Boolean(compute='_compute_date_filters')
     is_this_month = fields.Boolean(compute='_compute_date_filters')
 
+    # --- D7: protected reset to draft ---
+    can_reset_to_draft = fields.Boolean(compute='_compute_can_reset_to_draft')
+
+    def _compute_can_reset_to_draft(self):
+        for op in self:
+            op.can_reset_to_draft = (
+                op.state == 'posted'
+                and not op.payment_id
+                and not op.transfer_id
+                and (not op.closing_id or op.closing_id.state != 'validated')
+            )
+
     def _compute_date_filters(self):
         now = fields.Datetime.now()
         for op in self:
@@ -302,13 +314,31 @@ class TreasuryCashOperation(models.Model):
             op.state = 'draft'
 
     def action_reset_to_draft(self):
-        """Resets a posted operation to draft (formerly oski_treasury_access)"""
+        """Resets a posted operation to draft (D7 - formerly
+        oski_treasury_access / v15 treasury_access_protection).
+
+        Refused if the operation is linked to a payment or a transfer (those
+        flows own the operation's lifecycle) or belongs to a validated
+        closing. Reuses `_remove_own_account_move` (the same GL cleanup used
+        by `action_cancel`) instead of duplicating the reverse/unlink logic."""
         for op in self:
             if op.state != 'posted':
-                raise UserError(_("Only posted operations can be reset."))
+                raise UserError(_("Only posted operations can be reset to draft."))
+            if op.payment_id:
+                raise UserError(
+                    _("This operation is linked to payment %s.", op.payment_id.display_name)
+                )
+            if op.transfer_id:
+                raise UserError(
+                    _("This operation is linked to transfer %s.", op.transfer_id.display_name)
+                )
             if op.closing_id and op.closing_id.state == 'validated':
                 raise UserError(
-                    _("Cannot reset: operation in a validated closing.")
+                    _("This operation belongs to validated closing %s.", op.closing_id.display_name)
                 )
             op._remove_own_account_move()
-            op.state = 'draft'
+            closing = op.closing_id
+            op.write({'state': 'draft', 'closing_id': False})
+            if closing:
+                closing._compute_totals()
+        return True

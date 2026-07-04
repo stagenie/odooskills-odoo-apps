@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ============================================ -->
+    <!-- Record Rules: Cash Registers -->
+    <!-- ============================================ -->
+    <record id="rule_treasury_cash_user" model="ir.rule">
+        <field name="name">Cash Registers: Authorized Users</field>
+        <field name="model_id" ref="model_oski_treasury_cash"/>
+        <field name="domain_force">[
+            '|', '|',
+            ('user_ids', 'in', user.id),
+            ('responsible_id', '=', user.id),
+            ('create_uid', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
+    </record>
+    <record id="rule_treasury_cash_manager" model="ir.rule">
+        <field name="name">Cash Registers: Manager (sees all)</field>
+        <field name="model_id" ref="model_oski_treasury_cash"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
+    </record>
+
+    <!-- ============================================ -->
+    <!-- Record Rules: Cash Operations -->
+    <!-- ============================================ -->
+    <record id="rule_treasury_cash_operation_user" model="ir.rule">
+        <field name="name">Cash Operations: By Authorized Cash Register</field>
+        <field name="model_id" ref="model_oski_treasury_cash_operation"/>
+        <field name="domain_force">[
+            '|', '|',
+            ('cash_id.user_ids', 'in', user.id),
+            ('cash_id.responsible_id', '=', user.id),
+            ('cash_id.create_uid', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
+    </record>
+    <record id="rule_treasury_cash_operation_manager" model="ir.rule">
+        <field name="name">Cash Operations: Manager (sees all)</field>
+        <field name="model_id" ref="model_oski_treasury_cash_operation"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
+    </record>
+
+    <!-- ============================================ -->
+    <!-- Record Rules: Cash Closings -->
+    <!-- ============================================ -->
+    <record id="rule_treasury_cash_closing_user" model="ir.rule">
+        <field name="name">Cash Closings: By Authorized Cash Register</field>
+        <field name="model_id" ref="model_oski_treasury_cash_closing"/>
+        <field name="domain_force">[
+            '|', '|',
+            ('cash_id.user_ids', 'in', user.id),
+            ('cash_id.responsible_id', '=', user.id),
+            ('cash_id.create_uid', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
+    </record>
+    <record id="rule_treasury_cash_closing_manager" model="ir.rule">
+        <field name="name">Cash Closings: Manager (sees all)</field>
+        <field name="model_id" ref="model_oski_treasury_cash_closing"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
+    </record>
+
+    <!-- ============================================ -->
+    <!-- Record Rules: Safes -->
+    <!-- ============================================ -->
+    <record id="rule_treasury_safe_user" model="ir.rule">
+        <field name="name">Safes: Responsible/Authorized Only</field>
+        <field name="model_id" ref="model_oski_treasury_safe"/>
+        <field name="domain_force">[
+            '|', '|',
+            ('responsible_ids', 'in', user.id),
+            ('user_ids', 'in', user.id),
+            ('create_uid', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
+    </record>
+    <record id="rule_treasury_safe_manager" model="ir.rule">
+        <field name="name">Safes: Manager (sees all)</field>
+        <field name="model_id" ref="model_oski_treasury_safe"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
+    </record>
+
+    <!-- ============================================ -->
+    <!-- Record Rules: Safe Operations -->
+    <!-- ============================================ -->
+    <record id="rule_treasury_safe_operation_user" model="ir.rule">
+        <field name="name">Safe Operations: By Authorized Safe</field>
+        <field name="model_id" ref="model_oski_treasury_safe_operation"/>
+        <field name="domain_force">[
+            '|', '|',
+            ('safe_id.responsible_ids', 'in', user.id),
+            ('safe_id.user_ids', 'in', user.id),
+            ('safe_id.create_uid', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
+    </record>
+    <record id="rule_treasury_safe_operation_manager" model="ir.rule">
+        <field name="name">Safe Operations: Manager (sees all)</field>
+        <field name="model_id" ref="model_oski_treasury_safe_operation"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
+    </record>
+
+    <!-- ============================================ -->
+    <!-- Record Rules: Transfers -->
+    <!-- ============================================ -->
+    <record id="rule_treasury_transfer_user" model="ir.rule">
+        <field name="name">Transfers: By Authorized Entities</field>
+        <field name="model_id" ref="model_oski_treasury_transfer"/>
+        <field name="domain_force">[
+            '|', '|', '|', '|', '|',
+            ('cash_from_id.user_ids', 'in', user.id),
+            ('cash_to_id.user_ids', 'in', user.id),
+            ('safe_from_id.responsible_ids', 'in', user.id),
+            ('safe_to_id.responsible_ids', 'in', user.id),
+            ('user_id', '=', user.id),
+            ('create_uid', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_user'))]"/>
+    </record>
+    <record id="rule_treasury_transfer_manager" model="ir.rule">
+        <field name="name">Transfers: Manager (sees all)</field>
+        <field name="model_id" ref="model_oski_treasury_transfer"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_treasury_manager'))]"/>
+    </record>
+</odoo>

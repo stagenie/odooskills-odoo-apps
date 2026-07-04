@@ -8,3 +8,5 @@ from . import treasury_safe_operation
 from . import treasury_transfer
 from . import account_payment
 from . import res_config_settings
+from . import res_users
+from . import ir_ui_menu

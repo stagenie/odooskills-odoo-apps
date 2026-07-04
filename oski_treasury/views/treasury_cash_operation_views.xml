@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form -->
+    <record id="view_treasury_cash_operation_form" model="ir.ui.view">
+        <field name="name">oski.treasury.cash.operation.form</field>
+        <field name="model">oski.treasury.cash.operation</field>
+        <field name="arch" type="xml">
+            <form string="Cash Operation">
+                <header>
+                    <button name="action_post" string="Post" type="object"
+                        class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state != 'posted'"
+                        confirm="Are you sure you want to cancel this operation?"/>
+                    <button name="action_draft" string="Reset to Draft" type="object"
+                        invisible="state != 'cancel'"/>
+                    <button name="action_reset_to_draft" string="Reset to Draft" type="object"
+                        invisible="not can_reset_to_draft"
+                        groups="oski_treasury.group_treasury_manager"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,posted"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Operation">
+                            <field name="name"/>
+                            <field name="cash_id"/>
+                            <field name="operation_type"/>
+                            <field name="category_id"
+                                domain="[('operation_type', 'in', [operation_type, 'both'])]"/>
+                            <field name="amount"/>
+                            <field name="currency_id" invisible="True"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Details">
+                            <field name="partner_id"/>
+                            <field name="reference"/>
+                            <field name="is_manual" readonly="True"/>
+                            <field name="transfer_id" readonly="True"
+                                invisible="not transfer_id"/>
+                            <field name="payment_id" readonly="True"
+                                invisible="not payment_id"/>
+                            <field name="closing_id" readonly="True"
+                                invisible="not closing_id"/>
+                            <field name="move_id" readonly="True"
+                                invisible="not move_id"/>
+                            <field name="user_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Operation description..."/>
+                        </page>
+                        <page string="Observations" name="observations">
+                            <field name="observations"/>
+                        </page>
+                        <page string="Attachments" name="attachments">
+                            <field name="attachment_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List -->
+    <record id="view_treasury_cash_operation_list" model="ir.ui.view">
+        <field name="name">oski.treasury.cash.operation.list</field>
+        <field name="model">oski.treasury.cash.operation</field>
+        <field name="arch" type="xml">
+            <list string="Cash Operations"
+                  decoration-success="operation_type == 'in' and state == 'posted'"
+                  decoration-danger="operation_type == 'out' and state == 'posted'"
+                  decoration-muted="state == 'cancel'">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="cash_id"/>
+                <field name="operation_type"/>
+                <field name="category_id"/>
+                <field name="partner_id" optional="show"/>
+                <field name="amount" widget="monetary" sum="Total"/>
+                <field name="reference" optional="hide"/>
+                <field name="move_id" optional="hide"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'posted'"
+                    decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_treasury_cash_operation_search" model="ir.ui.view">
+        <field name="name">oski.treasury.cash.operation.search</field>
+        <field name="model">oski.treasury.cash.operation</field>
+        <field name="arch" type="xml">
+            <search string="Operations">
+                <field name="name"/>
+                <field name="cash_id"/>
+                <field name="partner_id"/>
+                <field name="reference"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="posted" string="Posted" domain="[('state', '=', 'posted')]"/>
+                <separator/>
+                <filter name="type_in" string="In" domain="[('operation_type', '=', 'in')]"/>
+                <filter name="type_out" string="Out" domain="[('operation_type', '=', 'out')]"/>
+                <separator/>
+                <filter name="today" string="Today"
+                    domain="[('date', '&gt;=', (context_today()).strftime('%Y-%m-%d 00:00:00')), ('date', '&lt;=', (context_today()).strftime('%Y-%m-%d 23:59:59'))]"/>
+                <filter name="this_month" string="This Month"
+                    domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d 00:00:00')), ('date', '&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d 00:00:00'))]"/>
+                <separator/>
+                <filter name="group_cash" string="Cash Register" context="{'group_by': 'cash_id'}"/>
+                <filter name="group_type" string="Type" context="{'group_by': 'operation_type'}"/>
+                <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                <filter name="group_date" string="Date" context="{'group_by': 'date:month'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_treasury_cash_operation" model="ir.actions.act_window">
+        <field name="name">Cash Operations</field>
+        <field name="res_model">oski.treasury.cash.operation</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_treasury_cash_operation_search"/>
+        <field name="context">{'search_default_posted': 1}</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_treasury_cash_operation"
+        name="Cash Operations"
+        parent="menu_treasury_operations"
+        action="action_treasury_cash_operation"
+        sequence="11"/>
+</odoo>

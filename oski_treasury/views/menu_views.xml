@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Treasury root menu -->
+    <menuitem id="menu_treasury_root"
+        name="Treasury"
+        web_icon="oski_treasury,static/description/icon.png"
+        sequence="35"/>
+
+    <!-- Operations sub-menu -->
+    <menuitem id="menu_treasury_operations"
+        name="Operations"
+        parent="menu_treasury_root"
+        sequence="10"/>
+
+    <!-- Configuration sub-menu -->
+    <menuitem id="menu_treasury_config"
+        name="Configuration"
+        parent="menu_treasury_root"
+        groups="group_treasury_manager"
+        sequence="90"/>
+</odoo>

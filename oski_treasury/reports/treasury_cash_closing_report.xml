@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_report_cash_closing" model="ir.actions.report">
+        <field name="name">Cash Closing</field>
+        <field name="model">oski.treasury.cash.closing</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oski_treasury.report_cash_closing</field>
+        <field name="report_file">oski_treasury.report_cash_closing</field>
+        <field name="binding_model_id" ref="model_oski_treasury_cash_closing"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_cash_closing">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="closing">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Cash Closing</h2>
+                        <h3 class="text-center text-muted" t-out="closing.name"/>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td><strong>Cash Register:</strong></td>
+                                        <td t-out="closing.cash_id.display_name"/>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date:</strong></td>
+                                        <td t-out="closing.closing_date" t-options="{'widget': 'date'}"/>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Closing No.:</strong></td>
+                                        <td t-out="closing.closing_number"/>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td><strong>Created By:</strong></td>
+                                        <td t-out="closing.user_id.name"/>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Validated By:</strong></td>
+                                        <td t-out="closing.validated_by.name"/>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status:</strong></td>
+                                        <td t-out="dict(closing._fields['state'].selection).get(closing.state)"/>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Balances -->
+                        <h4 class="mt-4">Balance Summary</h4>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Starting Balance</strong></td>
+                                <td class="text-end" t-out="closing.balance_start"
+                                    t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
+                            </tr>
+                            <tr class="text-success">
+                                <td><strong>Total In (+)</strong></td>
+                                <td class="text-end" t-out="closing.total_in"
+                                    t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
+                            </tr>
+                            <tr class="text-danger">
+                                <td><strong>Total Out (-)</strong></td>
+                                <td class="text-end" t-out="closing.total_out"
+                                    t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
+                            </tr>
+                            <tr class="table-active">
+                                <td><strong>Theoretical Balance</strong></td>
+                                <td class="text-end" t-out="closing.balance_end_theoretical"
+                                    t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
+                            </tr>
+                            <tr class="table-primary">
+                                <td><strong>Actual Balance (counted)</strong></td>
+                                <td class="text-end" t-out="closing.balance_end_real"
+                                    t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
+                            </tr>
+                            <tr t-att-class="'table-danger' if closing.difference else ''">
+                                <td><strong>Difference</strong></td>
+                                <td class="text-end" t-out="closing.difference"
+                                    t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
+                            </tr>
+                        </table>
+
+                        <!-- Operations -->
+                        <h4 class="mt-4">Operation Details</h4>
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Reference</th>
+                                    <th>Category</th>
+                                    <th>Type</th>
+                                    <th class="text-end">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="closing.operation_ids.filtered(lambda o: o.state == 'posted')" t-as="op">
+                                    <tr t-att-class="'text-success' if op.operation_type == 'in' else 'text-danger'">
+                                        <td t-out="op.date" t-options="{'widget': 'datetime'}"/>
+                                        <td t-out="op.name"/>
+                                        <td t-out="op.category_id.name"/>
+                                        <td t-out="'In' if op.operation_type == 'in' else 'Out'"/>
+                                        <td class="text-end" t-out="op.amount"
+                                            t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Signatures -->
+                        <div class="row mt-5">
+                            <div class="col-4 text-center">
+                                <p>Cashier</p>
+                                <br/><br/>
+                                <p>_____________________</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p>Responsible</p>
+                                <br/><br/>
+                                <p>_____________________</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p>Director</p>
+                                <br/><br/>
+                                <p>_____________________</p>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div t-if="closing.notes" class="mt-3">
+                            <strong>Notes:</strong>
+                            <p t-out="closing.notes"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
