@@ -6,3 +6,5 @@ access_rental_asset_manager,rental.asset.manager,model_oski_rental_asset,group_r
 access_rental_unavailability_user,rental.unavailability.user,model_oski_rental_unavailability,group_rental_user,1,1,1,1
 access_rental_order_user,rental.order.user,model_oski_rental_order,group_rental_user,1,1,1,1
 access_rental_order_line_user,rental.order.line.user,model_oski_rental_order_line,group_rental_user,1,1,1,1
+access_rental_checkout_wizard_user,rental.checkout.wizard.user,model_oski_rental_checkout_wizard,group_rental_user,1,1,1,0
+access_rental_checkin_wizard_user,rental.checkin.wizard.user,model_oski_rental_checkin_wizard,group_rental_user,1,1,1,0
