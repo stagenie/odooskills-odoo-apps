@@ -112,6 +112,16 @@ class TreasuryTransfer(models.Model):
             if tr.transfer_type == 'safe_to_safe' and tr.safe_from_id == tr.safe_to_id:
                 raise ValidationError(_("The source and destination must be different."))
 
+    @api.constrains('company_id', 'cash_from_id', 'cash_to_id',
+                     'safe_from_id', 'safe_to_id')
+    def _check_legs_company(self):
+        for tr in self:
+            for leg in (tr.cash_from_id, tr.cash_to_id, tr.safe_from_id, tr.safe_to_id):
+                if leg and leg.company_id != tr.company_id:
+                    raise ValidationError(
+                        _("All transfer legs must belong to the transfer's company.")
+                    )
+
     # --- Compute ---
 
     @api.depends('source_balance_before', 'dest_balance_before', 'amount')

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo.tests import TransactionCase, tagged
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, ValidationError
 
 
 @tagged('post_install', '-at_install', 'treasury')
@@ -161,6 +161,35 @@ class TestTreasuryAccess(TransactionCase):
             op2.id,
             self.env['oski.treasury.cash.operation'].with_user(mgr).search([]).ids,
         )
+
+    def test_d2_transfer_legs_same_company(self):
+        """A transfer's legs (cash/safe) must all belong to the transfer's
+        own company: referencing a foreign-company cash register/safe as a
+        leg must be rejected, while a normal same-company transfer must
+        still go through."""
+        company2 = self.env['res.company'].create({'name': 'ACL Company 5'})
+        cash_own = self._make_cash()
+        cash_foreign = self._make_cash(company=company2)
+
+        with self.assertRaises(ValidationError):
+            self.env['oski.treasury.transfer'].create({
+                'transfer_type': 'cash_to_cash',
+                'cash_from_id': cash_own.id,
+                'cash_to_id': cash_foreign.id,
+                'amount': 100.0,
+                'company_id': self.env.company.id,
+            })
+
+        # Same-company transfer must not be blocked.
+        cash_own_2 = self._make_cash()
+        transfer = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'cash_to_cash',
+            'cash_from_id': cash_own.id,
+            'cash_to_id': cash_own_2.id,
+            'amount': 100.0,
+            'company_id': self.env.company.id,
+        })
+        self.assertTrue(transfer.id)
 
     # ========================
     # ORM lock: safe responsibles reserved to Safe Administrators
