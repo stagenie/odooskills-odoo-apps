@@ -87,3 +87,31 @@ class TestTransitions(RentalCase):
         second = self._make_order([asset], START, STOP)
         second.action_reserve()
         self.assertEqual(second.state, 'reserved')
+
+    def test_reserved_line_edit_rechecks_conflicts(self):
+        asset = self._make_asset()
+        self._make_order([asset], START, STOP).action_reserve()
+        other = self._make_asset(name='Libre')
+        order = self._make_order(
+            [other], datetime(2026, 8, 10), datetime(2026, 8, 12))
+        order.action_reserve()
+        with self.assertRaises(UserError):
+            order.line_ids.write({
+                'asset_id': asset.id,
+                'date_start': datetime(2026, 8, 2),
+                'date_end': datetime(2026, 8, 4),
+            })
+
+    def test_reserved_line_add_rechecks_conflicts(self):
+        asset = self._make_asset()
+        self._make_order([asset], START, STOP).action_reserve()
+        order = self._make_order(
+            [self._make_asset(name='Libre')],
+            datetime(2026, 8, 10), datetime(2026, 8, 12))
+        order.action_reserve()
+        with self.assertRaises(UserError):
+            order.line_ids = [(0, 0, {
+                'asset_id': asset.id,
+                'date_start': datetime(2026, 8, 2),
+                'date_end': datetime(2026, 8, 4),
+            })]

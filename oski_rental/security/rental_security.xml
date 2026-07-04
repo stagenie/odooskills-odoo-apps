@@ -34,4 +34,14 @@
         <field name="model_id" ref="model_oski_rental_order"/>
         <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
+    <record id="rule_rental_order_line_company" model="ir.rule">
+        <field name="name">Ligne de location : multi-société</field>
+        <field name="model_id" ref="model_oski_rental_order_line"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_rental_unavailability_company" model="ir.rule">
+        <field name="name">Indisponibilité : multi-société</field>
+        <field name="model_id" ref="model_oski_rental_unavailability"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>

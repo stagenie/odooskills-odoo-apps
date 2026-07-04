@@ -49,3 +49,19 @@ class RentalOrderLine(models.Model):
             if line.date_end <= line.date_start:
                 raise ValidationError(
                     "La date de fin doit être postérieure à la date de début.")
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super().create(vals_list)
+        for order in lines.order_id.filtered(
+                lambda o: o.state in ('reserved', 'ongoing')):
+            order._check_conflicts()
+        return lines
+
+    def write(self, vals):
+        res = super().write(vals)
+        if {'asset_id', 'date_start', 'date_end'} & vals.keys():
+            for order in self.order_id.filtered(
+                    lambda o: o.state in ('reserved', 'ongoing')):
+                order._check_conflicts()
+        return res
