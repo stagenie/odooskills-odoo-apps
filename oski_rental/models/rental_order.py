@@ -226,3 +226,18 @@ class RentalOrder(models.Model):
                     "La caution ne peut être remboursée qu'après retour, "
                     "si elle a été perçue.")
             order.write({'deposit_state': 'refunded'})
+
+    def _cron_late_alert(self):
+        overdue = self.search([
+            ('state', '=', 'ongoing'),
+            ('date_end', '<', fields.Datetime.now()),
+            ('late_notified', '=', False),
+        ])
+        for order in overdue:
+            order.activity_schedule(
+                'mail.mail_activity_data_todo',
+                user_id=(order.user_id or self.env.user).id,
+                summary="Location en retard : %s" % order.name,
+                note="La location %s (client %s) devait être retournée le %s."
+                     % (order.name, order.partner_id.display_name, order.date_end))
+            order.late_notified = True

@@ -14,6 +14,7 @@
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
         'data/product_data.xml',
+        'data/ir_cron_data.xml',
     ],
     'demo': [],
     'installable': True,
