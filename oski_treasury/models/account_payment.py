@@ -138,45 +138,48 @@ class AccountPayment(models.Model):
 
     def action_cancel(self):
         """Override to cancel the associated cash operation."""
-        # Silent no-op for users without treasury access: reading the linked
-        # operation (state/closing) would raise AccessError for them.
-        if not self.env['oski.treasury.cash.operation'].has_access('read'):
-            return super().action_cancel()
         for payment in self:
-            if payment.treasury_operation_id and payment.treasury_operation_id.state == 'posted':
-                op = payment.treasury_operation_id
+            # Integrity guard + mirror-op leg cleanup: must run for EVERY
+            # user, treasury ACLs or not (otherwise a non-treasury user could
+            # silently cancel a payment locked by a validated closing).
+            # sudo() is narrowly scoped to the operation already linked to
+            # THIS payment (never a search): the lock check only evaluates
+            # booleans (no treasury data is returned to the user) and the
+            # mutation only touches the payment's own mirror record.
+            op = payment.sudo().treasury_operation_id
+            if op and op.state == 'posted':
                 if op.closing_id and op.closing_id.state == 'validated':
                     raise UserError(
-                        _("Cannot cancel this payment: the cash operation "
-                          "is part of the validated closing '%s'.",
-                          op.closing_id.name)
+                        _("This payment is locked by a validated treasury "
+                          "closing.")
                     )
                 op.action_cancel()
         return super().action_cancel()
 
     def action_draft(self):
         """Override to handle the reset to draft."""
-        # Silent no-op for users without treasury access (see action_cancel).
-        if not self.env['oski.treasury.cash.operation'].has_access('read'):
-            return super().action_draft()
         for payment in self:
-            if payment.treasury_operation_id:
-                op = payment.treasury_operation_id
+            # Integrity guard: unconditional (see action_cancel). Scoped
+            # sudo read of the payment's own mirror operation, boolean
+            # evaluation only, generic message (no closing data leaked).
+            op = payment.sudo().treasury_operation_id
+            if op:
                 if op.closing_id and op.closing_id.state == 'validated':
                     raise UserError(
-                        _("Cannot reset to draft: the cash operation "
-                          "is part of the validated closing '%s'.",
-                          op.closing_id.name)
+                        _("This payment is locked by a validated treasury "
+                          "closing.")
                     )
                 if op.closing_id and op.closing_id.state == 'confirmed':
                     raise UserError(
-                        _("Cannot reset to draft: the cash operation "
-                          "is part of the confirmed closing '%s'. "
-                          "Reset the closing to draft first.",
-                          op.closing_id.name)
+                        _("This payment is locked by a confirmed treasury "
+                          "closing. Reset the closing to draft first.")
                     )
         res = super().action_draft()
         for payment in self:
-            if payment.treasury_operation_id and payment.treasury_operation_id.state == 'posted':
-                payment.treasury_operation_id.write({'state': 'draft'})
+            # Leg cleanup of the payment's own mirror operation: scoped sudo
+            # (record already linked to the payment, never a search) so the
+            # mirror does not go stale when a non-treasury user resets.
+            op = payment.sudo().treasury_operation_id
+            if op and op.state == 'posted':
+                op.write({'state': 'draft'})
         return res
