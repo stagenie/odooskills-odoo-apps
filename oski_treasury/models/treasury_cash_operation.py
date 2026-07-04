@@ -47,10 +47,9 @@ class TreasuryCashOperation(models.Model):
     move_id = fields.Many2one(
         'account.move', string='Journal Entry', readonly=True, copy=False,
     )
-    # TODO(Task 5): restore transfer_id
-    # transfer_id = fields.Many2one(
-    #     'oski.treasury.transfer', string='Transfer', readonly=True,
-    # )
+    transfer_id = fields.Many2one(
+        'oski.treasury.transfer', string='Transfer', readonly=True,
+    )
     closing_id = fields.Many2one(
         'oski.treasury.cash.closing', string='Closing', readonly=True,
     )
@@ -119,12 +118,11 @@ class TreasuryCashOperation(models.Model):
                 raise UserError(
                     _("Cannot delete an operation linked to a validated closing.")
                 )
-            # TODO(Task 5): restore transfer_id check
-            # if op.transfer_id:
-            #     raise UserError(
-            #         _("Cannot delete an operation linked to a transfer. "
-            #           "Cancel the transfer first.")
-            #     )
+            if op.transfer_id:
+                raise UserError(
+                    _("Cannot delete an operation linked to a transfer. "
+                      "Cancel the transfer first.")
+                )
         return super().unlink()
 
     # --- Workflow actions ---
@@ -193,10 +191,9 @@ class TreasuryCashOperation(models.Model):
             return acc if acc.exists() else Account
 
         cash_account = _acc('oski_treasury.default_cash_account_id')
-        # TODO(Task 5): restore transfer_id branch
-        # if self.transfer_id:
-        #     counterpart = _acc('oski_treasury.default_transfer_account_id')
-        if self.operation_type == 'in':
+        if self.transfer_id:
+            counterpart = _acc('oski_treasury.default_transfer_account_id')
+        elif self.operation_type == 'in':
             counterpart = _acc('oski_treasury.default_revenue_account_id')
         else:
             counterpart = _acc('oski_treasury.default_expense_account_id')
@@ -227,13 +224,12 @@ class TreasuryCashOperation(models.Model):
         self.ensure_one()
         if self.move_id or not self._treasury_account_move_enabled():
             return
-        # TODO(Task 5): restore transfer_id guard (internal treasury movement:
-        # cash/safe/bank transfer -> no GL entry here. Both legs would use the
-        # same accounts (net zero, loss of per-cash-register traceability)
-        # and the safe/bank leg does not generate a move (transit account
-        # never settled)).
-        # if self.transfer_id:
-        #     return
+        # Internal treasury movement (cash/safe/bank transfer): no GL entry
+        # here. Both legs would use the same accounts (net zero, loss of
+        # per-cash-register traceability) and the safe/bank leg does not
+        # generate a move (transit account never settled).
+        if self.transfer_id:
+            return
         # Link to the payment's native entry (no duplication)
         if self.payment_id and self.payment_id.move_id:
             self.move_id = self.payment_id.move_id

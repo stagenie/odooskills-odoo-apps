@@ -51,10 +51,9 @@ class TreasurySafeOperation(models.Model):
     company_id = fields.Many2one(
         'res.company', related='safe_id.company_id', store=True,
     )
-    # TODO(Task 5): restore transfer_id
-    # transfer_id = fields.Many2one(
-    #     'oski.treasury.transfer', string='Transfer', readonly=True,
-    # )
+    transfer_id = fields.Many2one(
+        'oski.treasury.transfer', string='Transfer', readonly=True,
+    )
 
     # --- Compute ---
 

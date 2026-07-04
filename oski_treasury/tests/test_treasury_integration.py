@@ -7,8 +7,8 @@ from odoo.exceptions import ValidationError, UserError
 @tagged('post_install', '-at_install', 'treasury')
 class TestTreasuryIntegration(TransactionCase):
     """Integration tests for the oski_treasury module (cash registers,
-    operations, chained closings and safes). Transfer tests are ported in
-    Task 5 once that model exists."""
+    operations, chained closings, safes and transfers with 3-level balance
+    control)."""
 
     @classmethod
     def setUpClass(cls):
@@ -397,6 +397,162 @@ class TestTreasuryIntegration(TransactionCase):
                          "is absent from vals")
 
     # ========================
+    # Transfer tests (cash <-> cash)
+    # ========================
+
+    def test_40_transfer_cash_to_cash(self):
+        """Cash -> cash transfer creates 2 automatic operations"""
+        cash1 = self.env['oski.treasury.cash'].create({
+            'name': 'Source', 'code': 'SRC1',
+            'journal_id': self.journal_cash.id,
+        })
+        cash2 = self.env['oski.treasury.cash'].create({
+            'name': 'Dest', 'code': 'DST1',
+            'journal_id': self.journal_cash2.id,
+        })
+        # Fund the source
+        op_in = self.env['oski.treasury.cash.operation'].create({
+            'cash_id': cash1.id, 'operation_type': 'in',
+            'category_id': self.category_in.id, 'amount': 15000,
+        })
+        op_in.action_post()
+
+        # Transfer
+        transfer = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'cash_to_cash',
+            'cash_from_id': cash1.id,
+            'cash_to_id': cash2.id,
+            'amount': 5000,
+        })
+        transfer.action_confirm()
+        self.assertEqual(transfer.state, 'confirm')
+        self.assertTrue(transfer.cash_operation_out_id)
+        self.assertTrue(transfer.cash_operation_in_id)
+
+        # Check balances
+        cash1.invalidate_recordset()
+        cash2.invalidate_recordset()
+        self.assertEqual(cash1.current_balance, 10000)
+        self.assertEqual(cash2.current_balance, 5000)
+
+        transfer.action_done()
+        self.assertEqual(transfer.state, 'done')
+
+    def test_41_transfer_amount_positive(self):
+        """Transfer amount > 0"""
+        with self.assertRaises(ValidationError):
+            self.env['oski.treasury.transfer'].create({
+                'transfer_type': 'cash_to_cash',
+                'cash_from_id': self.env['oski.treasury.cash'].create({
+                    'name': 'X', 'code': 'X01',
+                    'journal_id': self.journal_cash.id,
+                }).id,
+                'cash_to_id': self.env['oski.treasury.cash'].create({
+                    'name': 'Y', 'code': 'Y01',
+                    'journal_id': self.journal_cash2.id,
+                }).id,
+                'amount': -100,
+            })
+
+    def test_42_transfer_same_source_dest(self):
+        """Source != Destination"""
+        cash = self.env['oski.treasury.cash'].create({
+            'name': 'Self', 'code': 'SLF1',
+            'journal_id': self.journal_cash.id,
+        })
+        with self.assertRaises(ValidationError):
+            self.env['oski.treasury.transfer'].create({
+                'transfer_type': 'cash_to_cash',
+                'cash_from_id': cash.id,
+                'cash_to_id': cash.id,
+                'amount': 1000,
+            })
+
+    def test_43_transfer_cancel_reverses(self):
+        """Cancelling a transfer cancels its linked operations"""
+        cash1 = self.env['oski.treasury.cash'].create({
+            'name': 'Src Cancel', 'code': 'SC01',
+            'journal_id': self.journal_cash.id,
+        })
+        cash2 = self.env['oski.treasury.cash'].create({
+            'name': 'Dst Cancel', 'code': 'DC01',
+            'journal_id': self.journal_cash2.id,
+        })
+        # Fund
+        op = self.env['oski.treasury.cash.operation'].create({
+            'cash_id': cash1.id, 'operation_type': 'in',
+            'category_id': self.category_in.id, 'amount': 10000,
+        })
+        op.action_post()
+
+        transfer = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'cash_to_cash',
+            'cash_from_id': cash1.id, 'cash_to_id': cash2.id,
+            'amount': 3000,
+        })
+        transfer.action_confirm()
+        transfer.action_cancel()
+
+        self.assertEqual(transfer.state, 'cancel')
+        self.assertEqual(transfer.cash_operation_out_id.state, 'cancel')
+        self.assertEqual(transfer.cash_operation_in_id.state, 'cancel')
+
+    def test_52_transfer_blocked_from_locked_cash(self):
+        """Transfer from a locked cash register -> blocked."""
+        cash = self.env['oski.treasury.cash'].create({
+            'name': 'CashLock', 'code': 'CLCK',
+            'journal_id': self.journal_cash.id,
+        })
+        cash2 = self.env['oski.treasury.cash'].create({
+            'name': 'CashLock2', 'code': 'CLK2',
+            'journal_id': self.journal_cash2.id,
+        })
+        self._fund_cash(cash, 5000)
+        cash.action_lock()
+        transfer = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'cash_to_cash',
+            'cash_from_id': cash.id, 'cash_to_id': cash2.id, 'amount': 1000,
+        })
+        with self.assertRaises(UserError):
+            transfer.action_confirm()
+
+    def test_57_force_transfer_cash_source(self):
+        """force_transfer must bypass the balance control all the way
+        through: the cash-out leg (action_post) must not re-block."""
+        cash_src = self.env['oski.treasury.cash'].create({
+            'name': 'CashForceSrc', 'code': 'CFS1',
+            'journal_id': self.journal_cash.id,
+        })
+        cash_dst = self.env['oski.treasury.cash'].create({
+            'name': 'CashForceDst', 'code': 'CFD1',
+            'journal_id': self.journal_cash2.id,
+        })
+        # Source at 100, forced transfer of 5000 (blocking control by default)
+        op = self.env['oski.treasury.cash.operation'].create({
+            'cash_id': cash_src.id, 'operation_type': 'in',
+            'category_id': self.category_in.id, 'amount': 100,
+        })
+        op.action_post()
+        transfer = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'cash_to_cash', 'amount': 5000,
+            'cash_from_id': cash_src.id, 'cash_to_id': cash_dst.id,
+            'force_transfer': True,
+        })
+        transfer.action_confirm()
+        self.assertEqual(transfer.state, 'confirm')
+        self.assertEqual(cash_src.current_balance, -4900)
+        self.assertEqual(cash_dst.current_balance, 5000)
+        # Without force: the same transfer is blocked
+        transfer2 = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'cash_to_cash', 'amount': 5000,
+            'cash_from_id': cash_dst.id, 'cash_to_id': cash_src.id,
+            'force_transfer': False,
+        })
+        transfer2.amount = 99999
+        with self.assertRaises(UserError):
+            transfer2.action_confirm()
+
+    # ========================
     # Safe tests
     # ========================
 
@@ -426,6 +582,11 @@ class TestTreasuryIntegration(TransactionCase):
         if date:
             vals['date'] = date
         return self.env['oski.treasury.safe.operation'].create(vals)
+
+    def _fund_safe(self, safe, amount):
+        op = self._make_safe_op(safe, 'initial', amount, description='init')
+        op.action_confirm()
+        op.action_done()
 
     def test_30_safe_create_and_init(self):
         """Creating a safe and initializing it"""
@@ -473,3 +634,66 @@ class TestTreasuryIntegration(TransactionCase):
             o.action_confirm()
             o.action_done()
         self.assertEqual(ops[-1].balance_after, safe.current_balance)
+
+    # ========================
+    # Transfer tests (cash <-> safe)
+    # ========================
+
+    def test_50_transfer_cash_safe_matrix(self):
+        """cash->safe, safe->cash, safe->safe: no amount is lost."""
+        cash = self.env['oski.treasury.cash'].create({
+            'name': 'CashMat', 'code': 'CMAT',
+            'journal_id': self.journal_cash.id,
+        })
+        safe1 = self._make_safe('SafeMat1', 'SMA1')
+        safe2 = self._make_safe('SafeMat2', 'SMA2')
+        self._fund_cash(cash, 10000)
+        self._fund_safe(safe1, 8000)
+
+        # cash -> safe (3000)
+        t1 = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'cash_to_safe',
+            'cash_from_id': cash.id, 'safe_to_id': safe1.id, 'amount': 3000,
+        })
+        t1.action_confirm()
+        cash.invalidate_recordset(); safe1.invalidate_recordset()
+        self.assertEqual(cash.current_balance, 7000)
+        self.assertEqual(safe1.current_balance, 11000)
+
+        # safe -> cash (2000)
+        t2 = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'safe_to_cash',
+            'safe_from_id': safe1.id, 'cash_to_id': cash.id, 'amount': 2000,
+        })
+        t2.action_confirm()
+        cash.invalidate_recordset(); safe1.invalidate_recordset()
+        self.assertEqual(cash.current_balance, 9000)
+        self.assertEqual(safe1.current_balance, 9000)
+
+        # safe -> safe (4000)
+        t3 = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'safe_to_safe',
+            'safe_from_id': safe1.id, 'safe_to_id': safe2.id, 'amount': 4000,
+        })
+        t3.action_confirm()
+        safe1.invalidate_recordset(); safe2.invalidate_recordset()
+        self.assertEqual(safe1.current_balance, 5000)
+        self.assertEqual(safe2.current_balance, 4000)
+
+    def test_58_force_transfer_safe_source(self):
+        """force_transfer with a safe source: the safe-out leg
+        (action_confirm) must not re-block."""
+        safe = self._make_safe('SafeForce', 'SFOR')
+        cash_dst = self.env['oski.treasury.cash'].create({
+            'name': 'CashSafeForce', 'code': 'CSF1',
+            'journal_id': self.journal_cash.id,
+        })
+        transfer = self.env['oski.treasury.transfer'].create({
+            'transfer_type': 'safe_to_cash', 'amount': 1000,
+            'safe_from_id': safe.id, 'cash_to_id': cash_dst.id,
+            'force_transfer': True,
+        })
+        transfer.action_confirm()
+        self.assertEqual(transfer.state, 'confirm')
+        self.assertEqual(safe.current_balance, -1000)
+        self.assertEqual(cash_dst.current_balance, 1000)
