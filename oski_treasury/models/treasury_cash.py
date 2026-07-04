@@ -158,6 +158,21 @@ class TreasuryCash(models.Model):
                 and cash.days_since_closing > cash.auto_close_days
             )
 
+    def _cron_update_days_since_closing(self):
+        """Daily cron: refresh days_since_closing / is_closing_late.
+
+        Both fields are stored computes depending only on
+        last_closing_date/require_closing/auto_close_days: they never
+        change on their own as days pass with no write on the register,
+        so without this cron they silently go stale (a register closed
+        10 days ago keeps showing 'Days Since Closing = 0' until its next
+        unrelated write). Locked registers are excluded: once locked they
+        are frozen and their closing lateness no longer matters.
+        """
+        cashes = self.search([('state', '!=', 'locked')])
+        cashes._compute_days_since_closing()
+        cashes.flush_recordset(['days_since_closing', 'is_closing_late'])
+
     @api.depends('closing_ids.state')
     def _compute_has_pending_closing(self):
         for cash in self:

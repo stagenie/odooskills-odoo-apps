@@ -29,6 +29,10 @@
                             <field name="amount" readonly="state != 'draft'"/>
                             <field name="currency_id" invisible="True"/>
                             <field name="date" readonly="state != 'draft'"/>
+                            <field name="force_transfer"
+                                groups="oski_treasury.group_treasury_manager"
+                                invisible="state != 'draft'"
+                                readonly="state != 'draft'"/>
                         </group>
                         <group string="Source / Destination">
                             <field name="cash_from_id"
@@ -57,9 +61,6 @@
                                     <field name="control_checked"/>
                                     <field name="control_date"/>
                                     <field name="control_user_id"/>
-                                    <field name="force_transfer"
-                                        groups="oski_treasury.group_treasury_manager"
-                                        invisible="state != 'draft'"/>
                                 </group>
                                 <group string="Balance Simulation">
                                     <field name="source_balance_before" widget="monetary"/>

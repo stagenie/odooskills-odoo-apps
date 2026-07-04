@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
+
 from odoo import fields
 from odoo.tests import TransactionCase, tagged
 from odoo.exceptions import ValidationError, UserError
@@ -697,3 +699,24 @@ class TestTreasuryIntegration(TransactionCase):
         self.assertEqual(transfer.state, 'confirm')
         self.assertEqual(safe.current_balance, -1000)
         self.assertEqual(cash_dst.current_balance, 1000)
+
+    # ========================
+    # Final review wave - closing-late cron
+    # ========================
+
+    def test_59_cron_update_days_since_closing(self):
+        """days_since_closing / is_closing_late are stored computes that
+        never refresh on their own with the passing of time: the daily
+        cron must recompute them explicitly."""
+        cash = self.env['oski.treasury.cash'].create({
+            'name': 'CashCronClosing', 'code': 'CCRC',
+            'journal_id': self.journal_cash.id,
+            'require_closing': True,
+            'auto_close_days': 5,
+        })
+        ten_days_ago = fields.Datetime.now() - timedelta(days=10)
+        cash.write({'last_closing_date': ten_days_ago})
+        self.env['oski.treasury.cash']._cron_update_days_since_closing()
+        cash.invalidate_recordset()
+        self.assertEqual(cash.days_since_closing, 10)
+        self.assertTrue(cash.is_closing_late)
