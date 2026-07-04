@@ -407,18 +407,12 @@ class TestTreasuryIntegration(TransactionCase):
         auto-incremented, test-run-unique value so callers (including the
         D3 tests) can omit them entirely.
 
-        allow_negative_balance defaults to True: the balance-sufficiency
-        guard on action_confirm() checks the safe's *live* current_balance
-        (done ops only -- see action_confirm), which is meaningless when a
-        batch of ops is confirmed together before any of them is marked
-        done (as the D3 historical-balance tests do). This default keeps
-        the guard from interfering with pure balance-computation tests;
-        it is unrelated to the D3 historical compute itself."""
+        allow_negative_balance is not set by default, allowing the model's
+        own default (False) to apply unless the caller passes it explicitly."""
         self.__class__._safe_seq += 1
         vals.setdefault('name', name or f'Safe Test {self._safe_seq}')
         vals.setdefault('code', code or f'SFX{self._safe_seq:03d}')
         vals.setdefault('responsible_ids', [(6, 0, [self.env.ref('base.user_admin').id])])
-        vals.setdefault('allow_negative_balance', True)
         return self.env['oski.treasury.safe'].create(vals)
 
     def _make_safe_op(self, safe, operation_type, amount, date=None, **vals):
@@ -461,7 +455,7 @@ class TestTreasuryIntegration(TransactionCase):
     def test_d3_safe_balance_historical(self):
         """balance_before/balance_after reflect the safe's state strictly
         BEFORE each operation, not the safe's live current_balance."""
-        safe = self._make_safe()
+        safe = self._make_safe(allow_negative_balance=True)
         op1 = self._make_safe_op(safe, 'other_in', 100.0, date='2026-01-01')
         op2 = self._make_safe_op(safe, 'other_out', 30.0, date='2026-01-02')
         (op1 + op2).action_confirm()
@@ -473,7 +467,7 @@ class TestTreasuryIntegration(TransactionCase):
     def test_d3_safe_balance_matches_current(self):
         """Invariant: balance_after of the last done operation == the
         safe's current_balance."""
-        safe = self._make_safe()
+        safe = self._make_safe(allow_negative_balance=True)
         ops = [self._make_safe_op(safe, 'other_in', a) for a in (50.0, 20.0)]
         for o in ops:
             o.action_confirm()
