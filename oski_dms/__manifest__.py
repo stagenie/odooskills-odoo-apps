@@ -23,6 +23,9 @@
         'views/dms_menus.xml',
         'data/dms_data.xml',
     ],
+    'demo': [
+        'demo/dms_demo.xml',
+    ],
     'installable': True,
     'application': True,
 }
