@@ -133,6 +133,23 @@ class DmsDocument(models.Model):
             'context': {'active_test': False},
         }
 
+    def action_open_linked_record(self):
+        """Ouvre le formulaire de l'enregistrement métier rattaché.
+
+        Utilisé par le bouton du header form : reste discret (`invisible`
+        tant que `res_id` n'est pas renseigné) plutôt que de lever une erreur.
+        """
+        self.ensure_one()
+        if not (self.res_model and self.res_id):
+            return False
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': self.res_model,
+            'res_id': self.res_id,
+            'view_mode': 'form',
+            'target': 'current',
+        }
+
     def unlink(self):
         # Ne supprimer que les attachments réellement POSSÉDÉS par la GED
         # (créés via l'upload — `res_model='oski.dms.document'`). Un document

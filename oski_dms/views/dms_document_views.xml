@@ -25,6 +25,9 @@
                     <button name="action_restore_version" type="object"
                             string="Restaurer cette version"
                             invisible="active" class="btn-primary"/>
+                    <button name="action_open_linked_record" type="object"
+                            string="Ouvrir l'enregistrement lié"
+                            invisible="not res_id"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -81,9 +84,40 @@
         </field>
     </record>
 
+    <record id="view_dms_document_search" model="ir.ui.view">
+        <field name="name">oski.dms.document.search</field>
+        <field name="model">oski.dms.document</field>
+        <field name="arch" type="xml">
+            <search string="Documents">
+                <field name="name"/>
+                <field name="res_name" string="Enregistrement lié"/>
+                <field name="workspace_id"/>
+                <field name="tag_ids"/>
+                <field name="owner_id"/>
+                <filter name="my_docs" string="Mes documents"
+                        domain="[('owner_id', '=', uid)]"/>
+                <separator/>
+                <filter name="type_pdf" string="PDF"
+                        domain="[('mimetype', '=', 'application/pdf')]"/>
+                <filter name="type_image" string="Images"
+                        domain="[('mimetype', 'like', 'image/')]"/>
+                <!-- Regrouper par -->
+                <group>
+                    <filter name="gb_workspace" string="Espace"
+                            context="{'group_by': 'workspace_id'}"/>
+                    <filter name="gb_owner" string="Propriétaire"
+                            context="{'group_by': 'owner_id'}"/>
+                    <filter name="gb_date" string="Date de création"
+                            context="{'group_by': 'create_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_dms_document" model="ir.actions.act_window">
         <field name="name">Documents</field>
         <field name="res_model">oski.dms.document</field>
         <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_dms_document_search"/>
     </record>
 </odoo>

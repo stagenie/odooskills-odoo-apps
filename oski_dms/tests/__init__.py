@@ -4,3 +4,5 @@ from . import test_document
 from . import test_version
 from . import test_acl
 from . import test_attach_existing
+from . import test_link
+from . import test_search
