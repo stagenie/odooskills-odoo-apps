@@ -13,6 +13,7 @@
     'license': 'LGPL-3',
     'depends': ['base', 'mail', 'web'],
     'data': [
+        'security/dms_security.xml',
         'security/ir.model.access.csv',
         'views/dms_workspace_views.xml',
         'views/dms_tag_views.xml',

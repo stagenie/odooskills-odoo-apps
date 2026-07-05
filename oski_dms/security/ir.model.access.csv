@@ -1,4 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_dms_workspace_all,dms.workspace.all,model_oski_dms_workspace,base.group_user,1,1,1,1
-access_dms_tag_all,dms.tag.all,model_oski_dms_tag,base.group_user,1,1,1,1
-access_dms_document_all,dms.document.all,model_oski_dms_document,base.group_user,1,1,1,1
+access_dms_workspace_user,dms.workspace.user,model_oski_dms_workspace,group_dms_user,1,0,0,0
+access_dms_workspace_manager,dms.workspace.manager,model_oski_dms_workspace,group_dms_manager,1,1,1,1
+access_dms_document_user,dms.document.user,model_oski_dms_document,group_dms_user,1,1,1,1
+access_dms_document_manager,dms.document.manager,model_oski_dms_document,group_dms_manager,1,1,1,1
+access_dms_tag_user,dms.tag.user,model_oski_dms_tag,group_dms_user,1,0,0,0
+access_dms_tag_manager,dms.tag.manager,model_oski_dms_tag,group_dms_manager,1,1,1,1
