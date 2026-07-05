@@ -4,6 +4,8 @@
               web_icon="oski_dms,static/description/icon.png"/>
     <menuitem id="menu_dms_workspace" name="Espaces"
               parent="menu_dms_root" action="action_dms_workspace" sequence="20"/>
+    <menuitem id="menu_dms_tag" name="Étiquettes"
+              parent="menu_dms_root" action="action_dms_tag" sequence="40"/>
     <menuitem id="menu_dms_config" name="Configuration"
               parent="menu_dms_root" sequence="90" groups="base.group_system"/>
 </odoo>
