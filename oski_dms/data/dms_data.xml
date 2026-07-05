@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dms_workspace_general" model="oski.dms.workspace">
+        <field name="name">Général</field>
+    </record>
+
+    <record id="action_ir_attachment_file_dms" model="ir.actions.server">
+        <field name="name">Classer dans la GED</field>
+        <field name="model_id" ref="base.model_ir_attachment"/>
+        <field name="binding_model_id" ref="base.model_ir_attachment"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">action = records[:1].action_file_in_dms() if records else False</field>
+    </record>
+</odoo>

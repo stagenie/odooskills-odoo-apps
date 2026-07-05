@@ -3,3 +3,4 @@ from . import test_tag
 from . import test_document
 from . import test_version
 from . import test_acl
+from . import test_attach_existing
