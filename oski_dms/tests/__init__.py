@@ -6,3 +6,4 @@ from . import test_acl
 from . import test_attach_existing
 from . import test_link
 from . import test_search
+from . import test_settings

@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, ValidationError
 
 
 class DmsDocument(models.Model):
@@ -44,9 +44,17 @@ class DmsDocument(models.Model):
             doc.file = doc.attachment_id.datas if doc.attachment_id else False
 
     def _inverse_file(self):
+        max_mb = int(self.env['ir.config_parameter'].sudo().get_param(
+            'oski_dms.max_upload_mb', 0) or 0)
         for doc in self:
             if not doc.file:
                 continue
+            if max_mb:
+                # doc.file est du base64 ; taille binaire ≈ len*3/4
+                size_mb = (len(doc.file) * 3 / 4) / (1024 * 1024)
+                if size_mb > max_mb:
+                    raise ValidationError(
+                        self.env._("Fichier trop volumineux (max %s Mo).", max_mb))
             fname = doc.file_name or doc.name
             if doc.attachment_id:
                 doc.attachment_id.write({'datas': doc.file, 'name': fname})

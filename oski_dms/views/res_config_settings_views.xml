@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_dms" model="ir.ui.view">
+        <field name="name">res.config.settings.form.dms</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Documents" string="Documents" name="oski_dms">
+                    <block title="Général">
+                        <setting string="Espace par défaut"
+                                 help="Espace proposé par défaut au classement">
+                            <field name="dms_default_workspace_id"/>
+                        </setting>
+                        <setting string="Taille max upload (Mo)"
+                                 help="0 = illimité">
+                            <field name="dms_max_upload_mb"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_dms_config_settings" model="ir.actions.act_window">
+        <field name="name">Paramètres</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'module': 'oski_dms'}</field>
+    </record>
+</odoo>

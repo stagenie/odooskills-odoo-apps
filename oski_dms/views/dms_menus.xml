@@ -10,4 +10,6 @@
               parent="menu_dms_root" action="action_dms_tag" sequence="40"/>
     <menuitem id="menu_dms_config" name="Configuration"
               parent="menu_dms_root" sequence="90" groups="base.group_system"/>
+    <menuitem id="menu_dms_settings" name="Paramètres"
+              parent="menu_dms_config" action="action_dms_config_settings" sequence="10"/>
 </odoo>
