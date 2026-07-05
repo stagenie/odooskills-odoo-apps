@@ -16,6 +16,7 @@
         'security/ir.model.access.csv',
         'views/dms_workspace_views.xml',
         'views/dms_tag_views.xml',
+        'views/dms_document_views.xml',
         'views/dms_menus.xml',
     ],
     'installable': True,

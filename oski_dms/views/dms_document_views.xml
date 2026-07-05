@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dms_document_list" model="ir.ui.view">
+        <field name="name">oski.dms.document.list</field>
+        <field name="model">oski.dms.document</field>
+        <field name="arch" type="xml">
+            <list string="Documents">
+                <field name="name"/>
+                <field name="workspace_id"/>
+                <field name="tag_ids" widget="many2many_tags"/>
+                <field name="owner_id"/>
+                <field name="version_no"/>
+                <field name="file_size" widget="integer"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dms_document_form" model="ir.ui.view">
+        <field name="name">oski.dms.document.form</field>
+        <field name="model">oski.dms.document</field>
+        <field name="arch" type="xml">
+            <form string="Document">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="workspace_id"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="owner_id"/>
+                        </group>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="file" filename="file_name"/>
+                            <field name="mimetype"/>
+                            <field name="file_size"/>
+                            <field name="version_no"/>
+                        </group>
+                    </group>
+                    <group string="Rattachement" name="link">
+                        <field name="res_model"/>
+                        <field name="res_id"/>
+                        <field name="res_name"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_dms_document_kanban" model="ir.ui.view">
+        <field name="name">oski.dms.document.kanban</field>
+        <field name="model">oski.dms.document</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="mimetype"/>
+                <field name="workspace_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="name"/></strong>
+                            <div><field name="workspace_id"/></div>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_dms_document" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">oski.dms.document</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+</odoo>

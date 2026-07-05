@@ -2,6 +2,8 @@
 <odoo>
     <menuitem id="menu_dms_root" name="Documents" sequence="55"
               web_icon="oski_dms,static/description/icon.png"/>
+    <menuitem id="menu_dms_document" name="Documents"
+              parent="menu_dms_root" action="action_dms_document" sequence="10"/>
     <menuitem id="menu_dms_workspace" name="Espaces"
               parent="menu_dms_root" action="action_dms_workspace" sequence="20"/>
     <menuitem id="menu_dms_tag" name="Étiquettes"

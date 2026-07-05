@@ -29,11 +29,8 @@ class DmsWorkspace(models.Model):
         'res.groups', 'oski_dms_ws_manage_group_rel', 'ws_id', 'group_id',
         string="Groupes gestion")
 
-    # NOTE(Task 1→3): `oski.dms.document` n'existe pas encore (créé en Task 3).
-    # Un One2many vers un comodel absent du registre fait planter le chargement
-    # du module (assertion ORM sur `comodel_name` — voir odoo/orm/fields_relational.py,
-    # setup_nonrelated). `document_ids` sera ajouté ici en Task 3, en même temps
-    # que le modèle document ; `document_count` restera à 0 en attendant.
+    document_ids = fields.One2many(
+        'oski.dms.document', 'workspace_id', string="Documents")
     document_count = fields.Integer(
         compute='_compute_document_count', string="Nb documents")
     active = fields.Boolean(default=True)
@@ -48,8 +45,7 @@ class DmsWorkspace(models.Model):
             else:
                 ws.complete_name = ws.name
 
-    @api.depends()
+    @api.depends('document_ids')
     def _compute_document_count(self):
-        # Placeholder Task 1 : recalculé sur `document_ids` dès Task 3.
         for ws in self:
-            ws.document_count = 0
+            ws.document_count = len(ws.document_ids)
