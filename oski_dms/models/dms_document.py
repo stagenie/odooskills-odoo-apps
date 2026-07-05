@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import AccessError
 
 
 class DmsDocument(models.Model):
@@ -62,6 +63,18 @@ class DmsDocument(models.Model):
         for doc in self:
             name = False
             if doc.res_model and doc.res_id:
-                rec = self.env[doc.res_model].browse(doc.res_id).exists()
-                name = rec.display_name if rec else False
+                try:
+                    rec = self.env[doc.res_model].browse(doc.res_id).exists()
+                    name = rec.display_name if rec else False
+                except (KeyError, AccessError):
+                    name = False
             doc.res_name = name
+
+    def unlink(self):
+        attachments = self.attachment_id
+        res = super().unlink()
+        # `super().unlink()` supprime déjà les ir.attachment dont res_model/res_id
+        # pointent vers ce document (nettoyage natif Odoo) ; `.exists()` évite le
+        # MissingError sur ceux-là tout en supprimant un éventuel attachment restant.
+        attachments.exists().unlink()
+        return res

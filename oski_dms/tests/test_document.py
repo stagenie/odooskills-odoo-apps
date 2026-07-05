@@ -36,3 +36,15 @@ class TestDocument(DmsCommon):
         doc = self._make_doc()
         self.assertEqual(doc.workspace_id, self.ws_root)
         self.assertEqual(self.ws_root.document_count, 1)
+
+    def test_unlink_removes_attachment(self):
+        doc = self._make_doc()
+        att_id = doc.attachment_id.id
+        self.assertTrue(att_id)
+        doc.unlink()
+        self.assertFalse(self.env['ir.attachment'].browse(att_id).exists())
+
+    def test_res_name_invalid_model_no_crash(self):
+        doc = self._make_doc()
+        doc.write({'res_model': 'modele.inexistant', 'res_id': 1})
+        self.assertFalse(doc.res_name)
