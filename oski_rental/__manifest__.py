@@ -6,7 +6,8 @@
     'description': "Gestion de location générique : ressources unitaires, réservations, "
                    "départ/retour avec état des lieux, caution, facturation, alertes retard.",
     'author': 'OdooSkills',
-    'website': 'https://odooskills.com',
+    'website': 'https://apps.odooskills.com',
+    'support': 'support@odooskills.com',
     'license': 'LGPL-3',
     'depends': ['base', 'mail', 'account', 'product'],
     'data': [
@@ -26,6 +27,7 @@
     'demo': [
         'demo/rental_demo.xml',
     ],
+    'images': ['static/description/banner.png'],
     'installable': True,
     'application': True,
 }
