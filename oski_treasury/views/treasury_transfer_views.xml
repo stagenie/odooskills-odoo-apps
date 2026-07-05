@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form -->
+    <record id="view_treasury_transfer_form" model="ir.ui.view">
+        <field name="name">oski.treasury.transfer.form</field>
+        <field name="model">oski.treasury.transfer</field>
+        <field name="arch" type="xml">
+            <form string="Treasury Transfer">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                        class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_done" string="Done" type="object"
+                        class="btn-primary" invisible="state != 'confirm'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state in ('done', 'cancel')"/>
+                    <button name="action_draft" string="Reset to Draft" type="object"
+                        invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,confirm,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Transfer">
+                            <field name="transfer_type" readonly="state != 'draft'"/>
+                            <field name="amount" readonly="state != 'draft'"/>
+                            <field name="currency_id" invisible="True"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="force_transfer"
+                                groups="oski_treasury.group_treasury_manager"
+                                invisible="state != 'draft'"
+                                readonly="state != 'draft'"/>
+                        </group>
+                        <group string="Source / Destination">
+                            <field name="cash_from_id"
+                                invisible="transfer_type not in ('cash_to_cash', 'cash_to_safe')"
+                                required="transfer_type in ('cash_to_cash', 'cash_to_safe')"
+                                readonly="state != 'draft'"/>
+                            <field name="cash_to_id"
+                                invisible="transfer_type not in ('cash_to_cash', 'safe_to_cash')"
+                                required="transfer_type in ('cash_to_cash', 'safe_to_cash')"
+                                readonly="state != 'draft'"/>
+                            <field name="safe_from_id"
+                                invisible="transfer_type not in ('safe_to_cash', 'safe_to_safe')"
+                                required="transfer_type in ('safe_to_cash', 'safe_to_safe')"
+                                readonly="state != 'draft'"/>
+                            <field name="safe_to_id"
+                                invisible="transfer_type not in ('cash_to_safe', 'safe_to_safe')"
+                                required="transfer_type in ('cash_to_safe', 'safe_to_safe')"
+                                readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Control" name="control"
+                            invisible="state == 'draft'">
+                            <group>
+                                <group string="Verification">
+                                    <field name="control_checked"/>
+                                    <field name="control_date"/>
+                                    <field name="control_user_id"/>
+                                </group>
+                                <group string="Balance Simulation">
+                                    <field name="source_balance_before" widget="monetary"/>
+                                    <field name="source_balance_after" widget="monetary"/>
+                                    <field name="dest_balance_before" widget="monetary"/>
+                                    <field name="dest_balance_after" widget="monetary"/>
+                                </group>
+                            </group>
+                            <div invisible="not control_warning"
+                                class="alert alert-warning" role="alert">
+                                <field name="control_warning"/>
+                            </div>
+                        </page>
+                        <page string="Linked Operations" name="linked_ops"
+                            invisible="state == 'draft'">
+                            <group>
+                                <field name="cash_operation_out_id" readonly="True"
+                                    invisible="not cash_operation_out_id"/>
+                                <field name="cash_operation_in_id" readonly="True"
+                                    invisible="not cash_operation_in_id"/>
+                                <field name="safe_operation_out_id" readonly="True"
+                                    invisible="not safe_operation_out_id"/>
+                                <field name="safe_operation_in_id" readonly="True"
+                                    invisible="not safe_operation_in_id"/>
+                            </group>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Transfer description..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List -->
+    <record id="view_treasury_transfer_list" model="ir.ui.view">
+        <field name="name">oski.treasury.transfer.list</field>
+        <field name="model">oski.treasury.transfer</field>
+        <field name="arch" type="xml">
+            <list string="Transfers" decoration-muted="state == 'cancel'">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="transfer_type"/>
+                <field name="amount" widget="monetary" sum="Total"/>
+                <field name="control_checked" optional="show"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'confirm'"
+                    decoration-success="state == 'done'"
+                    decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_treasury_transfer_search" model="ir.ui.view">
+        <field name="name">oski.treasury.transfer.search</field>
+        <field name="model">oski.treasury.transfer</field>
+        <field name="arch" type="xml">
+            <search string="Transfers">
+                <field name="name"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="confirm" string="Confirmed" domain="[('state', '=', 'confirm')]"/>
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <filter name="controlled" string="Controlled" domain="[('control_checked', '=', True)]"/>
+                <filter name="not_controlled" string="Not Controlled" domain="[('control_checked', '=', False)]"/>
+                <separator/>
+                <filter name="group_type" string="Type" context="{'group_by': 'transfer_type'}"/>
+                <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                <filter name="group_date" string="Date" context="{'group_by': 'date:month'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_treasury_transfer" model="ir.actions.act_window">
+        <field name="name">Transfers</field>
+        <field name="res_model">oski.treasury.transfer</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_treasury_transfer_search"/>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_treasury_transfer"
+        name="Transfers"
+        parent="menu_treasury_operations"
+        action="action_treasury_transfer"
+        sequence="30"/>
+</odoo>

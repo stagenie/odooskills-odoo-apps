@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Payment form view inheritance -->
+    <record id="view_account_payment_form_inherit_treasury" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit.treasury</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="journal_type" invisible="1"/>
+                <field name="cash_id" readonly="1"
+                       invisible="journal_type != 'cash'"/>
+            </field>
+
+            <!-- Show the linked cash operation -->
+            <xpath expr="//sheet" position="inside">
+                <group string="Treasury" invisible="not treasury_operation_id">
+                    <field name="treasury_operation_id" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Payment list view inheritance -->
+    <record id="view_account_payment_list_inherit_treasury" model="ir.ui.view">
+        <field name="name">account.payment.list.inherit.treasury</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="treasury_operation_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+</odoo>

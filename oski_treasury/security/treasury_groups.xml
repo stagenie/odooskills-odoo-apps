@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="privilege_treasury" model="res.groups.privilege">
+        <field name="name">Treasury</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="group_treasury_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="privilege_id" ref="privilege_treasury"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_treasury_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="privilege_treasury"/>
+        <field name="implied_ids" eval="[(4, ref('group_treasury_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <!-- D-spec §7 : seul habilité à modifier responsible_ids des coffres (leçon v15 safe_access_fix) -->
+    <record id="group_treasury_safe_admin" model="res.groups">
+        <field name="name">Safe Administrator</field>
+        <field name="privilege_id" ref="privilege_treasury"/>
+        <field name="implied_ids" eval="[(4, ref('group_treasury_manager'))]"/>
+    </record>
+</odoo>

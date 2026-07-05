@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form -->
+    <record id="view_treasury_cash_closing_form" model="ir.ui.view">
+        <field name="name">oski.treasury.cash.closing.form</field>
+        <field name="model">oski.treasury.cash.closing</field>
+        <field name="arch" type="xml">
+            <form string="Cash Closing">
+                <header>
+                    <button name="action_load_operations"
+                        string="Reload Operations" type="object"
+                        class="btn-secondary" invisible="state != 'draft'"/>
+                    <button name="action_confirm" string="Confirm" type="object"
+                        class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_validate" string="Validate" type="object"
+                        class="btn-primary" invisible="state != 'confirmed'"
+                        groups="oski_treasury.group_treasury_manager"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state in ('validated', 'cancel')"/>
+                    <button name="action_print_closing_report"
+                        string="Print Report" type="object"
+                        class="btn-secondary"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,confirmed,validated"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_pending_operations" type="object"
+                            class="oe_stat_button" icon="fa-clock-o"
+                            invisible="state == 'validated'">
+                            <field name="pending_manual_operation_count" widget="statinfo"
+                                string="Pending"/>
+                        </button>
+                        <button name="action_create_manual_operation" type="object"
+                            class="oe_stat_button" icon="fa-plus-circle"
+                            invisible="state in ('validated', 'cancel')">
+                            <span class="o_stat_text">Add Operation</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Information">
+                            <field name="cash_id" readonly="state != 'draft'"/>
+                            <field name="closing_date" readonly="state != 'draft'"/>
+                            <field name="closing_number"/>
+                            <field name="currency_id" invisible="True"/>
+                            <field name="user_id"/>
+                            <field name="validated_by" invisible="state != 'validated'"/>
+                        </group>
+                        <group string="Balances">
+                            <field name="balance_start" widget="monetary"/>
+                            <field name="total_in" widget="monetary"/>
+                            <field name="total_out" widget="monetary"/>
+                            <field name="balance_end_theoretical" widget="monetary"/>
+                            <field name="balance_end_real" widget="monetary"
+                                readonly="state == 'validated'"/>
+                            <field name="difference" widget="monetary"
+                                decoration-danger="difference != 0"/>
+                            <field name="adjustment_operation_id" readonly="1"
+                                invisible="not adjustment_operation_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Operations" name="operations">
+                            <field name="operation_ids" readonly="True">
+                                <list decoration-success="operation_type == 'in'"
+                                      decoration-danger="operation_type == 'out'">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="operation_type"/>
+                                    <field name="category_id"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                    <field name="amount" widget="monetary" sum="Total"/>
+                                    <field name="partner_id" optional="hide"/>
+                                    <field name="description" optional="hide"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                            <group invisible="state == 'validated'">
+                                <button name="action_validate_all_pending_operations"
+                                    string="Validate Pending Operations"
+                                    type="object" class="btn-secondary"
+                                    invisible="pending_manual_operation_count == 0"/>
+                            </group>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List -->
+    <record id="view_treasury_cash_closing_list" model="ir.ui.view">
+        <field name="name">oski.treasury.cash.closing.list</field>
+        <field name="model">oski.treasury.cash.closing</field>
+        <field name="arch" type="xml">
+            <list string="Cash Closings"
+                  decoration-info="state == 'draft'"
+                  decoration-warning="state == 'confirmed'"
+                  decoration-success="state == 'validated'">
+                <field name="name"/>
+                <field name="cash_id"/>
+                <field name="closing_date"/>
+                <field name="balance_start" widget="monetary"/>
+                <field name="balance_end_theoretical" widget="monetary"/>
+                <field name="balance_end_real" widget="monetary"/>
+                <field name="difference" widget="monetary" decoration-danger="difference != 0"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state == 'confirmed'"
+                    decoration-success="state == 'validated'"
+                    decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_treasury_cash_closing_search" model="ir.ui.view">
+        <field name="name">oski.treasury.cash.closing.search</field>
+        <field name="model">oski.treasury.cash.closing</field>
+        <field name="arch" type="xml">
+            <search string="Closings">
+                <field name="cash_id"/>
+                <field name="closing_date"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter name="validated" string="Validated" domain="[('state', '=', 'validated')]"/>
+                <separator/>
+                <filter name="group_cash" string="Cash Register" context="{'group_by': 'cash_id'}"/>
+                <filter name="group_date" string="Date" context="{'group_by': 'closing_date:month'}"/>
+                <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_treasury_cash_closing" model="ir.actions.act_window">
+        <field name="name">Cash Closings</field>
+        <field name="res_model">oski.treasury.cash.closing</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_treasury_cash_closing_search"/>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_treasury_cash_closing"
+        name="Cash Closings"
+        parent="menu_treasury_operations"
+        action="action_treasury_cash_closing"
+        sequence="12"/>
+</odoo>

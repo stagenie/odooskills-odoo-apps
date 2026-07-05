@@ -204,10 +204,47 @@ for sub, default_license in APPS:
         except Exception as e:
             errors.append("%s: %s" % (tech, e))
 
+# --- Passe 2 : dépendances entre modules du catalogue ----------------------
+# Scanne TOUS les manifests présents sous OSKI_ROOT (indépendamment
+# d'OSKI_ONLY : lecture pure, aucune création de fiche) et pointe
+# dependency_ids de chaque fiche existante vers les fiches du catalogue
+# citées dans son `depends`. Les dépendances hors catalogue (account,
+# mail, …) sont ignorées.
+all_depends = {}
+for sub, _lic in APPS:
+    base = os.path.join(ROOT, "content", "apps", sub)
+    if not os.path.isdir(base):
+        continue
+    for tech in sorted(os.listdir(base)):
+        if not tech.startswith("oski_") or tech == "oski_app_store":
+            continue
+        manifest_path = os.path.join(base, tech, "__manifest__.py")
+        if not os.path.isfile(manifest_path):
+            continue
+        try:
+            all_depends[tech] = read_manifest(manifest_path).get("depends") or []
+        except Exception as e:
+            errors.append("%s (deps): %s" % (tech, e))
+
+_by_tech = {
+    r.technical_name: r
+    for r in Module.search([("technical_name", "in", list(all_depends))])
+}
+deps_linked = 0
+for tech, deps in all_depends.items():
+    rec = _by_tech.get(tech)
+    if not rec:
+        continue
+    dep_ids = [_by_tech[d].id for d in deps if d in _by_tech]
+    if set(dep_ids) != set(rec.dependency_ids.ids):
+        rec.write({"dependency_ids": [(6, 0, dep_ids)]})
+        deps_linked += 1
+
 env.cr.commit()
 print("=== IMPORT CATALOG ===")
 print("created:", len(created))
 print("updated:", len(updated))
+print("deps maj:", deps_linked)
 print("errors :", len(errors))
 for e in errors:
     print("  !", e)

@@ -37,6 +37,16 @@
                                     <a t-attf-href="/apps?tag=#{tag.id}" class="oski-chip" t-out="tag.name"/>
                                 </t>
                             </div>
+                            <!-- Dépendances catalogue : lien si la fiche cible est
+                                 publiée, sinon nom simple (la page cible ferait 404). -->
+                            <div class="oski-deps mb-3" t-if="module.dependency_ids">
+                                <span class="oski-deps-label">Nécessite&#160;:</span>
+                                <t t-foreach="module.dependency_ids" t-as="dep">
+                                    <a t-if="dep.website_published" t-att-href="dep.website_url"
+                                       class="oski-chip" t-out="dep.name"/>
+                                    <span t-else="" class="oski-chip oski-chip-static" t-out="dep.name"/>
+                                </t>
+                            </div>
                             <t t-set="target" t-value="module.download_target(version)"/>
                             <t t-if="target and target.attachment_id">
                                 <a t-if="module.is_free"

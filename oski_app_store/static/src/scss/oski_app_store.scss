@@ -102,6 +102,14 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
     .oski-clear { color: $oski-muted; font-size: .85rem;
         &:hover { color: $oski-plum; } }
 
+    // ---- Encart dépendances (fiche module) ----
+    .oski-deps {
+        display: flex; align-items: center; flex-wrap: wrap; gap: .35rem;
+        .oski-deps-label { color: $oski-muted; font-size: .85rem; font-weight: 600; }
+        .oski-chip-static { cursor: default;
+            &:hover { border-color: $oski-line; color: $oski-muted; } }
+    }
+
     // ---- Cartes catalogue ----
     .oski-card {
         position: relative; display: flex; flex-direction: column; height: 100%;

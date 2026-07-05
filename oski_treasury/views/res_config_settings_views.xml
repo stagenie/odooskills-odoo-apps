@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_treasury" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.treasury</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='account']" position="inside">
+                <block title="Treasury — Accounting" name="treasury_accounting_settings">
+                    <setting string="Generate Accounting Entries"
+                        help="Creates an accounting entry when a cash operation is posted. Operations originating from a payment are linked to the native entry without duplication.">
+                        <field name="treasury_account_move_enabled"/>
+                    </setting>
+                    <setting string="Default Accounts"
+                        invisible="not treasury_account_move_enabled"
+                        help="Accounts used if the category does not define any. Auto-detected from the chart of accounts, editable.">
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label string="Cash Account" for="treasury_cash_account_id" class="col-lg-4 o_light_label"/>
+                                <field name="treasury_cash_account_id"/>
+                            </div>
+                            <div class="row">
+                                <label string="Revenue Account" for="treasury_revenue_account_id" class="col-lg-4 o_light_label"/>
+                                <field name="treasury_revenue_account_id"/>
+                            </div>
+                            <div class="row">
+                                <label string="Expense Account" for="treasury_expense_account_id" class="col-lg-4 o_light_label"/>
+                                <field name="treasury_expense_account_id"/>
+                            </div>
+                            <div class="row">
+                                <label string="Internal Transfer Account" for="treasury_transfer_account_id" class="col-lg-4 o_light_label"/>
+                                <field name="treasury_transfer_account_id"/>
+                            </div>
+                            <div class="row">
+                                <label string="Entries Journal" for="treasury_journal_id" class="col-lg-4 o_light_label"/>
+                                <field name="treasury_journal_id"/>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
