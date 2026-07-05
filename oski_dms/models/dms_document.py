@@ -134,10 +134,17 @@ class DmsDocument(models.Model):
         }
 
     def unlink(self):
-        attachments = self.attachment_id
+        # Ne supprimer que les attachments réellement POSSÉDÉS par la GED
+        # (créés via l'upload — `res_model='oski.dms.document'`). Un document
+        # peut pointer vers un attachment EXTERNE partagé (« classer une PJ
+        # existante », res_model='res.partner' par ex.) : le détruire causerait
+        # une perte de données sur l'enregistrement métier source.
+        owned = self.attachment_id.filtered(
+            lambda a: a.res_model == 'oski.dms.document')
         res = super().unlink()
-        # `super().unlink()` supprime déjà les ir.attachment dont res_model/res_id
-        # pointent vers ce document (nettoyage natif Odoo) ; `.exists()` évite le
-        # MissingError sur ceux-là tout en supprimant un éventuel attachment restant.
-        attachments.exists().unlink()
+        # `super().unlink()` supprime déjà les attachments possédés dont
+        # res_model/res_id pointent vers ce document (nettoyage natif Odoo) ;
+        # `.exists()` évite le MissingError sur ceux-là tout en supprimant un
+        # éventuel attachment possédé restant.
+        owned.exists().unlink()
         return res
