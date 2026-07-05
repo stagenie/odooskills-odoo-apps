@@ -26,6 +26,20 @@ class TestVersion(DmsCommon):
         self.assertEqual(new.workspace_id, doc.workspace_id)
         self.assertEqual(new.tag_ids.mapped('name'), ['Ref'])
 
+    def test_version_wizard_creates_version(self):
+        doc = self._doc()
+        wizard = self.env['oski.dms.version.wizard'].create({
+            'document_id': doc.id,
+            'file': base64.b64encode(b'v2'),
+            'file_name': 'Doc.txt',
+        })
+        wizard.action_create_version()
+        chain = doc._version_chain()
+        new = chain.filtered(lambda d: d.version_no == 2)
+        self.assertEqual(len(new), 1)
+        self.assertTrue(new.active)
+        self.assertFalse(doc.active)
+
     def test_restore_version(self):
         doc = self._doc()
         new = doc.action_new_version(base64.b64encode(b'v2'), 'Doc.txt')

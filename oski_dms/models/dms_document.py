@@ -11,7 +11,8 @@ class DmsDocument(models.Model):
     name = fields.Char(required=True, tracking=True)
     workspace_id = fields.Many2one(
         'oski.dms.workspace', string="Espace", required=True,
-        ondelete='restrict', tracking=True)
+        ondelete='restrict', tracking=True,
+        default=lambda self: self._default_workspace())
     attachment_id = fields.Many2one(
         'ir.attachment', string="Pièce jointe", ondelete='cascade', copy=False)
 
@@ -38,6 +39,13 @@ class DmsDocument(models.Model):
     company_id = fields.Many2one(
         related='workspace_id.company_id', store=True, string="Société")
 
+    @api.model
+    def _default_workspace(self):
+        """Espace proposé par défaut, réglable via Configuration > Documents."""
+        param = self.env['ir.config_parameter'].sudo().get_param(
+            'oski_dms.default_workspace_id')
+        return int(param) if param else False
+
     @api.depends('attachment_id.datas')
     def _compute_file(self):
         for doc in self:
@@ -56,7 +64,13 @@ class DmsDocument(models.Model):
                     raise ValidationError(
                         self.env._("Fichier trop volumineux (max %s Mo).", max_mb))
             fname = doc.file_name or doc.name
-            if doc.attachment_id:
+            # Un document peut pointer vers un attachment EXTERNE partagé
+            # (classé via « Classer une PJ existante », res_model='res.partner'
+            # par ex.). N'écraser QUE les attachments POSSÉDÉS par la GED :
+            # sinon déposer un nouveau fichier muterait la PJ d'origine de
+            # l'enregistrement métier source (perte de données).
+            owned = doc.attachment_id and doc.attachment_id.res_model == 'oski.dms.document'
+            if owned:
                 doc.attachment_id.write({'datas': doc.file, 'name': fname})
             else:
                 doc.attachment_id = self.env['ir.attachment'].create({
@@ -139,6 +153,18 @@ class DmsDocument(models.Model):
             'view_mode': 'list,form',
             'domain': [('id', 'in', chain.ids)],
             'context': {'active_test': False},
+        }
+
+    def action_open_version_wizard(self):
+        """Ouvre le wizard de dépôt d'une nouvelle version (point d'entrée UI)."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': "Nouvelle version",
+            'res_model': 'oski.dms.version.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_document_id': self.id},
         }
 
     def action_open_linked_record(self):

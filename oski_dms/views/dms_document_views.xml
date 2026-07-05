@@ -28,6 +28,8 @@
                     <button name="action_open_linked_record" type="object"
                             string="Ouvrir l'enregistrement lié"
                             invisible="not res_id"/>
+                    <button name="action_open_version_wizard" type="object"
+                            string="Nouvelle version"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">

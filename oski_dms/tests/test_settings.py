@@ -16,6 +16,12 @@ class TestSettings(DmsCommon):
                 'file': base64.b64encode(big), 'file_name': 'big.bin',
             })
 
+    def test_default_workspace_applied(self):
+        self.env['ir.config_parameter'].sudo().set_param(
+            'oski_dms.default_workspace_id', str(self.ws_root.id))
+        default = self.env['oski.dms.document'].default_get(['workspace_id'])
+        self.assertEqual(default['workspace_id'], self.ws_root.id)
+
     def test_under_limit_ok(self):
         self.env['ir.config_parameter'].sudo().set_param('oski_dms.max_upload_mb', '5')
         small = b'0' * 1024

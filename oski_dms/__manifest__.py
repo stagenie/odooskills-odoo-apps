@@ -19,6 +19,7 @@
         'views/dms_tag_views.xml',
         'views/dms_document_views.xml',
         'views/dms_file_wizard_views.xml',
+        'views/dms_version_wizard_views.xml',
         'views/res_config_settings_views.xml',
         'views/dms_menus.xml',
         'data/dms_data.xml',

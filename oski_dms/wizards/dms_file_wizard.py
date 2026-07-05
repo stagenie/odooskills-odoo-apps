@@ -8,7 +8,8 @@ class DmsFileWizard(models.TransientModel):
     attachment_id = fields.Many2one(
         'ir.attachment', string="Pièce jointe", required=True)
     workspace_id = fields.Many2one(
-        'oski.dms.workspace', string="Espace", required=True)
+        'oski.dms.workspace', string="Espace", required=True,
+        default=lambda self: self.env['oski.dms.document']._default_workspace())
     tag_ids = fields.Many2many('oski.dms.tag', string="Étiquettes")
 
     def action_file(self):

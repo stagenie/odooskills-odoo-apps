@@ -6,3 +6,4 @@ access_dms_document_manager,dms.document.manager,model_oski_dms_document,group_d
 access_dms_tag_user,dms.tag.user,model_oski_dms_tag,group_dms_user,1,0,0,0
 access_dms_tag_manager,dms.tag.manager,model_oski_dms_tag,group_dms_manager,1,1,1,1
 access_dms_file_wizard_user,dms.file.wizard.user,model_oski_dms_file_wizard,group_dms_user,1,1,1,1
+access_dms_version_wizard_user,dms.version.wizard.user,model_oski_dms_version_wizard,group_dms_user,1,1,1,1
