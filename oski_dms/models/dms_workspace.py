@@ -9,7 +9,7 @@ class DmsWorkspace(models.Model):
     _parent_name = 'parent_id'
     _order = 'complete_name'
 
-    name = fields.Char(required=True, tracking=True)
+    name = fields.Char(string="Nom", required=True, tracking=True)
     parent_id = fields.Many2one(
         'oski.dms.workspace', string="Espace parent",
         ondelete='cascade', index=True)

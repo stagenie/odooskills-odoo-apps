@@ -8,7 +8,7 @@ class DmsDocument(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'create_date desc'
 
-    name = fields.Char(required=True, tracking=True)
+    name = fields.Char(string="Nom", required=True, tracking=True)
     workspace_id = fields.Many2one(
         'oski.dms.workspace', string="Espace", required=True,
         ondelete='restrict', tracking=True,
@@ -29,8 +29,10 @@ class DmsDocument(models.Model):
     owner_id = fields.Many2one(
         'res.users', string="Propriétaire", default=lambda s: s.env.user)
 
-    mimetype = fields.Char(related='attachment_id.mimetype', store=True)
-    file_size = fields.Integer(related='attachment_id.file_size', store=True)
+    mimetype = fields.Char(
+        related='attachment_id.mimetype', store=True, string="Type de fichier")
+    file_size = fields.Integer(
+        related='attachment_id.file_size', store=True, string="Taille (octets)")
 
     version_no = fields.Integer(string="Version", default=1, copy=False)
     previous_version_id = fields.Many2one(
