@@ -70,6 +70,69 @@ class DmsDocument(models.Model):
                     name = False
             doc.res_name = name
 
+    version_ids = fields.One2many(
+        'oski.dms.document', 'previous_version_id', string="Versions suivantes")
+
+    def action_new_version(self, datas, file_name=None):
+        """Crée une nouvelle version courante ; archive la version actuelle.
+
+        `attachment_id`/`version_no`/`previous_version_id` sont `copy=False` :
+        la nouvelle version reconstruit son propre `ir.attachment` via
+        `file`/`file_name` (inverse `_inverse_file`) plutôt que de partager
+        celui de l'ancienne version.
+        """
+        self.ensure_one()
+        new = self.copy({
+            'version_no': self.version_no + 1,
+            'previous_version_id': self.id,
+            'active': True,
+            'name': self.name,
+            'file': datas,
+            'file_name': file_name or self.file_name,
+            'tag_ids': [(6, 0, self.tag_ids.ids)],
+            'res_model': self.res_model,
+            'res_id': self.res_id,
+        })
+        self.active = False
+        return new
+
+    def _version_chain(self):
+        """Retourne tous les documents de la chaîne de versions (actifs ou non)."""
+        self.ensure_one()
+        root = self
+        while root.previous_version_id:
+            root = root.previous_version_id
+        chain = root
+        cursor = root
+        nxt = self.with_context(active_test=False).search(
+            [('previous_version_id', '=', cursor.id)], limit=1)
+        while nxt:
+            chain |= nxt
+            cursor = nxt
+            nxt = self.with_context(active_test=False).search(
+                [('previous_version_id', '=', cursor.id)], limit=1)
+        return chain
+
+    def action_restore_version(self):
+        """Ré-active cette version comme courante ; archive le reste de la chaîne."""
+        self.ensure_one()
+        chain = self._version_chain()
+        (chain - self).write({'active': False})
+        self.active = True
+        return self
+
+    def action_view_versions(self):
+        self.ensure_one()
+        chain = self._version_chain()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': "Versions",
+            'res_model': 'oski.dms.document',
+            'view_mode': 'list,form',
+            'domain': [('id', 'in', chain.ids)],
+            'context': {'active_test': False},
+        }
+
     def unlink(self):
         attachments = self.attachment_id
         res = super().unlink()

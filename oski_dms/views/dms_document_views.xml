@@ -21,7 +21,19 @@
         <field name="model">oski.dms.document</field>
         <field name="arch" type="xml">
             <form string="Document">
+                <header>
+                    <button name="action_restore_version" type="object"
+                            string="Restaurer cette version"
+                            invisible="active" class="btn-primary"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_view_versions"
+                                class="oe_stat_button" icon="fa-history"
+                                invisible="version_no == 1 and not version_ids">
+                            <field name="version_no" widget="statinfo" string="Version"/>
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="name"/>
