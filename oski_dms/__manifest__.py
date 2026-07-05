@@ -27,6 +27,7 @@
     'demo': [
         'demo/dms_demo.xml',
     ],
+    'images': ['static/description/banner.png'],
     'installable': True,
     'application': True,
 }
