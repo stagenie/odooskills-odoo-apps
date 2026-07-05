@@ -90,7 +90,6 @@
         <field name="arch" type="xml">
             <search string="Documents">
                 <field name="name"/>
-                <field name="res_name" string="Enregistrement lié"/>
                 <field name="workspace_id"/>
                 <field name="tag_ids"/>
                 <field name="owner_id"/>
