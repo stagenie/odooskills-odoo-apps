@@ -11,6 +11,7 @@
     'data': [
         'security/dashboard_security.xml',
         'security/ir.model.access.csv',
+        'views/dashboard_views.xml',
         'views/menu.xml',
     ],
     'assets': {

@@ -1,1 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_dashboard_user,oski.dashboard.user,model_oski_dashboard,base.group_user,1,1,1,1
+access_oski_dashboard_widget_user,oski.dashboard.widget.user,model_oski_dashboard_widget,base.group_user,1,1,1,1
