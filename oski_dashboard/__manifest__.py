@@ -21,6 +21,10 @@
         'web.assets_tests': [
             'oski_dashboard/static/tests/tours/**/*',
         ],
+        'web.assets_unit_tests': [
+            'oski_dashboard/static/tests/**/*',
+            ('remove', 'oski_dashboard/static/tests/tours/**/*'),
+        ],
     },
     'installable': True,
     'application': True,

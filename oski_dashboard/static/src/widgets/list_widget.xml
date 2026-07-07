@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.ListWidget">
+    <table class="table table-sm mb-0">
+        <tbody>
+            <tr t-foreach="rows" t-as="row" t-key="row_index">
+                <td class="text-truncate" t-out="row.label"/>
+                <td class="text-end fw-bold" t-out="row.value"/>
+            </tr>
+        </tbody>
+    </table>
+</t>
+</templates>
