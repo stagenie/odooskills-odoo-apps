@@ -4,7 +4,7 @@
     <div class="o_oski_dashboard_action d-flex flex-column h-100">
         <div class="o_oski_toolbar d-flex align-items-center gap-2 p-2 border-bottom">
             <select class="form-select w-auto o_oski_dashboard_select"
-                    t-on-change="(ev) => this.selectDashboard(parseInt(ev.target.value))">
+                    t-on-change="onSelectChange">
                 <option t-foreach="state.dashboards" t-as="dashboard" t-key="dashboard.id"
                         t-att-value="dashboard.id"
                         t-att-selected="dashboard.id === state.currentId"

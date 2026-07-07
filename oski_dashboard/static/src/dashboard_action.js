@@ -32,6 +32,10 @@ export class DashboardAction extends Component {
         }
     }
 
+    onSelectChange(ev) {
+        return this.selectDashboard(parseInt(ev.target.value, 10));
+    }
+
     async selectDashboard(dashboardId) {
         this.state.currentId = dashboardId;
         this.state.globalFilters = [];
