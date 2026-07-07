@@ -3,7 +3,10 @@ import { dashboardWidgetRegistry } from "../core/widget_registry";
 
 export class ListWidget extends Component {
     static template = "oski_dashboard.ListWidget";
-    static props = { widget: Object, payload: Object };
+    static props = {
+        widget: Object, payload: Object,
+        onSegmentClick: { type: Function, optional: true },
+    };
 
     get rows() {
         const { labels, values } = this.props.payload;

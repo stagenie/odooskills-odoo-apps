@@ -92,24 +92,71 @@ class OskiDashboardWidget(models.Model):
             'widget_type': widget.widget_type,
             'options': options,
             'labels': [], 'values': [], 'raw_keys': [], 'total': 0, 'delta_pct': None,
+            'drill_depth': 0, 'drill_more': False, 'drill_field': False, 'drill_domain': [],
         }
         if not widget.model_id:
             return payload
         Model = self.env[widget.model_id.model]
         domain = safe_eval(widget.domain or '[]')
         domain += widget._extra_filters_domain(global_filters or [])
+        # Drill-down (hook générique, cf. _drill_groupby) : chaque étape du
+        # chemin ajoute une égalité au domaine — appliqué ici, en amont du
+        # calcul de fenêtre de période, pour que la comparaison N-1
+        # (compare_previous) hérite elle aussi du filtre de drill.
+        drill_path = drill_path or []
+        for step in drill_path:
+            field_name = step.get('field')
+            if field_name not in Model._fields:
+                continue
+            odoo_field = Model._fields[field_name]
+            value = step.get('value')
+            if odoo_field._description_searchable:
+                domain.append((field_name, '=', value))
+            else:
+                # Champ sans recherche SQL (ex. res.partner.company_type,
+                # champ interface pur compute-only sans search=) : le domaine
+                # ORM ne sait pas le convertir en SQL (ValueError "Cannot
+                # convert ... to SQL because it is not stored"), alors même
+                # qu'il est un group_by/niveau de drill valide (agrégation
+                # Python via _aggregate_non_stored). On résout donc les ids
+                # correspondants en Python sur le domaine accumulé jusqu'ici,
+                # puis on bascule sur ('id', 'in', ...) — composable avec les
+                # étapes de drill suivantes.
+                matched_ids = [r.id for r in Model.search(domain, limit=NON_STORED_MAX_RECORDS)
+                               if r[field_name] == value]
+                domain = [('id', 'in', matched_ids)]
+        payload['drill_depth'] = len(drill_path)
+        # Domaine exposé au front pour l'action liste native du dernier niveau
+        # (drill.js) : widget.domain + cross-filters + drill path, DÉJÀ
+        # résolu ci-dessus (id-in pour les champs non cherchables comme
+        # company_type) — reconstruire ce domaine côté client à partir des
+        # seules paires {field, value} du drill_path reproduirait le bug SQL
+        # ("Cannot convert ... to SQL because it is not stored"). Capturé
+        # avant l'ajout de la fenêtre de période (objets datetime Python, non
+        # sérialisables tels quels en JSON-RPC).
+        payload['drill_domain'] = domain
         start, stop, prev_start, prev_stop = widget._period_window()
         current_domain = list(domain)
         if start:
             current_domain += widget._period_domain(start, stop)
-        data = widget._aggregate(Model, current_domain)
+        widget_at_depth = widget.with_context(oski_drill_depth=len(drill_path))
+        data = widget_at_depth._aggregate(Model, current_domain)
         payload.update(data)
         if widget.compare_previous and prev_start:
-            prev = widget._aggregate(Model, domain + widget._period_domain(prev_start, prev_stop))
+            prev = widget_at_depth._aggregate(
+                Model, domain + widget._period_domain(prev_start, prev_stop))
             if prev['total']:
                 payload['delta_pct'] = round(
                     100.0 * (payload['total'] - prev['total']) / abs(prev['total']), 1)
         return payload
+
+    def _drill_groupby(self, depth):
+        """Retourne (champ de groupement du niveau `depth`, reste-t-il un
+        niveau après). FREE : pas de drill-down multi-niveaux — le niveau 0
+        délègue toujours à group_by_field_id, sans niveau supplémentaire.
+        Surchargé par oski_dashboard_pro (drill_level_ids)."""
+        self.ensure_one()
+        return None, False
 
     def _extra_filters_domain(self, global_filters):
         """Hook : le module pro ajoute le cross-filtering ici."""
@@ -189,18 +236,26 @@ class OskiDashboardWidget(models.Model):
         measure_stored = not measure_field or Model._fields[measure_field.name].store
         aggregate = ('__count' if not measure_field
                      else f'{measure_field.name}:{self.measure_agg}')
-        if not self.group_by_field_id:
+        # Champ de groupement effectif : le niveau de drill courant (si un
+        # module comme oski_dashboard_pro en fournit un) prime sur le
+        # group_by_field_id configuré sur le widget — sinon repli sur ce
+        # dernier (comportement inchangé sans drill-down).
+        drill_field, has_more = self._drill_groupby(self.env.context.get('oski_drill_depth', 0))
+        gb_field = drill_field or self.group_by_field_id
+        if not gb_field:
             if not measure_stored:
                 # Mesure calculée non stockée : _read_group ne sait pas la traduire
                 # en SQL, agrégation Python plafonnée (droits du user courant).
                 records = Model.search(domain, limit=NON_STORED_MAX_RECORDS)
                 values = [v or 0 for v in records.mapped(measure_field.name)]
-                return {'labels': [], 'values': [], 'total': self._python_aggregate(values)}
+                return {'labels': [], 'values': [], 'total': self._python_aggregate(values),
+                        'drill_more': has_more, 'drill_field': False}
             groups = Model._read_group(domain, [], [aggregate])
             total = groups[0][0] if groups else 0
-            return {'labels': [], 'values': [], 'total': total or 0}
+            return {'labels': [], 'values': [], 'total': total or 0,
+                    'drill_more': has_more, 'drill_field': False}
 
-        group_by_field = self.group_by_field_id.sudo()
+        group_by_field = gb_field.sudo()
         fname = group_by_field.name
         odoo_field = Model._fields[fname]
         if odoo_field.store and measure_stored:
@@ -225,7 +280,8 @@ class OskiDashboardWidget(models.Model):
             values = [p[1] for p in top]
             raw_keys = [p[2] for p in top]
         total = sum(v for v in values if isinstance(v, (int, float)))
-        return {'labels': labels, 'values': values, 'raw_keys': raw_keys, 'total': total}
+        return {'labels': labels, 'values': values, 'raw_keys': raw_keys, 'total': total,
+                'drill_more': has_more, 'drill_field': fname}
 
     def _raw_key(self, key):
         # Clé brute d'un groupe : id pour un recordset M2O (y compris vide →

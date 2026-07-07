@@ -37,4 +37,12 @@ export class WidgetShell extends Component {
             this.state.error = error.data?.message || String(error);
         }
     }
+
+    // Hook drill-down : no-op par défaut (FREE, pas de drill_level_ids).
+    // oski_dashboard_pro (drill.js) patche cette méthode pour descendre d'un
+    // niveau (drill_more) ou ouvrir la liste native au dernier niveau —
+    // transmis en prop optionnelle aux widgets enfants (cf. template) qui
+    // l'appellent en priorité sur le cross-filtering (Task 11) quand le
+    // payload indique un drill en cours.
+    onSegmentClick(index) {}
 }

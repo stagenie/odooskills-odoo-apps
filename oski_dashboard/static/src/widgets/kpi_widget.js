@@ -3,7 +3,10 @@ import { dashboardWidgetRegistry } from "../core/widget_registry";
 
 export class KpiWidget extends Component {
     static template = "oski_dashboard.KpiWidget";
-    static props = { widget: Object, payload: Object };
+    static props = {
+        widget: Object, payload: Object,
+        onSegmentClick: { type: Function, optional: true },
+    };
 
     get deltaClass() {
         const delta = this.props.payload.delta_pct;
