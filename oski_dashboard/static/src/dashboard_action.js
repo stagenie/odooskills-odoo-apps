@@ -26,7 +26,11 @@ export class DashboardAction extends Component {
         onWillStart(async () => {
             await this.loadDashboards();
         });
-        onWillUnmount(() => clearInterval(this.refreshTimer));
+        this.isDestroyed = false;
+        onWillUnmount(() => {
+            this.isDestroyed = true;
+            clearInterval(this.refreshTimer);
+        });
     }
 
     get current() {
@@ -66,6 +70,9 @@ export class DashboardAction extends Component {
 
     startAutoRefresh() {
         clearInterval(this.refreshTimer);
+        if (this.isDestroyed) {
+            return; // selectDashboard résolu après unmount : ne pas relancer de timer
+        }
         const seconds = this.current?.refresh_interval || 0;
         if (seconds > 0) {
             this.refreshTimer = setInterval(() => this.refreshWidgets(), seconds * 1000);
