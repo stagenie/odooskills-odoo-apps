@@ -29,6 +29,7 @@ class TestWidgetData(TransactionCase):
         data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
         self.assertEqual(data['total'], 3)
         self.assertEqual(data['widget_type'], 'kpi')
+        self.assertIsInstance(data['options'], dict)
 
     def test_kpi_sum(self):
         widget = self._make_widget(measure_field_id=self.field_color.id, measure_agg='sum')
@@ -46,6 +47,21 @@ class TestWidgetData(TransactionCase):
         widget = self._make_widget(widget_type='list', group_by_field_id=field_id.id, limit=2)
         data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
         self.assertEqual(len(data['labels']), 2)
+
+    def test_kpi_non_stored_measure(self):
+        """Mesure calculée non stockée (res.currency.rate) : agrégation Python."""
+        currency = self.env['res.currency'].sudo().create({
+            'name': 'XDS', 'symbol': 'X',
+            'rate_ids': [(0, 0, {'name': '2020-01-01', 'rate': 2.0})],
+        })
+        model_currency = self.env['ir.model']._get('res.currency')
+        field_rate = self.env['ir.model.fields']._get('res.currency', 'rate')
+        widget = self._make_widget(
+            model_id=model_currency.id,
+            domain=f"[('id', '=', {currency.id})]",
+            measure_field_id=field_rate.id, measure_agg='sum')
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
+        self.assertEqual(data['total'], 2.0)
 
     def test_record_rules_applied(self):
         """Argument marketing : un user restreint voit des chiffres restreints."""

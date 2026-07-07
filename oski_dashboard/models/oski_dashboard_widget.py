@@ -1,6 +1,13 @@
+import json
+
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.safe_eval import safe_eval
+
+# Plafond du repli Python : quand le group by (ou la mesure) porte sur un champ
+# non stocké, l'agrégation se fait en Python sur un search() — on borne le
+# nombre d'enregistrements chargés pour éviter un parcours illimité.
+NON_STORED_MAX_RECORDS = 5000
 
 
 class OskiDashboardWidget(models.Model):
@@ -68,10 +75,17 @@ class OskiDashboardWidget(models.Model):
     def get_widget_data(self, widget_id, global_filters=None, drill_path=None):
         widget = self.browse(widget_id)
         widget.check_access('read')
+        # Contrat de payload : options est un dict (le frontend ne parse pas de JSON).
+        try:
+            options = json.loads(widget.options or '{}')
+        except ValueError:
+            options = {}
+        if not isinstance(options, dict):
+            options = {}
         payload = {
             'name': widget.name,
             'widget_type': widget.widget_type,
-            'options': widget.options or '{}',
+            'options': options,
             'labels': [], 'values': [], 'total': 0, 'delta_pct': None,
         }
         if not widget.model_id:
@@ -94,9 +108,16 @@ class OskiDashboardWidget(models.Model):
         # n'est lisible que par group_erp_manager (cf. base/security/ir.model.access.csv),
         # ce qui n'a rien à voir avec les droits d'accès aux données métier ci-dessous.
         measure_field = self.measure_field_id.sudo()
+        measure_stored = not measure_field or Model._fields[measure_field.name].store
         aggregate = ('__count' if not measure_field
                      else f'{measure_field.name}:{self.measure_agg}')
         if not self.group_by_field_id:
+            if not measure_stored:
+                # Mesure calculée non stockée : _read_group ne sait pas la traduire
+                # en SQL, agrégation Python plafonnée (droits du user courant).
+                records = Model.search(domain, limit=NON_STORED_MAX_RECORDS)
+                values = [v or 0 for v in records.mapped(measure_field.name)]
+                return {'labels': [], 'values': [], 'total': self._python_aggregate(values)}
             groups = Model._read_group(domain, [], [aggregate])
             total = groups[0][0] if groups else 0
             return {'labels': [], 'values': [], 'total': total or 0}
@@ -104,7 +125,7 @@ class OskiDashboardWidget(models.Model):
         group_by_field = self.group_by_field_id.sudo()
         fname = group_by_field.name
         odoo_field = Model._fields[fname]
-        if odoo_field.store:
+        if odoo_field.store and measure_stored:
             groupby = fname
             if odoo_field.type in ('date', 'datetime'):
                 groupby = f'{groupby}:{self.group_by_granularity or "month"}'
@@ -126,7 +147,9 @@ class OskiDashboardWidget(models.Model):
         return {'labels': labels, 'values': values, 'total': total}
 
     def _aggregate_non_stored(self, Model, domain, group_field, measure_field):
-        records = Model.search(domain)
+        # Le group by porte sur un champ non stocké : agrégation en Python,
+        # search() plafonné pour ne pas charger un volume illimité en mémoire.
+        records = Model.search(domain, limit=NON_STORED_MAX_RECORDS)
         ids_by_key = {}
         order = []
         for record in records:
