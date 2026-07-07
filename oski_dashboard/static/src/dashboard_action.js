@@ -12,6 +12,10 @@ export class DashboardAction extends Component {
     setup() {
         this.orm = useService("orm");
         this.dialog = useService("dialog");
+        // Sérialise les écritures save_layout : sans file d'attente, deux
+        // drags rapprochés peuvent voir leurs RPC arriver dans le désordre
+        // et l'ancien layout écraser le nouveau côté serveur.
+        this._layoutSaveChain = Promise.resolve();
         useSubEnv({ dashboardBus: new EventBus() });
         this.state = useState({
             dashboards: [], currentId: null, widgets: [], layout: {},
@@ -58,10 +62,17 @@ export class DashboardAction extends Component {
         this.state.editMode = true;
     }
 
-    async onLayoutChange(widgetId, pos) {
+    onLayoutChange(widgetId, pos) {
         this.state.layout = { ...this.state.layout, [widgetId]: pos };
-        await this.orm.call("oski.dashboard", "save_layout",
-            [this.state.currentId, JSON.stringify(this.state.layout)]);
+        // Le layout est stringifié DANS le thunk mis en file : chaque écriture
+        // envoie l'état le plus frais et les RPC s'exécutent dans l'ordre.
+        // Le .catch garde la chaîne vivante après un RPC en échec (le service
+        // RPC d'Odoo affiche déjà le dialogue d'erreur).
+        this._layoutSaveChain = this._layoutSaveChain.then(() =>
+            this.orm.call("oski.dashboard", "save_layout",
+                [this.state.currentId, JSON.stringify(this.state.layout)])
+        ).catch(() => {});
+        return this._layoutSaveChain;
     }
 
     addWidget() {

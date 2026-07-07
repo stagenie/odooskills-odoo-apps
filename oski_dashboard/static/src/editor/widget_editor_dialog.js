@@ -2,7 +2,10 @@ import { Component, useState, onWillStart } from "@odoo/owl";
 import { Dialog } from "@web/core/dialog/dialog";
 import { useService } from "@web/core/utils/hooks";
 
-const WIDGET_TYPES = [
+// Exporté : le module pro étend la liste via import { WIDGET_TYPES } + push(...)
+// — this.WIDGET_TYPES référence CE tableau partagé, les entrées poussées
+// apparaissent donc dans le dropdown sans autre câblage.
+export const WIDGET_TYPES = [
     ["kpi", "KPI"], ["bar", "Barres"], ["line", "Lignes"], ["area", "Aires"],
     ["pie", "Camembert"], ["donut", "Donut"], ["list", "Liste"],
     ["gauge", "Jauge"], ["text", "Texte"],
