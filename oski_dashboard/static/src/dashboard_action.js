@@ -1,6 +1,7 @@
-import { Component, EventBus, useState, useSubEnv, onWillStart } from "@odoo/owl";
+import { Component, EventBus, useState, useSubEnv, onWillStart, onWillUnmount } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
+import { user } from "@web/core/user";
 import { DashboardGrid } from "./grid/dashboard_grid";
 import { WidgetEditorDialog } from "./editor/widget_editor_dialog";
 
@@ -25,15 +26,25 @@ export class DashboardAction extends Component {
         onWillStart(async () => {
             await this.loadDashboards();
         });
+        onWillUnmount(() => clearInterval(this.refreshTimer));
     }
 
     get current() {
         return this.state.dashboards.find((d) => d.id === this.state.currentId) || null;
     }
 
+    get isFavorite() {
+        return !!this.current && this.current.favorite_user_ids.includes(user.userId);
+    }
+
     async loadDashboards() {
         this.state.dashboards = await this.orm.searchRead(
-            "oski.dashboard", [], ["name", "layout_json", "refresh_interval", "user_id"]);
+            "oski.dashboard", [],
+            ["name", "layout_json", "refresh_interval", "user_id", "favorite_user_ids", "sequence"]);
+        const userId = user.userId;
+        this.state.dashboards.sort((a, b) =>
+            (b.favorite_user_ids.includes(userId) - a.favorite_user_ids.includes(userId)) ||
+            a.sequence - b.sequence || a.id - b.id);
         if (this.state.dashboards.length) {
             await this.selectDashboard(this.state.dashboards[0].id);
         }
@@ -50,6 +61,26 @@ export class DashboardAction extends Component {
         this.state.widgets = await this.orm.searchRead(
             "oski.dashboard.widget", [["dashboard_id", "=", dashboardId]],
             ["name", "widget_type", "model_id", "options"]);
+        this.startAutoRefresh();
+    }
+
+    startAutoRefresh() {
+        clearInterval(this.refreshTimer);
+        const seconds = this.current?.refresh_interval || 0;
+        if (seconds > 0) {
+            this.refreshTimer = setInterval(() => this.refreshWidgets(), seconds * 1000);
+        }
+    }
+
+    refreshWidgets() {
+        this.state.globalFilters = [...this.state.globalFilters]; // force re-fetch (props change)
+    }
+
+    async toggleFavorite() {
+        await this.orm.call("oski.dashboard", "write", [[this.state.currentId], {
+            favorite_user_ids: [[this.isFavorite ? 3 : 4, user.userId]],
+        }]);
+        await this.loadDashboards();
     }
 
     toggleEdit() {
