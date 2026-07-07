@@ -7,7 +7,7 @@
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
     'license': 'LGPL-3',
-    'depends': ['web'],
+    'depends': ['web', 'web_tour'],
     'data': [
         'security/dashboard_security.xml',
         'security/ir.model.access.csv',
@@ -17,6 +17,9 @@
     'assets': {
         'web.assets_backend': [
             'oski_dashboard/static/src/**/*',
+        ],
+        'web.assets_tests': [
+            'oski_dashboard/static/tests/tours/**/*',
         ],
     },
     'installable': True,

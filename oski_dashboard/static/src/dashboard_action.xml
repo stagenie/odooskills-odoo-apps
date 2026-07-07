@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.DashboardAction">
+    <div class="o_oski_dashboard_action d-flex flex-column h-100">
+        <div class="o_oski_toolbar d-flex align-items-center gap-2 p-2 border-bottom">
+            <select class="form-select w-auto o_oski_dashboard_select"
+                    t-on-change="(ev) => this.selectDashboard(parseInt(ev.target.value))">
+                <option t-foreach="state.dashboards" t-as="dashboard" t-key="dashboard.id"
+                        t-att-value="dashboard.id"
+                        t-att-selected="dashboard.id === state.currentId"
+                        t-out="dashboard.name"/>
+            </select>
+            <button class="btn btn-secondary o_oski_new_dashboard" t-on-click="createDashboard">
+                Nouveau
+            </button>
+            <div class="flex-grow-1"/>
+            <button class="btn o_oski_toggle_edit" t-if="current"
+                    t-att-class="state.editMode ? 'btn-primary' : 'btn-outline-primary'"
+                    t-on-click="toggleEdit">
+                <i class="fa fa-pencil me-1"/>Éditer
+            </button>
+        </div>
+        <div class="flex-grow-1 overflow-auto p-2">
+            <div t-if="!state.dashboards.length" class="o_oski_empty text-center text-muted mt-5">
+                <p>Aucun tableau de bord.</p>
+                <button class="btn btn-primary" t-on-click="createDashboard">Créer le premier</button>
+            </div>
+            <DashboardGrid t-if="current" dashboard="current" widgets="state.widgets"
+                           layout="state.layout" editMode="state.editMode"
+                           globalFilters="state.globalFilters"/>
+        </div>
+    </div>
+</t>
+</templates>
