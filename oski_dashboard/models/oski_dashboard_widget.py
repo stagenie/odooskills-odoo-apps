@@ -34,6 +34,7 @@ class OskiDashboardWidget(models.Model):
     group_by_field_id = fields.Many2one(
         'ir.model.fields', string='Grouper par',
         domain="[('model_id', '=', model_id), ('store', '=', True)]")
+    group_by_field_name = fields.Char(related='group_by_field_id.name')
     group_by_granularity = fields.Selection(
         selection=[('day', 'Jour'), ('week', 'Semaine'), ('month', 'Mois'),
                    ('quarter', 'Trimestre'), ('year', 'Année')], default='month')
@@ -90,7 +91,7 @@ class OskiDashboardWidget(models.Model):
             'name': widget.name,
             'widget_type': widget.widget_type,
             'options': options,
-            'labels': [], 'values': [], 'total': 0, 'delta_pct': None,
+            'labels': [], 'values': [], 'raw_keys': [], 'total': 0, 'delta_pct': None,
         }
         if not widget.model_id:
             return payload
@@ -207,7 +208,8 @@ class OskiDashboardWidget(models.Model):
             if odoo_field.type in ('date', 'datetime'):
                 groupby = f'{groupby}:{self.group_by_granularity or "month"}'
             groups = Model._read_group(domain, [groupby], [aggregate])
-            pairs = [(self._format_group_label(key), value or 0) for key, value in groups]
+            pairs = [(self._format_group_label(key), value or 0, self._raw_key(key))
+                     for key, value in groups]
         else:
             # Champs calculés non stockés (ex. res.partner.company_type) : _read_group
             # ne sait pas les traduire en SQL, on agrège donc en Python. search()
@@ -216,12 +218,22 @@ class OskiDashboardWidget(models.Model):
 
         labels = [p[0] for p in pairs]
         values = [p[1] for p in pairs]
+        raw_keys = [p[2] for p in pairs]
         if self.limit:
-            top = sorted(zip(labels, values), key=lambda p: p[1], reverse=True)[:self.limit]
+            top = sorted(zip(labels, values, raw_keys), key=lambda p: p[1], reverse=True)[:self.limit]
             labels = [p[0] for p in top]
             values = [p[1] for p in top]
+            raw_keys = [p[2] for p in top]
         total = sum(v for v in values if isinstance(v, (int, float)))
-        return {'labels': labels, 'values': values, 'total': total}
+        return {'labels': labels, 'values': values, 'raw_keys': raw_keys, 'total': total}
+
+    def _raw_key(self, key):
+        # Clé brute d'un groupe : id pour un recordset M2O (y compris vide →
+        # False, cohérent avec _format_group_label), valeur telle quelle sinon
+        # (selection/bool/int/label de granularité date...).
+        if isinstance(key, models.BaseModel):
+            return key.id
+        return key
 
     def _aggregate_non_stored(self, Model, domain, group_field, measure_field):
         # Le group by porte sur un champ non stocké : agrégation en Python,
@@ -247,7 +259,7 @@ class OskiDashboardWidget(models.Model):
                 values = [v or 0 for v in group_records.mapped(measure_field.name)]
                 value = self._python_aggregate(values)
             label = selection_map.get(key) or self._format_group_label(key)
-            pairs.append((label, value))
+            pairs.append((label, value, self._raw_key(key)))
         return pairs
 
     def _python_aggregate(self, values):

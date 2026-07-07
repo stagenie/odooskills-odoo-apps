@@ -33,6 +33,19 @@
                 <i class="fa fa-pencil me-1"/>Éditer
             </button>
         </div>
+        <div class="o_oski_filters_bar d-flex align-items-center flex-wrap gap-2 p-2 border-bottom"
+             t-if="state.globalFilters.length">
+            <span t-foreach="state.globalFilters" t-as="gf" t-key="gf_index"
+                  class="badge text-bg-info o_oski_filter_chip">
+                <t t-out="gf.label"/>
+                <!-- `this.` explicite requis : l'appel nu "removeFilter(...)" dans un
+                     arrow inline t-on-click perd le contexte du composant sur ce module
+                     (TypeError "Cannot read properties of undefined (reading 'state')"),
+                     vérifié par tour manuel Task 11 — cf. task-11-report.md. -->
+                <i class="fa fa-times ms-1" role="button"
+                   t-on-click="() => this.removeFilter(gf_index)"/>
+            </span>
+        </div>
         <div class="flex-grow-1 overflow-auto p-2">
             <div t-if="!state.dashboards.length" class="o_oski_empty text-center text-muted mt-5">
                 <p>Aucun tableau de bord.</p>

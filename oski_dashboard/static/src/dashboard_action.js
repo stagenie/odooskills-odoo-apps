@@ -5,6 +5,12 @@ import { user } from "@web/core/user";
 import { DashboardGrid } from "./grid/dashboard_grid";
 import { WidgetEditorDialog } from "./editor/widget_editor_dialog";
 
+// Champs lus par selectDashboard() sur oski.dashboard.widget. Exporté : le
+// module pro pousse filter_emit/filter_listen dans CE tableau partagé — même
+// pattern que WIDGET_TYPES (widget_editor_dialog.js).
+export const WIDGET_FIELDS = ["name", "widget_type", "model_id", "model_name",
+    "group_by_field_id", "group_by_field_name", "options"];
+
 export class DashboardAction extends Component {
     static template = "oski_dashboard.DashboardAction";
     static components = { DashboardGrid };
@@ -23,6 +29,10 @@ export class DashboardAction extends Component {
             dashboards: [], currentId: null, widgets: [], layout: {},
             editMode: false, globalFilters: [],
         });
+        // Écouteur cross-filtering : inerte tant que rien n'émet FILTER-ADD
+        // (module pro absent) — le bus existe toujours (useSubEnv ci-dessus).
+        this._onFilterAdd = (ev) => this.addFilter(ev.detail);
+        this.env.dashboardBus.addEventListener("FILTER-ADD", this._onFilterAdd);
         onWillStart(async () => {
             await this.loadDashboards();
         });
@@ -30,6 +40,7 @@ export class DashboardAction extends Component {
         onWillUnmount(() => {
             this.isDestroyed = true;
             clearInterval(this.refreshTimer);
+            this.env.dashboardBus.removeEventListener("FILTER-ADD", this._onFilterAdd);
         });
     }
 
@@ -64,8 +75,18 @@ export class DashboardAction extends Component {
         this.state.layout = JSON.parse(this.current.layout_json || "{}");
         this.state.widgets = await this.orm.searchRead(
             "oski.dashboard.widget", [["dashboard_id", "=", dashboardId]],
-            ["name", "widget_type", "model_id", "options"]);
+            WIDGET_FIELDS);
         this.startAutoRefresh();
+    }
+
+    addFilter(gf) {
+        if (!this.state.globalFilters.some((f) => f.field === gf.field && f.value === gf.value)) {
+            this.state.globalFilters = [...this.state.globalFilters, gf];
+        }
+    }
+
+    removeFilter(index) {
+        this.state.globalFilters = this.state.globalFilters.filter((_f, i) => i !== index);
     }
 
     startAutoRefresh() {

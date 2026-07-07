@@ -9,6 +9,10 @@ export class ListWidget extends Component {
         const { labels, values } = this.props.payload;
         return labels.map((label, index) => ({ label, value: values[index] }));
     }
+
+    // No-op par défaut (FREE) : le module pro patche cette méthode pour émettre
+    // un filtre cross-widget au clic sur une ligne (cross_filter.js).
+    onRowClick(index) {}
 }
 
 dashboardWidgetRegistry.add("list", { component: ListWidget });
