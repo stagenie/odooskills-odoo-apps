@@ -80,7 +80,12 @@ export class DashboardAction extends Component {
     }
 
     addFilter(gf) {
-        if (!this.state.globalFilters.some((f) => f.field === gf.field && f.value === gf.value)) {
+        // Dédup par (model, field, value) : deux widgets de modèles différents
+        // groupés par un champ homonyme (ex. sale.state / purchase.state)
+        // doivent pouvoir coexister comme filtres distincts.
+        const exists = this.state.globalFilters.some(
+            (f) => f.model === gf.model && f.field === gf.field && f.value === gf.value);
+        if (!exists) {
             this.state.globalFilters = [...this.state.globalFilters, gf];
         }
     }
