@@ -28,6 +28,13 @@ export class DashboardAction extends Component {
         this.state = useState({
             dashboards: [], currentId: null, widgets: [], layout: {},
             editMode: false, globalFilters: [],
+            // Estampille de (re)chargement du dashboard : incrémentée par
+            // selectDashboard() uniquement (PAS par refreshWidgets). Les
+            // WidgetShell étant réutilisés par OWL (t-key = widget.id), c'est
+            // le signal qui permet aux extensions (drill-down pro) d'invalider
+            // leur état client (ex. drillPath) quand le dashboard est
+            // rechargé/changé — comme globalFilters est déjà remis à zéro.
+            reloadStamp: 0,
         });
         // Écouteur cross-filtering : inerte tant que rien n'émet FILTER-ADD
         // (module pro absent) — le bus existe toujours (useSubEnv ci-dessus).
@@ -72,6 +79,7 @@ export class DashboardAction extends Component {
     async selectDashboard(dashboardId) {
         this.state.currentId = dashboardId;
         this.state.globalFilters = [];
+        this.state.reloadStamp++;
         this.state.layout = JSON.parse(this.current.layout_json || "{}");
         this.state.widgets = await this.orm.searchRead(
             "oski.dashboard.widget", [["dashboard_id", "=", dashboardId]],

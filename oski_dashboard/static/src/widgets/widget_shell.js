@@ -9,6 +9,7 @@ export class WidgetShell extends Component {
         dashboard: Object,
         editMode: { type: Boolean, optional: true },
         globalFilters: { type: Array, optional: true },
+        reloadStamp: { type: Number, optional: true },
         onEdit: { type: Function, optional: true },
         onRemove: { type: Function, optional: true },
     };

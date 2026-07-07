@@ -7,6 +7,7 @@
              t-att-data-widget-id="widget.id">
             <WidgetShell widget="widget" dashboard="props.dashboard"
                          editMode="props.editMode" globalFilters="props.globalFilters"
+                         reloadStamp="props.reloadStamp"
                          onEdit="props.onEdit" onRemove="props.onRemove"/>
             <div t-if="props.editMode" class="o_oski_resize_handle"/>
         </div>

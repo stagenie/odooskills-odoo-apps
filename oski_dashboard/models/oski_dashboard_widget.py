@@ -103,11 +103,17 @@ class OskiDashboardWidget(models.Model):
         # chemin ajoute une égalité au domaine — appliqué ici, en amont du
         # calcul de fenêtre de période, pour que la comparaison N-1
         # (compare_previous) hérite elle aussi du filtre de drill.
+        # drill_depth ne compte que les étapes réellement appliquées (champ
+        # existant sur le modèle) : le RPC est public, un chemin forgé avec
+        # des champs inconnus ne doit pas gonfler artificiellement la
+        # profondeur (ni décaler le niveau demandé à _drill_groupby).
         drill_path = drill_path or []
+        applied_depth = 0
         for step in drill_path:
             field_name = step.get('field')
             if field_name not in Model._fields:
                 continue
+            applied_depth += 1
             odoo_field = Model._fields[field_name]
             value = step.get('value')
             if odoo_field._description_searchable:
@@ -125,7 +131,7 @@ class OskiDashboardWidget(models.Model):
                 matched_ids = [r.id for r in Model.search(domain, limit=NON_STORED_MAX_RECORDS)
                                if r[field_name] == value]
                 domain = [('id', 'in', matched_ids)]
-        payload['drill_depth'] = len(drill_path)
+        payload['drill_depth'] = applied_depth
         # Domaine exposé au front pour l'action liste native du dernier niveau
         # (drill.js) : widget.domain + cross-filters + drill path, DÉJÀ
         # résolu ci-dessus (id-in pour les champs non cherchables comme
@@ -139,7 +145,7 @@ class OskiDashboardWidget(models.Model):
         current_domain = list(domain)
         if start:
             current_domain += widget._period_domain(start, stop)
-        widget_at_depth = widget.with_context(oski_drill_depth=len(drill_path))
+        widget_at_depth = widget.with_context(oski_drill_depth=applied_depth)
         data = widget_at_depth._aggregate(Model, current_domain)
         payload.update(data)
         if widget.compare_previous and prev_start:

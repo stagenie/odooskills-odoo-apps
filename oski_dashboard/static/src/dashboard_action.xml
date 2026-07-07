@@ -54,6 +54,7 @@
             <DashboardGrid t-if="current" dashboard="current" widgets="state.widgets"
                            layout="state.layout" editMode="state.editMode"
                            globalFilters="state.globalFilters"
+                           reloadStamp="state.reloadStamp"
                            onEdit="editWidget.bind(this)" onRemove="removeWidget.bind(this)"
                            onLayoutChange="onLayoutChange.bind(this)"/>
         </div>
