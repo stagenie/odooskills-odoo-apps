@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, time, timedelta
 
+import pytz
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
@@ -120,6 +121,10 @@ class OskiDashboardWidget(models.Model):
             return None, None, None, None
         today = fields.Date.context_today(self)
         start_of_day = datetime.combine(today, time.min)
+        # Période N-1 : décalage calendaire pour les unités calendaires
+        # (mois/trimestre/année, longueurs inégales), décalage de longueur
+        # fixe pour les fenêtres glissantes et jour/semaine (déjà exacts).
+        prev_delta = None
         if self.period == 'today':
             start = start_of_day
             stop = start + timedelta(days=1)
@@ -129,13 +134,16 @@ class OskiDashboardWidget(models.Model):
         elif self.period == 'this_month':
             start = start_of_day.replace(day=1)
             stop = start + relativedelta(months=1)
+            prev_delta = relativedelta(months=1)
         elif self.period == 'this_quarter':
             quarter_month = 3 * ((today.month - 1) // 3) + 1
             start = start_of_day.replace(month=quarter_month, day=1)
             stop = start + relativedelta(months=3)
+            prev_delta = relativedelta(months=3)
         elif self.period == 'this_year':
             start = start_of_day.replace(month=1, day=1)
             stop = start + relativedelta(years=1)
+            prev_delta = relativedelta(years=1)
         elif self.period == 'last_7d':
             stop = start_of_day + timedelta(days=1)
             start = stop - timedelta(days=7)
@@ -148,8 +156,9 @@ class OskiDashboardWidget(models.Model):
         else:  # last_12m
             stop = start_of_day + timedelta(days=1)
             start = stop - relativedelta(months=12)
-        length = stop - start
-        return start, stop, start - length, start
+        if prev_delta is None:
+            prev_delta = stop - start
+        return start, stop, start - prev_delta, start
 
     def _period_domain(self, start, stop):
         self.ensure_one()
@@ -160,7 +169,14 @@ class OskiDashboardWidget(models.Model):
         date_field = self.date_field_id.sudo()
         field_name = date_field.name
         if date_field.ttype == 'date':
+            # Champ date : dates calendaires locales, pas de conversion.
             start, stop = start.date(), stop.date()
+        else:
+            # Champ datetime : stockage en UTC naïf — les bornes calculées à
+            # minuit LOCAL (context_today) doivent être converties tz user → UTC.
+            tz = pytz.timezone(self.env.user.tz or 'UTC')
+            start = tz.localize(start).astimezone(pytz.utc).replace(tzinfo=None)
+            stop = tz.localize(stop).astimezone(pytz.utc).replace(tzinfo=None)
         return [(field_name, '>=', start), (field_name, '<', stop)]
 
     def _aggregate(self, Model, domain):

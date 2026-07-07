@@ -100,3 +100,33 @@ class TestWidgetData(TransactionCase):
         data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
         self.assertEqual(data['total'], 3)
         self.assertEqual(data['delta_pct'], 200.0)  # 3 vs 1
+
+    def test_previous_window_calendar_aligned(self):
+        """Période N-1 calendaire pour mois/trimestre (pas de dérive 31 vs 30/28 jours)."""
+        from dateutil.relativedelta import relativedelta
+        field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
+        widget = self._make_widget(date_field_id=field_date.id, period='this_month')
+        start, stop, prev_start, prev_stop = widget._period_window()
+        self.assertEqual(prev_start, start - relativedelta(months=1))
+        self.assertEqual(prev_stop, start)
+        widget_q = self._make_widget(date_field_id=field_date.id, period='this_quarter')
+        start, stop, prev_start, prev_stop = widget_q._period_window()
+        self.assertEqual(prev_start, start - relativedelta(months=3))
+        self.assertEqual(prev_stop, start)
+
+    def test_period_domain_datetime_utc(self):
+        """Bornes datetime converties tz user -> UTC naïf (stockage Odoo)."""
+        import pytz
+        self.user.sudo().write({'tz': 'America/New_York'})
+        field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
+        widget = self._make_widget(date_field_id=field_date.id, period='today')
+        widget_as_user = widget.with_user(self.user)
+        start, stop, _, _ = widget_as_user._period_window()
+        domain = widget_as_user._period_domain(start, stop)
+        tz = pytz.timezone('America/New_York')
+        expected_start = tz.localize(start).astimezone(pytz.utc).replace(tzinfo=None)
+        expected_stop = tz.localize(stop).astimezone(pytz.utc).replace(tzinfo=None)
+        self.assertEqual(domain, [
+            ('create_date', '>=', expected_start),
+            ('create_date', '<', expected_stop),
+        ])
