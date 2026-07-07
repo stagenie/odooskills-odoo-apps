@@ -63,3 +63,107 @@ class OskiDashboardWidget(models.Model):
             except Exception:
                 raise ValidationError(
                     self.env._("Filtre invalide pour le modèle %s.", widget.model_id.model))
+
+    @api.model
+    def get_widget_data(self, widget_id, global_filters=None, drill_path=None):
+        widget = self.browse(widget_id)
+        widget.check_access('read')
+        payload = {
+            'name': widget.name,
+            'widget_type': widget.widget_type,
+            'options': widget.options or '{}',
+            'labels': [], 'values': [], 'total': 0, 'delta_pct': None,
+        }
+        if not widget.model_id:
+            return payload
+        Model = self.env[widget.model_id.model]
+        domain = safe_eval(widget.domain or '[]')
+        domain += widget._extra_filters_domain(global_filters or [])
+        data = widget._aggregate(Model, domain)
+        payload.update(data)
+        return payload
+
+    def _extra_filters_domain(self, global_filters):
+        """Hook : le module pro ajoute le cross-filtering ici."""
+        self.ensure_one()
+        return []
+
+    def _aggregate(self, Model, domain):
+        self.ensure_one()
+        # Lecture des métadonnées (nom/type du champ) en sudo : ir.model.fields
+        # n'est lisible que par group_erp_manager (cf. base/security/ir.model.access.csv),
+        # ce qui n'a rien à voir avec les droits d'accès aux données métier ci-dessous.
+        measure_field = self.measure_field_id.sudo()
+        aggregate = ('__count' if not measure_field
+                     else f'{measure_field.name}:{self.measure_agg}')
+        if not self.group_by_field_id:
+            groups = Model._read_group(domain, [], [aggregate])
+            total = groups[0][0] if groups else 0
+            return {'labels': [], 'values': [], 'total': total or 0}
+
+        group_by_field = self.group_by_field_id.sudo()
+        fname = group_by_field.name
+        odoo_field = Model._fields[fname]
+        if odoo_field.store:
+            groupby = fname
+            if odoo_field.type in ('date', 'datetime'):
+                groupby = f'{groupby}:{self.group_by_granularity or "month"}'
+            groups = Model._read_group(domain, [groupby], [aggregate])
+            pairs = [(self._format_group_label(key), value or 0) for key, value in groups]
+        else:
+            # Champs calculés non stockés (ex. res.partner.company_type) : _read_group
+            # ne sait pas les traduire en SQL, on agrège donc en Python. search()
+            # applique déjà les règles d'accès de l'utilisateur courant (pas de sudo).
+            pairs = self._aggregate_non_stored(Model, domain, odoo_field, measure_field)
+
+        labels = [p[0] for p in pairs]
+        values = [p[1] for p in pairs]
+        if self.limit:
+            top = sorted(zip(labels, values), key=lambda p: p[1], reverse=True)[:self.limit]
+            labels = [p[0] for p in top]
+            values = [p[1] for p in top]
+        total = sum(v for v in values if isinstance(v, (int, float)))
+        return {'labels': labels, 'values': values, 'total': total}
+
+    def _aggregate_non_stored(self, Model, domain, group_field, measure_field):
+        records = Model.search(domain)
+        ids_by_key = {}
+        order = []
+        for record in records:
+            key = record[group_field.name]
+            if key not in ids_by_key:
+                ids_by_key[key] = []
+                order.append(key)
+            ids_by_key[key].append(record.id)
+        selection_map = {}
+        if group_field.type == 'selection' and isinstance(group_field.selection, list):
+            selection_map = dict(group_field.selection)
+        pairs = []
+        for key in order:
+            group_records = Model.browse(ids_by_key[key])
+            if not measure_field:
+                value = len(group_records)
+            else:
+                values = [v or 0 for v in group_records.mapped(measure_field.name)]
+                value = self._python_aggregate(values)
+            label = selection_map.get(key) or self._format_group_label(key)
+            pairs.append((label, value))
+        return pairs
+
+    def _python_aggregate(self, values):
+        if not values:
+            return 0
+        if self.measure_agg == 'avg':
+            return sum(values) / len(values)
+        if self.measure_agg == 'min':
+            return min(values)
+        if self.measure_agg == 'max':
+            return max(values)
+        return sum(values)
+
+    def _format_group_label(self, key):
+        if key is None or key is False:
+            return self.env._("Indéfini")
+        if isinstance(key, models.BaseModel):
+            return key.display_name or self.env._("Indéfini")
+        return str(key)
