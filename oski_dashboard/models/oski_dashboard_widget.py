@@ -1,4 +1,7 @@
 import json
+from datetime import datetime, time, timedelta
+
+from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
@@ -93,14 +96,72 @@ class OskiDashboardWidget(models.Model):
         Model = self.env[widget.model_id.model]
         domain = safe_eval(widget.domain or '[]')
         domain += widget._extra_filters_domain(global_filters or [])
-        data = widget._aggregate(Model, domain)
+        start, stop, prev_start, prev_stop = widget._period_window()
+        current_domain = list(domain)
+        if start:
+            current_domain += widget._period_domain(start, stop)
+        data = widget._aggregate(Model, current_domain)
         payload.update(data)
+        if widget.compare_previous and prev_start:
+            prev = widget._aggregate(Model, domain + widget._period_domain(prev_start, prev_stop))
+            if prev['total']:
+                payload['delta_pct'] = round(
+                    100.0 * (payload['total'] - prev['total']) / abs(prev['total']), 1)
         return payload
 
     def _extra_filters_domain(self, global_filters):
         """Hook : le module pro ajoute le cross-filtering ici."""
         self.ensure_one()
         return []
+
+    def _period_window(self):
+        self.ensure_one()
+        if not self.date_field_id or not self.period or self.period == 'all':
+            return None, None, None, None
+        today = fields.Date.context_today(self)
+        start_of_day = datetime.combine(today, time.min)
+        if self.period == 'today':
+            start = start_of_day
+            stop = start + timedelta(days=1)
+        elif self.period == 'this_week':
+            start = start_of_day - timedelta(days=today.weekday())
+            stop = start + timedelta(weeks=1)
+        elif self.period == 'this_month':
+            start = start_of_day.replace(day=1)
+            stop = start + relativedelta(months=1)
+        elif self.period == 'this_quarter':
+            quarter_month = 3 * ((today.month - 1) // 3) + 1
+            start = start_of_day.replace(month=quarter_month, day=1)
+            stop = start + relativedelta(months=3)
+        elif self.period == 'this_year':
+            start = start_of_day.replace(month=1, day=1)
+            stop = start + relativedelta(years=1)
+        elif self.period == 'last_7d':
+            stop = start_of_day + timedelta(days=1)
+            start = stop - timedelta(days=7)
+        elif self.period == 'last_30d':
+            stop = start_of_day + timedelta(days=1)
+            start = stop - timedelta(days=30)
+        elif self.period == 'last_90d':
+            stop = start_of_day + timedelta(days=1)
+            start = stop - timedelta(days=90)
+        else:  # last_12m
+            stop = start_of_day + timedelta(days=1)
+            start = stop - relativedelta(months=12)
+        length = stop - start
+        return start, stop, start - length, start
+
+    def _period_domain(self, start, stop):
+        self.ensure_one()
+        # Lecture de métadonnées (nom/type du champ de date) en sudo, comme
+        # measure_field_id/group_by_field_id dans _aggregate : ir.model.fields
+        # n'est lisible que par group_erp_manager, sans lien avec les droits
+        # d'accès aux données métier ci-dessus.
+        date_field = self.date_field_id.sudo()
+        field_name = date_field.name
+        if date_field.ttype == 'date':
+            start, stop = start.date(), stop.date()
+        return [(field_name, '>=', start), (field_name, '<', stop)]
 
     def _aggregate(self, Model, domain):
         self.ensure_one()

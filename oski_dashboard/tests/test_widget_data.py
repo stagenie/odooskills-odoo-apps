@@ -74,3 +74,29 @@ class TestWidgetData(TransactionCase):
         widget = self._make_widget()
         data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
         self.assertEqual(data['total'], 2)
+
+    def test_period_this_month(self):
+        field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
+        old = self.env['res.partner'].sudo().create(
+            {'name': 'Old', 'category_id': [(4, self.tag.id)]})
+        self.env.cr.execute(
+            "UPDATE res_partner SET create_date = create_date - interval '70 days' WHERE id = %s",
+            [old.id])
+        old.invalidate_recordset()
+        widget = self._make_widget(date_field_id=field_date.id, period='this_month')
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
+        self.assertEqual(data['total'], 3)  # Old exclu
+
+    def test_delta_previous_period(self):
+        field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
+        prev = self.env['res.partner'].sudo().create(
+            {'name': 'Prev', 'category_id': [(4, self.tag.id)]})
+        self.env.cr.execute(
+            "UPDATE res_partner SET create_date = date_trunc('month', now()) - interval '10 days' WHERE id = %s",
+            [prev.id])
+        prev.invalidate_recordset()
+        widget = self._make_widget(
+            date_field_id=field_date.id, period='this_month', compare_previous=True)
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
+        self.assertEqual(data['total'], 3)
+        self.assertEqual(data['delta_pct'], 200.0)  # 3 vs 1
