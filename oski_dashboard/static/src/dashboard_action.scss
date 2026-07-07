@@ -4,8 +4,24 @@
     grid-auto-rows: 90px;
     gap: 8px;
 }
+.o_oski_grid_cell {
+    position: relative;
+}
 .o_oski_grid_edit .o_oski_grid_cell {
     outline: 1px dashed $o-brand-primary;
     cursor: move;
+}
+.o_oski_resize_handle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 14px;
+    height: 14px;
+    cursor: se-resize;
+    border-style: solid;
+    border-width: 0 0 14px 14px;
+    border-color: transparent transparent $o-brand-primary transparent;
+    opacity: 0.6;
+    z-index: 1;
 }
 .o_oski_widget .card-body { min-height: 0; }

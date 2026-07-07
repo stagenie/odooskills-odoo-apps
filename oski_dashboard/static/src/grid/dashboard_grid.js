@@ -1,8 +1,9 @@
-import { Component } from "@odoo/owl";
+import { Component, useRef } from "@odoo/owl";
 import { WidgetShell } from "../widgets/widget_shell";
+import { useGridDnd } from "./grid_dnd";
+import { GRID_COLS, ROW_HEIGHT } from "./grid_constants";
 
-export const GRID_COLS = 12;
-export const ROW_HEIGHT = 90;
+export { GRID_COLS, ROW_HEIGHT };
 
 export class DashboardGrid extends Component {
     static template = "oski_dashboard.DashboardGrid";
@@ -17,6 +18,15 @@ export class DashboardGrid extends Component {
         onRemove: { type: Function, optional: true },
         onLayoutChange: { type: Function, optional: true },
     };
+
+    setup() {
+        this.gridRef = useRef("grid");
+        useGridDnd(this.gridRef, {
+            isEnabled: () => this.props.editMode,
+            getLayout: () => this.props.layout,
+            onDrop: (id, pos) => this.props.onLayoutChange && this.props.onLayoutChange(id, pos),
+        });
+    }
 
     cellStyle(widget) {
         const pos = this.props.layout[widget.id] || { x: 0, y: 0, w: 4, h: 3 };

@@ -14,6 +14,10 @@
                 Nouveau
             </button>
             <div class="flex-grow-1"/>
+            <button class="btn btn-outline-secondary o_oski_add_widget" t-if="state.editMode"
+                    t-on-click="addWidget">
+                <i class="fa fa-plus me-1"/>Widget
+            </button>
             <button class="btn o_oski_toggle_edit" t-if="current"
                     t-att-class="state.editMode ? 'btn-primary' : 'btn-outline-primary'"
                     t-on-click="toggleEdit">
@@ -27,7 +31,9 @@
             </div>
             <DashboardGrid t-if="current" dashboard="current" widgets="state.widgets"
                            layout="state.layout" editMode="state.editMode"
-                           globalFilters="state.globalFilters"/>
+                           globalFilters="state.globalFilters"
+                           onEdit="editWidget.bind(this)" onRemove="removeWidget.bind(this)"
+                           onLayoutChange="onLayoutChange.bind(this)"/>
         </div>
     </div>
 </t>

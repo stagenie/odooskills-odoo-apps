@@ -26,3 +26,21 @@ registry.category("web_tour.tours").add("oski_dashboard_smoke", {
         { trigger: ".o_oski_dashboard_select option:first-child:checked:not(:visible)", run: () => {} },
     ],
 });
+
+registry.category("web_tour.tours").add("oski_dashboard_create_widget", {
+    url: "/odoo",
+    steps: () => [
+        // Même contexte que oski_dashboard_smoke : DB de test dédiée avec ce seul
+        // module "métier" installé -> /odoo redirige directement sur DashboardAction
+        // (pas de grille .o_app à cliquer avant).
+        { trigger: ".o_oski_dashboard_action .o_oski_new_dashboard", run: "click" },
+        // createDashboard() bascule déjà state.editMode = true : le bouton
+        // "+ Widget" est visible sans passer par .o_oski_toggle_edit.
+        { trigger: ".o_oski_add_widget", run: "click" },
+        { trigger: ".o_oski_editor_name", run: "edit KPI Clients" },
+        { trigger: ".o_oski_editor_model", run: "selectByLabel Contact" },
+        { trigger: ".o_oski_editor_save", run: "click" },
+        { trigger: ".o_oski_widget .card-header:contains('KPI Clients')", run: () => {} },
+        { trigger: ".o_oski_widget .display-5", run: () => {} },
+    ],
+});
