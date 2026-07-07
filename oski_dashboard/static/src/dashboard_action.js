@@ -12,6 +12,7 @@ export class DashboardAction extends Component {
     setup() {
         this.orm = useService("orm");
         this.dialog = useService("dialog");
+        this.notification = useService("notification");
         // Sérialise les écritures save_layout : sans file d'attente, deux
         // drags rapprochés peuvent voir leurs RPC arriver dans le désordre
         // et l'ancien layout écraser le nouveau côté serveur.
@@ -62,17 +63,26 @@ export class DashboardAction extends Component {
         this.state.editMode = true;
     }
 
-    onLayoutChange(widgetId, pos) {
+    async onLayoutChange(widgetId, pos) {
         this.state.layout = { ...this.state.layout, [widgetId]: pos };
+        const dashboardId = this.state.currentId;
         // Le layout est stringifié DANS le thunk mis en file : chaque écriture
         // envoie l'état le plus frais et les RPC s'exécutent dans l'ordre.
-        // Le .catch garde la chaîne vivante après un RPC en échec (le service
-        // RPC d'Odoo affiche déjà le dialogue d'erreur).
-        this._layoutSaveChain = this._layoutSaveChain.then(() =>
-            this.orm.call("oski.dashboard", "save_layout",
-                [this.state.currentId, JSON.stringify(this.state.layout)])
-        ).catch(() => {});
-        return this._layoutSaveChain;
+        // Le .catch garde la chaîne vivante après un RPC en échec — et comme
+        // un catch attaché SUPPRIME le dialogue d'erreur global d'Odoo v19
+        // (déclenché uniquement par le listener unhandledrejection de
+        // error_service), on notifie explicitement l'utilisateur.
+        this._layoutSaveChain = this._layoutSaveChain.then(() => {
+            if (this.state.currentId !== dashboardId) {
+                return; // dashboard changé entre-temps : ne pas écraser l'autre layout
+            }
+            return this.orm.call("oski.dashboard", "save_layout",
+                [dashboardId, JSON.stringify(this.state.layout)]);
+        }).catch(() => {
+            this.notification.add(
+                "Échec de l'enregistrement de la disposition — vos derniers déplacements ne sont pas sauvegardés.",
+                { type: "warning" });
+        });
     }
 
     addWidget() {
