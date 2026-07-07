@@ -12,9 +12,11 @@ registry.category("web_tour.tours").add("oski_dashboard_smoke", {
         { trigger: ".o_oski_dashboard_select option:not(:visible)", run: () => {} },
         { trigger: ".o_oski_toggle_edit.btn-primary", run: () => {} },
         // Régression sélecteur (Task 6) : créer un 2e dashboard (auto-sélectionné)
-        // puis REBASCULER sur le 1er via le <select>. Avec le handler cassé
-        // (« v2 is not a function »), l'erreur JS fait échouer le tour ; et si
-        // selectDashboard tournait avec un mauvais id, le re-render OWL
+        // puis REBASCULER sur le 1er via le <select>. Le handler inline
+        // "(ev) => this.selectDashboard(...)" produisait « v2 is not a function » ici ;
+        // cause exacte non isolée (le pattern fonctionne ailleurs dans le core) —
+        // méthode nommée onSelectChange utilisée par sécurité. Et si selectDashboard
+        // tournait avec un mauvais id, le re-render OWL
         // (t-att-selected => propriété DOM option.selected, cf. isProp owl.js)
         // décocherait la 1re option => :checked est l'assertion d'état correcte
         // ([selected] ne marche PAS : OWL ne pose jamais l'attribut).
