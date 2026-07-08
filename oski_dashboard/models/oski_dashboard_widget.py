@@ -96,7 +96,16 @@ class OskiDashboardWidget(models.Model):
         }
         if not widget.model_id:
             return payload
-        Model = self.env[widget.model_id.model]
+        # ir.model n'est lisible que par group_erp_manager (même restriction
+        # que ir.model.fields plus bas dans ce fichier, cf. base/security/
+        # ir.model.access.csv) : le nom technique du modèle est une métadonnée,
+        # pas une donnée métier. Sans ce sudo(), un utilisateur métier standard
+        # (propriétaire du widget mais pas administrateur) provoque une
+        # AccessError dès que le cache ORM est froid — ex. le mode TV
+        # (oski_dashboard_pro) où chaque requête HTTP publique a son propre
+        # curseur/transaction, sans le cache partagé « chaud » des tests
+        # TransactionCase.
+        Model = self.env[widget.model_id.sudo().model]
         domain = safe_eval(widget.domain or '[]')
         domain += widget._extra_filters_domain(global_filters or [])
         # Drill-down (hook générique, cf. _drill_groupby) : chaque étape du
