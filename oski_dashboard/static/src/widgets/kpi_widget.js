@@ -17,7 +17,10 @@ export class KpiWidget extends Component {
     }
     get thresholdClass() {
         const { total, thresholds } = this.props.payload;
-        if (!thresholds) return "";
+        // Le PRO émet toujours un objet thresholds (truthy), y compris
+        // {warning: null, danger: null} quand aucun seuil n'est configuré —
+        // sans le second garde, tout KPI tomberait sur text-success.
+        if (!thresholds || (thresholds.danger == null && thresholds.warning == null)) return "";
         if (thresholds.danger != null && total <= thresholds.danger) return "text-danger";
         if (thresholds.warning != null && total <= thresholds.warning) return "text-warning";
         return "text-success";
