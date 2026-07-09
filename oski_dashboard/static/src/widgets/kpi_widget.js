@@ -15,6 +15,16 @@ export class KpiWidget extends Component {
     get formattedTotal() {
         return new Intl.NumberFormat().format(this.props.payload.total || 0);
     }
+    get thresholdClass() {
+        const { total, thresholds } = this.props.payload;
+        if (!thresholds) return "";
+        if (thresholds.danger != null && total <= thresholds.danger) return "text-danger";
+        if (thresholds.warning != null && total <= thresholds.warning) return "text-warning";
+        return "text-success";
+    }
+    get targetProgress() {
+        return Math.min(100, 100 * this.props.payload.total / this.props.payload.target);
+    }
 }
 
 dashboardWidgetRegistry.add("kpi", { component: KpiWidget });
