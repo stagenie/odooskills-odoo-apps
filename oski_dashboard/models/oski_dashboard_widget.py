@@ -5,7 +5,7 @@ import pytz
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, ValidationError
 from odoo.tools.safe_eval import safe_eval
 
 # Plafond du repli Python : quand le group by (ou la mesure) porte sur un champ
@@ -83,6 +83,15 @@ class OskiDashboardWidget(models.Model):
                     self.env._("Filtre invalide pour le modèle %s.", model_name))
 
     @api.model
+    def _check_internal_user(self):
+        """Les proxys métadonnées ci-dessous sont appelables par call_kw sans
+        contrôle d'ACL au niveau méthode : on les réserve aux utilisateurs
+        internes pour ne pas laisser un compte portail énumérer le schéma."""
+        if not self.env.su and not self.env.user._is_internal():
+            raise AccessError(
+                self.env._("Réservé aux utilisateurs internes."))
+
+    @api.model
     def get_available_models(self):
         """Proxy sudo pour l'éditeur de widget (widget_editor_dialog.js) :
         ir.model/ir.model.fields ne sont lisibles que par group_erp_manager
@@ -90,7 +99,9 @@ class OskiDashboardWidget(models.Model):
         une action ouverte à tout utilisateur autorisé sur ses dashboards.
         Sudo borné aux métadonnées (nom/libellé de modèle), jamais aux
         données métier — politique déjà validée en T13 (cf. _check_domain,
-        _aggregate ci-dessus/dans ce fichier)."""
+        _aggregate ci-dessus/dans ce fichier). Réservé aux utilisateurs
+        internes : les comptes portail n'ont pas à énumérer le schéma."""
+        self._check_internal_user()
         models = self.env['ir.model'].sudo().search_read(
             [('transient', '=', False), ('abstract', '=', False)],
             ['id', 'name', 'model'], order='name')
@@ -101,6 +112,7 @@ class OskiDashboardWidget(models.Model):
         """Proxy sudo pour l'éditeur de widget : mêmes métadonnées que
         get_available_models ci-dessus, bornées aux champs stockés du modèle
         demandé."""
+        self._check_internal_user()
         fields_data = self.env['ir.model.fields'].sudo().search_read(
             [('model_id', '=', model_id), ('store', '=', True)],
             ['id', 'name', 'field_description', 'ttype', 'store'],

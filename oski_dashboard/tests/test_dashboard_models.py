@@ -75,6 +75,19 @@ class TestDashboardModels(TransactionCase):
             self.user_a).get_model_fields(model_partner.id)
         self.assertTrue(any(f['name'] == 'name' for f in fields_data))
 
+    def test_metadata_proxies_denied_to_portal(self):
+        # Durcissement re-review : les proxys sudo sont appelables par call_kw
+        # sans ACL de méthode — un compte portail ne doit pas pouvoir
+        # énumérer le schéma (modèles/champs) via ces proxys.
+        portal = new_test_user(
+            self.env, login='dash_portal', groups='base.group_portal')
+        Widget = self.env['oski.dashboard.widget'].with_user(portal)
+        with self.assertRaises(AccessError):
+            Widget.get_available_models()
+        model_partner = self.env['ir.model']._get('res.partner')
+        with self.assertRaises(AccessError):
+            Widget.get_model_fields(model_partner.id)
+
     def test_widget_domain_check_cold_cache(self):
         # B2 : _check_domain lisait model_id.model sans sudo() — AccessError
         # en prod à cache froid. Le create() ci-dessous se fait juste après
