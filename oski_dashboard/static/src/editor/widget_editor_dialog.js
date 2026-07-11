@@ -35,9 +35,12 @@ export class WidgetEditorDialog extends Component {
             models: [], fields: [], previewWidget: null,
         });
         onWillStart(async () => {
-            this.state.models = await this.orm.searchRead(
-                "ir.model", [["transient", "=", false], ["abstract", "=", false]],
-                ["model", "name"], { order: "name" });
+            // Proxy sudo côté serveur (get_available_models) : ir.model
+            // n'est lisible en direct que par group_erp_manager — un
+            // searchRead direct ici lève AccessError pour tout utilisateur
+            // standard (cf. brief T16-fix B1).
+            this.state.models = await this.orm.call(
+                "oski.dashboard.widget", "get_available_models", []);
             if (this.props.widgetId) {
                 const [record] = await this.orm.read("oski.dashboard.widget", [this.props.widgetId],
                     Object.keys(this.state.values));
@@ -54,10 +57,11 @@ export class WidgetEditorDialog extends Component {
             this.state.fields = [];
             return;
         }
-        this.state.fields = await this.orm.searchRead(
-            "ir.model.fields",
-            [["model_id", "=", this.state.values.model_id], ["store", "=", true]],
-            ["name", "field_description", "ttype"], { order: "field_description" });
+        // Proxy sudo (get_model_fields) : même raison que get_available_models
+        // ci-dessus — ir.model.fields n'est lisible en direct que par
+        // group_erp_manager.
+        this.state.fields = await this.orm.call(
+            "oski.dashboard.widget", "get_model_fields", [this.state.values.model_id]);
     }
 
     get measureFields() {

@@ -67,6 +67,15 @@ export class DashboardAction extends Component {
         this.state.dashboards.sort((a, b) =>
             (b.favorite_user_ids.includes(userId) - a.favorite_user_ids.includes(userId)) ||
             a.sequence - b.sequence || a.id - b.id);
+        // Le dashboard courant existe toujours dans la liste rafraîchie (ex.
+        // après toggleFavorite, qui ne fait que réordonner/mettre à jour les
+        // favoris) : conserver la sélection au lieu de re-sélectionner
+        // dashboards[0], ce qui rechargerait inutilement widgets/layout et
+        // perdrait l'état courant (globalFilters, editMode implicite).
+        if (this.state.currentId !== null &&
+            this.state.dashboards.some((d) => d.id === this.state.currentId)) {
+            return;
+        }
         if (this.state.dashboards.length) {
             await this.selectDashboard(this.state.dashboards[0].id);
         }
@@ -81,9 +90,13 @@ export class DashboardAction extends Component {
         this.state.globalFilters = [];
         this.state.reloadStamp++;
         this.state.layout = JSON.parse(this.current.layout_json || "{}");
-        this.state.widgets = await this.orm.searchRead(
+        const widgets = await this.orm.searchRead(
             "oski.dashboard.widget", [["dashboard_id", "=", dashboardId]],
             WIDGET_FIELDS);
+        if (this.state.currentId !== dashboardId) {
+            return; // sélection changée pendant l'await : réponse périmée, ne pas écraser
+        }
+        this.state.widgets = widgets;
         this.startAutoRefresh();
     }
 
@@ -118,9 +131,12 @@ export class DashboardAction extends Component {
     }
 
     async toggleFavorite() {
-        await this.orm.call("oski.dashboard", "write", [[this.state.currentId], {
-            favorite_user_ids: [[this.isFavorite ? 3 : 4, user.userId]],
-        }]);
+        // action_toggle_favorite (serveur) : un write() direct est refusé par
+        // rule_dashboard_own_write pour un lecteur partagé (accès via
+        // group_ids, pas propriétaire) — la méthode serveur vérifie le droit
+        // de lecture puis écrit en sudo, bornée à l'UID appelant (cf. brief
+        // T16-fix M1).
+        await this.orm.call("oski.dashboard", "action_toggle_favorite", [[this.state.currentId]]);
         await this.loadDashboards();
     }
 

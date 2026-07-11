@@ -30,11 +30,32 @@ class OskiDashboard(models.Model):
     def _check_layout_json(self):
         for dashboard in self:
             try:
-                json.loads(dashboard.layout_json or '{}')
+                parsed = json.loads(dashboard.layout_json or '{}')
             except ValueError:
                 raise ValidationError(self.env._("Disposition invalide (JSON attendu)."))
+            # JSON valide mais pas un objet (ex. "null", "[]", "42") : le
+            # frontend fait toujours JSON.parse(layout_json || "{}") et
+            # itère les clés comme un dict de positions — "null" (JSON
+            # valide) plante au premier accès côté client.
+            if not isinstance(parsed, dict):
+                raise ValidationError(self.env._("Disposition invalide (objet JSON attendu)."))
 
     def save_layout(self, layout_json):
         self.ensure_one()
         self.write({'layout_json': layout_json})
+        return True
+
+    def action_toggle_favorite(self):
+        """Bascule le dashboard courant dans/hors des favoris de l'appelant.
+        Un simple orm.call write() côté client est refusé par
+        rule_dashboard_own_write pour un lecteur partagé (accès via
+        group_ids) : cette méthode vérifie le droit de LECTURE (accessible
+        au propriétaire ET aux lecteurs partagés), puis écrit en sudo — mais
+        BORNÉE à l'ajout/retrait de l'UID appelant dans favorite_user_ids,
+        jamais à des vals fournis par le client (cf. brief T16-fix M1)."""
+        self.ensure_one()
+        self.check_access('read')
+        uid = self.env.uid
+        command = 3 if uid in self.favorite_user_ids.ids else 4
+        self.sudo().write({'favorite_user_ids': [(command, uid)]})
         return True

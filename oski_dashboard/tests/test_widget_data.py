@@ -114,6 +114,16 @@ class TestWidgetData(TransactionCase):
         self.assertEqual(prev_start, start - relativedelta(months=3))
         self.assertEqual(prev_stop, start)
 
+    def test_drill_path_non_dict_step_ignored(self):
+        # m2 : get_widget_data est un RPC public — un drill_path forgé avec
+        # un step non-dict (chaîne, entier, None) ne doit pas planter (500)
+        # mais être simplement ignoré, comme un champ inconnu.
+        widget = self._make_widget()
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(
+            widget.id, drill_path=['not-a-dict', 42, None])
+        self.assertEqual(data['total'], 3)
+        self.assertEqual(data['drill_depth'], 0)
+
     def test_period_domain_datetime_utc(self):
         """Bornes datetime converties tz user -> UTC naïf (stockage Odoo)."""
         import pytz

@@ -17,8 +17,31 @@ export class WidgetShell extends Component {
     setup() {
         this.orm = useService("orm");
         this.state = useState({ payload: null, error: null });
+        this._trackFetchProps(this.props);
         onWillStart(() => this.loadData(this.props));
-        onWillUpdateProps((next) => this.loadData(next));
+        // Le parent (DashboardAction/DashboardGrid) se re-rend pour des
+        // raisons sans rapport avec les données du widget (editMode, drag de
+        // layout...) : sans garde, onWillUpdateProps re-fetch à CHAQUE
+        // re-render parent, un WidgetShell par widget. Ne refetch que si un
+        // des trois signaux pertinents change réellement — comparaison par
+        // référence, cohérente avec dashboard_action.js qui recrée
+        // volontairement un nouveau tableau globalFilters pour signaler un
+        // rafraîchissement (refreshWidgets/addFilter/removeFilter).
+        onWillUpdateProps((next) => {
+            if (next.widget.id === this._fetchWidgetId &&
+                next.globalFilters === this._fetchGlobalFilters &&
+                next.reloadStamp === this._fetchReloadStamp) {
+                return;
+            }
+            this._trackFetchProps(next);
+            return this.loadData(next);
+        });
+    }
+
+    _trackFetchProps(props) {
+        this._fetchWidgetId = props.widget.id;
+        this._fetchGlobalFilters = props.globalFilters;
+        this._fetchReloadStamp = props.reloadStamp;
     }
 
     get widgetComponent() {

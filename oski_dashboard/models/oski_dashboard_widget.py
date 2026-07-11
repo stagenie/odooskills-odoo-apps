@@ -65,16 +65,47 @@ class OskiDashboardWidget(models.Model):
         for widget in self:
             if not widget.model_id:
                 continue
+            # ir.model n'est lisible que par group_erp_manager (métadonnée,
+            # cf. base/security/ir.model.access.csv) : sans ce sudo(), un
+            # utilisateur métier standard provoque une AccessError dès que le
+            # cache ORM est froid (create()/write() en dehors d'un test
+            # TransactionCase qui l'a déjà chauffé en superuser).
+            model_name = widget.model_id.sudo().model
             try:
                 dom = safe_eval(widget.domain or '[]')
                 if not isinstance(dom, list):
                     raise ValueError()
-                self.env[widget.model_id.model]._search(dom, limit=1)
+                self.env[model_name]._search(dom, limit=1)
             except ValidationError:
                 raise
             except Exception:
                 raise ValidationError(
-                    self.env._("Filtre invalide pour le modèle %s.", widget.model_id.model))
+                    self.env._("Filtre invalide pour le modèle %s.", model_name))
+
+    @api.model
+    def get_available_models(self):
+        """Proxy sudo pour l'éditeur de widget (widget_editor_dialog.js) :
+        ir.model/ir.model.fields ne sont lisibles que par group_erp_manager
+        (base/security/ir.model.access.csv), alors que composer un widget est
+        une action ouverte à tout utilisateur autorisé sur ses dashboards.
+        Sudo borné aux métadonnées (nom/libellé de modèle), jamais aux
+        données métier — politique déjà validée en T13 (cf. _check_domain,
+        _aggregate ci-dessus/dans ce fichier)."""
+        models = self.env['ir.model'].sudo().search_read(
+            [('transient', '=', False), ('abstract', '=', False)],
+            ['id', 'name', 'model'], order='name')
+        return models
+
+    @api.model
+    def get_model_fields(self, model_id):
+        """Proxy sudo pour l'éditeur de widget : mêmes métadonnées que
+        get_available_models ci-dessus, bornées aux champs stockés du modèle
+        demandé."""
+        fields_data = self.env['ir.model.fields'].sudo().search_read(
+            [('model_id', '=', model_id), ('store', '=', True)],
+            ['id', 'name', 'field_description', 'ttype', 'store'],
+            order='field_description')
+        return fields_data
 
     @api.model
     def get_widget_data(self, widget_id, global_filters=None, drill_path=None):
@@ -119,6 +150,12 @@ class OskiDashboardWidget(models.Model):
         drill_path = drill_path or []
         applied_depth = 0
         for step in drill_path:
+            # RPC public : un step forgé qui n'est pas un dict (ex. une
+            # chaîne ou un entier) ferait planter .get() ci-dessous (500) —
+            # ignoré au même titre qu'un champ inconnu (cf. commentaire
+            # ci-dessus sur applied_depth).
+            if not isinstance(step, dict):
+                continue
             field_name = step.get('field')
             if field_name not in Model._fields:
                 continue

@@ -32,7 +32,10 @@ export function buildChartConfig(widgetType, payload, options = {}) {
             return { ...base, type: "doughnut",
                      data: { ...base.data, datasets: [{ ...base.data.datasets[0], backgroundColor: colors }] } };
         case "gauge": {
-            const target = options.target || total || 1;
+            // ?? (pas ||) : un objectif explicitement configuré à 0 doit
+            // rester 0, pas être écrasé par total/1 (0 est une valeur
+            // falsy en JS mais un objectif légitime).
+            const target = options.target ?? total ?? 1;
             const done = Math.min(total, target);
             return {
                 type: "doughnut",

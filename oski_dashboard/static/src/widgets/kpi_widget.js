@@ -26,7 +26,11 @@ export class KpiWidget extends Component {
         return "text-success";
     }
     get targetProgress() {
-        return Math.min(100, 100 * this.props.payload.total / this.props.payload.target);
+        // Clamp bas ajouté (T14-M4, cf. brief T16-fix) : un total négatif
+        // (mesure sum sur un champ pouvant l'être) donnerait un pourcentage
+        // négatif -> largeur de barre "width:-N%" invalide en CSS.
+        return Math.max(0, Math.min(
+            100, 100 * this.props.payload.total / this.props.payload.target));
     }
 }
 
