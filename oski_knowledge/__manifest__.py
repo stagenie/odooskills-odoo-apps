@@ -12,6 +12,7 @@
     'website': 'https://apps.odooskills.com',
     'support': 'support@odooskills.com',
     'license': 'LGPL-3',
+    'images': ['static/description/banner.png'],
     'depends': ['base', 'mail', 'web', 'web_tour'],
     'data': [
         'security/knowledge_security.xml',
