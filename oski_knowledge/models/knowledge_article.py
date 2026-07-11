@@ -64,28 +64,16 @@ class KnowledgeArticle(models.Model):
             article.child_count = len(article.child_ids)
 
     def write(self, vals):
-        if 'parent_id' in vals and vals['parent_id']:
-            for article in self:
-                new_parent = self.browse(vals['parent_id'])
-                # Check if new_parent is a descendant of article
-                current = new_parent
-                while current:
-                    if current.id == article.id:
-                        raise ValidationError(
-                            self.env._("Un article ne peut pas être son propre ancêtre."))
-                    current = current.parent_id
+        if vals.get('parent_id'):
+            # En v19, _parent_store_update() lève un UserError générique avant que
+            # les @api.constrains ne tournent : ce pré-check garantit une ValidationError claire.
+            new_parent = self.browse(vals['parent_id'])
+            ancestor_ids = {int(i) for i in (new_parent.parent_path or '').split('/') if i}
+            ancestor_ids.add(new_parent.id)
+            if ancestor_ids & set(self.ids):
+                raise ValidationError(
+                    self.env._("Un article ne peut pas être son propre ancêtre."))
         return super().write(vals)
-
-    @api.constrains('parent_id')
-    def _check_parent_id(self):
-        for article in self:
-            if article.parent_id:
-                parent = article.parent_id
-                while parent:
-                    if parent.id == article.id:
-                        raise ValidationError(
-                            self.env._("Un article ne peut pas être son propre ancêtre."))
-                    parent = parent.parent_id
 
     @api.constrains('section', 'owner_id')
     def _check_private_owner(self):

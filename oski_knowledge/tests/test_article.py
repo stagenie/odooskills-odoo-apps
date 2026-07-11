@@ -55,6 +55,20 @@ class TestKnowledgeArticle(TransactionCase):
         with self.assertRaises(ValidationError):
             art.owner_id = False
 
+    def test_cycle_forbidden_batch_write(self):
+        # Batch write : un seul enregistrement en cycle doit bloquer TOUT le batch
+        # (ValidationError levée avant super().write(), donc B reste intact = parent_id=False).
+        root_a = self.Article.create({'name': 'RacineA'})
+        child_a = self.Article.create({'name': 'EnfantA', 'parent_id': root_a.id})
+        root_b = self.Article.create({'name': 'RacineB'})
+        self.Article.create({'name': 'EnfantB', 'parent_id': root_b.id})
+        try:
+            (root_a + root_b).write({'parent_id': child_a.id})
+            self.fail("ValidationError attendue pour le cycle sur root_a")
+        except ValidationError:
+            pass
+        self.assertFalse(root_b.parent_id)
+
     def test_child_count(self):
         self.assertEqual(self.root.child_count, 1)
         self.assertEqual(self.child.child_count, 1)
