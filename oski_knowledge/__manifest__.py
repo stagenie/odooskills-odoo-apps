@@ -20,6 +20,9 @@
         'views/knowledge_article_views.xml',
         'views/knowledge_menus.xml',
     ],
+    'demo': [
+        'demo/knowledge_demo.xml',
+    ],
     'assets': {
         'web.assets_backend': [
             'oski_knowledge/static/src/knowledge_app/**/*',
