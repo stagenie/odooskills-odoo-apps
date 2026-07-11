@@ -94,13 +94,20 @@ class KnowledgeArticle(models.Model):
         for article in self:
             article.is_user_favorite = article.id in favorite_ids
 
+    @api.model
     def _search_is_user_favorite(self, operator, value):
+        # Le domain optimizer v19 normalise ('is_user_favorite', '=', True) en
+        # ('is_user_favorite', 'in', {True}) avant d'appeler cette méthode (cf.
+        # odoo/orm/domains.py::_optimize_field_search_method). Suivre le pattern
+        # natif (project.project._search_is_favorite, stock.picking.type) :
+        # ne gérer que 'in' et laisser le framework dériver '!=' / 'not in' /
+        # ('=', False) via l'opérateur inverse + négation De Morgan du domaine
+        # retourné, plutôt que de comparer (operator, value) à la main.
+        if operator != 'in':
+            return NotImplemented
         favorites = self.env['knowledge.article.favorite'].search(
             [('user_id', '=', self.env.uid)])
-        article_ids = favorites.article_id.ids
-        if (operator == '=') == bool(value):
-            return [('id', 'in', article_ids)]
-        return [('id', 'not in', article_ids)]
+        return [('id', 'in', favorites.article_id.ids)]
 
     def action_toggle_favorite(self):
         """Bascule l'article dans/hors des favoris de l'appelant. Écriture

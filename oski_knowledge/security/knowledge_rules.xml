@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- UNE SEULE règle globale sur l'article (§0.3) : le pro RÉÉCRIT ce domaine. -->
+    <!-- Règle de GROUPE portée par group_knowledge_user (§0.3) : le pro RÉÉCRIT ce domaine.
+         En v19 le domaine final = AND(règles GLOBALES) AND OR(règles de GROUPE applicables) :
+         une règle de groupe ne peut jamais élargir une règle globale. Comme tout interne a
+         group_knowledge_user (implied depuis base.group_user), la couverture est identique à
+         une règle globale, tout en permettant à la règle manager de s'OR-er avec elle. -->
     <record id="rule_article_global" model="ir.rule">
         <field name="name">Article : périmètre workspace/privé</field>
         <field name="model_id" ref="model_knowledge_article"/>
-        <field name="global" eval="True"/>
+        <field name="groups" eval="[(4, ref('group_knowledge_user'))]"/>
         <field name="domain_force">['|', ('section', '=', 'workspace'), '&amp;', ('section', '=', 'private'), ('owner_id', '=', user.id)]</field>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="True"/>
