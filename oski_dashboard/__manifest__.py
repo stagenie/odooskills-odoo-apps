@@ -3,10 +3,16 @@
     'version': '19.0.1.0.0',
     'category': 'Productivity',
     'summary': "Constructeur de tableaux de bord drag-and-drop",
-    'description': "Tableaux de bord personnalisables : KPI, graphiques, listes, jauges. Données lues avec les droits de l'utilisateur.",
+    'description': """Composez vos tableaux de bord Odoo sans code : grille drag-and-drop,
+9 types de widgets (KPI, barres, lignes, aires, camembert, donut, liste, jauge, texte),
+périodes calendaires avec comparaison N-1, favoris et auto-refresh.
+Chaque widget lit ses données avec les droits de l'utilisateur connecté
+(règles propriétaire / partage en lecture par groupes).""",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
+    'support': 'support@odooskills.com',
     'license': 'LGPL-3',
+    'images': ['static/description/screenshot_01_tableau_de_bord.png'],
     'depends': ['web', 'web_tour'],
     'data': [
         'security/dashboard_security.xml',
