@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- UNE SEULE règle globale sur l'article (§0.3) : le pro RÉÉCRIT ce domaine. -->
+    <record id="rule_article_global" model="ir.rule">
+        <field name="name">Article : périmètre workspace/privé</field>
+        <field name="model_id" ref="model_knowledge_article"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|', ('section', '=', 'workspace'), '&amp;', ('section', '=', 'private'), ('owner_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <!-- Règle de GROUPE manager (s'ajoute en OR) : accès total. -->
+    <record id="rule_article_manager" model="ir.rule">
+        <field name="name">Article : accès total responsable</field>
+        <field name="model_id" ref="model_knowledge_article"/>
+        <field name="groups" eval="[(4, ref('group_knowledge_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <!-- Favori : chacun ne voit/gère que les siens (règle globale) -->
+    <record id="rule_favorite_own" model="ir.rule">
+        <field name="name">Favori : les miens</field>
+        <field name="model_id" ref="model_knowledge_article_favorite"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+</odoo>
