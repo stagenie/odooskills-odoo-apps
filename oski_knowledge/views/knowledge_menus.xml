@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_knowledge_root" name="Connaissances" sequence="45"
+              web_icon="oski_knowledge,static/description/icon.png"
+              groups="oski_knowledge.group_knowledge_user"/>
+    <menuitem id="menu_knowledge_config" name="Configuration"
+              parent="menu_knowledge_root" sequence="90"
+              groups="oski_knowledge.group_knowledge_manager"/>
+</odoo>
