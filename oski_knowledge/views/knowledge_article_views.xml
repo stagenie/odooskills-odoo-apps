@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_article_form" model="ir.ui.view">
+        <field name="name">knowledge.article.form</field>
+        <field name="model">knowledge.article</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_archive_to_trash" type="object"
+                            string="Archiver" icon="fa-trash"
+                            invisible="not active"/>
+                    <button name="action_restore" type="object"
+                            string="Restaurer" icon="fa-undo"
+                            invisible="active"/>
+                    <button name="action_toggle_favorite" type="object"
+                            string="Favori" icon="fa-star-o"/>
+                </header>
+                <sheet>
+                    <div class="oe_title d-flex align-items-center gap-2">
+                        <field name="icon" placeholder="📄"
+                               class="oe_inline" style="width: 3ch;"/>
+                        <h1 class="mb-0 flex-grow-1">
+                            <field name="name" placeholder="Titre de l'article"/>
+                        </h1>
+                    </div>
+                    <field name="body" nolabel="1"
+                           options="{'collaborative': false}"/>
+                    <notebook>
+                        <page string="Sous-articles" name="children">
+                            <field name="child_ids" readonly="1">
+                                <list>
+                                    <field name="icon"/>
+                                    <field name="name"/>
+                                    <field name="owner_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Infos" name="info">
+                            <group>
+                                <field name="owner_id"/>
+                                <field name="section"
+                                       readonly="parent_id != False"/>
+                                <field name="parent_id"/>
+                                <field name="sequence"/>
+                                <field name="active" invisible="1"/>
+                                <field name="child_count" invisible="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_article_list" model="ir.ui.view">
+        <field name="name">knowledge.article.list</field>
+        <field name="model">knowledge.article</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="icon"/>
+                <field name="name"/>
+                <field name="section"/>
+                <field name="owner_id"/>
+                <field name="child_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_article_search" model="ir.ui.view">
+        <field name="name">knowledge.article.search</field>
+        <field name="model">knowledge.article</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"
+                       filter_domain="['|', ('name', 'ilike', self), ('body_text', 'ilike', self)]"/>
+                <filter name="my_articles" string="Mes articles"
+                        domain="[('owner_id', '=', uid)]"/>
+                <filter name="my_favorites" string="Mes favoris"
+                        domain="[('is_user_favorite', '=', True)]"/>
+                <separator/>
+                <filter name="workspace" string="Espace de travail"
+                        domain="[('section', '=', 'workspace')]"/>
+                <filter name="private" string="Privé"
+                        domain="[('section', '=', 'private')]"/>
+                <separator/>
+                <filter name="archived" string="Archivés"
+                        domain="[('active', '=', False)]"/>
+                <group name="group_by">
+                    <filter name="group_section" string="Espace"
+                            context="{'group_by': 'section'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_article_all" model="ir.actions.act_window">
+        <field name="name">Tous les articles</field>
+        <field name="res_model">knowledge.article</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_article_search"/>
+    </record>
+
+    <record id="action_article_trash" model="ir.actions.act_window">
+        <field name="name">Corbeille</field>
+        <field name="res_model">knowledge.article</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('active', '=', False)]</field>
+        <field name="context">{'active_test': False}</field>
+    </record>
+</odoo>

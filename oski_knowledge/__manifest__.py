@@ -17,6 +17,7 @@
         'security/knowledge_security.xml',
         'security/ir.model.access.csv',
         'security/knowledge_rules.xml',
+        'views/knowledge_article_views.xml',
         'views/knowledge_menus.xml',
     ],
     'installable': True,

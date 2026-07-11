@@ -6,4 +6,10 @@
     <menuitem id="menu_knowledge_config" name="Configuration"
               parent="menu_knowledge_root" sequence="90"
               groups="oski_knowledge.group_knowledge_manager"/>
+    <menuitem id="menu_article_all" name="Tous les articles"
+              parent="menu_knowledge_root" action="action_article_all"
+              sequence="20"/>
+    <menuitem id="menu_article_trash" name="Corbeille"
+              parent="menu_knowledge_root" action="action_article_trash"
+              sequence="30"/>
 </odoo>
