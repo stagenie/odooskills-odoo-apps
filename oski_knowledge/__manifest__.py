@@ -20,6 +20,14 @@
         'views/knowledge_article_views.xml',
         'views/knowledge_menus.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'oski_knowledge/static/src/knowledge_app/**/*',
+        ],
+        'web.assets_tests': [
+            'oski_knowledge/static/tests/tours/**/*',
+        ],
+    },
     'installable': True,
     'application': True,
 }

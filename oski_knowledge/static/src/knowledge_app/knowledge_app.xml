@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="oski_knowledge.KnowledgeApp">
+        <div class="o_knowledge_app d-flex h-100">
+            <div class="o_knowledge_sidebar border-end p-2 overflow-auto">
+                <!-- Favoris -->
+                <div class="o_knowledge_favorites mb-3" t-if="state.favorites.length">
+                    <div class="text-muted small text-uppercase fw-bold mb-1">Favoris</div>
+                    <t t-foreach="state.favorites" t-as="node" t-key="'fav_' + node.id">
+                        <div class="o_knowledge_node d-flex align-items-center gap-1"
+                             t-att-class="{ 'o_knowledge_selected': node.id === state.currentId }"
+                             t-on-click="() => this.selectArticle(node)">
+                            <span t-out="node.icon"/>
+                            <span class="flex-grow-1 text-truncate" t-out="node.name"/>
+                        </div>
+                    </t>
+                </div>
+                <!-- Espace de travail -->
+                <div class="mb-3">
+                    <div class="d-flex align-items-center">
+                        <span class="text-muted small text-uppercase fw-bold flex-grow-1">Espace de travail</span>
+                        <button class="btn btn-sm btn-link p-0 o_knowledge_new_workspace"
+                                title="Nouvel article" t-on-click="() => this.createRoot('workspace')">
+                            <i class="fa fa-plus"/>
+                        </button>
+                    </div>
+                    <t t-call="oski_knowledge.KnowledgeNodes">
+                        <t t-set="nodes" t-value="state.workspace"/>
+                    </t>
+                </div>
+                <!-- Privé -->
+                <div class="mb-3">
+                    <div class="d-flex align-items-center">
+                        <span class="text-muted small text-uppercase fw-bold flex-grow-1">Privé</span>
+                        <button class="btn btn-sm btn-link p-0 o_knowledge_new_private"
+                                title="Nouvel article privé" t-on-click="() => this.createRoot('private')">
+                            <i class="fa fa-plus"/>
+                        </button>
+                    </div>
+                    <t t-call="oski_knowledge.KnowledgeNodes">
+                        <t t-set="nodes" t-value="state.private"/>
+                    </t>
+                </div>
+            </div>
+            <div class="o_knowledge_main flex-grow-1 overflow-auto">
+                <t t-if="state.currentId">
+                    <View t-key="state.currentId" t-props="viewProps"/>
+                </t>
+                <div t-else="" class="d-flex flex-column align-items-center justify-content-center h-100 text-muted">
+                    <p>Aucun article sélectionné.</p>
+                    <button class="btn btn-primary" t-on-click="() => this.createRoot('workspace')">
+                        Créer un article
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Rendu récursif d'une liste de nœuds -->
+    <t t-name="oski_knowledge.KnowledgeNodes">
+        <t t-foreach="nodes" t-as="node" t-key="node.id">
+            <div class="o_knowledge_node d-flex align-items-center gap-1"
+                 t-att-class="{ 'o_knowledge_selected': node.id === state.currentId }">
+                <span class="o_knowledge_chevron" t-if="node.child_count &gt; 0"
+                      t-on-click="() => this.toggleExpand(node)">
+                    <i t-att-class="isExpanded(node.id) ? 'fa fa-chevron-down' : 'fa fa-chevron-right'"/>
+                </span>
+                <span class="o_knowledge_chevron_placeholder" t-else=""/>
+                <span t-out="node.icon" t-on-click="() => this.selectArticle(node)"/>
+                <span class="flex-grow-1 text-truncate" t-out="node.name"
+                      t-on-click="() => this.selectArticle(node)"/>
+                <button class="btn btn-sm btn-link p-0 o_knowledge_fav_toggle"
+                        t-att-title="isFavorite(node) ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+                        t-on-click="() => this.toggleFavorite(node)">
+                    <i t-att-class="isFavorite(node) ? 'fa fa-star text-warning' : 'fa fa-star-o'"/>
+                </button>
+                <button class="btn btn-sm btn-link p-0 o_knowledge_new_child"
+                        title="Nouveau sous-article" t-on-click="() => this.createChild(node)">
+                    <i class="fa fa-plus"/>
+                </button>
+            </div>
+            <div class="o_knowledge_children ps-3" t-if="isExpanded(node.id)">
+                <t t-call="oski_knowledge.KnowledgeNodes">
+                    <t t-set="nodes" t-value="state.expanded[node.id]"/>
+                </t>
+            </div>
+        </t>
+    </t>
+</templates>
