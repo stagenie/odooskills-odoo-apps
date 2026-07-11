@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.WidgetShell">
+    <div class="o_oski_widget card h-100">
+        <div class="card-header d-flex align-items-center py-1 px-2">
+            <span class="fw-bold text-truncate flex-grow-1" t-out="props.widget.name"/>
+            <t t-if="props.editMode">
+                <button class="btn btn-sm btn-link o_oski_widget_edit" title="Modifier"
+                        t-on-click="() => props.onEdit and props.onEdit(props.widget)">
+                    <i class="fa fa-pencil"/>
+                </button>
+                <button class="btn btn-sm btn-link text-danger o_oski_widget_remove" title="Supprimer"
+                        t-on-click="() => props.onRemove and props.onRemove(props.widget)">
+                    <i class="fa fa-trash"/>
+                </button>
+            </t>
+        </div>
+        <div class="card-body p-2 overflow-hidden">
+            <div t-if="state.error" class="alert alert-warning mb-0 small" t-out="state.error"/>
+            <t t-elif="state.payload and widgetComponent">
+                <!-- onSegmentClick : "this." explicite requis (cf. gotcha ListWidget
+                     ci-dessus) — méthode patchée par le pro (drill.js), un nom nu
+                     perdrait le contexte du composant. -->
+                <t t-component="widgetComponent" widget="props.widget" payload="state.payload"
+                   onSegmentClick="(index) => this.onSegmentClick(index)"/>
+            </t>
+            <div t-else="" class="d-flex justify-content-center align-items-center h-100">
+                <i class="fa fa-spinner fa-spin"/>
+            </div>
+        </div>
+    </div>
+</t>
+</templates>

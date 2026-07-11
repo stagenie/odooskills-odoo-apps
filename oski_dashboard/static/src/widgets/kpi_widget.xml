@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.KpiWidget">
+    <div class="d-flex flex-column justify-content-center align-items-center h-100">
+        <div class="display-5 fw-bold" t-att-class="thresholdClass" t-out="formattedTotal"/>
+        <div t-if="props.payload.delta_pct !== null" t-att-class="deltaClass" class="small">
+            <i t-att-class="props.payload.delta_pct >= 0 ? 'fa fa-arrow-up' : 'fa fa-arrow-down'"/>
+            <t t-out="props.payload.delta_pct"/>% vs période préc.
+        </div>
+        <div t-if="props.payload.target" class="progress w-75 mt-1" style="height: 6px;">
+            <div class="progress-bar" t-att-style="'width:' + targetProgress + '%'"/>
+        </div>
+    </div>
+</t>
+</templates>

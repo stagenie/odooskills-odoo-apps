@@ -1,0 +1,55 @@
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">OSKI Dashboard — constructeur de tableaux de bord</h1>
+    <p style="color: #6b7280; font-size: 17px;">Composez vos propres tableaux de bord Odoo par glisser-déposer : KPI, graphiques, listes et jauges alimentés en direct — avec les droits de l'utilisateur qui regarde, jamais en admin.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Odoo Community n'offre aucun tableau de bord personnalisable : les chiffres qui comptent sont éparpillés entre les vues liste, les pivots et les exports Excel refaits chaque lundi. Pour suivre un CA mensuel, un pipeline ou un top clients d'un seul coup d'œil, il faut soit passer à Enterprise, soit développer. Ce module apporte le constructeur qui manque — sans écrire une ligne de code.</p>
+
+  <!-- 3. FONCTIONNALITÉS (bénéfices) -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">🧩 <strong>Builder drag-and-drop</strong> — placez, redimensionnez et réorganisez vos widgets sur une grille de 12 colonnes, directement à l'écran ; la disposition est sauvegardée par tableau de bord.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">📊 <strong>9 types de widgets</strong> — KPI chiffré, barres, lignes, aires, camembert, donut, liste Top N, jauge avec objectif et bloc texte, rendus avec Chart.js.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">📅 <strong>Périodes calendaires + comparaison N-1</strong> — aujourd'hui, cette semaine, ce mois, ce trimestre, cette année, 7/30/90 derniers jours, 12 derniers mois… et un delta % automatique vs la période précédente sur les KPI.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">🔁 <strong>Multi-dashboards, favoris et auto-refresh</strong> — autant de tableaux de bord que de besoins, marquage en favori par utilisateur, re-lecture automatique toutes les N secondes si vous le souhaitez.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">⚙️ <strong>N'importe quel modèle Odoo</strong> — chaque widget vise un modèle, un filtre (domaine), un « grouper par » (granularité jour → année), une mesure (somme, moyenne, min, max ou comptage) et un Top N.</li>
+    <li style="line-height: 1.6; color: #374151; margin-bottom: 8px;">🔒 <strong>Sécurité réelle, pas cosmétique</strong> — chaque widget lit ses données avec les droits d'accès de l'utilisateur connecté (jamais en admin) ; règles d'enregistrement propriétaire / partage en lecture par groupes, et un rôle « Responsable Dashboards » qui voit tout.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Un tableau de bord ventes, composé sans code</h3>
+  <p style="line-height: 1.6; color: #374151;">KPI avec comparaison à la période précédente, jauge d'objectif annuel, top clients en barres et en liste, répartition par équipe : tout est lu en direct dans vos données.</p>
+  <p><img src="screenshot_01_tableau_de_bord.png" alt="Tableau de bord ventes : KPI avec delta N-1, jauge d'objectif, graphique en barres par client, donut par équipe et liste Top 5 clients" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Le mode édition : glisser, redimensionner, ajouter</h3>
+  <p style="line-height: 1.6; color: #374151;">Un clic sur « Éditer » et chaque widget devient déplaçable et redimensionnable par sa poignée ; le bouton « + Widget » ajoute un bloc au tableau.</p>
+  <p><img src="screenshot_02_mode_edition.png" alt="Mode édition du tableau de bord : cellules en pointillés, icônes crayon et corbeille sur chaque widget, poignées de redimensionnement" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. Configurer un widget en quelques listes déroulantes</h3>
+  <p style="line-height: 1.6; color: #374151;">Titre, type, modèle, filtre, groupement, mesure, période et comparaison N-1 : l'éditeur tient dans une fenêtre — pas de SQL, pas de vue XML.</p>
+  <p><img src="screenshot_03_editeur_widget.png" alt="Éditeur de widget : sélection du type KPI, du modèle Sales Order, du filtre, de la mesure et de la période avec comparaison" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. VALEUR -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Des tableaux de bord personnalisables en Community — le genre de confort réservé d'habitude à Enterprise ou à un outil BI externe.</li>
+    <li style="line-height: 1.6; color: #374151;">Gratuit, sans service tiers ni clé API : tout tourne dans votre Odoo.</li>
+    <li style="line-height: 1.6; color: #374151;">Conçu pour être partagé sereinement : ce que voit un utilisateur dans un widget est exactement ce que ses droits Odoo l'autorisent à voir.</li>
+  </ul>
+
+  <!-- 6. CROSS-SELL SUITE -->
+  <div style="background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 28px 0;">
+    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">Fait partie de la suite Dashboards</h3>
+    <p style="line-height: 1.6; color: #374151; margin: 0;">Complétez avec <strong>OSKI Dashboard Pro</strong> (entonnoir, radar, heatmap, pivot, carte, filtres croisés, drill-down, mode TV — 49 €) et <strong>OSKI Dashboard Gantt</strong> (widget planning Gantt — 19 €). Voir la suite complète sur <a href="https://apps.odooskills.com" style="color:#714B67;">apps.odooskills.com</a>.</p>
+  </div>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280; margin-top: 28px;">Licence LGPL-3 — compatible Odoo 19.0. Support : <a href="mailto:support@odooskills.com" style="color: #714B67;">support@odooskills.com</a>.</p>
+
+</section>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.ListWidget">
+    <table class="table table-sm mb-0">
+        <tbody>
+            <!-- `this.` explicite requis : l'appel nu "onRowClick(...)" dans un arrow
+                 inline t-on-click perd le contexte du composant ici (this undefined
+                 dans la méthode patchée par le pro) — vérifié par tour manuel Task 11. -->
+            <tr t-foreach="rows" t-as="row" t-key="row_index"
+                t-on-click="() => this.onRowClick(row_index)">
+                <td class="text-truncate" t-out="row.label"/>
+                <td class="text-end fw-bold" t-out="row.value"/>
+            </tr>
+        </tbody>
+    </table>
+</t>
+</templates>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.DashboardAction">
+    <div class="o_oski_dashboard_action d-flex flex-column h-100">
+        <div class="o_oski_toolbar d-flex align-items-center gap-2 p-2 border-bottom">
+            <select class="form-select w-auto o_oski_dashboard_select"
+                    t-on-change="onSelectChange">
+                <option t-foreach="state.dashboards" t-as="dashboard" t-key="dashboard.id"
+                        t-att-value="dashboard.id"
+                        t-att-selected="dashboard.id === state.currentId"
+                        t-out="dashboard.name"/>
+            </select>
+            <button class="btn btn-link p-1 o_oski_toggle_favorite" t-if="current"
+                    t-att-title="isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+                    t-on-click="toggleFavorite">
+                <i t-att-class="isFavorite ? 'fa fa-star text-warning' : 'fa fa-star-o'"/>
+            </button>
+            <button class="btn btn-secondary o_oski_new_dashboard" t-on-click="createDashboard">
+                Nouveau
+            </button>
+            <div class="flex-grow-1"/>
+            <button class="btn btn-outline-secondary o_oski_refresh" t-if="current"
+                    title="Rafraîchir" t-on-click="refreshWidgets">
+                <i class="fa fa-refresh"/>
+            </button>
+            <button class="btn btn-outline-secondary o_oski_add_widget" t-if="state.editMode"
+                    t-on-click="addWidget">
+                <i class="fa fa-plus me-1"/>Widget
+            </button>
+            <button class="btn o_oski_toggle_edit" t-if="current"
+                    t-att-class="state.editMode ? 'btn-primary' : 'btn-outline-primary'"
+                    t-on-click="toggleEdit">
+                <i class="fa fa-pencil me-1"/>Éditer
+            </button>
+        </div>
+        <div class="o_oski_filters_bar d-flex align-items-center flex-wrap gap-2 p-2 border-bottom"
+             t-if="state.globalFilters.length">
+            <span t-foreach="state.globalFilters" t-as="gf" t-key="gf_index"
+                  class="badge text-bg-info o_oski_filter_chip">
+                <t t-out="gf.label"/>
+                <!-- `this.` explicite requis : l'appel nu "removeFilter(...)" dans un
+                     arrow inline t-on-click perd le contexte du composant sur ce module
+                     (TypeError "Cannot read properties of undefined (reading 'state')"),
+                     vérifié par tour manuel Task 11 — cf. task-11-report.md. -->
+                <i class="fa fa-times ms-1" role="button"
+                   t-on-click="() => this.removeFilter(gf_index)"/>
+            </span>
+        </div>
+        <div class="flex-grow-1 overflow-auto p-2">
+            <div t-if="!state.dashboards.length" class="o_oski_empty text-center text-muted mt-5">
+                <p>Aucun tableau de bord.</p>
+                <button class="btn btn-primary" t-on-click="createDashboard">Créer le premier</button>
+            </div>
+            <DashboardGrid t-if="current" dashboard="current" widgets="state.widgets"
+                           layout="state.layout" editMode="state.editMode"
+                           globalFilters="state.globalFilters"
+                           reloadStamp="state.reloadStamp"
+                           onEdit="editWidget.bind(this)" onRemove="removeWidget.bind(this)"
+                           onLayoutChange="onLayoutChange.bind(this)"/>
+        </div>
+    </div>
+</t>
+</templates>
