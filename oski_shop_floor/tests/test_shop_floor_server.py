@@ -55,3 +55,22 @@ class TestShopFloorServer(TransactionCase):
         self.assertEqual(comp['product_id'], self.component.id)
         self.assertEqual(comp['qty_demand'], 2.0)
         self.assertEqual(comp['qty_done'], 0.0)
+
+    def test_get_detail_qty_done_nonzero(self):
+        # Sans stock.move.line, qty_done=0.0 est trivialement vrai (liste
+        # vide) et n'exercise pas la sommation sur le champ v19 `quantity`.
+        # On crée une move_line avec une quantité non nulle pour vérifier
+        # que sf_get_detail() lit bien `quantity` (et pas `qty_done`, champ
+        # supprimé en v19) et ne double-compte pas.
+        move = self.wo.move_raw_ids[0]
+        self.env['stock.move.line'].create({
+            'move_id': move.id,
+            'product_id': move.product_id.id,
+            'product_uom_id': move.product_uom.id,
+            'quantity': 1.5,
+            'location_id': move.location_id.id,
+            'location_dest_id': move.location_dest_id.id,
+        })
+        detail = self.wo.sf_get_detail()
+        comp = next(c for c in detail['components'] if c['product_id'] == self.component.id)
+        self.assertEqual(comp['qty_done'], 1.5)
