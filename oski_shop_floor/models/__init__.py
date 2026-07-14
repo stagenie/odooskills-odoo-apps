@@ -1,1 +1,2 @@
-# modèles ajoutés en Task 2
+from . import mrp_workcenter
+from . import mrp_workorder
