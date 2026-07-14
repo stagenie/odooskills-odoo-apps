@@ -60,6 +60,15 @@ class MrpWorkorder(models.Model):
     def sf_start(self):
         self.ensure_one()
         self.button_start()
+        # button_start() fixe qty_producing = qty_remaining, dont l'inverse
+        # _set_qty_producing() (noyau mrp) pré-remplit automatiquement la
+        # quantité consommée de chaque move non pické (proposition de
+        # consommation attendue). Le flux Shop Floor est piloté par le scan
+        # (comptage manuel composant par composant) : on neutralise cette
+        # proposition pour que l'opérateur reparte de 0, sans droits élargis.
+        move_lines = self.move_raw_ids.move_line_ids
+        if move_lines:
+            move_lines.quantity = 0
         self.invalidate_recordset(self._SF_STALE_COMPUTE_FIELDS)
         return self.sf_get_detail()
 

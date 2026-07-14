@@ -80,6 +80,28 @@ class TestShopFloorServer(TransactionCase):
         self.assertEqual(detail['state'], 'progress')
         self.assertTrue(detail['is_user_working'])
 
+    def test_start_zeroes_component_consumption(self):
+        # button_start() du noyau mrp fait passer qty_producing à
+        # qty_remaining, ce qui déclenche _set_qty_producing() : celui-ci
+        # PRÉ-REMPLIT automatiquement la quantité consommée de chaque
+        # composant non pické (proposition de consommation attendue), même
+        # sans aucun scan. Le flux Shop Floor est piloté par le scan : le
+        # compteur doit démarrer à 0, pas à la quantité proposée par défaut.
+        detail = self.wo.sf_start()
+        for comp in detail['components']:
+            self.assertEqual(comp['qty_done'], 0.0)
+        detail = self.wo.sf_get_detail()
+        for comp in detail['components']:
+            self.assertEqual(comp['qty_done'], 0.0)
+
+        # Le scan doit repartir de 0, pas s'empiler sur la proposition.
+        self.component.barcode = 'SFCOMP02'
+        move = self.wo.move_raw_ids[0]
+        res = self.wo.sf_scan('SFCOMP02')
+        self.assertTrue(res['found'])
+        comp = next(c for c in res['detail']['components'] if c['move_id'] == move.id)
+        self.assertEqual(comp['qty_done'], 1.0)
+
     def test_set_qty(self):
         self.wo.sf_start()
         detail = self.wo.sf_set_qty(1.0)
