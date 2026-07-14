@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PAGE D'ACCUEIL
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.BarcodeMain">
+        <div class="o_barcode_main">
+            <!-- Home -->
+            <t t-if="state.currentScreen === 'home'">
+                <div class="o_barcode_title">OPERATIONS STOCK</div>
+                <div class="o_barcode_grid">
+                    <div class="o_barcode_card" t-on-click="() => this._navigate('receipt_list')">
+                        <span class="o_card_icon fa fa-download"/>
+                        <span class="o_card_label">RECEPTION</span>
+                        <span class="o_card_count" t-if="state.counts.incoming > 0">
+                            <t t-out="state.counts.incoming"/> en attente
+                        </span>
+                    </div>
+                    <div class="o_barcode_card" t-on-click="() => this._navigate('delivery_list')">
+                        <span class="o_card_icon fa fa-upload"/>
+                        <span class="o_card_label">EXPEDITION</span>
+                        <span class="o_card_count" t-if="state.counts.outgoing > 0">
+                            <t t-out="state.counts.outgoing"/> en attente
+                        </span>
+                    </div>
+                    <div class="o_barcode_card" t-on-click="() => this._navigate('inventory')">
+                        <span class="o_card_icon fa fa-clipboard"/>
+                        <span class="o_card_label">INVENTAIRE</span>
+                    </div>
+                    <div class="o_barcode_card" t-on-click="() => this._navigate('transfer')">
+                        <span class="o_card_icon fa fa-exchange"/>
+                        <span class="o_card_label">TRANSFERT</span>
+                        <span class="o_card_count" t-if="state.counts.internal > 0">
+                            <t t-out="state.counts.internal"/> en attente
+                        </span>
+                    </div>
+                    <div class="o_barcode_card" t-on-click="() => this._navigate('consult')">
+                        <span class="o_card_icon fa fa-info-circle"/>
+                        <span class="o_card_label">CONSULTATION</span>
+                        <span class="o_card_count">Info article</span>
+                    </div>
+                    <div class="o_barcode_card" t-on-click="() => this._navigate('session')">
+                        <span class="o_card_icon fa fa-user-circle"/>
+                        <span class="o_card_label">MA SESSION</span>
+                        <span class="o_card_count">Journal du jour</span>
+                    </div>
+                </div>
+            </t>
+
+            <!-- Picking Lists (navigation niveau 2) -->
+            <PickingList t-if="state.currentScreen === 'receipt_list'"
+                         pickingTypeCode="'incoming'" title="'RECEPTION'"
+                         onPickingSelected.bind="_onPickingSelected" onBack.bind="_goHome"/>
+            <PickingList t-if="state.currentScreen === 'delivery_list'"
+                         pickingTypeCode="'outgoing'" title="'EXPEDITION'"
+                         onPickingSelected.bind="_onPickingSelected" onBack.bind="_goHome"/>
+
+            <!-- Detail screens (navigation niveau 3) -->
+            <BarcodeReceipt t-if="state.currentScreen === 'receipt_detail'"
+                            pickingId="state.selectedPickingId" onBack.bind="_backToList"/>
+            <BarcodeDelivery t-if="state.currentScreen === 'delivery_detail'"
+                             pickingId="state.selectedPickingId" onBack.bind="_backToList"/>
+
+            <!-- Inventaire, Transfert, Consultation et Session (directement) -->
+            <BarcodeInventory t-if="state.currentScreen === 'inventory'" onBack.bind="_goHome"/>
+            <BarcodeTransfer t-if="state.currentScreen === 'transfer'" onBack.bind="_goHome"/>
+            <BarcodeConsult t-if="state.currentScreen === 'consult'" onBack.bind="_goHome"/>
+            <BarcodeSession t-if="state.currentScreen === 'session'" onBack.bind="_goHome"/>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SCAN BANNER
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.ScanBanner">
+        <div t-att-class="bannerClass">
+            <div class="o_scan_icon">
+                <i class="fa fa-barcode"/>
+            </div>
+            <div class="o_scan_text">
+                <t t-if="props.lastScan">
+                    <span class="o_scan_product_name" t-out="props.lastScan"/>
+                </t>
+                <t t-else="">
+                    <span class="o_scan_waiting"><t t-out="displayMessage"/></span>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PICKING LIST
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.PickingList">
+        <div class="o_barcode_screen">
+            <div class="o_barcode_header">
+                <button class="o_barcode_back" t-on-click="props.onBack">
+                    <i class="fa fa-arrow-left"/>
+                </button>
+                <span class="o_barcode_screen_title"><t t-out="props.title"/></span>
+                <button class="o_barcode_refresh" t-on-click="_loadPickings">
+                    <i class="fa fa-refresh"/>
+                </button>
+            </div>
+
+            <!-- Scan banner pour scanner un bon -->
+            <div class="o_scan_banner o_scan_banner_doc">
+                <div class="o_scan_icon"><i class="fa fa-barcode"/></div>
+                <div class="o_scan_text">
+                    <span class="o_scan_waiting">Scannez le code-barres du bon</span>
+                </div>
+            </div>
+
+            <!-- Recherche manuelle -->
+            <div class="o_barcode_search_wrap mb-3">
+                <span class="o_barcode_search_icon fa fa-search"/>
+                <input type="text" class="o_barcode_search_input" t-ref="filterInput"
+                       placeholder="Rechercher par réf, client, origine..."
+                       t-on-input="_onFilterInput" autocomplete="off"/>
+            </div>
+
+            <!-- Compteur -->
+            <div class="o_barcode_list_count" t-if="!state.loading">
+                <t t-out="filteredPickings.length"/> opération(s)
+            </div>
+            <div class="o_barcode_list_count" t-if="state.loading">
+                <i class="fa fa-spinner fa-spin"/> Chargement...
+            </div>
+
+            <!-- Liste pickings -->
+            <div class="o_barcode_picking_list">
+                <t t-foreach="filteredPickings" t-as="p" t-key="p.id">
+                    <div class="o_picking_card" t-on-click="() => this._selectPicking(p.id)">
+                        <div class="o_picking_card_header">
+                            <span class="o_picking_name" t-out="p.name"/>
+                            <span t-att-class="'badge ' + _stateBadgeClass(p.state)"
+                                  t-out="_stateLabel(p.state)"/>
+                        </div>
+                        <div class="o_picking_card_body">
+                            <span class="o_picking_partner" t-if="p.partner_name" t-out="p.partner_name"/>
+                            <span class="o_picking_origin text-muted" t-if="p.origin"> — <t t-out="p.origin"/></span>
+                        </div>
+                        <div class="o_picking_card_footer">
+                            <div class="o_picking_progress_wrap">
+                                <div class="o_picking_progress_bar">
+                                    <div class="o_picking_progress_fill"
+                                         t-attf-style="width: {{ _progressPercent(p) }}%"/>
+                                </div>
+                                <span class="o_picking_progress_text">
+                                    <t t-out="p.done_lines"/>/<t t-out="p.total_lines"/> lignes
+                                </span>
+                                <span class="o_picking_qty_text text-muted ms-2" t-if="p.total_qty_demand > 0">
+                                    (<t t-out="p.total_qty_done"/>/<t t-out="p.total_qty_demand"/> unités)
+                                </span>
+                            </div>
+                            <span class="o_picking_date text-muted" t-if="p.scheduled_date"
+                                  t-out="p.scheduled_date.substring(0, 10)"/>
+                        </div>
+                    </div>
+                </t>
+
+                <!-- Empty state -->
+                <div class="o_barcode_empty" t-if="!state.loading and filteredPickings.length === 0">
+                    <i class="fa fa-check-circle"/>
+                    <span>Aucune opération en attente</span>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PRODUCT SEARCH
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.ProductSearch">
+        <div class="o_barcode_search_wrap">
+            <span class="o_barcode_search_icon fa fa-search"/>
+            <input type="text" class="o_barcode_search_input" t-ref="searchInput"
+                   t-att-placeholder="placeholder" t-att-value="state.query"
+                   t-on-input="_onInput" t-on-keydown="_onKeydown" t-on-blur="_onBlur"
+                   autocomplete="off"/>
+            <div class="o_barcode_search_dropdown" t-if="state.showDropdown">
+                <t t-foreach="state.results" t-as="product" t-key="product.id">
+                    <div class="o_barcode_search_item"
+                         t-on-mousedown.prevent="() => this._selectProduct(product)">
+                        <div class="d-flex flex-column">
+                            <span class="o_search_product_name" t-out="product.name"/>
+                            <div class="d-flex gap-2">
+                                <span class="o_search_product_ref" t-if="product.default_code">
+                                    <i class="fa fa-tag"/> <t t-out="product.default_code"/>
+                                </span>
+                                <span class="o_search_product_ref" t-if="product.barcode">
+                                    <i class="fa fa-barcode"/> <t t-out="product.barcode"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <div class="o_barcode_search_dropdown p-2 text-muted" t-if="state.loading">
+                <i class="fa fa-spinner fa-spin"/> Recherche...
+            </div>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         QTY STEPPER
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.QtyStepper">
+        <div class="o_qty_stepper">
+            <button class="o_qty_btn o_qty_minus"
+                    t-on-mousedown="_onMinusDown" t-on-mouseup="_onPointerUp"
+                    t-on-mouseleave="_onPointerUp" t-on-touchstart="_onMinusDown"
+                    t-on-touchend="_onPointerUp">-</button>
+            <input class="o_qty_input" type="text" inputmode="numeric" pattern="[0-9]*"
+                   t-att-value="props.value" t-on-change="_onInputChange"/>
+            <button class="o_qty_btn o_qty_plus"
+                    t-on-mousedown="_onPlusDown" t-on-mouseup="_onPointerUp"
+                    t-on-mouseleave="_onPointerUp" t-on-touchstart="_onPlusDown"
+                    t-on-touchend="_onPointerUp">+</button>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         HEADER COMMUN (back + titre + mode toggle + refresh)
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.ScreenHeader">
+        <div class="o_barcode_header">
+            <button class="o_barcode_back" t-on-click="props.onBack">
+                <i class="fa fa-arrow-left"/>
+            </button>
+            <span class="o_barcode_screen_title"><t t-out="title"/></span>
+            <div class="d-flex gap-1 align-items-center">
+                <div class="o_barcode_mode_toggle">
+                    <button t-att-class="{'active': state.mode === 'scan'}"
+                            t-on-click="() => this._setMode('scan')">Scan</button>
+                    <button t-att-class="{'active': state.mode === 'manual'}"
+                            t-on-click="() => this._setMode('manual')">Manuel</button>
+                </div>
+                <button class="o_barcode_refresh" t-on-click="_refresh">
+                    <i class="fa fa-refresh"/>
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ECRAN RECEPTION
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.BarcodeReceipt">
+        <div class="o_barcode_screen">
+            <t t-call="oski_stock_barcode.ScreenHeader">
+                <t t-set="title">RECEPTION</t>
+            </t>
+
+            <div class="o_barcode_picking_info" t-if="state.pickingName">
+                <strong><t t-out="state.pickingName"/></strong>
+                <t t-if="state.partnerName"> — <t t-out="state.partnerName"/></t>
+                <t t-if="state.origin"> (<t t-out="state.origin"/>)</t>
+            </div>
+
+            <!-- Scan banner -->
+            <ScanBanner t-if="state.mode === 'scan'" active="true"
+                        lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"/>
+
+            <!-- Mode manuel : search -->
+            <ProductSearch t-if="state.mode === 'manual'"
+                           onProductSelected.bind="_onProductSelected"
+                           placeholder="'Rechercher un article...'"/>
+
+            <!-- Compteur lignes + total qté -->
+            <div class="o_barcode_list_count" t-if="state.lines.length > 0">
+                <t t-out="state.lines.length"/> article(s)
+                <t t-if="hasAnyQty"> — <strong><t t-out="state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="state.lines.length"/> complet(s)</strong></t>
+                <span class="ms-2 badge text-bg-info">
+                    Total : <t t-out="totalDone"/>/<t t-out="totalDemand"/> unité(s)
+                </span>
+            </div>
+
+            <!-- Tableau desktop -->
+            <div class="o_barcode_table_wrap o_scrollable" t-if="state.lines.length > 0">
+                <table class="o_barcode_table">
+                    <thead><tr>
+                        <th>Article</th><th style="width:10%">Attendu</th>
+                        <th style="width:18%">Reçu</th><th style="width:8%">Reste</th>
+                    </tr></thead>
+                    <tbody>
+                        <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
+                            <tr t-att-class="_lineClass(line)">
+                                <td><t t-out="line.product_name"/></td>
+                                <td><t t-out="line.demand_qty"/></td>
+                                <td><QtyStepper value="line.done_qty"
+                                    onChange.bind="(qty) => this._onQtyChange(line, qty)" min="0"/></td>
+                                <td><t t-out="Math.max(0, line.demand_qty - line.done_qty)"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Cards mobile -->
+            <div class="o_barcode_cards" t-if="state.lines.length > 0">
+                <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
+                    <div t-att-class="'o_barcode_line_card ' + _lineClass(line)">
+                        <div class="o_card_product_name" t-out="line.product_name"/>
+                        <div class="o_card_progress">
+                            <span><t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
+                            <span t-if="line.done_qty >= line.demand_qty and line.demand_qty > 0"
+                                  class="text-success fw-bold">OK</span>
+                        </div>
+                        <div class="o_card_stepper_row">
+                            <QtyStepper value="line.done_qty"
+                                onChange.bind="(qty) => this._onQtyChange(line, qty)" min="0"/>
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Actions : valider ou post-validation -->
+            <t t-if="!state.validated">
+                <div class="o_barcode_actions" t-if="state.lines.length > 0">
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="_validate"
+                            t-att-disabled="!hasAnyQty">
+                        <t t-if="allComplete">Valider la réception</t>
+                        <t t-else="">Réception partielle (reliquat)</t>
+                    </button>
+                </div>
+            </t>
+            <t t-if="state.validated">
+                <div class="o_barcode_validated text-center p-4">
+                    <i class="fa fa-check-circle fa-3x text-success mb-3"/>
+                    <div class="fw-bold mb-3" t-out="state.validationMessage"/>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button class="btn btn-outline-primary mt-2" t-on-click="_printSlip">
+                            <i class="fa fa-print me-1"/>Imprimer le bon
+                        </button>
+                        <button class="btn btn-primary" t-on-click="props.onBack">
+                            <i class="fa fa-arrow-left me-1"/> Retour
+                        </button>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ECRAN EXPEDITION
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.BarcodeDelivery">
+        <div class="o_barcode_screen">
+            <t t-call="oski_stock_barcode.ScreenHeader">
+                <t t-set="title">EXPEDITION</t>
+            </t>
+
+            <div class="o_barcode_picking_info" t-if="state.pickingName">
+                <strong><t t-out="state.pickingName"/></strong>
+                <t t-if="state.partnerName"> — <t t-out="state.partnerName"/></t>
+                <t t-if="state.origin"> (<t t-out="state.origin"/>)</t>
+            </div>
+
+            <ScanBanner t-if="state.mode === 'scan'" active="true"
+                        lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"/>
+
+            <ProductSearch t-if="state.mode === 'manual'"
+                           onProductSelected.bind="_onProductSelected"
+                           placeholder="'Rechercher un article...'"/>
+
+            <!-- Compteur lignes + total qté -->
+            <div class="o_barcode_list_count" t-if="state.lines.length > 0">
+                <t t-out="state.lines.length"/> article(s)
+                <t t-if="hasAnyQty"> — <strong><t t-out="state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="state.lines.length"/> complet(s)</strong></t>
+                <span class="ms-2 badge text-bg-info">
+                    Total : <t t-out="totalDone"/>/<t t-out="totalDemand"/> unité(s)
+                </span>
+            </div>
+
+            <!-- Tableau desktop avec dispo -->
+            <div class="o_barcode_table_wrap o_scrollable" t-if="state.lines.length > 0">
+                <table class="o_barcode_table">
+                    <thead><tr>
+                        <th>Article</th><th style="width:7%">Demandé</th>
+                        <th style="width:7%">Dispo</th>
+                        <th style="width:15%">Livré</th><th style="width:7%">Reste</th>
+                        <th style="width:6%">Etat</th>
+                    </tr></thead>
+                    <tbody>
+                        <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
+                            <tr t-att-class="_lineClass(line)">
+                                <td><t t-out="line.product_name"/></td>
+                                <td><t t-out="line.demand_qty"/></td>
+                                <td t-att-class="_availClass(line)"><t t-out="line.available_qty"/></td>
+                                <td><QtyStepper value="line.done_qty"
+                                    onChange.bind="(qty) => this._onQtyChange(line, qty)"
+                                    min="0" max="_lineMaxQty(line)"/></td>
+                                <td><t t-out="Math.max(0, line.demand_qty - line.done_qty)"/></td>
+                                <td>
+                                    <span t-if="line.done_qty >= line.demand_qty and line.demand_qty > 0"
+                                          class="badge text-bg-success">OK</span>
+                                    <span t-elif="line.available_qty &lt; line.demand_qty"
+                                          class="badge text-bg-danger" title="Stock insuffisant">!</span>
+                                    <span t-else="">--</span>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Cards mobile -->
+            <div class="o_barcode_cards" t-if="state.lines.length > 0">
+                <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
+                    <div t-att-class="'o_barcode_line_card ' + _lineClass(line)">
+                        <div class="o_card_product_name" t-out="line.product_name"/>
+                        <div class="o_card_progress">
+                            <span>Livré: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
+                            <span class="text-muted ms-2">Dispo: <t t-out="line.available_qty"/></span>
+                            <span class="ms-2" t-if="line.demand_qty - line.done_qty > 0">
+                                Reste: <strong><t t-out="line.demand_qty - line.done_qty"/></strong>
+                            </span>
+                        </div>
+                        <div class="o_card_stepper_row">
+                            <QtyStepper value="line.done_qty"
+                                onChange.bind="(qty) => this._onQtyChange(line, qty)"
+                                min="0" max="_lineMaxQty(line)"/>
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+            <t t-if="!state.validated">
+                <div class="o_barcode_actions" t-if="state.lines.length > 0">
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="_validate"
+                            t-att-disabled="!hasAnyQty">
+                        <t t-if="allComplete">Valider la livraison</t>
+                        <t t-else="">Livraison partielle (reliquat)</t>
+                    </button>
+                </div>
+            </t>
+            <t t-if="state.validated">
+                <div class="o_barcode_validated text-center p-4">
+                    <i class="fa fa-check-circle fa-3x text-success mb-3"/>
+                    <div class="fw-bold mb-3" t-out="state.validationMessage"/>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button class="btn btn-outline-primary mt-2" t-on-click="_printSlip">
+                            <i class="fa fa-print me-1"/>Imprimer le bon
+                        </button>
+                        <button class="btn btn-primary" t-on-click="props.onBack">
+                            <i class="fa fa-arrow-left me-1"/> Retour
+                        </button>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ECRAN INVENTAIRE
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.BarcodeInventory">
+        <div class="o_barcode_screen">
+
+            <!-- ═══ NIVEAU 1 : LISTE EMPLACEMENTS ═══ -->
+            <t t-if="state.screen === 'locations'">
+                <div class="o_barcode_header">
+                    <button class="o_barcode_back" t-on-click="props.onBack">
+                        <i class="fa fa-arrow-left"/>
+                    </button>
+                    <span class="o_barcode_screen_title">INVENTAIRE</span>
+                    <button class="o_barcode_refresh" t-on-click="_loadLocations">
+                        <i class="fa fa-refresh"/>
+                    </button>
+                </div>
+
+                <!-- Scan banner emplacement -->
+                <div class="o_scan_banner o_scan_banner_doc">
+                    <div class="o_scan_icon"><i class="fa fa-barcode"/></div>
+                    <div class="o_scan_text">
+                        <span class="o_scan_waiting">Scannez le code-barres d'un emplacement</span>
+                    </div>
+                </div>
+
+                <!-- Recherche emplacement -->
+                <div class="o_barcode_search_wrap mb-3">
+                    <span class="o_barcode_search_icon fa fa-search"/>
+                    <input type="text" class="o_barcode_search_input"
+                           placeholder="Rechercher un emplacement..."
+                           t-on-input="_onLocationFilterInput" autocomplete="off"/>
+                </div>
+
+                <div class="o_barcode_list_count" t-if="!state.loading">
+                    <t t-out="filteredLocations.length"/> emplacement(s)
+                </div>
+                <div class="o_barcode_list_count" t-if="state.loading">
+                    <i class="fa fa-spinner fa-spin"/> Chargement...
+                </div>
+
+                <div class="o_barcode_picking_list">
+                    <t t-foreach="filteredLocations" t-as="loc" t-key="loc.id">
+                        <div class="o_picking_card" t-on-click="() => this._selectLocation(loc)">
+                            <div class="o_picking_card_header">
+                                <span class="o_picking_name" t-out="loc.complete_name"/>
+                            </div>
+                            <div class="o_picking_card_body" t-if="loc.barcode">
+                                <span class="text-muted"><i class="fa fa-barcode"/> <t t-out="loc.barcode"/></span>
+                            </div>
+                        </div>
+                    </t>
+
+                    <div class="o_barcode_empty" t-if="!state.loading and filteredLocations.length === 0">
+                        <i class="fa fa-map-marker"/>
+                        <span>Aucun emplacement trouvé</span>
+                    </div>
+                </div>
+            </t>
+
+            <!-- ═══ NIVEAU 2 : DETAIL INVENTAIRE ═══ -->
+            <t t-if="state.screen === 'detail'">
+                <div class="o_barcode_header">
+                    <button class="o_barcode_back" t-on-click="_backToLocations">
+                        <i class="fa fa-arrow-left"/>
+                    </button>
+                    <span class="o_barcode_screen_title">INVENTAIRE</span>
+                    <div class="d-flex gap-1 align-items-center">
+                        <div class="o_barcode_mode_toggle">
+                            <button t-att-class="{'active': state.mode === 'scan'}"
+                                    t-on-click="() => this._setMode('scan')">Scan</button>
+                            <button t-att-class="{'active': state.mode === 'manual'}"
+                                    t-on-click="() => this._setMode('manual')">Manuel</button>
+                        </div>
+                        <button class="o_barcode_refresh" t-on-click="_refresh">
+                            <i class="fa fa-refresh"/>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="o_barcode_picking_info">
+                    <i class="fa fa-map-marker"/> <strong><t t-out="state.selectedLocationName"/></strong>
+                </div>
+
+                <ScanBanner t-if="state.mode === 'scan'" active="true"
+                            lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"
+                            message="'Scannez un article pour incrémenter'"/>
+
+                <ProductSearch t-if="state.mode === 'manual'"
+                               onProductSelected.bind="_onProductSelected"
+                               placeholder="'Ajouter un article par nom, réf ou code-barres...'"
+                               storableOnly="true"/>
+
+                <!-- Filtre local sur la liste chargée -->
+                <div class="o_barcode_filter_wrap mb-2" t-if="state.items.length > 0">
+                    <input type="text" class="o_barcode_filter_input"
+                           placeholder="Filtrer la liste..."
+                           t-on-input="_onItemFilterInput" autocomplete="off"/>
+                </div>
+
+                <div class="o_barcode_list_count" t-if="state.items.length > 0">
+                    <t t-out="filteredItems.length"/> article(s)
+                    <t t-if="touchedCount > 0"> — <strong><t t-out="touchedCount"/> modifié(s)</strong></t>
+                </div>
+                <div class="o_barcode_list_count" t-if="state.loading">
+                    <i class="fa fa-spinner fa-spin"/> Chargement...
+                </div>
+
+                <!-- Tableau desktop -->
+                <div class="o_barcode_table_wrap o_scrollable" t-if="filteredItems.length > 0">
+                    <table class="o_barcode_table">
+                        <thead><tr>
+                            <th style="width:4%">#</th>
+                            <th>Article</th><th style="width:9%">Système</th>
+                            <th style="width:16%">Compté</th><th style="width:7%">Ecart</th>
+                            <th style="width:5%"/>
+                        </tr></thead>
+                        <tbody>
+                            <t t-foreach="filteredItems" t-as="item" t-key="item.product_id">
+                                <tr t-att-class="_lineClass(item)">
+                                    <td class="text-muted"><t t-out="item_index + 1"/></td>
+                                    <td>
+                                        <t t-out="item.product_name"/>
+                                        <span class="text-muted ms-1" t-if="item.default_code"
+                                              t-out="'[' + item.default_code + ']'"/>
+                                    </td>
+                                    <td><t t-out="item.quantity"/></td>
+                                    <td>
+                                        <QtyStepper value="item.counted_qty"
+                                            onChange.bind="(qty) => this._onQtyChange(item, qty)" min="0"/>
+                                    </td>
+                                    <td t-att-class="_ecartClass(item)">
+                                        <t t-out="_ecartValue(item)"/>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-success"
+                                                t-att-disabled="!item.touched"
+                                                t-on-click="() => this._applyLine(item)"
+                                                title="Appliquer cette ligne">
+                                            <i class="fa fa-check"/>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Cards mobile -->
+                <div class="o_barcode_cards" t-if="filteredItems.length > 0">
+                    <t t-foreach="filteredItems" t-as="item" t-key="item.product_id">
+                        <div t-att-class="'o_barcode_line_card ' + _lineClass(item)">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-muted fw-bold">#<t t-out="item_index + 1"/></span>
+                                <span t-att-class="_ecartClass(item)">
+                                    Ecart: <t t-out="_ecartValue(item)"/>
+                                </span>
+                            </div>
+                            <div class="o_card_product_name" t-out="item.product_name"/>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Système: <t t-out="item.quantity"/></span>
+                                <button class="btn btn-sm btn-outline-success"
+                                        t-att-disabled="!item.touched"
+                                        t-on-click="() => this._applyLine(item)">
+                                    <i class="fa fa-check"/> Appliquer
+                                </button>
+                            </div>
+                            <div class="o_card_stepper_row">
+                                <QtyStepper value="item.counted_qty"
+                                    onChange.bind="(qty) => this._onQtyChange(item, qty)" min="0"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <!-- Empty -->
+                <div class="o_barcode_empty" t-if="!state.loading and state.items.length === 0">
+                    <i class="fa fa-inbox"/>
+                    <span>Aucun article en stock — scannez ou recherchez pour ajouter</span>
+                </div>
+
+                <div class="o_barcode_actions">
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="_applyInventory"
+                            t-att-disabled="touchedCount === 0">
+                        Appliquer l'inventaire (<t t-out="touchedCount"/> article(s) modifié(s))
+                    </button>
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ECRAN TRANSFERT
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.BarcodeTransfer">
+        <div class="o_barcode_screen">
+
+            <!-- ═══ PHASE 1 : PREPARATION ═══ -->
+            <t t-if="state.screen === 'prepare'">
+                <t t-call="oski_stock_barcode.ScreenHeader">
+                    <t t-set="title">TRANSFERT</t>
+                </t>
+
+                <div class="d-flex gap-2 mb-3 flex-wrap">
+                    <div class="flex-fill">
+                        <label class="form-label fw-bold">De :</label>
+                        <select class="o_barcode_picking_select" t-on-change="_onSrcChange">
+                            <option value="">-- Source --</option>
+                            <t t-foreach="state.locations" t-as="loc" t-key="loc.id">
+                                <option t-att-value="loc.id" t-att-selected="loc.id === state.srcLocationId">
+                                    <t t-out="loc.complete_name"/></option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="flex-fill">
+                        <label class="form-label fw-bold">Vers :</label>
+                        <select class="o_barcode_picking_select" t-on-change="_onDestChange">
+                            <option value="">-- Destination --</option>
+                            <t t-foreach="state.locations" t-as="loc" t-key="loc.id">
+                                <option t-att-value="loc.id" t-att-selected="loc.id === state.destLocationId">
+                                    <t t-out="loc.complete_name"/></option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+
+                <ScanBanner t-if="state.mode === 'scan' and state.srcLocationId and state.destLocationId"
+                            active="true" lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"
+                            message="'Scannez un article à transférer'"/>
+
+                <ProductSearch t-if="state.mode === 'manual' and state.srcLocationId and state.destLocationId"
+                               onProductSelected.bind="_onProductSelected"
+                               placeholder="'Rechercher un article à transférer...'"/>
+
+                <div class="o_barcode_table_wrap" t-if="state.items.length > 0">
+                    <table class="o_barcode_table">
+                        <thead><tr>
+                            <th>Article</th><th style="width:18%">Quantité</th>
+                            <th style="width:12%">Dispo</th><th style="width:5%"/>
+                        </tr></thead>
+                        <tbody>
+                            <t t-foreach="state.items" t-as="item" t-key="item.product_id">
+                                <tr>
+                                    <td><t t-out="item.product_name"/></td>
+                                    <td><QtyStepper value="item.qty"
+                                        onChange.bind="(qty) => this._onQtyChange(item, qty)"
+                                        min="1" max="item.available_qty"/></td>
+                                    <td class="text-muted"><t t-out="item.available_qty"/> dispo</td>
+                                    <td><button class="btn btn-sm btn-outline-danger"
+                                        t-on-click="() => this._removeItem(item_index)">
+                                        <i class="fa fa-trash"/></button></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="o_barcode_cards" t-if="state.items.length > 0">
+                    <t t-foreach="state.items" t-as="item" t-key="item.product_id">
+                        <div class="o_barcode_line_card">
+                            <div class="d-flex justify-content-between">
+                                <div class="o_card_product_name" t-out="item.product_name"/>
+                                <button class="btn btn-sm btn-outline-danger"
+                                    t-on-click="() => this._removeItem(item_index)">
+                                    <i class="fa fa-trash"/></button>
+                            </div>
+                            <div class="o_card_progress text-muted"><t t-out="item.available_qty"/> disponibles</div>
+                            <div class="o_card_stepper_row">
+                                <QtyStepper value="item.qty"
+                                    onChange.bind="(qty) => this._onQtyChange(item, qty)"
+                                    min="1" max="item.available_qty"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <div class="o_barcode_actions" t-if="state.srcLocationId and state.destLocationId">
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="_confirmTransfer"
+                            t-att-disabled="!canConfirm">
+                        Créer le transfert
+                    </button>
+                </div>
+            </t>
+
+            <!-- ═══ PHASE 2 : DETAIL — ajuster quantités + valider ═══ -->
+            <t t-if="state.screen === 'detail'">
+                <div class="o_barcode_header">
+                    <button class="o_barcode_back" t-on-click="_backToPrepare">
+                        <i class="fa fa-arrow-left"/>
+                    </button>
+                    <span class="o_barcode_screen_title">TRANSFERT</span>
+                    <button class="o_barcode_refresh" t-on-click="_refresh">
+                        <i class="fa fa-refresh"/>
+                    </button>
+                </div>
+
+                <div class="o_barcode_picking_info">
+                    <strong><t t-out="state.pickingName"/></strong>
+                </div>
+
+                <!-- Compteur -->
+                <div class="o_barcode_list_count" t-if="state.lines.length > 0">
+                    <t t-out="state.lines.length"/> article(s)
+                    <span class="ms-2 badge text-bg-info">
+                        Total : <t t-out="totalDone"/>/<t t-out="totalDemand"/> unité(s)
+                    </span>
+                </div>
+
+                <!-- Tableau desktop -->
+                <div class="o_barcode_table_wrap o_scrollable" t-if="state.lines.length > 0">
+                    <table class="o_barcode_table">
+                        <thead><tr>
+                            <th>Article</th><th style="width:8%">Demandé</th>
+                            <th style="width:8%">Dispo</th>
+                            <th style="width:16%">Transféré</th><th style="width:8%">Reste</th>
+                        </tr></thead>
+                        <tbody>
+                            <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
+                                <tr t-att-class="_lineClass(line)">
+                                    <td><t t-out="line.product_name"/></td>
+                                    <td><t t-out="line.demand_qty"/></td>
+                                    <td class="text-muted"><t t-out="line.available_qty"/></td>
+                                    <td><QtyStepper value="line.done_qty"
+                                        onChange.bind="(qty) => this._onLineQtyChange(line, qty)"
+                                        min="0" max="Math.min(line.demand_qty, line.available_qty)"/></td>
+                                    <td><t t-out="Math.max(0, line.demand_qty - line.done_qty)"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Cards mobile -->
+                <div class="o_barcode_cards" t-if="state.lines.length > 0">
+                    <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
+                        <div t-att-class="'o_barcode_line_card ' + _lineClass(line)">
+                            <div class="o_card_product_name" t-out="line.product_name"/>
+                            <div class="o_card_progress">
+                                <span>Transféré: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
+                                <span class="text-muted ms-2">Dispo: <t t-out="line.available_qty"/></span>
+                            </div>
+                            <div class="o_card_stepper_row">
+                                <QtyStepper value="line.done_qty"
+                                    onChange.bind="(qty) => this._onLineQtyChange(line, qty)"
+                                    min="0" max="Math.min(line.demand_qty, line.available_qty)"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <t t-if="!state.validated">
+                    <div class="o_barcode_actions" t-if="state.lines.length > 0">
+                        <button class="o_barcode_btn o_btn_primary" t-on-click="_validateTransfer"
+                                t-att-disabled="!hasAnyQty">
+                            <t t-if="allComplete">Valider le transfert</t>
+                            <t t-else="">Transfert partiel (reliquat)</t>
+                        </button>
+                    </div>
+                </t>
+                <t t-if="state.validated">
+                    <div class="o_barcode_validated text-center p-4">
+                        <i class="fa fa-check-circle fa-3x text-success mb-3"/>
+                        <div class="fw-bold mb-3" t-out="state.validationMessage"/>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <button class="btn btn-outline-primary" t-on-click="_printPicking">
+                                <i class="fa fa-print me-1"/> Imprimer
+                            </button>
+                            <button class="btn btn-primary" t-on-click="_backToPrepare">
+                                <i class="fa fa-plus me-1"/> Nouveau transfert
+                            </button>
+                            <button class="btn btn-outline-secondary" t-on-click="props.onBack">
+                                <i class="fa fa-home me-1"/> Accueil
+                            </button>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ECRAN CONSULTATION PRODUIT
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.BarcodeConsult">
+        <div class="o_barcode_screen">
+            <div class="o_barcode_header">
+                <button class="o_barcode_back" t-on-click="props.onBack">
+                    <i class="fa fa-arrow-left"/>
+                </button>
+                <span class="o_barcode_screen_title">CONSULTATION</span>
+                <div class="d-flex gap-1 align-items-center">
+                    <div class="o_barcode_mode_toggle">
+                        <button t-att-class="{'active': state.mode === 'scan'}"
+                                t-on-click="() => this._setMode('scan')">Scan</button>
+                        <button t-att-class="{'active': state.mode === 'manual'}"
+                                t-on-click="() => this._setMode('manual')">Manuel</button>
+                    </div>
+                    <button class="o_barcode_refresh" t-on-click="_clear"
+                            t-if="state.viewType" title="Nouvelle recherche">
+                        <i class="fa fa-times"/>
+                    </button>
+                </div>
+            </div>
+
+            <ScanBanner t-if="state.mode === 'scan'" active="true"
+                        lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"
+                        message="'Scannez un article ou un emplacement'"/>
+
+            <ProductSearch t-if="state.mode === 'manual'"
+                           onProductSelected.bind="_onProductSelected"
+                           placeholder="'Rechercher par nom, réf ou code-barres...'"/>
+
+            <!-- Chargement -->
+            <div class="text-center p-4" t-if="state.loading">
+                <i class="fa fa-spinner fa-spin fa-2x"/>
+            </div>
+
+            <!-- ═══ FICHE PRODUIT ═══ -->
+            <t t-if="state.viewType === 'product' and !state.loading">
+                <div class="o_consult_product_card">
+                    <div class="o_consult_header">
+                        <div class="o_consult_image">
+                            <img t-if="state.product.has_image"
+                                 t-att-src="state.product.image_url"
+                                 alt="Image produit"/>
+                            <div t-else="" class="o_consult_no_image">
+                                <i class="fa fa-cube fa-3x text-muted"/>
+                            </div>
+                        </div>
+                        <div class="o_consult_info">
+                            <h4 class="mb-1" t-out="state.product.name"/>
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <span class="badge text-bg-secondary" t-if="state.product.default_code">
+                                    <i class="fa fa-tag"/> <t t-out="state.product.default_code"/>
+                                </span>
+                                <span class="badge text-bg-secondary" t-if="state.product.barcode">
+                                    <i class="fa fa-barcode"/> <t t-out="state.product.barcode"/>
+                                </span>
+                                <span class="badge text-bg-light" t-if="state.product.categ_name">
+                                    <t t-out="state.product.categ_name"/>
+                                </span>
+                            </div>
+                            <div class="text-muted" t-if="state.product.uom_name">
+                                UdM : <t t-out="state.product.uom_name"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="o_consult_stock_summary">
+                        <div class="o_consult_stock_item">
+                            <span class="o_consult_stock_label">En stock</span>
+                            <span class="o_consult_stock_value" t-out="state.product.total_qty"/>
+                        </div>
+                        <div class="o_consult_stock_item">
+                            <span class="o_consult_stock_label">Réservé</span>
+                            <span class="o_consult_stock_value text-warning" t-out="state.product.total_reserved"/>
+                        </div>
+                        <div class="o_consult_stock_item">
+                            <span class="o_consult_stock_label">Disponible</span>
+                            <span t-att-class="'o_consult_stock_value ' + _stockClass(state.product.total_available)"
+                                  t-out="state.product.total_available"/>
+                        </div>
+                    </div>
+
+                    <div class="o_consult_locations" t-if="state.product.locations.length > 0">
+                        <h6 class="mb-2">Stock par emplacement</h6>
+                        <table class="table table-sm table-striped mb-0">
+                            <thead><tr>
+                                <th>Emplacement</th>
+                                <th class="text-end" style="width:20%">En stock</th>
+                                <th class="text-end" style="width:20%">Réservé</th>
+                                <th class="text-end" style="width:20%">Dispo</th>
+                            </tr></thead>
+                            <tbody>
+                                <t t-foreach="state.product.locations" t-as="loc" t-key="loc.location_id">
+                                    <tr>
+                                        <td><t t-out="loc.location_name"/></td>
+                                        <td class="text-end"><t t-out="loc.quantity"/></td>
+                                        <td class="text-end text-muted"><t t-out="loc.reserved_quantity"/></td>
+                                        <td t-att-class="'text-end ' + _stockClass(loc.available_quantity)">
+                                            <t t-out="loc.available_quantity"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-muted text-center p-3" t-if="state.product.locations.length === 0">
+                        <i class="fa fa-info-circle"/> Aucun stock pour cet article
+                    </div>
+
+                    <div class="o_consult_moves mt-3" t-if="state.recentMoves.length > 0">
+                        <h6 class="mb-2">Derniers mouvements</h6>
+                        <table class="table table-sm table-striped mb-0">
+                            <thead><tr>
+                                <th>Date</th><th>De</th><th>Vers</th>
+                                <th class="text-end">Qté</th><th>Lot</th>
+                            </tr></thead>
+                            <tbody>
+                                <t t-foreach="state.recentMoves" t-as="mv" t-key="mv_index">
+                                    <tr>
+                                        <td><t t-out="mv.date"/></td>
+                                        <td><t t-out="mv.location"/></td>
+                                        <td><t t-out="mv.location_dest"/></td>
+                                        <td class="text-end"><t t-out="mv.quantity"/></td>
+                                        <td><t t-out="mv.lot_name"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+
+            <!-- ═══ FICHE EMPLACEMENT ═══ -->
+            <t t-if="state.viewType === 'location' and !state.loading">
+                <div class="o_consult_product_card">
+                    <div class="o_consult_header">
+                        <div class="o_consult_image">
+                            <i class="fa fa-map-marker fa-3x text-muted"/>
+                        </div>
+                        <div class="o_consult_info">
+                            <h4 class="mb-1" t-out="state.location.name"/>
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <span class="badge text-bg-secondary" t-if="state.location.barcode">
+                                    <i class="fa fa-barcode"/> <t t-out="state.location.barcode"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="o_consult_stock_summary">
+                        <div class="o_consult_stock_item">
+                            <span class="o_consult_stock_label">Articles</span>
+                            <span class="o_consult_stock_value" t-out="state.location.total_products"/>
+                        </div>
+                        <div class="o_consult_stock_item">
+                            <span class="o_consult_stock_label">Qté totale</span>
+                            <span class="o_consult_stock_value" t-out="state.location.total_qty"/>
+                        </div>
+                        <div class="o_consult_stock_item">
+                            <span class="o_consult_stock_label">Disponible</span>
+                            <span t-att-class="'o_consult_stock_value ' + _stockClass(state.location.total_available)"
+                                  t-out="state.location.total_available"/>
+                        </div>
+                    </div>
+
+                    <div class="o_consult_locations" t-if="state.location.products.length > 0">
+                        <h6 class="mb-2">Contenu de l'emplacement</h6>
+                        <table class="table table-sm table-striped mb-0">
+                            <thead><tr>
+                                <th>Article</th>
+                                <th class="text-end" style="width:18%">En stock</th>
+                                <th class="text-end" style="width:18%">Réservé</th>
+                                <th class="text-end" style="width:18%">Dispo</th>
+                            </tr></thead>
+                            <tbody>
+                                <t t-foreach="state.location.products" t-as="p" t-key="p.product_id">
+                                    <tr>
+                                        <td>
+                                            <t t-out="p.product_name"/>
+                                            <span class="text-muted ms-1" t-if="p.default_code"
+                                                  t-out="'[' + p.default_code + ']'"/>
+                                        </td>
+                                        <td class="text-end"><t t-out="p.quantity"/></td>
+                                        <td class="text-end text-muted"><t t-out="p.reserved_quantity"/></td>
+                                        <td t-att-class="'text-end ' + _stockClass(p.available_quantity)">
+                                            <t t-out="p.available_quantity"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-muted text-center p-3" t-if="state.location.products.length === 0">
+                        <i class="fa fa-info-circle"/> Aucun article en stock
+                    </div>
+                </div>
+            </t>
+
+            <!-- Etat initial -->
+            <div class="o_barcode_empty" t-if="!state.viewType and !state.loading">
+                <i class="fa fa-search fa-2x"/>
+                <span>Scannez ou recherchez un article ou emplacement</span>
+            </div>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ECRAN MA SESSION (journal des scans du jour)
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.BarcodeSession">
+        <div class="o_barcode_screen o_barcode_session">
+            <div class="o_barcode_header">
+                <button class="o_barcode_back" t-on-click="props.onBack">
+                    <i class="fa fa-arrow-left"/>
+                </button>
+                <span class="o_barcode_screen_title">Ma session</span>
+            </div>
+            <div class="p-3" t-if="!state.loading">
+                <div class="o_session_summary d-flex flex-wrap gap-2 mb-3">
+                    <t t-foreach="summaryList" t-as="s" t-key="s.key">
+                        <span class="badge text-bg-primary p-2">
+                            <t t-out="s.label"/> : <t t-out="s.count"/>
+                            <t t-if="s.total_qty"> (<t t-out="s.total_qty"/>)</t>
+                        </span>
+                    </t>
+                </div>
+                <div class="text-muted" t-if="state.lines.length === 0">
+                    Aucun scan aujourd'hui.
+                </div>
+                <table class="table table-sm" t-if="state.lines.length > 0">
+                    <thead><tr>
+                        <th>Heure</th><th>Action</th><th>Article</th>
+                        <th>Lot</th><th class="text-end">Qté</th>
+                    </tr></thead>
+                    <tbody>
+                        <t t-foreach="state.lines" t-as="l" t-key="l_index">
+                            <tr>
+                                <td><t t-out="l.time"/></td>
+                                <td><t t-out="l.action_label"/></td>
+                                <td><t t-out="l.product_name"/></td>
+                                <td><t t-out="l.lot_name"/></td>
+                                <td class="text-end"><t t-out="l.quantity"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SLOT EXTENSIBLE (V3 lot/serie)
+         ══════════════════════════════════════════════════════════════ -->
+    <t t-name="oski_stock_barcode.LineExtra">
+        <!-- Vide par defaut — surcharge par oski_stock_barcode_lot -->
+    </t>
+
+</templates>

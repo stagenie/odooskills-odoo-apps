@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Action Client OWL -->
+    <record id="action_barcode_operations" model="ir.actions.client">
+        <field name="name">Opérations Code-Barres</field>
+        <field name="tag">oski_barcode_main</field>
+    </record>
+
+    <!-- Menu racine (app principale) -->
+    <menuitem id="menu_barcode_root"
+              name="Code-Barres"
+              web_icon="oski_stock_barcode,static/description/icon.png"
+              action="action_barcode_operations"
+              sequence="45"/>
+
+</odoo>

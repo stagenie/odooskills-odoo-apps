@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         RAPPORT BON DE LIVRAISON — Ajouter code-barres scannable
+         Le rapport d'opérations (report_picking) a déjà un barcode natif.
+         Ici on ajoute le barcode au delivery slip (BL/BR)
+         via la route /report/barcode/ (pas de dépendance renderPM).
+         ══════════════════════════════════════════════════════════════ -->
+
+    <template id="oski_report_delivery_barcode" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[hasclass('page')]/div[hasclass('oe_structure')][1]" position="before">
+            <div class="text-end mb-2">
+                <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 300, 50)"
+                     style="width:250px;height:40px;"
+                     alt="Code-barres"/>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ETIQUETTES EMPLACEMENTS — Code-barres imprimables
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="action_report_location_barcode" model="ir.actions.report">
+        <field name="name">Étiquettes code-barres</field>
+        <field name="model">stock.location</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oski_stock_barcode.report_location_barcode</field>
+        <field name="report_file">oski_stock_barcode.report_location_barcode</field>
+        <field name="binding_model_id" ref="stock.model_stock_location"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <template id="report_location_barcode">
+        <t t-call="web.html_container">
+            <div class="page">
+                <style>
+                    .o_loc_label {
+                        display: inline-block;
+                        width: 48%;
+                        border: 1px solid #ccc;
+                        border-radius: 6px;
+                        padding: 12px;
+                        margin: 4px 0.5%;
+                        text-align: center;
+                        page-break-inside: avoid;
+                        vertical-align: top;
+                    }
+                    .o_loc_label_name {
+                        font-size: 14px;
+                        font-weight: bold;
+                        margin-bottom: 6px;
+                        word-break: break-all;
+                    }
+                    .o_loc_label_barcode_text {
+                        font-size: 10px;
+                        color: #666;
+                        margin-top: 4px;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="loc">
+                    <div class="o_loc_label">
+                        <div class="o_loc_label_name" t-out="loc.complete_name"/>
+                        <img t-if="loc.barcode"
+                             t-att-src="'/report/barcode/Code128/%s?width=400&amp;height=80&amp;humanreadable=1' % loc.barcode"
+                             style="width:200px;height:45px;"/>
+                        <img t-else=""
+                             t-att-src="'/report/barcode/Code128/%s?width=400&amp;height=80&amp;humanreadable=1' % loc.complete_name"
+                             style="width:200px;height:45px;"/>
+                        <div class="o_loc_label_barcode_text" t-out="loc.barcode or loc.complete_name"/>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+</odoo>

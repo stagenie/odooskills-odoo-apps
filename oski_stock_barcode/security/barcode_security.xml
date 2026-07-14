@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rule_scan_log_own" model="ir.rule">
+        <field name="name">Scan log: ses propres lignes</field>
+        <field name="model_id" ref="model_oski_barcode_scan_log"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+
+    <record id="rule_scan_log_manager" model="ir.rule">
+        <field name="name">Scan log: manager voit tout</field>
+        <field name="model_id" ref="model_oski_barcode_scan_log"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('stock.group_stock_manager'))]"/>
+    </record>
+</odoo>
