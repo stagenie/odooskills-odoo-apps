@@ -86,6 +86,11 @@
                 <span class="o_sf_qty_target">/ <t t-out="wo.qty_production"/></span>
             </div>
 
+            <div class="o_sf_scanbox">
+                <input type="text" class="o_sf_scan_input" placeholder="Scanner ou saisir un code-barres"
+                       t-on-change="(ev) => { this.onScan(ev.target.value); ev.target.value=''; }"/>
+            </div>
+
             <div class="o_sf_components">
                 <h2>Composants</h2>
                 <div class="o_sf_comp_row" t-foreach="wo.components" t-as="comp" t-key="comp.move_id">

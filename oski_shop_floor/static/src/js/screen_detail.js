@@ -2,6 +2,8 @@
 
 import { Component, useState } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { useShopFloorScan } from "./use_shop_floor_scan";
+import { scanFeedback } from "./scan_feedback";
 
 export class ScreenDetail extends Component {
     static template = "oski_shop_floor.ScreenDetail";
@@ -11,6 +13,7 @@ export class ScreenDetail extends Component {
         this.orm = useService("orm");
         this.notification = useService("notification");
         this.state = useState({ detail: this.props.detail });
+        useShopFloorScan((code) => this.onScan(code));
     }
 
     get wo() {
@@ -41,5 +44,23 @@ export class ScreenDetail extends Component {
 
     incComponent(comp) {
         return this.consume(comp.move_id, (comp.qty_done || 0) + 1);
+    }
+
+    async onScan(code) {
+        try {
+            const res = await this.orm.call(
+                "mrp.workorder", "sf_scan", [[this.props.orderId], code]
+            );
+            if (res.found) {
+                this.state.detail = res.detail;
+                scanFeedback(true);
+            } else {
+                scanFeedback(false);
+                this.notification.add(`Code non reconnu : ${code}`, { type: "warning" });
+            }
+        } catch (e) {
+            scanFeedback(false);
+            this.notification.add(e.data?.message || e.message || "Erreur scan", { type: "danger" });
+        }
     }
 }
