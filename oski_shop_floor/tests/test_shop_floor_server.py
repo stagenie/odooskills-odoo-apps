@@ -74,3 +74,28 @@ class TestShopFloorServer(TransactionCase):
         detail = self.wo.sf_get_detail()
         comp = next(c for c in detail['components'] if c['product_id'] == self.component.id)
         self.assertEqual(comp['qty_done'], 1.5)
+
+    def test_start_sets_progress(self):
+        detail = self.wo.sf_start()
+        self.assertEqual(detail['state'], 'progress')
+        self.assertTrue(detail['is_user_working'])
+
+    def test_set_qty(self):
+        self.wo.sf_start()
+        detail = self.wo.sf_set_qty(1.0)
+        self.assertEqual(detail['qty_producing'], 1.0)
+
+    def test_pause_then_finish(self):
+        self.wo.sf_start()
+        paused = self.wo.sf_pause()
+        self.assertFalse(paused['is_user_working'])
+        self.wo.sf_start()
+        self.wo.sf_set_qty(1.0)
+        finished = self.wo.sf_finish()
+        self.assertEqual(finished['state'], 'done')
+        self.assertIn('next_order_id', finished)
+
+    def test_finish_before_start_raises(self):
+        from odoo.exceptions import UserError
+        with self.assertRaises(UserError):
+            self.wo.sf_finish()
