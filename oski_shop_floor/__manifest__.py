@@ -20,6 +20,9 @@ composants. Aucune licence Enterprise requise.
     'assets': {
         'web.assets_backend': [
             'oski_shop_floor/static/src/xml/shop_floor_templates.xml',
+            'oski_shop_floor/static/src/js/screen_workcenter.js',
+            'oski_shop_floor/static/src/js/screen_orders.js',
+            'oski_shop_floor/static/src/js/screen_detail.js',
             'oski_shop_floor/static/src/js/shop_floor_app.js',
         ],
     },

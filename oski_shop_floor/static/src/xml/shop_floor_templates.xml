@@ -1,8 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates xml:space="preserve">
+
     <t t-name="oski_shop_floor.App">
         <div class="o_shop_floor">
-            <div class="o_sf_placeholder">Atelier — chargement…</div>
+            <ScreenWorkcenter t-if="state.screen === 'workcenter'"
+                              workcenters="state.workcenters"
+                              onOpen.bind="openWorkcenter"/>
+            <ScreenOrders t-if="state.screen === 'orders'"
+                          orders="state.orders"
+                          onBack.bind="goHome"
+                          onOpen.bind="openOrder"/>
+            <ScreenDetail t-if="state.screen === 'detail'"
+                          detail="state.detail"
+                          orderId="state.orderId"
+                          onBack.bind="goOrders"/>
         </div>
     </t>
+
+    <t t-name="oski_shop_floor.ScreenWorkcenter">
+        <div class="o_sf_screen o_sf_workcenter">
+            <h1 class="o_sf_title">Postes de charge</h1>
+            <div class="o_sf_grid">
+                <button class="o_sf_card" t-foreach="props.workcenters" t-as="wc" t-key="wc.id"
+                        t-on-click="() => props.onOpen(wc.id)">
+                    <span class="o_sf_card_name" t-out="wc.name"/>
+                    <span class="o_sf_badges">
+                        <span class="o_sf_badge o_sf_progress" t-if="wc.count_progress">
+                            <t t-out="wc.count_progress"/> en cours
+                        </span>
+                        <span class="o_sf_badge o_sf_ready">
+                            <t t-out="wc.count_ready"/> à faire
+                        </span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="oski_shop_floor.ScreenOrders">
+        <div class="o_sf_screen o_sf_orders">
+            <div class="o_sf_header">
+                <button class="o_sf_back" t-on-click="() => props.onBack()">← Postes</button>
+                <h1 class="o_sf_title">Ordres de travail</h1>
+            </div>
+            <div class="o_sf_list">
+                <button class="o_sf_row" t-foreach="props.orders" t-as="o" t-key="o.id"
+                        t-att-class="{ 'o_sf_row_active': o.state === 'progress' }"
+                        t-on-click="() => props.onOpen(o.id)">
+                    <span class="o_sf_row_main">
+                        <span class="o_sf_row_name" t-out="o.name"/>
+                        <span class="o_sf_row_sub" t-out="o.product_name"/>
+                    </span>
+                    <span class="o_sf_row_state" t-out="o.state === 'progress' ? 'En cours' : 'À faire'"/>
+                </button>
+                <div class="o_sf_empty" t-if="!props.orders.length">Aucun ordre de travail sur ce poste.</div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="oski_shop_floor.ScreenDetail">
+        <div class="o_sf_screen o_sf_detail">
+            <div class="o_sf_header">
+                <button class="o_sf_back" t-on-click="() => props.onBack()">← Ordres</button>
+                <h1 class="o_sf_title" t-out="wo.name"/>
+            </div>
+
+            <div class="o_sf_meta">
+                <span t-out="wo.product_name"/> · <span t-out="wo.production_name"/>
+                <span class="o_sf_state" t-out="wo.state"/>
+            </div>
+
+            <div class="o_sf_actions">
+                <button class="o_sf_btn o_sf_start" t-if="wo.state !== 'progress' and wo.state !== 'done'"
+                        t-on-click="() => this.start()">Démarrer</button>
+                <button class="o_sf_btn o_sf_pause" t-if="wo.state === 'progress'"
+                        t-on-click="() => this.pause()">Pause</button>
+                <button class="o_sf_btn o_sf_finish" t-if="wo.state === 'progress'"
+                        t-on-click="() => this.finish()">Terminer</button>
+            </div>
+
+            <div class="o_sf_qty">
+                <label>Quantité produite</label>
+                <input type="number" step="1" min="0" t-att-value="wo.qty_producing"
+                       t-on-change="(ev) => this.setQty(ev)"/>
+                <span class="o_sf_qty_target">/ <t t-out="wo.qty_production"/></span>
+            </div>
+
+            <div class="o_sf_components">
+                <h2>Composants</h2>
+                <div class="o_sf_comp_row" t-foreach="wo.components" t-as="comp" t-key="comp.move_id">
+                    <span class="o_sf_comp_name" t-out="comp.product_name"/>
+                    <span class="o_sf_comp_qty"><t t-out="comp.qty_done"/> / <t t-out="comp.qty_demand"/></span>
+                    <button class="o_sf_comp_add" t-on-click="() => this.incComponent(comp)">+1</button>
+                </div>
+            </div>
+        </div>
+    </t>
+
 </templates>
