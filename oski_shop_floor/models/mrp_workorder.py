@@ -88,6 +88,7 @@ class MrpWorkorder(models.Model):
         if self.state != 'progress':
             raise UserError(_("Impossible de terminer un ordre de travail qui n'est pas en cours."))
         self.button_finish()
+        self.invalidate_recordset(self._SF_STALE_COMPUTE_FIELDS)
         next_order = self.search([
             ('workcenter_id', '=', self.workcenter_id.id),
             ('state', '=', 'ready'),

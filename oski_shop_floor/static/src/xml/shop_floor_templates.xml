@@ -67,7 +67,7 @@
 
             <div class="o_sf_meta">
                 <span t-out="wo.product_name"/> · <span t-out="wo.production_name"/>
-                <span class="o_sf_state" t-out="wo.state"/>
+                <span class="o_sf_state" t-out="stateLabel"/>
             </div>
 
             <div class="o_sf_actions">

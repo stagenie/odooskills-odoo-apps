@@ -22,7 +22,6 @@ export class ShopFloorApp extends Component {
             workcenters: [],
             orders: [],
             detail: null,
-            error: "",
         });
         onWillStart(() => this.loadWorkcenters());
     }

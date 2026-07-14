@@ -20,6 +20,18 @@ export class ScreenDetail extends Component {
         return this.state.detail;
     }
 
+    get stateLabel() {
+        const labels = {
+            ready: "À faire",
+            progress: "En cours",
+            done: "Terminé",
+            cancel: "Annulé",
+            pending: "En attente",
+            waiting: "En attente",
+        };
+        return labels[this.wo.state] || this.wo.state;
+    }
+
     async _call(method, args = []) {
         try {
             this.state.detail = await this.orm.call(
@@ -50,12 +62,6 @@ export class ScreenDetail extends Component {
     }
     setQty(ev) { return this._call("sf_set_qty", [parseFloat(ev.target.value) || 0]); }
     consume(moveId, qty) { return this._call("sf_consume", [moveId, qty]); }
-
-    async refresh() {
-        this.state.detail = await this.orm.call(
-            "mrp.workorder", "sf_get_detail", [[this.props.orderId]]
-        );
-    }
 
     incComponent(comp) {
         return this.consume(comp.move_id, (comp.qty_done || 0) + 1);
