@@ -27,6 +27,7 @@ composants. Aucune licence Enterprise requise.
             'oski_shop_floor/static/src/js/screen_orders.js',
             'oski_shop_floor/static/src/js/screen_detail.js',
             'oski_shop_floor/static/src/js/shop_floor_app.js',
+            'oski_shop_floor/static/tests/tours/shop_floor_tour.js',
         ],
     },
     'images': ['static/description/banner.png'],

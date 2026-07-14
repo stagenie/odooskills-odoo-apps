@@ -32,7 +32,22 @@ export class ScreenDetail extends Component {
 
     start() { return this._call("sf_start"); }
     pause() { return this._call("sf_pause"); }
-    finish() { return this._call("sf_finish"); }
+
+    async finish() {
+        // sf_finish() clôt l'OT (state='done') : il ne reste plus sur ce
+        // poste, donc l'écran Détail n'a plus de raison d'être affiché.
+        // On ne retourne à la liste des ordres qu'en cas de succès — une
+        // sf_finish() qui lève UserError (OT pas en cours) ne doit pas
+        // faire naviguer l'opérateur ailleurs.
+        try {
+            this.state.detail = await this.orm.call(
+                "mrp.workorder", "sf_finish", [[this.props.orderId]]
+            );
+            this.props.onBack();
+        } catch (e) {
+            this.notification.add(e.data?.message || e.message || "Erreur", { type: "danger" });
+        }
+    }
     setQty(ev) { return this._call("sf_set_qty", [parseFloat(ev.target.value) || 0]); }
     consume(moveId, qty) { return this._call("sf_consume", [moveId, qty]); }
 
