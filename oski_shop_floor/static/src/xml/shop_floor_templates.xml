@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="oski_shop_floor.App">
+        <div class="o_shop_floor">
+            <div class="o_sf_placeholder">Atelier — chargement…</div>
+        </div>
+    </t>
+</templates>
