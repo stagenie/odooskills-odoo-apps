@@ -92,3 +92,42 @@ class MrpWorkorder(models.Model):
         self.ensure_one()
         self.qty_producing = qty
         return self.sf_get_detail()
+
+    def sf_consume(self, move_id, qty):
+        """Pose la quantité consommée sur un composant (move_raw_ids) de l'OT.
+
+        Sécurité : le move DOIT appartenir aux composants de cet OT, sinon rejet.
+        V1 : par produit uniquement ; si tracké lot/série, renvoie needs_lot=True
+        (le pont barcode gèrera le lot) sans bloquer.
+        """
+        self.ensure_one()
+        move = self.move_raw_ids.filtered(lambda m: m.id == move_id)
+        if not move:
+            raise UserError(_("Composant introuvable pour cet ordre de travail."))
+        line = move.move_line_ids[:1]
+        if line:
+            line.quantity = qty
+        else:
+            self.env['stock.move.line'].create({
+                'move_id': move.id,
+                'product_id': move.product_id.id,
+                'product_uom_id': move.product_uom.id,
+                'quantity': qty,
+                'location_id': move.location_id.id,
+                'location_dest_id': move.location_dest_id.id,
+            })
+        detail = self.sf_get_detail()
+        detail['needs_lot'] = move.product_id.tracking != 'none'
+        return detail
+
+    def sf_scan(self, barcode):
+        """Résout un code-barres : composant de l'OT -> +1 UdM consommée."""
+        self.ensure_one()
+        move = self.move_raw_ids.filtered(lambda m: m.product_id.barcode == barcode)
+        if move:
+            move = move[0]
+            line = move.move_line_ids[:1]
+            new_qty = (line.quantity if line else 0.0) + 1.0
+            detail = self.sf_consume(move.id, new_qty)
+            return {'found': True, 'action': 'consume', 'move_id': move.id, 'detail': detail}
+        return {'found': False}

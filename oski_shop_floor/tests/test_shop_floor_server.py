@@ -99,3 +99,44 @@ class TestShopFloorServer(TransactionCase):
         from odoo.exceptions import UserError
         with self.assertRaises(UserError):
             self.wo.sf_finish()
+
+    def test_consume_sets_quantity(self):
+        self.wo.sf_start()
+        move = self.wo.move_raw_ids[0]
+        detail = self.wo.sf_consume(move.id, 2.0)
+        comp = next(c for c in detail['components'] if c['move_id'] == move.id)
+        self.assertEqual(comp['qty_done'], 2.0)
+        self.assertFalse(detail['needs_lot'])
+
+    def test_consume_foreign_move_rejected(self):
+        from odoo.exceptions import UserError
+        other = self.env['stock.move'].create({
+            'product_id': self.component.id,
+            'product_uom_qty': 1.0, 'product_uom': self.component.uom_id.id,
+            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_dest_id': self.env.ref('stock.stock_location_customers').id,
+        })
+        with self.assertRaises(UserError):
+            self.wo.sf_consume(other.id, 1.0)
+
+    def test_scan_component_increments(self):
+        self.component.barcode = 'SFCOMP01'
+        self.wo.sf_start()
+        # sf_start() -> button_start() fait passer qty_producing à une valeur
+        # non nulle, ce qui déclenche _set_qty_producing() côté noyau mrp :
+        # celui-ci PRÉ-REMPLIT automatiquement la quantité consommée du
+        # composant (proposition de consommation attendue), même sans aucun
+        # scan. On neutralise cette proposition pour tester le scan sur une
+        # base à zéro (le pont barcode réel devra faire de même en amont).
+        move = self.wo.move_raw_ids[0]
+        move.move_line_ids.quantity = 0.0
+        res = self.wo.sf_scan('SFCOMP01')
+        self.assertTrue(res['found'])
+        move = self.wo.move_raw_ids[0]
+        comp = next(c for c in res['detail']['components'] if c['move_id'] == move.id)
+        self.assertEqual(comp['qty_done'], 1.0)
+
+    def test_scan_unknown_not_found(self):
+        self.wo.sf_start()
+        res = self.wo.sf_scan('NOPE')
+        self.assertFalse(res['found'])
