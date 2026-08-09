@@ -287,3 +287,24 @@ class TestPartnerBalanceEngine(TransactionCase):
         rows = self.env['oski.partner.balance.engine']._build_rows(
             self._options(partner_ids=[partner.id]))
         self.assertEqual(rows, [])
+
+    def test_39_sequence_spans_partners_and_sections(self):
+        """One counter for the whole result: no reset per partner or per section."""
+        partner_a = self.env['res.partner'].create({'name': 'PB Rows 10 A'})
+        partner_b = self.env['res.partner'].create({'name': 'PB Rows 10 B'})
+        journal_purchase = self.env['account.journal'].create({
+            'name': 'PB Purchases 3', 'type': 'purchase', 'code': 'PBPU3',
+        })
+        for partner in (partner_a, partner_b):
+            self._make_invoice(partner, '2026-02-01', 100.0)
+            self._make_invoice(partner, '2026-02-02', 60.0,
+                               journal=journal_purchase, move_type='in_invoice')
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner_a.id, partner_b.id],
+                          scope='both', include_opening=False))
+        sequences = [row['sequence'] for row in rows]
+        self.assertEqual(len(rows), 4, "two partners x two sections x one line each")
+        self.assertEqual(
+            sequences, list(range(1, len(rows) + 1)),
+            "the sequence must run 1..N across every section and partner; "
+            "a counter reset per partner or per section would repeat values")
