@@ -19,3 +19,15 @@ class AccountMove(models.Model):
         help="When ticked, this document is left out of the partner balance, "
              "of the statement and of the opening balance.",
     )
+
+    def write(self, vals):
+        result = super().write(vals)
+        if 'oski_exclude_from_balance' in vals:
+            # oski.partner.balance.line#is_excluded is a related field on a
+            # TransientModel. The ORM does not register a recompute trigger
+            # from a regular model onto a transient one (see
+            # Field.resolve_depends), so an already-cached wizard line would
+            # keep showing the old value. Invalidate it explicitly.
+            self.env['oski.partner.balance.line'].search(
+                [('move_id', 'in', self.ids)]).invalidate_recordset(['is_excluded'])
+        return result

@@ -22,6 +22,8 @@ Odoo Community has no partner ledger. This module adds one.
     'license': 'LGPL-3',
     'depends': ['account'],
     'data': [
+        'security/partner_balance_groups.xml',
+        'security/ir.model.access.csv',
         'views/account_move_views.xml',
     ],
     'post_init_hook': 'post_init_hook',

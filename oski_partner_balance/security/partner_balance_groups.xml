@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_partner_balance_user" model="res.groups">
+        <field name="name">Partner Balance</field>
+        <field name="privilege_id" ref="account.res_groups_privilege_accounting"/>
+        <field name="comment">Read the partner balance and print its statements.</field>
+    </record>
+
+    <record id="account.group_account_invoice" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('oski_partner_balance.group_partner_balance_user'))]"/>
+    </record>
+</odoo>
