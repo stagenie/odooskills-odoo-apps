@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_balance_wizard_form" model="ir.ui.view">
+        <field name="name">oski.partner.balance.wizard.form</field>
+        <field name="model">oski.partner.balance.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Partner Balance">
+                <group>
+                    <group string="Period">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="include_opening"/>
+                    </group>
+                    <group string="Scope">
+                        <field name="scope"/>
+                        <field name="target_moves"/>
+                        <field name="partner_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <group string="Journals">
+                    <field name="journal_filter"/>
+                    <field name="journal_ids" widget="many2many_tags"
+                           invisible="journal_filter == 'all'"
+                           required="journal_filter != 'all'"/>
+                </group>
+                <footer>
+                    <button name="action_view_lines" type="object" string="View"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_partner_balance_wizard" model="ir.actions.act_window">
+        <field name="name">Partner Balance</field>
+        <field name="res_model">oski.partner.balance.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -102,3 +102,17 @@ class TestPartnerBalanceWizard(TransactionCase):
         with self.assertRaises(AccessError):
             self.env['oski.partner.balance.line'].with_user(user).search(
                 [('wizard_id', '=', wizard.id)]).mapped('cumulative')
+
+    def test_50_views_render(self):
+        """Both views compile: a malformed arch fails here, not at the customer's."""
+        self.env['oski.partner.balance.wizard'].get_view(
+            self.env.ref('oski_partner_balance.view_partner_balance_wizard_form').id,
+            'form')
+        self.env['oski.partner.balance.line'].get_view(
+            self.env.ref('oski_partner_balance.view_partner_balance_line_list').id,
+            'list')
+
+    def test_51_action_is_reachable(self):
+        action = self.env.ref('oski_partner_balance.action_partner_balance_wizard')
+        self.assertEqual(action.res_model, 'oski.partner.balance.wizard')
+        self.assertEqual(action.target, 'new')

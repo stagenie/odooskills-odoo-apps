@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_balance_line_list" model="ir.ui.view">
+        <field name="name">oski.partner.balance.line.list</field>
+        <field name="model">oski.partner.balance.line</field>
+        <field name="arch" type="xml">
+            <list string="Partner Balance" create="false" delete="false"
+                  default_order="sequence" decoration-info="is_opening == True">
+                <field name="sequence" column_invisible="1"/>
+                <field name="partner_id"/>
+                <field name="section" optional="show"/>
+                <field name="date"/>
+                <field name="operation_datetime" optional="hide"/>
+                <field name="journal_id" optional="show"/>
+                <field name="name"/>
+                <field name="ref" optional="hide"/>
+                <field name="label" optional="show"/>
+                <field name="date_maturity" optional="show"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="cumulative"/>
+                <field name="amount_residual" optional="hide"/>
+                <field name="is_excluded" widget="boolean_toggle"
+                       groups="account.group_account_manager"
+                       readonly="is_opening"/>
+                <field name="is_opening" column_invisible="1"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="move_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_partner_balance_line_search" model="ir.ui.view">
+        <field name="name">oski.partner.balance.line.search</field>
+        <field name="model">oski.partner.balance.line</field>
+        <field name="arch" type="xml">
+            <search string="Partner Balance">
+                <field name="partner_id"/>
+                <field name="name"/>
+                <group>
+                    <filter name="group_partner" string="Partner"
+                            context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_section" string="Section"
+                            context="{'group_by': 'section'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
