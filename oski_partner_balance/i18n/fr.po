@@ -1,0 +1,451 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_partner_balance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-09 10:22+0000\n"
+"PO-Revision-Date: 2026-08-09 10:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_partner_balance
+#: model:ir.actions.report,print_report_name:oski_partner_balance.action_report_partner_balance
+msgid "'Partner Balance'"
+msgstr "'Solde tiers'"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "<strong>Closing balance</strong>"
+msgstr "<strong>Solde de clôture</strong>"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,help:oski_partner_balance.field_oski_partner_balance_wizard__include_opening
+msgid ""
+"Add the balance carried forward at the start date as the first line, and "
+"start the running balance from it."
+msgstr ""
+"Ajoute le solde reporté à la date de début comme première ligne et démarre "
+"le solde cumulé à partir de celui-ci."
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__journal_filter__exclude
+msgid "All but the selected journals"
+msgstr "Tous les journaux sauf ceux sélectionnés"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__target_moves__all
+msgid "All entries"
+msgstr "Toutes les écritures"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__journal_filter__all
+msgid "All journals"
+msgstr "Tous les journaux"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__amount_residual
+msgid "Amount Due"
+msgstr "Montant dû"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__balance
+msgid "Balance"
+msgstr "Solde"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__create_uid
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__create_date
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__credit
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Credit"
+msgstr "Crédit"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__scope__receivable
+msgid "Customer"
+msgstr "Client"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__scope__both
+msgid "Customer and Vendor (two sections)"
+msgstr "Client et fournisseur (deux sections)"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__date
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__date_from
+msgid "Date From"
+msgstr "Date de début"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__date_to
+msgid "Date To"
+msgstr "Date de fin"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__debit
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Debit"
+msgstr "Débit"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_account_move__display_name
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_engine__display_name
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__display_name
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__name
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_list
+msgid "Document"
+msgstr "Document"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__date_maturity
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Due Date"
+msgstr "Échéance"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_account_bank_statement_line__oski_exclude_from_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_account_move__oski_exclude_from_balance
+msgid "Exclude from Partner Balance"
+msgstr "Exclure du solde tiers"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__is_excluded
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Excluded"
+msgstr "Exclu"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "Export XLSX"
+msgstr "Exporter en XLSX"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "From"
+msgstr "Du"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_account_move__id
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_engine__id
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__id
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__include_opening
+msgid "Include Opening Balance"
+msgstr "Inclure le solde initial"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Included"
+msgstr "Inclus"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__journal_id
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Journal"
+msgstr "Journal"
+
+#. module: oski_partner_balance
+#: model:ir.model,name:oski_partner_balance.model_account_move
+msgid "Journal Entry"
+msgstr "Écriture comptable"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__journal_filter
+msgid "Journal Filter"
+msgstr "Filtre journal"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__journal_ids
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "Journals"
+msgstr "Journaux"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__label
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Label"
+msgstr "Libellé"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__write_uid
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__write_date
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__write_date
+msgid "Last Updated on"
+msgstr "Dernière modification le"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__line_ids
+msgid "Line"
+msgstr "Ligne"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__move_id
+msgid "Move"
+msgstr "Pièce comptable"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__move_line_id
+msgid "Move Line"
+msgstr "Ligne d'écriture"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_line__section__net
+msgid "Net"
+msgstr "Net"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__scope__net
+msgid "Netted (single running balance)"
+msgstr "Net (un seul solde cumulé)"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__journal_filter__include
+msgid "Only the selected journals"
+msgstr "Uniquement les journaux sélectionnés"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__is_opening
+msgid "Opening Line"
+msgstr "Ligne de solde initial"
+
+#. module: oski_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/models/partner_balance_engine.py:0
+msgid "Opening balance"
+msgstr "Solde initial"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_account_bank_statement_line__oski_operation_datetime
+#: model:ir.model.fields,field_description:oski_partner_balance.field_account_move__oski_operation_datetime
+msgid "Operation Date & Time"
+msgstr "Date et heure d'opération"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__operation_datetime
+msgid "Operation Datetime"
+msgstr "Date et heure d'opération"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__partner_id
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_search
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: oski_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/wizard/partner_balance_wizard.py:0
+#: model:ir.actions.act_window,name:oski_partner_balance.action_partner_balance_wizard
+#: model:ir.actions.report,name:oski_partner_balance.action_report_partner_balance
+#: model:ir.model,name:oski_partner_balance.model_oski_partner_balance_wizard
+#: model:ir.ui.menu,name:oski_partner_balance.menu_partner_balance
+#: model:res.groups,name:oski_partner_balance.group_partner_balance_user
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_list
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_search
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "Partner Balance"
+msgstr "Solde tiers"
+
+#. module: oski_partner_balance
+#: model:ir.model,name:oski_partner_balance.model_oski_partner_balance_engine
+msgid "Partner Balance Engine"
+msgstr "Moteur de solde tiers"
+
+#. module: oski_partner_balance
+#: model:ir.model,name:oski_partner_balance.model_oski_partner_balance_line
+msgid "Partner Balance Line"
+msgstr "Ligne de solde tiers"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__partner_ids
+msgid "Partners"
+msgstr "Partenaires"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_line__section__payable
+msgid "Payable"
+msgstr "Fournisseur"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "Period"
+msgstr "Période"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__target_moves__posted
+msgid "Posted entries"
+msgstr "Écritures comptabilisées"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: oski_partner_balance
+#: model:res.groups,comment:oski_partner_balance.group_partner_balance_user
+msgid "Read the partner balance and print its statements."
+msgstr "Consulter le solde tiers et imprimer ses relevés."
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_line__section__receivable
+msgid "Receivable"
+msgstr "Client"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__ref
+msgid "Reference"
+msgstr "Référence"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__cumulative
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "Running Balance"
+msgstr "Solde cumulé"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__scope
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "Scope"
+msgstr "Périmètre"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__section
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_search
+msgid "Section"
+msgstr "Section"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_wizard__target_moves
+msgid "Target Moves"
+msgstr "Écritures ciblées"
+
+#. module: oski_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/wizard/partner_balance_wizard.py:0
+msgid "The start date must precede the end date."
+msgstr "La date de début doit précéder la date de fin."
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_list
+msgid "Total Credit"
+msgstr "Total crédit"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_list
+msgid "Total Debit"
+msgstr "Total débit"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,help:oski_partner_balance.field_account_bank_statement_line__oski_operation_datetime
+#: model:ir.model.fields,help:oski_partner_balance.field_account_move__oski_operation_datetime
+msgid ""
+"Used to order same-day operations on the partner statement. Defaults to the "
+"creation time and can be corrected."
+msgstr ""
+"Sert à ordonner les opérations d'un même jour sur le relevé tiers. "
+"Initialisé à l'heure de création et modifiable."
+
+#. module: oski_partner_balance
+#: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__scope__payable
+msgid "Vendor"
+msgstr "Fournisseur"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+msgid "View"
+msgstr "Consulter"
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,help:oski_partner_balance.field_account_bank_statement_line__oski_exclude_from_balance
+#: model:ir.model.fields,help:oski_partner_balance.field_account_move__oski_exclude_from_balance
+#: model:ir.model.fields,help:oski_partner_balance.field_oski_partner_balance_line__is_excluded
+msgid ""
+"When ticked, this document is left out of the partner balance, of the "
+"statement and of the opening balance."
+msgstr ""
+"Une fois coché, ce document est exclu du solde tiers, du relevé et du solde "
+"initial."
+
+#. module: oski_partner_balance
+#: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__wizard_id
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "to"
+msgstr "au"
+
+#. module: oski_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/wizard/partner_balance_wizard.py:0
+msgid "wizard_id"
+msgstr "wizard_id"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "— journals:"
+msgstr "— journaux :"
+
+#. module: oski_partner_balance
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+msgid "— opening balance:"
+msgstr "— solde initial :"

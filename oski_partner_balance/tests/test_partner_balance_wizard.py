@@ -172,3 +172,20 @@ class TestPartnerBalanceWizard(TransactionCase):
         self.assertIn(b'Vendor', html, "the payable section is unlabelled")
         self.assertIn(b'Closing balance', html)
         self.assertIn(b'PBWPU', html, "the journal filter is not restated")
+
+    def test_70_xlsx_bytes_look_like_a_workbook(self):
+        from odoo.addons.oski_partner_balance.controllers.partner_balance_xlsx import (
+            build_xlsx,
+        )
+        wizard = self._wizard()
+        wizard._generate_lines()
+        content = build_xlsx(wizard)
+        self.assertTrue(content.startswith(b'PK'), "not a zip container")
+        self.assertGreater(len(content), 1000)
+
+    def test_71_export_action_points_at_the_route(self):
+        wizard = self._wizard()
+        action = wizard.action_export_xlsx()
+        self.assertEqual(action['type'], 'ir.actions.act_url')
+        self.assertEqual(
+            action['url'], '/oski_partner_balance/xlsx/%s' % wizard.id)

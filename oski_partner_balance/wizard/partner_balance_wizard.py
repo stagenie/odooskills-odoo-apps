@@ -81,3 +81,12 @@ class PartnerBalanceWizard(models.TransientModel):
         return self.env.ref(
             'oski_partner_balance.action_report_partner_balance').report_action(
             self, config=False)
+
+    def action_export_xlsx(self):
+        self.ensure_one()
+        self._generate_lines()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/oski_partner_balance/xlsx/%s' % self.id,
+            'target': 'self',
+        }
