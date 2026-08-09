@@ -26,6 +26,9 @@
                 <field name="is_opening" column_invisible="1"/>
                 <field name="currency_id" column_invisible="1"/>
                 <field name="move_id" column_invisible="1"/>
+                <button name="action_open_move" type="object" string="Document"
+                        icon="fa-external-link" class="btn-link"
+                        invisible="is_opening"/>
             </list>
         </field>
     </record>

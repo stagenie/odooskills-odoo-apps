@@ -116,3 +116,13 @@ class TestPartnerBalanceWizard(TransactionCase):
         action = self.env.ref('oski_partner_balance.action_partner_balance_wizard')
         self.assertEqual(action.res_model, 'oski.partner.balance.wizard')
         self.assertEqual(action.target, 'new')
+
+    def test_52_line_drills_down_to_its_document(self):
+        """An accountant who spots an odd figure must reach the document."""
+        wizard = self._wizard()
+        lines = wizard._generate_lines()
+        posting = lines.filtered(lambda line: not line.is_opening)[0]
+        action = posting.action_open_move()
+        self.assertEqual(action['res_model'], 'account.move')
+        self.assertEqual(action['res_id'], posting.move_id.id)
+        self.assertEqual(action['view_mode'], 'form')

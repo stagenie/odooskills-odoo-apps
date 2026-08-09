@@ -35,3 +35,15 @@ class PartnerBalanceLine(models.TransientModel):
     company_id = fields.Many2one(
         'res.company', default=lambda self: self.env.company)
     currency_id = fields.Many2one(related='company_id.currency_id')
+
+    def action_open_move(self):
+        """Open the document behind this line."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': self.move_id.display_name,
+            'res_model': 'account.move',
+            'res_id': self.move_id.id,
+            'view_mode': 'form',
+            'target': 'current',
+        }
