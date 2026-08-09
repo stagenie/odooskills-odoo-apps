@@ -8,9 +8,39 @@ class TestPartnerBalanceEngine(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.partner = cls.env['res.partner'].create({'name': 'PB Customer A'})
+        cls.partner_b = cls.env['res.partner'].create({'name': 'PB Customer B'})
         cls.journal_sale = cls.env['account.journal'].create({
             'name': 'PB Sales', 'type': 'sale', 'code': 'PBSAL',
         })
+        cls.journal_sale2 = cls.env['account.journal'].create({
+            'name': 'PB Sales 2', 'type': 'sale', 'code': 'PBSA2',
+        })
+        cls.product = cls.env['product.product'].create({
+            'name': 'PB Service', 'type': 'service', 'lst_price': 100.0,
+        })
+
+    @classmethod
+    def _make_invoice(cls, partner, date, amount, journal=None, post=True,
+                      operation_datetime=None, move_type='out_invoice'):
+        """Create (and by default post) a one-line invoice."""
+        move = cls.env['account.move'].create({
+            'move_type': move_type,
+            'partner_id': partner.id,
+            'journal_id': (journal or cls.journal_sale).id,
+            'invoice_date': date,
+            'date': date,
+            'invoice_line_ids': [(0, 0, {
+                'product_id': cls.product.id,
+                'quantity': 1,
+                'price_unit': amount,
+                'tax_ids': [(6, 0, [])],
+            })],
+        })
+        if operation_datetime:
+            move.oski_operation_datetime = operation_datetime
+        if post:
+            move.action_post()
+        return move
 
     def test_00_module_installed(self):
         """The module is installed and its state is 'installed'."""
@@ -109,3 +139,37 @@ class TestPartnerBalanceEngine(TransactionCase):
         domain = engine._base_domain(
             self._options(journal_filter='include', journal_ids=[]), 'receivable')
         self.assertFalse([leaf for leaf in domain if leaf[0] == 'journal_id'])
+
+    def test_20_opening_balance_sums_lines_before_date_from(self):
+        partner = self.env['res.partner'].create({'name': 'PB Opening 1'})
+        self._make_invoice(partner, '2025-11-10', 300.0)
+        self._make_invoice(partner, '2025-12-05', 200.0)
+        self._make_invoice(partner, '2026-03-01', 50.0)
+        openings = self.env['oski.partner.balance.engine']._opening_balances(
+            self._options(partner_ids=[partner.id]), 'receivable')
+        self.assertAlmostEqual(openings.get(partner.id, 0.0), 500.0, places=2)
+
+    def test_21_opening_balance_ignores_excluded_moves(self):
+        partner = self.env['res.partner'].create({'name': 'PB Opening 2'})
+        self._make_invoice(partner, '2025-11-10', 300.0)
+        excluded = self._make_invoice(partner, '2025-12-05', 200.0)
+        excluded.oski_exclude_from_balance = True
+        openings = self.env['oski.partner.balance.engine']._opening_balances(
+            self._options(partner_ids=[partner.id]), 'receivable')
+        self.assertAlmostEqual(openings.get(partner.id, 0.0), 300.0, places=2)
+
+    def test_22_opening_balance_is_empty_without_prior_lines(self):
+        partner = self.env['res.partner'].create({'name': 'PB Opening 3'})
+        self._make_invoice(partner, '2026-03-01', 120.0)
+        openings = self.env['oski.partner.balance.engine']._opening_balances(
+            self._options(partner_ids=[partner.id]), 'receivable')
+        self.assertEqual(openings.get(partner.id, 0.0), 0.0)
+
+    def test_23_opening_balance_respects_journal_filter(self):
+        partner = self.env['res.partner'].create({'name': 'PB Opening 4'})
+        self._make_invoice(partner, '2025-11-10', 300.0, journal=self.journal_sale)
+        self._make_invoice(partner, '2025-11-11', 400.0, journal=self.journal_sale2)
+        openings = self.env['oski.partner.balance.engine']._opening_balances(
+            self._options(partner_ids=[partner.id], journal_filter='exclude',
+                          journal_ids=[self.journal_sale2.id]), 'receivable')
+        self.assertAlmostEqual(openings.get(partner.id, 0.0), 300.0, places=2)

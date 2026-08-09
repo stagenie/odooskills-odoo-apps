@@ -45,3 +45,13 @@ class PartnerBalanceEngine(models.AbstractModel):
         elif journal_ids and journal_filter == 'exclude':
             domain.append(('journal_id', 'not in', journal_ids))
         return domain
+
+    @api.model
+    def _opening_balances(self, options, section):
+        """Balance carried forward, per partner, strictly before date_from."""
+        domain = self._base_domain(options, section) + [
+            ('date', '<', options['date_from']),
+        ]
+        groups = self.env['account.move.line']._read_group(
+            domain, ['partner_id'], ['balance:sum'])
+        return {partner.id: balance for partner, balance in groups}
