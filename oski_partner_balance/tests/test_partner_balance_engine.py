@@ -173,3 +173,15 @@ class TestPartnerBalanceEngine(TransactionCase):
             self._options(partner_ids=[partner.id], journal_filter='exclude',
                           journal_ids=[self.journal_sale2.id]), 'receivable')
         self.assertAlmostEqual(openings.get(partner.id, 0.0), 300.0, places=2)
+
+    def test_24_line_on_date_from_belongs_to_the_period(self):
+        """Strictly before: a line dated exactly on date_from is NOT an opening."""
+        partner = self.env['res.partner'].create({'name': 'PB Opening 5'})
+        self._make_invoice(partner, '2025-12-20', 150.0)
+        self._make_invoice(partner, '2026-01-01', 90.0)
+        openings = self.env['oski.partner.balance.engine']._opening_balances(
+            self._options(partner_ids=[partner.id]), 'receivable')
+        self.assertAlmostEqual(
+            openings.get(partner.id, 0.0), 150.0, places=2,
+            msg="the line dated on date_from must belong to the period, "
+                "not to the opening balance")
