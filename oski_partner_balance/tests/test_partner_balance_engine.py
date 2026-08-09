@@ -185,3 +185,105 @@ class TestPartnerBalanceEngine(TransactionCase):
             openings.get(partner.id, 0.0), 150.0, places=2,
             msg="the line dated on date_from must belong to the period, "
                 "not to the opening balance")
+
+    def test_30_rows_start_with_opening_line(self):
+        partner = self.env['res.partner'].create({'name': 'PB Rows 1'})
+        self._make_invoice(partner, '2025-12-01', 100.0)
+        self._make_invoice(partner, '2026-02-01', 40.0)
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id]))
+        self.assertTrue(rows[0]['is_opening'])
+        self.assertAlmostEqual(rows[0]['cumulative'], 100.0, places=2)
+        self.assertAlmostEqual(rows[1]['cumulative'], 140.0, places=2)
+
+    def test_31_opening_can_be_switched_off(self):
+        """Same moves, opening off: the final cumulative differs by the opening."""
+        partner = self.env['res.partner'].create({'name': 'PB Rows 2'})
+        self._make_invoice(partner, '2025-12-01', 100.0)
+        self._make_invoice(partner, '2026-02-01', 40.0)
+        engine = self.env['oski.partner.balance.engine']
+        with_opening = engine._build_rows(
+            self._options(partner_ids=[partner.id], include_opening=True))
+        without = engine._build_rows(
+            self._options(partner_ids=[partner.id], include_opening=False))
+        self.assertFalse(any(row['is_opening'] for row in without))
+        self.assertAlmostEqual(with_opening[-1]['cumulative'], 140.0, places=2)
+        self.assertAlmostEqual(without[-1]['cumulative'], 40.0, places=2)
+
+    def test_32_same_day_moves_ordered_by_operation_datetime(self):
+        partner = self.env['res.partner'].create({'name': 'PB Rows 3'})
+        late = self._make_invoice(partner, '2026-02-10', 70.0,
+                                  operation_datetime='2026-02-10 17:00:00')
+        early = self._make_invoice(partner, '2026-02-10', 30.0,
+                                   operation_datetime='2026-02-10 08:00:00')
+        rows = [r for r in self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id], include_opening=False))]
+        self.assertEqual(rows[0]['move_id'], early.id)
+        self.assertEqual(rows[1]['move_id'], late.id)
+        self.assertAlmostEqual(rows[0]['cumulative'], 30.0, places=2)
+        self.assertAlmostEqual(rows[1]['cumulative'], 100.0, places=2)
+
+    def test_33_identical_datetimes_are_broken_by_id(self):
+        partner = self.env['res.partner'].create({'name': 'PB Rows 4'})
+        first = self._make_invoice(partner, '2026-02-11', 10.0,
+                                   operation_datetime='2026-02-11 09:00:00')
+        second = self._make_invoice(partner, '2026-02-11', 20.0,
+                                    operation_datetime='2026-02-11 09:00:00')
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id], include_opening=False))
+        self.assertEqual([r['move_id'] for r in rows], [first.id, second.id])
+
+    def test_34_sequence_is_strictly_increasing(self):
+        partner = self.env['res.partner'].create({'name': 'PB Rows 5'})
+        self._make_invoice(partner, '2026-02-01', 10.0)
+        self._make_invoice(partner, '2026-02-02', 20.0)
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id]))
+        sequences = [row['sequence'] for row in rows]
+        self.assertEqual(sequences, sorted(sequences))
+        self.assertEqual(len(set(sequences)), len(sequences))
+
+    def test_35_excluded_move_leaves_the_statement(self):
+        partner = self.env['res.partner'].create({'name': 'PB Rows 6'})
+        self._make_invoice(partner, '2026-02-01', 10.0)
+        dropped = self._make_invoice(partner, '2026-02-02', 20.0)
+        dropped.oski_exclude_from_balance = True
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id], include_opening=False))
+        self.assertEqual(len(rows), 1)
+        self.assertAlmostEqual(rows[-1]['cumulative'], 10.0, places=2)
+
+    def test_36_scope_both_yields_two_sections(self):
+        partner = self.env['res.partner'].create({'name': 'PB Rows 7'})
+        journal_purchase = self.env['account.journal'].create({
+            'name': 'PB Purchases', 'type': 'purchase', 'code': 'PBPUR',
+        })
+        self._make_invoice(partner, '2026-02-01', 100.0)
+        self._make_invoice(partner, '2026-02-02', 60.0, journal=journal_purchase,
+                           move_type='in_invoice')
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id], scope='both',
+                          include_opening=False))
+        self.assertEqual(
+            {row['section'] for row in rows}, {'receivable', 'payable'})
+
+    def test_37_scope_net_yields_one_running_balance(self):
+        """Customer 100, vendor 60: the net cumulative ends at 40."""
+        partner = self.env['res.partner'].create({'name': 'PB Rows 8'})
+        journal_purchase = self.env['account.journal'].create({
+            'name': 'PB Purchases 2', 'type': 'purchase', 'code': 'PBPU2',
+        })
+        self._make_invoice(partner, '2026-02-01', 100.0)
+        self._make_invoice(partner, '2026-02-02', 60.0, journal=journal_purchase,
+                           move_type='in_invoice')
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id], scope='net',
+                          include_opening=False))
+        self.assertEqual({row['section'] for row in rows}, {'net'})
+        self.assertAlmostEqual(rows[-1]['cumulative'], 40.0, places=2)
+
+    def test_38_partner_without_lines_and_without_opening_is_skipped(self):
+        partner = self.env['res.partner'].create({'name': 'PB Rows 9'})
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[partner.id]))
+        self.assertEqual(rows, [])

@@ -1,4 +1,7 @@
-from odoo import api, models
+from collections import defaultdict
+from datetime import datetime
+
+from odoo import _, api, models
 
 ACCOUNT_TYPES = {
     'receivable': ['asset_receivable'],
@@ -55,3 +58,89 @@ class PartnerBalanceEngine(models.AbstractModel):
         groups = self.env['account.move.line']._read_group(
             domain, ['partner_id'], ['balance:sum'])
         return {partner.id: balance for partner, balance in groups}
+
+    @api.model
+    def _sort_key(self, line):
+        """Chronological key: date, then operation datetime, then id.
+
+        `id` is the last resort so that the order is total even when two moves
+        share both a date and an operation datetime.
+        """
+        return (
+            line.date,
+            line.move_id.oski_operation_datetime or datetime(1970, 1, 1),
+            line.id,
+        )
+
+    @api.model
+    def _build_rows(self, options):
+        """Ordered, cumulated statement rows. One source for screen, PDF, XLSX."""
+        AccountMoveLine = self.env['account.move.line']
+        rows = []
+        sequence = 0
+        include_opening = bool(options.get('include_opening'))
+        for section in self._sections(options['scope']):
+            openings = self._opening_balances(options, section) if include_opening else {}
+            domain = self._base_domain(options, section) + [
+                ('date', '>=', options['date_from']),
+                ('date', '<=', options['date_to']),
+            ]
+            lines = AccountMoveLine.search(domain)
+            per_partner = defaultdict(list)
+            for line in lines:
+                per_partner[line.partner_id.id].append(line)
+            partner_ids = set(per_partner) | {
+                pid for pid, amount in openings.items() if amount
+            }
+            partners = self.env['res.partner'].browse(sorted(partner_ids))
+            for partner in partners.sorted(lambda p: (p.display_name or '', p.id)):
+                cumulative = openings.get(partner.id, 0.0)
+                partner_lines = sorted(per_partner.get(partner.id, []), key=self._sort_key)
+                if not partner_lines and not cumulative:
+                    continue
+                if include_opening:
+                    sequence += 1
+                    rows.append({
+                        'sequence': sequence,
+                        'partner_id': partner.id,
+                        'section': section,
+                        'date': options['date_from'],
+                        'operation_datetime': False,
+                        'journal_id': False,
+                        'move_id': False,
+                        'move_line_id': False,
+                        'name': '',
+                        'ref': '',
+                        'label': _('Opening balance'),
+                        'date_maturity': False,
+                        'debit': 0.0,
+                        'credit': 0.0,
+                        'balance': 0.0,
+                        'cumulative': cumulative,
+                        'amount_residual': 0.0,
+                        'is_opening': True,
+                    })
+                for line in partner_lines:
+                    cumulative += line.balance
+                    sequence += 1
+                    rows.append({
+                        'sequence': sequence,
+                        'partner_id': partner.id,
+                        'section': section,
+                        'date': line.date,
+                        'operation_datetime': line.move_id.oski_operation_datetime,
+                        'journal_id': line.journal_id.id,
+                        'move_id': line.move_id.id,
+                        'move_line_id': line.id,
+                        'name': line.move_id.name or '',
+                        'ref': line.ref or line.move_id.ref or '',
+                        'label': line.name or '',
+                        'date_maturity': line.date_maturity,
+                        'debit': line.debit,
+                        'credit': line.credit,
+                        'balance': line.balance,
+                        'cumulative': cumulative,
+                        'amount_residual': line.amount_residual,
+                        'is_opening': False,
+                    })
+        return rows
