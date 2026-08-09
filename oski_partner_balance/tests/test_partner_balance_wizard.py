@@ -138,3 +138,37 @@ class TestPartnerBalanceWizard(TransactionCase):
                 'oski_partner_balance.report_partner_balance', res_ids=wizard.ids)
         self.assertEqual(content_type, 'pdf')
         self.assertTrue(pdf.startswith(b'%PDF'))
+
+    def test_61_pdf_states_its_sections_and_its_filters(self):
+        """The header and the section split must be readable, not merely valid PDF."""
+        journal_purchase = self.env['account.journal'].create({
+            'name': 'PBW Purchases', 'type': 'purchase', 'code': 'PBWPU',
+        })
+        bill = self.env['account.move'].create({
+            'move_type': 'in_invoice',
+            'partner_id': self.partner.id,
+            'journal_id': journal_purchase.id,
+            'invoice_date': '2026-03-01',
+            'date': '2026-03-01',
+            'invoice_line_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'quantity': 1,
+                'price_unit': 60.0,
+                'tax_ids': [(6, 0, [])],
+            })],
+        })
+        bill.action_post()
+        wizard = self._wizard(
+            scope='both',
+            journal_filter='include',
+            journal_ids=[(6, 0, [self.journal_sale.id, journal_purchase.id])])
+        lines = wizard._generate_lines()
+        self.assertEqual(
+            set(lines.mapped('section')), {'receivable', 'payable'},
+            "the fixture must produce both sections or this test proves nothing")
+        html = self.env['ir.actions.report']._render_qweb_html(
+            'oski_partner_balance.report_partner_balance', wizard.ids)[0]
+        self.assertIn(b'Customer', html, "the receivable section is unlabelled")
+        self.assertIn(b'Vendor', html, "the payable section is unlabelled")
+        self.assertIn(b'Closing balance', html)
+        self.assertIn(b'PBWPU', html, "the journal filter is not restated")

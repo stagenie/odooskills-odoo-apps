@@ -20,53 +20,77 @@
                             to <span t-out="wizard.date_to"/> —
                             <span t-out="dict(wizard._fields['scope'].selection)[wizard.scope]"/> —
                             <span t-out="dict(wizard._fields['target_moves'].selection)[wizard.target_moves]"/>
-                            <t t-if="wizard.include_opening"> — opening balance included</t>
+                            — opening balance:
+                            <t t-if="wizard.include_opening">Included</t>
+                            <t t-else="">Excluded</t>
                             <t t-if="wizard.journal_filter != 'all'">
                                 — journals:
                                 <span t-out="', '.join(wizard.journal_ids.mapped('name'))"/>
                                 (<span t-out="wizard.journal_filter"/>)
                             </t>
                         </p>
+                        <t t-set="section_labels"
+                           t-value="{'receivable': 'Customer', 'payable': 'Vendor', 'net': 'Net'}"/>
                         <t t-set="partners" t-value="wizard.line_ids.mapped('partner_id')"/>
                         <t t-foreach="partners" t-as="partner">
                             <t t-set="partner_lines"
                                t-value="wizard.line_ids.filtered(lambda l: l.partner_id == partner)"/>
                             <h4 t-out="partner.display_name"/>
-                            <table class="table table-sm o_main_table">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Journal</th>
-                                        <th>Document</th>
-                                        <th>Label</th>
-                                        <th>Due Date</th>
-                                        <th class="text-end">Debit</th>
-                                        <th class="text-end">Credit</th>
-                                        <th class="text-end">Running Balance</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr t-foreach="partner_lines" t-as="line">
-                                        <td><span t-out="line.date"/></td>
-                                        <td><span t-out="line.journal_id.code"/></td>
-                                        <td><span t-out="line.name"/></td>
-                                        <td><span t-out="line.label"/></td>
-                                        <td><span t-out="line.date_maturity"/></td>
-                                        <td class="text-end">
-                                            <span t-out="line.debit"
-                                                  t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
-                                        </td>
-                                        <td class="text-end">
-                                            <span t-out="line.credit"
-                                                  t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
-                                        </td>
-                                        <td class="text-end">
-                                            <span t-out="line.cumulative"
-                                                  t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <t t-set="sections"
+                               t-value="[s for s in ('receivable', 'payable', 'net')
+                                         if s in partner_lines.mapped('section')]"/>
+                            <t t-foreach="sections" t-as="section">
+                                <t t-set="section_lines"
+                                   t-value="partner_lines.filtered(lambda l: l.section == section)"/>
+                                <h5 t-if="len(sections) > 1"
+                                    t-out="section_labels.get(section, section)"/>
+                                <table class="table table-sm o_main_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Journal</th>
+                                            <th>Document</th>
+                                            <th>Label</th>
+                                            <th>Due Date</th>
+                                            <th class="text-end">Debit</th>
+                                            <th class="text-end">Credit</th>
+                                            <th class="text-end">Running Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="section_lines" t-as="line">
+                                            <td><span t-out="line.date"/></td>
+                                            <td><span t-out="line.journal_id.code"/></td>
+                                            <td><span t-out="line.name"/></td>
+                                            <td><span t-out="line.label"/></td>
+                                            <td><span t-out="line.date_maturity"/></td>
+                                            <td class="text-end">
+                                                <span t-out="line.debit"
+                                                      t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-out="line.credit"
+                                                      t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-out="line.cumulative"
+                                                      t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="7" class="text-end">
+                                                <strong>Closing balance</strong>
+                                            </td>
+                                            <td class="text-end">
+                                                <strong><span t-out="section_lines[-1].cumulative"
+                                                        t-options='{"widget": "monetary", "display_currency": section_lines[-1].currency_id}'/></strong>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </t>
                         </t>
                     </div>
                 </t>

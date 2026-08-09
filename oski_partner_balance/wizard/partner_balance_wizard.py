@@ -79,4 +79,5 @@ class PartnerBalanceWizard(models.TransientModel):
         self.ensure_one()
         self._generate_lines()
         return self.env.ref(
-            'oski_partner_balance.action_report_partner_balance').report_action(self)
+            'oski_partner_balance.action_report_partner_balance').report_action(
+            self, config=False)
