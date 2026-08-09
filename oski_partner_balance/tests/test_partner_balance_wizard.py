@@ -83,6 +83,12 @@ class TestPartnerBalanceWizard(TransactionCase):
         posting = lines.filtered(lambda line: not line.is_opening)
         self.assertFalse(posting.is_excluded)
         posting.move_id.oski_exclude_from_balance = True
+        # `is_excluded` is a related field on a TransientModel: the ORM
+        # registers no recompute trigger from account.move onto it, so the
+        # value cached earlier in this same transaction is stale. A real
+        # client never sees this — each RPC gets a fresh cache — but a test
+        # that reads, writes and re-reads in one transaction must invalidate.
+        posting.invalidate_recordset(['is_excluded'])
         self.assertTrue(posting.is_excluded)
 
     def test_46_plain_user_cannot_read_the_lines(self):
