@@ -103,6 +103,25 @@ class TestPartnerBalanceWizard(TransactionCase):
             self.env['oski.partner.balance.line'].with_user(user).search(
                 [('wizard_id', '=', wizard.id)]).mapped('cumulative')
 
+    def test_47_a_run_is_scoped_to_the_user_who_produced_it(self):
+        """The XLSX route is a plain GET whose id is guessable."""
+        other = self.env['res.users'].create({
+            'name': 'PBW Other', 'login': 'pbw_other',
+            'group_ids': [(6, 0, [
+                self.env.ref('base.group_user').id,
+                self.env.ref('account.group_account_invoice').id,
+            ])],
+        })
+        wizard = self._wizard()
+        wizard._generate_lines()
+        self.assertFalse(
+            self.env['oski.partner.balance.line'].with_user(other).search(
+                [('wizard_id', '=', wizard.id)]),
+            "another accountant must not read this run's lines")
+        with self.assertRaises(AccessError):
+            self.env['oski.partner.balance.wizard'].with_user(other).browse(
+                wizard.id).check_access('read')
+
     def test_50_views_render(self):
         """Both views compile: a malformed arch fails here, not at the customer's."""
         self.env['oski.partner.balance.wizard'].get_view(
@@ -189,3 +208,26 @@ class TestPartnerBalanceWizard(TransactionCase):
         self.assertEqual(action['type'], 'ir.actions.act_url')
         self.assertEqual(
             action['url'], '/oski_partner_balance/xlsx/%s' % wizard.id)
+
+    def test_72_xlsx_cells_keep_their_types(self):
+        """A workbook of strings would defeat the export."""
+        import io
+        from datetime import datetime
+
+        import openpyxl
+
+        from odoo.addons.oski_partner_balance.controllers.partner_balance_xlsx import (
+            build_xlsx,
+        )
+        wizard = self._wizard()
+        wizard._generate_lines()
+        sheet = openpyxl.load_workbook(io.BytesIO(build_xlsx(wizard))).active
+        headers = [cell.value for cell in sheet[1]]
+        self.assertEqual(headers[0], 'Partner')
+        self.assertEqual(headers[-1], 'Running Balance')
+        self.assertEqual(sheet.freeze_panes, 'A2', "the header row must stay visible")
+        first = [cell.value for cell in sheet[2]]
+        self.assertIsInstance(
+            first[2], datetime, "the date must stay a date, not a string")
+        self.assertIsInstance(
+            first[9], (int, float), "the running balance must stay a number")
