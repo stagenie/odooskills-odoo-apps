@@ -126,3 +126,15 @@ class TestPartnerBalanceWizard(TransactionCase):
         self.assertEqual(action['res_model'], 'account.move')
         self.assertEqual(action['res_id'], posting.move_id.id)
         self.assertEqual(action['view_mode'], 'form')
+
+    def test_60_pdf_renders(self):
+        """The PDF renders end to end and starts with the %PDF marker."""
+        wizard = self._wizard()
+        wizard._generate_lines()
+        report = self.env.ref('oski_partner_balance.action_report_partner_balance')
+        with self.allow_pdf_render():
+            pdf, content_type = report.with_context(
+                force_report_rendering=True)._render_qweb_pdf(
+                'oski_partner_balance.report_partner_balance', res_ids=wizard.ids)
+        self.assertEqual(content_type, 'pdf')
+        self.assertTrue(pdf.startswith(b'%PDF'))

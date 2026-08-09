@@ -28,6 +28,7 @@ Odoo Community has no partner ledger. This module adds one.
         'views/partner_balance_wizard_views.xml',
         'views/partner_balance_line_views.xml',
         'views/menu_views.xml',
+        'reports/partner_balance_report.xml',
     ],
     'post_init_hook': 'post_init_hook',
     'installable': True,

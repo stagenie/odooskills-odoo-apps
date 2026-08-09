@@ -74,3 +74,9 @@ class PartnerBalanceWizard(models.TransientModel):
             'context': {'create': False, 'search_default_group_partner': 1},
             'target': 'current',
         }
+
+    def action_print_pdf(self):
+        self.ensure_one()
+        self._generate_lines()
+        return self.env.ref(
+            'oski_partner_balance.action_report_partner_balance').report_action(self)

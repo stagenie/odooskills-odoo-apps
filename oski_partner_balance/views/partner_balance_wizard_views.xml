@@ -24,6 +24,8 @@
                            required="journal_filter != 'all'"/>
                 </group>
                 <footer>
+                    <button name="action_print_pdf" type="object" string="Print"
+                            class="btn-secondary"/>
                     <button name="action_view_lines" type="object" string="View"
                             class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
