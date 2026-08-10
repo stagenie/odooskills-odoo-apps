@@ -2,21 +2,31 @@ import io
 
 import xlsxwriter
 
-from odoo import http
+from odoo import _, http
 from odoo.http import content_disposition, request
 
-COLUMNS = [
-    ('Partner', 'partner', 32),
-    ('Section', 'section', 12),
-    ('Date', 'date', 12),
-    ('Journal', 'journal', 10),
-    ('Document', 'name', 18),
-    ('Label', 'label', 30),
-    ('Due Date', 'date_maturity', 12),
-    ('Debit', 'debit', 14),
-    ('Credit', 'credit', 14),
-    ('Running Balance', 'cumulative', 16),
-]
+
+def _columns():
+    """Column titles, translated at CALL time.
+
+    They used to be a module-level list of bare strings, so the exported
+    file came out with English headers on a French database while the
+    screen and the PDF right next to it were translated. `_()` cannot be
+    applied at import time either: the language is only known once a
+    request is being served, so the call has to happen here, per export.
+    """
+    return [
+        (_('Partner'), 'partner', 32),
+        (_('Section'), 'section', 12),
+        (_('Date'), 'date', 12),
+        (_('Journal'), 'journal', 10),
+        (_('Document'), 'name', 18),
+        (_('Label'), 'label', 30),
+        (_('Due Date'), 'date_maturity', 12),
+        (_('Debit'), 'debit', 14),
+        (_('Credit'), 'credit', 14),
+        (_('Running Balance'), 'cumulative', 16),
+    ]
 
 
 def build_xlsx(wizard):
@@ -24,12 +34,13 @@ def build_xlsx(wizard):
     stream = io.BytesIO()
     workbook = xlsxwriter.Workbook(stream, {'in_memory': True,
                                             'default_date_format': 'yyyy-mm-dd'})
-    sheet = workbook.add_worksheet('Partner Balance')
+    sheet = workbook.add_worksheet(_('Partner Balance'))
     header = workbook.add_format({'bold': True, 'bg_color': '#DDDDDD', 'border': 1})
     money = workbook.add_format({'num_format': '#,##0.00'})
     date_fmt = workbook.add_format({'num_format': 'yyyy-mm-dd'})
 
-    for index, (title, _key, width) in enumerate(COLUMNS):
+    columns = _columns()
+    for index, (title, _key, width) in enumerate(columns):
         sheet.write(0, index, title, header)
         sheet.set_column(index, index, width)
     sheet.freeze_panes(1, 0)
@@ -47,7 +58,7 @@ def build_xlsx(wizard):
             'credit': line.credit,
             'cumulative': line.cumulative,
         }
-        for col_index, (_title, key, _width) in enumerate(COLUMNS):
+        for col_index, (_title, key, _width) in enumerate(columns):
             value = values[key]
             if key in ('date', 'date_maturity'):
                 if value:

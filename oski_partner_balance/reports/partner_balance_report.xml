@@ -18,8 +18,8 @@
                         <p>
                             From <span t-out="wizard.date_from"/>
                             to <span t-out="wizard.date_to"/> —
-                            <span t-out="dict(wizard._fields['scope'].selection)[wizard.scope]"/> —
-                            <span t-out="dict(wizard._fields['target_moves'].selection)[wizard.target_moves]"/>
+                            <span t-field="wizard.scope"/> —
+                            <span t-field="wizard.target_moves"/>
                             — opening balance:
                             <t t-if="wizard.include_opening">Included</t>
                             <t t-else="">Excluded</t>

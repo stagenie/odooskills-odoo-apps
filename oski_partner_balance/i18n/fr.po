@@ -85,6 +85,8 @@ msgstr "Créé le"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__credit
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Credit"
 msgstr "Crédit"
 
@@ -106,6 +108,8 @@ msgstr "Client et fournisseur (deux sections)"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__date
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Date"
 msgstr "Date"
 
@@ -122,6 +126,8 @@ msgstr "Date de fin"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__debit
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Debit"
 msgstr "Débit"
 
@@ -137,12 +143,16 @@ msgstr "Nom affiché"
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__name
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_list
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Document"
 msgstr "Document"
 
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__date_maturity
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Due Date"
 msgstr "Échéance"
 
@@ -189,6 +199,8 @@ msgstr "Inclus"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__journal_id
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Journal"
 msgstr "Journal"
 
@@ -211,6 +223,8 @@ msgstr "Journaux"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__label
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Label"
 msgstr "Libellé"
 
@@ -281,6 +295,8 @@ msgstr "Date et heure d'opération"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__partner_id
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_search
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Partner"
 msgstr "Partenaire"
 
@@ -296,6 +312,8 @@ msgstr "Partenaire"
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_list
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_search
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_wizard_form
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Partner Balance"
 msgstr "Solde tiers"
 
@@ -352,6 +370,8 @@ msgstr "Référence"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__cumulative
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Running Balance"
 msgstr "Solde cumulé"
 
@@ -364,6 +384,8 @@ msgstr "Périmètre"
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__section
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_search
+#. odoo-python
+#: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Section"
 msgstr "Section"
 
