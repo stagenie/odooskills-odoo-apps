@@ -131,6 +131,22 @@ class TestPartnerBalanceWizard(TransactionCase):
             self.env.ref('oski_partner_balance.view_partner_balance_line_list').id,
             'list')
 
+    def test_50b_the_running_balance_column_is_never_footed(self):
+        """A running balance must not be summed.
+
+        Every numeric field defaults to aggregator='sum' in v19, so the list
+        view happily footed this column and printed the sum of successive
+        balances as a total. The figure was pure noise — the running balance
+        of the LAST line is the total. Debit and credit, on the other hand,
+        must keep their aggregate: those really do add up.
+        """
+        fields_ = self.env['oski.partner.balance.line']._fields
+        self.assertIsNone(
+            fields_['cumulative'].aggregator,
+            "the running balance column must not be footed")
+        self.assertEqual(fields_['debit'].aggregator, 'sum')
+        self.assertEqual(fields_['credit'].aggregator, 'sum')
+
     def test_51_action_is_reachable(self):
         action = self.env.ref('oski_partner_balance.action_partner_balance_wizard')
         self.assertEqual(action.res_model, 'oski.partner.balance.wizard')

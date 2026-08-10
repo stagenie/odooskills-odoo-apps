@@ -1,0 +1,56 @@
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Solde tiers — relevé client et fournisseur</h1>
+    <p style="color: #6b7280; font-size: 17px;">Le relevé de compte qui manque à la Communauté : chaque facture, chaque avoir, chaque règlement dans l'ordre, avec le solde recalculé sur chaque ligne — à l'écran, en PDF et en Excel.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Odoo Community sait dire qu'un client doit 16 500 €. Il ne sait pas dire <strong>comment on en est arrivé là</strong>. Quand ce client appelle pour contester, il faut ouvrir les factures une par une, retrouver les règlements, refaire l'addition à la main — et espérer tomber sur le même chiffre que lui. Le grand livre auxiliaire, ce document que tout comptable réclame dès la première semaine, n'existe pas dans la Communauté.</p>
+
+  <!-- 3. FONCTIONNALITÉS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">📄 <strong>Le relevé chronologique</strong> — factures, avoirs et règlements dans l'ordre où ils se sont produits, avec le <strong>solde cumulé recalculé sur chaque ligne</strong>. La dernière ligne EST le solde du client.</li>
+    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Report à nouveau</strong> — le solde à la date de début tient sur une ligne d'ouverture, pour que le relevé d'un trimestre reste juste sans remonter à la création du compte.</li>
+    <li style="line-height: 1.6; color: #374151;">🎯 <strong>Quatre portées</strong> — client seul, fournisseur seul, les deux côte à côte, ou <strong>compensés en un solde net</strong> quand le tiers est les deux à la fois.</li>
+    <li style="line-height: 1.6; color: #374151;">🔍 <strong>Filtres de journaux</strong> — inclure ou exclure les journaux qui ne concernent pas la discussion en cours.</li>
+    <li style="line-height: 1.6; color: #374151;">✂️ <strong>Exclusion d'un document</strong> — une facture litigieuse peut être sortie du calcul d'une case à cocher, sans toucher à la comptabilité.</li>
+    <li style="line-height: 1.6; color: #374151;">📤 <strong>PDF et Excel</strong> — produits à partir des données affichées à l'écran, pas d'un second calcul : l'export ne peut pas contredire l'écran.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Choisir la période et le périmètre</h3>
+  <p style="line-height: 1.6; color: #374151;">Un seul écran : la période, le report à nouveau, la portée, les écritures visées, les tiers et les journaux. Rien à paramétrer avant de s'en servir.</p>
+  <p><img src="screenshot_01_assistant.png" alt="Assistant Solde tiers : période, report à nouveau, portée client, tiers sélectionné et filtre de journaux" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Le relevé, ligne à ligne, solde compris</h3>
+  <p style="line-height: 1.6; color: #374151;">La ligne d'ouverture, puis chaque document avec son journal, son libellé, son échéance et le solde cumulé qui avance : 4 800, 7 100, 13 250, 16 650 — puis 15 250 après le règlement. Chaque ligne s'ouvre sur son document d'origine.</p>
+  <p><img src="screenshot_02_releve.png" alt="Relevé de Menuiserie Bel Air : ligne de solde initial puis cinq documents avec le solde cumulé colonne de droite" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. Le PDF que le client reçoit</h3>
+  <p style="line-height: 1.6; color: #374151;">Le même relevé, en-tête de société compris, avec la période et les filtres retenus rappelés en sous-titre — pour qu'aucune discussion ne commence par « sur quelle période ? ». Une version Excel s'exporte du même écran.</p>
+  <p><img src="screenshot_03_pdf.png" alt="PDF du relevé de compte, avec l'en-tête de société, le sous-titre de période et le tableau des écritures" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. VALEUR -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Gratuit, sous licence LGPL-3, sans dépendance à un module Enterprise.</li>
+    <li style="line-height: 1.6; color: #374151;">Le relevé est <strong>cloisonné par utilisateur</strong> : chacun ne lit que les lignes qu'il vient de produire, et les chiffres restent réservés aux profils comptables.</li>
+    <li style="line-height: 1.6; color: #374151;">Multi-société : le relevé décrit les livres de la société du document, jamais ceux de la session qui le consulte.</li>
+    <li style="line-height: 1.6; color: #374151;">C'est le socle de toute la famille Solde tiers — balance âgée, relances par courriel, limite de crédit s'y branchent sans recalculer quoi que ce soit.</li>
+  </ul>
+
+  <!-- 6. CROSS-SELL -->
+  <div style="background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 28px 0;">
+    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">Le cœur de la suite Solde tiers</h3>
+    <p style="line-height: 1.6; color: #374151; margin: 0;">Complétez avec la <strong>Balance âgée</strong> (qui doit quoi, et depuis quand), les <strong>Relevés par courriel</strong> (envoi périodique et attestation de solde), le <strong>Solde sur la facture</strong>, le <strong>Solde sur le devis</strong> et l'<strong>Encours et limite de crédit</strong> — ou prenez la suite complète en une installation. Voir la famille sur <a href="https://apps.odooskills.com" style="color:#714B67;">apps.odooskills.com</a>.</p>
+  </div>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280; margin-top: 28px;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : <a href="mailto:support@odooskills.com" style="color: #714B67;">support@odooskills.com</a>.</p>
+
+</section>

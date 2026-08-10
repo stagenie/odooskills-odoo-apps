@@ -27,7 +27,11 @@ class PartnerBalanceLine(models.TransientModel):
     debit = fields.Monetary()
     credit = fields.Monetary()
     balance = fields.Monetary()
-    cumulative = fields.Monetary(string='Running Balance')
+    # aggregator=None: every numeric field defaults to aggregator='sum' in v19,
+    # so the list view was footing the running balance column and printing the
+    # sum of successive balances as if it were a total. That figure means
+    # nothing — the running balance of the last line IS the total.
+    cumulative = fields.Monetary(string='Running Balance', aggregator=None)
     amount_residual = fields.Monetary(string='Amount Due')
     is_opening = fields.Boolean(string='Opening Line')
     is_excluded = fields.Boolean(
