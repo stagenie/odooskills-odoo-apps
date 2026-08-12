@@ -10,6 +10,11 @@ class PartnerBalanceLine(models.TransientModel):
         'oski.partner.balance.wizard', required=True, ondelete='cascade', index=True)
     sequence = fields.Integer(required=True, default=0)
     partner_id = fields.Many2one('res.partner', required=True, index=True)
+    group_partner_id = fields.Many2one(
+        'res.partner', string='Group', index=True,
+        help="The partner the running balance accumulates on. Equal to the "
+             "line's own partner unless the statement is consolidated over a "
+             "group of companies.")
     section = fields.Selection([
         ('receivable', 'Receivable'),
         ('payable', 'Payable'),

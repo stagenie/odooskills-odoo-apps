@@ -73,6 +73,25 @@ class PartnerBalanceEngine(models.AbstractModel):
         )
 
     @api.model
+    def _partner_axis(self, options, partner_ids):
+        """Which partner each line's running balance accumulates on.
+
+        The identity here: a statement speaks of one partner, and its running
+        balance belongs to that partner alone.
+
+        The seam exists so a consolidation module can remap a subtree of
+        companies onto its root WITHOUT restating the chronological rules
+        below. A group statement whose sections replay one subsidiary after
+        the other teaches nobody anything: the whole point is a single
+        balance, running in global date order over the group.
+
+        A row keeps its OWN partner in `partner_id` whatever the axis says:
+        a consolidated statement where one can no longer see which company
+        each entry came from is unusable for the person doing the chasing.
+        """
+        return {partner_id: partner_id for partner_id in partner_ids}
+
+    @api.model
     def _build_rows(self, options):
         """Ordered, cumulated statement rows. One source for screen, PDF, XLSX."""
         AccountMoveLine = self.env['account.move.line']
@@ -86,15 +105,20 @@ class PartnerBalanceEngine(models.AbstractModel):
                 ('date', '<=', options['date_to']),
             ]
             lines = AccountMoveLine.search(domain)
+            axis = self._partner_axis(
+                options, set(lines.partner_id.ids) | set(openings))
             per_partner = defaultdict(list)
             for line in lines:
-                per_partner[line.partner_id.id].append(line)
+                per_partner[axis[line.partner_id.id]].append(line)
+            axis_openings = defaultdict(float)
+            for partner_id, amount in openings.items():
+                axis_openings[axis[partner_id]] += amount
             partner_ids = set(per_partner) | {
-                pid for pid, amount in openings.items() if amount
+                pid for pid, amount in axis_openings.items() if amount
             }
             partners = self.env['res.partner'].browse(sorted(partner_ids))
             for partner in partners.sorted(lambda p: (p.display_name or '', p.id)):
-                cumulative = openings.get(partner.id, 0.0)
+                cumulative = axis_openings.get(partner.id, 0.0)
                 partner_lines = sorted(per_partner.get(partner.id, []), key=self._sort_key)
                 if not partner_lines and not cumulative:
                     continue
@@ -103,6 +127,7 @@ class PartnerBalanceEngine(models.AbstractModel):
                     rows.append({
                         'sequence': sequence,
                         'partner_id': partner.id,
+                        'group_partner_id': partner.id,
                         'section': section,
                         'date': options['date_from'],
                         'operation_datetime': False,
@@ -125,7 +150,14 @@ class PartnerBalanceEngine(models.AbstractModel):
                     sequence += 1
                     rows.append({
                         'sequence': sequence,
-                        'partner_id': partner.id,
+                        # The line's OWN partner, never the axis: on a
+                        # consolidated statement this column is what tells the
+                        # reader which company of the group each entry belongs
+                        # to. Writing `partner.id` here would still satisfy
+                        # every non-consolidated test, and quietly make the
+                        # consolidated statement unreadable.
+                        'partner_id': line.partner_id.id,
+                        'group_partner_id': partner.id,
                         'section': section,
                         'date': line.date,
                         'operation_datetime': line.move_id.oski_operation_datetime,

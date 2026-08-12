@@ -308,3 +308,29 @@ class TestPartnerBalanceEngine(TransactionCase):
             sequences, list(range(1, len(rows) + 1)),
             "the sequence must run 1..N across every section and partner; "
             "a counter reset per partner or per section would repeat values")
+
+    def test_73_partner_axis_is_the_identity_by_default(self):
+        """The seam exists, and on its own it changes strictly nothing.
+
+        A statement speaks of one partner, and its running balance belongs to
+        that partner alone. The seam is there so a consolidation module can
+        remap a subtree of companies onto its root WITHOUT restating the
+        chronological rules of `_build_rows`.
+        """
+        engine = self.env['oski.partner.balance.engine']
+        axis = engine._partner_axis({}, {self.partner.id, self.partner_b.id})
+        self.assertEqual(
+            axis,
+            {self.partner.id: self.partner.id,
+             self.partner_b.id: self.partner_b.id})
+
+    def test_74_rows_carry_their_axis_alongside_their_own_partner(self):
+        """Every row names both the partner it belongs to and the axis it sums on."""
+        self._make_invoice(self.partner, '2026-02-10', 100.0)
+        rows = self.env['oski.partner.balance.engine']._build_rows(
+            self._options(partner_ids=[self.partner.id], include_opening=False))
+        self.assertTrue(rows)
+        for row in rows:
+            self.assertEqual(
+                row['group_partner_id'], row['partner_id'],
+                "outside consolidation, a row's axis is its own partner")
