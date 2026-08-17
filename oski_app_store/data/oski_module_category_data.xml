@@ -16,6 +16,24 @@
         <field name="name">Site web &amp; eCommerce</field>
         <field name="sequence">40</field>
     </record>
+    <!-- Les trois catégories ci-dessous ont été ajoutées après coup. Deux
+         d'entre elles (Inventaire, Projet) existaient déjà en base, créées à la
+         main et donc SANS xmlid : l'importeur ne pouvait pas les atteindre et
+         entassait tout dans Productivité. Leur xmlid a été posé sur les
+         enregistrements existants avant ce chargement, qui les met à jour au
+         lieu d'en créer des doublons. -->
+    <record id="cat_inventory" model="oski.module.category">
+        <field name="name">Inventaire &amp; Logistique</field>
+        <field name="sequence">25</field>
+    </record>
+    <record id="cat_manufacturing" model="oski.module.category">
+        <field name="name">Fabrication &amp; Qualité</field>
+        <field name="sequence">35</field>
+    </record>
+    <record id="cat_project" model="oski.module.category">
+        <field name="name">Projet &amp; Services</field>
+        <field name="sequence">45</field>
+    </record>
     <record id="cat_productivity" model="oski.module.category">
         <field name="name">Productivité</field>
         <field name="sequence">50</field>
