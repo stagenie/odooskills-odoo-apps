@@ -29,8 +29,17 @@ _CAT_MAP = [
     # plus bas les redisperserait un par un.
     (("multi-company", "multi company", "multicompany",
       "inter-company", "intercompany", "multi-soc", "inter-soc"), "cat_multicompany"),
+    # « Operations » est le mot des 19 modules de patrimoine ; il ne dit rien
+    # à personne, d'où les synonymes métier qui l'accompagnent.
+    (("operations", "asset", "fleet", "maintenance", "patrimoine", "gmao"), "cat_assets"),
     (("manufactur", "mrp", "plm", "quality", "qualit"), "cat_manufacturing"),
     (("inventory", "stock", "logistique", "warehouse"), "cat_inventory"),
+    # Santé et Location AVANT le bac Projet & Services : leurs manifestes
+    # disent « Health/Medical » et « Services/Rental », et « services » les
+    # avalerait tous les deux. Location passe aussi avant Site web, sinon
+    # « Website/Rental » partirait dans le bac eCommerce.
+    (("medical", "health", "dental", "clinic", "sant"), "cat_health"),
+    (("rental", "location"), "cat_rental"),
     (("helpdesk", "project", "planning", "services"), "cat_project"),
     (("sale", "crm", "vente"), "cat_sales"),
     (("account", "invoic", "financ", "compta"), "cat_accounting"),

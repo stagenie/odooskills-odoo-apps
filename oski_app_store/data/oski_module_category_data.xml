@@ -34,6 +34,24 @@
         <field name="name">Projet &amp; Services</field>
         <field name="sequence">45</field>
     </record>
+    <!-- Les trois bacs ci-dessous ont été ouverts avant l'import des familles
+         Patrimoine, Santé et Location. Sans eux, les 19 modules de patrimoine
+         (catégorie manifeste « Operations », qu'aucune règle ne connaissait)
+         seraient tombés dans Technique & Outils et les 14 modules de santé
+         (« Services ») auraient porté Projet & Services à 30 fiches : la
+         taxonomie tout juste rééquilibrée se serait redéséquilibrée. -->
+    <record id="cat_assets" model="oski.module.category">
+        <field name="name">Patrimoine &amp; Maintenance</field>
+        <field name="sequence">38</field>
+    </record>
+    <record id="cat_health" model="oski.module.category">
+        <field name="name">Santé</field>
+        <field name="sequence">46</field>
+    </record>
+    <record id="cat_rental" model="oski.module.category">
+        <field name="name">Location</field>
+        <field name="sequence">47</field>
+    </record>
     <!-- La famille inter-sociétés traverse stock, ventes et comptabilité :
          aucun bac fonctionnel ne la possède, et la disperser revenait à la
          rendre introuvable pour qui cherche du multi-sociétés. -->
