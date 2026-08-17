@@ -34,6 +34,13 @@
         <field name="name">Projet &amp; Services</field>
         <field name="sequence">45</field>
     </record>
+    <!-- La famille inter-sociétés traverse stock, ventes et comptabilité :
+         aucun bac fonctionnel ne la possède, et la disperser revenait à la
+         rendre introuvable pour qui cherche du multi-sociétés. -->
+    <record id="cat_multicompany" model="oski.module.category">
+        <field name="name">Multi-sociétés</field>
+        <field name="sequence">48</field>
+    </record>
     <record id="cat_productivity" model="oski.module.category">
         <field name="name">Productivité</field>
         <field name="sequence">50</field>

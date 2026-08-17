@@ -24,6 +24,11 @@ _EXCLUDED_EXT = (".pyc", ".pyo")
 # porte le mot « quality » ET rien d'autre ; « Services/Helpdesk » porte
 # « services ». Déplacer une ligne change le rangement de familles entières.
 _CAT_MAP = [
+    # En tête : « Multi-Company » n'a aucun mot en commun avec les autres bacs,
+    # mais ses modules en portent tous un (stock, vente, compta). Le laisser
+    # plus bas les redisperserait un par un.
+    (("multi-company", "multi company", "multicompany",
+      "inter-company", "intercompany", "multi-soc", "inter-soc"), "cat_multicompany"),
     (("manufactur", "mrp", "plm", "quality", "qualit"), "cat_manufacturing"),
     (("inventory", "stock", "logistique", "warehouse"), "cat_inventory"),
     (("helpdesk", "project", "planning", "services"), "cat_project"),
