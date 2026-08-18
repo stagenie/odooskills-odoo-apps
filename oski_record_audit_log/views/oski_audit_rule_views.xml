@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_oski_audit_rule_list" model="ir.ui.view">
+        <field name="name">oski.audit.rule.list</field>
+        <field name="model">oski.audit.rule</field>
+        <field name="arch" type="xml">
+            <list string="Règles de journalisation">
+                <field name="model_id"/>
+                <field name="model_name"/>
+                <field name="log_create"/>
+                <field name="log_write"/>
+                <field name="log_unlink"/>
+                <field name="field_ids" widget="many2many_tags" optional="show"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_audit_rule_form" model="ir.ui.view">
+        <field name="name">oski.audit.rule.form</field>
+        <field name="model">oski.audit.rule</field>
+        <field name="arch" type="xml">
+            <form string="Règle de journalisation">
+                <sheet>
+                    <group>
+                        <group string="Modèle">
+                            <field name="model_id"/>
+                            <field name="model_name"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Opérations suivies">
+                            <field name="log_create"/>
+                            <field name="log_write"/>
+                            <field name="log_unlink"/>
+                        </group>
+                    </group>
+                    <group string="Champs surveillés" invisible="not log_write">
+                        <field name="field_ids" widget="many2many_tags" nolabel="1"
+                               options="{'no_create': True}"/>
+                    </group>
+                    <p class="text-muted">
+                        Sans champ désigné, toutes les modifications de champs stockés sont
+                        journalisées. Les pièces jointes, images et listes liées sont ignorées :
+                        leur contenu ne tient pas sur une ligne de journal.
+                    </p>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_oski_audit_rule" model="ir.actions.act_window">
+        <field name="name">Journalisation</field>
+        <field name="res_model">oski.audit.rule</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_oski_audit_rule"
+              name="Règles de journalisation"
+              parent="base.menu_custom"
+              action="action_oski_audit_rule"
+              sequence="56"/>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_oski_audit_log_list" model="ir.ui.view">
+        <field name="name">oski.audit.log.list</field>
+        <field name="model">oski.audit.log</field>
+        <field name="arch" type="xml">
+            <list string="Journal des modifications" create="false" edit="false"
+                  decoration-danger="operation == 'unlink'"
+                  decoration-success="operation == 'create'">
+                <field name="create_date"/>
+                <field name="user_id"/>
+                <field name="model_label"/>
+                <field name="model_name" optional="hide"/>
+                <field name="res_id" optional="hide"/>
+                <field name="res_name"/>
+                <field name="operation"/>
+                <field name="changes"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_audit_log_search" model="ir.ui.view">
+        <field name="name">oski.audit.log.search</field>
+        <field name="model">oski.audit.log</field>
+        <field name="arch" type="xml">
+            <search string="Journal des modifications">
+                <field name="res_name"/>
+                <field name="model_name"/>
+                <field name="user_id"/>
+                <field name="changes"/>
+                <filter name="creations" string="Créations" domain="[('operation', '=', 'create')]"/>
+                <filter name="writes" string="Modifications" domain="[('operation', '=', 'write')]"/>
+                <filter name="deletions" string="Suppressions" domain="[('operation', '=', 'unlink')]"/>
+                <group>
+                    <filter name="group_model" string="Modèle" domain="[]" context="{'group_by': 'model_name'}"/>
+                    <filter name="group_user" string="Auteur" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_operation" string="Opération" domain="[]" context="{'group_by': 'operation'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_audit_log" model="ir.actions.act_window">
+        <field name="name">Journal des modifications</field>
+        <field name="res_model">oski.audit.log</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="menu_oski_audit_log"
+              name="Journal des modifications"
+              parent="base.menu_custom"
+              action="action_oski_audit_log"
+              sequence="57"/>
+</odoo>
