@@ -1,0 +1,56 @@
+<!--
+  Fiche produit OdooSkills — oski_mail_queue_monitor
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Moniteur de la file de courriels</h1>
+    <p style="color: #6b7280; font-size: 17px;">Sachez que vos courriels ne partent plus le jour même, pas trois mois après.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Un serveur sortant mal configuré ne fait aucun bruit. Les courriels s'empilent en <code>mail.mail</code>, la file grossit, et personne ne l'apprend avant qu'un client demande pourquoi il n'a jamais reçu sa facture. Odoo sait renvoyer un courriel en échec ; il ne surveille rien.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🩺 <strong>Une auscultation quotidienne</strong> — combien en attente, combien en échec, depuis combien de temps le plus vieux attend, et pour quelles causes.</li>
+    <li style="line-height: 1.6; color: #374151;">🚨 <strong>Une alerte qui ne passe pas par un courriel</strong> — prévenir d'une file morte en envoyant un courriel reviendrait à confier le diagnostic au malade. L'alerte est une activité, lisible dans l'interface quel que soit l'état du serveur sortant.</li>
+    <li style="line-height: 1.6; color: #374151;">🔕 <strong>Une seule alerte ouverte à la fois</strong> — une panne qui dure des semaines ne produit pas une activité par jour, sinon plus personne ne les lit.</li>
+    <li style="line-height: 1.6; color: #374151;">↩️ <strong>Renvoi groupé</strong> — un bouton remet en file tout ce qui est en échec, une fois le serveur réparé.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. L'état de la file, jour après jour</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois journées saines, puis quatre relevés en échec : la date exacte où le serveur sortant a lâché se lit d'un coup d'œil.</p>
+  <img src="screenshot_01_checks.png"
+       alt="Liste des auscultations de la file : date, nombre en attente, nombre en échec, âge du plus vieux courriel et verdict"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Ce qui est mort, et ce qu'on en fait</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Depuis le relevé, un bouton mène aux courriels concernés : factures, devis, relances. Chacun peut être renvoyé une fois la cause corrigée.</p>
+  <img src="screenshot_02_failed.png"
+       alt="Liste des courriels en échec avec leur objet et un bouton de renvoi sur chaque ligne"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Le seuil de la file à l'arrêt se règle par paramètre système ; le reste fonctionne sans configuration.</li>
+    <li style="line-height: 1.6; color: #374151;">Un test vérifie que l'alerte n'émet elle-même aucun courriel : la promesse est vérifiable, pas déclarative.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Surveiller la file est une chose ; répondre aux clients en est une autre. La gamme OdooSkills compte une famille Helpdesk complète — tickets, engagements de délai, base de connaissances — et un moniteur des tâches planifiées, son voisin naturel. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>

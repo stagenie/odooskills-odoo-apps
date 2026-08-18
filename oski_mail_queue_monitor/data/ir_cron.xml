@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_oski_mail_queue_check" model="ir.cron">
+        <field name="name">Courriels : auscultation de la file</field>
+        <field name="model_id" ref="model_oski_mail_queue_check"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_check_queue()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>
