@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_oski_report_watermark_list" model="ir.ui.view">
+        <field name="name">oski.report.watermark.list</field>
+        <field name="model">oski.report.watermark</field>
+        <field name="arch" type="xml">
+            <list string="Filigranes">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="report_id"/>
+                <field name="model_name"/>
+                <field name="filter_domain" optional="show"/>
+                <field name="text"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_report_watermark_form" model="ir.ui.view">
+        <field name="name">oski.report.watermark.form</field>
+        <field name="model">oski.report.watermark</field>
+        <field name="arch" type="xml">
+            <form string="Filigrane">
+                <sheet>
+                    <widget name="web_ribbon" title="Archivé" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Devis non confirmé"/></h1>
+                    </div>
+                    <group>
+                        <group string="Quand">
+                            <field name="report_id" options="{'no_create': True}"/>
+                            <field name="model_name"/>
+                            <field name="filter_domain"
+                                   placeholder="[('state', '=', 'draft')]"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="sequence"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group string="Quoi">
+                            <field name="text" placeholder="BROUILLON"/>
+                            <field name="color" widget="color"/>
+                            <field name="opacity"/>
+                            <field name="angle"/>
+                            <field name="font_size"/>
+                        </group>
+                    </group>
+                    <div class="text-muted">
+                        Plusieurs règles peuvent viser le même rapport : la première
+                        de la liste qui accepte le document l'emporte. Quand une
+                        impression groupe des documents qui appellent des filigranes
+                        différents, aucun n'est posé — un élément fixe se répète sur
+                        toutes les pages et marquerait les autres à tort.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_oski_report_watermark_search" model="ir.ui.view">
+        <field name="name">oski.report.watermark.search</field>
+        <field name="model">oski.report.watermark</field>
+        <field name="arch" type="xml">
+            <search string="Filigranes">
+                <field name="name"/>
+                <field name="report_id"/>
+                <field name="text"/>
+                <filter name="inactive" string="Archivés" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_report" string="Rapport" domain="[]"
+                            context="{'group_by': 'report_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_report_watermark" model="ir.actions.act_window">
+        <field name="name">Filigranes de rapport</field>
+        <field name="res_model">oski.report.watermark</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Poser un premier filigrane</p>
+            <p>
+                Un filigrane marque le document lui-même : BROUILLON tant qu'un
+                devis n'est pas confirmé, COPIE sur une réimpression, ANNULÉ sur
+                ce qui ne vaut plus.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_oski_report_watermark"
+              name="Filigranes de rapport"
+              parent="base.next_id_6"
+              action="action_oski_report_watermark"
+              sequence="35"/>
+
+</odoo>
