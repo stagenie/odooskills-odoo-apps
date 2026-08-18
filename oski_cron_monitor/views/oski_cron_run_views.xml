@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_cron_run_view_list" model="ir.ui.view">
+        <field name="name">oski.cron.run.list</field>
+        <field name="model">oski.cron.run</field>
+        <field name="arch" type="xml">
+            <list string="Exécutions planifiées" create="false" edit="false"
+                  decoration-danger="state == 'failure'">
+                <field name="started_at"/>
+                <field name="cron_name"/>
+                <field name="duration" sum="Durée totale"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'success'"
+                       decoration-danger="state == 'failure'"/>
+                <field name="user_id" optional="hide"/>
+                <field name="error" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_cron_run_view_form" model="ir.ui.view">
+        <field name="name">oski.cron.run.form</field>
+        <field name="model">oski.cron.run</field>
+        <field name="arch" type="xml">
+            <form string="Exécution" create="false" edit="false">
+                <sheet>
+                    <h1><field name="cron_name" readonly="1"/></h1>
+                    <group>
+                        <group>
+                            <field name="started_at"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                            <field name="user_id"/>
+                            <field name="cron_id"/>
+                        </group>
+                    </group>
+                    <group string="Erreur" invisible="state != 'failure'">
+                        <field name="error" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="oski_cron_run_view_search" model="ir.ui.view">
+        <field name="name">oski.cron.run.search</field>
+        <field name="model">oski.cron.run</field>
+        <field name="arch" type="xml">
+            <search string="Exécutions planifiées">
+                <field name="cron_name"/>
+                <field name="error"/>
+                <filter name="failure" string="Échecs" domain="[('state', '=', 'failure')]"/>
+                <filter name="success" string="Réussites" domain="[('state', '=', 'success')]"/>
+                <separator/>
+                <filter name="today" string="Aujourd'hui"
+                        domain="[('started_at', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                <group>
+                    <filter name="group_cron" string="Tâche" domain="[]" context="{'group_by': 'cron_name'}"/>
+                    <filter name="group_state" string="Résultat" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter name="group_day" string="Jour" domain="[]" context="{'group_by': 'started_at:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oski_cron_run_action" model="ir.actions.act_window">
+        <field name="name">Exécutions planifiées</field>
+        <field name="res_model">oski.cron.run</field>
+        <field name="view_mode">list,form</field>
+        <!-- Contexte vide, et déclaré : retirer un champ d'un enregistrement de
+             données ne remet rien à zéro à la mise à jour, l'ancienne valeur
+             reste en base. -->
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aucune exécution enregistrée</p>
+            <p>Les tâches planifiées inscrivent ici chaque passage, réussi ou non.</p>
+        </field>
+    </record>
+
+    <menuitem id="oski_cron_run_menu"
+              name="Exécutions planifiées"
+              parent="base.menu_automation"
+              action="oski_cron_run_action"
+              sequence="15"
+              groups="base.group_system"/>
+</odoo>

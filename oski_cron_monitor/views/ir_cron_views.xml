@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_view_form_oski" model="ir.ui.view">
+        <field name="name">ir.cron.form.oski.monitor</field>
+        <field name="model">ir.cron</field>
+        <field name="inherit_id" ref="base.ir_cron_view_form"/>
+        <field name="arch" type="xml">
+            <field name="nextcall" position="after">
+                <field name="lastcall" readonly="1"/>
+                <field name="oski_last_state" readonly="1"/>
+                <field name="oski_last_duration" readonly="1"/>
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page name="oski_runs" string="Exécutions">
+                    <field name="oski_run_ids" readonly="1">
+                        <list decoration-danger="state == 'failure'">
+                            <field name="started_at"/>
+                            <field name="duration"/>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'success'"
+                                   decoration-danger="state == 'failure'"/>
+                            <field name="error" optional="show"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ir_cron_view_tree_oski" model="ir.ui.view">
+        <field name="name">ir.cron.list.oski.monitor</field>
+        <field name="model">ir.cron</field>
+        <field name="inherit_id" ref="base.ir_cron_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="nextcall" position="after">
+                <field name="lastcall" optional="show"/>
+                <field name="oski_last_state" optional="show" widget="badge"
+                       decoration-success="oski_last_state == 'success'"
+                       decoration-danger="oski_last_state == 'failure'"/>
+            </field>
+        </field>
+    </record>
+</odoo>
