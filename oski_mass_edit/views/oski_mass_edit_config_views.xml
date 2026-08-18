@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_oski_mass_edit_config_list" model="ir.ui.view">
+        <field name="name">oski.mass.edit.config.list</field>
+        <field name="model">oski.mass.edit.config</field>
+        <field name="arch" type="xml">
+            <list string="Modèles ouverts à l'édition en masse" editable="bottom">
+                <field name="model_id"/>
+                <field name="model_name"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_mass_edit_config_form" model="ir.ui.view">
+        <field name="name">oski.mass.edit.config.form</field>
+        <field name="model">oski.mass.edit.config</field>
+        <field name="arch" type="xml">
+            <form string="Modèle ouvert à l'édition en masse">
+                <sheet>
+                    <group>
+                        <field name="model_id"/>
+                        <field name="model_name"/>
+                        <field name="active"/>
+                        <field name="action_id" readonly="1"/>
+                    </group>
+                    <p class="text-muted">
+                        Une fois enregistré, « Édition en masse » apparaît dans le menu
+                        <b>Actions</b> de la vue liste de ce modèle.
+                    </p>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_oski_mass_edit_config" model="ir.actions.act_window">
+        <field name="name">Édition en masse</field>
+        <field name="res_model">oski.mass.edit.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_oski_mass_edit_config"
+              name="Édition en masse"
+              parent="base.menu_custom"
+              action="action_oski_mass_edit_config"
+              sequence="52"/>
+</odoo>

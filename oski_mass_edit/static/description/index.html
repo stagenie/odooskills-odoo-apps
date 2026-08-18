@@ -1,0 +1,63 @@
+<!--
+  Fiche produit OdooSkills — oski_mass_edit
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Édition en masse</h1>
+    <p style="color: #6b7280; font-size: 17px;">Modifiez un champ sur toute une sélection depuis la vue liste, sans ouvrir chaque fiche.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Corriger la même erreur sur deux cents contacts, poser un vendeur sur tout un lot de commandes, vider un champ devenu obsolète : Odoo demande d'ouvrir chaque fiche, une par une. La seule alternative native est l'export, la retouche dans un tableur, puis le réimport — trois occasions de se tromper pour une correction d'une seconde.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">✏️ <strong>Un champ, toute la sélection</strong> — cochez vos lignes, ouvrez « Édition en masse » dans le menu Actions, choisissez le champ et la valeur.</li>
+    <li style="line-height: 1.6; color: #374151;">🧩 <strong>Sur le modèle de votre choix</strong> — un administrateur déclare une fois les modèles concernés ; l'entrée apparaît alors dans leur vue liste, sans toucher aux vues.</li>
+    <li style="line-height: 1.6; color: #374151;">🔤 <strong>Tous les types courants</strong> — texte, texte long, HTML, sélection, entier, décimal, monétaire, booléen, date, date-heure et relation simple.</li>
+    <li style="line-height: 1.6; color: #374151;">🧹 <strong>Vider aussi bien que remplir</strong> — l'opération « Vider le champ » remet à blanc sans passer par une valeur bidon.</li>
+    <li style="line-height: 1.6; color: #374151;">🔒 <strong>Vos droits s'appliquent</strong> — l'écriture passe par les droits d'accès et les règles d'enregistrement de l'utilisateur courant. Le module n'emploie jamais <code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">sudo()</code>.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. L'entrée s'ajoute au menu Actions de la liste</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois contacts cochés : « Édition en masse » prend place parmi les actions natives d'Odoo (Export, Dupliquer, Archiver, Supprimer), sans rien déplacer.</p>
+  <img src="screenshot_01_menu_actions.png"
+       alt="Liste des contacts Odoo, trois lignes cochées, menu Actions ouvert affichant l'entrée « Édition en masse » sous les actions natives"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. L'assistant, réduit à l'essentiel</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Le modèle et le nombre d'enregistrements retenus sont rappelés en clair ; le champ se choisit dans la liste des champs inscriptibles du modèle, ici « Reference » sur trois contacts.</p>
+  <img src="screenshot_02_assistant.png"
+       alt="Assistant d'édition en masse : modèle res.partner, 3 enregistrements retenus, champ Reference, opération Définir une valeur, valeur CLI-2026"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">3. Les modèles ouverts, en un écran</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Un administrateur ajoute ou retire un modèle d'une ligne. Le désactiver retire l'entrée du menu Actions sans perdre la configuration.</p>
+  <img src="screenshot_03_modeles_ouverts.png"
+       alt="Liste de configuration : le modèle Contact (res.partner) est ouvert à l'édition en masse, avec un interrupteur Actif"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Une correction de masse redevient une correction, au lieu d'un export suivi d'un réimport.</li>
+    <li style="line-height: 1.6; color: #374151;">Les types non gérés sont refusés par un message explicite plutôt que convertis approximativement : aucune valeur fausse n'est posée sur mille enregistrements.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Si votre besoin porte moins sur la saisie que sur le contrôle de ce que chacun peut voir et modifier, la gamme OdooSkills compte une quinzaine de modules de cloisonnement — par équipe commerciale, par département, par projet, par journal comptable, par entrepôt. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>
