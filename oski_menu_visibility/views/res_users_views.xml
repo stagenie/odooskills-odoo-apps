@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_oski_hidden_menus" model="ir.ui.view">
+        <field name="name">res.users.form.oski.hidden.menus</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <!-- Une vue héritée ne peut pas porter ses groupes sur l'enregistrement en
+                     v19 : la restriction se déclare sur l'élément lui-même. -->
+                <page string="Menus masqués" name="oski_hidden_menus" groups="base.group_system">
+                    <field name="oski_hidden_menu_ids" widget="many2many_tags"
+                           options="{'no_create': True}"/>
+                    <p class="text-muted">
+                        Ces menus disparaissent de l'écran de cet utilisateur, et de lui seul.
+                        Masquer un menu masque aussi tout ce qu'il contient.
+                        Ce réglage range l'écran ; il ne remplace pas des droits d'accès.
+                    </p>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,56 @@
+<!--
+  Fiche produit OdooSkills — oski_menu_visibility
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Menus masqués par utilisateur</h1>
+    <p style="color: #6b7280; font-size: 17px;">Retirez des menus de l'écran d'un utilisateur précis, sans créer de groupe ni toucher aux droits.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Un utilisateur n'a besoin que d'une partie de ce que son rôle lui ouvre. La réponse habituelle est d'inventer un groupe pour chaque exception : la matrice des droits enfle, personne ne sait plus ce que chaque groupe emporte, et la moindre mise à jour devient risquée. Pour un simple encombrement d'écran, c'est un prix démesuré.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🙈 <strong>Sur la fiche utilisateur</strong> — un onglet, une liste de menus, et c'est réglé. Aucun groupe créé, aucun droit modifié.</li>
+    <li style="line-height: 1.6; color: #374151;">🌿 <strong>La branche entière suit</strong> — masquer un menu masque aussi tout ce qu'il contient, sans avoir à énumérer les sous-menus.</li>
+    <li style="line-height: 1.6; color: #374151;">👤 <strong>Strictement individuel</strong> — le masquage ne déborde jamais sur un collègue partageant les mêmes groupes.</li>
+    <li style="line-height: 1.6; color: #374151;">↩️ <strong>Réversible d'un clic</strong> — retirer l'étiquette rend le menu, immédiatement.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Le réglage vit sur la fiche de l'utilisateur</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois menus retirés à Claire Morel : deux journaux techniques et la section « Users &amp; Companies ». Le chemin complet est affiché, pour qu'aucun homonyme ne prête à confusion.</p>
+  <img src="screenshot_01_onglet_utilisateur.png"
+       alt="Fiche utilisateur Odoo de Claire Morel, onglet « Menus masqués » affichant trois menus retirés sous forme d'étiquettes"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Le choix se fait par recherche, sur le chemin complet</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Taper un mot suffit : la liste propose les menus correspondants avec leur arborescence, de la racine jusqu'à l'entrée.</p>
+  <img src="screenshot_02_choix_des_menus.png"
+       alt="Sélecteur de menus ouvert sur la fiche utilisateur : la recherche « Journal » propose les entrées Settings/Technical/Journal des suppressions, des modifications, des exports et des connexions"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Un écran allégé sans dette de configuration : rien à défaire dans les groupes le jour où l'utilisateur change de poste.</li>
+    <li style="line-height: 1.6; color: #374151;">Le filtrage se greffe à l'endroit exact où un réglage personnel reste personnel — un détail d'implémentation qui évite de servir le masquage d'un utilisateur à tous ceux qui partagent ses groupes.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;"><strong>À savoir</strong> : ce module range l'écran, il ne verrouille pas la donnée. Un menu masqué reste atteignable par son adresse directe. Pour interdire réellement l'accès, il faut des droits : la gamme OdooSkills compte une quinzaine de modules de cloisonnement — par équipe commerciale, par département, par projet, par journal comptable, par entrepôt. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>
