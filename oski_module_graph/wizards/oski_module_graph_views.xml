@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_module_graph_view_form" model="ir.ui.view">
+        <field name="name">oski.module.graph.form</field>
+        <field name="model">oski.module.graph</field>
+        <field name="arch" type="xml">
+            <form string="Graphe des dépendances">
+                <group>
+                    <group>
+                        <field name="module_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="with_dependencies"/>
+                        <field name="node_count" invisible="not svg"/>
+                        <field name="edge_count" invisible="not svg"/>
+                    </group>
+                </group>
+                <div class="text-center" style="overflow-x: auto;" invisible="not svg">
+                    <field name="svg" nolabel="1" readonly="1"/>
+                </div>
+                <footer>
+                    <button name="action_draw" type="object" string="Dessiner" class="btn-primary"/>
+                    <button string="Fermer" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="oski_module_graph_action" model="ir.actions.act_window">
+        <field name="name">Graphe des dépendances</field>
+        <field name="res_model">oski.module.graph</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="oski_module_graph_menu"
+              name="Graphe des dépendances"
+              parent="base.menu_custom"
+              action="oski_module_graph_action"
+              sequence="30"
+              groups="base.group_system"/>
+</odoo>
