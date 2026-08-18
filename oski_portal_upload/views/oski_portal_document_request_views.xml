@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_oski_portal_document_request_list" model="ir.ui.view">
+        <field name="name">oski.portal.document.request.list</field>
+        <field name="model">oski.portal.document.request</field>
+        <field name="arch" type="xml">
+            <list string="Documents demandés"
+                  decoration-muted="state == 'cancelled'"
+                  decoration-danger="state == 'pending' and deadline and deadline &lt; current_date">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="resource_ref" widget="reference"/>
+                <field name="deadline"/>
+                <field name="received_on" optional="hide"/>
+                <field name="attachment_id" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'received'"
+                       decoration-warning="state == 'pending'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_portal_document_request_form" model="ir.ui.view">
+        <field name="name">oski.portal.document.request.form</field>
+        <field name="model">oski.portal.document.request</field>
+        <field name="arch" type="xml">
+            <form string="Document demandé">
+                <header>
+                    <button name="action_cancel" type="object" string="Annuler"
+                            invisible="state != 'pending'"/>
+                    <button name="action_reset" type="object" string="Réattendre"
+                            invisible="state != 'cancelled'"/>
+                    <button name="action_open_record" type="object"
+                            string="Ouvrir la fiche" class="btn-secondary"
+                            invisible="not res_model"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="pending,received"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Bon de commande signé"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="resource_ref" widget="reference"/>
+                            <field name="partner_id"/>
+                            <field name="deadline"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="res_model" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="attachment_id" invisible="state != 'received'"/>
+                            <field name="received_on" invisible="state != 'received'"/>
+                        </group>
+                    </group>
+                    <group string="Précisions affichées au client">
+                        <field name="note" nolabel="1" colspan="2"
+                               placeholder="Le bon signé et daté, page de garde comprise."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_oski_portal_document_request_search" model="ir.ui.view">
+        <field name="name">oski.portal.document.request.search</field>
+        <field name="model">oski.portal.document.request</field>
+        <field name="arch" type="xml">
+            <search string="Documents demandés">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <filter name="pending" string="Attendus"
+                        domain="[('state', '=', 'pending')]"/>
+                <filter name="received" string="Reçus"
+                        domain="[('state', '=', 'received')]"/>
+                <separator/>
+                <filter name="late" string="En retard"
+                        domain="[('state', '=', 'pending'), ('deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <group>
+                    <filter name="group_state" string="État" domain="[]"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_partner" string="Client" domain="[]"
+                            context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_deadline" string="Échéance" domain="[]"
+                            context="{'group_by': 'deadline'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_portal_document_request" model="ir.actions.act_window">
+        <field name="name">Documents demandés</field>
+        <field name="res_model">oski.portal.document.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_pending': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Demander un premier document</p>
+            <p>
+                Le document apparaît sur la page portail de la fiche visée. Le
+                client le dépose depuis là, et vous le retrouvez en pièce jointe
+                de la fiche, signalé dans son fil de discussion.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_oski_portal_upload_root"
+              name="Documents client"
+              web_icon="oski_portal_upload,static/description/icon.png"
+              sequence="95"/>
+
+    <menuitem id="menu_oski_portal_document_request"
+              name="Documents demandés"
+              parent="menu_oski_portal_upload_root"
+              action="action_oski_portal_document_request"
+              sequence="10"/>
+
+</odoo>
