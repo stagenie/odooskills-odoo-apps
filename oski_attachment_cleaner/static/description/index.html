@@ -1,0 +1,56 @@
+<!--
+  Fiche produit OdooSkills — oski_attachment_cleaner
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Nettoyage des pièces jointes</h1>
+    <p style="color: #6b7280; font-size: 17px;">Orphelines, copies redondantes, poids du magasin de fichiers — et une purge qui laisse une trace.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Le magasin de fichiers d'une base vieillit mal. Des migrations, des suppressions en cascade au niveau de la base, des imports ratés laissent derrière eux des pièces jointes qui ne désignent plus rien. Odoo n'en propose aucun inventaire, et sa purge automatique ne touche qu'à ce qu'il a lui-même produit.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🔎 <strong>Un relevé avant tout</strong> — le module compte, pèse et nomme ; il ne supprime que sur un second geste.</li>
+    <li style="line-height: 1.6; color: #374151;">🧷 <strong>Deux critères, pas un de plus</strong> — les orphelines, et les copies redondantes du <em>même</em> document. La même pièce sur deux documents différents n'est jamais touchée : un contrat type attaché à deux clients doit le rester.</li>
+    <li style="line-height: 1.6; color: #374151;">🛡️ <strong>Un filet de sécurité explicite</strong> — valeurs de champs binaires, fichiers servis par une URL, pièces publiques, vues, et tout ce qui est plus récent que l'âge minimum : jamais proposés.</li>
+    <li style="line-height: 1.6; color: #374151;">🧾 <strong>Chaque purge laisse sa trace</strong> — qui, quand, combien de pièces, combien d'octets, sur quels critères, et la liste des fichiers supprimés.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Le relevé, avant toute suppression</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Cinq orphelines et deux copies redondantes, nommées une à une avec leur document d'origine et leur poids. Le poids total du magasin est rappelé à côté, pour mesurer ce que la purge changerait réellement.</p>
+  <img src="screenshot_01_scan.png"
+       alt="Relevé des pièces jointes : cinq orphelines, deux copies redondantes, poids retenu et poids total, avec la liste nominative"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Ce qui a été purgé, et par qui</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Chaque purge est archivée : la question « qui a supprimé ces fichiers ? » ne reste pas sans réponse.</p>
+  <img src="screenshot_02_purges.png"
+       alt="Historique des purges de pièces jointes avec l'auteur, le nombre de pièces supprimées et les octets libérés"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">La purge <strong>rejoue le relevé</strong> au lieu de faire confiance à la sélection enregistrée : entre les deux, la base a continué de vivre.</li>
+    <li style="line-height: 1.6; color: #374151;">Une pièce dont le modèle a disparu avec son module n'est pas déclarée orpheline : réinstaller le module la rendrait utile, et une purge est sans retour.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Nettoyer les pièces jointes est un entretien ; les organiser est un métier. La gamme OdooSkills propose une gestion documentaire complète — classement, versions, droits par dossier, signature électronique. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>
