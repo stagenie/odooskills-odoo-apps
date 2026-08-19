@@ -1,7 +1,23 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
 
 ZIP_ACTION_CODE = "action = env['ir.attachment']._oski_zip_action(records)"
+
+def oski_wanted(operator, value):
+    """Traduit une condition booléenne en « on cherche les vrais » ou non.
+
+    Odoo 19 NORMALISE ``('champ', '=', True)`` en ``operator='in'`` et
+    ``value=OrderedSet([True])`` avant d'appeler la méthode ``search`` d'un
+    champ. Lire l'opérateur brut rendrait alors le complément exact du
+    résultat attendu — une liste qui a l'air plausible et qui est fausse.
+    """
+    if operator in ("in", "not in"):
+        truthy = any(bool(item) for item in value)
+        return truthy if operator == "in" else not truthy
+    if operator in ("=", "!="):
+        return bool(value) if operator == "=" else not bool(value)
+    raise NotImplementedError(
+        "Opérateur non pris en charge sur ce champ : %s" % operator)
+
 
 
 class IrModel(models.Model):
@@ -49,11 +65,9 @@ class IrModel(models.Model):
         """Le champ n'est pas stocké, et c'est voulu : la liste des modèles
         change à chaque module installé, une valeur en base vieillirait sans
         que rien ne la rafraîchisse."""
-        if operator not in ("=", "!=") or not isinstance(value, bool):
-            raise UserError(_("Filtre non pris en charge sur ce champ."))
+        wanted = oski_wanted(operator, value)
         available = self.sudo().search([]).filtered(
             lambda record: record._oski_zip_is_available()).ids
-        wanted = value if operator == "=" else not value
         return [("id", "in" if wanted else "not in", available)]
 
     @api.model_create_multi

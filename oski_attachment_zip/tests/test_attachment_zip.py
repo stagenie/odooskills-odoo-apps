@@ -14,6 +14,12 @@ class ZipCommon(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.partner_model = cls.env["ir.model"]._get("res.partner")
+        # `_get` rend un enregistrement VIDE pour un modèle absent de la base,
+        # et toute assertion posée dessus passe alors sans rien éprouver :
+        # le mixin d'essai se choisit donc parmi ceux réellement chargés.
+        cls.abstract_model = cls.env["ir.model"].search([]).filtered(
+            lambda record: record.model in cls.env
+            and cls.env[record.model]._abstract)[:1]
         cls.first = cls.env["res.partner"].create({"name": "Fiche Une"})
         cls.second = cls.env["res.partner"].create({"name": "Fiche Deux"})
         cls.attachments = cls.env["ir.attachment"]
@@ -81,20 +87,31 @@ class TestZipActivation(ZipCommon):
     def test_an_abstract_model_gets_nothing(self):
         """Un mixin n'a pas de fiche : lui poser une entrée de menu
         promettrait un écran qui n'existe pas."""
-        mixin = self.env["ir.model"]._get("mail.thread")
-        self.assertFalse(mixin.oski_zip_available)
-        mixin.oski_zip_enabled = True
-        self.assertFalse(mixin.oski_zip_action_id)
+        self.assertTrue(self.abstract_model, "aucun modèle abstrait chargé")
+        self.assertFalse(self.abstract_model.oski_zip_available)
+        self.abstract_model.oski_zip_enabled = True
+        self.assertFalse(self.abstract_model.oski_zip_action_id)
 
     def test_a_real_model_is_offered(self):
         self.assertTrue(self.partner_model.oski_zip_available)
 
+    def test_the_boolean_filter_survives_its_normalisation(self):
+        """Odoo 19 change ``= True`` en ``in {True}`` avant d'appeler la
+        méthode de recherche : mal lu, l'opérateur rend le complément exact
+        du résultat attendu."""
+        offered = self.env["ir.model"].search([("oski_zip_available", "in", [True])])
+        self.assertIn(self.partner_model, offered)
+        self.assertNotIn(self.abstract_model, offered)
+        hidden = self.env["ir.model"].search([("oski_zip_available", "not in", [True])])
+        self.assertIn(self.abstract_model, hidden)
+        self.assertNotIn(self.partner_model, hidden)
+
     def test_the_configuration_screen_only_lists_real_models(self):
         offered = self.env["ir.model"].search([("oski_zip_available", "=", True)])
         self.assertIn(self.partner_model, offered)
-        self.assertNotIn(self.env["ir.model"]._get("mail.thread"), offered)
+        self.assertNotIn(self.abstract_model, offered)
         hidden = self.env["ir.model"].search([("oski_zip_available", "=", False)])
-        self.assertIn(self.env["ir.model"]._get("mail.thread"), hidden)
+        self.assertIn(self.abstract_model, hidden)
         self.assertNotIn(self.partner_model, hidden)
 
 
