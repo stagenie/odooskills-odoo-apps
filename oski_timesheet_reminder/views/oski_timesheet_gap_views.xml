@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_oski_timesheet_gap_list" model="ir.ui.view">
+        <field name="name">oski.timesheet.gap.list</field>
+        <field name="model">oski.timesheet.gap</field>
+        <field name="arch" type="xml">
+            <list string="Retards de saisie" create="false"
+                  decoration-danger="missing_hours &gt;= 8">
+                <field name="date_from"/>
+                <field name="date_to" optional="hide"/>
+                <field name="employee_id"/>
+                <field name="expected_hours" sum="Attendu"/>
+                <field name="logged_hours" sum="Saisi"/>
+                <field name="missing_hours" sum="Manquant"/>
+                <field name="reminded_on" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_timesheet_gap_pivot" model="ir.ui.view">
+        <field name="name">oski.timesheet.gap.pivot</field>
+        <field name="model">oski.timesheet.gap</field>
+        <field name="arch" type="xml">
+            <pivot string="Retards de saisie" sample="0">
+                <field name="employee_id" type="row"/>
+                <field name="date_from" interval="week" type="col"/>
+                <field name="missing_hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_oski_timesheet_gap_search" model="ir.ui.view">
+        <field name="name">oski.timesheet.gap.search</field>
+        <field name="model">oski.timesheet.gap</field>
+        <field name="arch" type="xml">
+            <search string="Retards de saisie">
+                <field name="employee_id"/>
+                <filter name="heavy" string="Une journée ou plus"
+                        domain="[('missing_hours', '&gt;=', 8)]"/>
+                <filter name="not_reminded" string="Sans rappel"
+                        domain="[('reminded_on', '=', False)]"/>
+                <group>
+                    <filter name="group_employee" string="Employé" domain="[]"
+                            context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_week" string="Semaine" domain="[]"
+                            context="{'group_by': 'date_from:week'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_timesheet_gap" model="ir.actions.act_window">
+        <field name="name">Retards de saisie</field>
+        <field name="res_model">oski.timesheet.gap</field>
+        <field name="view_mode">list,pivot</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Personne n'est en retard</p>
+            <p>
+                Chaque semaine, la tâche planifiée compare les heures saisies
+                aux heures attendues et consigne ici ce qui manque.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_oski_timesheet_gap"
+              name="Retards de saisie"
+              parent="hr_timesheet.timesheet_menu_root"
+              action="action_oski_timesheet_gap"
+              sequence="45"
+              groups="hr_timesheet.group_hr_timesheet_approver"/>
+
+</odoo>
