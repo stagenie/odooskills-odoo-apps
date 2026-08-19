@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_oski_expire" model="ir.ui.view">
+        <field name="name">res.config.settings.form.oski.expire</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='quotation_validity_days']" position="after">
+                <setting id="oski_quotation_expire"
+                         string="Péremption des devis"
+                         help="Annuler chaque nuit les devis dont la date de validité est dépassée. Le devis annulé garde la trace de sa péremption.">
+                    <field name="oski_quote_expire_active"/>
+                </setting>
+                <setting id="oski_quotation_reminder"
+                         string="Relance avant échéance"
+                         help="Le vendeur reçoit une activité — jamais un courriel de plus — sur les devis qui approchent de leur date de validité. Zéro : aucune relance. La relance ne dépend pas de la péremption.">
+                    <div class="content-group">
+                        <div class="mt8">
+                            <span>Relancer</span>
+                            <field name="oski_quote_reminder_days"
+                                   class="col-1 oe_inline mx-2"/>
+                            <span>jour(s) avant l'échéance</span>
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
