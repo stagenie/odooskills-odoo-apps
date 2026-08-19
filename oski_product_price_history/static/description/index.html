@@ -1,0 +1,57 @@
+<!--
+  Fiche produit OdooSkills — oski_product_price_history
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Historique des prix</h1>
+    <p style="color: #6b7280; font-size: 17px;">Chaque changement de prix de vente ou de coût, avec l'écart, la date et l'auteur.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Odoo n'a pas d'historique de prix. Le prix affiché est celui d'aujourd'hui ; celui d'avant la dernière hausse n'existe plus nulle part, et personne ne peut dire qui l'a changé ni quand. La question revient pourtant à chaque litige client, à chaque révision tarifaire et à chaque clôture.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">📈 <strong>Chaque mouvement inscrit</strong> : l'ancienne valeur, la nouvelle, l'écart en monnaie et en pourcentage, la date et l'auteur.</li>
+    <li style="line-height: 1.6; color: #374151;">🏷️ <strong>Le prix de vente et le coût</strong> — ce dernier par variante et par société, parce que deux filiales peuvent valoriser le même article différemment.</li>
+    <li style="line-height: 1.6; color: #374151;">🔎 <strong>Des filtres prêts</strong> : hausses, baisses, année en cours, regroupement par article, par auteur ou par mois.</li>
+    <li style="line-height: 1.6; color: #374151;">🧭 <strong>Un bouton sur la fiche article</strong> qui ouvre son seul historique, et une courbe pour lire sa trajectoire.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Le relevé complet</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Les hausses en rouge, les baisses en vert, l'écart chiffré à côté du pourcentage. Chaque ligne nomme son auteur : la question « qui a changé ce prix ? » cesse d'être une enquête.</p>
+  <img src="screenshot_01_history.png"
+       alt="Liste de l'historique des prix Odoo : date, article, prix avant et après, écart en monnaie et en pourcentage, auteur"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Depuis la fiche de l'article</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Le bouton compte les mouvements de cet article et ouvre son historique seul. Le suivi Odoo du fil de discussion garde la trace du changement ; le module en fait une donnée qu'on peut trier, filtrer et totaliser.</p>
+  <img src="screenshot_02_product.png"
+       alt="Fiche article Odoo portant le bouton statistique « Prix » du module et le suivi des changements au fil de discussion"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;"><strong>Aucune purge automatique</strong>, contrairement aux journaux techniques de la gamme : un historique de prix qui s'efface au bout de trente jours ne répond plus à la seule question qu'on lui pose.</li>
+    <li style="line-height: 1.6; color: #374151;">Le coût est un champ <strong>dépendant de la société</strong> : le module l'enregistre société par société, comme Odoo le stocke.</li>
+    <li style="line-height: 1.6; color: #374151;">Les lignes sont en <strong>lecture seule</strong> — un historique qu'on peut réécrire ne vaut rien.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — il ne dépend que des articles, donc il fonctionne en vente comme en achat ou en inventaire.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Savoir qui a changé un prix est une chose ; décider qui a le droit de le faire en est une autre. La gamme OdooSkills couvre la protection du coût et de la marge, le cloisonnement des listes de prix et des catégories d'articles, et l'approbation des changements d'articles. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>
