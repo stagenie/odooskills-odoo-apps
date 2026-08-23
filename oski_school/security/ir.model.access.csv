@@ -4,3 +4,11 @@ access_school_period_manager,school.period.manager,model_oski_school_period,oski
 access_school_term_teacher,school.term.teacher,model_oski_school_term,oski_school.group_school_teacher,1,0,0,0
 access_school_term_manager,school.term.manager,model_oski_school_term,oski_school.group_school_manager,1,1,1,1
 access_school_term_generate_wizard,school.term.generate.wizard,model_oski_school_term_generate_wizard,oski_school.group_school_manager,1,1,1,1
+access_school_subject_teacher,school.subject.teacher,model_oski_school_subject,oski_school.group_school_teacher,1,0,0,0
+access_school_subject_manager,school.subject.manager,model_oski_school_subject,oski_school.group_school_manager,1,1,1,1
+access_school_room_teacher,school.room.teacher,model_oski_school_room,oski_school.group_school_teacher,1,0,0,0
+access_school_room_manager,school.room.manager,model_oski_school_room,oski_school.group_school_manager,1,1,1,1
+access_school_program_teacher,school.program.teacher,model_oski_school_program,oski_school.group_school_teacher,1,0,0,0
+access_school_program_manager,school.program.manager,model_oski_school_program,oski_school.group_school_manager,1,1,1,1
+access_school_level_teacher,school.level.teacher,model_oski_school_level,oski_school.group_school_teacher,1,0,0,0
+access_school_level_manager,school.level.manager,model_oski_school_level,oski_school.group_school_manager,1,1,1,1
