@@ -30,4 +30,78 @@
         <field name="implied_ids" eval="[(4, ref('oski_school.group_school_officer'))]"/>
         <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
+
+    <!-- Multi-société -->
+    <record id="rule_school_period_company" model="ir.rule">
+        <field name="name">School period: multi-company</field>
+        <field name="model_id" ref="model_oski_school_period"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_program_company" model="ir.rule">
+        <field name="name">School program: multi-company</field>
+        <field name="model_id" ref="model_oski_school_program"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_room_company" model="ir.rule">
+        <field name="name">School room: multi-company</field>
+        <field name="model_id" ref="model_oski_school_room"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_teacher_company" model="ir.rule">
+        <field name="name">Teacher: multi-company</field>
+        <field name="model_id" ref="model_oski_school_teacher"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_student_company" model="ir.rule">
+        <field name="name">Student: multi-company</field>
+        <field name="model_id" ref="model_oski_school_student"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_class_company" model="ir.rule">
+        <field name="name">Class: multi-company</field>
+        <field name="model_id" ref="model_oski_school_class"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_enrollment_company" model="ir.rule">
+        <field name="name">Enrollment: multi-company</field>
+        <field name="model_id" ref="model_oski_school_enrollment"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <!-- L'enseignant ne voit que les étudiants de ses classes -->
+    <record id="rule_school_enrollment_teacher" model="ir.rule">
+        <field name="name">Enrollment: own classes (teacher)</field>
+        <field name="model_id" ref="model_oski_school_enrollment"/>
+        <field name="domain_force">['|',
+            ('class_id.subject_line_ids.teacher_id.user_id', '=', user.id),
+            ('class_id.homeroom_teacher_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('oski_school.group_school_teacher'))]"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_school_student_teacher" model="ir.rule">
+        <field name="name">Student: own classes (teacher)</field>
+        <field name="model_id" ref="model_oski_school_student"/>
+        <field name="domain_force">['|',
+            ('enrollment_ids.class_id.subject_line_ids.teacher_id.user_id', '=', user.id),
+            ('enrollment_ids.class_id.homeroom_teacher_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('oski_school.group_school_teacher'))]"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <!-- Officer et Manager voient tout : règle globale OR-ée qui neutralise la précédente -->
+    <record id="rule_school_enrollment_officer" model="ir.rule">
+        <field name="name">Enrollment: all (officer)</field>
+        <field name="model_id" ref="model_oski_school_enrollment"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('oski_school.group_school_officer'))]"/>
+    </record>
+    <record id="rule_school_student_officer" model="ir.rule">
+        <field name="name">Student: all (officer)</field>
+        <field name="model_id" ref="model_oski_school_student"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('oski_school.group_school_officer'))]"/>
+    </record>
 </odoo>
