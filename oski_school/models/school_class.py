@@ -8,7 +8,7 @@ class SchoolClass(models.Model):
     _inherit = ['mail.thread']
     _order = 'period_id desc, level_id, name'
 
-    name = fields.Char(compute='_compute_name', store=True, readonly=False)
+    name = fields.Char(compute='_compute_name', store=True, readonly=False, required=True, precompute=True)
     suffix = fields.Char(size=8, help='A, B, Morning…')
     level_id = fields.Many2one('oski.school.level', required=True, ondelete='restrict', index=True)
     program_id = fields.Many2one(related='level_id.program_id', store=True, index=True)
