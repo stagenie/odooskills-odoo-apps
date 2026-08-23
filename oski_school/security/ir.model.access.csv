@@ -12,3 +12,9 @@ access_school_program_teacher,school.program.teacher,model_oski_school_program,o
 access_school_program_manager,school.program.manager,model_oski_school_program,oski_school.group_school_manager,1,1,1,1
 access_school_level_teacher,school.level.teacher,model_oski_school_level,oski_school.group_school_teacher,1,0,0,0
 access_school_level_manager,school.level.manager,model_oski_school_level,oski_school.group_school_manager,1,1,1,1
+access_school_teacher_teacher,school.teacher.teacher,model_oski_school_teacher,oski_school.group_school_teacher,1,0,0,0
+access_school_teacher_manager,school.teacher.manager,model_oski_school_teacher,oski_school.group_school_manager,1,1,1,1
+access_school_student_teacher,school.student.teacher,model_oski_school_student,oski_school.group_school_teacher,1,0,0,0
+access_school_student_officer,school.student.officer,model_oski_school_student,oski_school.group_school_officer,1,1,1,1
+access_school_guardian_teacher,school.guardian.teacher,model_oski_school_guardian,oski_school.group_school_teacher,1,0,0,0
+access_school_guardian_officer,school.guardian.officer,model_oski_school_guardian,oski_school.group_school_officer,1,1,1,1

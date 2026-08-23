@@ -23,3 +23,24 @@ class SchoolCase(TransactionCase):
             {'program_id': cls.program.id, 'name': 'Grade 5', 'code': 'G5', 'sequence': 2},
         ])
         cls.room = cls.env['oski.school.room'].create({'name': 'Room A', 'code': 'A', 'capacity': 30})
+        cls.teacher_partner = cls.env['res.partner'].create({'name': 'Ada Teacher'})
+        cls.teacher = cls.env['oski.school.teacher'].create({
+            'partner_id': cls.teacher_partner.id, 'subject_ids': [(6, 0, [cls.math.id])]})
+        cls.student_partner = cls.env['res.partner'].create({'name': 'Sam Student'})
+        cls.student = cls.env['oski.school.student'].create({
+            'partner_id': cls.student_partner.id, 'birth_date': '2014-03-02'})
+        cls.parent_partner = cls.env['res.partner'].create({'name': 'Pat Parent', 'email': 'pat@example.com'})
+        cls.guardian = cls.env['oski.school.guardian'].create({
+            'student_id': cls.student.id, 'partner_id': cls.parent_partner.id,
+            'relation': 'mother', 'is_primary': True, 'is_billing': True})
+
+    @classmethod
+    def _new_student(cls, name, with_guardian=False):
+        partner = cls.env['res.partner'].create({'name': name})
+        student = cls.env['oski.school.student'].create({'partner_id': partner.id})
+        if with_guardian:
+            gp = cls.env['res.partner'].create({'name': f'{name} parent'})
+            cls.env['oski.school.guardian'].create({
+                'student_id': student.id, 'partner_id': gp.id,
+                'relation': 'father', 'is_primary': True, 'is_billing': True})
+        return student
