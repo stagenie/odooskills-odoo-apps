@@ -124,37 +124,6 @@ class SchoolLevel(models.Model):
     _code_program_uniq = models.Constraint(
         'UNIQUE (program_id, code)', 'The level code must be unique inside a program.')
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        # Check constraint before create to raise ValidationError instead of IntegrityError
-        for vals in vals_list:
-            self._check_code_unique_inline(vals)
-        return super().create(vals_list)
-
-    def _check_code_unique_inline(self, vals):
-        """Check code uniqueness before insert (for better error messages)."""
-        program_id = vals.get('program_id')
-        code = vals.get('code')
-        if program_id and code:
-            dup = self.env['oski.school.level'].search_count([
-                ('program_id', '=', program_id),
-                ('code', '=', code)])
-            if dup:
-                raise ValidationError(self.env._('The level code must be unique inside a program.'))
-
-    @api.constrains('code', 'program_id')
-    def _check_code_unique(self):
-        for level in self:
-            domain = [
-                ('program_id', '=', level.program_id.id),
-                ('code', '=', level.code)]
-            # Only exclude the current record if it has been saved (id is not False)
-            if level.id:
-                domain.append(('id', '!=', level.id))
-            dup = self.env['oski.school.level'].search_count(domain)
-            if dup:
-                raise ValidationError(self.env._('The level code must be unique inside a program.'))
-
     @api.depends('sequence', 'program_id', 'manual_next_level',
                  'program_id.level_ids.sequence')
     def _compute_next_level(self):

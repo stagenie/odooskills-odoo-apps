@@ -46,8 +46,9 @@ class TestProgram(SchoolCase):
         self.assertFalse(self.level_6.next_level_id)
 
     def test_level_code_unique_per_program(self):
-        from odoo.exceptions import ValidationError
-        with self.assertRaises(ValidationError):
+        from psycopg2 import IntegrityError
+        from odoo.tools import mute_logger
+        with self.assertRaises(IntegrityError), mute_logger('odoo.sql_db'), self.env.cr.savepoint():
             self.env['oski.school.level'].create({
                 'program_id': self.program.id, 'name': 'Dup', 'code': 'G6', 'sequence': 9})
 
