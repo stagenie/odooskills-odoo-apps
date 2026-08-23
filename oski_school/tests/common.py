@@ -33,6 +33,13 @@ class SchoolCase(TransactionCase):
         cls.guardian = cls.env['oski.school.guardian'].create({
             'student_id': cls.student.id, 'partner_id': cls.parent_partner.id,
             'relation': 'mother', 'is_primary': True, 'is_billing': True})
+        cls.class_6a = cls.env['oski.school.class'].create({
+            'level_id': cls.level_6.id, 'period_id': cls.period.id, 'suffix': 'A',
+            'room_id': cls.room.id, 'capacity': 2,
+            'subject_line_ids': [(0, 0, {'subject_id': cls.math.id, 'teacher_id': cls.teacher.id})],
+        })
+        cls.class_5a = cls.env['oski.school.class'].create({
+            'level_id': cls.level_5.id, 'period_id': cls.period.id, 'suffix': 'A', 'capacity': 30})
 
     @classmethod
     def _new_student(cls, name, with_guardian=False):

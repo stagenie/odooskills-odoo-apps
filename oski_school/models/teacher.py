@@ -17,6 +17,7 @@ class SchoolTeacher(models.Model):
                               help='Internal user given the Teacher group.')
     employee_code = fields.Char(size=16)
     subject_ids = fields.Many2many('oski.school.subject', string='Can teach')
+    class_subject_ids = fields.One2many('oski.school.class.subject', 'teacher_id', string='Teaches')
     company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
     active = fields.Boolean(default=True)
 

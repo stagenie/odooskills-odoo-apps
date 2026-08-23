@@ -18,3 +18,7 @@ access_school_student_teacher,school.student.teacher,model_oski_school_student,o
 access_school_student_officer,school.student.officer,model_oski_school_student,oski_school.group_school_officer,1,1,1,1
 access_school_guardian_teacher,school.guardian.teacher,model_oski_school_guardian,oski_school.group_school_teacher,1,0,0,0
 access_school_guardian_officer,school.guardian.officer,model_oski_school_guardian,oski_school.group_school_officer,1,1,1,1
+access_school_class_teacher,school.class.teacher,model_oski_school_class,oski_school.group_school_teacher,1,0,0,0
+access_school_class_manager,school.class.manager,model_oski_school_class,oski_school.group_school_manager,1,1,1,1
+access_school_class_subject_teacher,school.class.subject.teacher,model_oski_school_class_subject,oski_school.group_school_teacher,1,0,0,0
+access_school_class_subject_manager,school.class.subject.manager,model_oski_school_class_subject,oski_school.group_school_manager,1,1,1,1
