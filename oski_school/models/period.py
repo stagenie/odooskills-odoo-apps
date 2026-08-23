@@ -69,14 +69,16 @@ class SchoolPeriod(models.Model):
     def action_open_duplicate_wizard(self):
         self.ensure_one()
         return {
-            'type': 'ir.actions.act_window', 'res_model': 'oski.school.structure.duplicate.wizard',
+            'type': 'ir.actions.act_window', 'name': self.env._('Duplicate structure'),
+            'res_model': 'oski.school.structure.duplicate.wizard',
             'view_mode': 'form', 'target': 'new', 'context': {'default_period_id': self.id},
         }
 
     def action_open_term_wizard(self):
         self.ensure_one()
         return {
-            'type': 'ir.actions.act_window', 'res_model': 'oski.school.term.generate.wizard',
+            'type': 'ir.actions.act_window', 'name': self.env._('Generate terms'),
+            'res_model': 'oski.school.term.generate.wizard',
             'view_mode': 'form', 'target': 'new', 'context': {'default_period_id': self.id},
         }
 

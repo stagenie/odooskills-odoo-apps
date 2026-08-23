@@ -92,7 +92,8 @@ class SchoolEnrollment(models.Model):
     def action_open_withdraw_wizard(self):
         self.ensure_one()
         return {
-            'type': 'ir.actions.act_window', 'res_model': 'oski.school.enrollment.withdraw.wizard',
+            'type': 'ir.actions.act_window', 'name': self.env._('Withdraw'),
+            'res_model': 'oski.school.enrollment.withdraw.wizard',
             'view_mode': 'form', 'target': 'new',
             'context': {'default_enrollment_id': self.id},
         }

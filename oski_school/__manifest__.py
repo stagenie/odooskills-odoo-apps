@@ -1,23 +1,23 @@
 {
-    'name': 'OdooSkills — School: students, classes, enrollments',
+    'name': 'École — élèves, classes, inscriptions',
     'version': '19.0.1.0.0',
     'category': 'Services/Education',
-    'summary': 'The free core of the School suite: academic structure, students '
-               'and guardians, teachers, enrollments and year-end promotion.',
+    'summary': "Gérez une école privée : périodes, programmes, classes, élèves et "
+               "tuteurs, inscriptions avec contrôle des places, passage d'année",
     'description': """
-Run any private school — primary, middle, high, higher education, language
-centre or vocational training — on one generic core.
+Cœur gratuit de la suite École — pour le primaire, le collège, le lycée, le
+supérieur, un centre de langues ou de formation professionnelle.
 
-- Periods (school year, semester, rolling session) with grading terms.
-- Programs typed by cycle, levels, subjects, rooms, classes.
-- Students with guardians, registration numbers, teachers.
-- Enrollments with seat control, guardian requirement and withdrawal.
-- Year-end promotion wizard (promoted / repeated / left) and structure duplication.
-- Enrollment certificate and class list (PDF).
+- Périodes (année scolaire, semestre, session) avec trimestres générés.
+- Programmes typés par cycle, niveaux, matières, salles, classes.
+- Élèves avec tuteurs, matricule automatique, enseignants.
+- Inscriptions avec contrôle des places, tuteur obligatoire et retrait.
+- Assistant de passage d'année (admis / redoublant / parti) et duplication de structure.
+- Certificat de scolarité et liste de classe (PDF).
 
-Paid satellites add admission, online application, fees and online payment,
-timetable, attendance, grades and report cards, teacher workspace, dashboard
-and communication.
+Les modules payants de la suite ajoutent admissions et inscription en ligne,
+frais de scolarité et paiement en ligne, emploi du temps, présences, notes et
+bulletins, espace enseignant, tableau de bord et communication.
 """,
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
@@ -41,6 +41,7 @@ and communication.
         'reports/report_class_list.xml',
     ],
     'demo': ['demo/school_demo.xml'],
+    'images': ['static/description/banner.png'],
     'installable': True,
     'application': True,
 }

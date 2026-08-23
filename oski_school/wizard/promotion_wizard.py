@@ -72,7 +72,8 @@ class PromotionWizard(models.TransientModel):
             })
         self.env['oski.school.promotion.wizard.line'].create(vals)
         return {
-            'type': 'ir.actions.act_window', 'res_model': self._name, 'res_id': self.id,
+            'type': 'ir.actions.act_window', 'name': self.env._('Promotion'),
+            'res_model': self._name, 'res_id': self.id,
             'view_mode': 'form', 'target': 'new',
         }
 

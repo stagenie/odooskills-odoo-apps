@@ -1215,6 +1215,12 @@ msgstr "Promu(e)"
 #. module: oski_school
 #. odoo-python
 #: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "Promotion"
+msgstr "Passage d’année"
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
 msgid "Promotion %(period)s: %(decision)s%(target)s"
 msgstr "Passage d’année %(period)s : %(decision)s%(target)s"
 
@@ -1272,7 +1278,7 @@ msgstr "Recharger la proposition"
 #: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__result__repeated
 #: model:ir.model.fields.selection,name:oski_school.selection__oski_school_promotion_wizard_line__decision__repeated
 msgid "Repeated"
-msgstr "Redouble"
+msgstr "Redoublant(e)"
 
 #. module: oski_school
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_user_id
