@@ -69,7 +69,7 @@ class SchoolProgram(models.Model):
     active = fields.Boolean(default=True)
     description = fields.Html(translate=True)
     image_1920 = fields.Image(max_width=1920, max_height=1920)
-    image_128 = fields.Image(related='image_1920', max_width=128, max_height=128, store=True)
+    image_128 = fields.Image('Thumbnail', related='image_1920', max_width=128, max_height=128, store=True)
     enrollment_count = fields.Integer(compute='_compute_enrollment_count')
     level_count = fields.Integer(compute='_compute_level_count')
 
@@ -121,12 +121,37 @@ class SchoolLevel(models.Model):
     subject_ids = fields.Many2many('oski.school.subject', string='Subjects')
     company_id = fields.Many2one(related='program_id.company_id', store=True)
 
+    _code_program_uniq = models.Constraint(
+        'UNIQUE (program_id, code)', 'The level code must be unique inside a program.')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Check constraint before create to raise ValidationError instead of IntegrityError
+        for vals in vals_list:
+            self._check_code_unique_inline(vals)
+        return super().create(vals_list)
+
+    def _check_code_unique_inline(self, vals):
+        """Check code uniqueness before insert (for better error messages)."""
+        program_id = vals.get('program_id')
+        code = vals.get('code')
+        if program_id and code:
+            dup = self.env['oski.school.level'].search_count([
+                ('program_id', '=', program_id),
+                ('code', '=', code)])
+            if dup:
+                raise ValidationError(self.env._('The level code must be unique inside a program.'))
+
     @api.constrains('code', 'program_id')
     def _check_code_unique(self):
         for level in self:
-            dup = self.search_count([
-                ('program_id', '=', level.program_id.id), ('code', '=', level.code),
-                ('id', '!=', level.id)])
+            domain = [
+                ('program_id', '=', level.program_id.id),
+                ('code', '=', level.code)]
+            # Only exclude the current record if it has been saved (id is not False)
+            if level.id:
+                domain.append(('id', '!=', level.id))
+            dup = self.env['oski.school.level'].search_count(domain)
             if dup:
                 raise ValidationError(self.env._('The level code must be unique inside a program.'))
 

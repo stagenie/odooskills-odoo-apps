@@ -19,6 +19,17 @@ class TestProgram(SchoolCase):
         language._onchange_cycle_type()
         self.assertFalse(language.guardian_required)
         self.assertEqual(language.promotion_mode, 'level')
+        for cycle in ('primary', 'high'):
+            p = Program.new({'cycle_type': cycle})
+            p._onchange_cycle_type()
+            self.assertTrue(p.guardian_required, cycle)
+            self.assertEqual(p.promotion_mode, 'level', cycle)
+        vocational = Program.new({'cycle_type': 'vocational'})
+        vocational._onchange_cycle_type()
+        self.assertFalse(vocational.guardian_required)
+        self.assertEqual(vocational.promotion_mode, 'manual')
+        created = Program.create({'name': 'Voc', 'code': 'VOC', 'cycle_type': 'vocational'})
+        self.assertEqual(created.promotion_mode, 'manual', 'defaults also applied on create')
 
     def test_next_level_follows_sequence(self):
         self.assertEqual(self.level_6.next_level_id, self.level_5)
