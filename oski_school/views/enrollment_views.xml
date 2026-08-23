@@ -7,13 +7,15 @@
             <form>
                 <header>
                     <button name="action_confirm" type="object" string="Confirm" class="btn-primary"
-                            invisible="state != 'draft'"/>
+                            invisible="state != 'draft'" groups="oski_school.group_school_officer"/>
                     <button name="action_activate" type="object" string="Activate" class="btn-primary"
-                            invisible="state != 'confirmed'"/>
+                            invisible="state != 'confirmed'" groups="oski_school.group_school_officer"/>
                     <button name="action_open_withdraw_wizard" type="object" string="Withdraw"
-                            invisible="state not in ('confirmed', 'active')"/>
+                            invisible="state not in ('confirmed', 'active')"
+                            groups="oski_school.group_school_officer"/>
                     <button name="action_cancel" type="object" string="Cancel"
-                            invisible="state != 'draft'" confirm="Delete this draft enrollment?"/>
+                            invisible="state != 'draft'" confirm="Delete this draft enrollment?"
+                            groups="oski_school.group_school_officer"/>
                     <button name="action_print_certificate" type="object" string="Certificate"
                             invisible="state not in ('active', 'completed')"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,active,completed"/>

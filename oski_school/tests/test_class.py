@@ -38,6 +38,14 @@ class TestClass(SchoolCase):
             self.env['oski.school.class.subject'].create({
                 'class_id': self.class_6a.id, 'subject_id': self.math.id, 'teacher_id': self.teacher.id})
 
+    def test_class_subject_line_search(self):
+        Line = self.env['oski.school.class.subject']
+        math_line = self.class_6a.subject_line_ids.filtered(lambda l: l.subject_id == self.math)
+        by_subject = Line.name_search('Math')
+        self.assertIn(math_line.id, [r[0] for r in by_subject])
+        by_class = Line.name_search('G6/26-27')
+        self.assertIn(math_line.id, [r[0] for r in by_class])
+
     def test_company_consistency(self):
         other_company = self.env['res.company'].create({'name': 'Other school'})
         period = self.env['oski.school.period'].with_company(other_company).create({

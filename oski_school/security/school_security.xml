@@ -110,6 +110,23 @@
         <field name="model_id" ref="model_oski_school_guardian"/>
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
+    <record id="rule_school_guardian_teacher" model="ir.rule">
+        <field name="name">Guardian: own classes (teacher)</field>
+        <field name="model_id" ref="model_oski_school_guardian"/>
+        <field name="domain_force">['|',
+            ('student_id.enrollment_ids.class_id.subject_line_ids.teacher_id.user_id', '=', user.id),
+            ('student_id.enrollment_ids.class_id.homeroom_teacher_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('oski_school.group_school_teacher'))]"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_school_guardian_officer" model="ir.rule">
+        <field name="name">Guardian: all (officer)</field>
+        <field name="model_id" ref="model_oski_school_guardian"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('oski_school.group_school_officer'))]"/>
+    </record>
     <record id="rule_school_term_company" model="ir.rule">
         <field name="name">School term: multi-company</field>
         <field name="model_id" ref="model_oski_school_term"/>

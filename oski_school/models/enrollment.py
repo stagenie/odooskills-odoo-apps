@@ -55,7 +55,8 @@ class SchoolEnrollment(models.Model):
             if enr.program_id.guardian_required and not enr.student_id.primary_guardian_id:
                 raise ValidationError(self.env._(
                     'The program %s requires a primary guardian on the student.', enr.program_id.name))
-            if enr.class_id.seats_available <= 0 and not self.env.context.get('force_overbook'):
+            if (enr.class_id.capacity and enr.class_id.seats_available <= 0
+                    and not self.env.context.get('force_overbook')):
                 raise ValidationError(self.env._('The class %s is full.', enr.class_id.name))
         self.write({'state': 'confirmed'})
         to_activate = self.filtered(lambda e: e.period_id.state == 'open')
@@ -81,6 +82,7 @@ class SchoolEnrollment(models.Model):
         if any(e.state != 'draft' for e in self):
             raise UserError(self.env._('Only draft enrollments can be cancelled. Withdraw instead.'))
         self.unlink()
+        return self.env['ir.actions.act_window']._for_xml_id('oski_school.action_school_enrollment')
 
     def action_print_certificate(self):
         if any(e.state not in ('active', 'completed') for e in self):

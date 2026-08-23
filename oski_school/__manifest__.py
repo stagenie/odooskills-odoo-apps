@@ -23,7 +23,6 @@ and communication.
     'website': 'https://apps.odooskills.com',
     'support': 'support@odooskills.com',
     'license': 'LGPL-3',
-    'images': ['static/description/banner.png'],
     'depends': ['mail', 'contacts'],
     'data': [
         'security/school_security.xml',

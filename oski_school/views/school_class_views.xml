@@ -6,8 +6,10 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_open" type="object" string="Open" invisible="state == 'open'"/>
-                    <button name="action_close" type="object" string="Close" invisible="state != 'open'"/>
+                    <button name="action_open" type="object" string="Open" invisible="state == 'open'"
+                            groups="oski_school.group_school_manager"/>
+                    <button name="action_close" type="object" string="Close" invisible="state != 'open'"
+                            groups="oski_school.group_school_manager"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>

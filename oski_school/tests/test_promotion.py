@@ -111,6 +111,14 @@ class TestPromotion(SchoolCase):
             self.period.action_close()
         wiz = self._wizard()
         wiz.action_apply()
+        # A confirmed-but-not-yet-active enrollment with no result must also block the close.
+        extra_student = self._new_student('Extra', True)
+        extra = self.env['oski.school.enrollment'].create({
+            'student_id': extra_student.id, 'class_id': self.class_5a.id})
+        extra.write({'state': 'confirmed'})
+        with self.assertRaises(UserError):
+            self.period.action_close()
+        extra.action_withdraw('test')
         self.period.action_close()
         self.assertTrue(all(e.state == 'completed' for e in self.enrollments))
         self.assertEqual(self.period.state, 'closed')

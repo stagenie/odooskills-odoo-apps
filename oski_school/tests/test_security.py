@@ -29,13 +29,16 @@ class TestAccess(SchoolCase):
         Users = cls.env['res.users'].with_context(no_reset_password=True)
         cls.user_teacher = Users.create({
             'name': 'T', 'login': 't@x.com', 'partner_id': cls.teacher_partner.id,
+            'company_id': cls.company.id, 'company_ids': [(6, 0, [cls.company.id])],
             'group_ids': [(6, 0, [cls.env.ref('oski_school.group_school_teacher').id])]})
         cls.teacher.user_id = cls.user_teacher
         cls.user_officer = Users.create({
             'name': 'O', 'login': 'o@x.com',
+            'company_id': cls.company.id, 'company_ids': [(6, 0, [cls.company.id])],
             'group_ids': [(6, 0, [cls.env.ref('oski_school.group_school_officer').id])]})
         cls.user_manager = Users.create({
             'name': 'M', 'login': 'm@x.com',
+            'company_id': cls.company.id, 'company_ids': [(6, 0, [cls.company.id])],
             'group_ids': [(6, 0, [cls.env.ref('oski_school.group_school_manager').id])]})
         cls.in_class = cls._new_student('In class', True)
         cls.out_class = cls._new_student('Elsewhere', True)
@@ -51,6 +54,13 @@ class TestAccess(SchoolCase):
         self.assertNotIn('Elsewhere', names)
         Enrollment = self.env['oski.school.enrollment'].with_user(self.user_teacher)
         self.assertEqual(Enrollment.search([]).student_id, self.in_class)
+
+    def test_teacher_sees_guardians_of_own_class_only(self):
+        Guardian = self.env['oski.school.guardian'].with_user(self.user_teacher)
+        guardians = Guardian.search([])
+        self.assertIn(self.in_class.guardian_ids.id, guardians.ids)
+        self.assertNotIn(self.out_class.guardian_ids.id, guardians.ids)
+        self.assertNotIn(self.guardian.id, guardians.ids)
 
     def test_teacher_cannot_write(self):
         with self.assertRaises(AccessError):
@@ -80,8 +90,9 @@ class TestAccess(SchoolCase):
 
     def test_company_isolation(self):
         other = self.env['res.company'].create({'name': 'Other school'})
-        self.user_officer.write({'company_ids': [(4, other.id)], 'company_id': other.id})
-        Student = self.env['oski.school.student'].with_user(self.user_officer).with_company(other)
+        self.user_officer.write({'company_ids': [(6, 0, [other.id])], 'company_id': other.id})
+        Student = self.env['oski.school.student'].with_user(self.user_officer).with_context(
+            allowed_company_ids=[other.id])
         self.assertFalse(Student.search([('id', '=', self.in_class.id)]))
 
     def test_company_isolation_guardians_terms_lines(self):
@@ -89,10 +100,13 @@ class TestAccess(SchoolCase):
             'period_id': self.period.id, 'name': 'T1', 'sequence': 1,
             'date_start': '2026-09-01', 'date_end': '2026-12-31'})
         other = self.env['res.company'].create({'name': 'Other school 2'})
-        self.user_officer.write({'company_ids': [(4, other.id)], 'company_id': other.id})
-        Guardian = self.env['oski.school.guardian'].with_user(self.user_officer).with_company(other)
+        self.user_officer.write({'company_ids': [(6, 0, [other.id])], 'company_id': other.id})
+        Guardian = self.env['oski.school.guardian'].with_user(self.user_officer).with_context(
+            allowed_company_ids=[other.id])
         self.assertFalse(Guardian.search([]), 'guardians of company A leak to company B')
-        Term = self.env['oski.school.term'].with_user(self.user_officer).with_company(other)
+        Term = self.env['oski.school.term'].with_user(self.user_officer).with_context(
+            allowed_company_ids=[other.id])
         self.assertFalse(Term.search([('period_id', '=', self.period.id)]))
-        Line = self.env['oski.school.class.subject'].with_user(self.user_officer).with_company(other)
+        Line = self.env['oski.school.class.subject'].with_user(self.user_officer).with_context(
+            allowed_company_ids=[other.id])
         self.assertFalse(Line.search([('class_id', '=', self.class_6a.id)]))

@@ -49,12 +49,14 @@ class SchoolPeriod(models.Model):
         Enrollment = self.env['oski.school.enrollment']
         for period in self:
             undecided = Enrollment.search_count([
-                ('period_id', '=', period.id), ('state', '=', 'active'), ('result', '=', 'none')])
+                ('period_id', '=', period.id), ('state', 'in', ('confirmed', 'active')),
+                ('result', '=', 'none')])
             if undecided:
                 raise UserError(self.env._(
-                    '%(count)s active enrollments of %(period)s have no result yet. '
+                    '%(count)s confirmed or active enrollments of %(period)s have no result yet. '
                     'Run the promotion wizard first.', count=undecided, period=period.name))
-        Enrollment.search([('period_id', 'in', self.ids), ('state', '=', 'active')]).write(
+        Enrollment.search([
+            ('period_id', 'in', self.ids), ('state', 'in', ('confirmed', 'active'))]).write(
             {'state': 'completed'})
         self.env['oski.school.class'].search([('period_id', 'in', self.ids)]).write({'state': 'closed'})
         self.write({'state': 'closed'})

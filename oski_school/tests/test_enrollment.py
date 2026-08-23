@@ -95,3 +95,18 @@ class TestEnrollment(SchoolCase):
 
     def test_portal_url_hook_is_false_in_core(self):
         self.assertFalse(self._enroll(self.student)._get_portal_url())
+
+    def test_capacity_zero_is_unlimited(self):
+        klass = self.env['oski.school.class'].create({
+            'level_id': self.level_6.id, 'period_id': self.period.id, 'suffix': 'C'})
+        self.assertEqual(klass.capacity, 0)
+        for i in range(3):
+            student = self._new_student(f'Unlimited{i}', True)
+            enr = self._enroll(student, klass)
+            enr.action_confirm()
+        self.assertEqual(klass.student_count, 3)
+
+    def test_cancel_returns_action(self):
+        enr = self._enroll(self.student)
+        action = enr.action_cancel()
+        self.assertEqual(action.get('res_model'), 'oski.school.enrollment')

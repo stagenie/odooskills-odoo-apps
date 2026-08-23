@@ -7,15 +7,17 @@
             <form>
                 <header>
                     <button name="action_open" type="object" string="Open" class="btn-primary"
-                            invisible="state != 'draft'"/>
+                            invisible="state != 'draft'" groups="oski_school.group_school_manager"/>
                     <button name="action_open_promotion_wizard" type="object" string="Run promotion"
-                            class="btn-primary" invisible="state != 'open'"/>
+                            class="btn-primary" invisible="state != 'open'"
+                            groups="oski_school.group_school_manager"/>
                     <button name="action_close" type="object" string="Close"
-                            invisible="state != 'open'" confirm="Close this period? Active enrollments become completed."/>
+                            invisible="state != 'open'" confirm="Close this period? Active enrollments become completed."
+                            groups="oski_school.group_school_manager"/>
                     <button name="action_open_duplicate_wizard" type="object" string="Duplicate structure"
-                            invisible="state == 'draft'"/>
+                            invisible="state == 'draft'" groups="oski_school.group_school_manager"/>
                     <button name="action_open_term_wizard" type="object" string="Generate terms"
-                            invisible="term_ids"/>
+                            invisible="term_ids" groups="oski_school.group_school_manager"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,open,closed"/>
                 </header>
                 <sheet>

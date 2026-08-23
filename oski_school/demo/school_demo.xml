@@ -10,7 +10,7 @@
 
     <!-- ================= Periods (3) + terms ================= -->
     <record id="demo_period_2627" model="oski.school.period">
-        <field name="name">2026-2027</field><field name="code">AY2627</field><field name="period_type">year</field>
+        <field name="name">2026-2027</field><field name="code">26-27</field><field name="period_type">year</field>
         <field name="date_start">2026-08-24</field><field name="date_end">2027-06-30</field><field name="state">open</field>
     </record>
     <record id="demo_term_t1" model="oski.school.term"><field name="period_id" ref="demo_period_2627"/><field name="name">Term 1</field><field name="sequence">1</field><field name="date_start">2026-09-01</field><field name="date_end">2026-12-18</field></record>

@@ -16,7 +16,8 @@ class SchoolClass(models.Model):
     period_id = fields.Many2one('oski.school.period', required=True, ondelete='restrict', index=True)
     room_id = fields.Many2one('oski.school.room')
     homeroom_teacher_id = fields.Many2one('oski.school.teacher', string='Homeroom teacher')
-    capacity = fields.Integer(compute='_compute_capacity', store=True, readonly=False)
+    capacity = fields.Integer(compute='_compute_capacity', store=True, readonly=False,
+                               help='0 = unlimited')
     student_count = fields.Integer(compute='_compute_counts', store=True)
     seats_available = fields.Integer(compute='_compute_counts', store=True)
     subject_line_ids = fields.One2many('oski.school.class.subject', 'class_id', string='Subjects')
@@ -80,7 +81,8 @@ class SchoolClassSubject(models.Model):
     _name = 'oski.school.class.subject'
     _description = 'Subject taught in a class'
     _order = 'class_id, subject_id'
-    _rec_name = 'display_name'
+    _rec_name = 'subject_id'
+    _rec_names_search = ['subject_id.name', 'subject_id.code', 'class_id.name']
 
     class_id = fields.Many2one('oski.school.class', required=True, ondelete='cascade', index=True)
     subject_id = fields.Many2one('oski.school.subject', required=True, ondelete='restrict')
