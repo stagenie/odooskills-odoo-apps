@@ -17,10 +17,10 @@ class StructureDuplicateWizard(models.TransientModel):
     _description = 'Duplicate the structure into a new period'
 
     period_id = fields.Many2one('oski.school.period', required=True)
-    name = fields.Char(compute='_compute_defaults', store=True, readonly=False)
-    code = fields.Char(compute='_compute_defaults', store=True, readonly=False)
-    date_start = fields.Date(compute='_compute_defaults', store=True, readonly=False)
-    date_end = fields.Date(compute='_compute_defaults', store=True, readonly=False)
+    name = fields.Char(compute='_compute_defaults', store=True, readonly=False, required=True, precompute=True)
+    code = fields.Char(compute='_compute_defaults', store=True, readonly=False, required=True, precompute=True)
+    date_start = fields.Date(compute='_compute_defaults', store=True, readonly=False, required=True, precompute=True)
+    date_end = fields.Date(compute='_compute_defaults', store=True, readonly=False, required=True, precompute=True)
     copy_terms = fields.Boolean(default=True)
     copy_classes = fields.Boolean(default=True)
 
