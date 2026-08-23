@@ -112,6 +112,7 @@ class SchoolGuardian(models.Model):
     has_portal_access = fields.Boolean(compute='_compute_has_portal_access')
     email = fields.Char(related='partner_id.email')
     phone = fields.Char(related='partner_id.phone')
+    company_id = fields.Many2one(related='student_id.company_id', store=True, index=True)
 
     _student_partner_uniq = models.Constraint(
         'UNIQUE (student_id, partner_id)', 'This contact is already a guardian of this student.')

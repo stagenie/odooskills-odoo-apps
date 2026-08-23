@@ -83,3 +83,16 @@ class TestAccess(SchoolCase):
         self.user_officer.write({'company_ids': [(4, other.id)], 'company_id': other.id})
         Student = self.env['oski.school.student'].with_user(self.user_officer).with_company(other)
         self.assertFalse(Student.search([('id', '=', self.in_class.id)]))
+
+    def test_company_isolation_guardians_terms_lines(self):
+        self.env['oski.school.term'].create({
+            'period_id': self.period.id, 'name': 'T1', 'sequence': 1,
+            'date_start': '2026-09-01', 'date_end': '2026-12-31'})
+        other = self.env['res.company'].create({'name': 'Other school 2'})
+        self.user_officer.write({'company_ids': [(4, other.id)], 'company_id': other.id})
+        Guardian = self.env['oski.school.guardian'].with_user(self.user_officer).with_company(other)
+        self.assertFalse(Guardian.search([]), 'guardians of company A leak to company B')
+        Term = self.env['oski.school.term'].with_user(self.user_officer).with_company(other)
+        self.assertFalse(Term.search([('period_id', '=', self.period.id)]))
+        Line = self.env['oski.school.class.subject'].with_user(self.user_officer).with_company(other)
+        self.assertFalse(Line.search([('class_id', '=', self.class_6a.id)]))

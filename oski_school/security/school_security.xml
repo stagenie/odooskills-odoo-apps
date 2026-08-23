@@ -104,4 +104,20 @@
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('oski_school.group_school_officer'))]"/>
     </record>
+
+    <record id="rule_school_guardian_company" model="ir.rule">
+        <field name="name">Guardian: multi-company</field>
+        <field name="model_id" ref="model_oski_school_guardian"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_term_company" model="ir.rule">
+        <field name="name">School term: multi-company</field>
+        <field name="model_id" ref="model_oski_school_term"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_school_class_subject_company" model="ir.rule">
+        <field name="name">Class subject line: multi-company</field>
+        <field name="model_id" ref="model_oski_school_class_subject"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>
