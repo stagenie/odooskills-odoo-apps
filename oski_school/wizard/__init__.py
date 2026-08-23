@@ -1,1 +1,1 @@
-# noqa
+from . import term_generate_wizard

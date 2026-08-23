@@ -1,1 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_school_period_teacher,school.period.teacher,model_oski_school_period,oski_school.group_school_teacher,1,0,0,0
+access_school_period_manager,school.period.manager,model_oski_school_period,oski_school.group_school_manager,1,1,1,1
+access_school_term_teacher,school.term.teacher,model_oski_school_term,oski_school.group_school_teacher,1,0,0,0
+access_school_term_manager,school.term.manager,model_oski_school_term,oski_school.group_school_manager,1,1,1,1
+access_school_term_generate_wizard,school.term.generate.wizard,model_oski_school_term_generate_wizard,oski_school.group_school_manager,1,1,1,1
