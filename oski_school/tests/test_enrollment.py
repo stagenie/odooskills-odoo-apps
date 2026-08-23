@@ -94,6 +94,11 @@ class TestEnrollment(SchoolCase):
         self.assertEqual(self.program.enrollment_count, 1)
 
     def test_portal_url_hook_is_false_in_core(self):
+        # The satellite oski_school_portal overrides the hook with a real URL.
+        portal = self.env['ir.module.module'].search(
+            [('name', '=', 'oski_school_portal'), ('state', '=', 'installed')])
+        if portal:
+            self.skipTest('oski_school_portal is installed and provides the URL')
         self.assertFalse(self._enroll(self.student)._get_portal_url())
 
     def test_capacity_zero_is_unlimited(self):
