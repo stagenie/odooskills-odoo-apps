@@ -29,9 +29,14 @@ class SchoolStudent(models.Model):
     state = fields.Selection([
         ('prospect', 'Prospect'), ('active', 'Active'),
         ('alumni', 'Alumni'), ('left', 'Left'),
-    ], default='prospect', required=True, copy=False, tracking=True, index=True)
+    ], compute='_compute_state', store=True, tracking=True, index=True)
     company_id = fields.Many2one('res.company', required=True, default=lambda self: self.env.company)
     note = fields.Html()
+    enrollment_ids = fields.One2many('oski.school.enrollment', 'student_id', string='Enrollments')
+    current_enrollment_id = fields.Many2one(
+        'oski.school.enrollment', compute='_compute_current_enrollment', store=True)
+    current_class_id = fields.Many2one(related='current_enrollment_id.class_id', store=True)
+    enrollment_count = fields.Integer(compute='_compute_enrollment_count')
 
     _partner_uniq = models.Constraint('UNIQUE (partner_id)', 'This contact is already a student.')
 
@@ -41,6 +46,38 @@ class SchoolStudent(models.Model):
             student.primary_guardian_id = student.guardian_ids.filtered('is_primary')[:1]
             billing = student.guardian_ids.filtered('is_billing')[:1]
             student.billing_partner_id = billing.partner_id or student.partner_id
+
+    @api.depends('enrollment_ids.state', 'enrollment_ids.period_id.state')
+    def _compute_current_enrollment(self):
+        for student in self:
+            active = student.enrollment_ids.filtered(lambda e: e.state == 'active')
+            student.current_enrollment_id = active.sorted('date', reverse=True)[:1]
+
+    def _compute_enrollment_count(self):
+        for student in self:
+            student.enrollment_count = len(student.enrollment_ids)
+
+    @api.depends('enrollment_ids.state', 'enrollment_ids.result', 'enrollment_ids.level_id.next_level_id')
+    def _compute_state(self):
+        for student in self:
+            enrollments = student.enrollment_ids
+            if not enrollments:
+                student.state = 'prospect'
+                continue
+            if enrollments.filtered(lambda e: e.state in ('active', 'confirmed')):
+                student.state = 'active'
+                continue
+            last = enrollments.sorted(lambda e: (e.date, e.id))[-1]
+            if last.state == 'withdrawn':
+                student.state = 'left'
+            elif last.state == 'completed' and last.result == 'promoted' and not last.level_id.next_level_id:
+                student.state = 'alumni'
+            elif last.state == 'completed' and last.result == 'left':
+                student.state = 'left'
+            elif last.state == 'completed':
+                student.state = 'alumni' if not last.next_enrollment_id else 'active'
+            else:
+                student.state = 'prospect'
 
     @api.model_create_multi
     def create(self, vals_list):

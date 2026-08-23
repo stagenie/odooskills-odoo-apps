@@ -42,6 +42,8 @@ class SchoolPeriod(models.Model):
 
     def action_open(self):
         self.write({'state': 'open'})
+        self.env['oski.school.enrollment'].search([
+            ('period_id', 'in', self.ids), ('state', '=', 'confirmed')]).action_activate()
 
     def action_close(self):
         self.write({'state': 'closed'})

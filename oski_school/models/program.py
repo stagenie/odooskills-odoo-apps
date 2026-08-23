@@ -70,6 +70,7 @@ class SchoolProgram(models.Model):
     description = fields.Html(translate=True)
     image_1920 = fields.Image(max_width=1920, max_height=1920)
     image_128 = fields.Image('Thumbnail', related='image_1920', max_width=128, max_height=128, store=True)
+    enrollment_ids = fields.One2many('oski.school.enrollment', 'program_id')
     enrollment_count = fields.Integer(compute='_compute_enrollment_count')
     level_count = fields.Integer(compute='_compute_level_count')
 
@@ -89,15 +90,23 @@ class SchoolProgram(models.Model):
                 vals.setdefault(key, value)
         return super().create(vals_list)
 
+    @api.depends('enrollment_ids')
     def _compute_enrollment_count(self):
-        # Réel en Task 6 (le modèle d'inscription n'existe pas encore).
         for program in self:
-            program.enrollment_count = 0
+            program.enrollment_count = len(program.enrollment_ids)
 
     @api.depends('level_ids')
     def _compute_level_count(self):
         for program in self:
             program.level_count = len(program.level_ids)
+
+    def write(self, vals):
+        if 'cycle_type' in vals:
+            locked = self.filtered(lambda p: p.enrollment_ids and p.cycle_type != vals['cycle_type'])
+            if locked:
+                raise ValidationError(self.env._(
+                    'The cycle type of %s is locked: students are already enrolled.', locked[0].name))
+        return super().write(vals)
 
 
 class SchoolLevel(models.Model):

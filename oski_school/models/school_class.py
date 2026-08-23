@@ -20,6 +20,7 @@ class SchoolClass(models.Model):
     student_count = fields.Integer(compute='_compute_counts', store=True)
     seats_available = fields.Integer(compute='_compute_counts', store=True)
     subject_line_ids = fields.One2many('oski.school.class.subject', 'class_id', string='Subjects')
+    enrollment_ids = fields.One2many('oski.school.enrollment', 'class_id', string='Enrollments')
     state = fields.Selection([
         ('draft', 'Draft'), ('open', 'Open'), ('closed', 'Closed'),
     ], default='open', required=True, copy=False, tracking=True)
@@ -41,11 +42,10 @@ class SchoolClass(models.Model):
                 cls.capacity = cls.room_id.capacity
 
     def _get_active_enrollments(self):
-        """Surchargé en Task 6 : les inscriptions non annulées de la classe."""
         self.ensure_one()
-        return self.env['oski.school.class']  # recordset vide de même taille 0
+        return self.enrollment_ids.filtered(lambda e: e.state in ('confirmed', 'active'))
 
-    @api.depends('capacity')
+    @api.depends('capacity', 'enrollment_ids.state')
     def _compute_counts(self):
         for cls in self:
             count = len(cls._get_active_enrollments())
