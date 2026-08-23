@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_school_root" name="School" sequence="60"
+              groups="oski_school.group_school_teacher" web_icon="oski_school,static/description/icon.png"/>
+    <menuitem id="menu_school_students" name="Students" parent="menu_school_root" sequence="10"/>
+    <menuitem id="menu_school_enrollments" name="Enrollments" parent="menu_school_root" sequence="20"/>
+    <menuitem id="menu_school_structure" name="Structure" parent="menu_school_root" sequence="30"/>
+    <menuitem id="menu_school_config" name="Configuration" parent="menu_school_root" sequence="90"
+              groups="oski_school.group_school_manager"/>
+</odoo>

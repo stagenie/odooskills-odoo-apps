@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="res.groups.privilege" id="res_groups_privilege_school">
+        <field name="name">School</field>
+        <field name="sequence">25</field>
+        <field name="category_id" ref="base.module_category_services"/>
+    </record>
+
+    <record id="group_school_teacher" model="res.groups">
+        <field name="name">Teacher</field>
+        <field name="sequence">10</field>
+        <field name="comment">Reads the structure and the students of their own classes.</field>
+        <field name="privilege_id" ref="res_groups_privilege_school"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_school_officer" model="res.groups">
+        <field name="name">Officer</field>
+        <field name="sequence">20</field>
+        <field name="comment">Manages students, guardians and enrollments.</field>
+        <field name="privilege_id" ref="res_groups_privilege_school"/>
+        <field name="implied_ids" eval="[(4, ref('oski_school.group_school_teacher'))]"/>
+    </record>
+
+    <record id="group_school_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="sequence">30</field>
+        <field name="comment">Configures periods, programs and runs the promotion.</field>
+        <field name="privilege_id" ref="res_groups_privilege_school"/>
+        <field name="implied_ids" eval="[(4, ref('oski_school.group_school_officer'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>
