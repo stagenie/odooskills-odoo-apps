@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class SchoolPeriod(models.Model):
@@ -46,7 +46,23 @@ class SchoolPeriod(models.Model):
             ('period_id', 'in', self.ids), ('state', '=', 'confirmed')]).action_activate()
 
     def action_close(self):
+        Enrollment = self.env['oski.school.enrollment']
+        for period in self:
+            undecided = Enrollment.search_count([
+                ('period_id', '=', period.id), ('state', '=', 'active'), ('result', '=', 'none')])
+            if undecided:
+                raise UserError(self.env._(
+                    '%(count)s active enrollments of %(period)s have no result yet. '
+                    'Run the promotion wizard first.', count=undecided, period=period.name))
+        Enrollment.search([('period_id', 'in', self.ids), ('state', '=', 'active')]).write(
+            {'state': 'completed'})
+        self.env['oski.school.class'].search([('period_id', 'in', self.ids)]).write({'state': 'closed'})
         self.write({'state': 'closed'})
+
+    def action_open_promotion_wizard(self):
+        self.ensure_one()
+        wiz = self.env['oski.school.promotion.wizard'].create({'period_id': self.id})
+        return wiz.action_load_lines()
 
     @api.model
     def get_current(self, company, period_type):

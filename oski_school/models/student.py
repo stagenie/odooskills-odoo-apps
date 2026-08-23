@@ -57,7 +57,8 @@ class SchoolStudent(models.Model):
         for student in self:
             student.enrollment_count = len(student.enrollment_ids)
 
-    @api.depends('enrollment_ids.state', 'enrollment_ids.result', 'enrollment_ids.level_id.next_level_id')
+    @api.depends('enrollment_ids.state', 'enrollment_ids.result', 'enrollment_ids.level_id.next_level_id',
+                 'enrollment_ids.next_enrollment_id')
     def _compute_state(self):
         for student in self:
             enrollments = student.enrollment_ids
