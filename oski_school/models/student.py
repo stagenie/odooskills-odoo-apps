@@ -95,6 +95,13 @@ class SchoolStudent(models.Model):
             return student
         return self.create(dict(vals, partner_id=partner.id))
 
+    def action_view_enrollments(self):
+        self.ensure_one()
+        action = self.env['ir.actions.act_window']._for_xml_id('oski_school.action_school_enrollment')
+        action['domain'] = [('student_id', '=', self.id)]
+        action['context'] = {'default_student_id': self.id}
+        return action
+
 
 class SchoolGuardian(models.Model):
     _name = 'oski.school.guardian'

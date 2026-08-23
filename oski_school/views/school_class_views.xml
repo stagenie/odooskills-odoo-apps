@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_class_form" model="ir.ui.view">
+        <field name="name">oski.school.class.form</field>
+        <field name="model">oski.school.class</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open" type="object" string="Open" invisible="state == 'open'"/>
+                    <button name="action_close" type="object" string="Close" invisible="state != 'open'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_view_enrollments" type="object" class="oe_stat_button" icon="fa-users">
+                            <field name="student_count" widget="statinfo" string="Students"/>
+                        </button>
+                    </div>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="level_id"/>
+                            <field name="program_id"/>
+                            <field name="period_id"/>
+                            <field name="suffix"/>
+                        </group>
+                        <group>
+                            <field name="room_id"/>
+                            <field name="homeroom_teacher_id"/>
+                            <field name="capacity"/>
+                            <field name="seats_available"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="main" string="Subjects &amp; teachers">
+                            <field name="subject_line_ids">
+                                <list editable="bottom">
+                                    <field name="subject_id"/>
+                                    <field name="teacher_id"/>
+                                    <field name="coefficient"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="students" string="Students">
+                            <field name="enrollment_ids" readonly="1">
+                                <list>
+                                    <field name="student_id"/>
+                                    <field name="date"/>
+                                    <field name="state" widget="badge"/>
+                                    <field name="result"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_class_list" model="ir.ui.view">
+        <field name="name">oski.school.class.list</field>
+        <field name="model">oski.school.class</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="program_id"/>
+                <field name="level_id"/>
+                <field name="period_id"/>
+                <field name="homeroom_teacher_id"/>
+                <field name="student_count"/>
+                <field name="seats_available"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_school_class_search" model="ir.ui.view">
+        <field name="name">oski.school.class.search</field>
+        <field name="model">oski.school.class</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="level_id"/>
+                <field name="period_id"/>
+                <filter name="open" string="Open" domain="[('state', '=', 'open')]"/>
+                <group name="group_by">
+                    <filter name="group_period" string="Period" context="{'group_by': 'period_id'}"/>
+                    <filter name="group_program" string="Program" context="{'group_by': 'program_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_class" model="ir.actions.act_window">
+        <field name="name">Classes</field>
+        <field name="res_model">oski.school.class</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_open': 1, 'search_default_group_period': 1}</field>
+    </record>
+</odoo>

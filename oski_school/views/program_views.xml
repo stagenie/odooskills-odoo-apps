@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_program_form" model="ir.ui.view">
+        <field name="name">oski.school.program.form</field>
+        <field name="model">oski.school.program</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title"><h1><field name="name" placeholder="Middle School"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="cycle_type"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="guardian_required"/>
+                            <field name="promotion_mode"/>
+                            <field name="enrollment_count"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="main" string="Levels">
+                            <field name="level_ids" context="{'default_program_id': id}">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="cycle_type" column_invisible="1"/>
+                                    <field name="cefr_code" column_invisible="parent.cycle_type != 'language'"/>
+                                    <field name="credits_required" column_invisible="parent.cycle_type != 'higher'"/>
+                                    <field name="manual_next_level"/>
+                                    <field name="next_level_id" readonly="not manual_next_level"/>
+                                    <field name="subject_ids" widget="many2many_tags"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="subjects" string="Subjects">
+                            <field name="subject_ids"/>
+                        </page>
+                        <page name="description" string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_program_list" model="ir.ui.view">
+        <field name="name">oski.school.program.list</field>
+        <field name="model">oski.school.program</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="cycle_type"/>
+                <field name="level_count"/>
+                <field name="enrollment_count"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_school_program_kanban" model="ir.ui.view">
+        <field name="name">oski.school.program.kanban</field>
+        <field name="model">oski.school.program</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="image_128"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex">
+                            <field name="image_128" widget="image" class="o_kanban_image me-2" options="{'size': [64, 64]}"/>
+                            <div>
+                                <strong><field name="name"/></strong>
+                                <div class="text-muted"><field name="cycle_type"/></div>
+                                <div><field name="level_count"/> levels · <field name="enrollment_count"/> enrollments</div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_school_program" model="ir.actions.act_window">
+        <field name="name">Programs</field>
+        <field name="res_model">oski.school.program</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <record id="view_school_subject_list" model="ir.ui.view">
+        <field name="name">oski.school.subject.list</field>
+        <field name="model">oski.school.subject</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="coefficient"/>
+                <field name="credits"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_school_subject" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">oski.school.subject</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_school_room_list" model="ir.ui.view">
+        <field name="name">oski.school.room.list</field>
+        <field name="model">oski.school.room</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="capacity"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_school_room" model="ir.actions.act_window">
+        <field name="name">Rooms</field>
+        <field name="res_model">oski.school.room</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

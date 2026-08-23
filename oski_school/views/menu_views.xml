@@ -2,9 +2,30 @@
 <odoo>
     <menuitem id="menu_school_root" name="School" sequence="60"
               groups="oski_school.group_school_teacher" web_icon="oski_school,static/description/icon.png"/>
+
     <menuitem id="menu_school_students" name="Students" parent="menu_school_root" sequence="10"/>
-    <menuitem id="menu_school_enrollments" name="Enrollments" parent="menu_school_root" sequence="20"/>
+    <menuitem id="menu_school_students_students" name="Students" parent="menu_school_students"
+              action="action_school_student" sequence="10"/>
+    <menuitem id="menu_school_students_guardians" name="Guardians" parent="menu_school_students"
+              action="action_school_guardian" sequence="20" groups="oski_school.group_school_officer"/>
+
+    <menuitem id="menu_school_enrollments" name="Enrollments" parent="menu_school_root"
+              action="action_school_enrollment" sequence="20"/>
+
     <menuitem id="menu_school_structure" name="Structure" parent="menu_school_root" sequence="30"/>
+    <menuitem id="menu_school_structure_classes" name="Classes" parent="menu_school_structure"
+              action="action_school_class" sequence="10"/>
+    <menuitem id="menu_school_structure_periods" name="Periods" parent="menu_school_structure"
+              action="action_school_period" sequence="20"/>
+    <menuitem id="menu_school_structure_programs" name="Programs" parent="menu_school_structure"
+              action="action_school_program" sequence="30"/>
+    <menuitem id="menu_school_structure_teachers" name="Teachers" parent="menu_school_structure"
+              action="action_school_teacher" sequence="40"/>
+
     <menuitem id="menu_school_config" name="Configuration" parent="menu_school_root" sequence="90"
               groups="oski_school.group_school_manager"/>
+    <menuitem id="menu_school_config_subjects" name="Subjects" parent="menu_school_config"
+              action="action_school_subject" sequence="10"/>
+    <menuitem id="menu_school_config_rooms" name="Rooms" parent="menu_school_config"
+              action="action_school_room" sequence="20"/>
 </odoo>

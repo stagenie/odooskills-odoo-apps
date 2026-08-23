@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_enrollment_form" model="ir.ui.view">
+        <field name="name">oski.school.enrollment.form</field>
+        <field name="model">oski.school.enrollment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_activate" type="object" string="Activate" class="btn-primary"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_open_withdraw_wizard" type="object" string="Withdraw"
+                            invisible="state not in ('confirmed', 'active')"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state != 'draft'" confirm="Delete this draft enrollment?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,active,completed"/>
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box"/>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="student_id" readonly="state != 'draft'"/>
+                            <field name="class_id" readonly="state != 'draft'"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="program_id"/>
+                            <field name="level_id"/>
+                            <field name="period_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="main" string="Outcome">
+                            <group>
+                                <group>
+                                    <field name="result"/>
+                                    <field name="withdrawal_reason" invisible="state != 'withdrawn'"/>
+                                </group>
+                                <group>
+                                    <field name="previous_enrollment_id"/>
+                                    <field name="next_enrollment_id"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_enrollment_list" model="ir.ui.view">
+        <field name="name">oski.school.enrollment.list</field>
+        <field name="model">oski.school.enrollment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <field name="period_id"/>
+                <field name="date"/>
+                <field name="state" widget="badge" decoration-success="state == 'active'"
+                       decoration-info="state == 'confirmed'" decoration-muted="state in ('completed', 'withdrawn')"/>
+                <field name="result"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_school_enrollment_search" model="ir.ui.view">
+        <field name="name">oski.school.enrollment.search</field>
+        <field name="model">oski.school.enrollment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <filter name="active" string="Active" domain="[('state', '=', 'active')]"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <group name="group_by">
+                    <filter name="group_class" string="Class" context="{'group_by': 'class_id'}"/>
+                    <filter name="group_period" string="Period" context="{'group_by': 'period_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_enrollment" model="ir.actions.act_window">
+        <field name="name">Enrollments</field>
+        <field name="res_model">oski.school.enrollment</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_group_class': 1}</field>
+    </record>
+</odoo>

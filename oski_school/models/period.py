@@ -71,6 +71,13 @@ class SchoolPeriod(models.Model):
             'view_mode': 'form', 'target': 'new', 'context': {'default_period_id': self.id},
         }
 
+    def action_open_term_wizard(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window', 'res_model': 'oski.school.term.generate.wizard',
+            'view_mode': 'form', 'target': 'new', 'context': {'default_period_id': self.id},
+        }
+
     @api.model
     def get_current(self, company, period_type):
         today = fields.Date.context_today(self)

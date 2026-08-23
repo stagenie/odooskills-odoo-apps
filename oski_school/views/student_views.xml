@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_student_form" model="ir.ui.view">
+        <field name="name">oski.school.student.form</field>
+        <field name="model">oski.school.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_view_enrollments" type="object" class="oe_stat_button" icon="fa-graduation-cap">
+                            <field name="enrollment_count" widget="statinfo" string="Enrollments"/>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="partner_id"/>
+                        <h1><field name="partner_id" placeholder="Contact"/></h1>
+                        <field name="registration_number"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="birth_date"/>
+                            <field name="gender"/>
+                            <field name="nationality_id"/>
+                            <field name="id_number"/>
+                        </group>
+                        <group>
+                            <field name="current_class_id"/>
+                            <field name="primary_guardian_id"/>
+                            <field name="billing_partner_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="main" string="Guardians">
+                            <field name="guardian_ids">
+                                <list editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="relation"/>
+                                    <field name="is_primary"/>
+                                    <field name="is_billing"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                    <field name="has_portal_access"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="enrollments" string="Enrollments">
+                            <field name="enrollment_ids" readonly="1">
+                                <list>
+                                    <field name="period_id"/>
+                                    <field name="class_id"/>
+                                    <field name="date"/>
+                                    <field name="state" widget="badge"/>
+                                    <field name="result"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="notes" string="Notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_student_list" model="ir.ui.view">
+        <field name="name">oski.school.student.list</field>
+        <field name="model">oski.school.student</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="registration_number"/>
+                <field name="name"/>
+                <field name="current_class_id"/>
+                <field name="primary_guardian_id"/>
+                <field name="state" widget="badge" decoration-success="state == 'active'" decoration-muted="state in ('alumni', 'left')"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_school_student_kanban" model="ir.ui.view">
+        <field name="name">oski.school.student.kanban</field>
+        <field name="model">oski.school.student</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="image_128"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex">
+                            <field name="image_128" widget="image" class="o_kanban_image me-2" options="{'size': [48, 48]}"/>
+                            <div>
+                                <strong><field name="name"/></strong>
+                                <div class="text-muted"><field name="registration_number"/></div>
+                                <div><field name="current_class_id"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_school_student_search" model="ir.ui.view">
+        <field name="name">oski.school.student.search</field>
+        <field name="model">oski.school.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="registration_number"/>
+                <field name="current_class_id"/>
+                <filter name="active_students" string="Active" domain="[('state', '=', 'active')]"/>
+                <filter name="prospects" string="Prospects" domain="[('state', '=', 'prospect')]"/>
+                <group name="group_by">
+                    <filter name="group_class" string="Class" context="{'group_by': 'current_class_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">oski.school.student</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="view_school_student_search"/>
+        <field name="context">{'search_default_active_students': 1}</field>
+    </record>
+
+    <record id="view_school_guardian_list" model="ir.ui.view">
+        <field name="name">oski.school.guardian.list</field>
+        <field name="model">oski.school.guardian</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="partner_id"/>
+                <field name="student_id"/>
+                <field name="relation"/>
+                <field name="is_primary"/>
+                <field name="is_billing"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_school_guardian" model="ir.actions.act_window">
+        <field name="name">Guardians</field>
+        <field name="res_model">oski.school.guardian</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -68,6 +68,13 @@ class SchoolClass(models.Model):
     def action_close(self):
         self.write({'state': 'closed'})
 
+    def action_view_enrollments(self):
+        self.ensure_one()
+        action = self.env['ir.actions.act_window']._for_xml_id('oski_school.action_school_enrollment')
+        action['domain'] = [('class_id', '=', self.id)]
+        action['context'] = {'default_class_id': self.id}
+        return action
+
 
 class SchoolClassSubject(models.Model):
     _name = 'oski.school.class.subject'
