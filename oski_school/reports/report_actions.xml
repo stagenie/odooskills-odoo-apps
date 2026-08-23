@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_enrollment_certificate" model="ir.actions.report">
+        <field name="name">Enrollment certificate</field>
+        <field name="model">oski.school.enrollment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oski_school.report_enrollment_certificate</field>
+        <field name="report_file">oski_school.report_enrollment_certificate</field>
+        <field name="print_report_name">'Certificate - %s' % object.student_id.name</field>
+        <field name="binding_model_id" ref="model_oski_school_enrollment"/>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="action_report_class_list" model="ir.actions.report">
+        <field name="name">Class list</field>
+        <field name="model">oski.school.class</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oski_school.report_class_list</field>
+        <field name="report_file">oski_school.report_class_list</field>
+        <field name="print_report_name">'Class list - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_oski_school_class"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -14,6 +14,8 @@
                             invisible="state not in ('confirmed', 'active')"/>
                     <button name="action_cancel" type="object" string="Cancel"
                             invisible="state != 'draft'" confirm="Delete this draft enrollment?"/>
+                    <button name="action_print_certificate" type="object" string="Certificate"
+                            invisible="state not in ('active', 'completed')"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,active,completed"/>
                 </header>
                 <sheet>

@@ -82,6 +82,11 @@ class SchoolEnrollment(models.Model):
             raise UserError(self.env._('Only draft enrollments can be cancelled. Withdraw instead.'))
         self.unlink()
 
+    def action_print_certificate(self):
+        if any(e.state not in ('active', 'completed') for e in self):
+            raise UserError(self.env._('A certificate is issued for active or completed enrollments only.'))
+        return self.env.ref('oski_school.action_report_enrollment_certificate').report_action(self)
+
     def action_open_withdraw_wizard(self):
         self.ensure_one()
         return {
