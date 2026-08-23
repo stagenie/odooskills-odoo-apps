@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ================= Subjects (6) ================= -->
+    <record id="demo_subject_math" model="oski.school.subject"><field name="name">Mathematics</field><field name="code">MTH</field><field name="coefficient">3</field></record>
+    <record id="demo_subject_fr" model="oski.school.subject"><field name="name">French</field><field name="code">FRA</field><field name="coefficient">3</field></record>
+    <record id="demo_subject_en" model="oski.school.subject"><field name="name">English</field><field name="code">EN</field><field name="coefficient">2</field></record>
+    <record id="demo_subject_sci" model="oski.school.subject"><field name="name">Science</field><field name="code">SCI</field><field name="coefficient">2</field></record>
+    <record id="demo_subject_algo" model="oski.school.subject"><field name="name">Algorithms</field><field name="code">ALGO</field><field name="credits">6</field></record>
+    <record id="demo_subject_db" model="oski.school.subject"><field name="name">Databases</field><field name="code">DB</field><field name="credits">6</field></record>
+
+    <!-- ================= Periods (3) + terms ================= -->
+    <record id="demo_period_2627" model="oski.school.period">
+        <field name="name">2026-2027</field><field name="code">AY2627</field><field name="period_type">year</field>
+        <field name="date_start">2026-08-24</field><field name="date_end">2027-06-30</field><field name="state">open</field>
+    </record>
+    <record id="demo_term_t1" model="oski.school.term"><field name="period_id" ref="demo_period_2627"/><field name="name">Term 1</field><field name="sequence">1</field><field name="date_start">2026-09-01</field><field name="date_end">2026-12-18</field></record>
+    <record id="demo_term_t2" model="oski.school.term"><field name="period_id" ref="demo_period_2627"/><field name="name">Term 2</field><field name="sequence">2</field><field name="date_start">2027-01-04</field><field name="date_end">2027-03-26</field></record>
+    <record id="demo_term_t3" model="oski.school.term"><field name="period_id" ref="demo_period_2627"/><field name="name">Term 3</field><field name="sequence">3</field><field name="date_start">2027-04-12</field><field name="date_end">2027-06-30</field></record>
+    <record id="demo_period_sem1" model="oski.school.period">
+        <field name="name">Fall 2026</field><field name="code">F26</field><field name="period_type">semester</field>
+        <field name="date_start">2026-09-15</field><field name="date_end">2027-01-31</field><field name="state">open</field>
+    </record>
+    <record id="demo_period_eng1" model="oski.school.period">
+        <field name="name">English — Sept</field><field name="code">ENG-S</field><field name="period_type">session</field>
+        <field name="date_start">2026-09-07</field><field name="date_end">2026-10-12</field><field name="state">open</field>
+    </record>
+
+    <!-- ================= Programs (3) + levels ================= -->
+    <record id="demo_program_middle" model="oski.school.program">
+        <field name="name">Middle School</field><field name="code">MSCH</field><field name="cycle_type">middle</field>
+        <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_math'), ref('demo_subject_fr'), ref('demo_subject_en'), ref('demo_subject_sci')])]"/>
+    </record>
+    <record id="demo_level_g6" model="oski.school.level"><field name="program_id" ref="demo_program_middle"/><field name="name">Grade 6</field><field name="code">G6</field><field name="sequence">1</field></record>
+    <record id="demo_level_g7" model="oski.school.level"><field name="program_id" ref="demo_program_middle"/><field name="name">Grade 7</field><field name="code">G7</field><field name="sequence">2</field></record>
+    <record id="demo_level_g8" model="oski.school.level"><field name="program_id" ref="demo_program_middle"/><field name="name">Grade 8</field><field name="code">G8</field><field name="sequence">3</field></record>
+
+    <record id="demo_program_cs" model="oski.school.program">
+        <field name="name">Computer Science Bachelor</field><field name="code">CSB</field><field name="cycle_type">higher</field>
+        <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_algo'), ref('demo_subject_db')])]"/>
+    </record>
+    <record id="demo_level_l1" model="oski.school.level"><field name="program_id" ref="demo_program_cs"/><field name="name">Year 1</field><field name="code">L1</field><field name="sequence">1</field><field name="credits_required">60</field></record>
+    <record id="demo_level_l2" model="oski.school.level"><field name="program_id" ref="demo_program_cs"/><field name="name">Year 2</field><field name="code">L2</field><field name="sequence">2</field><field name="credits_required">60</field></record>
+
+    <record id="demo_program_eng" model="oski.school.program">
+        <field name="name">English courses</field><field name="code">ENGC</field><field name="cycle_type">language</field>
+        <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_en')])]"/>
+    </record>
+    <record id="demo_level_a1" model="oski.school.level"><field name="program_id" ref="demo_program_eng"/><field name="name">Beginner A1</field><field name="code">A1</field><field name="sequence">1</field><field name="cefr_code">A1</field></record>
+    <record id="demo_level_a2" model="oski.school.level"><field name="program_id" ref="demo_program_eng"/><field name="name">Elementary A2</field><field name="code">A2</field><field name="sequence">2</field><field name="cefr_code">A2</field></record>
+    <record id="demo_level_b1" model="oski.school.level"><field name="program_id" ref="demo_program_eng"/><field name="name">Intermediate B1</field><field name="code">B1</field><field name="sequence">3</field><field name="cefr_code">B1</field></record>
+    <record id="demo_level_b2" model="oski.school.level"><field name="program_id" ref="demo_program_eng"/><field name="name">Upper B2</field><field name="code">B2</field><field name="sequence">4</field><field name="cefr_code">B2</field></record>
+
+    <!-- ================= Rooms (4) ================= -->
+    <record id="demo_room_101" model="oski.school.room"><field name="name">Room 101</field><field name="code">101</field><field name="capacity">28</field></record>
+    <record id="demo_room_102" model="oski.school.room"><field name="name">Room 102</field><field name="code">102</field><field name="capacity">28</field></record>
+    <record id="demo_room_lab" model="oski.school.room"><field name="name">Computer lab</field><field name="code">LAB</field><field name="capacity">20</field></record>
+    <record id="demo_room_lang" model="oski.school.room"><field name="name">Language room</field><field name="code">LNG</field><field name="capacity">12</field></record>
+
+    <!-- ================= Teachers (8) ================= -->
+    <record id="demo_teacher_partner_01" model="res.partner"><field name="name">Nadia Benali</field><field name="email">nadia.benali@example.com</field></record>
+    <record id="demo_teacher_01" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_01"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_math')])]"/></record>
+
+    <record id="demo_teacher_partner_02" model="res.partner"><field name="name">Sofiane Amrani</field><field name="email">sofiane.amrani@example.com</field></record>
+    <record id="demo_teacher_02" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_02"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_fr')])]"/></record>
+
+    <record id="demo_teacher_partner_03" model="res.partner"><field name="name">Leila Haddadi</field><field name="email">leila.haddadi@example.com</field></record>
+    <record id="demo_teacher_03" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_03"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_en')])]"/></record>
+
+    <record id="demo_teacher_partner_04" model="res.partner"><field name="name">Karim Toumi</field><field name="email">karim.toumi@example.com</field></record>
+    <record id="demo_teacher_04" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_04"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_sci')])]"/></record>
+
+    <record id="demo_teacher_partner_05" model="res.partner"><field name="name">Yasmine Belaid</field><field name="email">yasmine.belaid@example.com</field></record>
+    <record id="demo_teacher_05" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_05"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_algo')])]"/></record>
+
+    <record id="demo_teacher_partner_06" model="res.partner"><field name="name">Omar Ghersi</field><field name="email">omar.ghersi@example.com</field></record>
+    <record id="demo_teacher_06" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_06"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_db')])]"/></record>
+
+    <record id="demo_teacher_partner_07" model="res.partner"><field name="name">Sophie Lambert</field><field name="email">sophie.lambert@example.com</field></record>
+    <record id="demo_teacher_07" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_07"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_en')])]"/></record>
+
+    <record id="demo_teacher_partner_08" model="res.partner"><field name="name">Rachid Mokrani</field><field name="email">rachid.mokrani@example.com</field></record>
+    <record id="demo_teacher_08" model="oski.school.teacher"><field name="partner_id" ref="demo_teacher_partner_08"/><field name="subject_ids" eval="[(6, 0, [ref('demo_subject_math')])]"/></record>
+
+    <!-- ================= Classes (6) ================= -->
+    <record id="demo_class_g6a" model="oski.school.class">
+        <field name="level_id" ref="demo_level_g6"/><field name="period_id" ref="demo_period_2627"/><field name="suffix">A</field>
+        <field name="room_id" ref="demo_room_101"/><field name="homeroom_teacher_id" ref="demo_teacher_01"/>
+        <field name="subject_line_ids" eval="[(0, 0, {'subject_id': ref('demo_subject_math'), 'teacher_id': ref('demo_teacher_01')}),
+                                               (0, 0, {'subject_id': ref('demo_subject_fr'), 'teacher_id': ref('demo_teacher_02')})]"/>
+    </record>
+    <record id="demo_class_g7a" model="oski.school.class">
+        <field name="level_id" ref="demo_level_g7"/><field name="period_id" ref="demo_period_2627"/><field name="suffix">A</field>
+        <field name="room_id" ref="demo_room_102"/><field name="homeroom_teacher_id" ref="demo_teacher_02"/>
+        <field name="subject_line_ids" eval="[(0, 0, {'subject_id': ref('demo_subject_fr'), 'teacher_id': ref('demo_teacher_02')}),
+                                               (0, 0, {'subject_id': ref('demo_subject_en'), 'teacher_id': ref('demo_teacher_03')}),
+                                               (0, 0, {'subject_id': ref('demo_subject_sci'), 'teacher_id': ref('demo_teacher_04')})]"/>
+    </record>
+    <record id="demo_class_g8a" model="oski.school.class">
+        <field name="level_id" ref="demo_level_g8"/><field name="period_id" ref="demo_period_2627"/><field name="suffix">A</field>
+        <field name="room_id" ref="demo_room_101"/><field name="homeroom_teacher_id" ref="demo_teacher_08"/>
+        <field name="subject_line_ids" eval="[(0, 0, {'subject_id': ref('demo_subject_math'), 'teacher_id': ref('demo_teacher_08')}),
+                                               (0, 0, {'subject_id': ref('demo_subject_sci'), 'teacher_id': ref('demo_teacher_04')})]"/>
+    </record>
+    <record id="demo_class_l1" model="oski.school.class">
+        <field name="level_id" ref="demo_level_l1"/><field name="period_id" ref="demo_period_sem1"/>
+        <field name="room_id" ref="demo_room_lab"/><field name="homeroom_teacher_id" ref="demo_teacher_05"/>
+        <field name="subject_line_ids" eval="[(0, 0, {'subject_id': ref('demo_subject_algo'), 'teacher_id': ref('demo_teacher_05')}),
+                                               (0, 0, {'subject_id': ref('demo_subject_db'), 'teacher_id': ref('demo_teacher_06')})]"/>
+    </record>
+    <record id="demo_class_a1_eve" model="oski.school.class">
+        <field name="level_id" ref="demo_level_a1"/><field name="period_id" ref="demo_period_eng1"/><field name="suffix">Eve</field>
+        <field name="room_id" ref="demo_room_lang"/><field name="homeroom_teacher_id" ref="demo_teacher_03"/>
+        <field name="subject_line_ids" eval="[(0, 0, {'subject_id': ref('demo_subject_en'), 'teacher_id': ref('demo_teacher_03')})]"/>
+    </record>
+    <record id="demo_class_b1_eve" model="oski.school.class">
+        <field name="level_id" ref="demo_level_b1"/><field name="period_id" ref="demo_period_eng1"/><field name="suffix">Eve</field>
+        <field name="room_id" ref="demo_room_lang"/><field name="homeroom_teacher_id" ref="demo_teacher_07"/>
+        <field name="subject_line_ids" eval="[(0, 0, {'subject_id': ref('demo_subject_en'), 'teacher_id': ref('demo_teacher_07')})]"/>
+    </record>
+
+    <!-- ================= Students 01-12 : Middle school, with guardian ================= -->
+    <!-- Grade 6 A (demo_class_g6a) -->
+    <record id="demo_student_partner_01" model="res.partner"><field name="name">Lina Haddad</field></record>
+    <record id="demo_student_01" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_01"/><field name="birth_date">2014-05-12</field><field name="gender">female</field></record>
+    <record id="demo_guardian_partner_01" model="res.partner"><field name="name">Karim Haddad</field><field name="email">karim.haddad@example.com</field><field name="phone">+213 555 010 101</field></record>
+    <record id="demo_guardian_01" model="oski.school.guardian"><field name="student_id" ref="demo_student_01"/><field name="partner_id" ref="demo_guardian_partner_01"/><field name="relation">father</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_01" model="oski.school.enrollment"><field name="student_id" ref="demo_student_01"/><field name="class_id" ref="demo_class_g6a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_02" model="res.partner"><field name="name">Yanis Belkacem</field></record>
+    <record id="demo_student_02" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_02"/><field name="birth_date">2014-09-03</field><field name="gender">male</field></record>
+    <record id="demo_guardian_partner_02" model="res.partner"><field name="name">Amel Belkacem</field><field name="email">amel.belkacem@example.com</field><field name="phone">+213 555 010 201</field></record>
+    <record id="demo_guardian_02" model="oski.school.guardian"><field name="student_id" ref="demo_student_02"/><field name="partner_id" ref="demo_guardian_partner_02"/><field name="relation">mother</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_02" model="oski.school.enrollment"><field name="student_id" ref="demo_student_02"/><field name="class_id" ref="demo_class_g6a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_03" model="res.partner"><field name="name">Sarah Ait Ali</field></record>
+    <record id="demo_student_03" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_03"/><field name="birth_date">2015-01-20</field><field name="gender">female</field></record>
+    <record id="demo_guardian_partner_03" model="res.partner"><field name="name">Farid Ait Ali</field><field name="email">farid.aitali@example.com</field><field name="phone">+213 555 010 301</field></record>
+    <record id="demo_guardian_03" model="oski.school.guardian"><field name="student_id" ref="demo_student_03"/><field name="partner_id" ref="demo_guardian_partner_03"/><field name="relation">father</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_03" model="oski.school.enrollment"><field name="student_id" ref="demo_student_03"/><field name="class_id" ref="demo_class_g6a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_04" model="res.partner"><field name="name">Rayan Cherif</field></record>
+    <record id="demo_student_04" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_04"/><field name="birth_date">2014-11-15</field><field name="gender">male</field></record>
+    <record id="demo_guardian_partner_04" model="res.partner"><field name="name">Nadia Cherif</field><field name="email">nadia.cherif@example.com</field><field name="phone">+213 555 010 401</field></record>
+    <record id="demo_guardian_04" model="oski.school.guardian"><field name="student_id" ref="demo_student_04"/><field name="partner_id" ref="demo_guardian_partner_04"/><field name="relation">mother</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_04" model="oski.school.enrollment"><field name="student_id" ref="demo_student_04"/><field name="class_id" ref="demo_class_g6a"/><field name="state">active</field></record>
+
+    <!-- Grade 7 A (demo_class_g7a) -->
+    <record id="demo_student_partner_05" model="res.partner"><field name="name">Amina Boumediene</field></record>
+    <record id="demo_student_05" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_05"/><field name="birth_date">2013-03-08</field><field name="gender">female</field></record>
+    <record id="demo_guardian_partner_05" model="res.partner"><field name="name">Sofiane Boumediene</field><field name="email">sofiane.boumediene@example.com</field><field name="phone">+213 555 010 501</field></record>
+    <record id="demo_guardian_05" model="oski.school.guardian"><field name="student_id" ref="demo_student_05"/><field name="partner_id" ref="demo_guardian_partner_05"/><field name="relation">father</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_05" model="oski.school.enrollment"><field name="student_id" ref="demo_student_05"/><field name="class_id" ref="demo_class_g7a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_06" model="res.partner"><field name="name">Bilal Meziane</field></record>
+    <record id="demo_student_06" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_06"/><field name="birth_date">2013-07-22</field><field name="gender">male</field></record>
+    <record id="demo_guardian_partner_06" model="res.partner"><field name="name">Yasmine Meziane</field><field name="email">yasmine.meziane@example.com</field><field name="phone">+213 555 010 601</field></record>
+    <record id="demo_guardian_06" model="oski.school.guardian"><field name="student_id" ref="demo_student_06"/><field name="partner_id" ref="demo_guardian_partner_06"/><field name="relation">mother</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_06" model="oski.school.enrollment"><field name="student_id" ref="demo_student_06"/><field name="class_id" ref="demo_class_g7a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_07" model="res.partner"><field name="name">Chaima Rahmani</field></record>
+    <record id="demo_student_07" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_07"/><field name="birth_date">2013-12-01</field><field name="gender">female</field></record>
+    <record id="demo_guardian_partner_07" model="res.partner"><field name="name">Omar Rahmani</field><field name="email">omar.rahmani@example.com</field><field name="phone">+213 555 010 701</field></record>
+    <record id="demo_guardian_07" model="oski.school.guardian"><field name="student_id" ref="demo_student_07"/><field name="partner_id" ref="demo_guardian_partner_07"/><field name="relation">father</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_07" model="oski.school.enrollment"><field name="student_id" ref="demo_student_07"/><field name="class_id" ref="demo_class_g7a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_08" model="res.partner"><field name="name">Walid Saadi</field></record>
+    <record id="demo_student_08" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_08"/><field name="birth_date">2013-04-17</field><field name="gender">male</field></record>
+    <record id="demo_guardian_partner_08" model="res.partner"><field name="name">Leila Saadi</field><field name="email">leila.saadi@example.com</field><field name="phone">+213 555 010 801</field></record>
+    <record id="demo_guardian_08" model="oski.school.guardian"><field name="student_id" ref="demo_student_08"/><field name="partner_id" ref="demo_guardian_partner_08"/><field name="relation">mother</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_08" model="oski.school.enrollment"><field name="student_id" ref="demo_student_08"/><field name="class_id" ref="demo_class_g7a"/><field name="state">active</field></record>
+
+    <!-- Grade 8 A (demo_class_g8a) -->
+    <record id="demo_student_partner_09" model="res.partner"><field name="name">Nour Ferhat</field></record>
+    <record id="demo_student_09" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_09"/><field name="birth_date">2012-02-14</field><field name="gender">female</field></record>
+    <record id="demo_guardian_partner_09" model="res.partner"><field name="name">Samir Ferhat</field><field name="email">samir.ferhat@example.com</field><field name="phone">+213 555 010 901</field></record>
+    <record id="demo_guardian_09" model="oski.school.guardian"><field name="student_id" ref="demo_student_09"/><field name="partner_id" ref="demo_guardian_partner_09"/><field name="relation">father</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_09" model="oski.school.enrollment"><field name="student_id" ref="demo_student_09"/><field name="class_id" ref="demo_class_g8a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_10" model="res.partner"><field name="name">Ilyes Bentaleb</field></record>
+    <record id="demo_student_10" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_10"/><field name="birth_date">2012-06-09</field><field name="gender">male</field></record>
+    <record id="demo_guardian_partner_10" model="res.partner"><field name="name">Houria Bentaleb</field><field name="email">houria.bentaleb@example.com</field><field name="phone">+213 555 011 001</field></record>
+    <record id="demo_guardian_10" model="oski.school.guardian"><field name="student_id" ref="demo_student_10"/><field name="partner_id" ref="demo_guardian_partner_10"/><field name="relation">mother</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_10" model="oski.school.enrollment"><field name="student_id" ref="demo_student_10"/><field name="class_id" ref="demo_class_g8a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_11" model="res.partner"><field name="name">Meriem Zerrouki</field></record>
+    <record id="demo_student_11" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_11"/><field name="birth_date">2012-10-25</field><field name="gender">female</field></record>
+    <record id="demo_guardian_partner_11" model="res.partner"><field name="name">Karim Zerrouki</field><field name="email">karim.zerrouki@example.com</field><field name="phone">+213 555 011 101</field></record>
+    <record id="demo_guardian_11" model="oski.school.guardian"><field name="student_id" ref="demo_student_11"/><field name="partner_id" ref="demo_guardian_partner_11"/><field name="relation">legal</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_11" model="oski.school.enrollment"><field name="student_id" ref="demo_student_11"/><field name="class_id" ref="demo_class_g8a"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_12" model="res.partner"><field name="name">Adel Kaddour</field></record>
+    <record id="demo_student_12" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_12"/><field name="birth_date">2012-08-30</field><field name="gender">male</field></record>
+    <record id="demo_guardian_partner_12" model="res.partner"><field name="name">Nawel Kaddour</field><field name="email">nawel.kaddour@example.com</field><field name="phone">+213 555 011 201</field></record>
+    <record id="demo_guardian_12" model="oski.school.guardian"><field name="student_id" ref="demo_student_12"/><field name="partner_id" ref="demo_guardian_partner_12"/><field name="relation">mother</field><field name="is_primary" eval="True"/><field name="is_billing" eval="True"/></record>
+    <record id="demo_enrollment_12" model="oski.school.enrollment"><field name="student_id" ref="demo_student_12"/><field name="class_id" ref="demo_class_g8a"/><field name="state">active</field></record>
+
+    <!-- ================= Students 13-18 : CS Bachelor Year 1, no guardian ================= -->
+    <record id="demo_student_partner_13" model="res.partner"><field name="name">Yacine Boudiaf</field><field name="email">yacine.boudiaf@example.com</field></record>
+    <record id="demo_student_13" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_13"/><field name="birth_date">2007-01-10</field><field name="gender">male</field></record>
+    <record id="demo_enrollment_13" model="oski.school.enrollment"><field name="student_id" ref="demo_student_13"/><field name="class_id" ref="demo_class_l1"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_14" model="res.partner"><field name="name">Sofia Mansouri</field><field name="email">sofia.mansouri@example.com</field></record>
+    <record id="demo_student_14" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_14"/><field name="birth_date">2007-05-19</field><field name="gender">female</field></record>
+    <record id="demo_enrollment_14" model="oski.school.enrollment"><field name="student_id" ref="demo_student_14"/><field name="class_id" ref="demo_class_l1"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_15" model="res.partner"><field name="name">Karim Bouzid</field><field name="email">karim.bouzid@example.com</field></record>
+    <record id="demo_student_15" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_15"/><field name="birth_date">2006-11-02</field><field name="gender">male</field></record>
+    <record id="demo_enrollment_15" model="oski.school.enrollment"><field name="student_id" ref="demo_student_15"/><field name="class_id" ref="demo_class_l1"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_16" model="res.partner"><field name="name">Nesrine Hamadi</field><field name="email">nesrine.hamadi@example.com</field></record>
+    <record id="demo_student_16" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_16"/><field name="birth_date">2007-03-27</field><field name="gender">female</field></record>
+    <record id="demo_enrollment_16" model="oski.school.enrollment"><field name="student_id" ref="demo_student_16"/><field name="class_id" ref="demo_class_l1"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_17" model="res.partner"><field name="name">Amine Ould Said</field><field name="email">amine.ouldsaid@example.com</field></record>
+    <record id="demo_student_17" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_17"/><field name="birth_date">2006-09-14</field><field name="gender">male</field></record>
+    <record id="demo_enrollment_17" model="oski.school.enrollment"><field name="student_id" ref="demo_student_17"/><field name="class_id" ref="demo_class_l1"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_18" model="res.partner"><field name="name">Djamila Kerroum</field><field name="email">djamila.kerroum@example.com</field></record>
+    <record id="demo_student_18" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_18"/><field name="birth_date">2007-07-06</field><field name="gender">female</field></record>
+    <record id="demo_enrollment_18" model="oski.school.enrollment"><field name="student_id" ref="demo_student_18"/><field name="class_id" ref="demo_class_l1"/><field name="state">active</field></record>
+
+    <!-- ================= Students 19-24 : English courses, adults, no guardian ================= -->
+    <!-- A1 evening (demo_class_a1_eve) -->
+    <record id="demo_student_partner_19" model="res.partner"><field name="name">Thomas Martin</field><field name="email">thomas.martin@example.com</field></record>
+    <record id="demo_student_19" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_19"/><field name="birth_date">1990-04-02</field><field name="gender">male</field><field name="nationality_id" ref="base.fr"/></record>
+    <record id="demo_enrollment_19" model="oski.school.enrollment"><field name="student_id" ref="demo_student_19"/><field name="class_id" ref="demo_class_a1_eve"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_20" model="res.partner"><field name="name">Fatima Zohra Benyamina</field><field name="email">fatimazohra.benyamina@example.com</field></record>
+    <record id="demo_student_20" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_20"/><field name="birth_date">1988-12-11</field><field name="gender">female</field><field name="nationality_id" ref="base.dz"/></record>
+    <record id="demo_enrollment_20" model="oski.school.enrollment"><field name="student_id" ref="demo_student_20"/><field name="class_id" ref="demo_class_a1_eve"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_21" model="res.partner"><field name="name">Ahmed Slimani</field><field name="email">ahmed.slimani@example.com</field></record>
+    <record id="demo_student_21" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_21"/><field name="birth_date">1995-06-23</field><field name="gender">male</field><field name="nationality_id" ref="base.dz"/></record>
+    <record id="demo_enrollment_21" model="oski.school.enrollment"><field name="student_id" ref="demo_student_21"/><field name="class_id" ref="demo_class_a1_eve"/><field name="state">active</field></record>
+
+    <!-- B1 evening (demo_class_b1_eve) -->
+    <record id="demo_student_partner_22" model="res.partner"><field name="name">Elena Popescu</field><field name="email">elena.popescu@example.com</field></record>
+    <record id="demo_student_22" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_22"/><field name="birth_date">1992-09-17</field><field name="gender">female</field><field name="nationality_id" ref="base.ro"/></record>
+    <record id="demo_enrollment_22" model="oski.school.enrollment"><field name="student_id" ref="demo_student_22"/><field name="class_id" ref="demo_class_b1_eve"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_23" model="res.partner"><field name="name">Youssef Idrissi</field><field name="email">youssef.idrissi@example.com</field></record>
+    <record id="demo_student_23" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_23"/><field name="birth_date">1985-02-28</field><field name="gender">male</field><field name="nationality_id" ref="base.ma"/></record>
+    <record id="demo_enrollment_23" model="oski.school.enrollment"><field name="student_id" ref="demo_student_23"/><field name="class_id" ref="demo_class_b1_eve"/><field name="state">active</field></record>
+
+    <record id="demo_student_partner_24" model="res.partner"><field name="name">Claire Dubois</field><field name="email">claire.dubois@example.com</field></record>
+    <record id="demo_student_24" model="oski.school.student"><field name="partner_id" ref="demo_student_partner_24"/><field name="birth_date">1998-01-05</field><field name="gender">female</field><field name="nationality_id" ref="base.fr"/></record>
+    <record id="demo_enrollment_24" model="oski.school.enrollment"><field name="student_id" ref="demo_student_24"/><field name="class_id" ref="demo_class_b1_eve"/><field name="state">active</field></record>
+</odoo>

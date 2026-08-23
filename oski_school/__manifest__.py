@@ -41,7 +41,7 @@ and communication.
         'reports/report_enrollment_certificate.xml',
         'reports/report_class_list.xml',
     ],
-    'demo': [],
+    'demo': ['demo/school_demo.xml'],
     'installable': True,
     'application': True,
 }
