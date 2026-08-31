@@ -215,6 +215,38 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         a { color: $oski-plum; text-decoration: underline; }
         .oski-legal-contact { margin-top: 2.5rem; padding-top: 1.2rem;
             border-top: 1px solid $oski-line; color: $oski-muted; }
+        ul, ol { line-height: 1.7; margin-bottom: .9rem; }
+        code { background: rgba($oski-plum, .08); color: $oski-plum;
+            padding: .1rem .35rem; border-radius: 5px; font-size: .9em; }
+    }
+    .oski-legal-table {
+        width: 100%; font-size: .95rem; margin-bottom: 1rem;
+        th { width: 9.5rem; text-align: left; vertical-align: top; color: $oski-plum;
+            font-weight: 600; padding: .5rem .9rem .5rem 0; }
+        td { padding: .5rem 0; border-bottom: 1px solid $oski-line; line-height: 1.6; }
+    }
+
+    // ---- Questions fréquentes : <details> natifs, sans JavaScript ----
+    .oski-faq {
+        .oski-faq-lead { color: $oski-muted; line-height: 1.7; margin-bottom: 2.2rem; }
+        .oski-faq-item {
+            border-bottom: 1px solid $oski-line;
+            summary {
+                cursor: pointer; list-style: none; padding: .85rem 2rem .85rem 0;
+                font-weight: 600; position: relative;
+                &::-webkit-details-marker { display: none; }
+                &::after {
+                    content: "+"; position: absolute; right: .2rem; top: .75rem;
+                    font-size: 1.25rem; font-weight: 400; color: $oski-plum;
+                    transition: transform .15s ease;
+                }
+                &:hover { color: $oski-plum; }
+                &:focus-visible { outline: 2px solid $oski-plum; outline-offset: 3px; }
+            }
+            &[open] > summary::after { content: "−"; }
+            p, ol, ul { color: $oski-ink; margin: 0 0 1rem; padding-left: 0; }
+            ol, ul { padding-left: 1.2rem; }
+        }
     }
 
     // ---- Icône / monogramme ----

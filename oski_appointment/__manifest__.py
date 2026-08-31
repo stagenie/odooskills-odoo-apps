@@ -5,7 +5,7 @@
     "summary": "Réservez des créneaux sans double réservation — prise de RDV structurée pour Odoo Community",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["calendar", "resource", "mail"],
     "data": [

@@ -5,7 +5,7 @@
     "summary": "Gérez vos abonnements et facturez automatiquement chaque client au bon rythme — sans Enterprise.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["sale", "account"],
     "data": [

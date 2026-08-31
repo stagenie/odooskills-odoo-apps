@@ -13,7 +13,7 @@ paramétrage technique requis.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "images": ["static/description/screenshot_01_seuil_produit.png"],
     "depends": ["stock", "mail"],

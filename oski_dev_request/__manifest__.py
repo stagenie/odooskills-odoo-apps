@@ -12,7 +12,7 @@ Accusé de réception automatique. Lien vers le module livré à la clôture.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["oski_app_store", "website", "mail", "portal"],
     "data": [

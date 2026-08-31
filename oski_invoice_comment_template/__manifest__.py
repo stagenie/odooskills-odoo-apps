@@ -11,7 +11,7 @@ imprimée nativement dans le PDF — aucune modification de rapport QWeb requise
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "images": ["static/description/screenshot_01_config_modeles.png"],
     "depends": ["account"],

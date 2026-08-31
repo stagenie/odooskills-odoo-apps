@@ -92,6 +92,155 @@
         <field name="website_indexed" eval="True"/>
     </record>
 
+
+    <!-- Mentions légales : éditeur, hébergeur, marques. -->
+    <template id="legal_notice" name="Mentions légales">
+        <t t-call="website.layout">
+            <div class="oski-store">
+                <div class="container oski-legal py-5">
+                    <h1 class="oski-legal-title">Mentions légales</h1>
+                    <p class="oski-legal-date">Dernière mise à jour : 31 août 2026.</p>
+
+                    <h2>Éditeur du site</h2>
+                    <p><strong>Odoo &amp; AI Skills LLC</strong><br/>
+                        8206 Louisiana Blvd NE, Ste A #9881<br/>
+                        Albuquerque, NM 87113, États-Unis<br/>
+                        Courriel : <a href="mailto:apps@odooskills.com">apps@odooskills.com</a></p>
+
+                    <h2>Directeur de la publication</h2>
+                    <p>Mustapha BENHAMIDA, gérant.</p>
+
+                    <h2>Hébergement</h2>
+                    <p>Le site est hébergé sur un serveur du <strong>Groupe LWS SARL</strong> (France) —
+                        <a href="https://www.lws.fr" rel="noopener" target="_blank">lws.fr</a>.</p>
+
+                    <h2>Marques et droits</h2>
+                    <p><em>Odoo</em> est une marque déposée d'Odoo S.A. Ce site n'est ni édité ni
+                        approuvé par Odoo S.A. Les modules proposés sont des travaux indépendants
+                        conçus pour fonctionner avec le logiciel Odoo. Les autres marques citées
+                        appartiennent à leurs titulaires respectifs.</p>
+
+                    <h2>Contenus du site</h2>
+                    <p>Textes, visuels et captures sont la propriété de l'éditeur, sauf mention
+                        contraire. Chaque module reste régi par la licence indiquée sur sa fiche.</p>
+
+                    <h2>Signalement</h2>
+                    <p>Toute demande relative à un contenu de ce site — erreur, droit d'auteur,
+                        donnée personnelle — se traite à
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
+
+                    <p class="oski-legal-contact">
+                        Voir aussi <a href="/apps/conditions-utilisation">les conditions d'utilisation</a>
+                        et <a href="/apps/confidentialite">la politique de confidentialité</a>.
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="legal_notice_page" model="website.page">
+        <field name="name">Mentions légales</field>
+        <field name="url">/apps/mentions-legales</field>
+        <field name="view_id" ref="legal_notice"/>
+        <field name="is_published" eval="True"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+
+    <!-- Politique de confidentialité : ce qui est collecté, pourquoi, combien
+         de temps, et par quelles mains cela passe. -->
+    <template id="privacy_policy" name="Politique de confidentialité">
+        <t t-call="website.layout">
+            <div class="oski-store">
+                <div class="container oski-legal py-5">
+                    <h1 class="oski-legal-title">Politique de confidentialité</h1>
+                    <p class="oski-legal-date">Dernière mise à jour : 31 août 2026.</p>
+
+                    <p>Ce site collecte le minimum nécessaire pour livrer un module, émettre une
+                        facture et répondre à un message. Rien n'est vendu ni cédé à des tiers à
+                        des fins publicitaires.</p>
+
+                    <h2>1. Responsable du traitement</h2>
+                    <p>Odoo &amp; AI Skills LLC, 8206 Louisiana Blvd NE, Ste A #9881,
+                        Albuquerque, NM 87113, États-Unis —
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
+
+                    <h2>2. Ce qui est collecté</h2>
+                    <table class="oski-legal-table">
+                        <tr><th>Compte</th><td>nom, adresse électronique, mot de passe chiffré,
+                            adresse de facturation.</td></tr>
+                        <tr><th>Commande</th><td>modules achetés, montant, date, facture. Les
+                            <strong>données de carte ne transitent jamais par ce site</strong> :
+                            elles sont saisies chez le prestataire de paiement.</td></tr>
+                        <tr><th>Demande de module</th><td>coordonnées, description du besoin,
+                            budget, pièces jointes que vous joignez vous-même.</td></tr>
+                        <tr><th>Messages</th><td>contenu des courriels reçus à
+                            <code>apps@odooskills.com</code> et des formulaires du site.</td></tr>
+                        <tr><th>Technique</th><td>journaux du serveur (adresse IP, page demandée,
+                            date), cookies de session et de panier.</td></tr>
+                    </table>
+
+                    <h2>3. Pourquoi</h2>
+                    <ul>
+                        <li><strong>Exécuter la commande</strong> : livrer l'archive, ouvrir
+                            l'espace client, émettre la facture.</li>
+                        <li><strong>Répondre</strong> à une demande de module ou à un message.</li>
+                        <li><strong>Tenir la comptabilité</strong>, obligation légale.</li>
+                        <li><strong>Protéger le site</strong> : anti-spam des formulaires,
+                            journaux de sécurité — intérêt légitime.</li>
+                        <li><strong>Informer</strong> des nouveautés, uniquement si vous vous êtes
+                            inscrit : chaque envoi porte son lien de désinscription.</li>
+                    </ul>
+
+                    <h2>4. Qui d'autre y a accès</h2>
+                    <p>Uniquement des prestataires techniques, chacun pour sa part :
+                        <strong>Stripe</strong> et <strong>PayPal</strong> pour l'encaissement,
+                        <strong>Mailjet</strong> pour l'acheminement des courriels,
+                        <strong>Groupe LWS</strong> pour l'hébergement du serveur (France).
+                        Aucune revente, aucun courtier en données.</p>
+
+                    <h2>5. Combien de temps</h2>
+                    <ul>
+                        <li>Compte et achats : tant que le compte existe — il donne accès aux
+                            téléchargements déjà payés.</li>
+                        <li>Factures : la durée de conservation comptable applicable.</li>
+                        <li>Demandes de module et messages : trois ans après le dernier échange.</li>
+                        <li>Journaux techniques : douze mois.</li>
+                    </ul>
+
+                    <h2>6. Où sont les données</h2>
+                    <p>Le serveur est situé en France. L'éditeur est une société américaine : ses
+                        responsables y accèdent depuis l'étranger, et les prestataires cités
+                        peuvent traiter certaines données hors de l'Union européenne.</p>
+
+                    <h2>7. Vos droits</h2>
+                    <p>Accès, rectification, effacement, limitation, opposition et portabilité
+                        s'exercent d'un courriel à
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>. Réponse sous
+                        un mois. Un résident de l'Union européenne peut saisir l'autorité de
+                        contrôle de son pays s'il estime la réponse insuffisante.</p>
+
+                    <h2>8. Cookies</h2>
+                    <p>Les cookies nécessaires (session, panier, préférence de langue) permettent
+                        au site de fonctionner. Les cookies non essentiels ne sont déposés qu'après
+                        acceptation dans le bandeau, révocable à tout moment.</p>
+
+                    <p class="oski-legal-contact">
+                        Une question sur ce texte ?
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="privacy_policy_page" model="website.page">
+        <field name="name">Politique de confidentialité</field>
+        <field name="url">/apps/confidentialite</field>
+        <field name="view_id" ref="privacy_policy"/>
+        <field name="is_published" eval="True"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+
     <!-- Lien permanent en pied de page : la mention légale doit être joignable
          depuis n'importe quelle page, y compris le tunnel d'achat. -->
     <template id="footer_legal_links" inherit_id="website.layout"
@@ -99,7 +248,13 @@
         <xpath expr="//div[hasclass('o_footer_copyright')]" position="inside">
             <div class="container oski-footer-legal">
                 <a href="/apps/conditions-utilisation">Conditions d'utilisation</a>
-                <span class="mx-2" aria-hidden="true">·</span>
+                <span class="sep" aria-hidden="true">·</span>
+                <a href="/apps/mentions-legales">Mentions légales</a>
+                <span class="sep" aria-hidden="true">·</span>
+                <a href="/apps/confidentialite">Confidentialité</a>
+                <span class="sep" aria-hidden="true">·</span>
+                <a href="/apps/faq">Questions fréquentes</a>
+                <span class="sep" aria-hidden="true">·</span>
                 <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
             </div>
         </xpath>

@@ -21,7 +21,7 @@ Aucune configuration requise : fonctionne dès l'installation.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "images": ["static/description/screenshot_01_onglet_checklist.png"],
     "depends": ["project"],

@@ -17,7 +17,7 @@ Fonctionnalités clés :
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["mail", "contacts"],
     "data": [

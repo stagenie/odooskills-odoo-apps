@@ -10,7 +10,7 @@
                    "privé, favoris ordonnés, corbeille, navigation par sidebar.",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
-    'support': 'support@odooskills.com',
+    'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'images': ['static/description/banner.png'],
     'depends': ['base', 'mail', 'web', 'web_tour'],

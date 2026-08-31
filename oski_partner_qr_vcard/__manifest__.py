@@ -12,7 +12,7 @@ en un tap — aucune application tierce requise.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["contacts"],
     "external_dependencies": {"python": ["qrcode"]},

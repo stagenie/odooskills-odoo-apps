@@ -9,7 +9,7 @@
                    "aux enregistrements métier et droits par espace.",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
-    'support': 'support@odooskills.com',
+    'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'depends': ['base', 'mail', 'web'],
     'data': [

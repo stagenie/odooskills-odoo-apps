@@ -12,7 +12,7 @@ Journal de session « Ma session » retraçant chaque scan de l'opérateur.
 Fonctionne avec n'importe quelle douchette clavier (USB/Bluetooth) ou la caméra.""",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
-    'support': 'support@odooskills.com',
+    'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'images': ['static/description/banner.png'],
     'depends': ['stock', 'barcodes'],

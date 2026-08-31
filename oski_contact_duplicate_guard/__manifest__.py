@@ -11,7 +11,7 @@ sont affichés. Email et téléphone activables séparément depuis les Réglage
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["contacts", "base_setup"],
     "data": [

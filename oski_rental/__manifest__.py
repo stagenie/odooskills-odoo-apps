@@ -7,7 +7,7 @@
                    "départ/retour avec état des lieux, caution, facturation, alertes retard.",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
-    'support': 'support@odooskills.com',
+    'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'depends': ['base', 'mail', 'account', 'product'],
     'data': [

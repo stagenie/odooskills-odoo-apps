@@ -21,7 +21,7 @@
                    'restrict a payment from maintaining its own mirror operation.',
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
-    'support': 'support@odooskills.com',
+    'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'images': [
         'static/description/banner.png',

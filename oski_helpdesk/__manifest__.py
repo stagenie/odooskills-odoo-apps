@@ -5,7 +5,7 @@
     "summary": "Gérez les demandes client sans en perdre une seule : tickets numérotés, alias email, assignation équilibrée, kanban par étape.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base", "mail"],
     "data": [

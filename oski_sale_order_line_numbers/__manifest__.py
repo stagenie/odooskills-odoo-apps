@@ -23,7 +23,7 @@ installation.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "images": ["static/description/screenshot_01_devis_colonne_numero.png"],
     "depends": ["sale_management"],

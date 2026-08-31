@@ -6,7 +6,7 @@
     "summary": "Installez ce socle gratuit pour restreindre l'accès Odoo par journal, entrepôt, département ou équipe — sans modifier le code source.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base"],
     "data": [

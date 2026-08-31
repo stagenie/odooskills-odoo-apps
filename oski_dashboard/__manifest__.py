@@ -10,7 +10,7 @@ Chaque widget lit ses données avec les droits de l'utilisateur connecté
 (règles propriétaire / partage en lecture par groupes).""",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
-    'support': 'support@odooskills.com',
+    'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'images': ['static/description/screenshot_01_tableau_de_bord.png'],
     'depends': ['web', 'web_tour'],

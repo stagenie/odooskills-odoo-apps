@@ -99,9 +99,47 @@ class TestLegalPages(HttpCase):
         self.assertTrue(page.is_published)
         self.assertEqual(page.url, "/apps/conditions-utilisation")
 
-    def test_footer_links_to_terms(self):
-        """Le lien légal suit le visiteur sur toutes les pages."""
+    def test_legal_notice_public(self):
+        self.authenticate(None, None)
+        resp = self.url_open("/apps/mentions-legales")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("AI Skills LLC", resp.text)
+        self.assertIn("LWS", resp.text)
+
+    def test_privacy_policy_public(self):
+        self.authenticate(None, None)
+        resp = self.url_open("/apps/confidentialite")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("Politique de confidentialité", resp.text)
+        self.assertIn("apps@odooskills.com", resp.text)
+
+    def test_faq_public(self):
+        self.authenticate(None, None)
+        resp = self.url_open("/apps/faq")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("Questions fréquentes", resp.text)
+        self.assertIn("/my/apps", resp.text)
+        self.assertIn("/apps/demande-developpement", resp.text)
+
+    def test_faq_needs_no_javascript(self):
+        """L'accordéon repose sur <details> : rien à charger, rien à casser."""
+        self.authenticate(None, None)
+        html = self.url_open("/apps/faq").text
+        self.assertIn("<details", html)
+        self.assertIn("<summary>", html)
+
+    def test_footer_links_to_every_legal_page(self):
+        """Les liens légaux suivent le visiteur sur toutes les pages."""
         self.authenticate(None, None)
         html = self.url_open("/apps").text
         self.assertIn("oski-footer-legal", html)
-        self.assertIn("/apps/conditions-utilisation", html)
+        for url in ("/apps/conditions-utilisation", "/apps/mentions-legales",
+                    "/apps/confidentialite", "/apps/faq"):
+            self.assertIn(url, html, "lien %s absent du pied de page" % url)
+
+    def test_no_stale_support_address(self):
+        """Une seule boîte est communiquée : apps@odooskills.com."""
+        self.authenticate(None, None)
+        for url in ("/apps/faq", "/apps/confidentialite", "/apps/mentions-legales",
+                    "/apps/conditions-utilisation"):
+            self.assertNotIn("support@odooskills.com", self.url_open(url).text)
