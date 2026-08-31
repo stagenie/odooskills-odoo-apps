@@ -1,5 +1,6 @@
 import base64
 import os
+import time
 
 from odoo import http
 from odoo.http import request
@@ -13,11 +14,22 @@ MAX_FILE_SIZE = 10 * 1024 * 1024   # 10 Mo / fichier
 MAX_FILES = 5
 MAX_TOTAL_SIZE = 25 * 1024 * 1024  # 25 Mo au total
 
+# Anti-spam d'un formulaire ouvert à tous, sans clé ni service tiers :
+# un piège invisible, un délai minimum et un plafond par session.
+HONEYPOT_FIELD = "website"      # laissé vide par un humain, rempli par un robot
+MIN_FILL_SECONDS = 3            # personne ne remplit ce formulaire en 3 secondes
+                                # (réglable : ir.config_parameter
+                                #  oski_dev_request.min_fill_seconds)
+FORM_MAX_AGE = 2 * 60 * 60      # un formulaire ouvert il y a 2 h est périmé
+MAX_PER_HOUR = 3                # au-delà, c'est du bruit
+
 
 class OskiDevRequestController(http.Controller):
 
     def _render_form(self, values=None, error=None):
         env = request.env
+        # Horodatage de l'affichage : il sert à mesurer le temps de remplissage.
+        request.session["oski_dev_form_ts"] = time.time()
         categories = env["oski.module.category"].sudo().search([])
         Req = env["oski.dev.request"]
         return request.render("oski_dev_request.form_page", {
@@ -27,38 +39,79 @@ class OskiDevRequestController(http.Controller):
             "values": values or {},
             "error": error,
             "allowed_ext": ", ".join(sorted(ALLOWED_EXT)),
+            "honeypot_field": HONEYPOT_FIELD,
         })
 
-    def _require_login(self):
-        """Route website=True + auth=user accepte l'utilisateur public ;
-        on force la connexion réelle (réservé aux inscrits)."""
-        if not request.session.uid or request.env.user._is_public():
-            return request.redirect(
-                "/web/login?redirect=%s" % request.httprequest.full_path)
+    def _spam_verdict(self, post):
+        """None si la soumission est plausible, sinon la raison du refus.
+
+        Le formulaire est ouvert à tous : sans garde-fou, il devient une boîte
+        à spam. Trois filtres suffisent et n'imposent rien à l'internaute :
+        un champ piège qu'aucun humain ne voit, un temps de remplissage
+        minimum, et un plafond par session.
+        """
+        if (post.get(HONEYPOT_FIELD) or "").strip():
+            return "honeypot"
+
+        min_delay = MIN_FILL_SECONDS
+        param = request.env["ir.config_parameter"].sudo().get_param(
+            "oski_dev_request.min_fill_seconds")
+        if param not in (None, False, ""):
+            try:
+                min_delay = float(param)
+            except ValueError:
+                pass
+
+        opened_at = request.session.get("oski_dev_form_ts")
+        if not opened_at:
+            return "Votre formulaire a expiré. Merci de le rouvrir et de le renvoyer."
+        elapsed = time.time() - opened_at
+        if elapsed < min_delay:
+            return "Formulaire envoyé trop vite. Merci de réessayer."
+        if elapsed > FORM_MAX_AGE:
+            return "Votre formulaire a expiré. Merci de le rouvrir et de le renvoyer."
+
+        recent = [t for t in request.session.get("oski_dev_sent", [])
+                  if time.time() - t < 3600]
+        if len(recent) >= MAX_PER_HOUR:
+            return ("Vous avez déjà envoyé %d demandes cette heure-ci. "
+                    "Écrivez-nous plutôt à apps@odooskills.com." % MAX_PER_HOUR)
+        request.session["oski_dev_sent"] = recent
         return None
 
-    @http.route("/apps/demande-developpement", type="http", auth="user",
+    def _remember_submission(self):
+        sent = list(request.session.get("oski_dev_sent", []))
+        sent.append(time.time())
+        request.session["oski_dev_sent"] = sent
+
+    @http.route("/apps/demande-developpement", type="http", auth="public",
                 website=True, sitemap=True)
     def dev_request_form(self, **kw):
-        redirect = self._require_login()
-        if redirect:
-            return redirect
+        # Ouvert à tous : un prospect qui découvre le catalogue doit pouvoir
+        # décrire son besoin sans d'abord créer un compte.
         user = request.env.user
-        partner = user.partner_id
-        values = {
-            "requester_name": user.name,
-            "email": user.email or partner.email or "",
-            "company_name": partner.commercial_company_name or "",
-            "phone": partner.phone or "",
-        }
+        values = {}
+        if not user._is_public():
+            partner = user.partner_id
+            values = {
+                "requester_name": user.name,
+                "email": user.email or partner.email or "",
+                "company_name": partner.commercial_company_name or "",
+                "phone": partner.phone or "",
+            }
         return self._render_form(values=values)
 
-    @http.route("/apps/demande-developpement/submit", type="http", auth="user",
+    @http.route("/apps/demande-developpement/submit", type="http", auth="public",
                 website=True, methods=["POST"])
     def dev_request_submit(self, **post):
-        redirect = self._require_login()
-        if redirect:
-            return redirect
+        verdict = self._spam_verdict(post)
+        if verdict == "honeypot":
+            # Un robot ne doit pas apprendre qu'il a été repéré : page de
+            # remerciement, aucune demande créée.
+            return request.redirect("/apps/demande-developpement/merci")
+        if verdict:
+            return self._render_form(values=post, error=verdict)
+
         # Champs obligatoires
         required = ["requester_name", "email", "subject", "description", "budget_range"]
         missing = [f for f in required if not (post.get(f) or "").strip()]
@@ -105,8 +158,11 @@ class OskiDevRequestController(http.Controller):
             "budget_range": post.get("budget_range"),
             "delivery_mode": post.get("delivery_mode") or "store",
             "odoo_version": post.get("odoo_version") or "19.0",
-            "user_id": env.user.id,
         }
+        # Le modèle rattache la demande à l'utilisateur courant par défaut :
+        # pour un visiteur, ce serait l'utilisateur « public », ce qui ne veut
+        # rien dire. On coupe explicitement le lien.
+        vals["user_id"] = False if env.user._is_public() else env.user.id
         if category_id and category_id.isdigit():
             vals["category_id"] = int(category_id)
         req = env["oski.dev.request"].sudo().create(vals)
@@ -135,9 +191,10 @@ class OskiDevRequestController(http.Controller):
         except Exception:
             pass  # un échec d'envoi ne doit pas casser la soumission
 
+        self._remember_submission()
         return request.redirect("/apps/demande-developpement/merci?ref=%s" % req.name)
 
-    @http.route("/apps/demande-developpement/merci", type="http", auth="user",
+    @http.route("/apps/demande-developpement/merci", type="http", auth="public",
                 website=True, sitemap=False)
     def dev_request_thanks(self, ref=None, **kw):
         return request.render("oski_dev_request.thanks_page", {"ref": ref})

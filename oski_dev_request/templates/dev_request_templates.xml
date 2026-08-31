@@ -19,6 +19,16 @@
                                   enctype="multipart/form-data" class="card p-4 shadow-sm">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
+                                <!-- Champ piège : invisible et hors tabulation pour un
+                                     humain, irrésistible pour un robot qui remplit tout. -->
+                                <div style="position:absolute;left:-9999px;top:-9999px;"
+                                     aria-hidden="true">
+                                    <label t-attf-for="#{honeypot_field}">Ne rien saisir ici</label>
+                                    <input type="text" t-att-name="honeypot_field"
+                                           t-att-id="honeypot_field" tabindex="-1"
+                                           autocomplete="off" value=""/>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Nom / Personne <span class="text-danger">*</span></label>

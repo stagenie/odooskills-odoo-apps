@@ -20,6 +20,13 @@ class TestDevRequestController(HttpCase):
             "group_ids": [(6, 0, [cls.env.ref("base.group_portal").id])],
         })
 
+    def setUp(self):
+        super().setUp()
+        # Le formulaire impose un temps de remplissage minimum : un test le
+        # franchit en quelques millisecondes, on neutralise le délai.
+        self.env["ir.config_parameter"].sudo().set_param(
+            "oski_dev_request.min_fill_seconds", "0")
+
     def _csrf(self):
         """Récupère le token CSRF depuis le formulaire."""
         r = self.url_open(FORM_URL)
@@ -27,12 +34,17 @@ class TestDevRequestController(HttpCase):
         self.assertTrue(m, "csrf_token absent du formulaire")
         return m.group(1)
 
-    def test_form_requires_login(self):
-        # authenticate(None, None) = session publique liée à la db (évite le
-        # routeur nodb -> 404 sur les routes website non authentifiées).
+    def test_form_is_open_to_visitors(self):
+        """Ouvert au public depuis la 19.0.2.0.0 : plus de détour par la connexion.
+
+        authenticate(None, None) = session publique liée à la db (évite le
+        routeur nodb -> 404 sur les routes website non authentifiées).
+        """
         self.authenticate(None, None)
         r = self.url_open(FORM_URL)
-        self.assertIn("/web/login", r.url)
+        self.assertEqual(r.status_code, 200)
+        self.assertNotIn("/web/login", r.url)
+        self.assertIn("Demander un module", r.text)
 
     def test_form_renders_when_logged(self):
         self.authenticate("portal_devreq", "portal_devreq")
