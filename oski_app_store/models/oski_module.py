@@ -25,7 +25,7 @@ class OskiModule(models.Model):
     currency_id = fields.Many2one(
         "res.currency",
         string="Devise",
-        default=lambda self: self.env.ref("base.EUR", raise_if_not_found=False),
+        default=lambda self: self.env.ref("base.USD", raise_if_not_found=False),
     )
     price = fields.Monetary(
         string="Prix",
@@ -107,6 +107,45 @@ class OskiModule(models.Model):
         return self.version_line_ids.sorted(
             lambda v: v.odoo_version_id.sequence, reverse=True
         )[:1]
+
+    def is_purchased_by(self, partner):
+        """True si ce partenaire détient une commande confirmée pour ce module.
+
+        Même règle que le contrôleur de téléchargement : le droit naît de la
+        commande confirmée (`state == 'sale'`), pas du devis. En vente en ligne
+        la commande ne se confirme qu'au paiement réussi.
+        """
+        self.ensure_one()
+        if self.is_free:
+            return True
+        if not partner or not self.product_tmpl_id:
+            return False
+        return bool(
+            self.env["sale.order.line"]
+            .sudo()
+            .search_count(
+                [
+                    ("order_partner_id", "=", partner.id),
+                    ("product_id.product_tmpl_id", "=", self.product_tmpl_id.id),
+                    ("state", "=", "sale"),
+                ]
+            )
+        )
+
+    @api.model
+    def purchased_by(self, partner):
+        """Modules payants dont ce partenaire a une commande confirmée."""
+        if not partner:
+            return self.browse()
+        lines = (
+            self.env["sale.order.line"]
+            .sudo()
+            .search([("order_partner_id", "=", partner.id), ("state", "=", "sale")])
+        )
+        templates = lines.mapped("product_id.product_tmpl_id")
+        if not templates:
+            return self.browse()
+        return self.sudo().search([("product_tmpl_id", "in", templates.ids)])
 
     @api.model_create_multi
     def create(self, vals_list):

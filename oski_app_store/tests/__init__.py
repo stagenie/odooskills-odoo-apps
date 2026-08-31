@@ -7,3 +7,4 @@ from . import test_odoo_version_registry
 from . import test_screenshots
 from . import test_module_page
 from . import test_build_zip
+from . import test_purchase_entitlement

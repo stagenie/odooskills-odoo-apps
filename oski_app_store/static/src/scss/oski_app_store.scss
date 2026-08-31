@@ -261,3 +261,22 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
     .oski-lightbox-img { max-width: 95vw; max-height: 92vh;
         object-fit: contain; }
 }
+
+// Fiche d'un module déjà acquis : la note sous le bouton de téléchargement.
+.oski-owned-note {
+    margin-top: .5rem;
+    margin-bottom: 0;
+    font-size: .875rem;
+    color: #6B7A79;
+}
+
+// Espace client « Mes applications ».
+.o_portal_my_apps {
+    .oski-portal-icon {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        border-radius: 8px;
+        flex: 0 0 auto;
+    }
+}

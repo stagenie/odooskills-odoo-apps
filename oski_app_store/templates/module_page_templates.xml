@@ -49,14 +49,30 @@
                             </div>
                             <t t-set="target" t-value="module.download_target(version)"/>
                             <t t-if="target and target.attachment_id">
-                                <a t-if="module.is_free"
+                                <!-- Gratuit ou déjà payé : on télécharge. Sinon on achète,
+                                     prix affiché sur le bouton. Un module payant sans produit
+                                     lié n'est pas vendable : on le dit plutôt que d'offrir un
+                                     bouton mort. -->
+                                <a t-if="module.is_free or is_purchased"
                                    t-attf-href="/apps/download/#{target.id}"
                                    class="btn oski-btn-download w-100">
                                     &#x2B07; Télécharger (<t t-out="target.odoo_version"/>)
                                 </a>
-                                <a t-else=""
-                                   t-attf-href="/shop/cart/update?product_id=#{module.product_tmpl_id.product_variant_id.id}"
-                                   class="btn oski-btn-buy w-100">Acheter</a>
+                                <t t-elif="is_sellable">
+                                    <a t-att-href="buy_url"
+                                       class="btn oski-btn-buy w-100">
+                                        Acheter —
+                                        <span t-field="module.price"
+                                              t-options='{"widget": "monetary", "display_currency": module.currency_id}'/>
+                                    </a>
+                                </t>
+                                <p t-else="" class="text-muted mb-0">
+                                    Bientôt en vente.
+                                </p>
+                                <p t-if="is_purchased" class="oski-owned-note">
+                                    Vous possédez ce module —
+                                    <a href="/my/apps">toutes vos applications</a>.
+                                </p>
                                 <p t-if="target.odoo_version != version" class="oski-fallback-note">
                                     Indisponible en <t t-out="version"/> — dernière version proposée :
                                     <t t-out="target.odoo_version"/>.

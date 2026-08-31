@@ -182,11 +182,30 @@ class OskiAppStore(http.Controller):
             return request.not_found()
         supported_versions, default_version = self._version_state()
         version = v if v in supported_versions else default_version
+        partner = (
+            request.env.user.partner_id
+            if not request.env.user._is_public()
+            else False
+        )
+        # Le produit est lu en sudo : un visiteur public n'a pas accès à
+        # product.template, et la fiche rendait 403 dès qu'un module payant
+        # était publié. Le bouton d'achat n'apparaît que si le produit est
+        # lui-même publié — sinon /shop/cart/update refuserait le panier.
+        product = module.sudo().product_tmpl_id
+        variant = product.product_variant_id
+        is_sellable = bool(variant) and product.is_published and product.sale_ok
         return request.render(
             "oski_app_store.module_page",
             {
                 "module": module,
                 "version": version,
+                "is_purchased": module.is_purchased_by(partner),
+                "is_sellable": is_sellable,
+                "buy_url": (
+                    "/shop/cart/update?product_id=%s" % variant.id
+                    if variant
+                    else ""
+                ),
                 "pill_versions": list(reversed(supported_versions)),
                 "screenshots": module.sudo().screenshot_ids.sorted("name"),
                 "back_url": self._catalog_back_url(),
@@ -231,24 +250,9 @@ class OskiAppStore(http.Controller):
                     "/web/login?redirect=%s" % module.website_url
                 )
 
-            # Utilisateur connecté : vérifier une commande confirmée
-            partner = request.env.user.partner_id
-            entitled = (
-                request.env["sale.order.line"]
-                .sudo()
-                .search_count(
-                    [
-                        ("order_partner_id", "=", partner.id),
-                        (
-                            "product_id.product_tmpl_id",
-                            "=",
-                            module.product_tmpl_id.id,
-                        ),
-                        ("state", "=", "sale"),
-                    ]
-                )
-            )
-            if not entitled:
+            # Utilisateur connecté : vérifier une commande confirmée.
+            # Une seule règle d'entitlement, partagée avec la fiche publique.
+            if not module.is_purchased_by(request.env.user.partner_id):
                 return request.redirect(module.website_url)
 
         # Lecture sudo de la pièce jointe pour garantir l'accès au binaire
