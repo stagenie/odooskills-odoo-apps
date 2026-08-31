@@ -1,4 +1,5 @@
 """Ordre d'affichage des versions Odoo (plus récente d'abord) et pages légales."""
+import pathlib
 import re
 
 from odoo.tests import tagged
@@ -143,3 +144,82 @@ class TestLegalPages(HttpCase):
         for url in ("/apps/faq", "/apps/confidentialite", "/apps/mentions-legales",
                     "/apps/conditions-utilisation"):
             self.assertNotIn("support@odooskills.com", self.url_open(url).text)
+
+
+@tagged("post_install", "-at_install")
+class TestSeoAndErrorPages(HttpCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.registry.clear_cache("routing")
+        cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
+
+    def test_catalog_has_title_and_description(self):
+        self.authenticate(None, None)
+        html = self.url_open("/apps").text
+        self.assertIn("<title>Modules Odoo |", html)
+        self.assertTrue(
+            re.search(r'<meta name="description" content="Modules Odoo pr[^"]+"', html),
+            "le catalogue doit porter sa propre méta-description",
+        )
+
+    def test_module_page_title_is_the_module(self):
+        """Chaque fiche porte son nom et son résumé, pas ceux du site."""
+        self.authenticate(None, None)
+        module, _ = _make_module(self.env, "oski_seo", ["19.0"])
+        module.summary = "Un résumé qui doit finir en méta-description."
+        html = self.url_open(module.website_url).text
+        self.assertIn("<title>oski_seo |", html)
+        self.assertIn('content="Un résumé qui doit finir en méta-description."', html)
+
+    def test_module_page_share_image_is_the_icon(self):
+        """Sans image propre, cent quarante-sept aperçus identiques."""
+        self.authenticate(None, None)
+        module, _ = _make_module(self.env, "oski_og", ["19.0"])
+        # PNG 1×1 transparent
+        module.image_1920 = (
+            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk"
+            "YPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+        )
+        html = self.url_open(module.website_url).text
+        self.assertIn("/web/image/oski.module/%s/image_1920" % module.id, html)
+
+    def test_unpublished_module_is_not_indexed(self):
+        """Une fiche non publiée ne doit pas entrer dans le sitemap."""
+        module, _ = _make_module(self.env, "oski_hidden", ["19.0"], published=False)
+        public = self.env.ref("base.public_user")
+        visible = self.env["oski.module"].with_user(public).search([
+            ("id", "=", module.id)
+        ])
+        self.assertFalse(visible, "le public ne doit pas voir la fiche non publiée")
+
+    def test_support_page_public(self):
+        self.authenticate(None, None)
+        resp = self.url_open("/apps/support")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("apps@odooskills.com", resp.text)
+        self.assertIn("Ce qui n'est pas couvert", resp.text)
+
+    def test_support_page_promises_no_delay(self):
+        """Le délai n'est pas tranché : la page ne doit rien promettre."""
+        self.authenticate(None, None)
+        html = self.url_open("/apps/support").text
+        for promesse in ("48 h", "24 h", "48h", "24h", "heures ouvrées"):
+            self.assertNotIn(promesse, html)
+
+    def test_404_search_field_is_visible(self):
+        """Le champ hérite du style du hero sombre : il doit être ré-habillé."""
+        scss = pathlib.Path(__file__).parent.parent.joinpath(
+            "static/src/scss/oski_app_store.scss").read_text()
+        block = scss[scss.index(".oski-404-search"):]
+        block = block[:block.index(".oski-404-foot")]
+        self.assertIn("background: #fff", block)
+        self.assertIn("border: 1px solid $oski-line", block)
+
+    def test_404_is_branded_and_french(self):
+        self.authenticate(None, None)
+        resp = self.url_open("/apps/cette-page-nexiste-pas")
+        self.assertEqual(resp.status_code, 404)
+        self.assertIn("Cette page n'existe pas.", resp.text)
+        self.assertIn("/apps", resp.text)
+        self.assertNotIn("We couldn't find the page", resp.text)

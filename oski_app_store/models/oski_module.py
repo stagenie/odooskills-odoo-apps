@@ -4,7 +4,7 @@ from odoo import api, fields, models
 class OskiModule(models.Model):
     _name = "oski.module"
     _description = "Module du store OdooSkills"
-    _inherit = ["website.published.mixin"]
+    _inherit = ["website.published.mixin", "website.seo.metadata"]
     _order = "name"
 
     name = fields.Char(string="Nom affiché", required=True, translate=True)
@@ -75,6 +75,28 @@ class OskiModule(models.Model):
                 record.website_url = "/apps/%s" % self.env["ir.http"]._slug(record)
             else:
                 record.website_url = "#"
+
+    def _default_website_meta(self):
+        """Titre, description et image de partage propres à chaque module.
+
+        Sans cela, un lien de fiche collé dans une conversation affiche le nom
+        du site et son logo : cent quarante-sept aperçus identiques.
+        """
+        res = super()._default_website_meta()
+        opengraph, twitter = res["default_opengraph"], res["default_twitter"]
+        opengraph["og:title"] = twitter["twitter:title"] = self.name
+        if self.summary:
+            opengraph["og:description"] = self.summary
+            twitter["twitter:description"] = self.summary
+        if self.image_1920:
+            image_url = "/web/image/oski.module/%s/image_1920" % self.id
+            opengraph["og:image"] = twitter["twitter:image"] = image_url
+        return res
+
+    def _seo_description(self):
+        """Méta-description : le résumé, sinon le nom. Jamais vide."""
+        self.ensure_one()
+        return self.summary or "%s — module Odoo signé OdooSkills." % self.name
 
     def latest_version(self, odoo_version="19.0"):
         """Retourne la dernière oski.module.version pour une version Odoo."""

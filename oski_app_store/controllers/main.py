@@ -139,6 +139,16 @@ class OskiAppStore(http.Controller):
         version_spectrum = [_version_option(pv) for pv in supported_versions]
         OskiModule = request.env["oski.module"].sudo()
 
+        meta_description = (
+            "Modules Odoo prêts à installer, gratuits et premium, signés "
+            "OdooSkills — compatibles de la %s à la %s."
+            % (released_versions[-1], released_versions[0])
+        )
+        if upcoming_versions:
+            meta_description += " Odoo %s à la porte." % (
+                upcoming_versions[0].split(".")[0]
+            )
+
         values = {
             "modules": modules,
             "version_spectrum": version_spectrum,
@@ -161,6 +171,10 @@ class OskiAppStore(http.Controller):
             "sort": sort,
             "has_filters": bool(cats or tags or pricing != "all" or search),
             "clear_url": "/apps",
+            # Référencement : sans ces deux clés, chaque page hérite du titre
+            # générique du site et n'a aucune description.
+            "additional_title": "Modules Odoo",
+            "website_meta_description": meta_description,
         }
         return request.render("oski_app_store.catalog_page", values)
 
@@ -219,6 +233,11 @@ class OskiAppStore(http.Controller):
                 ),
                 "pill_versions": supported_versions,
                 "upcoming_versions": upcoming_versions,
+                # main_object : le titre de l'onglet, l'aperçu de partage et le
+                # panneau de référencement de l'éditeur s'y accrochent.
+                "main_object": module,
+                "additional_title": module.name,
+                "website_meta_description": module._seo_description(),
                 "screenshots": module.sudo().screenshot_ids.sorted("name"),
                 "back_url": self._catalog_back_url(),
             },

@@ -6,6 +6,8 @@
          standard (/terms est servi par le module account). -->
     <template id="terms_of_use" name="Conditions d'utilisation">
         <t t-call="website.layout">
+            <t t-set="additional_title">Conditions d'utilisation</t>
+            <t t-set="website_meta_description">Conditions d'utilisation du store de modules Odoo OdooSkills : compte, licences, usage acceptable, disponibilité.</t>
             <div class="oski-store">
                 <div class="container oski-legal py-5">
                     <h1 class="oski-legal-title">Conditions d'utilisation</h1>
@@ -96,6 +98,8 @@
     <!-- Mentions légales : éditeur, hébergeur, marques. -->
     <template id="legal_notice" name="Mentions légales">
         <t t-call="website.layout">
+            <t t-set="additional_title">Mentions légales</t>
+            <t t-set="website_meta_description">Éditeur, directeur de la publication et hébergeur du store de modules Odoo OdooSkills.</t>
             <div class="oski-store">
                 <div class="container oski-legal py-5">
                     <h1 class="oski-legal-title">Mentions légales</h1>
@@ -150,6 +154,8 @@
          de temps, et par quelles mains cela passe. -->
     <template id="privacy_policy" name="Politique de confidentialité">
         <t t-call="website.layout">
+            <t t-set="additional_title">Politique de confidentialité</t>
+            <t t-set="website_meta_description">Ce que le store OdooSkills collecte, pourquoi, combien de temps, qui y accède, et comment exercer vos droits.</t>
             <div class="oski-store">
                 <div class="container oski-legal py-5">
                     <h1 class="oski-legal-title">Politique de confidentialité</h1>

@@ -4,6 +4,8 @@
          donc rien à casser et tout reste ouvrable au clavier et à l'impression. -->
     <template id="faq_page" name="Questions fréquentes">
         <t t-call="website.layout">
+            <t t-set="additional_title">Questions fréquentes</t>
+            <t t-set="website_meta_description">Acheter, recevoir et installer un module du store OdooSkills : compte, paiement, facture, livraison immédiate, versions d'Odoo couvertes.</t>
             <div class="oski-store">
                 <div class="container oski-legal oski-faq py-5">
                     <h1 class="oski-legal-title">Questions fréquentes</h1>

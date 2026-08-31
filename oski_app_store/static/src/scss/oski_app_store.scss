@@ -249,6 +249,55 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         }
     }
 
+    // ---- Support ----
+    .oski-support {
+        .oski-support-mail {
+            font-family: $oski-display; font-size: 1.35rem; font-weight: 600;
+            margin: 0 0 2rem;
+            a { color: $oski-plum; text-decoration: none;
+                border-bottom: 2px solid rgba($oski-plum, .25);
+                &:hover { border-bottom-color: $oski-plum; } }
+        }
+    }
+
+    // ---- Page introuvable ----
+    .oski-404 {
+        max-width: 40rem; margin-inline: auto; text-align: center;
+        padding: 3rem 0 1rem;
+        .oski-404-code {
+            font-family: $oski-display; font-weight: 700;
+            font-size: clamp(4rem, 14vw, 7rem); line-height: 1;
+            color: $oski-line; margin: 0 0 .5rem; letter-spacing: -.04em;
+        }
+        .oski-404-title { font-family: $oski-display; font-weight: 700;
+            font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: -.02em;
+            margin: 0 0 .6rem; }
+        .oski-404-lead { color: $oski-muted; line-height: 1.6; margin: 0 0 1.8rem; }
+        .oski-404-actions {
+            display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+            justify-content: center; margin-bottom: 2rem;
+        }
+        .oski-btn-primary { background: $oski-plum; color: #fff; font-weight: 600;
+            border-radius: 10px; padding: .6rem 1.3rem;
+            &:hover { background: $oski-plum-dark; color: #fff; } }
+        .oski-404-link { color: $oski-muted; text-decoration: none; font-weight: 500;
+            &:hover { color: $oski-plum; text-decoration: underline; } }
+        // La recherche du hero est habillée pour un fond sombre : sur le blanc
+        // de cette page, le champ disparaissait purement et simplement.
+        .oski-404-search { max-width: 26rem; margin: 0 auto 2rem;
+            .form-control {
+                border: 1px solid $oski-line; background: #fff; color: $oski-ink;
+                border-radius: 10px 0 0 10px;
+                &::placeholder { color: $oski-muted; }
+                &:focus { border-color: $oski-plum; background: #fff;
+                    color: $oski-ink; box-shadow: none; }
+            }
+            .btn { background: $oski-plum; color: #fff; border-radius: 0 10px 10px 0;
+                &:hover { background: $oski-plum-dark; color: #fff; } } }
+        .oski-404-foot { color: $oski-muted; font-size: .9rem;
+            a { color: $oski-plum; } }
+    }
+
     // ---- Icône / monogramme ----
     .oski-icon { width: 44px; height: 44px; border-radius: 10px; object-fit: contain; }
     .oski-monogram {

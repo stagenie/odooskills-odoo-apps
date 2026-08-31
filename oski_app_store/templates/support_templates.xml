@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Page support. Le délai de réponse est délibérément absent : il n'est
+         pas tranché, et une promesse de délai non tenue se retourne en avis
+         négatif. À poser ici le jour où il l'est. -->
+    <template id="support_page" name="Support">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Support</t>
+            <t t-set="website_meta_description">Une seule adresse pour tout le store OdooSkills : apps@odooskills.com. Ce qui est couvert, ce qui ne l'est pas, et ce qu'il faut joindre à un signalement.</t>
+            <div class="oski-store">
+                <div class="container oski-legal oski-support py-5">
+                    <h1 class="oski-legal-title">Support</h1>
+                    <p class="oski-faq-lead">Une seule adresse pour tout le store —
+                        modules gratuits comme payants, question avant achat comme panne
+                        après installation.</p>
+
+                    <p class="oski-support-mail">
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
+                    </p>
+
+                    <h2>Ce qui est couvert</h2>
+                    <ul>
+                        <li>Le module ne s'installe pas, ou remonte une erreur.</li>
+                        <li>Une fonction du module ne se comporte pas comme sa fiche l'annonce.</li>
+                        <li>Une incompatibilité avec un module standard d'Odoo.</li>
+                        <li>Une question sur la portée d'un module avant de l'acheter.</li>
+                        <li>Un problème de commande, de facture ou de téléchargement.</li>
+                    </ul>
+
+                    <h2>Ce qui n'est pas couvert</h2>
+                    <ul>
+                        <li>L'adaptation du module à vos processus : c'est du développement.
+                            Le formulaire <a href="/apps/demande-developpement">Demander un
+                            module</a> ouvre une demande chiffrée.</li>
+                        <li>L'administration de votre serveur ou de votre base.</li>
+                        <li>Le paramétrage d'Odoo lui-même, hors du module concerné.</li>
+                        <li>Un module modifié : décrivez la modification, elle change tout.</li>
+                    </ul>
+
+                    <h2>Ce qu'il faut joindre</h2>
+                    <p>Un signalement complet est traité une fois ; un signalement partiel
+                        coûte trois allers-retours.</p>
+                    <ol>
+                        <li>La <strong>version d'Odoo</strong> et son mode d'installation.</li>
+                        <li>Le <strong>nom technique</strong> du module et sa version.</li>
+                        <li>Ce que vous attendiez, ce qui s'est produit.</li>
+                        <li>Le <strong>message d'erreur complet</strong> — le journal du serveur
+                            en dit plus que la capture d'écran.</li>
+                        <li>Le chemin suivi dans l'interface pour reproduire le problème.</li>
+                    </ol>
+
+                    <h2>Délai de réponse</h2>
+                    <p>Chaque message reçoit une réponse. Le délai garanti sera annoncé avec
+                        les conditions de vente, avant l'ouverture des ventes.</p>
+
+                    <p class="oski-legal-contact">
+                        Voir aussi <a href="/apps/faq">les questions fréquentes</a> — elles
+                        répondent déjà à l'essentiel.
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="support_page_record" model="website.page">
+        <field name="name">Support</field>
+        <field name="url">/apps/support</field>
+        <field name="view_id" ref="support_page"/>
+        <field name="is_published" eval="True"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+
+    <!-- Page introuvable : celle du standard est en anglais, illustrée d'une
+         image générique, et ne renvoie que vers l'accueil. -->
+    <template id="store_404" inherit_id="http_routing.404" name="Store — page introuvable">
+        <xpath expr="//div[@id='wrap']/div[hasclass('oe_structure')]" position="replace">
+            <div class="oski-store">
+                <div class="container oski-404 py-5">
+                    <p class="oski-404-code" aria-hidden="true">404</p>
+                    <h1 class="oski-404-title">Cette page n'existe pas.</h1>
+                    <p class="oski-404-lead">Le lien est peut-être ancien, ou le module a
+                        changé d'adresse. Le catalogue, lui, n'a pas bougé.</p>
+                    <div class="oski-404-actions">
+                        <a href="/apps" class="btn oski-btn-primary">Parcourir le catalogue</a>
+                        <a href="/apps/faq" class="oski-404-link">Questions fréquentes</a>
+                        <a href="/apps/support" class="oski-404-link">Support</a>
+                    </div>
+                    <form method="get" action="/apps" class="oski-search oski-404-search">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control"
+                                   placeholder="Chercher un module…"/>
+                            <button type="submit" class="btn oski-btn-primary">Rechercher</button>
+                        </div>
+                    </form>
+                    <p class="oski-404-foot">Si le lien venait de nous, dites-le à
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
