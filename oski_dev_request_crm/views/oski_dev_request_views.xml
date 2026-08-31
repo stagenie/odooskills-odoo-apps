@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_dev_request_view_form_crm" model="ir.ui.view">
+        <field name="name">oski.dev.request.form.crm</field>
+        <field name="model">oski.dev.request</field>
+        <field name="inherit_id" ref="oski_dev_request.oski_dev_request_view_form"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button name="action_open_lead" type="object"
+                        string="Voir l'opportunité" class="btn-secondary"
+                        invisible="not lead_id"/>
+            </header>
+            <field name="email" position="after">
+                <field name="lead_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>
