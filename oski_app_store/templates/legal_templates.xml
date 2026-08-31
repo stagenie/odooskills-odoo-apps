@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Conditions d'utilisation du site. Volontairement courtes : elles
+         couvrent l'usage du site, pas la vente (CGV séparées). L'URL est
+         préfixée /apps/ pour rester hors de portée des contrôleurs du
+         standard (/terms est servi par le module account). -->
+    <template id="terms_of_use" name="Conditions d'utilisation">
+        <t t-call="website.layout">
+            <div class="oski-store">
+                <div class="container oski-legal py-5">
+                    <h1 class="oski-legal-title">Conditions d'utilisation</h1>
+                    <p class="oski-legal-date">Dernière mise à jour : 31 août 2026.</p>
+
+                    <h2>1. Éditeur du site</h2>
+                    <p>Le site <strong>apps.odooskills.com</strong> est édité par
+                        <strong>Odoo &amp; AI Skills LLC</strong>, société de droit de l'État
+                        du Nouveau-Mexique (États-Unis). Toute question relative au site ou
+                        aux modules se pose à
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>, seule
+                        adresse de contact du store.</p>
+
+                    <h2>2. Objet du site</h2>
+                    <p>Le site présente un catalogue de modules pour le logiciel Odoo. Certains
+                        modules sont téléchargeables gratuitement, d'autres après achat. Odoo
+                        est une marque d'Odoo S.A. ; ce site n'est pas édité par Odoo S.A. et
+                        n'engage pas cette société.</p>
+
+                    <h2>3. Compte</h2>
+                    <p>La création d'un compte est nécessaire pour acheter un module et
+                        retrouver ses téléchargements. Les informations fournies doivent être
+                        exactes et tenues à jour. Les identifiants sont personnels : leur usage
+                        relève de la responsabilité du titulaire du compte, qui signale sans
+                        délai tout usage non autorisé.</p>
+
+                    <h2>4. Modules et licences</h2>
+                    <p>Chaque module est distribué sous la licence indiquée sur sa fiche et
+                        reproduite dans son archive. Cette licence détermine ce qui est permis :
+                        installation, modification, redistribution. Les conditions financières
+                        d'un achat (prix, facturation, remboursement) relèvent des conditions
+                        générales de vente présentées au moment du paiement.</p>
+
+                    <h2>5. Propriété intellectuelle du site</h2>
+                    <p>Les textes, visuels, captures et éléments graphiques du site sont
+                        protégés. Leur reproduction hors citation courte avec lien vers la
+                        source demande un accord écrit préalable.</p>
+
+                    <h2>6. Usage acceptable</h2>
+                    <p>Sont interdits : l'extraction automatisée massive du catalogue, toute
+                        tentative d'accès non autorisé, la mise en défaut volontaire du service,
+                        le contournement des contrôles d'accès aux archives payantes et la
+                        redistribution d'un module payant hors du cadre de sa licence.</p>
+
+                    <h2>7. Disponibilité</h2>
+                    <p>Le site est fourni en l'état. Des interruptions peuvent survenir pour
+                        maintenance ou pour une cause extérieure. Aucune disponibilité
+                        ininterrompue n'est garantie.</p>
+
+                    <h2>8. Liens externes</h2>
+                    <p>Le site peut renvoyer vers des sites tiers, dont le contenu échappe à
+                        l'éditeur. Leur consultation relève des conditions propres à ces sites.</p>
+
+                    <h2>9. Données personnelles</h2>
+                    <p>Les données collectées (compte, commande, message) servent à répondre aux
+                        demandes, livrer les modules et facturer. Toute demande d'accès, de
+                        rectification ou de suppression se fait à
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
+
+                    <h2>10. Modification des conditions</h2>
+                    <p>Ces conditions peuvent évoluer. La version en ligne au moment de la
+                        visite est celle qui s'applique ; la date de mise à jour figure en tête
+                        de page.</p>
+
+                    <h2>11. Droit applicable</h2>
+                    <p>Ces conditions sont régies par le droit de l'État du Nouveau-Mexique
+                        (États-Unis). Les dispositions impératives protégeant le consommateur
+                        dans son pays de résidence restent applicables.</p>
+
+                    <p class="oski-legal-contact">
+                        Une question sur ce texte ?
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="terms_of_use_page" model="website.page">
+        <field name="name">Conditions d'utilisation</field>
+        <field name="url">/apps/conditions-utilisation</field>
+        <field name="view_id" ref="terms_of_use"/>
+        <field name="is_published" eval="True"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+
+    <!-- Lien permanent en pied de page : la mention légale doit être joignable
+         depuis n'importe quelle page, y compris le tunnel d'achat. -->
+    <template id="footer_legal_links" inherit_id="website.layout"
+              name="Store — liens légaux du pied de page">
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="inside">
+            <div class="container oski-footer-legal">
+                <a href="/apps/conditions-utilisation">Conditions d'utilisation</a>
+                <span class="mx-2" aria-hidden="true">·</span>
+                <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
+            </div>
+        </xpath>
+    </template>
+</odoo>

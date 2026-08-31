@@ -28,7 +28,8 @@
                                 <t t-set="avail" t-value="module.available_versions()"/>
                                 <t t-foreach="pill_versions" t-as="pv">
                                     <a t-attf-href="#{module.website_url}?v=#{pv}"
-                                       t-attf-class="oski-vpill #{'on' if pv in avail else 'off'} #{'sel' if pv == version else ''}"
+                                       t-att-title="'Odoo %s — pas encore sortie' % pv if pv in upcoming_versions else pv"
+                                       t-attf-class="oski-vpill #{'on' if pv in avail else 'off'} #{'sel' if pv == version else ''} #{'soon' if pv in upcoming_versions else ''}"
                                        t-out="pv"/>
                                 </t>
                             </div>

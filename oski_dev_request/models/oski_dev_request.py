@@ -24,17 +24,18 @@ class OskiDevRequest(models.Model):
     subject = fields.Char(string="Objet", required=True, tracking=True)
     description = fields.Text(string="Description du besoin", required=True)
     category_id = fields.Many2one("oski.module.category", string="Catégorie")
+    # Le référentiel oski.odoo.version fait foi : ajouter une version Odoo
+    # reste un simple enregistrement, sans toucher au code (ordre = plus
+    # récente d'abord, version à venir comprise).
     odoo_version = fields.Selection(
-        [
-            ("15.0", "15.0"),
-            ("16.0", "16.0"),
-            ("17.0", "17.0"),
-            ("18.0", "18.0"),
-            ("19.0", "19.0"),
-        ],
+        selection="_selection_odoo_version",
         string="Version Odoo cible",
-        default="19.0",
+        default=lambda self: self.env["oski.odoo.version"].get_default(),
     )
+
+    @api.model
+    def _selection_odoo_version(self):
+        return [(v, v) for v in self.env["oski.odoo.version"].get_supported()]
     budget_range = fields.Selection(
         [
             ("lt_500", "Moins de 500 €"),

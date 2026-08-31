@@ -24,9 +24,9 @@
             <p class="oski-card-summary" t-out="module.summary"/>
             <div class="oski-card-foot">
                 <div class="oski-card-versions" aria-label="Compatibilité">
-                    <t t-foreach="version_pills" t-as="pv">
-                        <span t-attf-class="oski-dot #{'on' if pv['label'] in avail else 'off'}"
-                              t-out="pv['label'].split('.')[0]"/>
+                    <t t-foreach="card_versions" t-as="pv">
+                        <span t-attf-class="oski-dot #{'on' if pv in avail else 'off'}"
+                              t-out="pv.split('.')[0]"/>
                     </t>
                 </div>
                 <span class="oski-card-go" aria-hidden="true">Voir →</span>
@@ -47,6 +47,8 @@
                         <a t-att-href="fo['href']"
                            t-attf-class="dropdown-item #{'active' if fo['selected'] else ''}">
                             <t t-out="fo.get('label') or fo.get('name')"/>
+                            <span t-if="fo.get('note')" class="oski-opt-note"
+                                  t-out="fo['note']"/>
                         </a>
                     </li>
                 </t>
@@ -70,8 +72,8 @@
                         <h1 class="oski-hero-title">Donnez à Odoo<br/>
                             <em>ce qui lui manque.</em></h1>
                         <p class="oski-hero-lead">Une collection de modules signés OdooSkills —
-                            compatibles de la <t t-out="version_spectrum[0]['label']"/> à la
-                            <t t-out="version_spectrum[-1]['label']"/>, du gratuit au premium,
+                            compatibles de la <t t-out="released_versions[-1]"/> à la
+                            <t t-out="released_versions[0]"/>, du gratuit au premium,
                             prêts à installer.</p>
                         <form method="get" action="/apps" class="oski-search">
                             <div class="input-group">
@@ -86,12 +88,18 @@
                             <div class="oski-spectrum-scale">
                                 <t t-foreach="version_spectrum" t-as="sv">
                                     <a t-att-href="sv['href']"
-                                       t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''}">
+                                       t-att-title="'Odoo %s — pas encore sortie' % sv['label'] if sv['soon'] else sv['label']"
+                                       t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''} #{'is-soon' if sv['soon'] else ''}">
                                         <span t-out="sv['label'].split('.')[0]"/>
                                     </a>
                                 </t>
                             </div>
                         </div>
+                        <p t-if="upcoming_versions" class="oski-hero-soon">
+                            <span class="oski-soon-flag">Odoo <t t-out="upcoming_versions[0].split('.')[0]"/></span>
+                            est à la porte : les archives <t t-out="upcoming_versions[0]"/>
+                            suivront la sortie officielle.
+                        </p>
                     </div>
                 </header>
 
@@ -125,6 +133,12 @@
                            class="oski-clear ms-auto">Tout effacer</a>
                     </div>
 
+                    <div t-if="version_is_upcoming" class="oski-notice" role="status">
+                        <strong>Odoo <t t-out="version.split('.')[0]"/> n'est pas encore sortie.</strong>
+                        Aucune archive <t t-out="version"/> n'est publiée à ce jour&#160;; les modules
+                        ci-dessous sont livrés dans leur dernière version disponible.
+                    </div>
+
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3">
                         <t t-foreach="modules" t-as="module">
                             <div class="col">
@@ -139,7 +153,7 @@
                     <div t-if="not modules and not has_filters" class="oski-launch text-center">
                         <div class="oski-spectrum-scale oski-launch-scale" aria-hidden="true">
                             <t t-foreach="version_spectrum" t-as="sv">
-                                <span t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''}"
+                                <span t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''} #{'is-soon' if sv['soon'] else ''}"
                                       t-out="sv['label'].split('.')[0]"/>
                             </t>
                         </div>

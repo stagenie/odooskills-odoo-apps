@@ -1,6 +1,6 @@
 {
     "name": "Demande de développement — Opportunités CRM",
-    "version": "19.0.1.0.0",
+    "version": "19.0.2.0.0",
     "category": "Website",
     "summary": "Chaque demande de module ouvre une opportunité dans le pipeline commercial.",
     "description": """

@@ -16,6 +16,13 @@
         <field name="name">18.0</field>
         <field name="sequence">180</field>
     </record>
+    <!-- 20.0 : annoncée avant sa sortie, sans archive. is_upcoming la garde
+         hors du choix par défaut et hors des pastilles de compatibilité. -->
+    <record id="odoo_version_20" model="oski.odoo.version">
+        <field name="name">20.0</field>
+        <field name="sequence">200</field>
+        <field name="is_upcoming" eval="True"/>
+    </record>
     <record id="odoo_version_19" model="oski.odoo.version">
         <field name="name">19.0</field>
         <field name="sequence">190</field>

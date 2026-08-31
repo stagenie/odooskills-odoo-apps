@@ -12,15 +12,23 @@ class OskiDevRequest(models.Model):
         help="Opportunité ouverte à la soumission de la demande.",
     )
 
+    def _selection_label(self, fname):
+        """Libellé lisible d'un champ selection, statique ou dynamique.
+
+        `_fields[...].selection` vaut le nom d'une méthode quand la liste est
+        calculée (odoo_version la tire du référentiel des versions) : passer
+        par _description_selection couvre les deux cas.
+        """
+        value = self[fname]
+        labels = dict(self._fields[fname]._description_selection(self.env))
+        return labels.get(value, value or "")
+
     def _prepare_crm_lead_values(self):
         """Valeurs de l'opportunité ouverte pour cette demande."""
         self.ensure_one()
-        version = dict(self._fields["odoo_version"].selection).get(
-            self.odoo_version, self.odoo_version or "")
-        budget = dict(self._fields["budget_range"].selection).get(
-            self.budget_range, self.budget_range or "")
-        mode = dict(self._fields["delivery_mode"].selection).get(
-            self.delivery_mode, self.delivery_mode or "")
+        version = self._selection_label("odoo_version")
+        budget = self._selection_label("budget_range")
+        mode = self._selection_label("delivery_mode")
         lines = [
             "<p><b>%s</b> — %s</p>" % (self.name or "", self.subject or ""),
             "<p>%s</p>" % (self.description or "").replace("\n", "<br/>"),

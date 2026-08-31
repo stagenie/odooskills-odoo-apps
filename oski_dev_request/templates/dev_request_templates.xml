@@ -82,7 +82,7 @@
                                         <select name="odoo_version" class="form-select">
                                             <t t-foreach="version_options" t-as="vo">
                                                 <option t-att-value="vo[0]"
-                                                        t-att-selected="'selected' if values.get('odoo_version', '19.0') == vo[0] else None">
+                                                        t-att-selected="'selected' if values.get('odoo_version', default_version) == vo[0] else None">
                                                     <t t-out="vo[1]"/>
                                                 </option>
                                             </t>

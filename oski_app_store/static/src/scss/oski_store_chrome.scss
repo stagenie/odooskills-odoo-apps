@@ -76,3 +76,12 @@ footer.o_footer {
     color: rgba(255, 255, 255, 0.65);
     a { color: rgba(255, 255, 255, 0.65); &:hover { color: #fff; } }
 }
+
+// ---- Liens légaux du pied de page (hors .oski-store : chrome du site) ----
+.oski-footer-legal {
+    padding-top: .4rem;
+    font-size: .82rem;
+    opacity: .75;
+    a { color: inherit; text-decoration: none;
+        &:hover { text-decoration: underline; } }
+}

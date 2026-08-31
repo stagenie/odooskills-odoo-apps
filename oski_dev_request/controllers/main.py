@@ -35,7 +35,8 @@ class OskiDevRequestController(http.Controller):
         return request.render("oski_dev_request.form_page", {
             "categories": categories,
             "budget_options": Req._fields["budget_range"].selection,
-            "version_options": Req._fields["odoo_version"].selection,
+            "version_options": Req._selection_odoo_version(),
+            "default_version": env["oski.odoo.version"].sudo().get_default(),
             "values": values or {},
             "error": error,
             "allowed_ext": ", ".join(sorted(ALLOWED_EXT)),

@@ -18,12 +18,17 @@ class OskiAppStore(http.Controller):
     """Contrôleur principal du store OdooSkills App Store."""
 
     def _version_state(self):
-        """(supported, default) depuis le référentiel oski.odoo.version."""
+        """(supported, default, upcoming) depuis le référentiel oski.odoo.version.
+
+        `supported` est trié de la plus récente à la plus ancienne — l'ordre
+        d'affichage partout dans le site. `upcoming` liste les versions
+        annoncées sans archive (Odoo 20 avant sa sortie).
+        """
         Versions = request.env["oski.odoo.version"].sudo()
         supported = Versions.get_supported()
         if not supported:
-            return ["19.0"], "19.0"  # garde-fou base vide
-        return supported, Versions.get_default()
+            return ["19.0"], "19.0", []  # garde-fou base vide
+        return supported, Versions.get_default(), Versions.get_upcoming()
 
     @http.route(["/apps"], type="http", auth="public", website=True, sitemap=True)
     def apps_catalog(self, **kw):
@@ -33,7 +38,10 @@ class OskiAppStore(http.Controller):
         Filtrage : OR intra-groupe (ORM `in`), AND inter-groupes (conjonction).
         État partageable + encodé via url_state.build_query.
         """
-        supported_versions, default_version = self._version_state()
+        supported_versions, default_version, upcoming_versions = self._version_state()
+        released_versions = [
+            pv for pv in supported_versions if pv not in upcoming_versions
+        ]
 
         args = request.httprequest.args
 
@@ -116,23 +124,19 @@ class OskiAppStore(http.Controller):
             }
             for key, label in (("name", "Nom"), ("recent", "Récents"))
         ]
-        version_pills = [
-            {
+        # Plus récente d'abord, versions à venir en tête : le visiteur cherche
+        # d'abord la version qu'il installe aujourd'hui ou demain.
+        def _version_option(pv):
+            return {
                 "label": pv,
                 "selected": pv == version,
+                "soon": pv in upcoming_versions,
+                "note": "bientôt" if pv in upcoming_versions else "",
                 "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
             }
-            for pv in reversed(supported_versions)
-        ]
 
-        version_spectrum = [
-            {
-                "label": pv,
-                "selected": pv == version,
-                "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
-            }
-            for pv in reversed(supported_versions)
-        ]
+        version_pills = [_version_option(pv) for pv in supported_versions]
+        version_spectrum = [_version_option(pv) for pv in supported_versions]
         OskiModule = request.env["oski.module"].sudo()
 
         values = {
@@ -145,7 +149,14 @@ class OskiAppStore(http.Controller):
             "pricing_options": pricing_options,
             "sort_options": sort_options,
             "version_pills": version_pills,
+            # Pastilles de compatibilité des cartes : uniquement les versions
+            # sorties (une pastille toujours éteinte sur chaque carte n'apprend
+            # rien au visiteur).
+            "card_versions": released_versions,
+            "released_versions": released_versions,
+            "upcoming_versions": upcoming_versions,
             "version": version,
+            "version_is_upcoming": version in upcoming_versions,
             "search": search,
             "sort": sort,
             "has_filters": bool(cats or tags or pricing != "all" or search),
@@ -180,7 +191,7 @@ class OskiAppStore(http.Controller):
             "oski_app_store.group_manager"
         ):
             return request.not_found()
-        supported_versions, default_version = self._version_state()
+        supported_versions, default_version, upcoming_versions = self._version_state()
         version = v if v in supported_versions else default_version
         partner = (
             request.env.user.partner_id
@@ -206,7 +217,8 @@ class OskiAppStore(http.Controller):
                     if variant
                     else ""
                 ),
-                "pill_versions": list(reversed(supported_versions)),
+                "pill_versions": supported_versions,
+                "upcoming_versions": upcoming_versions,
                 "screenshots": module.sudo().screenshot_ids.sorted("name"),
                 "back_url": self._catalog_back_url(),
             },

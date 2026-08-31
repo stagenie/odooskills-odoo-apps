@@ -80,6 +80,30 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
             background: $oski-pink; color: $oski-ink-deep; border-color: $oski-pink;
             box-shadow: 0 8px 22px rgba($oski-pink, .35); transform: translateY(-2px);
         }
+        // Version annoncée, pas encore sortie : contour pointillé, pas de plein.
+        &.is-soon {
+            border-style: dashed; border-color: rgba($oski-pink, .55);
+            color: rgba(255,255,255,.55); background: transparent;
+            &.is-active { background: rgba($oski-pink, .18); color: #fff;
+                border-color: $oski-pink; box-shadow: none; }
+        }
+    }
+    .oski-hero-soon {
+        margin: 1.2rem 0 0; font-size: .95rem; color: rgba(255,255,255,.72);
+    }
+    .oski-soon-flag {
+        display: inline-block; margin-right: .4rem; padding: .12rem .5rem;
+        border-radius: 999px; font-family: $oski-display; font-weight: 600;
+        font-size: .8rem; color: $oski-ink-deep; background: $oski-pink;
+    }
+
+    // ---- Bandeau d'information (version pas encore sortie) ----
+    .oski-notice {
+        border: 1px dashed rgba($oski-plum, .45); border-radius: 12px;
+        background: rgba($oski-plum, .06); color: $oski-ink;
+        padding: .85rem 1.1rem; margin-bottom: 1.4rem; font-size: .92rem;
+        line-height: 1.55;
+        strong { color: $oski-plum; }
     }
 
     // ---- Toolbar filtres ----
@@ -148,6 +172,12 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         font-size: .72rem; font-weight: 600; }
     .oski-badge-free { background: rgba($oski-green, .12); color: $oski-green; }
     .oski-badge-premium { background: rgba($oski-plum, .12); color: $oski-plum; }
+    .oski-opt-note {
+        margin-left: .45rem; font-size: .72rem; font-weight: 600;
+        letter-spacing: .04em; text-transform: uppercase; color: $oski-muted;
+    }
+    // L'option active a un fond plum : la mention doit rester lisible dessus.
+    .dropdown-item.active .oski-opt-note { color: rgba(255, 255, 255, .8); }
     .oski-dot {
         display: inline-flex; align-items: center; justify-content: center;
         min-width: 1.5rem; height: 1.5rem; border-radius: 6px;
@@ -169,6 +199,22 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         .oski-launch-title { font-family: $oski-display; font-weight: 700;
             font-size: 1.7rem; letter-spacing: -.02em; margin: 0 0 .6rem; }
         .oski-launch-lead { color: $oski-muted; line-height: 1.6; margin: 0 0 1.6rem; }
+    }
+
+    // ---- Pages légales ----
+    .oski-legal {
+        max-width: 44rem; margin-inline: auto;
+        h1.oski-legal-title { font-family: $oski-display; font-weight: 700;
+            font-size: clamp(1.8rem, 4vw, 2.4rem); letter-spacing: -.02em;
+            margin: 0 0 .3rem; }
+        .oski-legal-date { color: $oski-muted; font-size: .88rem;
+            margin-bottom: 2.2rem; }
+        h2 { font-family: $oski-display; font-weight: 600; font-size: 1.05rem;
+            color: $oski-plum; margin: 2rem 0 .5rem; }
+        p { line-height: 1.7; color: $oski-ink; margin-bottom: .9rem; }
+        a { color: $oski-plum; text-decoration: underline; }
+        .oski-legal-contact { margin-top: 2.5rem; padding-top: 1.2rem;
+            border-top: 1px solid $oski-line; color: $oski-muted; }
     }
 
     // ---- Icône / monogramme ----
@@ -208,6 +254,9 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
             &:hover { border-color: $oski-plum; color: $oski-plum; } }
         &.off { background: transparent; color: #c3c8d2; pointer-events: none; }
         &.sel { background: $oski-plum; color: #fff; border-color: $oski-plum; }
+        // Version à venir : visible dans la frise, mais rien à télécharger.
+        &.soon { border: 1px dashed rgba($oski-plum, .4); color: $oski-muted;
+            background: transparent; }
     }
     .oski-btn-download { background: $oski-green; color: #fff; font-weight: 600;
         border-radius: 10px; padding: .6rem;
