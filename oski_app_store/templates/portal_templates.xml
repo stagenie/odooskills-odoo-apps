@@ -6,7 +6,7 @@
               inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'apps'" class="breadcrumb-item active">
-                Mes applications
+                My applications
             </li>
         </xpath>
     </template>
@@ -20,8 +20,8 @@
         <div id="portal_client_category" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="icon" t-value="'/oski_app_store/static/description/icon.png'"/>
-                <t t-set="title">Mes applications</t>
-                <t t-set="text">Télécharger les modules achetés, toutes versions</t>
+                <t t-set="title">My applications</t>
+                <t t-set="text">Download purchased modules, all versions</t>
                 <t t-set="url" t-value="'/my/apps'"/>
                 <t t-set="placeholder_count" t-value="'app_count'"/>
             </t>
@@ -34,18 +34,17 @@
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
             <t t-call="portal.portal_searchbar">
-                <t t-set="title">Mes applications</t>
+                <t t-set="title">My applications</t>
             </t>
 
             <p t-if="not modules" class="alert alert-info mt-3" role="alert">
-                Aucune application achetée pour l'instant.
-                <a href="/apps">Parcourir le catalogue</a>.
+                No application purchased yet.
+                <a href="/apps">Browse the catalog</a>.
             </p>
 
             <div t-else="" class="o_portal_my_apps mt-3">
                 <p class="text-muted">
-                    Une commande confirmée donne droit à l'archive du module pour
-                    chaque version d'Odoo proposée. Les liens restent valables.
+                    A confirmed order grants the module archive for every Odoo version offered. The links remain valid.
                 </p>
                 <div class="row g-3">
                     <div t-foreach="modules" t-as="module" class="col-12 col-lg-6">

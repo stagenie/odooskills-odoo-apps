@@ -131,6 +131,10 @@ class OskiAppStore(http.Controller):
                 "label": pv,
                 "selected": pv == version,
                 "soon": pv in upcoming_versions,
+                # QWeb n'expose pas `_` dans son contexte de rendu : le titre
+                # traduit (annonce "pas encore sortie") se construit ici, pas
+                # dans une expression t-att-title du gabarit.
+                "title": _("Odoo %s — not released yet") % pv if pv in upcoming_versions else pv,
                 "note": _("soon") if pv in upcoming_versions else "",
                 "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
             }
@@ -218,6 +222,16 @@ class OskiAppStore(http.Controller):
         product = module.sudo().product_tmpl_id
         variant = product.product_variant_id
         is_sellable = bool(variant) and product.is_published and product.sale_ok
+        # Même raison que _version_option côté catalogue : le titre traduit
+        # ("pas encore sortie") ne peut pas se construire dans le gabarit,
+        # QWeb n'y expose pas `_`.
+        pill_versions = [
+            {
+                "version": pv,
+                "title": _("Odoo %s — not released yet") % pv if pv in upcoming_versions else pv,
+            }
+            for pv in supported_versions
+        ]
         return request.render(
             "oski_app_store.module_page",
             {
@@ -226,7 +240,7 @@ class OskiAppStore(http.Controller):
                 "is_purchased": module.is_purchased_by(partner),
                 "is_sellable": is_sellable,
                 "buy_url": "/apps/buy/%s" % module.id if variant else "",
-                "pill_versions": supported_versions,
+                "pill_versions": pill_versions,
                 "upcoming_versions": upcoming_versions,
                 # main_object : le titre de l'onglet, l'aperçu de partage et le
                 # panneau de référencement de l'éditeur s'y accrochent.

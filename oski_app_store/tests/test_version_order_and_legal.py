@@ -38,7 +38,7 @@ class TestVersionOrder(HttpCase):
         html = self.url_open("/apps").text
         self.assertIn("is-soon", html)
         self.assertIn("oski-opt-note", html)
-        self.assertIn("est à la porte", html)
+        self.assertIn("is at the door", html)
 
     def test_card_dots_skip_upcoming(self):
         """Aucune pastille 20 sur les cartes : rien à télécharger en 20.0."""
@@ -58,7 +58,7 @@ class TestVersionOrder(HttpCase):
         resp = self.url_open("/apps?v=20.0")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("oski-notice", resp.text)
-        self.assertIn("n'est pas encore sortie", resp.text)
+        self.assertIn("is not released yet", resp.text)
         self.assertIn("oski_notice20", resp.text, "Behavior B : rien n'est masqué")
 
     def test_module_page_pill_20_soon(self):
@@ -76,8 +76,8 @@ class TestVersionOrder(HttpCase):
         self.authenticate(None, None)
         module, versions = _make_module(self.env, "oski_fb20", ["19.0"])
         html = self.url_open("%s?v=20.0" % module.website_url).text
-        self.assertIn("Télécharger (19.0)", html)
-        self.assertIn("Indisponible en 20.0", html)
+        self.assertIn("Download (19.0)", html)
+        self.assertIn("Not available in 20.0", html)
 
 
 @tagged("post_install", "-at_install")

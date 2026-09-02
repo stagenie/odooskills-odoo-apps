@@ -149,7 +149,7 @@ class TestPurchaseEntitlement(HttpCase):
         module, _ = self._make_paid_module("oski_cta_buy", price=49.0)
         self.authenticate(None, None)
         body = self.url_open(module.website_url).text
-        self.assertIn("Acheter", body)
+        self.assertIn("Buy", body)
         self.assertIn("49", body)
 
     def test_page_swaps_to_download_once_bought(self):
@@ -158,7 +158,7 @@ class TestPurchaseEntitlement(HttpCase):
         self._confirm_order(module, self.buyer.partner_id)
         self.authenticate("oski_buyer", "oski_buyer_pwd")
         body = self.url_open(module.website_url).text
-        self.assertIn("Télécharger", body)
+        self.assertIn("Download", body)
         self.assertNotIn("oski-btn-buy", body)
 
     def test_paid_module_without_product_shows_no_dead_button(self):
@@ -167,7 +167,7 @@ class TestPurchaseEntitlement(HttpCase):
         module.product_tmpl_id = False
         self.authenticate(None, None)
         body = self.url_open(module.website_url).text
-        self.assertIn("Bientôt en vente", body)
+        self.assertIn("Coming soon for sale", body)
         self.assertNotIn("/shop/cart/update?product_id=False", body)
 
     def test_paid_module_with_unpublished_product_is_not_sellable(self):
@@ -179,7 +179,7 @@ class TestPurchaseEntitlement(HttpCase):
         module, _ = self._make_paid_module("oski_cta_unpub", product_published=False)
         self.authenticate(None, None)
         body = self.url_open(module.website_url).text
-        self.assertIn("Bientôt en vente", body)
+        self.assertIn("Coming soon for sale", body)
         self.assertNotIn("oski-btn-buy", body)
 
     def test_paid_module_page_is_readable_by_public(self):

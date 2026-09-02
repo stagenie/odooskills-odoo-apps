@@ -4,7 +4,7 @@
         <t t-call="website.layout">
             <div class="oski-store">
             <div class="container py-5">
-                <a class="oski-back" t-att-href="back_url">&#8592; Retour au catalogue</a>
+                <a class="oski-back" t-att-href="back_url">&#8592; Back to catalog</a>
                 <t t-set="has_shots" t-value="bool(screenshots)"/>
                 <div class="row g-4 mb-4">
                     <!-- Carte fiche technique (haut gauche) -->
@@ -14,23 +14,23 @@
                                 <t t-call="oski_app_store.module_icon"/>
                                 <div>
                                     <h1 class="oski-module-title" t-out="module.name"/>
-                                    <span t-if="module.is_free" class="oski-badge oski-badge-free">Gratuit</span>
+                                    <span t-if="module.is_free" class="oski-badge oski-badge-free">Free</span>
                                     <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
                                 </div>
                             </div>
                             <p class="oski-module-summary" t-out="module.summary"/>
                             <table class="oski-techtable">
-                                <tr><th>Nom technique</th><td><code t-out="module.technical_name"/></td></tr>
-                                <tr><th>Licence</th><td t-out="dict(module._fields['license'].selection).get(module.license)"/></tr>
-                                <tr><th>Auteur</th><td t-out="module.author"/></tr>
+                                <tr><th>Technical name</th><td><code t-out="module.technical_name"/></td></tr>
+                                <tr><th>License</th><td t-out="dict(module._fields['license'].selection).get(module.license)"/></tr>
+                                <tr><th>Author</th><td t-out="module.author"/></tr>
                             </table>
-                            <div class="oski-version-select mb-3" aria-label="Version Odoo">
+                            <div class="oski-version-select mb-3" aria-label="Odoo version">
                                 <t t-set="avail" t-value="module.available_versions()"/>
                                 <t t-foreach="pill_versions" t-as="pv">
-                                    <a t-attf-href="#{module.website_url}?v=#{pv}"
-                                       t-att-title="'Odoo %s — pas encore sortie' % pv if pv in upcoming_versions else pv"
-                                       t-attf-class="oski-vpill #{'on' if pv in avail else 'off'} #{'sel' if pv == version else ''} #{'soon' if pv in upcoming_versions else ''}"
-                                       t-out="pv"/>
+                                    <a t-attf-href="#{module.website_url}?v=#{pv['version']}"
+                                       t-att-title="pv['title']"
+                                       t-attf-class="oski-vpill #{'on' if pv['version'] in avail else 'off'} #{'sel' if pv['version'] == version else ''} #{'soon' if pv['version'] in upcoming_versions else ''}"
+                                       t-out="pv['version']"/>
                                 </t>
                             </div>
                             <div class="oski-chips mb-3" t-if="module.tag_ids">
@@ -41,7 +41,7 @@
                             <!-- Dépendances catalogue : lien si la fiche cible est
                                  publiée, sinon nom simple (la page cible ferait 404). -->
                             <div class="oski-deps mb-3" t-if="module.dependency_ids">
-                                <span class="oski-deps-label">Nécessite&#160;:</span>
+                                <span class="oski-deps-label">Requires:</span>
                                 <t t-foreach="module.dependency_ids" t-as="dep">
                                     <a t-if="dep.website_published" t-att-href="dep.website_url"
                                        class="oski-chip" t-out="dep.name"/>
@@ -57,30 +57,30 @@
                                 <a t-if="module.is_free or is_purchased"
                                    t-attf-href="/apps/download/#{target.id}"
                                    class="btn oski-btn-download w-100">
-                                    &#x2B07; Télécharger (<t t-out="target.odoo_version"/>)
+                                    &#x2B07; Download (<t t-out="target.odoo_version"/>)
                                 </a>
                                 <t t-elif="is_sellable">
                                     <a t-att-href="buy_url"
                                        class="btn oski-btn-buy w-100">
-                                        Acheter —
+                                        Buy —
                                         <span t-field="module.price"
                                               t-options='{"widget": "monetary", "display_currency": module.currency_id}'/>
                                     </a>
                                 </t>
                                 <p t-else="" class="text-muted mb-0">
-                                    Bientôt en vente.
+                                    Coming soon for sale.
                                 </p>
                                 <p t-if="is_purchased and not module.is_free" class="oski-owned-note">
-                                    Vous possédez ce module —
-                                    <a href="/my/apps">toutes vos applications</a>.
+                                    You own this module —
+                                    <a href="/my/apps">all your applications</a>.
                                 </p>
                                 <p t-if="target.odoo_version != version" class="oski-fallback-note">
-                                    Indisponible en <t t-out="version"/> — dernière version proposée :
+                                    Not available in <t t-out="version"/> — latest version offered:
                                     <t t-out="target.odoo_version"/>.
                                 </p>
                             </t>
                             <t t-else="">
-                                <p class="text-muted">Aucune archive disponible.</p>
+                                <p class="text-muted">No archive available.</p>
                             </t>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                     <div class="modal-dialog modal-fullscreen">
                         <div class="modal-content">
                             <button type="button" class="btn-close" data-bs-dismiss="modal"/>
-                            <img src="" alt="Capture agrandie" class="oski-lightbox-img"/>
+                            <img src="" alt="Enlarged screenshot" class="oski-lightbox-img"/>
                         </div>
                     </div>
                 </div>
