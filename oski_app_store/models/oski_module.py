@@ -71,12 +71,12 @@ class OskiModule(models.Model):
 
     def _compute_website_url(self):
         # The slug comes from the technical name: the same URL in English and
-        # in French, a single canonical for search engines.
+        # in French, a single canonical for search engines. ir.http._slug is
+        # overridden in ir_http.py to slug oski.module by technical_name, so
+        # the frontend canonical redirect (_pre_dispatch) agrees with this URL.
         for record in self:
             if record.id:
-                record.website_url = "/apps/%s" % self.env["ir.http"]._slug(
-                    (record.id, record.technical_name)
-                )
+                record.website_url = "/apps/%s" % self.env["ir.http"]._slug(record)
             else:
                 record.website_url = "#"
 
