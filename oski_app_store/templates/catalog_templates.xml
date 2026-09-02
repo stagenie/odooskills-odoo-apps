@@ -68,8 +68,7 @@
             <link rel="stylesheet"
                   href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;display=swap"/>
             <div class="oski-store">
-                <!-- Hero pleine largeur : thèse + recherche + spectre de versions.
-                     Balise <header> conservée : oski_dev_request y injecte un CTA via xpath. -->
+                <!-- Hero pleine largeur : thèse + recherche + spectre de versions. Une seule action ici : chercher. -->
                 <header class="oski-hero">
                     <div class="oski-hero-glow" aria-hidden="true"/>
                     <div class="container oski-hero-inner">

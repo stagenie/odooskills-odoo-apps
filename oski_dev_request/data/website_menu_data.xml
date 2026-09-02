@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sans website_id et rattaché au menu générique, Odoo en crée une copie
+             par site à la création. -->
+        <record id="menu_request_module" model="website.menu">
+            <field name="name">Request a module</field>
+            <field name="url">/apps/demande-developpement</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence">90</field>
+        </record>
+    </data>
+</odoo>

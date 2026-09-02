@@ -142,19 +142,6 @@
         </t>
     </template>
 
-    <!-- CTA "Request a module" injected into the catalog hero /apps -->
-    <template id="catalog_dev_request_cta"
-              inherit_id="oski_app_store.catalog_page"
-              name="CTA Request a module (catalog)">
-        <xpath expr="//header[hasclass('oski-hero')]" position="inside">
-            <div class="mt-3">
-                <a href="/apps/demande-developpement" class="btn btn-sm oski-btn-primary">
-                    Need a custom module? Request one →
-                </a>
-            </div>
-        </xpath>
-    </template>
-
     <template id="thanks_page" name="Request sent">
         <t t-call="website.layout">
             <div class="oski-store">

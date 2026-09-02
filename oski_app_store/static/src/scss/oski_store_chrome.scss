@@ -34,6 +34,23 @@ $os-bg-soft:    #f8f4f7; // fond rosé doux
     }
     .nav-item.active > .nav-link,
     .nav-link.active { color: $os-plum; }
+
+    // CTA de navigation : outline plum, icône « + », même règle sur le tiroir mobile.
+    .nav-link[href="/apps/demande-developpement"] {
+        display: inline-flex; align-items: center; gap: .45rem;
+        margin-left: .5rem; padding: .45rem 1rem;
+        border: 1px solid $os-plum; border-radius: 10px; color: $os-plum;
+        &::before {
+            content: ""; width: 16px; height: 16px; background-color: currentColor;
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>") center / contain no-repeat;
+        }
+        &:hover, &:focus { background: $os-plum; color: #fff; }
+    }
+    @media (max-width: 991.98px) {
+        .navbar-nav .nav-link[href="/apps/demande-developpement"] {
+            margin: .75rem 0 0; justify-content: center;
+        }
+    }
 }
 
 // ---- Boutons primaires globaux ----

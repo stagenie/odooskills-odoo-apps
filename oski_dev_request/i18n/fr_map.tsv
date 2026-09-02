@@ -64,7 +64,6 @@ Module development request	Demande de développement de module
 My Activity Deadline	Échéance de mon activité
 Name	Nom / Personne
 Name <span class="text-danger">*</span>	Nom / Personne <span class="text-danger">*</span>
-Need a custom module? Request one →	Besoin d'un module sur-mesure ? Demander un module →
 New	Nouveau
 New dev request {{ object.name }} — {{ object.subject }}	Nouvelle demande de dev {{ object.name }} — {{ object.subject }}
 Next Activity Calendar Event	Prochain événement d'activité au calendrier
@@ -91,6 +90,7 @@ Reject	Refuser
 Rejected	Refusé
 Request	Demande
 Request a custom module	Demander un module sur-mesure
+Request a module	Demander un module
 Requester	Demandeur
 Responsible User	Utilisateur responsable
 SMS Delivery error	Erreur d'envoi SMS

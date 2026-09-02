@@ -20,6 +20,7 @@ Accusé de réception automatique. Lien vers le module livré à la clôture.
         "security/oski_dev_request_rules.xml",
         "data/ir_sequence_data.xml",
         "data/mail_template_data.xml",
+        "data/website_menu_data.xml",
         "views/oski_dev_request_views.xml",
         "templates/dev_request_templates.xml",
     ],
