@@ -70,9 +70,13 @@ class OskiModule(models.Model):
     )
 
     def _compute_website_url(self):
+        # The slug comes from the technical name: the same URL in English and
+        # in French, a single canonical for search engines.
         for record in self:
             if record.id:
-                record.website_url = "/apps/%s" % self.env["ir.http"]._slug(record)
+                record.website_url = "/apps/%s" % self.env["ir.http"]._slug(
+                    (record.id, record.technical_name)
+                )
             else:
                 record.website_url = "#"
 

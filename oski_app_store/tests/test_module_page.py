@@ -2,6 +2,8 @@ import base64
 
 from odoo.tests import HttpCase, tagged
 
+from .common_i18n import activate_french
+
 
 @tagged("post_install", "-at_install")
 class TestModulePage(HttpCase):
@@ -109,6 +111,20 @@ class TestModulePage(HttpCase):
         )
         self.assertEqual(resp.status_code, 200)
         self.assertIn('class="oski-back" href="/apps"', resp.text)
+
+    def test_website_url_is_language_independent(self):
+        """La même URL de fiche en anglais et en français : le slug vient du
+        nom technique, jamais du nom traduit."""
+        activate_french(self.env)
+        module = self.env["oski.module"].create({
+            "name": "Alerte de stock bas", "technical_name": "oski_stock_low_alert",
+            "is_free": True, "is_published": True,
+        })
+        self.assertEqual(module.website_url, "/apps/oski-stock-low-alert-%d" % module.id)
+        module.with_context(lang="fr_FR").write({"name": "Alerte"})
+        self.assertEqual(module.with_context(lang="fr_FR").website_url,
+                         "/apps/oski-stock-low-alert-%d" % module.id)
+        self.assertEqual(self.url_open(module.website_url).status_code, 200)
 
     def test_gallery_sorted_by_name(self):
         """Les captures doivent apparaître triées par nom de fichier (01 avant 02)."""
