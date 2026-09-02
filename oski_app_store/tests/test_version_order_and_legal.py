@@ -92,7 +92,7 @@ class TestLegalPages(HttpCase):
         self.authenticate(None, None)
         resp = self.url_open("/apps/conditions-utilisation")
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("Conditions d'utilisation", resp.text)
+        self.assertIn("Terms of use", resp.text)
         self.assertIn("apps@odooskills.com", resp.text)
 
     def test_terms_page_published(self):
@@ -111,14 +111,14 @@ class TestLegalPages(HttpCase):
         self.authenticate(None, None)
         resp = self.url_open("/apps/confidentialite")
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("Politique de confidentialité", resp.text)
+        self.assertIn("Privacy policy", resp.text)
         self.assertIn("apps@odooskills.com", resp.text)
 
     def test_faq_public(self):
         self.authenticate(None, None)
         resp = self.url_open("/apps/faq")
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("Questions fréquentes", resp.text)
+        self.assertIn("Frequently asked questions", resp.text)
         self.assertIn("/my/apps", resp.text)
         self.assertIn("/apps/demande-developpement", resp.text)
 
@@ -198,13 +198,14 @@ class TestSeoAndErrorPages(HttpCase):
         resp = self.url_open("/apps/support")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("apps@odooskills.com", resp.text)
-        self.assertIn("Ce qui n'est pas couvert", resp.text)
+        self.assertIn("What's not covered", resp.text)
 
     def test_support_page_promises_no_delay(self):
         """Le délai n'est pas tranché : la page ne doit rien promettre."""
         self.authenticate(None, None)
         html = self.url_open("/apps/support").text
-        for promesse in ("48 h", "24 h", "48h", "24h", "heures ouvrées"):
+        for promesse in ("48 h", "24 h", "48h", "24h", "heures ouvrées",
+                          "48 hours", "24 hours", "business hours"):
             self.assertNotIn(promesse, html)
 
     def test_404_search_field_is_visible(self):
@@ -216,10 +217,10 @@ class TestSeoAndErrorPages(HttpCase):
         self.assertIn("background: #fff", block)
         self.assertIn("border: 1px solid $oski-line", block)
 
-    def test_404_is_branded_and_french(self):
+    def test_404_is_branded_and_english(self):
         self.authenticate(None, None)
         resp = self.url_open("/apps/cette-page-nexiste-pas")
         self.assertEqual(resp.status_code, 404)
-        self.assertIn("Cette page n'existe pas.", resp.text)
+        self.assertIn("This page does not exist.", resp.text)
         self.assertIn("/apps", resp.text)
         self.assertNotIn("We couldn't find the page", resp.text)

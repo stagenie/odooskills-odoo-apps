@@ -44,13 +44,13 @@ class TestDevRequestController(HttpCase):
         r = self.url_open(FORM_URL)
         self.assertEqual(r.status_code, 200)
         self.assertNotIn("/web/login", r.url)
-        self.assertIn("Demander un module", r.text)
+        self.assertIn("Request a custom module", r.text)
 
     def test_form_renders_when_logged(self):
         self.authenticate("portal_devreq", "portal_devreq")
         r = self.url_open(FORM_URL)
         self.assertEqual(r.status_code, 200)
-        self.assertIn("Demander un module", r.text)
+        self.assertIn("Request a custom module", r.text)
 
     def test_submit_creates_request(self):
         self.authenticate("portal_devreq", "portal_devreq")
@@ -67,7 +67,7 @@ class TestDevRequestController(HttpCase):
         }
         r = self.url_open(SUBMIT_URL, data=data)
         self.assertEqual(r.status_code, 200)
-        self.assertIn("Merci", r.text)
+        self.assertIn("Thank you", r.text)
         rec = self.env["oski.dev.request"].search(
             [("subject", "=", "Besoin module facturation")], limit=1)
         self.assertTrue(rec, "La demande doit être créée")
@@ -85,7 +85,7 @@ class TestDevRequestController(HttpCase):
             "budget_range": "to_discuss",
         }
         r = self.url_open(SUBMIT_URL, data=data)
-        self.assertIn("champs obligatoires", r.text)
+        self.assertIn("required fields", r.text)
         self.assertFalse(self.env["oski.dev.request"].search(
             [("requester_name", "=", "Sans Objet")]))
 
@@ -102,7 +102,7 @@ class TestDevRequestController(HttpCase):
         }
         files = {"attachments": ("malware.exe", b"MZ binary", "application/octet-stream")}
         r = self.url_open(SUBMIT_URL, data=data, files=files)
-        self.assertIn("non autorisé", r.text)
+        self.assertIn("not allowed", r.text)
         self.assertFalse(self.env["oski.dev.request"].search(
             [("subject", "=", "Avec exe")]))
 
@@ -119,7 +119,7 @@ class TestDevRequestController(HttpCase):
         }
         files = {"attachments": ("cahier.pdf", b"%PDF-1.4 test", "application/pdf")}
         r = self.url_open(SUBMIT_URL, data=data, files=files)
-        self.assertIn("Merci", r.text)
+        self.assertIn("Thank you", r.text)
         rec = self.env["oski.dev.request"].search(
             [("subject", "=", "Avec pdf valide")], limit=1)
         self.assertTrue(rec)

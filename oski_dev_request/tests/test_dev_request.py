@@ -18,7 +18,7 @@ class TestDevRequest(TransactionCase):
     def test_sequence_assigned(self):
         r = self._make()
         self.assertTrue(r.name.startswith("DR"), "Référence doit avoir le préfixe DR")
-        self.assertNotEqual(r.name, "Nouveau")
+        self.assertNotEqual(r.name, "New")
 
     def test_sequence_increment(self):
         r1 = self._make()

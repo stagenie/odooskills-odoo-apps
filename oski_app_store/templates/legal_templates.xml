@@ -1,84 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Conditions d'utilisation du site. Volontairement courtes : elles
-         couvrent l'usage du site, pas la vente (CGV séparées). L'URL est
-         préfixée /apps/ pour rester hors de portée des contrôleurs du
-         standard (/terms est servi par le module account). -->
-    <template id="terms_of_use" name="Conditions d'utilisation">
+    <!-- Terms of use for the site. Deliberately short: they cover use of the
+         site, not the sale (separate terms of sale). The URL is prefixed
+         /apps/ to stay out of reach of the standard controllers
+         (/terms is served by the account module). -->
+    <template id="terms_of_use" name="Terms of use">
         <t t-call="website.layout">
-            <t t-set="additional_title">Conditions d'utilisation</t>
-            <t t-set="website_meta_description">Conditions d'utilisation du store de modules Odoo OdooSkills : compte, licences, usage acceptable, disponibilité.</t>
+            <t t-set="additional_title">Terms of use</t>
+            <t t-set="website_meta_description">Terms of use of the OdooSkills Odoo module store: account, licenses, acceptable use, availability.</t>
             <div class="oski-store">
                 <div class="container oski-legal py-5">
-                    <h1 class="oski-legal-title">Conditions d'utilisation</h1>
-                    <p class="oski-legal-date">Dernière mise à jour : 31 août 2026.</p>
+                    <h1 class="oski-legal-title">Terms of use</h1>
+                    <p class="oski-legal-date">Last updated: August 31, 2026.</p>
 
-                    <h2>1. Éditeur du site</h2>
-                    <p>Le site <strong>apps.odooskills.com</strong> est édité par
-                        <strong>Odoo &amp; AI Skills LLC</strong>, société de droit de l'État
-                        du Nouveau-Mexique (États-Unis). Toute question relative au site ou
-                        aux modules se pose à
-                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>, seule
-                        adresse de contact du store.</p>
+                    <h2>1. Site publisher</h2>
+                    <p>The site <strong>apps.odooskills.com</strong> is published by
+                        <strong>Odoo &amp; AI Skills LLC</strong>, a company organized under the
+                        laws of the State of New Mexico (United States). Any question about the
+                        site or the modules goes to
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>, the sole
+                        contact address of the store.</p>
 
-                    <h2>2. Objet du site</h2>
-                    <p>Le site présente un catalogue de modules pour le logiciel Odoo. Certains
-                        modules sont téléchargeables gratuitement, d'autres après achat. Odoo
-                        est une marque d'Odoo S.A. ; ce site n'est pas édité par Odoo S.A. et
-                        n'engage pas cette société.</p>
+                    <h2>2. Purpose of the site</h2>
+                    <p>The site presents a catalog of modules for the Odoo software. Some
+                        modules are available for free download, others after purchase. Odoo
+                        is a trademark of Odoo S.A.; this site is not published by Odoo S.A. and
+                        does not bind that company.</p>
 
-                    <h2>3. Compte</h2>
-                    <p>La création d'un compte est nécessaire pour acheter un module et
-                        retrouver ses téléchargements. Les informations fournies doivent être
-                        exactes et tenues à jour. Les identifiants sont personnels : leur usage
-                        relève de la responsabilité du titulaire du compte, qui signale sans
-                        délai tout usage non autorisé.</p>
+                    <h2>3. Account</h2>
+                    <p>Creating an account is required to purchase a module and to find your
+                        downloads again. The information provided must be accurate and kept up
+                        to date. Credentials are personal: their use is the responsibility of
+                        the account holder, who must report any unauthorized use without
+                        delay.</p>
 
-                    <h2>4. Modules et licences</h2>
-                    <p>Chaque module est distribué sous la licence indiquée sur sa fiche et
-                        reproduite dans son archive. Cette licence détermine ce qui est permis :
-                        installation, modification, redistribution. Les conditions financières
-                        d'un achat (prix, facturation, remboursement) relèvent des conditions
-                        générales de vente présentées au moment du paiement.</p>
+                    <h2>4. Modules and licenses</h2>
+                    <p>Each module is distributed under the license shown on its listing and
+                        reproduced in its archive. This license determines what is allowed:
+                        installation, modification, redistribution. The financial terms of a
+                        purchase (price, invoicing, refund) are covered by the terms of sale
+                        presented at the time of payment.</p>
 
-                    <h2>5. Propriété intellectuelle du site</h2>
-                    <p>Les textes, visuels, captures et éléments graphiques du site sont
-                        protégés. Leur reproduction hors citation courte avec lien vers la
-                        source demande un accord écrit préalable.</p>
+                    <h2>5. Intellectual property of the site</h2>
+                    <p>The text, visuals, screenshots and graphic elements of the site are
+                        protected. Their reproduction beyond a short quotation with a link to
+                        the source requires prior written consent.</p>
 
-                    <h2>6. Usage acceptable</h2>
-                    <p>Sont interdits : l'extraction automatisée massive du catalogue, toute
-                        tentative d'accès non autorisé, la mise en défaut volontaire du service,
-                        le contournement des contrôles d'accès aux archives payantes et la
-                        redistribution d'un module payant hors du cadre de sa licence.</p>
+                    <h2>6. Acceptable use</h2>
+                    <p>The following are forbidden: massive automated extraction of the
+                        catalog, any attempt at unauthorized access, deliberately putting the
+                        service at fault, circumventing the access controls on paid archives,
+                        and redistributing a paid module outside the scope of its license.</p>
 
-                    <h2>7. Disponibilité</h2>
-                    <p>Le site est fourni en l'état. Des interruptions peuvent survenir pour
-                        maintenance ou pour une cause extérieure. Aucune disponibilité
-                        ininterrompue n'est garantie.</p>
+                    <h2>7. Availability</h2>
+                    <p>The site is provided as is. Interruptions may occur for maintenance or
+                        for an external cause. No uninterrupted availability is guaranteed.</p>
 
-                    <h2>8. Liens externes</h2>
-                    <p>Le site peut renvoyer vers des sites tiers, dont le contenu échappe à
-                        l'éditeur. Leur consultation relève des conditions propres à ces sites.</p>
+                    <h2>8. External links</h2>
+                    <p>The site may link to third-party sites, whose content is beyond the
+                        publisher's control. Visiting them is governed by the terms specific to
+                        those sites.</p>
 
-                    <h2>9. Données personnelles</h2>
-                    <p>Les données collectées (compte, commande, message) servent à répondre aux
-                        demandes, livrer les modules et facturer. Toute demande d'accès, de
-                        rectification ou de suppression se fait à
+                    <h2>9. Personal data</h2>
+                    <p>The data collected (account, order, message) is used to respond to
+                        requests, deliver the modules and invoice. Any request for access,
+                        rectification or deletion is made to
                         <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
 
-                    <h2>10. Modification des conditions</h2>
-                    <p>Ces conditions peuvent évoluer. La version en ligne au moment de la
-                        visite est celle qui s'applique ; la date de mise à jour figure en tête
-                        de page.</p>
+                    <h2>10. Amendment of these terms</h2>
+                    <p>These terms may change. The version online at the time of the visit is
+                        the one that applies; the update date appears at the top of the page.</p>
 
-                    <h2>11. Droit applicable</h2>
-                    <p>Ces conditions sont régies par le droit de l'État du Nouveau-Mexique
-                        (États-Unis). Les dispositions impératives protégeant le consommateur
-                        dans son pays de résidence restent applicables.</p>
+                    <h2>11. Governing law</h2>
+                    <p>These terms are governed by the law of the State of New Mexico
+                        (United States). The mandatory provisions protecting the consumer in
+                        their country of residence remain applicable.</p>
 
                     <p class="oski-legal-contact">
-                        Une question sur ce texte ?
+                        A question about this text?
                         <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
                     </p>
                 </div>
@@ -87,7 +86,7 @@
     </template>
 
     <record id="terms_of_use_page" model="website.page">
-        <field name="name">Conditions d'utilisation</field>
+        <field name="name">Terms of use</field>
         <field name="url">/apps/conditions-utilisation</field>
         <field name="view_id" ref="terms_of_use"/>
         <field name="is_published" eval="True"/>
@@ -95,47 +94,48 @@
     </record>
 
 
-    <!-- Mentions légales : éditeur, hébergeur, marques. -->
-    <template id="legal_notice" name="Mentions légales">
+    <!-- Legal notice: publisher, host, trademarks. -->
+    <template id="legal_notice" name="Legal notice">
         <t t-call="website.layout">
-            <t t-set="additional_title">Mentions légales</t>
-            <t t-set="website_meta_description">Éditeur, directeur de la publication et hébergeur du store de modules Odoo OdooSkills.</t>
+            <t t-set="additional_title">Legal notice</t>
+            <t t-set="website_meta_description">Publisher, editor-in-chief and host of the OdooSkills Odoo module store.</t>
             <div class="oski-store">
                 <div class="container oski-legal py-5">
-                    <h1 class="oski-legal-title">Mentions légales</h1>
-                    <p class="oski-legal-date">Dernière mise à jour : 31 août 2026.</p>
+                    <h1 class="oski-legal-title">Legal notice</h1>
+                    <p class="oski-legal-date">Last updated: August 31, 2026.</p>
 
-                    <h2>Éditeur du site</h2>
+                    <h2>Site publisher</h2>
                     <p><strong>Odoo &amp; AI Skills LLC</strong><br/>
                         8206 Louisiana Blvd NE, Ste A #9881<br/>
-                        Albuquerque, NM 87113, États-Unis<br/>
-                        Courriel : <a href="mailto:apps@odooskills.com">apps@odooskills.com</a></p>
+                        Albuquerque, NM 87113, United States<br/>
+                        Email: <a href="mailto:apps@odooskills.com">apps@odooskills.com</a></p>
 
-                    <h2>Directeur de la publication</h2>
-                    <p>Mustapha BENHAMIDA, gérant.</p>
+                    <h2>Editor-in-chief</h2>
+                    <p>Mustapha BENHAMIDA, manager.</p>
 
-                    <h2>Hébergement</h2>
-                    <p>Le site est hébergé sur un serveur du <strong>Groupe LWS SARL</strong> (France) —
+                    <h2>Hosting</h2>
+                    <p>The site is hosted on a server of <strong>Groupe LWS SARL</strong> (France) —
                         <a href="https://www.lws.fr" rel="noopener" target="_blank">lws.fr</a>.</p>
 
-                    <h2>Marques et droits</h2>
-                    <p><em>Odoo</em> est une marque déposée d'Odoo S.A. Ce site n'est ni édité ni
-                        approuvé par Odoo S.A. Les modules proposés sont des travaux indépendants
-                        conçus pour fonctionner avec le logiciel Odoo. Les autres marques citées
-                        appartiennent à leurs titulaires respectifs.</p>
+                    <h2>Trademarks and rights</h2>
+                    <p><em>Odoo</em> is a registered trademark of Odoo S.A. This site is neither
+                        published nor endorsed by Odoo S.A. The modules offered are independent
+                        works designed to work with the Odoo software. Other trademarks
+                        mentioned belong to their respective owners.</p>
 
-                    <h2>Contenus du site</h2>
-                    <p>Textes, visuels et captures sont la propriété de l'éditeur, sauf mention
-                        contraire. Chaque module reste régi par la licence indiquée sur sa fiche.</p>
+                    <h2>Site content</h2>
+                    <p>Text, visuals and screenshots are the property of the publisher, unless
+                        stated otherwise. Each module remains governed by the license shown on
+                        its listing.</p>
 
-                    <h2>Signalement</h2>
-                    <p>Toute demande relative à un contenu de ce site — erreur, droit d'auteur,
-                        donnée personnelle — se traite à
+                    <h2>Reporting</h2>
+                    <p>Any request about content on this site — error, copyright, personal
+                        data — is handled at
                         <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
 
                     <p class="oski-legal-contact">
-                        Voir aussi <a href="/apps/conditions-utilisation">les conditions d'utilisation</a>
-                        et <a href="/apps/confidentialite">la politique de confidentialité</a>.
+                        See also <a href="/apps/conditions-utilisation">the terms of use</a>
+                        and <a href="/apps/confidentialite">the privacy policy</a>.
                     </p>
                 </div>
             </div>
@@ -143,95 +143,97 @@
     </template>
 
     <record id="legal_notice_page" model="website.page">
-        <field name="name">Mentions légales</field>
+        <field name="name">Legal notice</field>
         <field name="url">/apps/mentions-legales</field>
         <field name="view_id" ref="legal_notice"/>
         <field name="is_published" eval="True"/>
         <field name="website_indexed" eval="True"/>
     </record>
 
-    <!-- Politique de confidentialité : ce qui est collecté, pourquoi, combien
-         de temps, et par quelles mains cela passe. -->
-    <template id="privacy_policy" name="Politique de confidentialité">
+    <!-- Privacy policy: what is collected, why, for how long, and whose
+         hands it passes through. -->
+    <template id="privacy_policy" name="Privacy policy">
         <t t-call="website.layout">
-            <t t-set="additional_title">Politique de confidentialité</t>
-            <t t-set="website_meta_description">Ce que le store OdooSkills collecte, pourquoi, combien de temps, qui y accède, et comment exercer vos droits.</t>
+            <t t-set="additional_title">Privacy policy</t>
+            <t t-set="website_meta_description">What the OdooSkills store collects, why, for how long, who accesses it, and how to exercise your rights.</t>
             <div class="oski-store">
                 <div class="container oski-legal py-5">
-                    <h1 class="oski-legal-title">Politique de confidentialité</h1>
-                    <p class="oski-legal-date">Dernière mise à jour : 31 août 2026.</p>
+                    <h1 class="oski-legal-title">Privacy policy</h1>
+                    <p class="oski-legal-date">Last updated: August 31, 2026.</p>
 
-                    <p>Ce site collecte le minimum nécessaire pour livrer un module, émettre une
-                        facture et répondre à un message. Rien n'est vendu ni cédé à des tiers à
-                        des fins publicitaires.</p>
+                    <p>This site collects the minimum necessary to deliver a module, issue an
+                        invoice and answer a message. Nothing is sold or transferred to third
+                        parties for advertising purposes.</p>
 
-                    <h2>1. Responsable du traitement</h2>
+                    <h2>1. Data controller</h2>
                     <p>Odoo &amp; AI Skills LLC, 8206 Louisiana Blvd NE, Ste A #9881,
-                        Albuquerque, NM 87113, États-Unis —
+                        Albuquerque, NM 87113, United States —
                         <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
 
-                    <h2>2. Ce qui est collecté</h2>
+                    <h2>2. What is collected</h2>
                     <table class="oski-legal-table">
-                        <tr><th>Compte</th><td>nom, adresse électronique, mot de passe chiffré,
-                            adresse de facturation.</td></tr>
-                        <tr><th>Commande</th><td>modules achetés, montant, date, facture. Les
-                            <strong>données de carte ne transitent jamais par ce site</strong> :
-                            elles sont saisies chez le prestataire de paiement.</td></tr>
-                        <tr><th>Demande de module</th><td>coordonnées, description du besoin,
-                            budget, pièces jointes que vous joignez vous-même.</td></tr>
-                        <tr><th>Messages</th><td>contenu des courriels reçus à
-                            <code>apps@odooskills.com</code> et des formulaires du site.</td></tr>
-                        <tr><th>Technique</th><td>journaux du serveur (adresse IP, page demandée,
-                            date), cookies de session et de panier.</td></tr>
+                        <tr><th>Account</th><td>name, email address, encrypted password,
+                            billing address.</td></tr>
+                        <tr><th>Order</th><td>modules purchased, amount, date, invoice.
+                            <strong>Card data never passes through this site</strong>: it is
+                            entered on the payment provider's end.</td></tr>
+                        <tr><th>Module request</th><td>contact details, description of the
+                            need, budget, attachments you add yourself.</td></tr>
+                        <tr><th>Messages</th><td>content of the emails received at
+                            <code>apps@odooskills.com</code> and of the site's forms.</td></tr>
+                        <tr><th>Technical</th><td>server logs (IP address, page requested,
+                            date), session and cart cookies.</td></tr>
                     </table>
 
-                    <h2>3. Pourquoi</h2>
+                    <h2>3. Why</h2>
                     <ul>
-                        <li><strong>Exécuter la commande</strong> : livrer l'archive, ouvrir
-                            l'espace client, émettre la facture.</li>
-                        <li><strong>Répondre</strong> à une demande de module ou à un message.</li>
-                        <li><strong>Tenir la comptabilité</strong>, obligation légale.</li>
-                        <li><strong>Protéger le site</strong> : anti-spam des formulaires,
-                            journaux de sécurité — intérêt légitime.</li>
-                        <li><strong>Informer</strong> des nouveautés, uniquement si vous vous êtes
-                            inscrit : chaque envoi porte son lien de désinscription.</li>
+                        <li><strong>Fulfill the order</strong>: deliver the archive, open the
+                            customer area, issue the invoice.</li>
+                        <li><strong>Respond</strong> to a module request or a message.</li>
+                        <li><strong>Keep the accounts</strong>, a legal obligation.</li>
+                        <li><strong>Protect the site</strong>: form anti-spam, security
+                            logs — legitimate interest.</li>
+                        <li><strong>Inform</strong> about news, only if you have signed up:
+                            every mailing carries its unsubscribe link.</li>
                     </ul>
 
-                    <h2>4. Qui d'autre y a accès</h2>
-                    <p>Uniquement des prestataires techniques, chacun pour sa part :
-                        <strong>Stripe</strong> et <strong>PayPal</strong> pour l'encaissement,
-                        <strong>Mailjet</strong> pour l'acheminement des courriels,
-                        <strong>Groupe LWS</strong> pour l'hébergement du serveur (France).
-                        Aucune revente, aucun courtier en données.</p>
+                    <h2>4. Who else has access</h2>
+                    <p>Only technical providers, each for their part:
+                        <strong>Stripe</strong> and <strong>PayPal</strong> for payment
+                        collection, <strong>Mailjet</strong> for email delivery,
+                        <strong>Groupe LWS</strong> for hosting the server (France).
+                        No resale, no data broker.</p>
 
-                    <h2>5. Combien de temps</h2>
+                    <h2>5. For how long</h2>
                     <ul>
-                        <li>Compte et achats : tant que le compte existe — il donne accès aux
-                            téléchargements déjà payés.</li>
-                        <li>Factures : la durée de conservation comptable applicable.</li>
-                        <li>Demandes de module et messages : trois ans après le dernier échange.</li>
-                        <li>Journaux techniques : douze mois.</li>
+                        <li>Account and purchases: as long as the account exists — it gives
+                            access to the downloads already paid for.</li>
+                        <li>Invoices: the applicable accounting retention period.</li>
+                        <li>Module requests and messages: three years after the last
+                            exchange.</li>
+                        <li>Technical logs: twelve months.</li>
                     </ul>
 
-                    <h2>6. Où sont les données</h2>
-                    <p>Le serveur est situé en France. L'éditeur est une société américaine : ses
-                        responsables y accèdent depuis l'étranger, et les prestataires cités
-                        peuvent traiter certaines données hors de l'Union européenne.</p>
+                    <h2>6. Where the data is</h2>
+                    <p>The server is located in France. The publisher is a US company: its
+                        officers access it from abroad, and the providers mentioned may
+                        process some data outside the European Union.</p>
 
-                    <h2>7. Vos droits</h2>
-                    <p>Accès, rectification, effacement, limitation, opposition et portabilité
-                        s'exercent d'un courriel à
-                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>. Réponse sous
-                        un mois. Un résident de l'Union européenne peut saisir l'autorité de
-                        contrôle de son pays s'il estime la réponse insuffisante.</p>
+                    <h2>7. Your rights</h2>
+                    <p>Access, rectification, erasure, restriction, objection and portability
+                        are exercised by emailing
+                        <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>. Response
+                        within one month. A resident of the European Union may refer the matter
+                        to the supervisory authority of their country if they believe the
+                        response is insufficient.</p>
 
                     <h2>8. Cookies</h2>
-                    <p>Les cookies nécessaires (session, panier, préférence de langue) permettent
-                        au site de fonctionner. Les cookies non essentiels ne sont déposés qu'après
-                        acceptation dans le bandeau, révocable à tout moment.</p>
+                    <p>Necessary cookies (session, cart, language preference) allow the site to
+                        work. Non-essential cookies are only set after acceptance in the
+                        banner, revocable at any time.</p>
 
                     <p class="oski-legal-contact">
-                        Une question sur ce texte ?
+                        A question about this text?
                         <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
                     </p>
                 </div>
@@ -240,26 +242,26 @@
     </template>
 
     <record id="privacy_policy_page" model="website.page">
-        <field name="name">Politique de confidentialité</field>
+        <field name="name">Privacy policy</field>
         <field name="url">/apps/confidentialite</field>
         <field name="view_id" ref="privacy_policy"/>
         <field name="is_published" eval="True"/>
         <field name="website_indexed" eval="True"/>
     </record>
 
-    <!-- Lien permanent en pied de page : la mention légale doit être joignable
-         depuis n'importe quelle page, y compris le tunnel d'achat. -->
+    <!-- Permanent link in the footer: the legal notice must be reachable
+         from any page, including the purchase tunnel. -->
     <template id="footer_legal_links" inherit_id="website.layout"
-              name="Store — liens légaux du pied de page">
+              name="Store — footer legal links">
         <xpath expr="//div[hasclass('o_footer_copyright')]" position="inside">
             <div class="container oski-footer-legal">
-                <a href="/apps/conditions-utilisation">Conditions d'utilisation</a>
+                <a href="/apps/conditions-utilisation">Terms of use</a>
                 <span class="sep" aria-hidden="true">·</span>
-                <a href="/apps/mentions-legales">Mentions légales</a>
+                <a href="/apps/mentions-legales">Legal notice</a>
                 <span class="sep" aria-hidden="true">·</span>
-                <a href="/apps/confidentialite">Confidentialité</a>
+                <a href="/apps/confidentialite">Privacy policy</a>
                 <span class="sep" aria-hidden="true">·</span>
-                <a href="/apps/faq">Questions fréquentes</a>
+                <a href="/apps/faq">Frequently asked questions</a>
                 <span class="sep" aria-hidden="true">·</span>
                 <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
             </div>

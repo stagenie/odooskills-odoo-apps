@@ -1,0 +1,713 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-02 11:40+0000\n"
+"PO-Revision-Date: 2026-09-02 11:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_dev_request
+#: model:mail.template,body_html:oski_dev_request.mail_template_dev_request_notify
+msgid ""
+"<div style=\"font-family:Arial,sans-serif;\">\n"
+"                <p>New request <strong t-out=\"object.name or ''\"/>.</p>\n"
+"                <ul>\n"
+"                    <li>Requester: <t t-out=\"object.requester_name or ''\"/>\n"
+"                        (<t t-out=\"object.company_name or '—'\"/>)</li>\n"
+"                    <li>Email: <t t-out=\"object.email or ''\"/></li>\n"
+"                    <li>Subject: <t t-out=\"object.subject or ''\"/></li>\n"
+"                    <li>Category: <t t-out=\"object.category_id.name or '—'\"/></li>\n"
+"                    <li>Budget: <t t-out=\"object.budget_range or '—'\"/></li>\n"
+"                    <li>Mode: <t t-out=\"object.delivery_mode or ''\"/></li>\n"
+"                    <li>Version: <t t-out=\"object.odoo_version or '—'\"/></li>\n"
+"                </ul>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div style=\"font-family:Arial,sans-serif;\">\n"
+"                <p>Nouvelle demande <strong t-out=\"object.name or ''\"/>.</p>\n"
+"                <ul>\n"
+"                    <li>Demandeur : <t t-out=\"object.requester_name or ''\"/>\n"
+"                        (<t t-out=\"object.company_name or '—'\"/>)</li>\n"
+"                    <li>Email : <t t-out=\"object.email or ''\"/></li>\n"
+"                    <li>Objet : <t t-out=\"object.subject or ''\"/></li>\n"
+"                    <li>Catégorie : <t t-out=\"object.category_id.name or '—'\"/></li>\n"
+"                    <li>Budget : <t t-out=\"object.budget_range or '—'\"/></li>\n"
+"                    <li>Mode : <t t-out=\"object.delivery_mode or ''\"/></li>\n"
+"                    <li>Version : <t t-out=\"object.odoo_version or '—'\"/></li>\n"
+"                </ul>\n"
+"            </div>\n"
+"        "
+
+#. module: oski_dev_request
+#: model:mail.template,body_html:oski_dev_request.mail_template_dev_request_ack
+msgid ""
+"<div style=\"font-family:Arial,sans-serif;color:#21112E;\">\n"
+"                <p>Hello <t t-out=\"object.requester_name or ''\"/>,</p>\n"
+"                <p>We have received your development request\n"
+"                    <strong t-out=\"object.name or ''\"/>: \"<t t-out=\"object.subject or ''\"/>\".</p>\n"
+"                <p>Our team is reviewing it and will get back to you shortly.</p>\n"
+"                <p t-if=\"object.delivery_mode == 'exclusive'\">\n"
+"                    You have chosen <strong>exclusive</strong> delivery: the module will not be\n"
+"                    published on the store and the price will be significantly higher than a\n"
+"                    published app.\n"
+"                </p>\n"
+"                <p t-else=\"\">\n"
+"                    The developed module will be published on the OdooSkills store (standard price).\n"
+"                </p>\n"
+"                <p>— The OdooSkills team</p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div style=\"font-family:Arial,sans-serif;color:#21112E;\">\n"
+"                <p>Bonjour <t t-out=\"object.requester_name or ''\"/>,</p>\n"
+"                <p>Nous avons bien reçu votre demande de développement\n"
+"                    <strong t-out=\"object.name or ''\"/> : « <t t-out=\"object.subject or ''\"/> ».</p>\n"
+"                <p>Notre équipe l'analyse et reviendra vers vous rapidement.</p>\n"
+"                <p t-if=\"object.delivery_mode == 'exclusive'\">\n"
+"                    Vous avez choisi une livraison <strong>exclusive</strong> : le module ne sera pas\n"
+"                    publié sur le store et le tarif sera nettement supérieur à une app publiée.\n"
+"                </p>\n"
+"                <p t-else=\"\">\n"
+"                    Le module développé sera publié sur le store OdooSkills (tarif standard).\n"
+"                </p>\n"
+"                <p>— L'équipe OdooSkills</p>\n"
+"            </div>\n"
+"        "
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "<option value=\"\">— Choose —</option>"
+msgstr "<option value=\"\">— Choisir —</option>"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid ""
+"<strong>Exclusive to me</strong> — the module stays private,\n"
+"                                            not published on the store. <span class=\"text-danger\">Significantly higher price.</span>"
+msgstr ""
+"<strong>Exclusif pour moi</strong> — le module reste privé,\n"
+"                                            non publié sur le store. <span class=\"text-danger\">Tarif nettement supérieur.</span>"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid ""
+"<strong>Published on the store</strong> — standard price.\n"
+"                                            The module will be published on the OdooSkills store and reusable."
+msgstr ""
+"<strong>Publié sur le store</strong> — tarif standard.\n"
+"                                            Le module sera publié sur le store OdooSkills et réutilisable."
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Accept"
+msgstr "Accepter"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__state__accepted
+msgid "Accepted"
+msgstr "Accepté"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_needaction
+msgid "Action Needed"
+msgstr "Action requise"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Décoration d'exception d'activité"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_state
+msgid "Activity State"
+msgstr "État de l'activité"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône du type d'activité"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__assigned_id
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
+msgid "Assigned to"
+msgstr "Assigné à"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__attachment_ids
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Attachments"
+msgstr "Pièces jointes"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.thanks_page
+msgid "Back to catalog"
+msgstr "Retour au catalogue"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__budget_range
+msgid "Budget"
+msgstr "Budget"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Budget <span class=\"text-danger\">*</span>"
+msgstr "Budget <span class=\"text-danger\">*</span>"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__category_id
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__company_name
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Company"
+msgstr "Entreprise"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__state__delivered
+msgid "Delivered"
+msgstr "Livré"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__module_id
+msgid "Delivered module"
+msgstr "Module livré"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__delivery_mode
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Delivery mode"
+msgstr "Mode de livraison"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Describe your need: our team reviews it and gets back to you."
+msgstr "Décrivez votre besoin : notre équipe l'analyse et revient vers vous."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__description
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Description of the need"
+msgstr "Description du besoin"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Description of the need <span class=\"text-danger\">*</span>"
+msgstr "Description du besoin <span class=\"text-danger\">*</span>"
+
+#. module: oski_dev_request
+#: model:mail.template,name:oski_dev_request.mail_template_dev_request_ack
+msgid "Dev request: acknowledgement"
+msgstr "Demande de dev : accusé de réception"
+
+#. module: oski_dev_request
+#: model:mail.template,name:oski_dev_request.mail_template_dev_request_notify
+msgid "Dev request: internal notification"
+msgstr "Demande de dev : notification interne"
+
+#. module: oski_dev_request
+#: model:ir.actions.act_window,name:oski_dev_request.oski_dev_request_action
+#: model:ir.ui.menu,name:oski_dev_request.menu_oski_dev_request
+msgid "Dev requests"
+msgstr "Demandes de dev"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Development request"
+msgstr "Demande de développement"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_list
+msgid "Development requests"
+msgstr "Demandes de développement"
+
+#. module: oski_dev_request
+#: model_terms:ir.actions.act_window,help:oski_dev_request.oski_dev_request_action
+msgid "Development requests submitted from the site will appear here."
+msgstr ""
+"Les demandes de développement soumises depuis le site apparaîtront ici."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__email
+msgid "Email"
+msgstr "Email"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Email <span class=\"text-danger\">*</span>"
+msgstr "Email <span class=\"text-danger\">*</span>"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
+msgid "Exclusive"
+msgstr "Exclusif"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__delivery_mode__exclusive
+msgid "Exclusive to me (significantly higher price)"
+msgstr "Exclusif pour moi (tarif nettement supérieur)"
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid "File too large: %s (max 10 MB)."
+msgstr "Fichier trop volumineux : %s (max 10 Mo)."
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid "File type not allowed: %(filename)s. Allowed: %(allowed)s."
+msgstr "Type de fichier non autorisé : %(filename)s. Autorisés : %(allowed)s."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome, ex. fa-tasks"
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid "Form submitted too fast. Please try again."
+msgstr "Formulaire envoyé trop vite. Merci de réessayer."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__priority__1
+msgid "High"
+msgstr "Haute"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône indiquant une activité d'exception."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__message_has_error
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur d'envoi."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_is_follower
+msgid "Is Follower"
+msgstr "Est abonné"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__write_date
+msgid "Last Updated on"
+msgstr "Dernière modification le"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Leave this empty"
+msgstr "Ne rien saisir ici"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Mark delivered"
+msgstr "Marquer livré"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Max 5 files, 10 MB each. Allowed types:"
+msgstr "Max 5 fichiers, 10 Mo chacun. Types autorisés :"
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid "Maximum %d files."
+msgstr "Maximum %d fichiers."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: oski_dev_request
+#: model:ir.model,name:oski_dev_request.model_oski_dev_request
+msgid "Module development request"
+msgstr "Demande de développement de module"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Échéance de mon activité"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__requester_name
+msgid "Name"
+msgstr "Nom / Personne"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Name <span class=\"text-danger\">*</span>"
+msgstr "Nom / Personne <span class=\"text-danger\">*</span>"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_dev_request_cta
+msgid "Need a custom module? Request one →"
+msgstr "Besoin d'un module sur-mesure ? Demander un module →"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__state__new
+msgid "New"
+msgstr "Nouveau"
+
+#. module: oski_dev_request
+#: model:mail.template,subject:oski_dev_request.mail_template_dev_request_notify
+msgid "New dev request {{ object.name }} — {{ object.subject }}"
+msgstr "Nouvelle demande de dev {{ object.name }} — {{ object.subject }}"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Prochain événement d'activité au calendrier"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Échéance de la prochaine activité"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de la prochaine activité"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type de la prochaine activité"
+
+#. module: oski_dev_request
+#: model_terms:ir.actions.act_window,help:oski_dev_request.oski_dev_request_action
+msgid "No request yet"
+msgstr "Aucune demande pour le moment"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__priority__0
+msgid "Normal"
+msgstr "Normale"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec une erreur d'envoi"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
+msgid "Open"
+msgstr "En cours"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.thanks_page
+msgid "Our team is reviewing it and will get back to you by email."
+msgstr "Notre équipe l'analyse et reviendra vers vous par email."
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__gt_5000
+msgid "Over €5,000"
+msgstr "Plus de 5 000 €"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__phone
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Phone"
+msgstr "Téléphone"
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid "Please fill in all required fields."
+msgstr "Merci de remplir tous les champs obligatoires."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__priority
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__delivery_mode__store
+msgid "Published on the store (standard price)"
+msgstr "Publié sur le store (tarif standard)"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__state__quoted
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Quote sent"
+msgstr "Devis envoyé"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__rating_ids
+msgid "Ratings"
+msgstr "Évaluations"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__name
+msgid "Reference"
+msgstr "Référence"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Reject"
+msgstr "Refuser"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__state__rejected
+msgid "Rejected"
+msgstr "Refusé"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Request"
+msgstr "Demande"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Request a custom module"
+msgstr "Demander un module sur-mesure"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__user_id
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Requester"
+msgstr "Demandeur"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Send the request"
+msgstr "Envoyer la demande"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__state
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
+msgid "Status"
+msgstr "État"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"État basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifié : activités futures."
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
+msgid "Store"
+msgstr "Store"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__module_id
+msgid "Store module created in response to this request."
+msgstr "Module du store créé en réponse à cette demande."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__subject
+msgid "Subject"
+msgstr "Objet"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Subject <span class=\"text-danger\">*</span>"
+msgstr "Objet <span class=\"text-danger\">*</span>"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__odoo_version
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
+msgid "Target Odoo version"
+msgstr "Version Odoo cible"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.thanks_page
+msgid "Thank you!"
+msgstr "Merci !"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__to_discuss
+msgid "To discuss"
+msgstr "À discuter"
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid "Total attachment size too high (max 25 MB)."
+msgstr "Taille totale des pièces jointes trop élevée (max 25 Mo)."
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type de l'activité d'exception sur l'enregistrement."
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__state__analysis
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_form
+msgid "Under review"
+msgstr "En analyse"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__lt_500
+msgid "Under €500"
+msgstr "Moins de 500 €"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__priority__2
+msgid "Urgent"
+msgstr "Urgente"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: oski_dev_request
+#: model:ir.model.fields,help:oski_dev_request.field_oski_dev_request__website_message_ids
+msgid "Website communication history"
+msgstr "Historique de communication du site web"
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid ""
+"You have already sent %d requests this hour. Please write to us instead at "
+"apps@odooskills.com."
+msgstr ""
+"Vous avez déjà envoyé %d demandes cette heure-ci. Écrivez-nous plutôt à "
+"apps@odooskills.com."
+
+#. module: oski_dev_request
+#: model:mail.template,subject:oski_dev_request.mail_template_dev_request_ack
+msgid "Your development request {{ object.name }}"
+msgstr "Votre demande de développement {{ object.name }}"
+
+#. module: oski_dev_request
+#. odoo-python
+#: code:addons/oski_dev_request/controllers/main.py:0
+msgid "Your form has expired. Please reopen it and resend it."
+msgstr "Votre formulaire a expiré. Merci de le rouvrir et de le renvoyer."
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.thanks_page
+msgid "Your request"
+msgstr "Votre demande"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.thanks_page
+msgid "has been recorded."
+msgstr "a bien été enregistrée."
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__b_1500_5000
+msgid "€1,500 – €5,000"
+msgstr "1 500 – 5 000 €"
+
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__b_500_1500
+msgid "€500 – €1,500"
+msgstr "500 – 1 500 €"

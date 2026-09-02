@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Liste -->
+    <!-- List -->
     <record id="oski_dev_request_view_list" model="ir.ui.view">
         <field name="name">oski.dev.request.list</field>
         <field name="model">oski.dev.request</field>
         <field name="arch" type="xml">
-            <list string="Demandes de développement">
+            <list string="Development requests">
                 <field name="name"/>
                 <field name="create_date"/>
                 <field name="requester_name"/>
@@ -24,22 +24,22 @@
         </field>
     </record>
 
-    <!-- Formulaire -->
+    <!-- Form -->
     <record id="oski_dev_request_view_form" model="ir.ui.view">
         <field name="name">oski.dev.request.form</field>
         <field name="model">oski.dev.request</field>
         <field name="arch" type="xml">
-            <form string="Demande de développement">
+            <form string="Development request">
                 <header>
-                    <button name="action_set_analysis" type="object" string="En analyse"
+                    <button name="action_set_analysis" type="object" string="Under review"
                             class="btn-primary" invisible="state != 'new'"/>
-                    <button name="action_set_quoted" type="object" string="Devis envoyé"
+                    <button name="action_set_quoted" type="object" string="Quote sent"
                             class="btn-primary" invisible="state != 'analysis'"/>
-                    <button name="action_accept" type="object" string="Accepter"
+                    <button name="action_accept" type="object" string="Accept"
                             class="btn-primary" invisible="state != 'quoted'"/>
-                    <button name="action_set_delivered" type="object" string="Marquer livré"
+                    <button name="action_set_delivered" type="object" string="Mark delivered"
                             class="btn-primary" invisible="state != 'accepted'"/>
-                    <button name="action_reject" type="object" string="Refuser"
+                    <button name="action_reject" type="object" string="Reject"
                             invisible="state in ('rejected', 'delivered')"/>
                     <field name="state" widget="statusbar"
                            options="{'clickable': '0'}"
@@ -50,14 +50,14 @@
                         <h1><field name="name" readonly="1"/></h1>
                     </div>
                     <group>
-                        <group string="Demandeur">
+                        <group string="Requester">
                             <field name="requester_name"/>
                             <field name="company_name"/>
                             <field name="email" widget="email"/>
                             <field name="phone" widget="phone"/>
                             <field name="user_id"/>
                         </group>
-                        <group string="Demande">
+                        <group string="Request">
                             <field name="subject"/>
                             <field name="category_id"/>
                             <field name="odoo_version"/>
@@ -68,10 +68,10 @@
                             <field name="module_id"/>
                         </group>
                     </group>
-                    <group string="Description du besoin">
+                    <group string="Description of the need">
                         <field name="description" nolabel="1"/>
                     </group>
-                    <group string="Pièces jointes">
+                    <group string="Attachments">
                         <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
                     </group>
                 </sheet>
@@ -112,7 +112,7 @@
         </field>
     </record>
 
-    <!-- Recherche -->
+    <!-- Search -->
     <record id="oski_dev_request_view_search" model="ir.ui.view">
         <field name="name">oski.dev.request.search</field>
         <field name="model">oski.dev.request</field>
@@ -124,14 +124,14 @@
                 <field name="subject"/>
                 <field name="category_id"/>
                 <filter name="store" string="Store" domain="[('delivery_mode', '=', 'store')]"/>
-                <filter name="exclusive" string="Exclusif" domain="[('delivery_mode', '=', 'exclusive')]"/>
+                <filter name="exclusive" string="Exclusive" domain="[('delivery_mode', '=', 'exclusive')]"/>
                 <separator/>
-                <filter name="open" string="En cours"
+                <filter name="open" string="Open"
                         domain="[('state', 'not in', ('rejected', 'delivered'))]"/>
                 <group>
-                    <filter name="group_state" string="État" context="{'group_by': 'state'}"/>
-                    <filter name="group_category" string="Catégorie" context="{'group_by': 'category_id'}"/>
-                    <filter name="group_assigned" string="Assigné à" context="{'group_by': 'assigned_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_assigned" string="Assigned to" context="{'group_by': 'assigned_id'}"/>
                 </group>
             </search>
         </field>
@@ -139,20 +139,20 @@
 
     <!-- Action -->
     <record id="oski_dev_request_action" model="ir.actions.act_window">
-        <field name="name">Demandes de dev</field>
+        <field name="name">Dev requests</field>
         <field name="res_model">oski.dev.request</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="oski_dev_request_view_search"/>
         <field name="context">{'search_default_open': 1}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiley_face">Aucune demande pour le moment</p>
-            <p>Les demandes de développement soumises depuis le site apparaîtront ici.</p>
+            <p class="o_view_nocontent_smiley_face">No request yet</p>
+            <p>Development requests submitted from the site will appear here.</p>
         </field>
     </record>
 
     <!-- Menu -->
     <menuitem id="menu_oski_dev_request"
-              name="Demandes de dev"
+              name="Dev requests"
               parent="oski_app_store.menu_oski_app_store_root"
               action="oski_dev_request_action"
               sequence="40"/>

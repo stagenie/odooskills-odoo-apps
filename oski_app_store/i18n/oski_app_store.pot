@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 08:42+0000\n"
-"PO-Revision-Date: 2026-09-02 08:42+0000\n"
+"POT-Creation-Date: 2026-09-02 11:31+0000\n"
+"PO-Revision-Date: 2026-09-02 11:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -35,16 +35,17 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
 msgid ""
-", seule\n"
-"                        adresse de contact du store."
+", the sole\n"
+"                        contact address of the store."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-". Réponse sous\n"
-"                        un mois. Un résident de l'Union européenne peut saisir l'autorité de\n"
-"                        contrôle de son pays s'il estime la réponse insuffisante."
+". Response\n"
+"                        within one month. A resident of the European Union may refer the matter\n"
+"                        to the supervisory authority of their country if they believe the\n"
+"                        response is insufficient."
 msgstr ""
 
 #. module: oski_app_store
@@ -54,52 +55,52 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "1. Responsable du traitement"
+msgid "1. Data controller"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "1. Éditeur du site"
+msgid "1. Site publisher"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "10. Modification des conditions"
+msgid "10. Amendment of these terms"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "11. Droit applicable"
+msgid "11. Governing law"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid "2. Purpose of the site"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "2. Ce qui est collecté"
+msgid "2. What is collected"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "2. Objet du site"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "3. Compte"
+msgid "3. Account"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "3. Pourquoi"
+msgid "3. Why"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "4. Modules et licences"
+msgid "4. Modules and licenses"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "4. Qui d'autre y a accès"
+msgid "4. Who else has access"
 msgstr ""
 
 #. module: oski_app_store
@@ -109,32 +110,32 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "5. Combien de temps"
+msgid "5. For how long"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "5. Propriété intellectuelle du site"
+msgid "5. Intellectual property of the site"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid "6. Acceptable use"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "6. Où sont les données"
+msgid "6. Where the data is"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "6. Usage acceptable"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "7. Disponibilité"
+msgid "7. Availability"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "7. Vos droits"
+msgid "7. Your rights"
 msgstr ""
 
 #. module: oski_app_store
@@ -144,29 +145,29 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "8. Liens externes"
+msgid "8. External links"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "9. Données personnelles"
+msgid "9. Personal data"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-": chaque module acheté y\n"
-"                            figure avec toutes les versions d'Odoo pour lesquelles une archive\n"
-"                            existe. Un achat ne se perd pas."
+": every module purchased\n"
+"                            appears there with every Odoo version for which an archive exists.\n"
+"                            A purchase is never lost."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid ""
-"<em>Odoo</em> est une marque déposée d'Odoo S.A. Ce site n'est ni édité ni\n"
-"                        approuvé par Odoo S.A. Les modules proposés sont des travaux indépendants\n"
-"                        conçus pour fonctionner avec le logiciel Odoo. Les autres marques citées\n"
-"                        appartiennent à leurs titulaires respectifs."
+"<em>Odoo</em> is a registered trademark of Odoo S.A. This site is neither\n"
+"                        published nor endorsed by Odoo S.A. The modules offered are independent\n"
+"                        works designed to work with the Odoo software. Other trademarks\n"
+"                        mentioned belong to their respective owners."
 msgstr ""
 
 #. module: oski_app_store
@@ -202,15 +203,20 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-"<strong>Exécuter la commande</strong> : livrer l'archive, ouvrir\n"
-"                            l'espace client, émettre la facture."
+"<strong>Fulfill the order</strong>: deliver the archive, open the\n"
+"                            customer area, issue the invoice."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-"<strong>Informer</strong> des nouveautés, uniquement si vous vous êtes\n"
-"                            inscrit : chaque envoi porte son lien de désinscription."
+"<strong>Inform</strong> about news, only if you have signed up:\n"
+"                            every mailing carries its unsubscribe link."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "<strong>Keep the accounts</strong>, a legal obligation."
 msgstr ""
 
 #. module: oski_app_store
@@ -218,30 +224,39 @@ msgstr ""
 msgid ""
 "<strong>Odoo &amp; AI Skills LLC</strong><br/>\n"
 "                        8206 Louisiana Blvd NE, Ste A #9881<br/>\n"
-"                        Albuquerque, NM 87113, États-Unis<br/>\n"
-"                        Courriel :"
+"                        Albuquerque, NM 87113, United States<br/>\n"
+"                        Email:"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-"<strong>Protéger le site</strong> : anti-spam des formulaires,\n"
-"                            journaux de sécurité — intérêt légitime."
+"<strong>Protect the site</strong>: form anti-spam, security\n"
+"                            logs — legitimate interest."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "<strong>Répondre</strong> à une demande de module ou à un message."
+msgid "<strong>Respond</strong> to a module request or a message."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "<strong>Tenir la comptabilité</strong>, obligation légale."
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"A <code>.zip</code> archive containing the module folder, ready to\n"
+"                            drop into your installation."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "A collection of modules by OdooSkills — compatible from"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid ""
+"A complete report is handled once; a partial report costs three\n"
+"                        back-and-forths."
 msgstr ""
 
 #. module: oski_app_store
@@ -252,8 +267,55 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid ""
+"A modified module: describe the modification, it changes\n"
+"                            everything."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "A module feature doesn't behave as its listing describes."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "A question about a module's scope before buying it."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid "A question about this text?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "A question that isn't here ?"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_tag_name_uniq
 msgid "A tag with this name already exists."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"Access, rectification, erasure, restriction, objection and portability\n"
+"                        are exercised by emailing"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "Account"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"Account and purchases: as long as the account exists — it gives\n"
+"                            access to the downloads already paid for."
 msgstr ""
 
 #. module: oski_app_store
@@ -262,46 +324,25 @@ msgid "Accounting & Finance"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"Accès, rectification, effacement, limitation, opposition et portabilité\n"
-"                        s'exercent d'un courriel à"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Acheter"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"Acheter, recevoir et installer un module du store OdooSkills : compte, "
-"paiement, facture, livraison immédiate, versions d'Odoo couvertes."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"Acheter, recevoir, installer. Si votre question n'y\n"
-"                        est pas, elle a sa place à"
-msgstr ""
-
-#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__active
 msgid "Active"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid ""
-"Activez le mode développeur, puis\n"
-"                                <em>Applications → Mettre à jour la liste des applications</em>."
+"Adapting the module to your processes: that is development.\n"
+"                            The"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "Administering your server or your database."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Ai-je une facture ?"
+msgid "After the purchase"
 msgstr ""
 
 #. module: oski_app_store
@@ -311,13 +352,25 @@ msgid "All"
 msgstr ""
 
 #. module: oski_app_store
-#: model:ir.ui.menu,name:oski_app_store.menu_oski_app_store_root
-msgid "App Store"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "An incompatibility with a standard Odoo module."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Après l'achat"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "An order, invoice or download problem."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid ""
+"Any request about content on this site — error, copyright, personal\n"
+"                        data — is handled at"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_app_store_root
+msgid "App Store"
 msgstr ""
 
 #. module: oski_app_store
@@ -327,7 +380,15 @@ msgid "Author"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"Both points are set by the terms of sale, which will be published\n"
+"                            and presented at payment before sales open."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.portal_my_apps
+#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
 msgid "Browse the catalog"
 msgstr ""
 
@@ -337,15 +398,27 @@ msgid "Buy —"
 msgstr ""
 
 #. module: oski_app_store
-#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__can_publish
-msgid "Can Publish"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Buying"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-"Carte bancaire et PayPal. Les données de carte sont saisies chez le\n"
-"                            prestataire de paiement : elles ne transitent jamais par ce site."
+"Buying, receiving and installing a module from the OdooSkills store: "
+"account, payment, invoice, immediate delivery, Odoo versions covered."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"Buying, receiving, installing. If your question\n"
+"                        isn't here, it belongs at"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__can_publish
+msgid "Can Publish"
 msgstr ""
 
 #. module: oski_app_store
@@ -360,104 +433,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
 msgid "Category"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Ce qu'il faut joindre"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"Ce que le store OdooSkills collecte, pourquoi, combien de temps, qui y "
-"accède, et comment exercer vos droits."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Ce que vous attendiez, ce qui s'est produit."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Ce qui est couvert"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Ce qui n'est pas couvert"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"Ce site collecte le minimum nécessaire pour livrer un module, émettre une\n"
-"                        facture et répondre à un message. Rien n'est vendu ni cédé à des tiers à\n"
-"                        des fins publicitaires."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"Cela dépend du module : sa fiche affiche les versions pour lesquelles\n"
-"                            une archive existe, et le catalogue permet de filtrer dessus."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Ces conditions peuvent évoluer. La version en ligne au moment de la\n"
-"                        visite est celle qui s'applique ; la date de mise à jour figure en tête\n"
-"                        de page."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Ces conditions sont régies par le droit de l'État du Nouveau-Mexique\n"
-"                        (États-Unis). Les dispositions impératives protégeant le consommateur\n"
-"                        dans son pays de résidence restent applicables."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"Ces deux points sont fixés par les conditions générales de vente, qui\n"
-"                            seront publiées et présentées au paiement avant l'ouverture des\n"
-"                            ventes."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid "Cette page n'existe pas."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid ""
-"Chaque message reçoit une réponse. Le délai garanti sera annoncé avec\n"
-"                        les conditions de vente, avant l'ouverture des ventes."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Chaque module est distribué sous la licence indiquée sur sa fiche et\n"
-"                        reproduite dans son archive. Cette licence détermine ce qui est permis :\n"
-"                        installation, modification, redistribution. Les conditions financières\n"
-"                        d'un achat (prix, facturation, remboursement) relèvent des conditions\n"
-"                        générales de vente présentées au moment du paiement."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid "Chercher un module…"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Cherchez le module par son nom et installez-le."
 msgstr ""
 
 #. module: oski_app_store
@@ -476,16 +451,6 @@ msgid "Coming soon for sale."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Commande"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Comment installer un module ?"
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 msgid "Compatibility"
 msgstr ""
@@ -496,43 +461,13 @@ msgid "Compatible Odoo versions"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Compte"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"Compte et achats : tant que le compte existe — il donne accès aux\n"
-"                            téléchargements déjà payés."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "Conditions d'utilisation"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Conditions d'utilisation du store de modules Odoo OdooSkills : compte, "
-"licences, usage acceptable, disponibilité."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
-msgid "Confidentialité"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "Configuring Odoo itself, outside the module concerned."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Contact us"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Contenus du site"
 msgstr ""
 
 #. module: oski_app_store
@@ -554,40 +489,30 @@ msgid "Created on"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"Creating an account is required to purchase a module and to find your\n"
+"                        downloads again. The information provided must be accurate and kept up\n"
+"                        to date. Credentials are personal: their use is the responsibility of\n"
+"                        the account holder, who must report any unauthorized use without\n"
+"                        delay."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"Credit card and PayPal. Card data is entered on the payment\n"
+"                            provider's end: it never passes through this site."
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__currency_id
 msgid "Currency"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Dans"
-msgstr ""
-
-#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__is_default
 msgid "Default version"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Demande de module"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid ""
-"Demander un\n"
-"                            module"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Demander un module"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Demandes de module et messages : trois ans après le dernier échange."
 msgstr ""
 
 #. module: oski_app_store
@@ -597,21 +522,14 @@ msgid "Dependencies"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "Dernière mise à jour : 31 août 2026."
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Describe it: the"
 msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__description_html
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Description"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Directeur de la publication"
 msgstr ""
 
 #. module: oski_app_store
@@ -631,37 +549,52 @@ msgid "Display name"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Do I get an invoice ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Do I need to create an account ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Does a 19.0 module work on an 18.0 database ?"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.portal_my_home_apps
 msgid "Download purchased modules, all versions"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
 msgid ""
-"Décompressez l'archive dans un dossier déclaré dans\n"
-"                                <code>addons_path</code>."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Décrivez-le : le formulaire"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Délai de réponse"
+"Each module is distributed under the license shown on its listing and\n"
+"                        reproduced in its archive. This license determines what is allowed:\n"
+"                        installation, modification, redistribution. The financial terms of a\n"
+"                        purchase (price, invoicing, refund) are covered by the terms of sale\n"
+"                        presented at the time of payment."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-"En dollars américains. Le prix affiché sur la fiche est le montant\n"
-"                            facturé. Votre banque peut appliquer sa propre conversion."
+"Each module's listing shows what it requires. The store modules it\n"
+"                            depends on are clickable there."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "Editor-in-chief"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "En quelle monnaie ?"
+msgid ""
+"Enable developer mode, then\n"
+"                                <em>Apps → Update Apps List</em>."
 msgstr ""
 
 #. module: oski_app_store
@@ -670,28 +603,15 @@ msgid "Enlarged screenshot"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Et Odoo 20 ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Et les dépendances ?"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid ""
+"Every message gets a response. The guaranteed delay will be announced\n"
+"                        with the terms of sale, before sales open."
 msgstr ""
 
 #. module: oski_app_store
 #: model:oski.module.tag,name:oski_app_store.tag_demo_exemple
 msgid "Exemple"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Factures : la durée de conservation comptable applicable."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Faut-il créer un compte ?"
 msgstr ""
 
 #. module: oski_app_store
@@ -706,6 +626,13 @@ msgid "Free"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
+#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
+msgid "Frequently asked questions"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Give Odoo<br/><em>what it's missing.</em>"
 msgstr ""
@@ -716,13 +643,18 @@ msgid "Gratuit"
 msgstr ""
 
 #. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_hr
-msgid "Human Resources"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "Hosting"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Hébergement"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "How do I install a module ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_hr
+msgid "Human Resources"
 msgstr ""
 
 #. module: oski_app_store
@@ -742,16 +674,48 @@ msgid "Icon"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"Immédiatement. Dès la commande confirmée, la fiche du module bascule de\n"
-"                            « Acheter » à « Télécharger », et un courriel de confirmation vous\n"
-"                            renvoie vers vos applications."
+#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
+msgid "If the link came from us, let us know at"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Installer"
+msgid ""
+"Immediately. As soon as the order is confirmed, the module's listing\n"
+"                            switches from \"Buy\" to \"Download\", and a confirmation email points\n"
+"                            you back to your apps."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "In"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"In US dollars. The price shown on the listing is the amount\n"
+"                            invoiced. Your bank may apply its own conversion."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "In what form ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "In which currency ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Installing"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "Invoices: the applicable accounting retention period."
 msgstr ""
 
 #. module: oski_app_store
@@ -760,55 +724,15 @@ msgid "Is Published"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Journaux techniques : douze mois."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-"L'adaptation du module à vos processus : c'est du développement.\n"
-"                            Le formulaire"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "L'administration de votre serveur ou de votre base."
+"It depends on the module: its listing shows the versions for which\n"
+"                            an archive exists, and the catalog lets you filter on them."
 msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__lgpl-3
 msgid "LGPL-3"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "La <strong>version d'Odoo</strong> et son mode d'installation."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"La création d'un compte est nécessaire pour acheter un module et\n"
-"                        retrouver ses téléchargements. Les informations fournies doivent être\n"
-"                        exactes et tenues à jour. Les identifiants sont personnels : leur usage\n"
-"                        relève de la responsabilité du titulaire du compte, qui signale sans\n"
-"                        délai tout usage non autorisé."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"La fiche de chaque module liste ce qu'il exige. Les modules du store\n"
-"                            dont il dépend y sont cliquables."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"La licence figure sur la fiche du module et dans son archive : les\n"
-"                            modules gratuits sont sous licence libre, les modules payants sous\n"
-"                            licence propriétaire Odoo."
 msgstr ""
 
 #. module: oski_app_store
@@ -830,119 +754,16 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid ""
-"Le <strong>message d'erreur complet</strong> — le journal du serveur\n"
-"                            en dit plus que la capture d'écran."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Le <strong>nom technique</strong> du module et sa version."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Le chemin suivi dans l'interface pour reproduire le problème."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid ""
-"Le lien est peut-être ancien, ou le module a\n"
-"                        changé d'adresse. Le catalogue, lui, n'a pas bougé."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Le module dont j'ai besoin n'existe pas."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Le module ne s'installe pas, ou remonte une erreur."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Le module ne s'installe pas, ou se comporte mal."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Le paramétrage d'Odoo lui-même, hors du module concerné."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"Le serveur est situé en France. L'éditeur est une société américaine : ses\n"
-"                        responsables y accèdent depuis l'étranger, et les prestataires cités\n"
-"                        peuvent traiter certaines données hors de l'Union européenne."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Le site <strong>apps.odooskills.com</strong> est édité par\n"
-"                        <strong>Odoo &amp; AI Skills LLC</strong>, société de droit de l'État\n"
-"                        du Nouveau-Mexique (États-Unis). Toute question relative au site ou\n"
-"                        aux modules se pose à"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Le site est fourni en l'état. Des interruptions peuvent survenir pour\n"
-"                        maintenance ou pour une cause extérieure. Aucune disponibilité\n"
-"                        ininterrompue n'est garantie."
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid ""
-"Le site est hébergé sur un serveur du <strong>Groupe LWS SARL</strong> "
-"(France) —"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Le site peut renvoyer vers des sites tiers, dont le contenu échappe à\n"
-"                        l'éditeur. Leur consultation relève des conditions propres à ces sites."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Le site présente un catalogue de modules pour le logiciel Odoo. Certains\n"
-"                        modules sont téléchargeables gratuitement, d'autres après achat. Odoo\n"
-"                        est une marque d'Odoo S.A. ; ce site n'est pas édité par Odoo S.A. et\n"
-"                        n'engage pas cette société."
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"Les cookies nécessaires (session, panier, préférence de langue) permettent\n"
-"                        au site de fonctionner. Les cookies non essentiels ne sont déposés qu'après\n"
-"                        acceptation dans le bandeau, révocable à tout moment."
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid "Last updated: August 31, 2026."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Les données collectées (compte, commande, message) servent à répondre aux\n"
-"                        demandes, livrer les modules et facturer. Toute demande d'accès, de\n"
-"                        rectification ou de suppression se fait à"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Les textes, visuels, captures et éléments graphiques du site sont\n"
-"                        protégés. Leur reproduction hors citation courte avec lien vers la\n"
-"                        source demande un accord écrit préalable."
+#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "Legal notice"
 msgstr ""
 
 #. module: oski_app_store
@@ -967,24 +788,8 @@ msgid "Manager"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Marques et droits"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Mentions légales"
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Messages"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Mises à jour et remboursement ?"
 msgstr ""
 
 #. module: oski_app_store
@@ -996,6 +801,18 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model,name:oski_app_store.model_oski_module_version
 msgid "Module archive for a given Odoo version"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "Module request"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"Module requests and messages: three years after the last\n"
+"                            exchange."
 msgstr ""
 
 #. module: oski_app_store
@@ -1014,7 +831,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Mustapha BENHAMIDA, gérant."
+msgid "Mustapha BENHAMIDA, manager."
 msgstr ""
 
 #. module: oski_app_store
@@ -1030,6 +847,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__name
 msgid "Name"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"Necessary cookies (session, cart, language preference) allow the site to\n"
+"                        work. Non-essential cookies are only set after acceptance in the\n"
+"                        banner, revocable at any time."
 msgstr ""
 
 #. module: oski_app_store
@@ -1055,9 +880,10 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-"Non. Chaque version majeure d'Odoo change son interface et ses\n"
-"                            conventions : il faut l'archive de votre version. Si elle n'existe pas\n"
-"                            encore, la fiche vous propose la plus récente disponible et le dit."
+"No. Every major Odoo version changes its interface and its\n"
+"                            conventions: you need the archive for your version. If it doesn't\n"
+"                            exist yet, the listing offers the most recent one available and\n"
+"                            says so."
 msgstr ""
 
 #. module: oski_app_store
@@ -1085,14 +911,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
 "Odoo &amp; AI Skills LLC, 8206 Louisiana Blvd NE, Ste A #9881,\n"
-"                        Albuquerque, NM 87113, États-Unis —"
+"                        Albuquerque, NM 87113, United States —"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-"Odoo 20 est à la porte. Elle apparaît déjà dans le sélecteur, sans\n"
-"                            archive : celles-ci suivront la sortie officielle."
+"Odoo 20 is at the door. It already appears in the selector, without\n"
+"                            an archive: those will follow the official release."
 msgstr ""
 
 #. module: oski_app_store
@@ -1131,6 +957,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.actions.act_window,name:oski_app_store.oski_odoo_version_action
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "Odoo versions"
 msgstr ""
 
@@ -1145,44 +972,43 @@ msgid "OdooSkills store module"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid ""
+"One address for the whole OdooSkills store: apps@odooskills.com. What's "
+"covered, what isn't, and what to attach to a report."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid ""
+"One address for the whole store —\n"
+"                        free modules as well as paid ones, a question before purchase as well\n"
+"                        as a failure after installation."
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_version_version_uniq
 msgid "Only one archive per Odoo version for a given module."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-"Oui, émise automatiquement à la confirmation de la commande et\n"
-"                            disponible dans votre espace client."
+"Only technical providers, each for their part:\n"
+"                        <strong>Stripe</strong> and <strong>PayPal</strong> for payment\n"
+"                        collection, <strong>Mailjet</strong> for email delivery,\n"
+"                        <strong>Groupe LWS</strong> for hosting the server (France).\n"
+"                        No resale, no data broker."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"Oui. Le droit de télécharger un module payant est attaché au client de\n"
-"                            la commande : sans compte, un achat ne pourrait pas vous être rattaché\n"
-"                            et vous repartiriez sans rien. Le compte se crée pendant le paiement,\n"
-"                            en deux champs."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Où retrouver mes achats plus tard ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid "Parcourir le catalogue"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "Order"
 msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__parent_id
 msgid "Parent category"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Politique de confidentialité"
 msgstr ""
 
 #. module: oski_app_store
@@ -1198,6 +1024,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__price
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Price"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "Privacy policy"
 msgstr ""
 
 #. module: oski_app_store
@@ -1232,25 +1064,9 @@ msgid "Published"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Quand est-ce que je reçois le module ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Quelles versions sont couvertes ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Quels moyens de paiement ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid "Questions fréquentes"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid ""
+"Publisher, editor-in-chief and host of the OdooSkills Odoo module store."
 msgstr ""
 
 #. module: oski_app_store
@@ -1262,24 +1078,14 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Receiving"
+msgstr ""
+
+#. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "Recent"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Recevoir"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid "Rechercher"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Redémarrez le service Odoo."
 msgstr ""
 
 #. module: oski_app_store
@@ -1293,8 +1099,35 @@ msgid "Release notes"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "Reporting"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid ""
+"Request a\n"
+"                            module"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Request a module"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Reset"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "Response time"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Restart the Odoo service."
 msgstr ""
 
 #. module: oski_app_store
@@ -1320,12 +1153,29 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
 msgid "Search"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Search a module, a feature…"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
+msgid "Search for a module…"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Search for the module by its name and install it."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "See also"
 msgstr ""
 
 #. module: oski_app_store
@@ -1345,37 +1195,18 @@ msgid "Short summary"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid "Si le lien venait de nous, dites-le à"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "Site content"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Signalement"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid ""
-"Sont interdits : l'extraction automatisée massive du catalogue, toute\n"
-"                        tentative d'accès non autorisé, la mise en défaut volontaire du service,\n"
-"                        le contournement des contrôles d'accès aux archives payantes et la\n"
-"                        redistribution d'un module payant hors du cadre de sa licence."
+msgid "Site publisher"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Sort"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Sous quelle forme ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Sous quelle licence ?"
 msgstr ""
 
 #. module: oski_app_store
@@ -1419,8 +1250,18 @@ msgid "Tags"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "Technical"
+msgstr ""
+
+#. module: oski_app_store
 #: model:oski.module.category,name:oski_app_store.cat_technical
 msgid "Technical & Tools"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid "Technical logs: twelve months."
 msgstr ""
 
 #. module: oski_app_store
@@ -1430,20 +1271,58 @@ msgid "Technical name"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid "Technique"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid "Terms of use"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"Terms of use of the OdooSkills Odoo module store: account, licenses, "
+"acceptable use, availability."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid ""
-"Textes, visuels et captures sont la propriété de l'éditeur, sauf mention\n"
-"                        contraire. Chaque module reste régi par la licence indiquée sur sa fiche."
+"Text, visuals and screenshots are the property of the publisher, unless\n"
+"                        stated otherwise. Each module remains governed by the license shown on\n"
+"                        its listing."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "The <strong>Odoo version</strong> and how it is installed."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid ""
+"The <strong>full error message</strong> — the server log says\n"
+"                            more than a screenshot."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "The catalog opens soon."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"The data collected (account, order, message) is used to respond to\n"
+"                        requests, deliver the modules and invoice. Any request for access,\n"
+"                        rectification or deletion is made to"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"The following are forbidden: massive automated extraction of the\n"
+"                        catalog, any attempt at unauthorized access, deliberately putting the\n"
+"                        service at fault, circumventing the access controls on paid archives,\n"
+"                        and redistributing a paid module outside the scope of its license."
 msgstr ""
 
 #. module: oski_app_store
@@ -1457,8 +1336,43 @@ msgid "The full relative URL to access the document through the website."
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"The license is shown on the module's listing and in its archive:\n"
+"                            free modules are under an open-source license, paid modules under\n"
+"                            a proprietary Odoo license."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
+msgid ""
+"The link may be old, or the module may have moved.\n"
+"                        The catalog, though, hasn't moved."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "The module I need doesn't exist."
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_technical_name_uniq
 msgid "The module technical name must be unique."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "The module won't install, or misbehaves."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "The module won't install, or raises an error."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "The module's <strong>technical name</strong> and its version."
 msgstr ""
 
 #. module: oski_app_store
@@ -1469,96 +1383,107 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
-#: model:ir.model.constraint,message:oski_app_store.constraint_oski_odoo_version_name_uniq
-msgid "This Odoo version is already registered."
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "The path followed in the interface to reproduce the problem."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"The server is located in France. The publisher is a US company: its\n"
+"                        officers access it from abroad, and the providers mentioned may\n"
+"                        process some data outside the European Union."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"The site <strong>apps.odooskills.com</strong> is published by\n"
+"                        <strong>Odoo &amp; AI Skills LLC</strong>, a company organized under the\n"
+"                        laws of the State of New Mexico (United States). Any question about the\n"
+"                        site or the modules goes to"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid ""
-"Toute demande relative à un contenu de ce site — erreur, droit d'auteur,\n"
-"                        donnée personnelle — se traite à"
+"The site is hosted on a server of <strong>Groupe LWS SARL</strong> (France) "
+"—"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Un module 19.0 fonctionne-t-il sur une base 18.0 ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Un module modifié : décrivez la modification, elle change tout."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Un problème de commande, de facture ou de téléchargement."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid ""
-"Un signalement complet est traité une fois ; un signalement partiel\n"
-"                        coûte trois allers-retours."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"Une archive <code>.zip</code> contenant le dossier du module, prête à\n"
-"                            déposer dans votre installation."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Une fonction du module ne se comporte pas comme sa fiche l'annonce."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Une incompatibilité avec un module standard d'Odoo."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Une question qui n'est pas ici ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
-msgid "Une question sur ce texte ?"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Une question sur la portée d'un module avant de l'acheter."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid ""
-"Une seule adresse pour tout le store OdooSkills : apps@odooskills.com. Ce "
-"qui est couvert, ce qui ne l'est pas, et ce qu'il faut joindre à un "
-"signalement."
+"The site is provided as is. Interruptions may occur for maintenance or\n"
+"                        for an external cause. No uninterrupted availability is guaranteed."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
 msgid ""
-"Une seule adresse pour tout le store —\n"
-"                        modules gratuits comme payants, question avant achat comme panne\n"
-"                        après installation."
+"The site may link to third-party sites, whose content is beyond the\n"
+"                        publisher's control. Visiting them is governed by the terms specific to\n"
+"                        those sites."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"The site presents a catalog of modules for the Odoo software. Some\n"
+"                        modules are available for free download, others after purchase. Odoo\n"
+"                        is a trademark of Odoo S.A.; this site is not published by Odoo S.A. and\n"
+"                        does not bind that company."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"The text, visuals, screenshots and graphic elements of the site are\n"
+"                        protected. Their reproduction beyond a short quotation with a link to\n"
+"                        the source requires prior written consent."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"These terms are governed by the law of the State of New Mexico\n"
+"                        (United States). The mandatory provisions protecting the consumer in\n"
+"                        their country of residence remain applicable."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
+msgid ""
+"These terms may change. The version online at the time of the visit is\n"
+"                        the one that applies; the update date appears at the top of the page."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.constraint,message:oski_app_store.constraint_oski_odoo_version_name_uniq
+msgid "This Odoo version is already registered."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
+msgid "This page does not exist."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-"Uniquement des prestataires techniques, chacun pour sa part :\n"
-"                        <strong>Stripe</strong> et <strong>PayPal</strong> pour l'encaissement,\n"
-"                        <strong>Mailjet</strong> pour l'acheminement des courriels,\n"
-"                        <strong>Groupe LWS</strong> pour l'hébergement du serveur (France).\n"
-"                        Aucune revente, aucun courtier en données."
+"This site collects the minimum necessary to deliver a module, issue an\n"
+"                        invoice and answer a message. Nothing is sold or transferred to third\n"
+"                        parties for advertising purposes."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "Trademarks and rights"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Under what license ?"
 msgstr ""
 
 #. module: oski_app_store
@@ -1568,8 +1493,20 @@ msgid "Unpublished"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"Unzip the archive into a folder declared in\n"
+"                                <code>addons_path</code>."
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__is_upcoming
 msgid "Upcoming"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Updates and refunds ?"
 msgstr ""
 
 #. module: oski_app_store
@@ -1585,19 +1522,8 @@ msgid "Versions"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Versions d'Odoo"
-msgstr ""
-
-#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_published
 msgid "Visible on current website"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "Voir aussi"
 msgstr ""
 
 #. module: oski_app_store
@@ -1636,6 +1562,84 @@ msgid "Website opengraph image"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "What about Odoo 20 ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "What about dependencies ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "What payment methods ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"What the OdooSkills store collects, why, for how long, who accesses it, and "
+"how to exercise your rights."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "What to attach"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "What you expected, what happened."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "What's covered"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "What's not covered"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "When do I receive the module ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Where can I find my purchases later ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Which versions are covered ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "Write to"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"Yes, issued automatically when the order is confirmed and available\n"
+"                            in your customer area."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+"Yes. The right to download a paid module is attached to the customer\n"
+"                            of the order: without an account, a purchase could not be linked to\n"
+"                            you and you would leave with nothing. The account is created during\n"
+"                            payment, in two fields."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "You own this module —"
 msgstr ""
@@ -1643,6 +1647,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "all your applications"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "and"
 msgstr ""
 
 #. module: oski_app_store
@@ -1669,29 +1678,29 @@ msgid "archives will follow the official release."
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"contact details, description of the\n"
+"                            need, budget, attachments you add yourself."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"content of the emails received at\n"
+"                            <code>apps@odooskills.com</code> and of the site's forms."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-"avec votre version d'Odoo, le nom du module et le message d'erreur\n"
-"                            complet. C'est la même boîte pour tout le store."
+"form\n"
+"                            opens a tracked request, budget and version included."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"contenu des courriels reçus à\n"
-"                            <code>apps@odooskills.com</code> et des formulaires du site."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"coordonnées, description du besoin,\n"
-"                            budget, pièces jointes que vous joignez vous-même."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "et"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "form opens a quoted request."
 msgstr ""
 
 #. module: oski_app_store
@@ -1711,28 +1720,6 @@ msgid "is not released yet."
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
-msgid ""
-"journaux du serveur (adresse IP, page demandée,\n"
-"                            date), cookies de session et de panier."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "la politique de confidentialité"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "les conditions d'utilisation"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "les questions fréquentes"
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid "lws.fr"
 msgstr ""
@@ -1740,33 +1727,21 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-"modules achetés, montant, date, facture. Les\n"
-"                            <strong>données de carte ne transitent jamais par ce site</strong> :\n"
-"                            elles sont saisies chez le prestataire de paiement."
+"modules purchased, amount, date, invoice.\n"
+"                            <strong>Card data never passes through this site</strong>: it is\n"
+"                            entered on the payment provider's end."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
-"nom, adresse électronique, mot de passe chiffré,\n"
-"                            adresse de facturation."
+"name, email address, encrypted password,\n"
+"                            billing address."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "oski_xxx"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid ""
-"ouvre une\n"
-"                            demande suivie, budget et version compris."
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
-msgid "ouvre une demande chiffrée."
 msgstr ""
 
 #. module: oski_app_store
@@ -1782,9 +1757,31 @@ msgid "recent"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
+msgid ""
+"server logs (IP address, page requested,\n"
+"                            date), session and cart cookies."
+msgstr ""
+
+#. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "soon"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
+msgid "the frequently asked questions"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "the privacy policy"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
+msgid "the terms of use"
 msgstr ""
 
 #. module: oski_app_store
@@ -1794,31 +1791,21 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "votre espace client"
+msgid ""
+"with your Odoo version, the module's name and the full error\n"
+"                            message. It's the same inbox for the whole store."
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "Écrivez à"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid "Éditeur du site"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
-msgid ""
-"Éditeur, directeur de la publication et hébergeur du store de modules Odoo "
-"OdooSkills."
+msgid "your customer area"
 msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid ""
-"— elles\n"
-"                        répondent déjà à l'essentiel."
+"—\n"
+"                        they already answer the essentials."
 msgstr ""
 
 #. module: oski_app_store

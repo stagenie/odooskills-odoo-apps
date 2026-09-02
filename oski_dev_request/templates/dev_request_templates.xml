@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="form_page" name="Demande de développement">
+    <template id="form_page" name="Development request">
         <t t-call="website.layout">
             <div class="oski-store">
                 <div class="container my-5">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="oski-hero mb-4">
-                                <h1 class="mb-2">Demander un module sur-mesure</h1>
-                                <p>Décrivez votre besoin : notre équipe l'analyse et revient vers vous.</p>
+                                <h1 class="mb-2">Request a custom module</h1>
+                                <p>Describe your need: our team reviews it and gets back to you.</p>
                             </div>
 
                             <t t-if="error">
@@ -19,11 +19,11 @@
                                   enctype="multipart/form-data" class="card p-4 shadow-sm">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
-                                <!-- Champ piège : invisible et hors tabulation pour un
-                                     humain, irrésistible pour un robot qui remplit tout. -->
+                                <!-- Honeypot field: invisible and out of tab order for a
+                                     human, irresistible to a bot that fills in everything. -->
                                 <div style="position:absolute;left:-9999px;top:-9999px;"
                                      aria-hidden="true">
-                                    <label t-attf-for="#{honeypot_field}">Ne rien saisir ici</label>
+                                    <label t-attf-for="#{honeypot_field}">Leave this empty</label>
                                     <input type="text" t-att-name="honeypot_field"
                                            t-att-id="honeypot_field" tabindex="-1"
                                            autocomplete="off" value=""/>
@@ -31,12 +31,12 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Nom / Personne <span class="text-danger">*</span></label>
+                                        <label class="form-label">Name <span class="text-danger">*</span></label>
                                         <input type="text" name="requester_name" class="form-control"
                                                required="required" t-att-value="values.get('requester_name', '')"/>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Entreprise</label>
+                                        <label class="form-label">Company</label>
                                         <input type="text" name="company_name" class="form-control"
                                                t-att-value="values.get('company_name', '')"/>
                                     </div>
@@ -46,29 +46,29 @@
                                                required="required" t-att-value="values.get('email', '')"/>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Téléphone</label>
+                                        <label class="form-label">Phone</label>
                                         <input type="text" name="phone" class="form-control"
                                                t-att-value="values.get('phone', '')"/>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Objet <span class="text-danger">*</span></label>
+                                    <label class="form-label">Subject <span class="text-danger">*</span></label>
                                     <input type="text" name="subject" class="form-control"
                                            required="required" t-att-value="values.get('subject', '')"/>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Description du besoin <span class="text-danger">*</span></label>
+                                    <label class="form-label">Description of the need <span class="text-danger">*</span></label>
                                     <textarea name="description" class="form-control" rows="6"
                                               required="required"><t t-out="values.get('description', '')"/></textarea>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label class="form-label">Catégorie</label>
+                                        <label class="form-label">Category</label>
                                         <select name="category_id" class="form-select">
-                                            <option value="">— Choisir —</option>
+                                            <option value="">— Choose —</option>
                                             <t t-foreach="categories" t-as="cat">
                                                 <option t-att-value="cat.id"
                                                         t-att-selected="'selected' if values.get('category_id') == str(cat.id) else None">
@@ -78,7 +78,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label class="form-label">Version Odoo cible</label>
+                                        <label class="form-label">Target Odoo version</label>
                                         <select name="odoo_version" class="form-select">
                                             <t t-foreach="version_options" t-as="vo">
                                                 <option t-att-value="vo[0]"
@@ -102,14 +102,14 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Mode de livraison</label>
+                                    <label class="form-label">Delivery mode</label>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="delivery_mode"
                                                id="dm_store" value="store"
                                                t-att-checked="'checked' if values.get('delivery_mode', 'store') != 'exclusive' else None"/>
                                         <label class="form-check-label" for="dm_store">
-                                            <strong>Publié sur le store</strong> — tarif standard.
-                                            Le module sera publié sur le store OdooSkills et réutilisable.
+                                            <strong>Published on the store</strong> — standard price.
+                                            The module will be published on the OdooSkills store and reusable.
                                         </label>
                                     </div>
                                     <div class="form-check">
@@ -117,22 +117,22 @@
                                                id="dm_excl" value="exclusive"
                                                t-att-checked="'checked' if values.get('delivery_mode') == 'exclusive' else None"/>
                                         <label class="form-check-label" for="dm_excl">
-                                            <strong>Exclusif pour moi</strong> — le module reste privé,
-                                            non publié sur le store. <span class="text-danger">Tarif nettement supérieur.</span>
+                                            <strong>Exclusive to me</strong> — the module stays private,
+                                            not published on the store. <span class="text-danger">Significantly higher price.</span>
                                         </label>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Pièces jointes</label>
+                                    <label class="form-label">Attachments</label>
                                     <input type="file" name="attachments" class="form-control" multiple="multiple"/>
                                     <small class="text-muted">
-                                        Max 5 fichiers, 10 Mo chacun. Types autorisés : <t t-out="allowed_ext"/>.
+                                        Max 5 files, 10 MB each. Allowed types: <t t-out="allowed_ext"/>.
                                     </small>
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-primary btn-lg">Envoyer la demande</button>
+                                    <button type="submit" class="btn btn-primary btn-lg">Send the request</button>
                                 </div>
                             </form>
                         </div>
@@ -142,29 +142,29 @@
         </t>
     </template>
 
-    <!-- CTA "Demander un module" injecté dans le hero du catalogue /apps -->
+    <!-- CTA "Request a module" injected into the catalog hero /apps -->
     <template id="catalog_dev_request_cta"
               inherit_id="oski_app_store.catalog_page"
-              name="CTA Demander un module (catalogue)">
+              name="CTA Request a module (catalog)">
         <xpath expr="//header[hasclass('oski-hero')]" position="inside">
             <div class="mt-3">
                 <a href="/apps/demande-developpement" class="btn btn-sm oski-btn-primary">
-                    Besoin d'un module sur-mesure ? Demander un module →
+                    Need a custom module? Request one →
                 </a>
             </div>
         </xpath>
     </template>
 
-    <template id="thanks_page" name="Demande envoyée">
+    <template id="thanks_page" name="Request sent">
         <t t-call="website.layout">
             <div class="oski-store">
                 <div class="container my-5 text-center">
                     <div class="oski-hero mb-4">
-                        <h1 class="mb-2">Merci !</h1>
-                        <p>Votre demande <strong t-if="ref"><t t-out="ref"/></strong> a bien été enregistrée.</p>
+                        <h1 class="mb-2">Thank you!</h1>
+                        <p>Your request <strong t-if="ref"><t t-out="ref"/></strong> has been recorded.</p>
                     </div>
-                    <p class="lead">Notre équipe l'analyse et reviendra vers vous par email.</p>
-                    <a href="/apps" class="btn btn-primary mt-3">Retour au catalogue</a>
+                    <p class="lead">Our team is reviewing it and will get back to you by email.</p>
+                    <a href="/apps" class="btn btn-primary mt-3">Back to catalog</a>
                 </div>
             </div>
         </t>

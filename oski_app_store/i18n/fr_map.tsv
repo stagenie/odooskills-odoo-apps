@@ -116,180 +116,192 @@ to	à la
 — latest version offered:	— dernière version proposée :
 ← Back to catalog	← Retour au catalogue
 ⬇ Download (	⬇ Télécharger (
-# --- legal_templates.xml / faq_templates.xml / support_templates.xml : identite provisoire (Task 4 remplace) ---
-, seule\n                        adresse de contact du store.	, seule\n                        adresse de contact du store.
-. Réponse sous\n                        un mois. Un résident de l'Union européenne peut saisir l'autorité de\n                        contrôle de son pays s'il estime la réponse insuffisante.	. Réponse sous\n                        un mois. Un résident de l'Union européenne peut saisir l'autorité de\n                        contrôle de son pays s'il estime la réponse insuffisante.
-1. Responsable du traitement	1. Responsable du traitement
-1. Éditeur du site	1. Éditeur du site
-10. Modification des conditions	10. Modification des conditions
-11. Droit applicable	11. Droit applicable
-2. Ce qui est collecté	2. Ce qui est collecté
-2. Objet du site	2. Objet du site
-3. Compte	3. Compte
-3. Pourquoi	3. Pourquoi
-4. Modules et licences	4. Modules et licences
-4. Qui d'autre y a accès	4. Qui d'autre y a accès
+, the sole\n                        contact address of the store.	, seule\n                        adresse de contact du store.
+. Response\n                        within one month. A resident of the European Union may refer the matter\n                        to the supervisory authority of their country if they believe the\n                        response is insufficient.	. Réponse sous\n                        un mois. Un résident de l'Union européenne peut saisir l'autorité de\n                        contrôle de son pays s'il estime la réponse insuffisante.
+1. Data controller	1. Responsable du traitement
+1. Site publisher	1. Éditeur du site
+10. Amendment of these terms	10. Modification des conditions
+11. Governing law	11. Droit applicable
+2. Purpose of the site	2. Objet du site
+2. What is collected	2. Ce qui est collecté
+3. Account	3. Compte
+3. Why	3. Pourquoi
+4. Modules and licenses	4. Modules et licences
+4. Who else has access	4. Qui d'autre y a accès
+5. For how long	5. Combien de temps
+5. Intellectual property of the site	5. Propriété intellectuelle du site
+6. Acceptable use	6. Usage acceptable
+6. Where the data is	6. Où sont les données
+7. Availability	7. Disponibilité
+7. Your rights	7. Vos droits
+8. External links	8. Liens externes
+9. Personal data	9. Données personnelles
+: every module purchased\n                            appears there with every Odoo version for which an archive exists.\n                            A purchase is never lost.	: chaque module acheté y\n                            figure avec toutes les versions d'Odoo pour lesquelles une archive\n                            existe. Un achat ne se perd pas.
+<em>Odoo</em> is a registered trademark of Odoo S.A. This site is neither\n                        published nor endorsed by Odoo S.A. The modules offered are independent\n                        works designed to work with the Odoo software. Other trademarks\n                        mentioned belong to their respective owners.	<em>Odoo</em> est une marque déposée d'Odoo S.A. Ce site n'est ni édité ni\n                        approuvé par Odoo S.A. Les modules proposés sont des travaux indépendants\n                        conçus pour fonctionner avec le logiciel Odoo. Les autres marques citées\n                        appartiennent à leurs titulaires respectifs.
+<strong>Fulfill the order</strong>: deliver the archive, open the\n                            customer area, issue the invoice.	<strong>Exécuter la commande</strong> : livrer l'archive, ouvrir\n                            l'espace client, émettre la facture.
+<strong>Inform</strong> about news, only if you have signed up:\n                            every mailing carries its unsubscribe link.	<strong>Informer</strong> des nouveautés, uniquement si vous vous êtes\n                            inscrit : chaque envoi porte son lien de désinscription.
+<strong>Keep the accounts</strong>, a legal obligation.	<strong>Tenir la comptabilité</strong>, obligation légale.
+<strong>Odoo &amp; AI Skills LLC</strong><br/>\n                        8206 Louisiana Blvd NE, Ste A #9881<br/>\n                        Albuquerque, NM 87113, United States<br/>\n                        Email:	<strong>Odoo &amp; AI Skills LLC</strong><br/>\n                        8206 Louisiana Blvd NE, Ste A #9881<br/>\n                        Albuquerque, NM 87113, États-Unis<br/>\n                        Courriel :
+<strong>Protect the site</strong>: form anti-spam, security\n                            logs — legitimate interest.	<strong>Protéger le site</strong> : anti-spam des formulaires,\n                            journaux de sécurité — intérêt légitime.
+<strong>Respond</strong> to a module request or a message.	<strong>Répondre</strong> à une demande de module ou à un message.
+A <code>.zip</code> archive containing the module folder, ready to\n                            drop into your installation.	Une archive <code>.zip</code> contenant le dossier du module, prête à\n                            déposer dans votre installation.
+A complete report is handled once; a partial report costs three\n                        back-and-forths.	Un signalement complet est traité une fois ; un signalement partiel\n                        coûte trois allers-retours.
+A modified module: describe the modification, it changes\n                            everything.	Un module modifié : décrivez la modification, elle change tout.
+A module feature doesn't behave as its listing describes.	Une fonction du module ne se comporte pas comme sa fiche l'annonce.
+A question about a module's scope before buying it.	Une question sur la portée d'un module avant de l'acheter.
+A question about this text?	Une question sur ce texte ?
+A question that isn't here ?	Une question qui n'est pas ici ?
+Access, rectification, erasure, restriction, objection and portability\n                        are exercised by emailing	Accès, rectification, effacement, limitation, opposition et portabilité\n                        s'exercent d'un courriel à
+Account	Compte
+Account and purchases: as long as the account exists — it gives\n                            access to the downloads already paid for.	Compte et achats : tant que le compte existe — il donne accès aux\n                            téléchargements déjà payés.
+Adapting the module to your processes: that is development.\n                            The	L'adaptation du module à vos processus : c'est du développement.\n                            Le formulaire
+Administering your server or your database.	L'administration de votre serveur ou de votre base.
+After the purchase	Après l'achat
+An incompatibility with a standard Odoo module.	Une incompatibilité avec un module standard d'Odoo.
+An order, invoice or download problem.	Un problème de commande, de facture ou de téléchargement.
+Any request about content on this site — error, copyright, personal\n                        data — is handled at	Toute demande relative à un contenu de ce site — erreur, droit d'auteur,\n                        donnée personnelle — se traite à
+Both points are set by the terms of sale, which will be published\n                            and presented at payment before sales open.	Ces deux points sont fixés par les conditions générales de vente, qui\n                            seront publiées et présentées au paiement avant l'ouverture des\n                            ventes.
+Buying	Acheter
+Buying, receiving and installing a module from the OdooSkills store: account, payment, invoice, immediate delivery, Odoo versions covered.	Acheter, recevoir et installer un module du store OdooSkills : compte, paiement, facture, livraison immédiate, versions d'Odoo couvertes.
+Buying, receiving, installing. If your question\n                        isn't here, it belongs at	Acheter, recevoir, installer. Si votre question n'y\n                        est pas, elle a sa place à
+Configuring Odoo itself, outside the module concerned.	Le paramétrage d'Odoo lui-même, hors du module concerné.
+Creating an account is required to purchase a module and to find your\n                        downloads again. The information provided must be accurate and kept up\n                        to date. Credentials are personal: their use is the responsibility of\n                        the account holder, who must report any unauthorized use without\n                        delay.	La création d'un compte est nécessaire pour acheter un module et\n                        retrouver ses téléchargements. Les informations fournies doivent être\n                        exactes et tenues à jour. Les identifiants sont personnels : leur usage\n                        relève de la responsabilité du titulaire du compte, qui signale sans\n                        délai tout usage non autorisé.
+Credit card and PayPal. Card data is entered on the payment\n                            provider's end: it never passes through this site.	Carte bancaire et PayPal. Les données de carte sont saisies chez le\n                            prestataire de paiement : elles ne transitent jamais par ce site.
+Describe it: the	Décrivez-le : le formulaire
+Do I get an invoice ?	Ai-je une facture ?
+Do I need to create an account ?	Faut-il créer un compte ?
+Does a 19.0 module work on an 18.0 database ?	Un module 19.0 fonctionne-t-il sur une base 18.0 ?
+Each module is distributed under the license shown on its listing and\n                        reproduced in its archive. This license determines what is allowed:\n                        installation, modification, redistribution. The financial terms of a\n                        purchase (price, invoicing, refund) are covered by the terms of sale\n                        presented at the time of payment.	Chaque module est distribué sous la licence indiquée sur sa fiche et\n                        reproduite dans son archive. Cette licence détermine ce qui est permis :\n                        installation, modification, redistribution. Les conditions financières\n                        d'un achat (prix, facturation, remboursement) relèvent des conditions\n                        générales de vente présentées au moment du paiement.
+Each module's listing shows what it requires. The store modules it\n                            depends on are clickable there.	La fiche de chaque module liste ce qu'il exige. Les modules du store\n                            dont il dépend y sont cliquables.
+Editor-in-chief	Directeur de la publication
+Enable developer mode, then\n                                <em>Apps → Update Apps List</em>.	Activez le mode développeur, puis\n                                <em>Applications → Mettre à jour la liste des applications</em>.
+Every message gets a response. The guaranteed delay will be announced\n                        with the terms of sale, before sales open.	Chaque message reçoit une réponse. Le délai garanti sera annoncé avec\n                        les conditions de vente, avant l'ouverture des ventes.
+Frequently asked questions	Questions fréquentes
+Hosting	Hébergement
+How do I install a module ?	Comment installer un module ?
+If the link came from us, let us know at	Si le lien venait de nous, dites-le à
+Immediately. As soon as the order is confirmed, the module's listing\n                            switches from "Buy" to "Download", and a confirmation email points\n                            you back to your apps.	Immédiatement. Dès la commande confirmée, la fiche du module bascule de\n                            « Acheter » à « Télécharger », et un courriel de confirmation vous\n                            renvoie vers vos applications.
+In	Dans
+In US dollars. The price shown on the listing is the amount\n                            invoiced. Your bank may apply its own conversion.	En dollars américains. Le prix affiché sur la fiche est le montant\n                            facturé. Votre banque peut appliquer sa propre conversion.
+In what form ?	Sous quelle forme ?
+In which currency ?	En quelle monnaie ?
+Installing	Installer
+Invoices: the applicable accounting retention period.	Journaux techniques : douze mois.
+It depends on the module: its listing shows the versions for which\n                            an archive exists, and the catalog lets you filter on them.	Cela dépend du module : sa fiche affiche les versions pour lesquelles\n                            une archive existe, et le catalogue permet de filtrer dessus.
+Last updated: August 31, 2026.	Dernière mise à jour : 31 août 2026.
+Legal notice	Mentions légales
+Module request	Demande de module
+Module requests and messages: three years after the last\n                            exchange.	Demandes de module et messages : trois ans après le dernier échange.
+Mustapha BENHAMIDA, manager.	Mustapha BENHAMIDA, gérant.
+Necessary cookies (session, cart, language preference) allow the site to\n                        work. Non-essential cookies are only set after acceptance in the\n                        banner, revocable at any time.	Les cookies nécessaires (session, panier, préférence de langue) permettent\n                        au site de fonctionner. Les cookies non essentiels ne sont déposés qu'après\n                        acceptation dans le bandeau, révocable à tout moment.
+No. Every major Odoo version changes its interface and its\n                            conventions: you need the archive for your version. If it doesn't\n                            exist yet, the listing offers the most recent one available and\n                            says so.	Non. Chaque version majeure d'Odoo change son interface et ses\n                            conventions : il faut l'archive de votre version. Si elle n'existe pas\n                            encore, la fiche vous propose la plus récente disponible et le dit.
+Odoo &amp; AI Skills LLC, 8206 Louisiana Blvd NE, Ste A #9881,\n                        Albuquerque, NM 87113, United States —	Odoo &amp; AI Skills LLC, 8206 Louisiana Blvd NE, Ste A #9881,\n                        Albuquerque, NM 87113, États-Unis —
+Odoo 20 is at the door. It already appears in the selector, without\n                            an archive: those will follow the official release.	Odoo 20 est à la porte. Elle apparaît déjà dans le sélecteur, sans\n                            archive : celles-ci suivront la sortie officielle.
+One address for the whole OdooSkills store: apps@odooskills.com. What's covered, what isn't, and what to attach to a report.	Une seule adresse pour tout le store OdooSkills : apps@odooskills.com. Ce qui est couvert, ce qui ne l'est pas, et ce qu'il faut joindre à un signalement.
+One address for the whole store —\n                        free modules as well as paid ones, a question before purchase as well\n                        as a failure after installation.	Une seule adresse pour tout le store —\n                        modules gratuits comme payants, question avant achat comme panne\n                        après installation.
+Only technical providers, each for their part:\n                        <strong>Stripe</strong> and <strong>PayPal</strong> for payment\n                        collection, <strong>Mailjet</strong> for email delivery,\n                        <strong>Groupe LWS</strong> for hosting the server (France).\n                        No resale, no data broker.	Uniquement des prestataires techniques, chacun pour sa part :\n                        <strong>Stripe</strong> et <strong>PayPal</strong> pour l'encaissement,\n                        <strong>Mailjet</strong> pour l'acheminement des courriels,\n                        <strong>Groupe LWS</strong> pour l'hébergement du serveur (France).\n                        Aucune revente, aucun courtier en données.
+Order	Commande
+Privacy policy	Politique de confidentialité
+Publisher, editor-in-chief and host of the OdooSkills Odoo module store.	Éditeur, directeur de la publication et hébergeur du store de modules Odoo OdooSkills.
+Receiving	Recevoir
+Reporting	Signalement
+Request a\n                            module	Demander un\n                            module
+Request a module	Demander un module
+Response time	Délai de réponse
+Restart the Odoo service.	Redémarrez le service Odoo.
+Search for a module…	Chercher un module…
+Search for the module by its name and install it.	Cherchez le module par son nom et installez-le.
+See also	Voir aussi
+Site content	Contenus du site
+Site publisher	Éditeur du site
+Technical	Technique
+Technical logs: twelve months.	Journaux techniques : douze mois.
+Terms of use	Conditions d'utilisation
+Terms of use of the OdooSkills Odoo module store: account, licenses, acceptable use, availability.	Conditions d'utilisation du store de modules Odoo OdooSkills : compte, licences, usage acceptable, disponibilité.
+Text, visuals and screenshots are the property of the publisher, unless\n                        stated otherwise. Each module remains governed by the license shown on\n                        its listing.	Textes, visuels et captures sont la propriété de l'éditeur, sauf mention\n                        contraire. Chaque module reste régi par la licence indiquée sur sa fiche.
+The <strong>Odoo version</strong> and how it is installed.	La <strong>version d'Odoo</strong> et son mode d'installation.
+The <strong>full error message</strong> — the server log says\n                            more than a screenshot.	Le <strong>message d'erreur complet</strong> — le journal du serveur\n                            en dit plus que la capture d'écran.
+The data collected (account, order, message) is used to respond to\n                        requests, deliver the modules and invoice. Any request for access,\n                        rectification or deletion is made to	Les données collectées (compte, commande, message) servent à répondre aux\n                        demandes, livrer les modules et facturer. Toute demande d'accès, de\n                        rectification ou de suppression se fait à
+The following are forbidden: massive automated extraction of the\n                        catalog, any attempt at unauthorized access, deliberately putting the\n                        service at fault, circumventing the access controls on paid archives,\n                        and redistributing a paid module outside the scope of its license.	Sont interdits : l'extraction automatisée massive du catalogue, toute\n                        tentative d'accès non autorisé, la mise en défaut volontaire du service,\n                        le contournement des contrôles d'accès aux archives payantes et la\n                        redistribution d'un module payant hors du cadre de sa licence.
+The license is shown on the module's listing and in its archive:\n                            free modules are under an open-source license, paid modules under\n                            a proprietary Odoo license.	La licence figure sur la fiche du module et dans son archive : les\n                            modules gratuits sont sous licence libre, les modules payants sous\n                            licence propriétaire Odoo.
+The link may be old, or the module may have moved.\n                        The catalog, though, hasn't moved.	Le lien est peut-être ancien, ou le module a\n                        changé d'adresse. Le catalogue, lui, n'a pas bougé.
+The module I need doesn't exist.	Le module dont j'ai besoin n'existe pas.
+The module won't install, or misbehaves.	Le module ne s'installe pas, ou se comporte mal.
+The module won't install, or raises an error.	Le module ne s'installe pas, ou remonte une erreur.
+The module's <strong>technical name</strong> and its version.	Le <strong>nom technique</strong> du module et sa version.
+The path followed in the interface to reproduce the problem.	Le chemin suivi dans l'interface pour reproduire le problème.
+The server is located in France. The publisher is a US company: its\n                        officers access it from abroad, and the providers mentioned may\n                        process some data outside the European Union.	Le serveur est situé en France. L'éditeur est une société américaine : ses\n                        responsables y accèdent depuis l'étranger, et les prestataires cités\n                        peuvent traiter certaines données hors de l'Union européenne.
+The site <strong>apps.odooskills.com</strong> is published by\n                        <strong>Odoo &amp; AI Skills LLC</strong>, a company organized under the\n                        laws of the State of New Mexico (United States). Any question about the\n                        site or the modules goes to	Le site <strong>apps.odooskills.com</strong> est édité par\n                        <strong>Odoo &amp; AI Skills LLC</strong>, société de droit de l'État\n                        du Nouveau-Mexique (États-Unis). Toute question relative au site ou\n                        aux modules se pose à
+The site is hosted on a server of <strong>Groupe LWS SARL</strong> (France) —	Le site est hébergé sur un serveur du <strong>Groupe LWS SARL</strong> (France) —
+The site is provided as is. Interruptions may occur for maintenance or\n                        for an external cause. No uninterrupted availability is guaranteed.	Le site est fourni en l'état. Des interruptions peuvent survenir pour\n                        maintenance ou pour une cause extérieure. Aucune disponibilité\n                        ininterrompue n'est garantie.
+The site may link to third-party sites, whose content is beyond the\n                        publisher's control. Visiting them is governed by the terms specific to\n                        those sites.	Le site peut renvoyer vers des sites tiers, dont le contenu échappe à\n                        l'éditeur. Leur consultation relève des conditions propres à ces sites.
+The site presents a catalog of modules for the Odoo software. Some\n                        modules are available for free download, others after purchase. Odoo\n                        is a trademark of Odoo S.A.; this site is not published by Odoo S.A. and\n                        does not bind that company.	Le site présente un catalogue de modules pour le logiciel Odoo. Certains\n                        modules sont téléchargeables gratuitement, d'autres après achat. Odoo\n                        est une marque d'Odoo S.A. ; ce site n'est pas édité par Odoo S.A. et\n                        n'engage pas cette société.
+The text, visuals, screenshots and graphic elements of the site are\n                        protected. Their reproduction beyond a short quotation with a link to\n                        the source requires prior written consent.	Les textes, visuels, captures et éléments graphiques du site sont\n                        protégés. Leur reproduction hors citation courte avec lien vers la\n                        source demande un accord écrit préalable.
+These terms are governed by the law of the State of New Mexico\n                        (United States). The mandatory provisions protecting the consumer in\n                        their country of residence remain applicable.	Ces conditions sont régies par le droit de l'État du Nouveau-Mexique\n                        (États-Unis). Les dispositions impératives protégeant le consommateur\n                        dans son pays de résidence restent applicables.
+These terms may change. The version online at the time of the visit is\n                        the one that applies; the update date appears at the top of the page.	Ces conditions peuvent évoluer. La version en ligne au moment de la\n                        visite est celle qui s'applique ; la date de mise à jour figure en tête\n                        de page.
+This page does not exist.	Cette page n'existe pas.
+This site collects the minimum necessary to deliver a module, issue an\n                        invoice and answer a message. Nothing is sold or transferred to third\n                        parties for advertising purposes.	Ce site collecte le minimum nécessaire pour livrer un module, émettre une\n                        facture et répondre à un message. Rien n'est vendu ni cédé à des tiers à\n                        des fins publicitaires.
+Trademarks and rights	Marques et droits
+Under what license ?	Sous quelle licence ?
+Unzip the archive into a folder declared in\n                                <code>addons_path</code>.	Décompressez l'archive dans un dossier déclaré dans\n                                <code>addons_path</code>.
+Updates and refunds ?	Mises à jour et remboursement ?
+What about Odoo 20 ?	Et Odoo 20 ?
+What about dependencies ?	Et les dépendances ?
+What payment methods ?	Quels moyens de paiement ?
+What the OdooSkills store collects, why, for how long, who accesses it, and how to exercise your rights.	Ce que le store OdooSkills collecte, pourquoi, combien de temps, qui y accède, et comment exercer vos droits.
+What to attach	Ce qu'il faut joindre
+What you expected, what happened.	Ce que vous attendiez, ce qui s'est produit.
+What's covered	Ce qui est couvert
+What's not covered	Ce qui n'est pas couvert
+When do I receive the module ?	Quand est-ce que je reçois le module ?
+Where can I find my purchases later ?	Où retrouver mes achats plus tard ?
+Which versions are covered ?	Quelles versions sont couvertes ?
+Write to	Écrivez à
+Yes, issued automatically when the order is confirmed and available\n                            in your customer area.	Oui, émise automatiquement à la confirmation de la commande et\n                            disponible dans votre espace client.
+Yes. The right to download a paid module is attached to the customer\n                            of the order: without an account, a purchase could not be linked to\n                            you and you would leave with nothing. The account is created during\n                            payment, in two fields.	Oui. Le droit de télécharger un module payant est attaché au client de\n                            la commande : sans compte, un achat ne pourrait pas vous être rattaché\n                            et vous repartiriez sans rien. Le compte se crée pendant le paiement,\n                            en deux champs.
+and	et
+contact details, description of the\n                            need, budget, attachments you add yourself.	coordonnées, description du besoin,\n                            budget, pièces jointes que vous joignez vous-même.
+content of the emails received at\n                            <code>apps@odooskills.com</code> and of the site's forms.	contenu des courriels reçus à\n                            <code>apps@odooskills.com</code> et des formulaires du site.
+form\n                            opens a tracked request, budget and version included.	ouvre une\n                            demande suivie, budget et version compris.
+form opens a quoted request.	ouvre une demande chiffrée.
+modules purchased, amount, date, invoice.\n                            <strong>Card data never passes through this site</strong>: it is\n                            entered on the payment provider's end.	modules achetés, montant, date, facture. Les\n                            <strong>données de carte ne transitent jamais par ce site</strong> :\n                            elles sont saisies chez le prestataire de paiement.
+name, email address, encrypted password,\n                            billing address.	nom, adresse électronique, mot de passe chiffré,\n                            adresse de facturation.
+server logs (IP address, page requested,\n                            date), session and cart cookies.	journaux du serveur (adresse IP, page demandée,\n                            date), cookies de session et de panier.
+the frequently asked questions	les questions fréquentes
+the privacy policy	la politique de confidentialité
+the terms of use	les conditions d'utilisation
+with your Odoo version, the module's name and the full error\n                            message. It's the same inbox for the whole store.	avec votre version d'Odoo, le nom du module et le message d'erreur\n                            complet. C'est la même boîte pour tout le store.
+your customer area	votre espace client
+—\n                        they already answer the essentials.	— elles\n                        répondent déjà à l'essentiel.
 404	404
-5. Combien de temps	5. Combien de temps
-5. Propriété intellectuelle du site	5. Propriété intellectuelle du site
-6. Où sont les données	6. Où sont les données
-6. Usage acceptable	6. Usage acceptable
-7. Disponibilité	7. Disponibilité
-7. Vos droits	7. Vos droits
 8. Cookies	8. Cookies
-8. Liens externes	8. Liens externes
-9. Données personnelles	9. Données personnelles
-: chaque module acheté y\n                            figure avec toutes les versions d'Odoo pour lesquelles une archive\n                            existe. Un achat ne se perd pas.	: chaque module acheté y\n                            figure avec toutes les versions d'Odoo pour lesquelles une archive\n                            existe. Un achat ne se perd pas.
-<em>Odoo</em> est une marque déposée d'Odoo S.A. Ce site n'est ni édité ni\n                        approuvé par Odoo S.A. Les modules proposés sont des travaux indépendants\n                        conçus pour fonctionner avec le logiciel Odoo. Les autres marques citées\n                        appartiennent à leurs titulaires respectifs.	<em>Odoo</em> est une marque déposée d'Odoo S.A. Ce site n'est ni édité ni\n                        approuvé par Odoo S.A. Les modules proposés sont des travaux indépendants\n                        conçus pour fonctionner avec le logiciel Odoo. Les autres marques citées\n                        appartiennent à leurs titulaires respectifs.
 <span class="sep" aria-hidden="true">·</span>	<span class="sep" aria-hidden="true">·</span>
-<strong>Exécuter la commande</strong> : livrer l'archive, ouvrir\n                            l'espace client, émettre la facture.	<strong>Exécuter la commande</strong> : livrer l'archive, ouvrir\n                            l'espace client, émettre la facture.
-<strong>Informer</strong> des nouveautés, uniquement si vous vous êtes\n                            inscrit : chaque envoi porte son lien de désinscription.	<strong>Informer</strong> des nouveautés, uniquement si vous vous êtes\n                            inscrit : chaque envoi porte son lien de désinscription.
-<strong>Odoo &amp; AI Skills LLC</strong><br/>\n                        8206 Louisiana Blvd NE, Ste A #9881<br/>\n                        Albuquerque, NM 87113, États-Unis<br/>\n                        Courriel :	<strong>Odoo &amp; AI Skills LLC</strong><br/>\n                        8206 Louisiana Blvd NE, Ste A #9881<br/>\n                        Albuquerque, NM 87113, États-Unis<br/>\n                        Courriel :
-<strong>Protéger le site</strong> : anti-spam des formulaires,\n                            journaux de sécurité — intérêt légitime.	<strong>Protéger le site</strong> : anti-spam des formulaires,\n                            journaux de sécurité — intérêt légitime.
-<strong>Répondre</strong> à une demande de module ou à un message.	<strong>Répondre</strong> à une demande de module ou à un message.
-<strong>Tenir la comptabilité</strong>, obligation légale.	<strong>Tenir la comptabilité</strong>, obligation légale.
-Accès, rectification, effacement, limitation, opposition et portabilité\n                        s'exercent d'un courriel à	Accès, rectification, effacement, limitation, opposition et portabilité\n                        s'exercent d'un courriel à
-Acheter	Acheter
-Acheter, recevoir et installer un module du store OdooSkills : compte, paiement, facture, livraison immédiate, versions d'Odoo couvertes.	Acheter, recevoir et installer un module du store OdooSkills : compte, paiement, facture, livraison immédiate, versions d'Odoo couvertes.
-Acheter, recevoir, installer. Si votre question n'y\n                        est pas, elle a sa place à	Acheter, recevoir, installer. Si votre question n'y\n                        est pas, elle a sa place à
-Activez le mode développeur, puis\n                                <em>Applications → Mettre à jour la liste des applications</em>.	Activez le mode développeur, puis\n                                <em>Applications → Mettre à jour la liste des applications</em>.
-Ai-je une facture ?	Ai-je une facture ?
 App Store	App Store
-Après l'achat	Après l'achat
 Can Publish	Can Publish
-Carte bancaire et PayPal. Les données de carte sont saisies chez le\n                            prestataire de paiement : elles ne transitent jamais par ce site.	Carte bancaire et PayPal. Les données de carte sont saisies chez le\n                            prestataire de paiement : elles ne transitent jamais par ce site.
-Ce qu'il faut joindre	Ce qu'il faut joindre
-Ce que le store OdooSkills collecte, pourquoi, combien de temps, qui y accède, et comment exercer vos droits.	Ce que le store OdooSkills collecte, pourquoi, combien de temps, qui y accède, et comment exercer vos droits.
-Ce que vous attendiez, ce qui s'est produit.	Ce que vous attendiez, ce qui s'est produit.
-Ce qui est couvert	Ce qui est couvert
-Ce qui n'est pas couvert	Ce qui n'est pas couvert
-Ce site collecte le minimum nécessaire pour livrer un module, émettre une\n                        facture et répondre à un message. Rien n'est vendu ni cédé à des tiers à\n                        des fins publicitaires.	Ce site collecte le minimum nécessaire pour livrer un module, émettre une\n                        facture et répondre à un message. Rien n'est vendu ni cédé à des tiers à\n                        des fins publicitaires.
-Cela dépend du module : sa fiche affiche les versions pour lesquelles\n                            une archive existe, et le catalogue permet de filtrer dessus.	Cela dépend du module : sa fiche affiche les versions pour lesquelles\n                            une archive existe, et le catalogue permet de filtrer dessus.
-Ces conditions peuvent évoluer. La version en ligne au moment de la\n                        visite est celle qui s'applique ; la date de mise à jour figure en tête\n                        de page.	Ces conditions peuvent évoluer. La version en ligne au moment de la\n                        visite est celle qui s'applique ; la date de mise à jour figure en tête\n                        de page.
-Ces conditions sont régies par le droit de l'État du Nouveau-Mexique\n                        (États-Unis). Les dispositions impératives protégeant le consommateur\n                        dans son pays de résidence restent applicables.	Ces conditions sont régies par le droit de l'État du Nouveau-Mexique\n                        (États-Unis). Les dispositions impératives protégeant le consommateur\n                        dans son pays de résidence restent applicables.
-Ces deux points sont fixés par les conditions générales de vente, qui\n                            seront publiées et présentées au paiement avant l'ouverture des\n                            ventes.	Ces deux points sont fixés par les conditions générales de vente, qui\n                            seront publiées et présentées au paiement avant l'ouverture des\n                            ventes.
-Cette page n'existe pas.	Cette page n'existe pas.
-Chaque message reçoit une réponse. Le délai garanti sera annoncé avec\n                        les conditions de vente, avant l'ouverture des ventes.	Chaque message reçoit une réponse. Le délai garanti sera annoncé avec\n                        les conditions de vente, avant l'ouverture des ventes.
-Chaque module est distribué sous la licence indiquée sur sa fiche et\n                        reproduite dans son archive. Cette licence détermine ce qui est permis :\n                        installation, modification, redistribution. Les conditions financières\n                        d'un achat (prix, facturation, remboursement) relèvent des conditions\n                        générales de vente présentées au moment du paiement.	Chaque module est distribué sous la licence indiquée sur sa fiche et\n                        reproduite dans son archive. Cette licence détermine ce qui est permis :\n                        installation, modification, redistribution. Les conditions financières\n                        d'un achat (prix, facturation, remboursement) relèvent des conditions\n                        générales de vente présentées au moment du paiement.
-Chercher un module…	Chercher un module…
-Cherchez le module par son nom et installez-le.	Cherchez le module par son nom et installez-le.
-Commande	Commande
-Comment installer un module ?	Comment installer un module ?
-Compte	Compte
-Compte et achats : tant que le compte existe — il donne accès aux\n                            téléchargements déjà payés.	Compte et achats : tant que le compte existe — il donne accès aux\n                            téléchargements déjà payés.
-Conditions d'utilisation	Conditions d'utilisation
-Conditions d'utilisation du store de modules Odoo OdooSkills : compte, licences, usage acceptable, disponibilité.	Conditions d'utilisation du store de modules Odoo OdooSkills : compte, licences, usage acceptable, disponibilité.
-Confidentialité	Confidentialité
-Contenus du site	Contenus du site
 Created by	Created by
 Created on	Created on
-Dans	Dans
-Demande de module	Demande de module
-Demander un\n                            module	Demander un\n                            module
-Demander un module	Demander un module
-Demandes de module et messages : trois ans après le dernier échange.	Demandes de module et messages : trois ans après le dernier échange.
-Dernière mise à jour : 31 août 2026.	Dernière mise à jour : 31 août 2026.
-Directeur de la publication	Directeur de la publication
 Display Name	Display Name
-Décompressez l'archive dans un dossier déclaré dans\n                                <code>addons_path</code>.	Décompressez l'archive dans un dossier déclaré dans\n                                <code>addons_path</code>.
-Décrivez-le : le formulaire	Décrivez-le : le formulaire
-Délai de réponse	Délai de réponse
-En dollars américains. Le prix affiché sur la fiche est le montant\n                            facturé. Votre banque peut appliquer sa propre conversion.	En dollars américains. Le prix affiché sur la fiche est le montant\n                            facturé. Votre banque peut appliquer sa propre conversion.
-En quelle monnaie ?	En quelle monnaie ?
-Et Odoo 20 ?	Et Odoo 20 ?
-Et les dépendances ?	Et les dépendances ?
 Exemple	Exemple
-Factures : la durée de conservation comptable applicable.	Factures : la durée de conservation comptable applicable.
-Faut-il créer un compte ?	Faut-il créer un compte ?
 Gratuit	Gratuit
-Hébergement	Hébergement
 ID	ID
-Immédiatement. Dès la commande confirmée, la fiche du module bascule de\n                            « Acheter » à « Télécharger », et un courriel de confirmation vous\n                            renvoie vers vos applications.	Immédiatement. Dès la commande confirmée, la fiche du module bascule de\n                            « Acheter » à « Télécharger », et un courriel de confirmation vous\n                            renvoie vers vos applications.
-Installer	Installer
 Is Published	Is Published
-Journaux techniques : douze mois.	Journaux techniques : douze mois.
-L'adaptation du module à vos processus : c'est du développement.\n                            Le formulaire	L'adaptation du module à vos processus : c'est du développement.\n                            Le formulaire
-L'administration de votre serveur ou de votre base.	L'administration de votre serveur ou de votre base.
 LGPL-3	LGPL-3
-La <strong>version d'Odoo</strong> et son mode d'installation.	La <strong>version d'Odoo</strong> et son mode d'installation.
-La création d'un compte est nécessaire pour acheter un module et\n                        retrouver ses téléchargements. Les informations fournies doivent être\n                        exactes et tenues à jour. Les identifiants sont personnels : leur usage\n                        relève de la responsabilité du titulaire du compte, qui signale sans\n                        délai tout usage non autorisé.	La création d'un compte est nécessaire pour acheter un module et\n                        retrouver ses téléchargements. Les informations fournies doivent être\n                        exactes et tenues à jour. Les identifiants sont personnels : leur usage\n                        relève de la responsabilité du titulaire du compte, qui signale sans\n                        délai tout usage non autorisé.
-La fiche de chaque module liste ce qu'il exige. Les modules du store\n                            dont il dépend y sont cliquables.	La fiche de chaque module liste ce qu'il exige. Les modules du store\n                            dont il dépend y sont cliquables.
-La licence figure sur la fiche du module et dans son archive : les\n                            modules gratuits sont sous licence libre, les modules payants sous\n                            licence propriétaire Odoo.	La licence figure sur la fiche du module et dans son archive : les\n                            modules gratuits sont sous licence libre, les modules payants sous\n                            licence propriétaire Odoo.
 Last Updated by	Last Updated by
 Last Updated on	Last Updated on
-Le <strong>message d'erreur complet</strong> — le journal du serveur\n                            en dit plus que la capture d'écran.	Le <strong>message d'erreur complet</strong> — le journal du serveur\n                            en dit plus que la capture d'écran.
-Le <strong>nom technique</strong> du module et sa version.	Le <strong>nom technique</strong> du module et sa version.
-Le chemin suivi dans l'interface pour reproduire le problème.	Le chemin suivi dans l'interface pour reproduire le problème.
-Le lien est peut-être ancien, ou le module a\n                        changé d'adresse. Le catalogue, lui, n'a pas bougé.	Le lien est peut-être ancien, ou le module a\n                        changé d'adresse. Le catalogue, lui, n'a pas bougé.
-Le module dont j'ai besoin n'existe pas.	Le module dont j'ai besoin n'existe pas.
-Le module ne s'installe pas, ou remonte une erreur.	Le module ne s'installe pas, ou remonte une erreur.
-Le module ne s'installe pas, ou se comporte mal.	Le module ne s'installe pas, ou se comporte mal.
-Le paramétrage d'Odoo lui-même, hors du module concerné.	Le paramétrage d'Odoo lui-même, hors du module concerné.
-Le serveur est situé en France. L'éditeur est une société américaine : ses\n                        responsables y accèdent depuis l'étranger, et les prestataires cités\n                        peuvent traiter certaines données hors de l'Union européenne.	Le serveur est situé en France. L'éditeur est une société américaine : ses\n                        responsables y accèdent depuis l'étranger, et les prestataires cités\n                        peuvent traiter certaines données hors de l'Union européenne.
-Le site <strong>apps.odooskills.com</strong> est édité par\n                        <strong>Odoo &amp; AI Skills LLC</strong>, société de droit de l'État\n                        du Nouveau-Mexique (États-Unis). Toute question relative au site ou\n                        aux modules se pose à	Le site <strong>apps.odooskills.com</strong> est édité par\n                        <strong>Odoo &amp; AI Skills LLC</strong>, société de droit de l'État\n                        du Nouveau-Mexique (États-Unis). Toute question relative au site ou\n                        aux modules se pose à
-Le site est fourni en l'état. Des interruptions peuvent survenir pour\n                        maintenance ou pour une cause extérieure. Aucune disponibilité\n                        ininterrompue n'est garantie.	Le site est fourni en l'état. Des interruptions peuvent survenir pour\n                        maintenance ou pour une cause extérieure. Aucune disponibilité\n                        ininterrompue n'est garantie.
-Le site est hébergé sur un serveur du <strong>Groupe LWS SARL</strong> (France) —	Le site est hébergé sur un serveur du <strong>Groupe LWS SARL</strong> (France) —
-Le site peut renvoyer vers des sites tiers, dont le contenu échappe à\n                        l'éditeur. Leur consultation relève des conditions propres à ces sites.	Le site peut renvoyer vers des sites tiers, dont le contenu échappe à\n                        l'éditeur. Leur consultation relève des conditions propres à ces sites.
-Le site présente un catalogue de modules pour le logiciel Odoo. Certains\n                        modules sont téléchargeables gratuitement, d'autres après achat. Odoo\n                        est une marque d'Odoo S.A. ; ce site n'est pas édité par Odoo S.A. et\n                        n'engage pas cette société.	Le site présente un catalogue de modules pour le logiciel Odoo. Certains\n                        modules sont téléchargeables gratuitement, d'autres après achat. Odoo\n                        est une marque d'Odoo S.A. ; ce site n'est pas édité par Odoo S.A. et\n                        n'engage pas cette société.
-Les cookies nécessaires (session, panier, préférence de langue) permettent\n                        au site de fonctionner. Les cookies non essentiels ne sont déposés qu'après\n                        acceptation dans le bandeau, révocable à tout moment.	Les cookies nécessaires (session, panier, préférence de langue) permettent\n                        au site de fonctionner. Les cookies non essentiels ne sont déposés qu'après\n                        acceptation dans le bandeau, révocable à tout moment.
-Les données collectées (compte, commande, message) servent à répondre aux\n                        demandes, livrer les modules et facturer. Toute demande d'accès, de\n                        rectification ou de suppression se fait à	Les données collectées (compte, commande, message) servent à répondre aux\n                        demandes, livrer les modules et facturer. Toute demande d'accès, de\n                        rectification ou de suppression se fait à
-Les textes, visuels, captures et éléments graphiques du site sont\n                        protégés. Leur reproduction hors citation courte avec lien vers la\n                        source demande un accord écrit préalable.	Les textes, visuels, captures et éléments graphiques du site sont\n                        protégés. Leur reproduction hors citation courte avec lien vers la\n                        source demande un accord écrit préalable.
-Marques et droits	Marques et droits
-Mentions légales	Mentions légales
 Messages	Messages
-Mises à jour et remboursement ?	Mises à jour et remboursement ?
 Module	Module
 Modules	Modules
-Mustapha BENHAMIDA, gérant.	Mustapha BENHAMIDA, gérant.
-Non. Chaque version majeure d'Odoo change son interface et ses\n                            conventions : il faut l'archive de votre version. Si elle n'existe pas\n                            encore, la fiche vous propose la plus récente disponible et le dit.	Non. Chaque version majeure d'Odoo change son interface et ses\n                            conventions : il faut l'archive de votre version. Si elle n'existe pas\n                            encore, la fiche vous propose la plus récente disponible et le dit.
 OPL-1	OPL-1
-Odoo &amp; AI Skills LLC, 8206 Louisiana Blvd NE, Ste A #9881,\n                        Albuquerque, NM 87113, États-Unis —	Odoo &amp; AI Skills LLC, 8206 Louisiana Blvd NE, Ste A #9881,\n                        Albuquerque, NM 87113, États-Unis —
-Odoo 20 est à la porte. Elle apparaît déjà dans le sélecteur, sans\n                            archive : celles-ci suivront la sortie officielle.	Odoo 20 est à la porte. Elle apparaît déjà dans le sélecteur, sans\n                            archive : celles-ci suivront la sortie officielle.
 OdooSkills App Store	OdooSkills App Store
-Oui, émise automatiquement à la confirmation de la commande et\n                            disponible dans votre espace client.	Oui, émise automatiquement à la confirmation de la commande et\n                            disponible dans votre espace client.
-Oui. Le droit de télécharger un module payant est attaché au client de\n                            la commande : sans compte, un achat ne pourrait pas vous être rattaché\n                            et vous repartiriez sans rien. Le compte se crée pendant le paiement,\n                            en deux champs.	Oui. Le droit de télécharger un module payant est attaché au client de\n                            la commande : sans compte, un achat ne pourrait pas vous être rattaché\n                            et vous repartiriez sans rien. Le compte se crée pendant le paiement,\n                            en deux champs.
-Où retrouver mes achats plus tard ?	Où retrouver mes achats plus tard ?
-Parcourir le catalogue	Parcourir le catalogue
-Politique de confidentialité	Politique de confidentialité
 Product	Product
-Quand est-ce que je reçois le module ?	Quand est-ce que je reçois le module ?
-Quelles versions sont couvertes ?	Quelles versions sont couvertes ?
-Quels moyens de paiement ?	Quels moyens de paiement ?
-Questions fréquentes	Questions fréquentes
-Recevoir	Recevoir
-Rechercher	Rechercher
-Redémarrez le service Odoo.	Redémarrez le service Odoo.
 SEO optimized	SEO optimized
 Seo name	Seo name
-Si le lien venait de nous, dites-le à	Si le lien venait de nous, dites-le à
-Signalement	Signalement
-Sont interdits : l'extraction automatisée massive du catalogue, toute\n                        tentative d'accès non autorisé, la mise en défaut volontaire du service,\n                        le contournement des contrôles d'accès aux archives payantes et la\n                        redistribution d'un module payant hors du cadre de sa licence.	Sont interdits : l'extraction automatisée massive du catalogue, toute\n                        tentative d'accès non autorisé, la mise en défaut volontaire du service,\n                        le contournement des contrôles d'accès aux archives payantes et la\n                        redistribution d'un module payant hors du cadre de sa licence.
-Sous quelle forme ?	Sous quelle forme ?
-Sous quelle licence ?	Sous quelle licence ?
 Support	Support
 Tag	Tag
-Technique	Technique
-Textes, visuels et captures sont la propriété de l'éditeur, sauf mention\n                        contraire. Chaque module reste régi par la licence indiquée sur sa fiche.	Textes, visuels et captures sont la propriété de l'éditeur, sauf mention\n                        contraire. Chaque module reste régi par la licence indiquée sur sa fiche.
 The full absolute URL to access the document through the website.	The full absolute URL to access the document through the website.
 The full relative URL to access the document through the website.	The full relative URL to access the document through the website.
-Toute demande relative à un contenu de ce site — erreur, droit d'auteur,\n                        donnée personnelle — se traite à	Toute demande relative à un contenu de ce site — erreur, droit d'auteur,\n                        donnée personnelle — se traite à
-Un module 19.0 fonctionne-t-il sur une base 18.0 ?	Un module 19.0 fonctionne-t-il sur une base 18.0 ?
-Un module modifié : décrivez la modification, elle change tout.	Un module modifié : décrivez la modification, elle change tout.
-Un problème de commande, de facture ou de téléchargement.	Un problème de commande, de facture ou de téléchargement.
-Un signalement complet est traité une fois ; un signalement partiel\n                        coûte trois allers-retours.	Un signalement complet est traité une fois ; un signalement partiel\n                        coûte trois allers-retours.
-Une archive <code>.zip</code> contenant le dossier du module, prête à\n                            déposer dans votre installation.	Une archive <code>.zip</code> contenant le dossier du module, prête à\n                            déposer dans votre installation.
-Une fonction du module ne se comporte pas comme sa fiche l'annonce.	Une fonction du module ne se comporte pas comme sa fiche l'annonce.
-Une incompatibilité avec un module standard d'Odoo.	Une incompatibilité avec un module standard d'Odoo.
-Une question qui n'est pas ici ?	Une question qui n'est pas ici ?
-Une question sur ce texte ?	Une question sur ce texte ?
-Une question sur la portée d'un module avant de l'acheter.	Une question sur la portée d'un module avant de l'acheter.
-Une seule adresse pour tout le store OdooSkills : apps@odooskills.com. Ce qui est couvert, ce qui ne l'est pas, et ce qu'il faut joindre à un signalement.	Une seule adresse pour tout le store OdooSkills : apps@odooskills.com. Ce qui est couvert, ce qui ne l'est pas, et ce qu'il faut joindre à un signalement.
-Une seule adresse pour tout le store —\n                        modules gratuits comme payants, question avant achat comme panne\n                        après installation.	Une seule adresse pour tout le store —\n                        modules gratuits comme payants, question avant achat comme panne\n                        après installation.
-Uniquement des prestataires techniques, chacun pour sa part :\n                        <strong>Stripe</strong> et <strong>PayPal</strong> pour l'encaissement,\n                        <strong>Mailjet</strong> pour l'acheminement des courriels,\n                        <strong>Groupe LWS</strong> pour l'hébergement du serveur (France).\n                        Aucune revente, aucun courtier en données.	Uniquement des prestataires techniques, chacun pour sa part :\n                        <strong>Stripe</strong> et <strong>PayPal</strong> pour l'encaissement,\n                        <strong>Mailjet</strong> pour l'acheminement des courriels,\n                        <strong>Groupe LWS</strong> pour l'hébergement du serveur (France).\n                        Aucune revente, aucun courtier en données.
 Versions	Versions
-Versions d'Odoo	Versions d'Odoo
 Visible on current website	Visible on current website
-Voir aussi	Voir aussi
 Website Absolute URL	Website Absolute URL
 Website URL	Website URL
 Website meta description	Website meta description
@@ -297,22 +309,5 @@ Website meta keywords	Website meta keywords
 Website meta title	Website meta title
 Website opengraph image	Website opengraph image
 apps@odooskills.com	apps@odooskills.com
-avec votre version d'Odoo, le nom du module et le message d'erreur\n                            complet. C'est la même boîte pour tout le store.	avec votre version d'Odoo, le nom du module et le message d'erreur\n                            complet. C'est la même boîte pour tout le store.
-contenu des courriels reçus à\n                            <code>apps@odooskills.com</code> et des formulaires du site.	contenu des courriels reçus à\n                            <code>apps@odooskills.com</code> et des formulaires du site.
-coordonnées, description du besoin,\n                            budget, pièces jointes que vous joignez vous-même.	coordonnées, description du besoin,\n                            budget, pièces jointes que vous joignez vous-même.
-et	et
-journaux du serveur (adresse IP, page demandée,\n                            date), cookies de session et de panier.	journaux du serveur (adresse IP, page demandée,\n                            date), cookies de session et de panier.
-la politique de confidentialité	la politique de confidentialité
-les conditions d'utilisation	les conditions d'utilisation
-les questions fréquentes	les questions fréquentes
 lws.fr	lws.fr
-modules achetés, montant, date, facture. Les\n                            <strong>données de carte ne transitent jamais par ce site</strong> :\n                            elles sont saisies chez le prestataire de paiement.	modules achetés, montant, date, facture. Les\n                            <strong>données de carte ne transitent jamais par ce site</strong> :\n                            elles sont saisies chez le prestataire de paiement.
-nom, adresse électronique, mot de passe chiffré,\n                            adresse de facturation.	nom, adresse électronique, mot de passe chiffré,\n                            adresse de facturation.
 oski_xxx	oski_xxx
-ouvre une\n                            demande suivie, budget et version compris.	ouvre une\n                            demande suivie, budget et version compris.
-ouvre une demande chiffrée.	ouvre une demande chiffrée.
-votre espace client	votre espace client
-Écrivez à	Écrivez à
-Éditeur du site	Éditeur du site
-Éditeur, directeur de la publication et hébergeur du store de modules Odoo OdooSkills.	Éditeur, directeur de la publication et hébergeur du store de modules Odoo OdooSkills.
-— elles\n                        répondent déjà à l'essentiel.	— elles\n                        répondent déjà à l'essentiel.

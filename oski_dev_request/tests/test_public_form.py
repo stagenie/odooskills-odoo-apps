@@ -63,7 +63,13 @@ class TestPublicDevRequestForm(HttpCase):
         """Un visiteur non connecté atteint le formulaire, sans détour."""
         resp = self.url_open(FORM_URL, allow_redirects=False)
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("Demander un module", resp.text)
+        self.assertIn("Request a custom module", resp.text)
+
+    def test_form_french_under_fr_prefix(self):
+        from odoo.addons.oski_app_store.tests.common_i18n import activate_french
+        activate_french(self.env, modules=("oski_app_store", "oski_dev_request"))
+        self.assertIn("Request a custom module", self.url_open(FORM_URL).text)
+        self.assertIn("Demander un module sur-mesure", self.url_open("/fr" + FORM_URL).text)
 
     def test_honeypot_is_served_hidden(self):
         body = self.url_open(FORM_URL).text
@@ -99,7 +105,7 @@ class TestPublicDevRequestForm(HttpCase):
         before = self._count()
         resp = self._post(self._payload(csrf))
         self.assertEqual(self._count(), before)
-        self.assertIn("trop vite", resp.text)
+        self.assertIn("too fast", resp.text)
 
     def test_submission_without_opening_the_form_is_refused(self):
         """Poster sans jamais avoir affiché la page : aucune demande."""

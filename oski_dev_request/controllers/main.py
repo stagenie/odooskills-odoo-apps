@@ -2,7 +2,7 @@ import base64
 import os
 import time
 
-from odoo import http
+from odoo import _, http
 from odoo.http import request
 
 # Validation des pièces jointes (côté serveur)
@@ -65,18 +65,19 @@ class OskiDevRequestController(http.Controller):
 
         opened_at = request.session.get("oski_dev_form_ts")
         if not opened_at:
-            return "Votre formulaire a expiré. Merci de le rouvrir et de le renvoyer."
+            return _("Your form has expired. Please reopen it and resend it.")
         elapsed = time.time() - opened_at
         if elapsed < min_delay:
-            return "Formulaire envoyé trop vite. Merci de réessayer."
+            return _("Form submitted too fast. Please try again.")
         if elapsed > FORM_MAX_AGE:
-            return "Votre formulaire a expiré. Merci de le rouvrir et de le renvoyer."
+            return _("Your form has expired. Please reopen it and resend it.")
 
         recent = [t for t in request.session.get("oski_dev_sent", [])
                   if time.time() - t < 3600]
         if len(recent) >= MAX_PER_HOUR:
-            return ("Vous avez déjà envoyé %d demandes cette heure-ci. "
-                    "Écrivez-nous plutôt à apps@odooskills.com." % MAX_PER_HOUR)
+            return _("You have already sent %d requests this hour. "
+                      "Please write to us instead at apps@odooskills.com."
+                      ) % MAX_PER_HOUR
         request.session["oski_dev_sent"] = recent
         return None
 
@@ -118,13 +119,13 @@ class OskiDevRequestController(http.Controller):
         missing = [f for f in required if not (post.get(f) or "").strip()]
         if missing:
             return self._render_form(values=post,
-                                     error="Merci de remplir tous les champs obligatoires.")
+                                     error=_("Please fill in all required fields."))
 
-        # Validation des fichiers (serveur)
+        # File validation (server-side)
         files = [f for f in request.httprequest.files.getlist("attachments") if f and f.filename]
         if len(files) > MAX_FILES:
             return self._render_form(values=post,
-                                     error="Maximum %d fichiers." % MAX_FILES)
+                                     error=_("Maximum %d files.") % MAX_FILES)
         total = 0
         prepared = []
         for f in files:
@@ -135,16 +136,18 @@ class OskiDevRequestController(http.Controller):
             if ext not in ALLOWED_EXT:
                 return self._render_form(
                     values=post,
-                    error="Type de fichier non autorisé : %s. Autorisés : %s." % (
-                        f.filename, ", ".join(sorted(ALLOWED_EXT))))
+                    error=_("File type not allowed: %(filename)s. Allowed: %(allowed)s.") % {
+                        "filename": f.filename,
+                        "allowed": ", ".join(sorted(ALLOWED_EXT)),
+                    })
             if size > MAX_FILE_SIZE:
                 return self._render_form(
                     values=post,
-                    error="Fichier trop volumineux : %s (max 10 Mo)." % f.filename)
+                    error=_("File too large: %s (max 10 MB).") % f.filename)
             prepared.append((f.filename, data))
         if total > MAX_TOTAL_SIZE:
             return self._render_form(values=post,
-                                     error="Taille totale des pièces jointes trop élevée (max 25 Mo).")
+                                     error=_("Total attachment size too high (max 25 MB)."))
 
         # Création (sudo : l'utilisateur portail n'a pas le droit create direct)
         env = request.env

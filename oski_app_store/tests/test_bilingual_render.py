@@ -39,3 +39,12 @@ class TestBilingualRender(HttpCase):
         self.assertIn("Nom technique", fr)
         self.assertIn("Back to catalog", en)
         self.assertIn("Retour au catalogue", fr)
+
+    def test_legal_pages_both_languages(self):
+        for path, en_marker, fr_marker in (
+            ("/apps/conditions-utilisation", "Terms of use", "Conditions d'utilisation"),
+            ("/apps/faq", "Frequently asked questions", "Questions fréquentes"),
+            ("/apps/support", "Support", "Support"),
+        ):
+            self.assertIn(en_marker, self.url_open(path).text, path)
+            self.assertIn(fr_marker, self.url_open("/fr" + path).text, path)

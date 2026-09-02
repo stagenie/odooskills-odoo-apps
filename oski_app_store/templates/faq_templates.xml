@@ -1,125 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Questions fréquentes. Balises <details> natives : pas de JavaScript,
-         donc rien à casser et tout reste ouvrable au clavier et à l'impression. -->
-    <template id="faq_page" name="Questions fréquentes">
+    <!-- Frequently asked questions. Native <details> tags: no JavaScript,
+         so nothing to break and everything stays openable by keyboard and
+         printable. -->
+    <template id="faq_page" name="Frequently asked questions">
         <t t-call="website.layout">
-            <t t-set="additional_title">Questions fréquentes</t>
-            <t t-set="website_meta_description">Acheter, recevoir et installer un module du store OdooSkills : compte, paiement, facture, livraison immédiate, versions d'Odoo couvertes.</t>
+            <t t-set="additional_title">Frequently asked questions</t>
+            <t t-set="website_meta_description">Buying, receiving and installing a module from the OdooSkills store: account, payment, invoice, immediate delivery, Odoo versions covered.</t>
             <div class="oski-store">
                 <div class="container oski-legal oski-faq py-5">
-                    <h1 class="oski-legal-title">Questions fréquentes</h1>
-                    <p class="oski-faq-lead">Acheter, recevoir, installer. Si votre question n'y
-                        est pas, elle a sa place à
+                    <h1 class="oski-legal-title">Frequently asked questions</h1>
+                    <p class="oski-faq-lead">Buying, receiving, installing. If your question
+                        isn't here, it belongs at
                         <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>.</p>
 
-                    <h2>Acheter</h2>
+                    <h2>Buying</h2>
                     <details class="oski-faq-item">
-                        <summary>Faut-il créer un compte&#160;?</summary>
-                        <p>Oui. Le droit de télécharger un module payant est attaché au client de
-                            la commande : sans compte, un achat ne pourrait pas vous être rattaché
-                            et vous repartiriez sans rien. Le compte se crée pendant le paiement,
-                            en deux champs.</p>
+                        <summary>Do I need to create an account&#160;?</summary>
+                        <p>Yes. The right to download a paid module is attached to the customer
+                            of the order: without an account, a purchase could not be linked to
+                            you and you would leave with nothing. The account is created during
+                            payment, in two fields.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Quels moyens de paiement&#160;?</summary>
-                        <p>Carte bancaire et PayPal. Les données de carte sont saisies chez le
-                            prestataire de paiement : elles ne transitent jamais par ce site.</p>
+                        <summary>What payment methods&#160;?</summary>
+                        <p>Credit card and PayPal. Card data is entered on the payment
+                            provider's end: it never passes through this site.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>En quelle monnaie&#160;?</summary>
-                        <p>En dollars américains. Le prix affiché sur la fiche est le montant
-                            facturé. Votre banque peut appliquer sa propre conversion.</p>
+                        <summary>In which currency&#160;?</summary>
+                        <p>In US dollars. The price shown on the listing is the amount
+                            invoiced. Your bank may apply its own conversion.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Ai-je une facture&#160;?</summary>
-                        <p>Oui, émise automatiquement à la confirmation de la commande et
-                            disponible dans votre espace client.</p>
-                    </details>
-
-                    <h2>Recevoir</h2>
-                    <details class="oski-faq-item">
-                        <summary>Quand est-ce que je reçois le module&#160;?</summary>
-                        <p>Immédiatement. Dès la commande confirmée, la fiche du module bascule de
-                            « Acheter » à « Télécharger », et un courriel de confirmation vous
-                            renvoie vers vos applications.</p>
-                    </details>
-                    <details class="oski-faq-item">
-                        <summary>Où retrouver mes achats plus tard&#160;?</summary>
-                        <p>Dans <a href="/my/apps">votre espace client</a> : chaque module acheté y
-                            figure avec toutes les versions d'Odoo pour lesquelles une archive
-                            existe. Un achat ne se perd pas.</p>
-                    </details>
-                    <details class="oski-faq-item">
-                        <summary>Sous quelle forme&#160;?</summary>
-                        <p>Une archive <code>.zip</code> contenant le dossier du module, prête à
-                            déposer dans votre installation.</p>
+                        <summary>Do I get an invoice&#160;?</summary>
+                        <p>Yes, issued automatically when the order is confirmed and available
+                            in your customer area.</p>
                     </details>
 
-                    <h2>Installer</h2>
+                    <h2>Receiving</h2>
                     <details class="oski-faq-item">
-                        <summary>Comment installer un module&#160;?</summary>
+                        <summary>When do I receive the module&#160;?</summary>
+                        <p>Immediately. As soon as the order is confirmed, the module's listing
+                            switches from "Buy" to "Download", and a confirmation email points
+                            you back to your apps.</p>
+                    </details>
+                    <details class="oski-faq-item">
+                        <summary>Where can I find my purchases later&#160;?</summary>
+                        <p>In <a href="/my/apps">your customer area</a>: every module purchased
+                            appears there with every Odoo version for which an archive exists.
+                            A purchase is never lost.</p>
+                    </details>
+                    <details class="oski-faq-item">
+                        <summary>In what form&#160;?</summary>
+                        <p>A <code>.zip</code> archive containing the module folder, ready to
+                            drop into your installation.</p>
+                    </details>
+
+                    <h2>Installing</h2>
+                    <details class="oski-faq-item">
+                        <summary>How do I install a module&#160;?</summary>
                         <ol>
-                            <li>Décompressez l'archive dans un dossier déclaré dans
+                            <li>Unzip the archive into a folder declared in
                                 <code>addons_path</code>.</li>
-                            <li>Redémarrez le service Odoo.</li>
-                            <li>Activez le mode développeur, puis
-                                <em>Applications → Mettre à jour la liste des applications</em>.</li>
-                            <li>Cherchez le module par son nom et installez-le.</li>
+                            <li>Restart the Odoo service.</li>
+                            <li>Enable developer mode, then
+                                <em>Apps → Update Apps List</em>.</li>
+                            <li>Search for the module by its name and install it.</li>
                         </ol>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Et les dépendances&#160;?</summary>
-                        <p>La fiche de chaque module liste ce qu'il exige. Les modules du store
-                            dont il dépend y sont cliquables.</p>
+                        <summary>What about dependencies&#160;?</summary>
+                        <p>Each module's listing shows what it requires. The store modules it
+                            depends on are clickable there.</p>
                     </details>
 
-                    <h2>Versions d'Odoo</h2>
+                    <h2>Odoo versions</h2>
                     <details class="oski-faq-item">
-                        <summary>Quelles versions sont couvertes&#160;?</summary>
-                        <p>Cela dépend du module : sa fiche affiche les versions pour lesquelles
-                            une archive existe, et le catalogue permet de filtrer dessus.</p>
+                        <summary>Which versions are covered&#160;?</summary>
+                        <p>It depends on the module: its listing shows the versions for which
+                            an archive exists, and the catalog lets you filter on them.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Et Odoo 20&#160;?</summary>
-                        <p>Odoo 20 est à la porte. Elle apparaît déjà dans le sélecteur, sans
-                            archive : celles-ci suivront la sortie officielle.</p>
+                        <summary>What about Odoo 20&#160;?</summary>
+                        <p>Odoo 20 is at the door. It already appears in the selector, without
+                            an archive: those will follow the official release.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Un module 19.0 fonctionne-t-il sur une base 18.0&#160;?</summary>
-                        <p>Non. Chaque version majeure d'Odoo change son interface et ses
-                            conventions : il faut l'archive de votre version. Si elle n'existe pas
-                            encore, la fiche vous propose la plus récente disponible et le dit.</p>
+                        <summary>Does a 19.0 module work on an 18.0 database&#160;?</summary>
+                        <p>No. Every major Odoo version changes its interface and its
+                            conventions: you need the archive for your version. If it doesn't
+                            exist yet, the listing offers the most recent one available and
+                            says so.</p>
                     </details>
 
-                    <h2>Après l'achat</h2>
+                    <h2>After the purchase</h2>
                     <details class="oski-faq-item">
-                        <summary>Le module ne s'installe pas, ou se comporte mal.</summary>
-                        <p>Écrivez à <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
-                            avec votre version d'Odoo, le nom du module et le message d'erreur
-                            complet. C'est la même boîte pour tout le store.</p>
+                        <summary>The module won't install, or misbehaves.</summary>
+                        <p>Write to <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
+                            with your Odoo version, the module's name and the full error
+                            message. It's the same inbox for the whole store.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Sous quelle licence&#160;?</summary>
-                        <p>La licence figure sur la fiche du module et dans son archive : les
-                            modules gratuits sont sous licence libre, les modules payants sous
-                            licence propriétaire Odoo.</p>
+                        <summary>Under what license&#160;?</summary>
+                        <p>The license is shown on the module's listing and in its archive:
+                            free modules are under an open-source license, paid modules under
+                            a proprietary Odoo license.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Mises à jour et remboursement&#160;?</summary>
-                        <p>Ces deux points sont fixés par les conditions générales de vente, qui
-                            seront publiées et présentées au paiement avant l'ouverture des
-                            ventes.</p>
+                        <summary>Updates and refunds&#160;?</summary>
+                        <p>Both points are set by the terms of sale, which will be published
+                            and presented at payment before sales open.</p>
                     </details>
                     <details class="oski-faq-item">
-                        <summary>Le module dont j'ai besoin n'existe pas.</summary>
-                        <p>Décrivez-le : le formulaire
-                            <a href="/apps/demande-developpement">Demander un module</a> ouvre une
-                            demande suivie, budget et version compris.</p>
+                        <summary>The module I need doesn't exist.</summary>
+                        <p>Describe it: the
+                            <a href="/apps/demande-developpement">Request a module</a> form
+                            opens a tracked request, budget and version included.</p>
                     </details>
 
                     <p class="oski-legal-contact">
-                        Une question qui n'est pas ici&#160;?
+                        A question that isn't here&#160;?
                         <a href="mailto:apps@odooskills.com">apps@odooskills.com</a>
                     </p>
                 </div>
@@ -128,7 +129,7 @@
     </template>
 
     <record id="faq_page_record" model="website.page">
-        <field name="name">Questions fréquentes</field>
+        <field name="name">Frequently asked questions</field>
         <field name="url">/apps/faq</field>
         <field name="view_id" ref="faq_page"/>
         <field name="is_published" eval="True"/>

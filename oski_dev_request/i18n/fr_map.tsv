@@ -1,0 +1,120 @@
+# msgid	msgstr — construit par make_fr_po.py
+<div style="font-family:Arial,sans-serif;">\n                <p>New request <strong t-out="object.name or ''"/>.</p>\n                <ul>\n                    <li>Requester: <t t-out="object.requester_name or ''"/>\n                        (<t t-out="object.company_name or '—'"/>)</li>\n                    <li>Email: <t t-out="object.email or ''"/></li>\n                    <li>Subject: <t t-out="object.subject or ''"/></li>\n                    <li>Category: <t t-out="object.category_id.name or '—'"/></li>\n                    <li>Budget: <t t-out="object.budget_range or '—'"/></li>\n                    <li>Mode: <t t-out="object.delivery_mode or ''"/></li>\n                    <li>Version: <t t-out="object.odoo_version or '—'"/></li>\n                </ul>\n            </div>\n        	<div style="font-family:Arial,sans-serif;">\n                <p>Nouvelle demande <strong t-out="object.name or ''"/>.</p>\n                <ul>\n                    <li>Demandeur : <t t-out="object.requester_name or ''"/>\n                        (<t t-out="object.company_name or '—'"/>)</li>\n                    <li>Email : <t t-out="object.email or ''"/></li>\n                    <li>Objet : <t t-out="object.subject or ''"/></li>\n                    <li>Catégorie : <t t-out="object.category_id.name or '—'"/></li>\n                    <li>Budget : <t t-out="object.budget_range or '—'"/></li>\n                    <li>Mode : <t t-out="object.delivery_mode or ''"/></li>\n                    <li>Version : <t t-out="object.odoo_version or '—'"/></li>\n                </ul>\n            </div>\n        
+<div style="font-family:Arial,sans-serif;color:#21112E;">\n                <p>Hello <t t-out="object.requester_name or ''"/>,</p>\n                <p>We have received your development request\n                    <strong t-out="object.name or ''"/>: "<t t-out="object.subject or ''"/>".</p>\n                <p>Our team is reviewing it and will get back to you shortly.</p>\n                <p t-if="object.delivery_mode == 'exclusive'">\n                    You have chosen <strong>exclusive</strong> delivery: the module will not be\n                    published on the store and the price will be significantly higher than a\n                    published app.\n                </p>\n                <p t-else="">\n                    The developed module will be published on the OdooSkills store (standard price).\n                </p>\n                <p>— The OdooSkills team</p>\n            </div>\n        	<div style="font-family:Arial,sans-serif;color:#21112E;">\n                <p>Bonjour <t t-out="object.requester_name or ''"/>,</p>\n                <p>Nous avons bien reçu votre demande de développement\n                    <strong t-out="object.name or ''"/> : « <t t-out="object.subject or ''"/> ».</p>\n                <p>Notre équipe l'analyse et reviendra vers vous rapidement.</p>\n                <p t-if="object.delivery_mode == 'exclusive'">\n                    Vous avez choisi une livraison <strong>exclusive</strong> : le module ne sera pas\n                    publié sur le store et le tarif sera nettement supérieur à une app publiée.\n                </p>\n                <p t-else="">\n                    Le module développé sera publié sur le store OdooSkills (tarif standard).\n                </p>\n                <p>— L'équipe OdooSkills</p>\n            </div>\n        
+<option value="">— Choose —</option>	<option value="">— Choisir —</option>
+<strong>Exclusive to me</strong> — the module stays private,\n                                            not published on the store. <span class="text-danger">Significantly higher price.</span>	<strong>Exclusif pour moi</strong> — le module reste privé,\n                                            non publié sur le store. <span class="text-danger">Tarif nettement supérieur.</span>
+<strong>Published on the store</strong> — standard price.\n                                            The module will be published on the OdooSkills store and reusable.	<strong>Publié sur le store</strong> — tarif standard.\n                                            Le module sera publié sur le store OdooSkills et réutilisable.
+Accept	Accepter
+Accepted	Accepté
+Action Needed	Action requise
+Activities	Activités
+Activity Exception Decoration	Décoration d'exception d'activité
+Activity State	État de l'activité
+Activity Type Icon	Icône du type d'activité
+Assigned to	Assigné à
+Attachment Count	Nombre de pièces jointes
+Attachments	Pièces jointes
+Back to catalog	Retour au catalogue
+Budget	Budget
+Budget <span class="text-danger">*</span>	Budget <span class="text-danger">*</span>
+Category	Catégorie
+Company	Entreprise
+Created by	Créé par
+Created on	Créé le
+Delivered	Livré
+Delivered module	Module livré
+Delivery mode	Mode de livraison
+Describe your need: our team reviews it and gets back to you.	Décrivez votre besoin : notre équipe l'analyse et revient vers vous.
+Description of the need	Description du besoin
+Description of the need <span class="text-danger">*</span>	Description du besoin <span class="text-danger">*</span>
+Dev request: acknowledgement	Demande de dev : accusé de réception
+Dev request: internal notification	Demande de dev : notification interne
+Dev requests	Demandes de dev
+Development request	Demande de développement
+Development requests	Demandes de développement
+Development requests submitted from the site will appear here.	Les demandes de développement soumises depuis le site apparaîtront ici.
+Display Name	Nom affiché
+Email	Email
+Email <span class="text-danger">*</span>	Email <span class="text-danger">*</span>
+Exclusive	Exclusif
+Exclusive to me (significantly higher price)	Exclusif pour moi (tarif nettement supérieur)
+File too large: %s (max 10 MB).	Fichier trop volumineux : %s (max 10 Mo).
+File type not allowed: %(filename)s. Allowed: %(allowed)s.	Type de fichier non autorisé : %(filename)s. Autorisés : %(allowed)s.
+Followers	Abonnés
+Followers (Partners)	Abonnés (Partenaires)
+Font awesome icon e.g. fa-tasks	Icône Font Awesome, ex. fa-tasks
+Form submitted too fast. Please try again.	Formulaire envoyé trop vite. Merci de réessayer.
+Has Message	A un message
+High	Haute
+ID	ID
+Icon	Icône
+Icon to indicate an exception activity.	Icône indiquant une activité d'exception.
+If checked, new messages require your attention.	Si coché, de nouveaux messages demandent votre attention.
+If checked, some messages have a delivery error.	Si coché, certains messages ont une erreur d'envoi.
+Is Follower	Est abonné
+Last Updated by	Dernière modification par
+Last Updated on	Dernière modification le
+Leave this empty	Ne rien saisir ici
+Mark delivered	Marquer livré
+Max 5 files, 10 MB each. Allowed types:	Max 5 fichiers, 10 Mo chacun. Types autorisés :
+Maximum %d files.	Maximum %d fichiers.
+Message Delivery error	Erreur d'envoi du message
+Messages	Messages
+Module development request	Demande de développement de module
+My Activity Deadline	Échéance de mon activité
+Name	Nom / Personne
+Name <span class="text-danger">*</span>	Nom / Personne <span class="text-danger">*</span>
+Need a custom module? Request one →	Besoin d'un module sur-mesure ? Demander un module →
+New	Nouveau
+New dev request {{ object.name }} — {{ object.subject }}	Nouvelle demande de dev {{ object.name }} — {{ object.subject }}
+Next Activity Calendar Event	Prochain événement d'activité au calendrier
+Next Activity Deadline	Échéance de la prochaine activité
+Next Activity Summary	Résumé de la prochaine activité
+Next Activity Type	Type de la prochaine activité
+No request yet	Aucune demande pour le moment
+Normal	Normale
+Number of Actions	Nombre d'actions
+Number of errors	Nombre d'erreurs
+Number of messages requiring action	Nombre de messages nécessitant une action
+Number of messages with delivery error	Nombre de messages avec une erreur d'envoi
+Open	En cours
+Our team is reviewing it and will get back to you by email.	Notre équipe l'analyse et reviendra vers vous par email.
+Over €5,000	Plus de 5 000 €
+Phone	Téléphone
+Please fill in all required fields.	Merci de remplir tous les champs obligatoires.
+Priority	Priorité
+Published on the store (standard price)	Publié sur le store (tarif standard)
+Quote sent	Devis envoyé
+Ratings	Évaluations
+Reference	Référence
+Reject	Refuser
+Rejected	Refusé
+Request	Demande
+Request a custom module	Demander un module sur-mesure
+Requester	Demandeur
+Responsible User	Utilisateur responsable
+SMS Delivery error	Erreur d'envoi SMS
+Send the request	Envoyer la demande
+Status	État
+Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.	État basé sur les activités\nEn retard : la date d'échéance est déjà dépassée\nAujourd'hui : la date d'activité est aujourd'hui\nPlanifié : activités futures.
+Store	Store
+Store module created in response to this request.	Module du store créé en réponse à cette demande.
+Subject	Objet
+Subject <span class="text-danger">*</span>	Objet <span class="text-danger">*</span>
+Target Odoo version	Version Odoo cible
+Thank you!	Merci !
+To discuss	À discuter
+Total attachment size too high (max 25 MB).	Taille totale des pièces jointes trop élevée (max 25 Mo).
+Type of the exception activity on record.	Type de l'activité d'exception sur l'enregistrement.
+Under review	En analyse
+Under €500	Moins de 500 €
+Urgent	Urgente
+Website Messages	Messages du site web
+Website communication history	Historique de communication du site web
+You have already sent %d requests this hour. Please write to us instead at apps@odooskills.com.	Vous avez déjà envoyé %d demandes cette heure-ci. Écrivez-nous plutôt à apps@odooskills.com.
+Your development request {{ object.name }}	Votre demande de développement {{ object.name }}
+Your form has expired. Please reopen it and resend it.	Votre formulaire a expiré. Merci de le rouvrir et de le renvoyer.
+Your request	Votre demande
+has been recorded.	a bien été enregistrée.
+€1,500 – €5,000	1 500 – 5 000 €
+€500 – €1,500	500 – 1 500 €
