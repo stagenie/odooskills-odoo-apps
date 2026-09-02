@@ -138,3 +138,43 @@ class TestBuyRoute(HttpCase):
         body = self.url_open(module.website_url).text
         self.assertIn("/apps/buy/%s" % module.id, body)
         self.assertNotIn("/shop/cart/update", body)
+
+    # --- la mention de possession ne vaut que pour un module payé ----------
+
+    def test_free_module_does_not_claim_to_be_owned(self):
+        """`is_purchased_by()` répond True d'office sur un module gratuit.
+
+        La fiche en tirait « Vous possédez ce module — toutes vos applications »,
+        montrée à n'importe quel visiteur anonyme, avec un lien vers un portail
+        qui lui demanderait de se connecter.
+        """
+        module, product = self._make_paid_module("oski_free_owned")
+        module.write({"is_free": True, "price": 0.0})
+        self.authenticate(None, None)
+        body = self.url_open(module.website_url).text
+        self.assertIn("oski-btn-download", body)
+        self.assertNotIn("oski-owned-note", body)
+
+    def test_paid_module_still_claims_ownership_once_bought(self):
+        buyer = self.env["res.users"].create(
+            {
+                "name": "Acheteur Route",
+                "login": "oski_buy_owner",
+                "password": "oski_buy_owner_pwd",
+                "email": "owner@example.com",
+                "group_ids": [(6, 0, [self.env.ref("base.group_portal").id])],
+            }
+        )
+        module, product = self._make_paid_module("oski_paid_owned")
+        order = self.env["sale.order"].create(
+            {
+                "partner_id": buyer.partner_id.id,
+                "order_line": [
+                    (0, 0, {"product_id": product.product_variant_id.id, "product_uom_qty": 1})
+                ],
+            }
+        )
+        order.action_confirm()
+        self.authenticate("oski_buy_owner", "oski_buy_owner_pwd")
+        body = self.url_open(module.website_url).text
+        self.assertIn("oski-owned-note", body)

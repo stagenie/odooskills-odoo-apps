@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills App Store",
-    "version": "19.0.6.1.0",
+    "version": "19.0.6.2.0",
     "category": "Website/eCommerce",
     "summary": "Boutique de modules OdooSkills (gratuits + premium)",
     "description": "Surcouche mince de website_sale exposant les modules oski_* "

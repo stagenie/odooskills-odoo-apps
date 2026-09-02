@@ -70,7 +70,7 @@
                                 <p t-else="" class="text-muted mb-0">
                                     Bientôt en vente.
                                 </p>
-                                <p t-if="is_purchased" class="oski-owned-note">
+                                <p t-if="is_purchased and not module.is_free" class="oski-owned-note">
                                     Vous possédez ce module —
                                     <a href="/my/apps">toutes vos applications</a>.
                                 </p>
