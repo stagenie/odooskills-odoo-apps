@@ -157,9 +157,9 @@ class TestSeoAndErrorPages(HttpCase):
     def test_catalog_has_title_and_description(self):
         self.authenticate(None, None)
         html = self.url_open("/apps").text
-        self.assertIn("<title>Modules Odoo |", html)
+        self.assertIn("<title>Odoo modules |", html)
         self.assertTrue(
-            re.search(r'<meta name="description" content="Modules Odoo pr[^"]+"', html),
+            re.search(r'<meta name="description" content="Ready-to-install Odoo modules[^"]+"', html),
             "le catalogue doit porter sa propre méta-description",
         )
 

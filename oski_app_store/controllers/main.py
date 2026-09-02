@@ -9,7 +9,7 @@ Route Task 9 : /apps/download/<version_id>
 """
 from urllib.parse import urlparse
 
-from odoo import http
+from odoo import _, http
 from odoo.http import request
 from odoo.addons.oski_app_store.controllers.url_state import build_query, toggle
 
@@ -113,7 +113,7 @@ class OskiAppStore(http.Controller):
                 "selected": pricing == key,
                 "href": build_query(cats, tags, key, sort, search, version, default_version),
             }
-            for key, label in (("all", "Tous"), ("free", "Gratuit"), ("premium", "Premium"))
+            for key, label in (("all", _("All")), ("free", _("Free")), ("premium", _("Premium")))
         ]
         sort_options = [
             {
@@ -122,7 +122,7 @@ class OskiAppStore(http.Controller):
                 "selected": sort == key,
                 "href": build_query(cats, tags, pricing, key, search, version, default_version),
             }
-            for key, label in (("name", "Nom"), ("recent", "Récents"))
+            for key, label in (("name", _("Name")), ("recent", _("Recent")))
         ]
         # Plus récente d'abord, versions à venir en tête : le visiteur cherche
         # d'abord la version qu'il installe aujourd'hui ou demain.
@@ -131,7 +131,7 @@ class OskiAppStore(http.Controller):
                 "label": pv,
                 "selected": pv == version,
                 "soon": pv in upcoming_versions,
-                "note": "bientôt" if pv in upcoming_versions else "",
+                "note": _("soon") if pv in upcoming_versions else "",
                 "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
             }
 
@@ -139,13 +139,12 @@ class OskiAppStore(http.Controller):
         version_spectrum = [_version_option(pv) for pv in supported_versions]
         OskiModule = request.env["oski.module"].sudo()
 
-        meta_description = (
-            "Modules Odoo prêts à installer, gratuits et premium, signés "
-            "OdooSkills — compatibles de la %s à la %s."
-            % (released_versions[-1], released_versions[0])
-        )
+        meta_description = _(
+            "Ready-to-install Odoo modules, free and premium, by OdooSkills — "
+            "compatible from %s to %s."
+        ) % (released_versions[-1], released_versions[0])
         if upcoming_versions:
-            meta_description += " Odoo %s à la porte." % (
+            meta_description += _(" Odoo %s is at the door.") % (
                 upcoming_versions[0].split(".")[0]
             )
 
@@ -173,7 +172,7 @@ class OskiAppStore(http.Controller):
             "clear_url": "/apps",
             # Référencement : sans ces deux clés, chaque page hérite du titre
             # générique du site et n'a aucune description.
-            "additional_title": "Modules Odoo",
+            "additional_title": _("Odoo modules"),
             "website_meta_description": meta_description,
         }
         return request.render("oski_app_store.catalog_page", values)

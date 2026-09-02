@@ -14,7 +14,7 @@
     </record>
 
     <record id="oski_odoo_version_action" model="ir.actions.act_window">
-        <field name="name">Versions Odoo</field>
+        <field name="name">Odoo versions</field>
         <field name="res_model">oski.odoo.version</field>
         <field name="view_mode">list</field>
     </record>

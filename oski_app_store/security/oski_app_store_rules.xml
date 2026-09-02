@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="oski_module_published_rule" model="ir.rule">
-        <field name="name">Modules : public/portail = publiés uniquement</field>
+        <field name="name">Modules: public/portal = published only</field>
         <field name="model_id" ref="model_oski_module"/>
         <field name="domain_force">[('is_published', '=', True)]</field>
         <field name="groups" eval="[(4, ref('base.group_public')), (4, ref('base.group_portal'))]"/>

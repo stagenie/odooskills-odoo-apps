@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class OskiModuleVersion(models.Model):
     _name = "oski.module.version"
-    _description = "Archive d'un module pour une version Odoo donnée"
+    _description = "Module archive for a given Odoo version"
     # m2o dans _order : délègue à l'ordre du comodèle ("sequence desc"),
     # inversé si DESC — donc "asc" ici = plus récente d'abord.
     _order = "odoo_version_id asc, released_date desc"
@@ -13,24 +13,24 @@ class OskiModuleVersion(models.Model):
     )
     odoo_version_id = fields.Many2one(
         "oski.odoo.version",
-        string="Version Odoo",
+        string="Odoo version",
         ondelete="restrict",
         # required géré par la vue + contrainte : pas de NOT NULL SQL pour que
         # la migration post-update puisse remplir les lignes existantes.
     )
     odoo_version = fields.Char(
-        string="Version Odoo (code)",
+        string="Odoo version (code)",
         related="odoo_version_id.name",
         store=True,
     )
     module_version = fields.Char(
-        string="Version du module", required=True, default="19.0.1.0.0"
+        string="Module version", required=True, default="19.0.1.0.0"
     )
-    attachment_id = fields.Many2one("ir.attachment", string="Archive .zip")
-    changelog = fields.Text(string="Notes de version")
-    released_date = fields.Date(string="Date de publication")
+    attachment_id = fields.Many2one("ir.attachment", string=".zip archive")
+    changelog = fields.Text(string="Release notes")
+    released_date = fields.Date(string="Release date")
 
     _version_uniq = models.Constraint(
         "UNIQUE(module_id, odoo_version_id)",
-        "Une seule archive par version Odoo pour un module donné.",
+        "Only one archive per Odoo version for a given module.",
     )

@@ -1,39 +1,39 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class OskiModule(models.Model):
     _name = "oski.module"
-    _description = "Module du store OdooSkills"
+    _description = "OdooSkills store module"
     _inherit = ["website.published.mixin", "website.seo.metadata"]
     _order = "name"
 
-    name = fields.Char(string="Nom affiché", required=True, translate=True)
-    technical_name = fields.Char(string="Nom technique", required=True)
-    summary = fields.Char(string="Résumé", translate=True)
+    name = fields.Char(string="Display name", required=True, translate=True)
+    technical_name = fields.Char(string="Technical name", required=True)
+    summary = fields.Char(string="Summary", translate=True)
     # sanitize=False requis : la doc importée (format apps.odoo.com) repose sur des
     # styles inline que le sanitizer dégraderait. Écriture réservée aux managers
     # (ACL) + scripts de seed — ne jamais exposer en écriture portail/public.
     description_html = fields.Html(string="Description", translate=True, sanitize=False)
-    category_id = fields.Many2one("oski.module.category", string="Catégorie")
+    category_id = fields.Many2one("oski.module.category", string="Category")
     license = fields.Selection(
-        [("lgpl-3", "LGPL-3"), ("opl-1", "OPL-1"), ("other", "Propriétaire")],
-        string="Licence",
+        [("lgpl-3", "LGPL-3"), ("opl-1", "OPL-1"), ("other", "Proprietary")],
+        string="License",
         default="lgpl-3",
         required=True,
     )
-    is_free = fields.Boolean(string="Gratuit", default=True)
+    is_free = fields.Boolean(string="Free", default=True)
     currency_id = fields.Many2one(
         "res.currency",
-        string="Devise",
+        string="Currency",
         default=lambda self: self.env.ref("base.USD", raise_if_not_found=False),
     )
     price = fields.Monetary(
-        string="Prix",
+        string="Price",
         currency_field="currency_id",
-        help="Prix de vente du module premium (issu du manifeste). Vide si gratuit.",
+        help="Sale price of the premium module (from the manifest). Empty when free.",
     )
-    author = fields.Char(string="Auteur", default="OdooSkills")
-    maintainer = fields.Char(string="Mainteneur", default="ADICOPS")
+    author = fields.Char(string="Author", default="OdooSkills")
+    maintainer = fields.Char(string="Maintainer", default="ADICOPS")
     version_line_ids = fields.One2many(
         "oski.module.version", "module_id", string="Versions"
     )
@@ -42,7 +42,7 @@ class OskiModule(models.Model):
         "oski_module_dependency_rel",
         "module_id",
         "dependency_id",
-        string="Dépendances",
+        string="Dependencies",
     )
     tag_ids = fields.Many2many(
         "oski.module.tag",
@@ -51,22 +51,22 @@ class OskiModule(models.Model):
         "tag_id",
         string="Tags",
     )
-    image_1920 = fields.Image(string="Icône")
+    image_1920 = fields.Image(string="Icon")
     screenshot_ids = fields.Many2many(
         "ir.attachment",
         "oski_module_screenshot_rel",
         "module_id",
         "attachment_id",
-        string="Captures d'écran",
-        help="Images de la galerie de la fiche publique (attachments publics).",
+        string="Screenshots",
+        help="Public gallery images of the module page (public attachments).",
     )
     product_tmpl_id = fields.Many2one(
-        "product.template", string="Produit lié", ondelete="restrict", copy=False
+        "product.template", string="Linked product", ondelete="restrict", copy=False
     )
 
     _technical_name_uniq = models.Constraint(
         "UNIQUE(technical_name)",
-        "Le nom technique du module doit être unique.",
+        "The module technical name must be unique.",
     )
 
     def _compute_website_url(self):
@@ -96,7 +96,7 @@ class OskiModule(models.Model):
     def _seo_description(self):
         """Méta-description : le résumé, sinon le nom. Jamais vide."""
         self.ensure_one()
-        return self.summary or "%s — module Odoo signé OdooSkills." % self.name
+        return self.summary or _("%s — an Odoo module by OdooSkills.") % self.name
 
     def latest_version(self, odoo_version="19.0"):
         """Retourne la dernière oski.module.version pour une version Odoo."""

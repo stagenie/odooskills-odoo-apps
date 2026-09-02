@@ -3,20 +3,20 @@ from odoo import api, fields, models
 
 class OskiOdooVersion(models.Model):
     _name = "oski.odoo.version"
-    _description = "Version Odoo supportée par le store"
+    _description = "Odoo version supported by the store"
     _order = "sequence desc"
 
     name = fields.Char(string="Version", required=True)
-    sequence = fields.Integer(string="Séquence", required=True, default=10)
-    is_default = fields.Boolean(string="Version par défaut")
+    sequence = fields.Integer(string="Sequence", required=True, default=10)
+    is_default = fields.Boolean(string="Default version")
     is_upcoming = fields.Boolean(
-        string="À venir",
-        help="Version Odoo pas encore sortie : annoncée dans le catalogue "
-             "et le sélecteur, mais sans archive téléchargeable.",
+        string="Upcoming",
+        help="Odoo version not yet released: announced in the catalog "
+             "and the selector, but without a downloadable archive.",
     )
 
     _name_uniq = models.Constraint(
-        "UNIQUE(name)", "Cette version Odoo est déjà déclarée."
+        "UNIQUE(name)", "This Odoo version is already registered."
     )
 
     @api.model

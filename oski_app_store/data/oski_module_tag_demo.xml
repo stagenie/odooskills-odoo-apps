@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
     <record id="tag_demo_gratuit" model="oski.module.tag">
-        <field name="name">Gratuit</field>
+        <field name="name">Free</field>
         <field name="color">10</field>
     </record>
     <record id="tag_demo_exemple" model="oski.module.tag">
-        <field name="name">Exemple</field>
+        <field name="name">Example</field>
         <field name="color">4</field>
     </record>
 </odoo>

@@ -28,12 +28,12 @@
                     <t t-name="card">
                         <div class="d-flex align-items-start">
                             <field name="image_1920" widget="image"
-                                   class="o_image_64_cover me-2 rounded" alt="Icône"/>
+                                   class="o_image_64_cover me-2 rounded" alt="Icon"/>
                             <div class="flex-grow-1 overflow-hidden">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <strong class="text-truncate"><field name="name"/></strong>
                                     <span t-if="record.is_free.raw_value"
-                                          class="badge text-bg-success ms-1">Gratuit</span>
+                                          class="badge text-bg-success ms-1">Free</span>
                                     <span t-else="" class="badge text-bg-primary ms-1">Premium</span>
                                 </div>
                                 <small class="text-muted d-block text-truncate">
@@ -46,7 +46,7 @@
                                     </strong>
                                 </div>
                                 <span t-if="!record.is_published.raw_value"
-                                      class="badge text-bg-secondary mt-1">Non publié</span>
+                                      class="badge text-bg-secondary mt-1">Unpublished</span>
                             </div>
                         </div>
                     </t>
@@ -62,17 +62,17 @@
             <form string="Module">
                 <header>
                     <field name="is_published" widget="boolean_toggle"
-                           string="Publier sur le store"/>
+                           string="Publish on the store"/>
                 </header>
                 <sheet>
-                    <widget name="web_ribbon" title="Publié" bg_color="text-bg-success"
+                    <widget name="web_ribbon" title="Published" bg_color="text-bg-success"
                             invisible="not is_published"/>
-                    <widget name="web_ribbon" title="Non publié" bg_color="text-bg-secondary"
+                    <widget name="web_ribbon" title="Unpublished" bg_color="text-bg-secondary"
                             invisible="is_published"/>
                     <field name="image_1920" widget="image" class="oe_avatar"/>
                     <div class="oe_title">
                         <label for="name"/>
-                        <h1><field name="name" placeholder="Nom affiché"/></h1>
+                        <h1><field name="name" placeholder="Display name"/></h1>
                         <field name="technical_name" placeholder="oski_xxx"/>
                     </div>
                     <group>
@@ -88,7 +88,7 @@
                             <field name="product_tmpl_id"/>
                         </group>
                     </group>
-                    <field name="summary" placeholder="Résumé court"/>
+                    <field name="summary" placeholder="Short summary"/>
                     <notebook>
                         <page string="Description" name="description">
                             <field name="description_html"/>
@@ -104,10 +104,10 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Captures d'écran" name="screenshots">
+                        <page string="Screenshots" name="screenshots">
                             <field name="screenshot_ids" widget="many2many_binary"/>
                         </page>
-                        <page string="Dépendances" name="dependencies">
+                        <page string="Dependencies" name="dependencies">
                             <field name="dependency_ids" widget="many2many_tags"/>
                         </page>
                     </notebook>
@@ -125,10 +125,10 @@
                 <field name="technical_name"/>
                 <field name="category_id"/>
                 <field name="tag_ids"/>
-                <filter name="published" string="Publiés" domain="[('is_published', '=', True)]"/>
-                <filter name="free" string="Gratuits" domain="[('is_free', '=', True)]"/>
+                <filter name="published" string="Published" domain="[('is_published', '=', True)]"/>
+                <filter name="free" string="Free" domain="[('is_free', '=', True)]"/>
                 <group>
-                    <filter name="group_category" string="Catégorie" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
                 </group>
             </search>
         </field>

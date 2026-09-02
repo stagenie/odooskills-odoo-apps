@@ -1,0 +1,67 @@
+# msgid	msgstr — construit par make_fr_po.py
+OdooSkills store module	Module du store OdooSkills
+Display name	Nom affiché
+Technical name	Nom technique
+Summary	Résumé
+Description	Description
+Category	Catégorie
+Proprietary	Propriétaire
+License	Licence
+Free	Gratuit
+Currency	Devise
+Price	Prix
+Sale price of the premium module (from the manifest). Empty when free.	Prix de vente du module premium (issu du manifeste). Vide si gratuit.
+Author	Auteur
+Maintainer	Mainteneur
+Dependencies	Dépendances
+Tags	Étiquettes
+Icon	Icône
+Screenshots	Captures d'écran
+Public gallery images of the module page (public attachments).	Images de la galerie de la fiche publique (attachments publics).
+Linked product	Produit lié
+The module technical name must be unique.	Le nom technique du module doit être unique.
+%s — an Odoo module by OdooSkills.	%s — module Odoo signé OdooSkills.
+Module archive for a given Odoo version	Archive d'un module pour une version Odoo donnée
+Odoo version	Version Odoo
+Odoo version (code)	Version Odoo (code)
+Module version	Version du module
+.zip archive	Archive .zip
+Release notes	Notes de version
+Release date	Date de publication
+Only one archive per Odoo version for a given module.	Une seule archive par version Odoo pour un module donné.
+Store module category	Catégorie de module du store
+Name	Nom
+Parent category	Catégorie parente
+Store module tag	Tag de module du store
+Color	Couleur
+Active	Actif
+A tag with this name already exists.	Un tag du même nom existe déjà.
+Odoo version supported by the store	Version Odoo supportée par le store
+Sequence	Séquence
+Default version	Version par défaut
+Upcoming	À venir
+Odoo version not yet released: announced in the catalog and the selector, but without a downloadable archive.	Version Odoo pas encore sortie : annoncée dans le catalogue et le sélecteur, mais sans archive téléchargeable.
+This Odoo version is already registered.	Cette version Odoo est déjà déclarée.
+All	Tous
+Premium	Premium
+Recent	Récents
+soon	bientôt
+Ready-to-install Odoo modules, free and premium, by OdooSkills — compatible from %s to %s.	Modules Odoo prêts à installer, gratuits et premium, signés OdooSkills — compatibles de la %s à la %s.
+ Odoo %s is at the door.	 Odoo %s à la porte.
+Odoo modules	Modules Odoo
+Unpublished	Non publié
+Publish on the store	Publier sur le store
+Published	Publié
+Short summary	Résumé court
+Categories	Catégories
+Odoo versions	Versions Odoo
+Odoo Versions	Versions Odoo
+Manager	Gestionnaire
+Modules: public/portal = published only	Modules : public/portail = publiés uniquement
+Sales & CRM	Ventes & CRM
+Accounting & Finance	Comptabilité & Finance
+Human Resources	Ressources Humaines
+Website & eCommerce	Site web & eCommerce
+Productivity	Productivité
+Technical & Tools	Technique & Outils
+Example	Exemple
