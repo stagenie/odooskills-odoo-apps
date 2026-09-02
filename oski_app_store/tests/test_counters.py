@@ -1,4 +1,6 @@
 """Compteurs : comptés dès le premier jour, affichés plus tard (spec §2)."""
+import re
+
 from odoo.tests import tagged
 from odoo.tests.common import HttpCase
 
@@ -62,3 +64,34 @@ class TestCounters(HttpCase):
         })
         self.assertEqual(draft.state, "draft")
         self.assertEqual(module.purchase_count, 2)
+
+    def _set(self, show, minimum=10):
+        Param = self.env["ir.config_parameter"].sudo()
+        Param.set_param("oski_app_store.show_counters", "True" if show else "False")
+        Param.set_param("oski_app_store.counters_min", str(minimum))
+
+    def test_counters_hidden_by_default(self):
+        module, version = self._module("oski_cnt_hidden")
+        version.write({"download_count": 500})
+        self.assertNotIn("oski-count", self.url_open("/apps").text)
+        self.assertNotIn("oski-count", self.url_open(module.website_url).text)
+
+    def test_counters_shown_above_threshold_only(self):
+        module, version = self._module("oski_cnt_shown")
+        version.write({"download_count": 12})
+        self._set(True, minimum=10)
+        page = self.url_open(module.website_url).text
+        self.assertIn('class="oski-count"', page)
+        catalog = self.url_open("/apps").text
+        self.assertRegex(
+            catalog,
+            re.compile(r'class="oski-count"[^>]*>.*?</svg>\s*12\s*</span>', re.S),
+        )
+        version.write({"download_count": 3})
+        self.assertNotIn("oski-count", self.url_open(module.website_url).text)
+
+    def test_sort_by_downloads_only_when_visible(self):
+        self._set(False)
+        self.assertNotIn("sort=downloads", self.url_open("/apps").text)
+        self._set(True)
+        self.assertIn("sort=downloads", self.url_open("/apps").text)

@@ -74,10 +74,16 @@ class OskiAppStore(http.Controller):
         if search:
             domain.append(("name", "ilike", search))
 
+        show_counters, _min = request.env["oski.module"]._counters_settings()
+
         modules = request.env["oski.module"].search(domain)
         if sort == "recent":
             modules = modules.sorted(
                 key=lambda m: (not m.supports(version), -m.create_date.timestamp())
+            )
+        elif sort == "downloads" and show_counters:
+            modules = modules.sorted(
+                key=lambda m: (not m.supports(version), -m.download_count)
             )
         else:
             modules = modules.sorted(
@@ -115,6 +121,9 @@ class OskiAppStore(http.Controller):
             }
             for key, label in (("all", _("All")), ("free", _("Free")), ("premium", _("Premium")))
         ]
+        sort_choices = [("name", _("Name")), ("recent", _("Recent"))]
+        if show_counters:
+            sort_choices.append(("downloads", _("Most downloaded")))
         sort_options = [
             {
                 "key": key,
@@ -122,7 +131,7 @@ class OskiAppStore(http.Controller):
                 "selected": sort == key,
                 "href": build_query(cats, tags, pricing, key, search, version, default_version),
             }
-            for key, label in (("name", _("Name")), ("recent", _("Recent")))
+            for key, label in sort_choices
         ]
         # Plus récente d'abord, versions à venir en tête : le visiteur cherche
         # d'abord la version qu'il installe aujourd'hui ou demain.
@@ -172,6 +181,7 @@ class OskiAppStore(http.Controller):
             "version_is_upcoming": version in upcoming_versions,
             "search": search,
             "sort": sort,
+            "show_counters": show_counters,
             "has_filters": bool(cats or tags or pricing != "all" or search),
             "clear_url": "/apps",
             # Référencement : sans ces deux clés, chaque page hérite du titre
@@ -237,6 +247,7 @@ class OskiAppStore(http.Controller):
             {
                 "module": module,
                 "version": version,
+                "show_counters": request.env["oski.module"]._counters_settings()[0],
                 "is_purchased": module.is_purchased_by(partner),
                 "is_sellable": is_sellable,
                 "buy_url": "/apps/buy/%s" % module.id if variant else "",

@@ -111,6 +111,24 @@ class OskiModule(models.Model):
             else:
                 record.website_url = "#"
 
+    @api.model
+    def _counters_settings(self):
+        """(show, minimum) : réglages `ir.config_parameter` du store."""
+        Param = self.env["ir.config_parameter"].sudo()
+        show = Param.get_param("oski_app_store.show_counters", "False") == "True"
+        try:
+            minimum = int(Param.get_param("oski_app_store.counters_min", "10"))
+        except ValueError:
+            minimum = 10
+        return show, minimum
+
+    def counters_visible(self, kind):
+        """True si le compteur `kind` ('download' | 'purchase') doit s'afficher."""
+        self.ensure_one()
+        show, minimum = self._counters_settings()
+        value = self.download_count if kind == "download" else self.purchase_count
+        return show and value >= minimum
+
     def _default_website_meta(self):
         """Titre, description et image de partage propres à chaque module.
 

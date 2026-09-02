@@ -320,3 +320,12 @@ Number of distinct customers with a confirmed order for this module.	Nombre de c
 HTTP Routing	Routage HTTP
 Store : commande confirmée	Store : commande confirmée
 Your applications are available ({{ object.name }})	Vos applications sont disponibles ({{ object.name }})
+# Task 8 : réglages d'affichage des compteurs publics
+Config Settings	Paramètres
+OdooSkills Store	Store OdooSkills
+Counters	Compteurs
+Public counters	Compteurs publics
+Counters are always recorded. Display them once the store has enough traffic.	Les compteurs sont toujours enregistrés. Affichez-les une fois que le store a assez de trafic.
+Show download and purchase counters	Afficher les compteurs de téléchargements et d'achats
+Minimum value to display a counter	Valeur minimale pour afficher un compteur
+Most downloaded	Les plus téléchargés

@@ -29,6 +29,11 @@
                               t-out="pv.split('.')[0]"/>
                     </t>
                 </div>
+                <span t-if="module.counters_visible('download')" class="oski-count"
+                      title="Downloads">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12"/><path d="M6 12l6 6 6-6"/><path d="M4 20h16"/></svg>
+                    <t t-out="module.download_count"/>
+                </span>
                 <span class="oski-card-go" aria-hidden="true">View →</span>
             </div>
         </a>

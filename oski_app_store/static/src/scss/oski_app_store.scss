@@ -166,6 +166,8 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
     .oski-card-versions { display: inline-flex; }
     .oski-card-go { font-size: .8rem; font-weight: 600; color: $oski-muted;
         opacity: 0; transition: opacity .18s ease, color .18s ease; white-space: nowrap; }
+    .oski-count { display: inline-flex; align-items: center; gap: .25rem;
+        color: $oski-muted; font-size: .78rem; font-weight: 600; }
 
     // ---- Badges / pastilles ----
     .oski-badge { padding: .15rem .55rem; border-radius: 999px;

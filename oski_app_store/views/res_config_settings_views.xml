@@ -1,0 +1,23 @@
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.oski_app_store</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="OdooSkills Store" string="OdooSkills Store" name="oski_app_store">
+                    <block title="Counters">
+                        <setting string="Public counters"
+                                 help="Counters are always recorded. Display them once the store has enough traffic.">
+                            <field name="oski_show_counters"/>
+                            <div class="mt-2" invisible="not oski_show_counters">
+                                <label for="oski_counters_min"/>
+                                <field name="oski_counters_min" class="o_light_label"/>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

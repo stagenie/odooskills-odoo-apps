@@ -21,6 +21,7 @@
         "views/oski_module_views.xml",
         "views/product_template_views.xml",
         "views/oski_odoo_version_views.xml",
+        "views/res_config_settings_views.xml",
         "views/oski_app_store_menus.xml",
         "templates/catalog_templates.xml",
         "templates/module_page_templates.xml",

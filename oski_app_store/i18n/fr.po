@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 13:29+0000\n"
-"PO-Revision-Date: 2026-09-02 13:29+0000\n"
+"POT-Creation-Date: 2026-09-02 20:38+0000\n"
+"PO-Revision-Date: 2026-09-02 20:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -557,6 +557,11 @@ msgid "Compatible Odoo versions"
 msgstr "Versions Odoo compatibles"
 
 #. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres"
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid "Configuring Odoo itself, outside the module concerned."
 msgstr "Le paramétrage d'Odoo lui-même, hors du module concerné."
@@ -565,6 +570,20 @@ msgstr "Le paramétrage d'Odoo lui-même, hors du module concerné."
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Contact us"
 msgstr "Nous contacter"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid "Counters"
+msgstr "Compteurs"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid ""
+"Counters are always recorded. Display them once the store has enough "
+"traffic."
+msgstr ""
+"Les compteurs sont toujours enregistrés. Affichez-les une fois que le store "
+"a assez de trafic."
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__create_uid
@@ -643,6 +662,7 @@ msgstr "Description"
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "Display Name"
 
@@ -675,6 +695,8 @@ msgstr "Télécharger les modules achetés, toutes versions"
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__download_count
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__download_count
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Downloads"
 msgstr "Téléchargements"
 
@@ -787,6 +809,7 @@ msgstr "Ressources Humaines"
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__id
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__id
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__id
 msgid "ID"
 msgstr "ID"
 
@@ -923,6 +946,11 @@ msgid "Messages"
 msgstr "Messages"
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_counters_min
+msgid "Minimum value to display a counter"
+msgstr "Valeur minimale pour afficher un compteur"
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__module_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Module"
@@ -958,6 +986,12 @@ msgstr "Version du module"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list
 msgid "Modules"
 msgstr "Modules"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Most downloaded"
+msgstr "Les plus téléchargés"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
@@ -1129,6 +1163,11 @@ msgid "OdooSkills App Store"
 msgstr "OdooSkills App Store"
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid "OdooSkills Store"
+msgstr "Store OdooSkills"
+
+#. module: oski_app_store
 #: model:ir.model,name:oski_app_store.model_oski_module
 msgid "OdooSkills store module"
 msgstr "Module du store OdooSkills"
@@ -1221,6 +1260,11 @@ msgid "Proprietary"
 msgstr "Propriétaire"
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid "Public counters"
+msgstr "Compteurs publics"
+
+#. module: oski_app_store
 #: model:ir.model.fields,help:oski_app_store.field_oski_module__screenshot_ids
 msgid "Public gallery images of the module page (public attachments)."
 msgstr "Images de la galerie de la fiche publique (attachments publics)."
@@ -1246,6 +1290,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__purchase_count
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Purchases"
 msgstr "Achats"
 
@@ -1377,6 +1422,11 @@ msgstr "Séquence"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Short summary"
 msgstr "Résumé court"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_show_counters
+msgid "Show download and purchase counters"
+msgstr "Afficher les compteurs de téléchargements et d'achats"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
