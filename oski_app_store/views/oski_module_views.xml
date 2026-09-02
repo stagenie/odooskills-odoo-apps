@@ -11,6 +11,8 @@
                 <field name="is_free"/>
                 <field name="currency_id" column_invisible="1"/>
                 <field name="price" widget="monetary" optional="show"/>
+                <field name="download_count" optional="show"/>
+                <field name="purchase_count" optional="show"/>
                 <field name="is_published"/>
             </list>
         </field>
@@ -101,6 +103,7 @@
                                     <field name="attachment_id"/>
                                     <field name="released_date"/>
                                     <field name="changelog"/>
+                                    <field name="download_count" optional="show"/>
                                 </list>
                             </field>
                         </page>

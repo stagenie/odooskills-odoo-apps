@@ -12,3 +12,4 @@ from . import test_version_order_and_legal
 from . import test_buy_route
 from . import test_i18n_source
 from . import test_bilingual_render
+from . import test_counters

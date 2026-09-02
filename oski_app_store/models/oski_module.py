@@ -63,11 +63,42 @@ class OskiModule(models.Model):
     product_tmpl_id = fields.Many2one(
         "product.template", string="Linked product", ondelete="restrict", copy=False
     )
+    download_count = fields.Integer(
+        string="Downloads",
+        compute="_compute_download_count",
+        help="Number of times any archive of this module was served, summed across versions.",
+    )
+    purchase_count = fields.Integer(
+        string="Purchases",
+        compute="_compute_purchase_count",
+        help="Number of distinct customers with a confirmed order for this module.",
+    )
 
     _technical_name_uniq = models.Constraint(
         "UNIQUE(technical_name)",
         "The module technical name must be unique.",
     )
+
+    @api.depends("version_line_ids.download_count")
+    def _compute_download_count(self):
+        for record in self:
+            record.download_count = sum(record.version_line_ids.mapped("download_count"))
+
+    def _compute_purchase_count(self):
+        Line = self.env["sale.order.line"].sudo()
+        for record in self:
+            if record.is_free or not record.product_tmpl_id:
+                record.purchase_count = 0
+                continue
+            groups = Line._read_group(
+                [
+                    ("product_id.product_tmpl_id", "=", record.product_tmpl_id.id),
+                    ("state", "=", "sale"),
+                ],
+                ["order_partner_id"],
+                [],
+            )
+            record.purchase_count = len(groups)
 
     def _compute_website_url(self):
         # The slug comes from the technical name: the same URL in English and

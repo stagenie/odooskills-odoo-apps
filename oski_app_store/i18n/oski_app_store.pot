@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 11:31+0000\n"
-"PO-Revision-Date: 2026-09-02 11:31+0000\n"
+"POT-Creation-Date: 2026-09-02 13:29+0000\n"
+"PO-Revision-Date: 2026-09-02 13:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -159,6 +159,36 @@ msgid ""
 ": every module purchased\n"
 "                            appears there with every Odoo version for which an archive exists.\n"
 "                            A purchase is never lost."
+msgstr ""
+
+#. module: oski_app_store
+#: model:mail.template,body_html:oski_app_store.mail_template_store_confirmation
+msgid ""
+"<div style=\"margin:0px;padding:0px;font-size:14px;\">\n"
+"    <p>Hello <t t-out=\"object.partner_id.name or ''\">client</t>,</p>\n"
+"    <p>\n"
+"        Your order <strong t-out=\"object.name or ''\">S00001</strong> is confirmed.\n"
+"        Your applications are available immediately.\n"
+"    </p>\n"
+"    <div style=\"margin:24px 0px;text-align:center;\">\n"
+"        <a t-attf-href=\"{{ object.get_base_url() }}/my/apps\" style=\"background-color:#21112E;padding:12px 24px;text-decoration:none;&#10;                  color:#FFFFFF;border-radius:4px;font-weight:600;display:inline-block;\">\n"
+"            Download my applications\n"
+"        </a>\n"
+"    </div>\n"
+"    <p>\n"
+"        This page stays available: it offers the archive of every module,\n"
+"        for every published Odoo version. You can come back to it any time\n"
+"        from your customer area.\n"
+"    </p>\n"
+"    <p>\n"
+"        Your invoice is attached to this message.\n"
+"        A question about installing a module&nbsp;?\n"
+"        Just reply to this e-mail.\n"
+"    </p>\n"
+"    <p style=\"color:#888888;font-size:12px;\">\n"
+"        <t t-out=\"object.company_id.name or ''\">Odoo &amp; AI Skills LLC</t>\n"
+"    </p>\n"
+"</div>"
 msgstr ""
 
 #. module: oski_app_store
@@ -533,6 +563,7 @@ msgid "Description"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_ir_http__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__display_name
@@ -566,6 +597,12 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.portal_my_home_apps
 msgid "Download purchased modules, all versions"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__download_count
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__download_count
+msgid "Downloads"
 msgstr ""
 
 #. module: oski_app_store
@@ -611,13 +648,14 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:oski.module.tag,name:oski_app_store.tag_demo_exemple
-msgid "Exemple"
+msgid "Example"
 msgstr ""
 
 #. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_free
+#: model:oski.module.tag,name:oski_app_store.tag_demo_gratuit
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_kanban
@@ -638,8 +676,8 @@ msgid "Give Odoo<br/><em>what it's missing.</em>"
 msgstr ""
 
 #. module: oski_app_store
-#: model:oski.module.tag,name:oski_app_store.tag_demo_gratuit
-msgid "Gratuit"
+#: model:ir.model,name:oski_app_store.model_ir_http
+msgid "HTTP Routing"
 msgstr ""
 
 #. module: oski_app_store
@@ -658,6 +696,7 @@ msgid "Human Resources"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_ir_http__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__id
@@ -892,6 +931,23 @@ msgid "Not available in"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__purchase_count
+msgid "Number of distinct customers with a confirmed order for this module."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__download_count
+msgid ""
+"Number of times any archive of this module was served, summed across "
+"versions."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_version__download_count
+msgid "Number of times this archive was served."
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__opl-1
 msgid "OPL-1"
 msgstr ""
@@ -1070,6 +1126,11 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__purchase_count
+msgid "Purchases"
+msgstr ""
+
+#. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid ""
@@ -1207,6 +1268,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Sort"
+msgstr ""
+
+#. module: oski_app_store
+#: model:mail.template,name:oski_app_store.mail_template_store_confirmation
+msgid "Store : commande confirmée"
 msgstr ""
 
 #. module: oski_app_store
@@ -1642,6 +1708,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "You own this module —"
+msgstr ""
+
+#. module: oski_app_store
+#: model:mail.template,subject:oski_app_store.mail_template_store_confirmation
+msgid "Your applications are available ({{ object.name }})"
 msgstr ""
 
 #. module: oski_app_store

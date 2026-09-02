@@ -332,6 +332,8 @@ class OskiAppStore(http.Controller):
             if not module.is_purchased_by(request.env.user.partner_id):
                 return request.redirect(module.website_url)
 
+        version._bump_download_count()
+
         # Lecture sudo de la pièce jointe pour garantir l'accès au binaire
         attachment = version.attachment_id.sudo()
         filename = "%s-%s.zip" % (module.technical_name, version.module_version)
