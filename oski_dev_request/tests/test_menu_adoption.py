@@ -28,7 +28,15 @@ class TestMenuAdoption(TransactionCase):
         self._data_rows().unlink()
         if stale:
             stale.unlink()
+        # Odoo's website.menu.unlink() already cascades the per-site copies of a
+        # generic menu when the generic record above is removed; unlink explicitly
+        # anyway so this simulation does not depend on that cascade.
+        self.env["website.menu"].search([("url", "=", REQUEST_URL)]).unlink()
         self.env.registry.clear_cache()
+        self.assertFalse(
+            self.env["website.menu"].search([("url", "=", REQUEST_URL)]),
+            "aucun menu ne doit subsister avant de simuler la production",
+        )
 
         website = self.env["website"].get_current_website()
         return self.env["website.menu"].create({
@@ -76,3 +84,18 @@ class TestMenuAdoption(TransactionCase):
         self.assertFalse(result)
         after = self.env["ir.model.data"].search([("model", "=", "website.menu")]).ids
         self.assertEqual(sorted(before), sorted(after))
+
+    def test_noop_when_no_menu_and_no_xmlid(self):
+        # Neither the xmlid nor any menu at REQUEST_URL exists.
+        stale = self.env.ref(MENU_XMLID, raise_if_not_found=False)
+        self._data_rows().unlink()
+        if stale:
+            stale.unlink()
+        self.env["website.menu"].search([("url", "=", REQUEST_URL)]).unlink()
+        self.env.registry.clear_cache()
+        self.assertFalse(self.env["website.menu"].search([("url", "=", REQUEST_URL)]))
+
+        result = adopt_request_menu(self.env)
+
+        self.assertFalse(result)
+        self.assertFalse(self._data_rows())

@@ -1,5 +1,4 @@
 """Adoption of a hand-made "Request a module" menu (production has one without xmlid)."""
-from odoo import SUPERUSER_ID, api
 
 REQUEST_URL = "/apps/demande-developpement"
 MENU_XMLID = "oski_dev_request.menu_request_module"
