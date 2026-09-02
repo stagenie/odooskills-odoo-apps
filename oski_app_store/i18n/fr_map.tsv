@@ -29,6 +29,7 @@ Module version	Version du module
 Release notes	Notes de version
 Release date	Date de publication
 Only one archive per Odoo version for a given module.	Une seule archive par version Odoo pour un module donné.
+Store module	Module store
 Store module category	Catégorie de module du store
 Name	Nom
 Parent category	Catégorie parente
