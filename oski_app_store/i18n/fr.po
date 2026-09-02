@@ -780,7 +780,7 @@ msgstr "Installer"
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Invoices: the applicable accounting retention period."
-msgstr "Journaux techniques : douze mois."
+msgstr "Factures : la durée de conservation comptable applicable."
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_published
