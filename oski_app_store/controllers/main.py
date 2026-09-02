@@ -215,7 +215,7 @@ class OskiAppStore(http.Controller):
         # Le produit est lu en sudo : un visiteur public n'a pas accès à
         # product.template, et la fiche rendait 403 dès qu'un module payant
         # était publié. Le bouton d'achat n'apparaît que si le produit est
-        # lui-même publié — sinon /shop/cart/update refuserait le panier.
+        # lui-même publié — sinon la mise au panier refuserait le produit.
         product = module.sudo().product_tmpl_id
         variant = product.product_variant_id
         is_sellable = bool(variant) and product.is_published and product.sale_ok
@@ -226,11 +226,7 @@ class OskiAppStore(http.Controller):
                 "version": version,
                 "is_purchased": module.is_purchased_by(partner),
                 "is_sellable": is_sellable,
-                "buy_url": (
-                    "/shop/cart/update?product_id=%s" % variant.id
-                    if variant
-                    else ""
-                ),
+                "buy_url": "/apps/buy/%s" % module.id if variant else "",
                 "pill_versions": supported_versions,
                 "upcoming_versions": upcoming_versions,
                 # main_object : le titre de l'onglet, l'aperçu de partage et le
@@ -242,6 +238,43 @@ class OskiAppStore(http.Controller):
                 "back_url": self._catalog_back_url(),
             },
         )
+
+    @http.route(
+        ["/apps/buy/<int:module_id>"],
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=False,
+    )
+    def apps_buy(self, module_id, **kw):
+        """Met le module au panier puis renvoie sur `/shop/cart`.
+
+        En Odoo 19, `/shop/cart/update` est une route **jsonrpc en POST** : le
+        lien GET que portait la fiche n'ajoutait rien et le visiteur voyait un
+        panier vide, sans erreur. Le store a besoin d'un lien franc, d'où cette
+        route maison qui applique la même règle de vente que la fiche.
+        """
+        module = request.env["oski.module"].sudo().browse(module_id).exists()
+        if not module or not module.is_published:
+            return request.not_found()
+
+        product = module.product_tmpl_id
+        variant = product.product_variant_id
+        if not variant or not product.is_published or not product.sale_ok:
+            return request.redirect(module.website_url)
+
+        order_sudo = request.cart or request.website._create_cart()
+        # Un module est un fichier : le racheter n'a pas de sens. Un
+        # rafraîchissement de la page ne doit donc jamais doubler la quantité.
+        already = order_sudo.order_line.filtered(
+            lambda sol: sol.product_id == variant
+        )
+        if not already:
+            order_sudo.with_context(skip_cart_verification=True)._cart_add(
+                product_id=variant.id, quantity=1
+            )
+
+        return request.redirect("/shop/cart")
 
     @http.route(
         ["/apps/download/<int:version_id>"],

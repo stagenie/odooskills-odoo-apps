@@ -9,3 +9,4 @@ from . import test_module_page
 from . import test_build_zip
 from . import test_purchase_entitlement
 from . import test_version_order_and_legal
+from . import test_buy_route
