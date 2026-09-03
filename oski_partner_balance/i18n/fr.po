@@ -97,6 +97,7 @@ msgstr "Devise"
 
 #. module: oski_partner_balance
 #: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__scope__receivable
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
 msgid "Customer"
 msgstr "Client"
 
@@ -257,6 +258,7 @@ msgstr "Ligne d'écriture"
 
 #. module: oski_partner_balance
 #: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_line__section__net
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
 msgid "Net"
 msgstr "Net"
 
@@ -427,6 +429,7 @@ msgstr ""
 
 #. module: oski_partner_balance
 #: model:ir.model.fields.selection,name:oski_partner_balance.selection__oski_partner_balance_wizard__scope__payable
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
 msgid "Vendor"
 msgstr "Fournisseur"
 

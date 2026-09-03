@@ -1,3 +1,5 @@
+import re
+
 from odoo.exceptions import AccessError
 from odoo.tests import TransactionCase, tagged
 
@@ -207,6 +209,70 @@ class TestPartnerBalanceWizard(TransactionCase):
         self.assertIn(b'Vendor', html, "the payable section is unlabelled")
         self.assertIn(b'Closing balance', html)
         self.assertIn(b'PBWPU', html, "the journal filter is not restated")
+
+    def test_62_pdf_groups_and_foots_on_the_group_axis(self):
+        """A consolidated group (2 subsidiaries under one root) must foot ONE
+        closing balance for the whole group, not one per subsidiary.
+
+        This reproduces, without depending on `oski_partner_balance_group`,
+        what a consolidation module produces: rows whose OWN `partner_id` is
+        the subsidiary but whose running balance accumulates on
+        `group_partner_id` (the root). Filtering/grouping the PDF by
+        `partner_id` instead of `group_partner_id` both splits the group into
+        one block per subsidiary AND foots each block on its own last line --
+        an intermediate value of the group's running balance, not the true
+        closing balance.
+        """
+        root = self.env['res.partner'].create({'name': 'PBW Group Root'})
+        sub_a = self.env['res.partner'].create({'name': 'PBW Subsidiary A'})
+        sub_b = self.env['res.partner'].create({'name': 'PBW Subsidiary B'})
+        wizard = self._wizard(partner_ids=[(6, 0, [sub_a.id, sub_b.id])])
+        self.env['oski.partner.balance.line'].create([
+            {
+                'wizard_id': wizard.id, 'sequence': 1, 'partner_id': sub_a.id,
+                'group_partner_id': root.id, 'section': 'receivable',
+                'date': '2026-01-05', 'name': 'A1', 'label': 'A1',
+                'debit': 100.0, 'credit': 0.0, 'balance': 100.0,
+                'cumulative': 100.0,
+            },
+            {
+                'wizard_id': wizard.id, 'sequence': 2, 'partner_id': sub_a.id,
+                'group_partner_id': root.id, 'section': 'receivable',
+                'date': '2026-01-10', 'name': 'A2', 'label': 'A2',
+                'debit': 50.0, 'credit': 0.0, 'balance': 50.0,
+                'cumulative': 150.0,
+            },
+            {
+                'wizard_id': wizard.id, 'sequence': 3, 'partner_id': sub_b.id,
+                'group_partner_id': root.id, 'section': 'receivable',
+                'date': '2026-01-20', 'name': 'B1', 'label': 'B1',
+                'debit': 80.0, 'credit': 0.0, 'balance': 80.0,
+                'cumulative': 230.0,
+            },
+            {
+                'wizard_id': wizard.id, 'sequence': 4, 'partner_id': sub_b.id,
+                'group_partner_id': root.id, 'section': 'receivable',
+                'date': '2026-01-25', 'name': 'B2', 'label': 'B2',
+                'debit': 20.0, 'credit': 0.0, 'balance': 20.0,
+                'cumulative': 250.0,
+            },
+        ])
+        html = self.env['ir.actions.report']._render_qweb_html(
+            'oski_partner_balance.report_partner_balance', wizard.ids)[0].decode()
+        self.assertEqual(
+            html.count('Closing balance'), 1,
+            "the group must foot a SINGLE closing balance, not one per subsidiary")
+        # Scoped to the closing-total row only: 150.00 legitimately shows up
+        # elsewhere in the table, as line A2's OWN row-level running
+        # balance -- a correct intermediate value to display on ITS row,
+        # never on offer as anyone's closing balance.
+        tfoot = re.search(r'<tfoot.*?</tfoot>', html, re.DOTALL).group()
+        self.assertIn(
+            '250.00', tfoot,
+            "the true final balance of the whole group must be footed")
+        self.assertNotIn(
+            '150.00', tfoot,
+            "subsidiary A's own last line must not be footed as a closing balance")
 
     def test_70_xlsx_bytes_look_like_a_workbook(self):
         from odoo.addons.oski_partner_balance.controllers.partner_balance_xlsx import (

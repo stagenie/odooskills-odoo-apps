@@ -29,21 +29,22 @@
                                 (<span t-out="wizard.journal_filter"/>)
                             </t>
                         </p>
-                        <t t-set="section_labels"
-                           t-value="{'receivable': 'Customer', 'payable': 'Vendor', 'net': 'Net'}"/>
-                        <t t-set="partners" t-value="wizard.line_ids.mapped('partner_id')"/>
-                        <t t-foreach="partners" t-as="partner">
+                        <t t-set="group_partners" t-value="wizard.line_ids.mapped('group_partner_id')"/>
+                        <t t-foreach="group_partners" t-as="group_partner">
                             <t t-set="partner_lines"
-                               t-value="wizard.line_ids.filtered(lambda l: l.partner_id == partner)"/>
-                            <h4 t-out="partner.display_name"/>
+                               t-value="wizard.line_ids.filtered(lambda l: l.group_partner_id == group_partner)"/>
+                            <h4 t-out="group_partner.display_name"/>
                             <t t-set="sections"
                                t-value="[s for s in ('receivable', 'payable', 'net')
                                          if s in partner_lines.mapped('section')]"/>
                             <t t-foreach="sections" t-as="section">
                                 <t t-set="section_lines"
                                    t-value="partner_lines.filtered(lambda l: l.section == section)"/>
-                                <h5 t-if="len(sections) > 1"
-                                    t-out="section_labels.get(section, section)"/>
+                                <h5 t-if="len(sections) > 1">
+                                    <t t-if="section == 'receivable'">Customer</t>
+                                    <t t-elif="section == 'payable'">Vendor</t>
+                                    <t t-else="">Net</t>
+                                </h5>
                                 <table class="table table-sm o_main_table">
                                     <thead>
                                         <tr>
