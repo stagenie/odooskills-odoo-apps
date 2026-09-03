@@ -27,7 +27,7 @@ page avec la raison, jamais sur une page d'erreur.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["portal"],
     "images": [

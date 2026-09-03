@@ -23,7 +23,7 @@ numéros déjà pris dans la plage sont sautés, y compris ceux venus d'un impor
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["product"],
     "images": [

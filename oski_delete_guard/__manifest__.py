@@ -14,7 +14,7 @@ jamais bloquées : le garde-fou protège l'interface, pas la maintenance.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [

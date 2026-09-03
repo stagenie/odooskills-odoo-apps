@@ -24,7 +24,7 @@ fichier produit, et marquerait les autres documents à tort.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["web"],
     "images": [

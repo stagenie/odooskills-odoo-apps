@@ -17,7 +17,7 @@ le registre garde la trace des gestes humains, pas celle de la maintenance.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [

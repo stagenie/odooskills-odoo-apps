@@ -408,6 +408,11 @@ msgid "App Store"
 msgstr "App Store"
 
 #. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_assets
+msgid "Assets & Maintenance"
+msgstr "Patrimoine & Maintenance"
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__author
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Author"
@@ -732,6 +737,11 @@ msgid "HTTP Routing"
 msgstr "Routage HTTP"
 
 #. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_health
+msgid "Health"
+msgstr "Santé"
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid "Hosting"
 msgstr "Hébergement"
@@ -810,6 +820,11 @@ msgid "Installing"
 msgstr "Installer"
 
 #. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_inventory
+msgid "Inventory & Logistics"
+msgstr "Inventaire & Logistique"
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Invoices: the applicable accounting retention period."
 msgstr "Factures : la durée de conservation comptable applicable."
@@ -886,6 +901,11 @@ msgid "Manager"
 msgstr "Gestionnaire"
 
 #. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_manufacturing
+msgid "Manufacturing & Quality"
+msgstr "Fabrication & Qualité"
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Messages"
 msgstr "Messages"
@@ -937,6 +957,11 @@ msgstr "Modules"
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "Most downloaded"
 msgstr "Les plus téléchargés"
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_multicompany
+msgid "Multi-Company"
+msgstr "Multi-sociétés"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
@@ -1207,6 +1232,11 @@ msgid "Productivity"
 msgstr "Productivité"
 
 #. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_project
+msgid "Project & Services"
+msgstr "Projet & Services"
+
+#. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__other
 msgid "Proprietary"
 msgstr "Propriétaire"
@@ -1276,6 +1306,11 @@ msgstr "Date de publication"
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__changelog
 msgid "Release notes"
 msgstr "Notes de version"
+
+#. module: oski_app_store
+#: model:oski.module.category,name:oski_app_store.cat_rental
+msgid "Rental"
+msgstr "Location"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice

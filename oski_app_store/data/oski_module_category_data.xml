@@ -16,47 +16,47 @@
         <field name="name">Website &amp; eCommerce</field>
         <field name="sequence">40</field>
     </record>
-    <!-- Les trois catégories ci-dessous ont été ajoutées après coup. Deux
-         d'entre elles (Inventaire, Projet) existaient déjà en base, créées à la
-         main et donc SANS xmlid : l'importeur ne pouvait pas les atteindre et
-         entassait tout dans Productivité. Leur xmlid a été posé sur les
-         enregistrements existants avant ce chargement, qui les met à jour au
-         lieu d'en créer des doublons. -->
+    <!-- The three categories below were added afterwards. Two of them
+         (Inventory, Project) already existed in the database, created by
+         hand and therefore WITHOUT an xmlid: the importer could not reach
+         them and piled everything into Productivity. Their xmlid was set on
+         the existing records before this load, which updates them instead
+         of creating duplicates. -->
     <record id="cat_inventory" model="oski.module.category">
-        <field name="name">Inventaire &amp; Logistique</field>
+        <field name="name">Inventory &amp; Logistics</field>
         <field name="sequence">25</field>
     </record>
     <record id="cat_manufacturing" model="oski.module.category">
-        <field name="name">Fabrication &amp; Qualité</field>
+        <field name="name">Manufacturing &amp; Quality</field>
         <field name="sequence">35</field>
     </record>
     <record id="cat_project" model="oski.module.category">
-        <field name="name">Projet &amp; Services</field>
+        <field name="name">Project &amp; Services</field>
         <field name="sequence">45</field>
     </record>
-    <!-- Les trois bacs ci-dessous ont été ouverts avant l'import des familles
-         Patrimoine, Santé et Location. Sans eux, les 19 modules de patrimoine
-         (catégorie manifeste « Operations », qu'aucune règle ne connaissait)
-         seraient tombés dans Technique & Outils et les 14 modules de santé
-         (« Services ») auraient porté Projet & Services à 30 fiches : la
-         taxonomie tout juste rééquilibrée se serait redéséquilibrée. -->
+    <!-- The three bins below were opened before importing the Assets,
+         Health and Rental families. Without them, the 19 asset modules
+         (manifest category "Operations", which no rule recognized) would
+         have fallen into Technical & Tools, and the 14 health modules
+         ("Services") would have pushed Project & Services to 30 listings:
+         the taxonomy just rebalanced would have become unbalanced again. -->
     <record id="cat_assets" model="oski.module.category">
-        <field name="name">Patrimoine &amp; Maintenance</field>
+        <field name="name">Assets &amp; Maintenance</field>
         <field name="sequence">38</field>
     </record>
     <record id="cat_health" model="oski.module.category">
-        <field name="name">Santé</field>
+        <field name="name">Health</field>
         <field name="sequence">46</field>
     </record>
     <record id="cat_rental" model="oski.module.category">
-        <field name="name">Location</field>
+        <field name="name">Rental</field>
         <field name="sequence">47</field>
     </record>
-    <!-- La famille inter-sociétés traverse stock, ventes et comptabilité :
-         aucun bac fonctionnel ne la possède, et la disperser revenait à la
-         rendre introuvable pour qui cherche du multi-sociétés. -->
+    <!-- The intercompany family spans stock, sales and accounting: no
+         functional bin owns it, and scattering it across those would make
+         it unfindable for anyone looking for multi-company modules. -->
     <record id="cat_multicompany" model="oski.module.category">
-        <field name="name">Multi-sociétés</field>
+        <field name="name">Multi-Company</field>
         <field name="sequence">48</field>
     </record>
     <record id="cat_productivity" model="oski.module.category">

@@ -17,7 +17,7 @@ et une trace posée dans la transaction de la connexion disparaîtrait avec elle
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [

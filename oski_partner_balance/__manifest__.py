@@ -21,7 +21,7 @@ sur chaque ligne.
 """,
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
-    'support': 'support@odooskills.com',
+    'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'images': ['static/description/banner.png'],
     'depends': ['account'],

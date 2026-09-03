@@ -12,7 +12,7 @@ s'appliquent normalement — le module n'écrit jamais en sudo.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
-    "support": "support@odooskills.com",
+    "support": "apps@odooskills.com",
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
