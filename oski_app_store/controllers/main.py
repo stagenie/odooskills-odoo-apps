@@ -7,11 +7,17 @@ Route Task 9 : /apps/download/<version_id>
   - module payant, connecté sans achat confirmé → redirect vers la page module
   - module payant, acheteur confirmé (sale.order.line state='sale') → zip servi
 """
+import time
 from urllib.parse import urlencode, urlparse
 
 from odoo import _, http
 from odoo.http import request
 from odoo.addons.oski_app_store.controllers.url_state import build_query, toggle
+
+# Un visiteur qui rafraîchit la page ou relance le téléchargement ne doit pas
+# gonfler le compteur public à chaque clic : une seule incrémentation par
+# version et par session dans cette fenêtre.
+DOWNLOAD_COUNT_GUARD_SECONDS = 6 * 3600
 
 
 class OskiAppStore(http.Controller):
@@ -58,7 +64,7 @@ class OskiAppStore(http.Controller):
         tags = _ints("tag")
         pricing = args.get("pricing", "all")
         sort = args.get("sort", "name")
-        search = args.get("search", "")
+        search = args.get("search", "").strip()[:120]
         v = args.get("v")
         version = v if v in supported_versions else default_version
 
@@ -311,6 +317,26 @@ class OskiAppStore(http.Controller):
 
         return request.redirect("/shop/cart")
 
+    def _should_count_download(self, version_id):
+        """True une fois par session et par version, dans une fenêtre de 6 h.
+
+        Le compteur reste dans `request.session` (JSON-sérialisable : clés
+        str, valeurs float) et purge au passage les entrées expirées pour ne
+        pas laisser grossir la session indéfiniment.
+        """
+        key = str(version_id)
+        now = time.time()
+        counted = dict(request.session.get("oski_dl_counted") or {})
+        counted = {
+            k: ts for k, ts in counted.items()
+            if now - ts < DOWNLOAD_COUNT_GUARD_SECONDS
+        }
+        last = counted.get(key)
+        should_count = last is None
+        counted[key] = now
+        request.session["oski_dl_counted"] = counted
+        return should_count
+
     @http.route(
         ["/apps/download/<int:version_id>"],
         type="http",
@@ -354,7 +380,8 @@ class OskiAppStore(http.Controller):
             if not module.is_purchased_by(request.env.user.partner_id):
                 return request.redirect(module.website_url)
 
-        version._bump_download_count()
+        if self._should_count_download(version.id):
+            version._bump_download_count()
 
         # Lecture sudo de la pièce jointe pour garantir l'accès au binaire
         attachment = version.attachment_id.sudo()

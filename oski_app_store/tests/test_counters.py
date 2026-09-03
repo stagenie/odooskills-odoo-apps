@@ -32,10 +32,17 @@ class TestCounters(HttpCase):
         return module, version
 
     def test_free_download_increments(self):
+        """Une même session ne compte qu'une fois par version (garde 6 h) ;
+        une autre session (autres cookies) compte à part."""
         module, version = self._module("oski_cnt_free")
         self.assertEqual(version.download_count, 0)
         self.assertEqual(self.url_open("/apps/download/%d" % version.id).status_code, 200)
         self.url_open("/apps/download/%d" % version.id)
+        version.invalidate_recordset(["download_count"])
+        self.assertEqual(version.download_count, 1)
+
+        self.opener.cookies.clear()
+        self.assertEqual(self.url_open("/apps/download/%d" % version.id).status_code, 200)
         version.invalidate_recordset(["download_count"])
         self.assertEqual(version.download_count, 2)
         self.assertEqual(module.download_count, 2)
@@ -64,6 +71,28 @@ class TestCounters(HttpCase):
         })
         self.assertEqual(draft.state, "draft")
         self.assertEqual(module.purchase_count, 2)
+
+    def test_purchase_count_batched_across_modules(self):
+        """Deux fiches calculées dans le même recordset : un seul _read_group,
+        chacune avec le bon nombre d'acheteurs distincts."""
+        module_a, _va = self._module("oski_cnt_batch_a", is_free=False, price=19.0)
+        module_b, _vb = self._module("oski_cnt_batch_b", is_free=False, price=29.0)
+        variant_a = module_a.product_tmpl_id.product_variant_id
+        variant_b = module_b.product_tmpl_id.product_variant_id
+        pa1 = self.env["res.partner"].create({"name": "Batch buyer A1"})
+        pa2 = self.env["res.partner"].create({"name": "Batch buyer A2"})
+        pb1 = self.env["res.partner"].create({"name": "Batch buyer B1"})
+        for partner, variant in ((pa1, variant_a), (pa2, variant_a), (pb1, variant_b)):
+            order = self.env["sale.order"].create({
+                "partner_id": partner.id,
+                "order_line": [(0, 0, {"product_id": variant.id, "product_uom_qty": 1})],
+            })
+            order.action_confirm()
+
+        both = module_a + module_b
+        both.invalidate_recordset(["purchase_count"])
+        self.assertEqual(module_a.purchase_count, 2)
+        self.assertEqual(module_b.purchase_count, 1)
 
     def _set(self, show, minimum=10):
         Param = self.env["ir.config_parameter"].sudo()

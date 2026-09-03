@@ -84,21 +84,48 @@ class OskiModule(models.Model):
         for record in self:
             record.download_count = sum(record.version_line_ids.mapped("download_count"))
 
+    @api.depends("product_tmpl_id", "is_free")
     def _compute_purchase_count(self):
+        # Non stocké : @api.depends ne sert qu'à invalider le cache, pas à
+        # dériver une formule de stockage.
+        paid = self.filtered(lambda m: not m.is_free and m.product_tmpl_id)
+        (self - paid).purchase_count = 0
+        if not paid:
+            return
+
+        templates = paid.product_tmpl_id
         Line = self.env["sale.order.line"].sudo()
-        for record in self:
-            if record.is_free or not record.product_tmpl_id:
-                record.purchase_count = 0
+        # Un seul _read_group pour tous les modules du batch : grouper
+        # directement sur `product_id.product_tmpl_id` n'est pas supporté,
+        # on groupe donc sur (product_id, order_partner_id) et on reconstitue
+        # le gabarit en Python — un seul aller-retour, avec prefetch en lot.
+        groups = Line._read_group(
+            [
+                ("product_id.product_tmpl_id", "in", templates.ids),
+                ("state", "=", "sale"),
+            ],
+            ["product_id", "order_partner_id"],
+            [],
+        )
+
+        products = self.env["product.product"].browse(
+            {product.id for product, partner in groups if product and partner}
+        )
+        tmpl_id_by_product_id = {p.id: p.product_tmpl_id.id for p in products}
+
+        partner_ids_by_tmpl_id = {}
+        for product, partner in groups:
+            if not product or not partner:
                 continue
-            groups = Line._read_group(
-                [
-                    ("product_id.product_tmpl_id", "=", record.product_tmpl_id.id),
-                    ("state", "=", "sale"),
-                ],
-                ["order_partner_id"],
-                [],
+            tmpl_id = tmpl_id_by_product_id.get(product.id)
+            if not tmpl_id:
+                continue
+            partner_ids_by_tmpl_id.setdefault(tmpl_id, set()).add(partner.id)
+
+        for record in paid:
+            record.purchase_count = len(
+                partner_ids_by_tmpl_id.get(record.product_tmpl_id.id, ())
             )
-            record.purchase_count = len(groups)
 
     def _compute_website_url(self):
         # The slug comes from the technical name: the same URL in English and
