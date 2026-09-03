@@ -184,6 +184,11 @@ class OskiAppStore(http.Controller):
             "show_counters": show_counters,
             "has_filters": bool(cats or tags or pricing != "all" or search),
             "clear_url": "/apps",
+            # Une seule phrase traduisible : mélanger un msgid tronqué avec un
+            # nœud texte statique produirait un français aux guillemets
+            # incohérents (cf. _version_option, même stratégie).
+            "empty_title": _("No module for “%s”.") % search if search
+            else _("No module matches these filters."),
             # Pré-remplissage du formulaire de demande de module depuis l'état
             # « aucun résultat » : on reprend la recherche et la première
             # catégorie active, sans le "?" (le gabarit l'ajoute lui-même).
