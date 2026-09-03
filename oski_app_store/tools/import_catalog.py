@@ -24,15 +24,33 @@ REPORT = os.environ.get("OSKI_REPORT")
 _EXCLUDED_DIRS = {".git", "__pycache__", ".idea", ".pytest_cache"}
 _EXCLUDED_EXT = (".pyc", ".pyo")
 
-# Map mot-clé catégorie manifest -> xmlid catégorie store
+# Map mot-clé catégorie manifest -> xmlid catégorie store.
+# L'ORDRE EST LA RÈGLE : le plus spécifique d'abord. « Manufacturing/Quality »
+# porte le mot « quality » ET rien d'autre ; « Services/Helpdesk » porte
+# « services ». Déplacer une ligne change le rangement de familles entières.
 _CAT_MAP = [
+    # En tête : « Multi-Company » n'a aucun mot en commun avec les autres bacs,
+    # mais ses modules en portent tous un (stock, vente, compta). Le laisser
+    # plus bas les redisperserait un par un.
+    (("multi-company", "multi company", "multicompany",
+      "inter-company", "intercompany", "multi-soc", "inter-soc"), "cat_multicompany"),
+    # « Operations » est le mot des 19 modules de patrimoine ; il ne dit rien
+    # à personne, d'où les synonymes métier qui l'accompagnent.
+    (("operations", "asset", "fleet", "maintenance", "patrimoine", "gmao"), "cat_assets"),
+    (("manufactur", "mrp", "plm", "quality", "qualit"), "cat_manufacturing"),
+    (("inventory", "stock", "logistique", "warehouse"), "cat_inventory"),
+    # Santé et Location AVANT le bac Projet & Services : leurs manifestes
+    # disent « Health/Medical » et « Services/Rental », et « services » les
+    # avalerait tous les deux. Location passe aussi avant Site web, sinon
+    # « Website/Rental » partirait dans le bac eCommerce.
+    (("medical", "health", "dental", "clinic", "sant"), "cat_health"),
+    (("rental", "location"), "cat_rental"),
+    (("helpdesk", "project", "planning", "services"), "cat_project"),
     (("sale", "crm", "vente"), "cat_sales"),
     (("account", "invoic", "financ", "compta"), "cat_accounting"),
     (("hr", "human", "employee", "recruit", "ressource"), "cat_hr"),
     (("website", "ecommerce", "e-commerce", "site", "portal", "appointment"), "cat_website"),
-    (("project", "manufactur", "mrp", "productivity", "planning", "quality",
-      "plm", "subscription", "helpdesk", "gantt", "stock", "inventory",
-      "purchase", "document"), "cat_productivity"),
+    (("productivity", "subscription", "gantt", "purchase", "document"), "cat_productivity"),
 ]
 
 

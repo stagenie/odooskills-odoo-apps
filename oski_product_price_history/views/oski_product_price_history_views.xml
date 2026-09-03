@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_oski_price_history_list" model="ir.ui.view">
+        <field name="name">oski.product.price.history.list</field>
+        <field name="model">oski.product.price.history</field>
+        <field name="arch" type="xml">
+            <list string="Historique des prix" create="false" delete="false"
+                  decoration-danger="variation &gt; 0" decoration-success="variation &lt; 0">
+                <field name="changed_on"/>
+                <field name="product_tmpl_id"/>
+                <field name="product_id" optional="hide"/>
+                <field name="field_name"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="old_value" widget="monetary"/>
+                <field name="new_value" widget="monetary"/>
+                <field name="variation" widget="monetary"/>
+                <field name="variation_percent"/>
+                <field name="user_id" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_price_history_graph" model="ir.ui.view">
+        <field name="name">oski.product.price.history.graph</field>
+        <field name="model">oski.product.price.history</field>
+        <field name="arch" type="xml">
+            <graph string="Historique des prix" type="line" sample="0">
+                <field name="changed_on" interval="day"/>
+                <field name="new_value" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_oski_price_history_search" model="ir.ui.view">
+        <field name="name">oski.product.price.history.search</field>
+        <field name="model">oski.product.price.history</field>
+        <field name="arch" type="xml">
+            <search string="Historique des prix">
+                <field name="product_tmpl_id"/>
+                <field name="user_id"/>
+                <filter name="sales" string="Prix de vente"
+                        domain="[('field_name', '=', 'list_price')]"/>
+                <filter name="cost" string="Coût"
+                        domain="[('field_name', '=', 'standard_price')]"/>
+                <separator/>
+                <filter name="increase" string="Hausses" domain="[('variation', '&gt;', 0)]"/>
+                <filter name="decrease" string="Baisses" domain="[('variation', '&lt;', 0)]"/>
+                <separator/>
+                <filter name="this_year" string="Cette année"
+                        domain="[('changed_on', '&gt;=', context_today().strftime('%Y-01-01'))]"/>
+                <group>
+                    <filter name="group_product" string="Article" domain="[]"
+                            context="{'group_by': 'product_tmpl_id'}"/>
+                    <filter name="group_field" string="Prix" domain="[]"
+                            context="{'group_by': 'field_name'}"/>
+                    <filter name="group_user" string="Auteur" domain="[]"
+                            context="{'group_by': 'user_id'}"/>
+                    <filter name="group_date" string="Date" domain="[]"
+                            context="{'group_by': 'changed_on:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_price_history" model="ir.actions.act_window">
+        <field name="name">Historique des prix</field>
+        <field name="res_model">oski.product.price.history</field>
+        <field name="view_mode">list,graph</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aucun prix n'a encore bougé</p>
+            <p>
+                Dès qu'un prix de vente ou un coût change, la ligne s'inscrit
+                ici : l'ancienne valeur, la nouvelle, l'écart, la date et
+                l'auteur.
+            </p>
+        </field>
+    </record>
+
+    <!--
+        Le module ne dépend que de `product`, qui ne déclare AUCUN menu : les
+        menus d'articles viennent de Ventes, d'Achats ou d'Inventaire. Une
+        racine propre est le seul point d'entrée qui ne suppose aucun de ces
+        modules installé.
+    -->
+    <menuitem id="menu_oski_price_root"
+              name="Prix des articles"
+              web_icon="oski_product_price_history,static/description/icon.png"
+              sequence="96"/>
+
+    <menuitem id="menu_oski_price_history"
+              name="Historique des prix"
+              parent="menu_oski_price_root"
+              action="action_oski_price_history"
+              sequence="10"/>
+
+    <record id="view_product_template_form_oski_history" model="ir.ui.view">
+        <field name="name">product.template.form.oski.history</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_oski_price_history" type="object"
+                        class="oe_stat_button" icon="fa-line-chart"
+                        invisible="not oski_price_history_count">
+                    <field name="oski_price_history_count" widget="statinfo"
+                           string="Prix"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

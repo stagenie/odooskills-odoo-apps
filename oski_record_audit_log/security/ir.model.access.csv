@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_audit_rule_admin,oski.audit.rule.admin,model_oski_audit_rule,base.group_system,1,1,1,1
+access_oski_audit_log_user,oski.audit.log.user,model_oski_audit_log,base.group_user,1,0,0,0
+access_oski_audit_log_admin,oski.audit.log.admin,model_oski_audit_log,base.group_system,1,1,1,1

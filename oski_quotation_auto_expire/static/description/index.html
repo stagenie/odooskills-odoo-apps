@@ -1,0 +1,57 @@
+<!--
+  Fiche produit OdooSkills — oski_quotation_auto_expire
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Devis périmés</h1>
+    <p style="color: #6b7280; font-size: 17px;">Les devis échus s'annulent d'eux-mêmes, et le vendeur est relancé avant l'échéance.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Odoo calcule une date de validité sur chaque devis, sait dire qu'il est expiré… et n'en fait rien. Les devis morts s'empilent dans le tunnel, gonflent le montant du pipeline et faussent les prévisions. Personne ne les rouvre jamais, et personne ne relance le client tant qu'il est encore temps.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">⏳ <strong>Une péremption automatique</strong> : chaque nuit, les devis dont la date de validité est dépassée sont annulés, avec une note au dossier qui dit pourquoi et quand.</li>
+    <li style="line-height: 1.6; color: #374151;">🔔 <strong>Une relance au vendeur</strong> quelques jours avant l'échéance, sous forme d'activité — jamais un courriel de plus.</li>
+    <li style="line-height: 1.6; color: #374151;">🏢 <strong>Deux réglages indépendants, par société</strong> : une filiale qui vend à la semaine et une maison mère qui vend au trimestre n'ont pas le même rythme.</li>
+    <li style="line-height: 1.6; color: #374151;">🔎 <strong>Deux filtres</strong> dans la recherche des devis : « Périmés » et « Échéance proche ».</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Un devis périmé, et la trace de sa péremption</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Le devis est passé à l'état annulé, la date de péremption est inscrite à côté de l'expiration, et le fil de discussion garde la raison. Rien n'est effacé : le devis reste consultable et remettable en jeu.</p>
+  <img src="screenshot_01_expired.png"
+       alt="Fiche d'un devis Odoo annulé, avec le champ « Périmé le » et la note de péremption au fil de discussion"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Les deux réglages, dans les paramètres de vente</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">La péremption et la relance se règlent séparément, juste sous la validité par défaut du cœur. Zéro jour de relance : aucune relance, sans que la péremption en soit affectée.</p>
+  <img src="screenshot_02_settings.png"
+       alt="Paramètres de vente d'Odoo montrant les options Péremption des devis et Relance avant échéance"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">La relance passe <strong>avant</strong> la péremption dans la même nuit : un devis relancé le matin puis annulé le soir ferait passer le vendeur pour un menteur auprès de son client.</li>
+    <li style="line-height: 1.6; color: #374151;">Les devis <strong>verrouillés ne sont jamais touchés</strong> — un devis qu'on a délibérément figé n'est pas un devis oublié.</li>
+    <li style="line-height: 1.6; color: #374151;">La relance est une <strong>activité</strong>, pas un courriel : elle atterrit dans la liste du jour du vendeur, là où un courriel de plus se serait perdu.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance en dehors des ventes.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Fermer les devis morts assainit le tunnel ; le piloter demande davantage. La gamme OdooSkills couvre l'approbation des devis au-delà d'un seuil, la fusion de plusieurs devis d'un même client, les commissions des vendeurs et le cloisonnement des équipes commerciales. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>

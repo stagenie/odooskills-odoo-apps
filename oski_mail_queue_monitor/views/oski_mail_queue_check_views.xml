@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_mail_queue_check_view_list" model="ir.ui.view">
+        <field name="name">oski.mail.queue.check.list</field>
+        <field name="model">oski.mail.queue.check</field>
+        <field name="arch" type="xml">
+            <list string="Auscultations" create="false" edit="false"
+                  decoration-danger="verdict == 'critical'"
+                  decoration-warning="verdict == 'warning'">
+                <field name="checked_on"/>
+                <field name="pending_count"/>
+                <field name="failed_count"/>
+                <field name="oldest_pending_hours"/>
+                <field name="verdict" widget="badge"
+                       decoration-success="verdict == 'ok'"
+                       decoration-warning="verdict == 'warning'"
+                       decoration-danger="verdict == 'critical'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_mail_queue_check_view_form" model="ir.ui.view">
+        <field name="name">oski.mail.queue.check.form</field>
+        <field name="model">oski.mail.queue.check</field>
+        <field name="arch" type="xml">
+            <form string="Auscultation" create="false">
+                <header>
+                    <button name="action_retry_failed_mails" type="object"
+                            string="Renvoyer les courriels en échec"
+                            class="btn-primary" invisible="failed_count == 0"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_failed_mails" type="object"
+                                class="oe_stat_button" icon="fa-envelope-o">
+                            <field name="failed_count" widget="statinfo" string="En échec"/>
+                        </button>
+                    </div>
+                    <h1><field name="verdict" readonly="1"/></h1>
+                    <group>
+                        <group>
+                            <field name="checked_on" readonly="1"/>
+                            <field name="pending_count" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="failed_count" readonly="1"/>
+                            <field name="oldest_pending_hours" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Détail">
+                        <field name="note" nolabel="1" readonly="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="oski_mail_queue_check_view_search" model="ir.ui.view">
+        <field name="name">oski.mail.queue.check.search</field>
+        <field name="model">oski.mail.queue.check</field>
+        <field name="arch" type="xml">
+            <search string="Auscultations">
+                <filter name="not_ok" string="Anomalies" domain="[('verdict', '!=', 'ok')]"/>
+                <group>
+                    <filter name="group_verdict" string="Verdict" domain="[]"
+                            context="{'group_by': 'verdict'}"/>
+                    <filter name="group_day" string="Jour" domain="[]"
+                            context="{'group_by': 'checked_on:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oski_mail_queue_check_action" model="ir.actions.act_window">
+        <field name="name">Santé de la file de courriels</field>
+        <field name="res_model">oski.mail.queue.check</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aucune auscultation</p>
+            <p>La tâche planifiée quotidienne inscrit ici l'état de la file d'envoi.</p>
+        </field>
+    </record>
+
+    <menuitem id="oski_mail_queue_check_menu"
+              name="Santé de la file"
+              parent="base.menu_email"
+              action="oski_mail_queue_check_action"
+              sequence="25"
+              groups="base.group_system"/>
+</odoo>

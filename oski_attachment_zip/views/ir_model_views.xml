@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_model_form_oski_zip" model="ir.ui.view">
+        <field name="name">ir.model.form.oski.zip</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='transient']" position="after">
+                <field name="oski_zip_enabled" invisible="not oski_zip_available"/>
+                <field name="oski_zip_available" invisible="1"/>
+                <field name="oski_zip_action_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_oski_zip_model_list" model="ir.ui.view">
+        <field name="name">ir.model.list.oski.zip</field>
+        <field name="model">ir.model</field>
+        <field name="arch" type="xml">
+            <list string="Téléchargement groupé" create="false" delete="false"
+                  editable="bottom">
+                <field name="name"/>
+                <field name="model"/>
+                <field name="oski_zip_enabled" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_zip_model_search" model="ir.ui.view">
+        <field name="name">ir.model.search.oski.zip</field>
+        <field name="model">ir.model</field>
+        <field name="arch" type="xml">
+            <search string="Modèles">
+                <field name="name"/>
+                <field name="model"/>
+                <filter name="enabled" string="Téléchargement actif"
+                        domain="[('oski_zip_enabled', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_zip_models" model="ir.actions.act_window">
+        <field name="name">Téléchargement groupé des pièces jointes</field>
+        <field name="res_model">ir.model</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('oski_zip_available', '=', True)]</field>
+        <field name="context">{}</field>
+        <field name="view_id" ref="view_oski_zip_model_list"/>
+        <field name="search_view_id" ref="view_oski_zip_model_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Choisir les modèles concernés</p>
+            <p>
+                Cocher un modèle ajoute l'entrée « Télécharger les pièces jointes
+                (ZIP) » au menu d'actions de ses fiches et de ses listes.
+                Décocher la retire.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_oski_zip_models"
+              name="Téléchargement groupé (ZIP)"
+              parent="base.next_id_9"
+              action="action_oski_zip_models"
+              sequence="45"/>
+
+</odoo>

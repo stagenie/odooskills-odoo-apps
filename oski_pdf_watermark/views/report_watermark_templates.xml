@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Le filigrane s'ajoute dans le corps du rapport, pas par-dessus le PDF
+        produit : un élément en position fixe est répété par le moteur
+        d'impression sur chacune des pages, ce qu'un dessin posé après coup ne
+        garantit pas.
+    -->
+    <template id="html_container_watermark" inherit_id="web.html_container">
+        <xpath expr="//t[@t-call='web.report_layout']" position="inside">
+            <div t-if="oski_watermark" class="oski-report-watermark"
+                 t-attf-style="position:fixed;top:38%;left:0;right:0;text-align:center;pointer-events:none;font-weight:bold;letter-spacing:0.08em;color:#{oski_watermark['color']};opacity:#{oski_watermark['opacity']};font-size:#{oski_watermark['font_size']}px;-webkit-transform:rotate(#{oski_watermark['angle']}deg);transform:rotate(#{oski_watermark['angle']}deg);">
+                <span t-out="oski_watermark['text']"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

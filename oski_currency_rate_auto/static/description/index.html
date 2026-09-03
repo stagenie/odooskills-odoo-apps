@@ -1,0 +1,56 @@
+<!--
+  Fiche produit OdooSkills — oski_currency_rate_auto
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Taux de change automatiques</h1>
+    <p style="color: #6b7280; font-size: 17px;">Les taux se mettent à jour tout seuls, depuis la Banque centrale européenne.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Odoo Community sait tenir un tableau de taux de change ; il ne sait pas le remplir. Chaque matin, quelqu'un recopie donc des taux à la main — ou personne ne le fait, et les conversions dérivent en silence sur les factures, les achats et les rapports.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🏦 <strong>Une source publique et gratuite</strong> — les taux de référence de la BCE. Aucune clé d'interface, aucun compte à ouvrir.</li>
+    <li style="line-height: 1.6; color: #374151;">🧭 <strong>Votre devise sert de pivot</strong>, quelle qu'elle soit. La BCE publie en euro ; le module fait la division. Une société en dollar obtient des taux vus depuis le dollar.</li>
+    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Un seul taux par devise et par jour</strong> — une seconde exécution corrige celui du jour au lieu d'en ajouter un.</li>
+    <li style="line-height: 1.6; color: #374151;">😴 <strong>La tâche dort tant que personne ne l'a demandée</strong> — un module installé n'appelle pas la BCE toutes les nuits sans consentement.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Une case, une source, une date</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">L'onglet ajouté sur la société tient en quatre lignes : l'interrupteur, la source, la date du dernier succès, et un bouton pour une mise à jour immédiate. En cas de panne, l'erreur s'affiche ici — un message dans le journal du serveur ne se lit pas depuis l'interface.</p>
+  <img src="screenshot_01_company.png"
+       alt="Onglet Taux de change sur la fiche société : case Taux de change automatiques, source Banque centrale européenne, date de dernière mise à jour"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. L'historique se remplit tout seul</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Un taux par jour et par devise, inscrit là où Odoo l'attend : les conversions de factures et de rapports s'appuient dessus sans autre réglage.</p>
+  <img src="screenshot_02_rates.png"
+       alt="Onglet Rates d'une devise avec un taux par jour sur six jours consécutifs"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Une société en panne n'arrête pas les autres : l'erreur est inscrite sur la société, et la mise à jour continue.</li>
+    <li style="line-height: 1.6; color: #374151;">Les devises inactives sont laissées de côté, et celles absentes du flux passent leur tour sans faire échouer le reste.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Des taux justes sont la base ; la trésorerie est la suite. La gamme OdooSkills compte une famille Trésorerie complète — prévisionnel, rapprochement bancaire, suivi d'encours, relance client. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>

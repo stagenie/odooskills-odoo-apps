@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rule_partner_balance_wizard_own" model="ir.rule">
+        <field name="name">Partner Balance: own runs only</field>
+        <field name="model_id" ref="model_oski_partner_balance_wizard"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="global" eval="True"/>
+    </record>
+
+    <record id="rule_partner_balance_line_own" model="ir.rule">
+        <field name="name">Partner Balance Line: own runs only</field>
+        <field name="model_id" ref="model_oski_partner_balance_line"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="global" eval="True"/>
+    </record>
+</odoo>

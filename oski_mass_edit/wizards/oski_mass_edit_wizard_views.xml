@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_oski_mass_edit_wizard_form" model="ir.ui.view">
+        <field name="name">oski.mass.edit.wizard.form</field>
+        <field name="model">oski.mass.edit.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Édition en masse">
+                <group>
+                    <field name="model_name"/>
+                    <field name="record_count"/>
+                    <field name="field_id" options="{'no_create': True}"/>
+                    <field name="field_ttype" invisible="1"/>
+                    <field name="operation"/>
+                    <field name="value_char"
+                           invisible="operation == 'clear' or field_ttype not in ('char', 'text', 'html', 'selection')"
+                           required="operation == 'set' and field_ttype == 'selection'"/>
+                    <field name="selection_hint" readonly="1"
+                           invisible="operation == 'clear' or field_ttype != 'selection'"/>
+                    <field name="value_number"
+                           invisible="operation == 'clear' or field_ttype not in ('integer', 'float', 'monetary')"/>
+                    <field name="value_bool"
+                           invisible="operation == 'clear' or field_ttype != 'boolean'"/>
+                    <field name="value_date"
+                           invisible="operation == 'clear' or field_ttype != 'date'"/>
+                    <field name="value_datetime"
+                           invisible="operation == 'clear' or field_ttype != 'datetime'"/>
+                    <field name="value_reference"
+                           invisible="operation == 'clear' or field_ttype != 'many2one'"/>
+                </group>
+                <p class="text-muted">
+                    La modification s'applique aux enregistrements sélectionnés dans la liste,
+                    sous vos propres droits d'accès.
+                </p>
+                <footer>
+                    <button name="action_apply" type="object" string="Appliquer" class="btn-primary"/>
+                    <button special="cancel" string="Annuler" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

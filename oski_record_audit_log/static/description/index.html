@@ -1,0 +1,57 @@
+<!--
+  Fiche produit OdooSkills — oski_record_audit_log
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Journal des modifications</h1>
+    <p style="color: #6b7280; font-size: 17px;">Qui a créé, modifié ou supprimé quoi — sur les modèles que vous désignez, sans écrire une ligne de code.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Le suivi natif d'Odoo ne couvre que les champs marqués « tracking » sur les modèles dotés d'un chatter. Un prix changé sur une fiche produit, un compte bancaire réécrit, une ligne effacée dans une table technique : rien de tout cela ne laisse de trace. Le jour où il faut comprendre ce qui s'est passé, il n'y a rien à lire.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🔍 <strong>Le modèle que vous voulez</strong> — désignez-le, choisissez les opérations suivies (création, modification, suppression), et c'est en place.</li>
+    <li style="line-height: 1.6; color: #374151;">↔️ <strong>Avant et après</strong> — chaque modification est écrite en clair : <code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">Reference : C-STU → CLI-0067</code>.</li>
+    <li style="line-height: 1.6; color: #374151;">🎯 <strong>Les champs qui comptent</strong> — limitez la surveillance à une liste de champs, ou laissez vide pour tout suivre.</li>
+    <li style="line-height: 1.6; color: #374151;">🧾 <strong>Le nom au moment du geste</strong> — une suppression conserve l'identifiant et le nom affiché, seules informations irrécupérables après coup.</li>
+    <li style="line-height: 1.6; color: #374151;">⚙️ <strong>Sans le bruit de la maintenance</strong> — les opérations menées en superutilisateur (installation, mise à jour, tâches planifiées) ne sont pas journalisées.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Le registre se lit d'un trait</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Créations en vert, suppressions en rouge, modifications en clair avec l'ancienne et la nouvelle valeur — et l'auteur sur chaque ligne.</p>
+  <img src="screenshot_01_journal.png"
+       alt="Journal des modifications : créations, modifications et suppressions de contacts par Claire Morel, avec le détail « Reference : C-STU → CLI-0067 »"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Une règle par modèle, trois cases à cocher</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Créations, modifications, suppressions : chaque opération s'active séparément. Le champ « Champs surveillés » restreint la surveillance quand tout suivre serait trop bavard.</p>
+  <img src="screenshot_02_regles.png"
+       alt="Règle de journalisation sur le modèle Contact, avec les trois opérations cochées et aucun champ restreint"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Une réponse au « qui a fait ça ? » qui ne dépend pas du chatter, donc qui fonctionne sur les modèles techniques comme sur les modèles métier.</li>
+    <li style="line-height: 1.6; color: #374151;">Pièces jointes, images et listes liées sont volontairement ignorées : leur contenu ne tient pas sur une ligne de journal, et les y forcer rendrait le registre illisible.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Journaliser dit ce qui s'est passé ; cloisonner empêche que cela se passe. la gamme OdooSkills compte une quinzaine de modules de cloisonnement — par équipe commerciale, par département, par projet, par journal comptable, par entrepôt. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>

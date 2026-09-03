@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_oski_timesheet" model="ir.ui.view">
+        <field name="name">res.config.settings.form.oski.timesheet</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_timesheet.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Juste sous les deux cases « Employee/Approver Reminder » du
+                 cœur, qui en Community ne déclenchent rien : c'est là que
+                 l'utilisateur les cherche. -->
+            <xpath expr="//setting[@id='reminder_allow']" position="after">
+                <setting id="oski_timesheet_reminder"
+                         string="Rappel de saisie"
+                         help="Chaque semaine, les heures saisies sont comparées aux heures attendues. L'employé en retard reçoit une activité — jamais un courriel.">
+                    <field name="oski_timesheet_reminder_active"/>
+                    <div class="content-group" invisible="not oski_timesheet_reminder_active">
+                        <div class="mt8">
+                            <span>À défaut d'horaire de travail, attendre</span>
+                            <field name="oski_timesheet_expected_hours"
+                                   class="col-1 oe_inline mx-2"/>
+                            <span>heures par semaine</span>
+                        </div>
+                        <div class="mt8">
+                            <span>Ne pas déranger en deçà de</span>
+                            <field name="oski_timesheet_tolerance"
+                                   class="col-1 oe_inline mx-2"/>
+                            <span>heure(s) d'écart</span>
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

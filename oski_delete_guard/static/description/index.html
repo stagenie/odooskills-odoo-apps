@@ -1,0 +1,63 @@
+<!--
+  Fiche produit OdooSkills — oski_delete_guard
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Garde-fou de suppression</h1>
+    <p style="color: #6b7280; font-size: 17px;">Interdisez la suppression modèle par modèle, réservez-la à quelques groupes, et gardez la trace de chaque effacement.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Une suppression ne laisse rien derrière elle : l'enregistrement disparaît, et son chatter avec lui. Odoo ne propose qu'un droit global par modèle, accordé ou refusé une fois pour toutes dans les droits d'accès — sans exception possible, sans message d'explication, et sans le moindre registre de ce qui a été effacé.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🛡️ <strong>Fermer modèle par modèle</strong> — désignez les modèles à protéger : commandes, contacts, pièces comptables, ce que vous décidez.</li>
+    <li style="line-height: 1.6; color: #374151;">🔑 <strong>Ouvrir l'exception à qui vous voulez</strong> — les groupes désignés gardent le droit de supprimer. Aucun groupe désigné signifie : personne.</li>
+    <li style="line-height: 1.6; color: #374151;">💬 <strong>Expliquer le refus</strong> — le message affiché est le vôtre (« Archivez plutôt que de supprimer »), pas une erreur technique.</li>
+    <li style="line-height: 1.6; color: #374151;">📓 <strong>Journaliser sans interdire</strong> — le mode « Autoriser, mais journaliser » laisse la porte ouverte et prend la trace : modèle, identifiant, nom affiché, auteur, date.</li>
+    <li style="line-height: 1.6; color: #374151;">🔧 <strong>La maintenance n'est jamais bloquée</strong> — installations, mises à jour, désinstallations et tâches planifiées traversent le garde-fou : il protège l'interface, pas le serveur.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Deux modèles, deux régimes</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Les contacts restent supprimables, mais chaque effacement est inscrit ; les étiquettes de contact, elles, sont fermées à tout le monde.</p>
+  <img src="screenshot_01_regles.png"
+       alt="Liste des règles de suppression : Contact en mode « Autoriser, mais journaliser », Partner Tags en mode « Interdire, sauf aux groupes autorisés »"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Le refus, tel que l'utilisateur le lit</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Un administrateur tente de supprimer une étiquette : la suppression est arrêtée et le message est celui qui a été écrit dans la règle. Le garde-fou ne fait pas d'exception pour l'administrateur.</p>
+  <img src="screenshot_02_refus.png"
+       alt="Fenêtre d'erreur Odoo affichant le message personnalisé « Une étiquette de contact ne se supprime pas : archivez-la. » après une tentative de suppression"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">3. Ce qui a réellement disparu</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois contacts effacés, avec leur identifiant et leur nom au moment de la suppression — les deux seules informations qu'on ne peut plus retrouver après coup.</p>
+  <img src="screenshot_03_journal.png"
+       alt="Journal des suppressions : trois contacts supprimés par Claire Morel, avec date, identifiant et nom de l'enregistrement"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Le nom et l'identifiant sont capturés avant la suppression : après, plus rien ne permet de les reconstituer.</li>
+    <li style="line-height: 1.6; color: #374151;">Aucun réglage global à changer : le garde-fou s'ajoute par-dessus vos droits d'accès existants, sans les redéfinir.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Pour aller au-delà de la suppression et cloisonner ce que chacun voit, la gamme OdooSkills compte une quinzaine de modules de cloisonnement — par équipe commerciale, par département, par projet, par journal comptable, par entrepôt. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>

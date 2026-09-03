@@ -1,0 +1,57 @@
+<!--
+  Fiche produit OdooSkills — oski_pdf_watermark
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Filigrane sur les rapports</h1>
+    <p style="color: #6b7280; font-size: 17px;">BROUILLON, COPIE, ANNULÉ — sur n'importe quel rapport, et sur toutes ses pages.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Un devis non confirmé, une facture annulée et une réimpression sortent de l'imprimante avec exactement la même allure que le document valide. Le client ne peut pas les distinguer, et personne au bureau non plus une fois la feuille posée sur une pile. Odoo 19 ne propose aucun filigrane : le seul du dépôt sert à marquer ses propres documents de démonstration, en interne, et n'est ouvert à personne.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">🖨️ <strong>N'importe quel rapport QWeb</strong> — devis, facture, bon de livraison, ordre de fabrication, y compris vos rapports maison.</li>
+    <li style="line-height: 1.6; color: #374151;">🎯 <strong>Conditionnel</strong> — une règle = un rapport, une condition sur le document, un mot. BROUILLON tant que le devis n'est pas confirmé, ANNULÉ dès qu'il ne vaut plus.</li>
+    <li style="line-height: 1.6; color: #374151;">📄 <strong>Toutes les pages</strong> — le filigrane est dessiné dans le corps du rapport, pas appliqué après coup : la page 7 est marquée comme la page 1.</li>
+    <li style="line-height: 1.6; color: #374151;">🎨 <strong>Réglable</strong> — mot, couleur, opacité, inclinaison, taille. Discret par défaut, pour rester lisible sous le texte.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Le devis, tel qu'il s'imprime</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Un devis en cours de rédaction porte son mot en travers, sans rien masquer des montants ni des lignes. Confirmé, il s'imprimera nu — c'est la condition de la règle qui décide, pas l'utilisateur.</p>
+  <img src="screenshot_01_report.png"
+       alt="Devis Odoo imprimé avec le filigrane BROUILLON en diagonale sur toute la page"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Les règles, à un endroit</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois règles, trois rapports, trois conditions. Elles se réordonnent à la souris : quand plusieurs acceptent le même document, la première l'emporte.</p>
+  <img src="screenshot_02_rules.png"
+       alt="Liste des filigranes de rapport : nom, rapport visé, modèle, condition et mot posé"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">La condition est un <strong>domaine</strong>, vérifié à l'enregistrement contre le modèle du rapport : jamais de code exécuté au moment d'imprimer, et une règle fautive est refusée devant son auteur.</li>
+    <li style="line-height: 1.6; color: #374151;">Une impression qui groupe des documents appelant des filigranes différents n'en pose <strong>aucun</strong> : mieux vaut ne rien marquer que marquer à tort.</li>
+    <li style="line-height: 1.6; color: #374151;">Aucun droit particulier pour imprimer un document marqué ; le paramétrage reste réservé aux administrateurs.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Marquer un document est un début ; le faire signer en est la suite. La gamme OdooSkills propose la signature électronique avec certificat et empreinte, la gestion documentaire, et le dépôt de pièces par le client depuis son portail. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>

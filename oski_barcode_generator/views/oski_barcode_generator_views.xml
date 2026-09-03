@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_oski_barcode_generator_form" model="ir.ui.view">
+        <field name="name">oski.barcode.generator.form</field>
+        <field name="model">oski.barcode.generator</field>
+        <field name="arch" type="xml">
+            <form string="Générer les codes-barres">
+                <group>
+                    <field name="prefix"/>
+                    <field name="scope"/>
+                    <field name="limit"/>
+                    <field name="candidate_count"/>
+                </group>
+                <div class="text-muted">
+                    Les articles qui portent déjà un code-barres ne sont jamais
+                    touchés : écraser un code casserait les étiquettes déjà
+                    imprimées et les scanners qui les lisent.
+                </div>
+                <footer>
+                    <button name="action_generate" type="object" string="Générer"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Annuler" class="btn-secondary"
+                            special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_oski_barcode_generator" model="ir.actions.act_window">
+        <field name="name">Générer les codes-barres</field>
+        <field name="res_model">oski.barcode.generator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_scope': 'empty'}</field>
+    </record>
+
+    <record id="action_oski_barcode_generator_products" model="ir.actions.act_window">
+        <field name="name">Générer les codes-barres</field>
+        <field name="res_model">oski.barcode.generator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_scope': 'selected'}</field>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">list,form</field>
+    </record>
+
+    <record id="action_oski_barcode_generator_variants" model="ir.actions.act_window">
+        <field name="name">Générer les codes-barres</field>
+        <field name="res_model">oski.barcode.generator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_scope': 'selected'}</field>
+        <field name="binding_model_id" ref="product.model_product_product"/>
+        <field name="binding_view_types">list,form</field>
+    </record>
+
+</odoo>

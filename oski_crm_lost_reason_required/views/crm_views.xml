@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_lead_lost_view_form_oski" model="ir.ui.view">
+        <field name="name">crm.lead.lost.form.oski</field>
+        <field name="model">crm.lead.lost</field>
+        <field name="inherit_id" ref="crm.crm_lead_lost_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lost_reason_id']" position="attributes">
+                <attribute name="required">oski_reason_required</attribute>
+            </xpath>
+            <xpath expr="//field[@name='lost_reason_id']" position="before">
+                <field name="oski_reason_required" invisible="1"/>
+                <field name="oski_feedback_required" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='lost_feedback']" position="attributes">
+                <attribute name="placeholder">Ce que le client a répondu, et ce qu'il aurait fallu pour l'emporter.</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lost_reason_view_list_oski" model="ir.ui.view">
+        <field name="name">crm.lost.reason.list.oski</field>
+        <field name="model">crm.lost.reason</field>
+        <field name="inherit_id" ref="crm.crm_lost_reason_view_tree"/>
+        <field name="arch" type="xml">
+            <!-- La liste du cœur ne porte que le nom du motif : c'est
+                 l'unique point d'accroche disponible. -->
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="leads_count"/>
+                <field name="oski_currency_id" column_invisible="1"/>
+                <field name="oski_lost_revenue" sum="Revenu perdu"/>
+                <field name="oski_last_lost_on"/>
+                <button name="action_oski_open_leads" type="object"
+                        string="Voir" icon="fa-search-plus"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

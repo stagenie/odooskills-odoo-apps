@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_oski_analytic_rule_list" model="ir.ui.view">
+        <field name="name">oski.analytic.journal.rule.list</field>
+        <field name="model">oski.analytic.journal.rule</field>
+        <field name="arch" type="xml">
+            <list string="Analytique obligatoire" editable="bottom">
+                <field name="journal_id"/>
+                <field name="account_prefix" placeholder="60, 61, 62"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                <!-- Couper une règle le temps d'une clôture est plus courant
+                     que la supprimer : l'interrupteur évite d'avoir à retenir
+                     les préfixes pour les ressaisir ensuite. -->
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_oski_analytic_rule_form" model="ir.ui.view">
+        <field name="name">oski.analytic.journal.rule.form</field>
+        <field name="model">oski.analytic.journal.rule</field>
+        <field name="arch" type="xml">
+            <form string="Analytique obligatoire">
+                <sheet>
+                    <group>
+                        <field name="journal_id"/>
+                        <field name="account_prefix" placeholder="60, 61, 62"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="active" invisible="1"/>
+                    </group>
+                    <div class="text-muted">
+                        Odoo sait déjà exiger l'analytique par domaine d'activité,
+                        préfixe de compte et catégorie d'article, dans
+                        l'applicabilité des plans analytiques. Cette règle-ci
+                        ajoute le seul critère qui y manque — le journal — et
+                        signale les écritures fautives <b>avant</b> la
+                        comptabilisation.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--
+        Sans vue de recherche, une règle coupée disparaît de l'écran et rien
+        ne permet plus de la retrouver : `active` masque la ligne, et aucun
+        filtre ne la ramène. Le filtre « Archivées » est donc la contrepartie
+        obligée de l'interrupteur de la liste.
+    -->
+    <record id="view_oski_analytic_rule_search" model="ir.ui.view">
+        <field name="name">oski.analytic.journal.rule.search</field>
+        <field name="model">oski.analytic.journal.rule</field>
+        <field name="arch" type="xml">
+            <search string="Analytique obligatoire">
+                <field name="journal_id"/>
+                <field name="account_prefix"/>
+                <filter name="oski_inactive" string="Archivées"
+                        domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_journal" string="Journal" domain="[]"
+                            context="{'group_by': 'journal_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_analytic_rule" model="ir.actions.act_window">
+        <field name="name">Analytique obligatoire par journal</field>
+        <field name="res_model">oski.analytic.journal.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_oski_analytic_rule_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Poser une première règle</p>
+            <p>
+                Choisissez un journal : ses écritures ne pourront plus être
+                comptabilisées sans ventilation analytique. Les préfixes de
+                comptes restreignent l'exigence à une partie du plan.
+            </p>
+        </field>
+    </record>
+
+    <record id="view_move_line_list_oski_analytic" model="ir.ui.view">
+        <field name="name">account.move.line.list.oski.analytic</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <list string="Lignes sans analytique" create="false" delete="false">
+                <field name="date"/>
+                <field name="move_id"/>
+                <field name="journal_id"/>
+                <field name="account_id"/>
+                <field name="name"/>
+                <field name="analytic_distribution" widget="analytic_distribution"
+                       groups="analytic.group_analytic_accounting"/>
+                <field name="debit" sum="Débit"/>
+                <field name="credit" sum="Crédit"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_move_line_search_oski_analytic" model="ir.ui.view">
+        <field name="name">account.move.line.search.oski.analytic</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <search string="Lignes sans analytique">
+                <field name="move_id"/>
+                <field name="account_id"/>
+                <field name="journal_id"/>
+                <filter name="oski_missing" string="Analytique manquante"
+                        domain="[('oski_analytic_missing', '=', True)]"/>
+                <filter name="draft" string="Brouillons"
+                        domain="[('move_id.state', '=', 'draft')]"/>
+                <group>
+                    <filter name="group_journal" string="Journal" domain="[]"
+                            context="{'group_by': 'journal_id'}"/>
+                    <filter name="group_account" string="Compte" domain="[]"
+                            context="{'group_by': 'account_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_analytic_missing_lines" model="ir.actions.act_window">
+        <field name="name">Écritures sans analytique</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_move_line_list_oski_analytic"/>
+        <field name="search_view_id" ref="view_move_line_search_oski_analytic"/>
+        <field name="domain">[('oski_analytic_missing', '=', True), ('move_id.state', '=', 'draft')]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Rien ne bloquera</p>
+            <p>
+                Aucune écriture en brouillon ne manque de ventilation là où un
+                journal l'exige.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_oski_analytic_rule"
+              name="Analytique obligatoire"
+              parent="account.menu_finance_configuration"
+              action="action_oski_analytic_rule"
+              sequence="45"/>
+
+    <menuitem id="menu_oski_analytic_missing"
+              name="Écritures sans analytique"
+              parent="account.menu_finance_entries"
+              action="action_oski_analytic_missing_lines"
+              sequence="45"/>
+
+</odoo>

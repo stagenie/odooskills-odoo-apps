@@ -1,0 +1,56 @@
+<!--
+  Fiche produit OdooSkills — oski_cron_monitor
+  Styles INLINE uniquement. Accent = #714B67.
+  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+-->
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Moniteur des tâches planifiées</h1>
+    <p style="color: #6b7280; font-size: 17px;">Chaque exécution : durée, réussite, erreur, et l'historique qui va avec.</p>
+  </div>
+
+  <!-- 2. LE PROBLÈME -->
+  <p style="line-height: 1.6; color: #374151;">Odoo garde la date du dernier passage d'une tâche planifiée dans <code>lastcall</code>, et le nombre d'échecs consécutifs dans <code>failure_count</code>. Aucun des deux n'apparaît dans une vue. Une tâche qui échoue toutes les nuits — relances client, synchronisation, calcul de stock — ne se voit donc que dans le journal du serveur, si quelqu'un pense à l'ouvrir.</p>
+
+  <!-- 3. CE QUE ÇA APPORTE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">⏱️ <strong>Chaque exécution inscrite</strong> — début, durée à la milliseconde, réussite ou échec, message d'erreur complet.</li>
+    <li style="line-height: 1.6; color: #374151;">🔴 <strong>Les échecs survivent à l'échec</strong> — le journal s'écrit sur une transaction distincte, car celle de la tâche est annulée quand elle tombe. C'est précisément l'échec qu'il faut garder.</li>
+    <li style="line-height: 1.6; color: #374151;">📈 <strong>La durée devient une donnée</strong> — la colonne se totalise, les tâches lentes se repèrent avant de devenir un incident.</li>
+    <li style="line-height: 1.6; color: #374151;">🧹 <strong>Purge automatique</strong> — les exécutions au-delà de 30 jours partent avec le nettoyage d'Odoo ; le délai se règle par paramètre système.</li>
+  </ul>
+
+  <!-- 4. APERÇUS RÉELS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Tout ce qui a tourné cette nuit</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Quarante-neuf exécutions, dont une en échec, signalée en rouge au milieu des réussites. Sans ce journal, cette ligne-là n'aurait laissé aucune trace visible.</p>
+  <img src="screenshot_01_runs.png"
+       alt="Liste des exécutions planifiées : date, tâche, durée en secondes et résultat, avec un échec en rouge"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. L'historique, sur la tâche elle-même</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">La fiche de la tâche planifiée gagne la date du dernier passage, son résultat, sa durée, et un onglet qui déroule ses exécutions passées.</p>
+  <img src="screenshot_02_cron_tab.png"
+       alt="Fiche d'une tâche planifiée Odoo avec le dernier résultat, la dernière durée et l'onglet Exécutions"
+       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+
+  <!-- 5. POURQUOI L'ADOPTER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Le registre ne peut jamais faire échouer une tâche qui a réussi : une panne d'écriture part dans le journal du serveur, la tâche aboutit.</li>
+    <li style="line-height: 1.6; color: #374151;">Aucune configuration : le module s'installe et la première tâche qui tourne est déjà inscrite.</li>
+    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+  </ul>
+
+  <!-- 6. POUR ALLER PLUS LOIN -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
+  <p style="line-height: 1.6; color: #374151;">Savoir qu'une tâche a échoué est un début ; voir l'activité de toute l'instance en est la suite. La gamme OdooSkills propose des tableaux de bord d'exploitation, des journaux d'accès et de modification, et une surveillance de la file de courriels. Catalogue complet : apps.odooskills.com.</p>
+
+  <!-- 7. COMPATIBILITÉ & LICENCE -->
+  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : support@odooskills.com.</p>
+
+</section>
