@@ -144,10 +144,19 @@
                             </div>
                         </t>
                     </div>
-                    <p t-if="not modules and has_filters" class="oski-empty text-center py-5">
-                        No module matches these filters.
-                        <a t-att-href="clear_url" class="oski-clear">Reset</a>
-                    </p>
+                    <div t-if="not modules and has_filters" class="oski-empty-state text-center">
+                        <span class="oski-empty-icon" aria-hidden="true">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M8 11h6"/></svg>
+                        </span>
+                        <h2 class="oski-empty-title">
+                            <t t-if="search">No module for “<t t-out="search"/>”.</t>
+                            <t t-else="">No module matches these filters.</t>
+                        </h2>
+                        <p class="oski-empty-lead">What you are looking for may not exist yet.</p>
+                        <div class="oski-empty-actions">
+                            <a t-att-href="clear_url" class="oski-empty-reset">Reset filters</a>
+                        </div>
+                    </div>
                     <div t-if="not modules and not has_filters" class="oski-launch text-center">
                         <div class="oski-spectrum-scale oski-launch-scale" aria-hidden="true">
                             <t t-foreach="version_spectrum" t-as="sv">

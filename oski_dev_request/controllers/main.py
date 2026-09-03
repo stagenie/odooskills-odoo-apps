@@ -88,7 +88,7 @@ class OskiDevRequestController(http.Controller):
 
     @http.route("/apps/demande-developpement", type="http", auth="public",
                 website=True, sitemap=True)
-    def dev_request_form(self, **kw):
+    def dev_request_form(self, subject=None, category=None, **kw):
         # Ouvert à tous : un prospect qui découvre le catalogue doit pouvoir
         # décrire son besoin sans d'abord créer un compte.
         user = request.env.user
@@ -101,6 +101,11 @@ class OskiDevRequestController(http.Controller):
                 "company_name": partner.commercial_company_name or "",
                 "phone": partner.phone or "",
             }
+        # Pré-remplissage depuis l'état « aucun résultat » du catalogue.
+        if subject:
+            values["subject"] = subject.strip()[:120]
+        if category and str(category).isdigit():
+            values["category_id"] = str(int(category))
         return self._render_form(values=values)
 
     @http.route("/apps/demande-developpement/submit", type="http", auth="public",

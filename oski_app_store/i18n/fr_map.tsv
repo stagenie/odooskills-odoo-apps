@@ -74,8 +74,10 @@ Search a module, a feature…	Rechercher un module, une fonctionnalité…
 Search	Rechercher
 Sort	Tri
 Clear all	Tout effacer
+No module for “	Aucun module pour «
 No module matches these filters.	Aucun module ne correspond à ces filtres.
 Reset	Réinitialiser
+Reset filters	Réinitialiser les filtres
 The catalog opens soon.	Le catalogue ouvre bientôt.
 Contact us	Nous contacter
 Odoo %s — not released yet	Odoo %s — pas encore sortie
@@ -253,6 +255,7 @@ What to attach	Ce qu'il faut joindre
 What you expected, what happened.	Ce que vous attendiez, ce qui s'est produit.
 What's covered	Ce qui est couvert
 What's not covered	Ce qui n'est pas couvert
+What you are looking for may not exist yet.	Ce que vous cherchez n'existe peut-être pas encore.
 When do I receive the module ?	Quand est-ce que je reçois le module ?
 Where can I find my purchases later ?	Où retrouver mes achats plus tard ?
 Which versions are covered ?	Quelles versions sont couvertes ?

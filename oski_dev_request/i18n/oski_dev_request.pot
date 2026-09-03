@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 21:50+0000\n"
-"PO-Revision-Date: 2026-09-02 21:50+0000\n"
+"POT-Creation-Date: 2026-09-03 03:59+0000\n"
+"PO-Revision-Date: 2026-09-03 03:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -58,6 +58,11 @@ msgstr ""
 #. module: oski_dev_request
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
 msgid "<option value=\"\">— Choose —</option>"
+msgstr ""
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
+msgid "<span class=\"oski-badge oski-badge-custom\">Custom</span>"
 msgstr ""
 
 #. module: oski_dev_request
@@ -143,6 +148,11 @@ msgid "Budget <span class=\"text-danger\">*</span>"
 msgstr ""
 
 #. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
+msgid "Can't find it?"
+msgstr ""
+
+#. module: oski_dev_request
 #: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__category_id
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
@@ -179,6 +189,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__delivery_mode
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
 msgid "Delivery mode"
+msgstr ""
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
+msgid "Describe your need in two minutes: we review it and reply by email."
 msgstr ""
 
 #. module: oski_dev_request
@@ -523,7 +538,13 @@ msgstr ""
 
 #. module: oski_dev_request
 #: model:website.menu,name:oski_dev_request.menu_request_module
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
 msgid "Request a module"
+msgstr ""
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_empty_request_button
+msgid "Request this module"
 msgstr ""
 
 #. module: oski_dev_request

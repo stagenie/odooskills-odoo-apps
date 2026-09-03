@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 21:50+0000\n"
-"PO-Revision-Date: 2026-09-02 21:50+0000\n"
+"POT-Creation-Date: 2026-09-03 03:59+0000\n"
+"PO-Revision-Date: 2026-09-03 03:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -86,6 +86,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
 msgid "<option value=\"\">— Choose —</option>"
 msgstr "<option value=\"\">— Choisir —</option>"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
+msgid "<span class=\"oski-badge oski-badge-custom\">Custom</span>"
+msgstr "<span class=\"oski-badge oski-badge-custom\">Sur-mesure</span>"
 
 #. module: oski_dev_request
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
@@ -174,6 +179,11 @@ msgid "Budget <span class=\"text-danger\">*</span>"
 msgstr "Budget <span class=\"text-danger\">*</span>"
 
 #. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
+msgid "Can't find it?"
+msgstr "Vous ne trouvez pas ?"
+
+#. module: oski_dev_request
 #: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__category_id
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.oski_dev_request_view_search
@@ -211,6 +221,13 @@ msgstr "Module livré"
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
 msgid "Delivery mode"
 msgstr "Mode de livraison"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
+msgid "Describe your need in two minutes: we review it and reply by email."
+msgstr ""
+"Décrivez votre besoin en deux minutes : nous l'analysons et vous répondons "
+"par courriel."
 
 #. module: oski_dev_request
 #: model_terms:ir.ui.view,arch_db:oski_dev_request.form_page
@@ -555,8 +572,14 @@ msgstr "Demander un module sur-mesure"
 
 #. module: oski_dev_request
 #: model:website.menu,name:oski_dev_request.menu_request_module
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_grid_request_card
 msgid "Request a module"
 msgstr "Demander un module"
+
+#. module: oski_dev_request
+#: model_terms:ir.ui.view,arch_db:oski_dev_request.catalog_empty_request_button
+msgid "Request this module"
+msgstr "Demander ce module"
 
 #. module: oski_dev_request
 #: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__user_id

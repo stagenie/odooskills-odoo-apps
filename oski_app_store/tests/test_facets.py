@@ -152,6 +152,12 @@ class TestFacets(HttpCase):
         resp = self.url_open("/apps")
         self.assertIn("oski-toolbar", resp.text)
 
+    def test_empty_state_without_dev_request_keeps_reset(self):
+        body = self.url_open("/apps?search=nothing-matches-this").text
+        self.assertIn("oski-empty-state", body)
+        self.assertIn("No module for", body)
+        self.assertIn('href="/apps"', body)
+
 
 @tagged("post_install", "-at_install")
 class TestModulePageChips(HttpCase):

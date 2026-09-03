@@ -7,7 +7,7 @@ Route Task 9 : /apps/download/<version_id>
   - module payant, connecté sans achat confirmé → redirect vers la page module
   - module payant, acheteur confirmé (sale.order.line state='sale') → zip servi
 """
-from urllib.parse import urlparse
+from urllib.parse import urlencode, urlparse
 
 from odoo import _, http
 from odoo.http import request
@@ -184,6 +184,12 @@ class OskiAppStore(http.Controller):
             "show_counters": show_counters,
             "has_filters": bool(cats or tags or pricing != "all" or search),
             "clear_url": "/apps",
+            # Pré-remplissage du formulaire de demande de module depuis l'état
+            # « aucun résultat » : on reprend la recherche et la première
+            # catégorie active, sans le "?" (le gabarit l'ajoute lui-même).
+            "prefill_query": urlencode(
+                {k: v for k, v in (("subject", search[:120]), ("category", cats[0] if cats else "")) if v}
+            ),
             # Référencement : sans ces deux clés, chaque page hérite du titre
             # générique du site et n'a aucune description.
             "additional_title": _("Odoo modules"),

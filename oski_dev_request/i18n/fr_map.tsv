@@ -4,6 +4,7 @@
 <option value="">— Choose —</option>	<option value="">— Choisir —</option>
 <strong>Exclusive to me</strong> — the module stays private,\n                                            not published on the store. <span class="text-danger">Significantly higher price.</span>	<strong>Exclusif pour moi</strong> — le module reste privé,\n                                            non publié sur le store. <span class="text-danger">Tarif nettement supérieur.</span>
 <strong>Published on the store</strong> — standard price.\n                                            The module will be published on the OdooSkills store and reusable.	<strong>Publié sur le store</strong> — tarif standard.\n                                            Le module sera publié sur le store OdooSkills et réutilisable.
+<span class="oski-badge oski-badge-custom">Custom</span>	<span class="oski-badge oski-badge-custom">Sur-mesure</span>
 Accept	Accepter
 Accepted	Accepté
 Action Needed	Action requise
@@ -16,6 +17,7 @@ Attachment Count	Nombre de pièces jointes
 Attachments	Pièces jointes
 Back to catalog	Retour au catalogue
 Budget	Budget
+Can't find it?	Vous ne trouvez pas ?
 Budget <span class="text-danger">*</span>	Budget <span class="text-danger">*</span>
 Category	Catégorie
 Company	Entreprise
@@ -24,6 +26,7 @@ Created on	Créé le
 Delivered	Livré
 Delivered module	Module livré
 Delivery mode	Mode de livraison
+Describe your need in two minutes: we review it and reply by email.	Décrivez votre besoin en deux minutes : nous l'analysons et vous répondons par courriel.
 Describe your need: our team reviews it and gets back to you.	Décrivez votre besoin : notre équipe l'analyse et revient vers vous.
 Description of the need	Description du besoin
 Description of the need <span class="text-danger">*</span>	Description du besoin <span class="text-danger">*</span>
@@ -91,6 +94,7 @@ Rejected	Refusé
 Request	Demande
 Request a custom module	Demander un module sur-mesure
 Request a module	Demander un module
+Request this module	Demander ce module
 Requester	Demandeur
 Responsible User	Utilisateur responsable
 SMS Delivery error	Erreur d'envoi SMS

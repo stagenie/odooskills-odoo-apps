@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 20:38+0000\n"
-"PO-Revision-Date: 2026-09-02 20:38+0000\n"
+"POT-Creation-Date: 2026-09-03 03:59+0000\n"
+"PO-Revision-Date: 2026-09-03 03:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -1041,6 +1041,11 @@ msgstr "Aucune archive disponible."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "No module for “"
+msgstr "Aucun module pour «"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "No module matches these filters."
 msgstr "Aucun module ne correspond à ces filtres."
 
@@ -1346,8 +1351,8 @@ msgstr "Demander un module"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "Reset"
-msgstr "Réinitialiser"
+msgid "Reset filters"
+msgstr "Réinitialiser les filtres"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
@@ -1880,6 +1885,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid "What to attach"
 msgstr "Ce qu'il faut joindre"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "What you are looking for may not exist yet."
+msgstr "Ce que vous cherchez n'existe peut-être pas encore."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page

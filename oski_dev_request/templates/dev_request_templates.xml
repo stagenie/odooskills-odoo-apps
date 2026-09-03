@@ -142,6 +142,39 @@
         </t>
     </template>
 
+    <template id="catalog_grid_request_card" inherit_id="oski_app_store.catalog_page"
+              name="Request card at the end of the grid">
+        <xpath expr="//t[@t-foreach='modules']" position="after">
+            <div t-if="modules" class="col">
+                <a href="/apps/demande-developpement" class="oski-card oski-card-request h-100">
+                    <div class="oski-card-top">
+                        <span class="oski-monogram" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </span>
+                        <span class="oski-badge oski-badge-custom">Custom</span>
+                    </div>
+                    <h2 class="oski-card-title">Can't find it?</h2>
+                    <p class="oski-card-summary">Describe your need in two minutes: we review it and reply by email.</p>
+                    <div class="oski-card-foot">
+                        <span class="oski-card-cta">Request a module
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="catalog_empty_request_button" inherit_id="oski_app_store.catalog_page"
+              name="Request button in the empty state">
+        <xpath expr="//a[hasclass('oski-empty-reset')]" position="before">
+            <a t-attf-href="/apps/demande-developpement#{'?' + prefill_query if prefill_query else ''}"
+               class="oski-empty-request">Request this module
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+        </xpath>
+    </template>
+
     <template id="thanks_page" name="Request sent">
         <t t-call="website.layout">
             <div class="oski-store">
