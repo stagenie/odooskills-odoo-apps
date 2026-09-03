@@ -95,10 +95,9 @@ class OskiModule(models.Model):
 
         templates = paid.product_tmpl_id
         Line = self.env["sale.order.line"].sudo()
-        # Un seul _read_group pour tous les modules du batch : grouper
-        # directement sur `product_id.product_tmpl_id` n'est pas supporté,
-        # on groupe donc sur (product_id, order_partner_id) et on reconstitue
-        # le gabarit en Python — un seul aller-retour, avec prefetch en lot.
+        # Un seul _read_group pour tous les modules du batch, groupé sur
+        # (product_id, order_partner_id) ; le gabarit est reconstitué en
+        # Python avec un prefetch en lot — un seul aller-retour SQL.
         groups = Line._read_group(
             [
                 ("product_id.product_tmpl_id", "in", templates.ids),
