@@ -2,44 +2,56 @@ import io
 
 import xlsxwriter
 
-from odoo import _, http
+from odoo import http
 from odoo.http import content_disposition, request
 
 
-def _columns():
-    """Column titles, translated at CALL time.
+def _columns(env):
+    """Column titles, translated at CALL time, against the given env.
 
     They used to be a module-level list of bare strings, so the exported
     file came out with English headers on a French database while the
-    screen and the PDF right next to it were translated. `_()` cannot be
-    applied at import time either: the language is only known once a
-    request is being served, so the call has to happen here, per export.
+    screen and the PDF right next to it were translated. Moving the call
+    inside a function was not enough on its own: the bare `_()` walks the
+    calling stack looking for a `self` with an `.env`, and this helper's own
+    frame carries neither — outside an HTTP request (a direct call, as in a
+    test) it finds no language and logs "no translation language detected".
+    `env._()` (Odoo 19) needs no such frame lookup: it reads `env.lang`
+    directly, so the caller must pass the wizard's own env.
     """
     return [
-        (_('Partner'), 'partner', 32),
-        (_('Section'), 'section', 12),
-        (_('Date'), 'date', 12),
-        (_('Journal'), 'journal', 10),
-        (_('Document'), 'name', 18),
-        (_('Label'), 'label', 30),
-        (_('Due Date'), 'date_maturity', 12),
-        (_('Debit'), 'debit', 14),
-        (_('Credit'), 'credit', 14),
-        (_('Running Balance'), 'cumulative', 16),
+        (env._('Partner'), 'partner', 32),
+        (env._('Section'), 'section', 12),
+        (env._('Date'), 'date', 12),
+        (env._('Journal'), 'journal', 10),
+        (env._('Document'), 'name', 18),
+        (env._('Label'), 'label', 30),
+        (env._('Due Date'), 'date_maturity', 12),
+        (env._('Debit'), 'debit', 14),
+        (env._('Credit'), 'credit', 14),
+        (env._('Running Balance'), 'cumulative', 16),
     ]
+
+
+_SECTION_LABELS = {
+    'receivable': 'Customer',
+    'payable': 'Vendor',
+    'net': 'Net',
+}
 
 
 def build_xlsx(wizard):
     """Return the XLSX bytes for an already generated wizard."""
+    env = wizard.env
     stream = io.BytesIO()
     workbook = xlsxwriter.Workbook(stream, {'in_memory': True,
                                             'default_date_format': 'yyyy-mm-dd'})
-    sheet = workbook.add_worksheet(_('Partner Balance'))
+    sheet = workbook.add_worksheet(env._('Partner Balance'))
     header = workbook.add_format({'bold': True, 'bg_color': '#DDDDDD', 'border': 1})
     money = workbook.add_format({'num_format': '#,##0.00'})
     date_fmt = workbook.add_format({'num_format': 'yyyy-mm-dd'})
 
-    columns = _columns()
+    columns = _columns(env)
     for index, (title, _key, width) in enumerate(columns):
         sheet.write(0, index, title, header)
         sheet.set_column(index, index, width)
@@ -48,7 +60,7 @@ def build_xlsx(wizard):
     for row_index, line in enumerate(wizard.line_ids, start=1):
         values = {
             'partner': line.partner_id.display_name,
-            'section': line.section,
+            'section': env._(_SECTION_LABELS.get(line.section, line.section)),
             'date': line.date,
             'journal': line.journal_id.code or '',
             'name': line.name or '',

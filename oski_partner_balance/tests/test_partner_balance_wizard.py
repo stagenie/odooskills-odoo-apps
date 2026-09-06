@@ -274,6 +274,50 @@ class TestPartnerBalanceWizard(TransactionCase):
             '150.00', tfoot,
             "subsidiary A's own last line must not be footed as a closing balance")
 
+    def test_63_pdf_shows_partner_column_only_when_consolidated(self):
+        """A consolidated section (2 subsidiaries grouped under one root)
+        mixes rows from different partners under a single heading and
+        closing balance: without a per-row 'Partner' column, nothing on the
+        page says which subsidiary a given line came from. A simple,
+        non-consolidated statement (partner_id == group_partner_id on every
+        line) must print exactly as before, with no such column.
+        """
+        root = self.env['res.partner'].create({'name': 'PBW Group Root 63'})
+        sub_a = self.env['res.partner'].create({'name': 'PBW Subsidiary A63'})
+        sub_b = self.env['res.partner'].create({'name': 'PBW Subsidiary B63'})
+        wizard = self._wizard(partner_ids=[(6, 0, [sub_a.id, sub_b.id])])
+        self.env['oski.partner.balance.line'].create([
+            {
+                'wizard_id': wizard.id, 'sequence': 1, 'partner_id': sub_a.id,
+                'group_partner_id': root.id, 'section': 'receivable',
+                'date': '2026-01-05', 'name': 'A1', 'label': 'A1',
+                'debit': 100.0, 'credit': 0.0, 'balance': 100.0,
+                'cumulative': 100.0,
+            },
+            {
+                'wizard_id': wizard.id, 'sequence': 2, 'partner_id': sub_b.id,
+                'group_partner_id': root.id, 'section': 'receivable',
+                'date': '2026-01-20', 'name': 'B1', 'label': 'B1',
+                'debit': 80.0, 'credit': 0.0, 'balance': 80.0,
+                'cumulative': 180.0,
+            },
+        ])
+        html = self.env['ir.actions.report']._render_qweb_html(
+            'oski_partner_balance.report_partner_balance', wizard.ids)[0].decode()
+        self.assertIn(
+            'Partner', html,
+            "a consolidated section must carry a Partner column header")
+        self.assertIn(sub_a.display_name, html)
+        self.assertIn(sub_b.display_name, html)
+
+        simple_wizard = self._wizard()
+        simple_wizard._generate_lines()
+        simple_html = self.env['ir.actions.report']._render_qweb_html(
+            'oski_partner_balance.report_partner_balance', simple_wizard.ids)[0].decode()
+        self.assertNotIn(
+            '>Partner<', simple_html,
+            "a non-consolidated statement must print unchanged, no Partner column")
+
     def test_70_xlsx_bytes_look_like_a_workbook(self):
         from odoo.addons.oski_partner_balance.controllers.partner_balance_xlsx import (
             build_xlsx,

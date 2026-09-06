@@ -296,11 +296,12 @@ msgstr "Date et heure d'opération"
 
 #. module: oski_partner_balance
 #: model:ir.model.fields,field_description:oski_partner_balance.field_oski_partner_balance_line__partner_id
+#: model_terms:ir.ui.view,arch_db:oski_partner_balance.report_partner_balance
 #: model_terms:ir.ui.view,arch_db:oski_partner_balance.view_partner_balance_line_search
 #. odoo-python
 #: code:addons/oski_partner_balance/controllers/partner_balance_xlsx.py:0
 msgid "Partner"
-msgstr "Partenaire"
+msgstr "Tiers"
 
 #. module: oski_partner_balance
 #. odoo-python

@@ -40,6 +40,8 @@
                             <t t-foreach="sections" t-as="section">
                                 <t t-set="section_lines"
                                    t-value="partner_lines.filtered(lambda l: l.section == section)"/>
+                                <t t-set="is_consolidated"
+                                   t-value="any(l.partner_id != l.group_partner_id for l in section_lines)"/>
                                 <h5 t-if="len(sections) > 1">
                                     <t t-if="section == 'receivable'">Customer</t>
                                     <t t-elif="section == 'payable'">Vendor</t>
@@ -48,6 +50,7 @@
                                 <table class="table table-sm o_main_table">
                                     <thead>
                                         <tr>
+                                            <th t-if="is_consolidated">Partner</th>
                                             <th>Date</th>
                                             <th>Journal</th>
                                             <th>Document</th>
@@ -60,6 +63,7 @@
                                     </thead>
                                     <tbody>
                                         <tr t-foreach="section_lines" t-as="line">
+                                            <td t-if="is_consolidated"><span t-out="line.partner_id.display_name"/></td>
                                             <td><span t-out="line.date"/></td>
                                             <td><span t-out="line.journal_id.code"/></td>
                                             <td><span t-out="line.name"/></td>
@@ -81,7 +85,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="7" class="text-end">
+                                            <td t-attf-colspan="{{ 8 if is_consolidated else 7 }}" class="text-end">
                                                 <strong>Closing balance</strong>
                                             </td>
                                             <td class="text-end">
