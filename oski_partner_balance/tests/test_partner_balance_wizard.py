@@ -357,3 +357,51 @@ class TestPartnerBalanceWizard(TransactionCase):
             first[2], datetime, "the date must stay a date, not a string")
         self.assertIsInstance(
             first[9], (int, float), "the running balance must stay a number")
+
+    def test_80_scoped_to_the_readers_own_company(self):
+        """C2: two sets of books do not add up to one statement.
+
+        `_base_domain` carried no company clause: a reader in company A,
+        whose allowed companies also include B, saw B's lines added into
+        A's statement while the currency printed stayed A's alone -- two
+        ledgers under one currency. The screen and the PDF must both stay
+        within `self.env.company`, whatever companies the session allows.
+        """
+        company_b = self.env['res.company'].create({'name': 'PBW Other Co'})
+        self.env.user.company_ids = [(4, company_b.id)]
+        self.env['account.chart.template'].try_loading(
+            'generic_coa', company=company_b, install_demo=False)
+        journal_b = self.env['account.journal'].create({
+            'name': 'PBW Sales B', 'type': 'sale', 'code': 'PBOTB',
+            'company_id': company_b.id,
+        })
+        move_b = self.env['account.move'].create({
+            'move_type': 'out_invoice',
+            'company_id': company_b.id,
+            'partner_id': self.partner.id,
+            'journal_id': journal_b.id,
+            'invoice_date': '2026-02-15',
+            'date': '2026-02-15',
+            'invoice_line_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'quantity': 1,
+                'price_unit': 5000.0,
+                'tax_ids': [(6, 0, [])],
+            })],
+        })
+        move_b.action_post()
+
+        wizard = self._wizard().with_context(
+            allowed_company_ids=[self.env.company.id, company_b.id])
+        lines = wizard._generate_lines()
+        self.assertNotIn(
+            move_b.id, lines.mapped('move_id').ids,
+            "company B's invoice must never appear on company A's statement")
+
+        report = self.env.ref('oski_partner_balance.action_report_partner_balance')
+        html = report.with_context(
+            force_report_rendering=True)._render_qweb_html(
+            'oski_partner_balance.report_partner_balance', wizard.ids)[0].decode()
+        self.assertNotIn(
+            move_b.name, html,
+            "company B's invoice must never print on company A's PDF")

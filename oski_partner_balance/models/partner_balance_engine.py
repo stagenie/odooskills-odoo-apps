@@ -29,11 +29,23 @@ class PartnerBalanceEngine(models.AbstractModel):
 
     @api.model
     def _base_domain(self, options, section):
-        """Domain on account.move.line, without any date boundary."""
+        """Domain on account.move.line, without any date boundary.
+
+        Scoped to `self.env.company` alone, never `self.env.companies`: a
+        statement is printed under ONE currency, `self.env.company`'s. A
+        reader whose session also allows a second company must never see
+        that company's lines added in -- two ledgers under one currency
+        is not a statement, it is two statements that lie about being
+        one. Callers that need a DIFFERENT company than the active one
+        (a cron walking every company in turn, say) must bind it with
+        `with_company()` before calling in, so this clause and their own
+        explicit `company_id` clause agree.
+        """
         domain = [
             ('account_id.account_type', 'in', self._account_types(section)),
             ('partner_id', '!=', False),
             ('move_id.oski_exclude_from_balance', '=', False),
+            ('company_id', '=', self.env.company.id),
         ]
         if options.get('target_moves', 'posted') == 'all':
             domain.append(('parent_state', 'in', ('draft', 'posted')))
