@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills Hello",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Productivity",
     "summary": "Module exemple OdooSkills (démo du store)",
     "author": "OdooSkills",
