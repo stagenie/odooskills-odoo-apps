@@ -16,8 +16,8 @@ msgstr ""
 #. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
-msgid " Odoo %s is at the door."
-msgstr " Odoo %s à la porte."
+msgid " Odoo %s on request."
+msgstr " Odoo %s à la demande."
 
 #. module: oski_app_store
 #. odoo-python
@@ -26,9 +26,13 @@ msgid "%s — an Odoo module by OdooSkills."
 msgstr "%s — module Odoo signé OdooSkills."
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid ", free to premium, ready to install."
-msgstr ", du gratuit au premium, prêts à installer."
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid ""
+", and we will\n"
+"                            tell you what is possible."
+msgstr ""
+", et nous vous\n"
+"                            dirons ce qui est possible."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
@@ -271,8 +275,8 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "A collection of modules by OdooSkills — compatible from"
-msgstr "Une collection de modules signés OdooSkills — compatibles de la"
+msgid "A collection of modules by OdooSkills — for Odoo"
+msgstr "Une collection de modules signés OdooSkills — pour Odoo"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
@@ -995,11 +999,6 @@ msgstr ""
 "                        acceptation dans le bandeau, révocable à tout moment."
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "No"
-msgstr "Aucune"
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.portal_my_apps
 msgid "No application purchased yet."
 msgstr "Aucune application achetée pour l'instant."
@@ -1070,9 +1069,21 @@ msgstr "Odoo"
 
 #. module: oski_app_store
 #. odoo-python
+#: code:addons/oski_app_store/models/oski_odoo_version.py:0
+msgid "Odoo %s cannot be both upcoming and on request."
+msgstr "Odoo %s ne peut pas être à la fois « à venir » et « à la demande »."
+
+#. module: oski_app_store
+#. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
-msgid "Odoo %s — not released yet"
-msgstr "Odoo %s — pas encore sortie"
+msgid "Odoo %s — archives on the way"
+msgstr "Odoo %s — archives en cours de publication"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Odoo %s — on request"
+msgstr "Odoo %s — à la demande"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
@@ -1086,11 +1097,13 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
-"Odoo 20 is at the door. It already appears in the selector, without\n"
-"                            an archive: those will follow the official release."
+"Odoo 20 is out, and our modules are being ported to it one by one.\n"
+"                            It already appears in the selector ; each 20.0 archive shows up on\n"
+"                            its listing as soon as it is ready."
 msgstr ""
-"Odoo 20 est à la porte. Elle apparaît déjà dans le sélecteur, sans\n"
-"                            archive : celles-ci suivront la sortie officielle."
+"Odoo 20 est sorti, et nos modules y sont portés un par un.\n"
+"                            La version apparaît déjà dans le sélecteur ; chaque archive 20.0 s'affiche sur\n"
+"                            sa fiche dès qu'elle est prête."
 
 #. module: oski_app_store
 #: model:ir.ui.menu,name:oski_app_store.oski_app_store_menu_odoo_versions
@@ -1150,6 +1163,22 @@ msgid "OdooSkills store module"
 msgstr "Module du store OdooSkills"
 
 #. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_odoo_version__on_request
+msgid ""
+"Older Odoo version no longer followed by default: it stays in the selector, "
+"flagged 'on request', and is left out of the 'for Odoo X and later' "
+"sentence."
+msgstr ""
+"Ancienne version d'Odoo qui n'est plus suivie d'office : elle reste dans le "
+"sélecteur, marquée « à la demande », et sort de la phrase « pour Odoo X et "
+"suivantes »."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__on_request
+msgid "On request"
+msgstr "À la demande"
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid ""
 "One address for the whole OdooSkills store: apps@odooskills.com. What's "
@@ -1174,6 +1203,11 @@ msgstr ""
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_version_version_uniq
 msgid "Only one archive per Odoo version for a given module."
 msgstr "Une seule archive par version Odoo pour un module donné."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Only some modules have their"
+msgstr "Seuls certains modules ont leur archive"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
@@ -1280,11 +1314,11 @@ msgstr "Achats"
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid ""
-"Ready-to-install Odoo modules, free and premium, by OdooSkills — compatible "
-"from %s to %s."
+"Ready-to-install Odoo modules, free and premium, by OdooSkills — for Odoo %s"
+" and later."
 msgstr ""
 "Modules Odoo prêts à installer, gratuits et premium, signés OdooSkills — "
-"compatibles de la %s à la %s."
+"pour Odoo %s et suivantes."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
@@ -1727,6 +1761,13 @@ msgstr ""
 "                        de page."
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "They are served on request. Tell us which module you need through the"
+msgstr ""
+"Elles sont servies à la demande. Dites-nous de quel module vous avez besoin "
+"via le"
+
+#. module: oski_app_store
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_odoo_version_name_uniq
 msgid "This Odoo version is already registered."
 msgstr "Cette version Odoo est déjà déclarée."
@@ -1836,6 +1877,11 @@ msgstr "Website opengraph image"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "What about Odoo 15 and 16 ?"
+msgstr "Et Odoo 15 et 16 ?"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "What about Odoo 20 ?"
 msgstr "Et Odoo 20 ?"
 
@@ -1941,6 +1987,11 @@ msgid "and"
 msgstr "et"
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "and later, free to premium, ready to install."
+msgstr "et suivantes, du gratuit au premium, prêts à installer."
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
@@ -1953,17 +2004,14 @@ msgstr "apps@odooskills.com"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid ""
-"archive is published today ; the modules below ship in their latest "
-"available version."
+msgid "archive today ; the others ship in their latest available version."
 msgstr ""
-"archive n'est publiée à ce jour ; les modules ci-dessous sont livrés dans "
-"leur dernière version disponible."
+"à ce jour ; les autres sont livrés dans leur dernière version disponible."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "archives will follow the official release."
-msgstr "archives suivront la sortie officielle."
+msgid "archives are on the way."
+msgstr ": les archives arrivent."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
@@ -2005,13 +2053,8 @@ msgstr "free"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "is at the door:"
-msgstr "est à la porte :"
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "is not released yet."
-msgstr "n'est pas encore sortie."
+msgid "is out: archives on the way, module by module."
+msgstr "est sorti : les archives arrivent, module par module."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
@@ -2039,6 +2082,17 @@ msgstr ""
 "                            adresse de facturation."
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "on request"
+msgstr "à la demande"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "on request."
+msgstr "à la demande."
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "oski_xxx"
 msgstr "oski_xxx"
@@ -2054,6 +2108,11 @@ msgstr "premium"
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "recent"
 msgstr "recent"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
+msgid "request form"
+msgstr "formulaire de demande"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
@@ -2084,11 +2143,6 @@ msgstr "la politique de confidentialité"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid "the terms of use"
 msgstr "les conditions d'utilisation"
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "to"
-msgstr "à la"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page

@@ -74,7 +74,7 @@
                     <div class="container oski-hero-inner">
                         <span class="oski-eyebrow">OdooSkills marketplace</span>
                         <h1 class="oski-hero-title">Give Odoo<br/><em>what it's missing.</em></h1>
-                        <p class="oski-hero-lead">A collection of modules by OdooSkills — compatible from <t t-out="released_versions[-1]"/> to <t t-out="released_versions[0]"/>, free to premium, ready to install.</p>
+                        <p class="oski-hero-lead">A collection of modules by OdooSkills — for Odoo <t t-out="oldest_standard"/> and later, free to premium, ready to install.<t t-if="on_request_label"> Odoo <t t-out="on_request_label"/> on request.</t></p>
                         <form method="get" action="/apps" class="oski-search">
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control"
@@ -89,7 +89,7 @@
                                 <t t-foreach="version_spectrum" t-as="sv">
                                     <a t-att-href="sv['href']"
                                        t-att-title="sv['title']"
-                                       t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''} #{'is-soon' if sv['soon'] else ''}">
+                                       t-attf-class="oski-spectrum-node #{'is-active' if sv['selected'] else ''} #{'is-soon' if sv['soon'] else ''} #{'is-on-request' if sv['on_request'] else ''}">
                                         <span t-out="sv['label'].split('.')[0]"/>
                                     </a>
                                 </t>
@@ -97,7 +97,7 @@
                         </div>
                         <p t-if="upcoming_versions" class="oski-hero-soon">
                             <span class="oski-soon-flag">Odoo <t t-out="upcoming_versions[0].split('.')[0]"/></span>
-                            is at the door: <t t-out="upcoming_versions[0]"/> archives will follow the official release.
+                            is out: archives on the way, module by module.
                         </p>
                     </div>
                 </header>
@@ -133,8 +133,8 @@
                     </div>
 
                     <div t-if="version_is_upcoming" class="oski-notice" role="status">
-                        <strong>Odoo <t t-out="version.split('.')[0]"/> is not released yet.</strong>
-                        No <t t-out="version"/> archive is published today&#160;; the modules below ship in their latest available version.
+                        <strong>Odoo <t t-out="version.split('.')[0]"/> archives are on the way.</strong>
+                        Only some modules have their <t t-out="version"/> archive today&#160;; the others ship in their latest available version.
                     </div>
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3">

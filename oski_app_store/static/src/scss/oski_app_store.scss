@@ -80,7 +80,9 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
             background: $oski-pink; color: $oski-ink-deep; border-color: $oski-pink;
             box-shadow: 0 8px 22px rgba($oski-pink, .35); transform: translateY(-2px);
         }
-        // Version annoncée, pas encore sortie : contour pointillé, pas de plein.
+        // Version ancienne servie à la demande : présente, mais en retrait.
+        &.is-on-request { opacity: .6; &.is-active, &:hover { opacity: 1; } }
+        // Version dont les archives arrivent : contour pointillé, pas de plein.
         &.is-soon {
             border-style: dashed; border-color: rgba($oski-pink, .55);
             color: rgba(255,255,255,.55); background: transparent;

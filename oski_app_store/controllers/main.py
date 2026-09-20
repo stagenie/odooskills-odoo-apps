@@ -28,7 +28,7 @@ class OskiAppStore(http.Controller):
 
         `supported` est trié de la plus récente à la plus ancienne — l'ordre
         d'affichage partout dans le site. `upcoming` liste les versions
-        annoncées sans archive (Odoo 20 avant sa sortie).
+        sans archive : Odoo 20 est sorti, ses archives arrivent module par module.
         """
         Versions = request.env["oski.odoo.version"].sudo()
         supported = Versions.get_supported()
@@ -48,6 +48,16 @@ class OskiAppStore(http.Controller):
         released_versions = [
             pv for pv in supported_versions if pv not in upcoming_versions
         ]
+        # Versions anciennes servies à la demande : elles restent filtrables
+        # (leurs archives existent), mais la phrase de compatibilité ne les
+        # promet plus d'office. Repli sur `released` si tout est à la demande.
+        on_request_versions = [
+            pv for pv in request.env["oski.odoo.version"].sudo().get_on_request()
+            if pv in released_versions
+        ]
+        standard_versions = [
+            pv for pv in released_versions if pv not in on_request_versions
+        ] or released_versions
 
         args = request.httprequest.args
 
@@ -146,11 +156,20 @@ class OskiAppStore(http.Controller):
                 "label": pv,
                 "selected": pv == version,
                 "soon": pv in upcoming_versions,
+                "on_request": pv in on_request_versions,
                 # QWeb n'expose pas `_` dans son contexte de rendu : le titre
-                # traduit (annonce "pas encore sortie") se construit ici, pas
-                # dans une expression t-att-title du gabarit.
-                "title": _("Odoo %s — not released yet") % pv if pv in upcoming_versions else pv,
-                "note": _("soon") if pv in upcoming_versions else "",
+                # traduit se construit ici, pas dans une expression
+                # t-att-title du gabarit.
+                "title": (
+                    _("Odoo %s — archives on the way") % pv if pv in upcoming_versions
+                    else _("Odoo %s — on request") % pv if pv in on_request_versions
+                    else pv
+                ),
+                "note": (
+                    _("soon") if pv in upcoming_versions
+                    else _("on request") if pv in on_request_versions
+                    else ""
+                ),
                 "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
             }
 
@@ -158,14 +177,17 @@ class OskiAppStore(http.Controller):
         version_spectrum = [_version_option(pv) for pv in supported_versions]
         OskiModule = request.env["oski.module"].sudo()
 
+        # Pas de borne haute : elle vieillit à chaque sortie d'Odoo.
+        oldest_standard = standard_versions[-1].split(".")[0]
+        on_request_label = ", ".join(
+            pv.split(".")[0] for pv in reversed(on_request_versions)
+        )
         meta_description = _(
             "Ready-to-install Odoo modules, free and premium, by OdooSkills — "
-            "compatible from %s to %s."
-        ) % (released_versions[-1], released_versions[0])
-        if upcoming_versions:
-            meta_description += _(" Odoo %s is at the door.") % (
-                upcoming_versions[0].split(".")[0]
-            )
+            "for Odoo %s and later."
+        ) % oldest_standard
+        if on_request_label:
+            meta_description += _(" Odoo %s on request.") % on_request_label
 
         values = {
             "modules": modules,
@@ -182,6 +204,8 @@ class OskiAppStore(http.Controller):
             # rien au visiteur).
             "card_versions": released_versions,
             "released_versions": released_versions,
+            "oldest_standard": oldest_standard,
+            "on_request_label": on_request_label,
             "upcoming_versions": upcoming_versions,
             "version": version,
             "version_is_upcoming": version in upcoming_versions,
@@ -250,12 +274,16 @@ class OskiAppStore(http.Controller):
         variant = product.product_variant_id
         is_sellable = bool(variant) and product.is_published and product.sale_ok
         # Même raison que _version_option côté catalogue : le titre traduit
-        # ("pas encore sortie") ne peut pas se construire dans le gabarit,
-        # QWeb n'y expose pas `_`.
+        # ne peut pas se construire dans le gabarit, QWeb n'y expose pas `_`.
+        on_request_versions = request.env["oski.odoo.version"].sudo().get_on_request()
         pill_versions = [
             {
                 "version": pv,
-                "title": _("Odoo %s — not released yet") % pv if pv in upcoming_versions else pv,
+                "title": (
+                    _("Odoo %s — archives on the way") % pv if pv in upcoming_versions
+                    else _("Odoo %s — on request") % pv if pv in on_request_versions
+                    else pv
+                ),
             }
             for pv in supported_versions
         ]
