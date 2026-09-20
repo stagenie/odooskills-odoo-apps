@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 08:44+0000\n"
-"PO-Revision-Date: 2026-09-20 08:44+0000\n"
+"POT-Creation-Date: 2026-09-20 09:01+0000\n"
+"PO-Revision-Date: 2026-09-20 09:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -376,11 +376,6 @@ msgid "App Store"
 msgstr ""
 
 #. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_assets
-msgid "Assets & Maintenance"
-msgstr ""
-
-#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__author
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Author"
@@ -678,11 +673,6 @@ msgid "HTTP Routing"
 msgstr ""
 
 #. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_health
-msgid "Health"
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid "Hosting"
 msgstr ""
@@ -753,11 +743,6 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "Installing"
-msgstr ""
-
-#. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_inventory
-msgid "Inventory & Logistics"
 msgstr ""
 
 #. module: oski_app_store
@@ -835,11 +820,6 @@ msgid "Manager"
 msgstr ""
 
 #. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_manufacturing
-msgid "Manufacturing & Quality"
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Messages"
 msgstr ""
@@ -890,11 +870,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "Most downloaded"
-msgstr ""
-
-#. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_multicompany
-msgid "Multi-Company"
 msgstr ""
 
 #. module: oski_app_store
@@ -1166,11 +1141,6 @@ msgid "Productivity"
 msgstr ""
 
 #. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_project
-msgid "Project & Services"
-msgstr ""
-
-#. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__other
 msgid "Proprietary"
 msgstr ""
@@ -1235,11 +1205,6 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__changelog
 msgid "Release notes"
-msgstr ""
-
-#. module: oski_app_store
-#: model:oski.module.category,name:oski_app_store.cat_rental
-msgid "Rental"
 msgstr ""
 
 #. module: oski_app_store
