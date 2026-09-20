@@ -18,7 +18,7 @@ class TestOdooVersionRegistry(TransactionCase):
         )
 
     def test_v20_flagged_upcoming(self):
-        """La 20.0 est annoncée mais pas encore sortie : aucune archive."""
+        """La 20.0 reste « à venir » tant que ses archives arrivent module par module."""
         v20 = self.env.ref("oski_app_store.odoo_version_20")
         self.assertTrue(v20.is_upcoming)
         self.assertEqual(self.env["oski.odoo.version"].get_upcoming(), ["20.0"])

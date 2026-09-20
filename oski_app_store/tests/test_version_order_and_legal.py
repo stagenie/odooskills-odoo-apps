@@ -38,7 +38,7 @@ class TestVersionOrder(HttpCase):
         html = self.url_open("/apps").text
         self.assertIn("is-soon", html)
         self.assertIn("oski-opt-note", html)
-        self.assertIn("is at the door", html)
+        self.assertIn("archives on the way", html)
 
     def test_card_dots_skip_upcoming(self):
         """Aucune pastille 20 sur les cartes : rien à télécharger en 20.0."""
@@ -58,7 +58,7 @@ class TestVersionOrder(HttpCase):
         resp = self.url_open("/apps?v=20.0")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("oski-notice", resp.text)
-        self.assertIn("is not released yet", resp.text)
+        self.assertIn("archives are on the way", resp.text)
         self.assertIn("oski_notice20", resp.text, "Behavior B : rien n'est masqué")
 
     def test_module_page_pill_20_soon(self):

@@ -83,8 +83,15 @@
                     </details>
                     <details class="oski-faq-item">
                         <summary>What about Odoo 20&#160;?</summary>
-                        <p>Odoo 20 is at the door. It already appears in the selector, without
-                            an archive: those will follow the official release.</p>
+                        <p>Odoo 20 is out, and our modules are being ported to it one by one.
+                            It already appears in the selector&#160;; each 20.0 archive shows up on
+                            its listing as soon as it is ready.</p>
+                    </details>
+                    <details class="oski-faq-item">
+                        <summary>What about Odoo 15 and 16&#160;?</summary>
+                        <p>They are served on request. Tell us which module you need through the
+                            <a href="/apps/demande-developpement">request form</a>, and we will
+                            tell you what is possible.</p>
                     </details>
                     <details class="oski-faq-item">
                         <summary>Does a 19.0 module work on an 18.0 database&#160;?</summary>
