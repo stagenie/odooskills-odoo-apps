@@ -9,13 +9,18 @@
                 <div class="row g-4 mb-4">
                     <!-- Carte fiche technique (haut gauche) -->
                     <div t-attf-class="#{'col-lg-5' if has_shots else 'col-12 oski-techcard-wide'}">
+                        <t t-set="ribbon" t-value="module.ribbon_display_id"/>
                         <div class="oski-techcard">
+                            <t t-if="ribbon and ribbon.style == 'ribbon'" t-call="oski_app_store.module_ribbon"/>
                             <div class="d-flex align-items-center gap-3 mb-2">
                                 <t t-call="oski_app_store.module_icon"/>
                                 <div>
                                     <h1 class="oski-module-title" t-out="module.name"/>
-                                    <span t-if="module.is_free" class="oski-badge oski-badge-free">Free</span>
-                                    <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
+                                    <span class="oski-badges">
+                                        <span t-if="module.is_free" class="oski-badge oski-badge-free">Free</span>
+                                        <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
+                                        <t t-if="ribbon and ribbon.style == 'tag'" t-call="oski_app_store.module_ribbon"/>
+                                    </span>
                                 </div>
                             </div>
                             <p class="oski-module-summary" t-out="module.summary"/>
@@ -151,6 +156,26 @@
                 <div class="oski-desc">
                     <t t-out="module.description_html"/>
                 </div>
+                <!-- Discussion : chatter portail pour les utilisateurs connectés
+                     (portail ou internes) ; un visiteur public est invité à se
+                     connecter. Le fil ne montre que les commentaires
+                     (website_message_ids) ; poster exige la lecture de la fiche
+                     (_mail_post_access = "read"). -->
+                <section class="oski-discussion" id="oski-discussion">
+                    <h2 class="oski-discussion-title">Discussion</h2>
+                    <t t-if="request.env.user._is_public()">
+                        <p class="oski-discussion-signin">
+                            <a t-attf-href="/web/login?redirect=#{module.website_url}#discussion"
+                               class="btn oski-btn-signin btn-sm">Sign in</a>
+                            to join the discussion.
+                        </p>
+                    </t>
+                    <t t-else="">
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="module"/>
+                        </t>
+                    </t>
+                </section>
             </div>
             </div>
         </t>

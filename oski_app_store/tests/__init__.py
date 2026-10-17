@@ -14,3 +14,5 @@ from . import test_i18n_source
 from . import test_bilingual_render
 from . import test_counters
 from . import test_version_on_request
+from . import test_ribbon
+from . import test_discussion

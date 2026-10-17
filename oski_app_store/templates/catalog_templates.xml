@@ -11,14 +11,28 @@
         </t>
     </template>
 
+    <!-- Bandeau promotionnel (product.ribbon) : `ribbon` est posé par l'appelant.
+         Style « ribbon » = bande en coin (absolue, l'hôte est position:relative +
+         overflow:hidden) ; style « tag » = pastille à côté du badge Free/Premium. -->
+    <template id="module_ribbon" name="Bandeau promotionnel">
+        <span t-attf-class="oski-ribbon oski-ribbon-#{ribbon.style} oski-ribbon-#{ribbon.position}"
+              t-attf-style="background:#{ribbon.bg_color};color:#{ribbon.text_color}"
+              t-out="ribbon.name"/>
+    </template>
+
     <!-- Carte compacte de la grille. -->
     <template id="module_card" name="Carte module (grille)">
         <t t-set="avail" t-value="module.available_versions()"/>
+        <t t-set="ribbon" t-value="module.ribbon_display_id"/>
         <a t-att-href="module.website_url" class="oski-card h-100">
+            <t t-if="ribbon and ribbon.style == 'ribbon'" t-call="oski_app_store.module_ribbon"/>
             <div class="oski-card-top">
                 <t t-call="oski_app_store.module_icon"/>
-                <span t-if="module.is_free" class="oski-badge oski-badge-free">Free</span>
-                <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
+                <span class="oski-badges">
+                    <t t-if="ribbon and ribbon.style == 'tag'" t-call="oski_app_store.module_ribbon"/>
+                    <span t-if="module.is_free" class="oski-badge oski-badge-free">Free</span>
+                    <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
+                </span>
             </div>
             <h2 class="oski-card-title" t-out="module.name"/>
             <p class="oski-card-summary" t-out="module.summary"/>

@@ -910,6 +910,7 @@ msgid "Manufacturing & Quality"
 msgstr "Fabrication & Qualité"
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_ids
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Messages"
 msgstr "Messages"
@@ -1063,6 +1064,7 @@ msgid "OPL-1"
 msgstr "OPL-1"
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.brand_promotion_affiliate
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Odoo"
 msgstr "Odoo"
@@ -2186,3 +2188,162 @@ msgstr "⬇ Télécharger ("
 #: model_terms:ir.ui.view,arch_db:oski_app_store.brand_promotion_affiliate
 msgid "Powered by"
 msgstr "Propulsé par"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_needaction
+msgid "Action Needed"
+msgstr "Action requise"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Discussion"
+msgstr "Discussion"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__ribbon_date_from
+msgid "First day the ribbon is shown. Empty: shown right away."
+msgstr "Premier jour d'affichage du bandeau. Vide : affiché tout de suite."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (partenaires)"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_has_error
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur de livraison."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_is_follower
+msgid "Is Follower"
+msgstr "Est abonné"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__ribbon_date_to
+msgid "Last day the ribbon is shown (inclusive). Empty: shown until removed."
+msgstr ""
+"Dernier jour d'affichage du bandeau (inclus). Vide : affiché jusqu'à son "
+"retrait."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur de livraison du message"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec une erreur de livraison"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Promotion"
+msgstr "Promotion"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__ribbon_id
+msgid ""
+"Promotional ribbon shown on the catalog card and the module page (e.g. On "
+"sale, Special offer, Black Friday)."
+msgstr ""
+"Bandeau promotionnel affiché sur la carte du catalogue et la page du module "
+"(ex. En promo, Offre spéciale, Black Friday)."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__rating_ids
+msgid "Ratings"
+msgstr "Évaluations"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_id
+msgid "Ribbon"
+msgstr "Bandeau"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_date_from
+msgid "Ribbon from"
+msgstr "Bandeau à partir du"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_display_id
+msgid "Ribbon shown today"
+msgstr "Bandeau affiché aujourd'hui"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_date_to
+msgid "Ribbon until"
+msgstr "Bandeau jusqu'au"
+
+#. module: oski_app_store
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_ribbons
+msgid "Ribbons"
+msgstr "Bandeaux"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur de livraison SMS"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Sign in"
+msgstr "Connectez-vous"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module.py:0
+msgid "The ribbon end date must be on or after its start date."
+msgstr ""
+"La date de fin du bandeau doit être postérieure ou égale à sa date de début."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__website_message_ids
+msgid "Website communication history"
+msgstr "Historique des communications du site web"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "to join the discussion."
+msgstr "pour rejoindre la discussion."

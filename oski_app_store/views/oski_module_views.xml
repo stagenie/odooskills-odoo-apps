@@ -4,7 +4,7 @@
         <field name="name">oski.module.list</field>
         <field name="model">oski.module</field>
         <field name="arch" type="xml">
-            <list string="Modules">
+            <list string="Modules" multi_edit="1">
                 <field name="name"/>
                 <field name="technical_name"/>
                 <field name="category_id"/>
@@ -13,6 +13,9 @@
                 <field name="price" widget="monetary" optional="show"/>
                 <field name="download_count" optional="show"/>
                 <field name="purchase_count" optional="show"/>
+                <field name="ribbon_id" optional="show"/>
+                <field name="ribbon_date_from" optional="hide"/>
+                <field name="ribbon_date_to" optional="hide"/>
                 <field name="is_published"/>
             </list>
         </field>
@@ -91,6 +94,15 @@
                         </group>
                     </group>
                     <field name="summary" placeholder="Short summary"/>
+                    <group string="Promotion" name="promotion">
+                        <group>
+                            <field name="ribbon_id"/>
+                        </group>
+                        <group>
+                            <field name="ribbon_date_from" invisible="not ribbon_id"/>
+                            <field name="ribbon_date_to" invisible="not ribbon_id"/>
+                        </group>
+                    </group>
                     <notebook>
                         <page string="Description" name="description">
                             <field name="description_html"/>
@@ -115,6 +127,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>

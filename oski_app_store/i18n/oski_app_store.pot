@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 08:44+0000\n"
-"PO-Revision-Date: 2026-09-20 08:44+0000\n"
+"POT-Creation-Date: 2026-10-17 21:20+0000\n"
+"PO-Revision-Date: 2026-10-17 21:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -326,6 +326,11 @@ msgid "Accounting & Finance"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__active
 msgid "Active"
 msgstr ""
@@ -378,6 +383,11 @@ msgstr ""
 #. module: oski_app_store
 #: model:oski.module.category,name:oski_app_store.cat_assets
 msgid "Assets & Maintenance"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_attachment_count
+msgid "Attachment Count"
 msgstr ""
 
 #. module: oski_app_store
@@ -557,6 +567,11 @@ msgid "Description"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Discussion"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_ir_http__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__display_name
@@ -649,6 +664,21 @@ msgid "Example"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__ribbon_date_from
+msgid "First day the ribbon is shown. Empty: shown right away."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_free
@@ -675,6 +705,11 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model,name:oski_app_store.model_ir_http
 msgid "HTTP Routing"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__has_message
+msgid "Has Message"
 msgstr ""
 
 #. module: oski_app_store
@@ -713,6 +748,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__image_1920
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_kanban
 msgid "Icon"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_has_error
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: oski_app_store
@@ -766,6 +812,11 @@ msgid "Invoices: the applicable accounting retention period."
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_published
 msgid "Is Published"
 msgstr ""
@@ -798,6 +849,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__ribbon_date_to
+msgid "Last day the ribbon is shown (inclusive). Empty: shown until removed."
 msgstr ""
 
 #. module: oski_app_store
@@ -840,6 +896,12 @@ msgid "Manufacturing & Quality"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_ids
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Messages"
 msgstr ""
@@ -962,8 +1024,28 @@ msgid "Not available in"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,help:oski_app_store.field_oski_module__purchase_count
 msgid "Number of distinct customers with a confirmed order for this module."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__message_has_error_counter
+msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: oski_app_store
@@ -984,6 +1066,7 @@ msgid "OPL-1"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.brand_promotion_affiliate
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Odoo"
 msgstr ""
@@ -1135,6 +1218,11 @@ msgid "Parent category"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.brand_promotion_affiliate
+msgid "Powered by"
+msgstr ""
+
+#. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
@@ -1168,6 +1256,18 @@ msgstr ""
 #. module: oski_app_store
 #: model:oski.module.category,name:oski_app_store.cat_project
 msgid "Project & Services"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
+msgid "Promotion"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__ribbon_id
+msgid ""
+"Promotional ribbon shown on the catalog card and the module page (e.g. On "
+"sale, Special offer, Black Friday)."
 msgstr ""
 
 #. module: oski_app_store
@@ -1206,6 +1306,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__purchase_count
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Purchases"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__rating_ids
+msgid "Ratings"
 msgstr ""
 
 #. module: oski_app_store
@@ -1275,8 +1380,38 @@ msgid "Restart the Odoo service."
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_id
+msgid "Ribbon"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_date_from
+msgid "Ribbon from"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_display_id
+msgid "Ribbon shown today"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_date_to
+msgid "Ribbon until"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_ribbons
+msgid "Ribbons"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_seo_optimized
 msgid "SEO optimized"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: oski_app_store
@@ -1341,6 +1476,11 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_show_counters
 msgid "Show download and purchase counters"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Sign in"
 msgstr ""
 
 #. module: oski_app_store
@@ -1537,6 +1677,12 @@ msgid "The path followed in the interface to reproduce the problem."
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module.py:0
+msgid "The ribbon end date must be on or after its start date."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
 "The server is located in France. The publisher is a US company: its\n"
@@ -1691,8 +1837,18 @@ msgid "Website Absolute URL"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_url
 msgid "Website URL"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__website_message_ids
+msgid "Website communication history"
 msgstr ""
 
 #. module: oski_app_store
@@ -1845,6 +2001,12 @@ msgid "archives are on the way."
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "archives on the way"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
 "contact details, description of the\n"
@@ -1942,12 +2104,6 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
-#. odoo-python
-#: code:addons/oski_app_store/controllers/main.py:0
-msgid "archives on the way"
-msgstr ""
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid "the frequently asked questions"
 msgstr ""
@@ -1960,6 +2116,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid "the terms of use"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "to join the discussion."
 msgstr ""
 
 #. module: oski_app_store
@@ -1994,9 +2155,4 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "⬇ Download ("
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.brand_promotion_affiliate
-msgid "Powered by"
 msgstr ""
