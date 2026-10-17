@@ -22,14 +22,14 @@ class TestVersionOnRequestRegistry(TransactionCase):
     def test_standard_excludes_upcoming_and_on_request(self):
         self.assertEqual(
             self.env["oski.odoo.version"].get_standard(),
-            ["19.0", "18.0"],
+            ["20.0", "19.0", "18.0"],
         )
 
     def test_released_still_lists_on_request(self):
         """Une version à la demande est sortie : ses archives restent filtrables."""
         self.assertEqual(
             self.env["oski.odoo.version"].get_released(),
-            ["19.0", "18.0", "17.0", "16.0", "15.0"],
+            ["20.0", "19.0", "18.0", "17.0", "16.0", "15.0"],
         )
 
     def test_default_flag_on_an_on_request_version_is_ignored(self):
@@ -37,7 +37,7 @@ class TestVersionOnRequestRegistry(TransactionCase):
         Version = self.env["oski.odoo.version"]
         Version.search([]).write({"is_default": False})
         self.env.ref("oski_app_store.odoo_version_16").is_default = True
-        self.assertEqual(Version.get_default(), "19.0")
+        self.assertEqual(Version.get_default(), "20.0")
 
     def test_default_falls_back_when_only_on_request_remain(self):
         """Mieux vaut ouvrir sur une version à la demande que sur un catalogue vide."""
@@ -92,7 +92,8 @@ class TestOpenCompatibilityWording(HttpCase):
         html = self._catalog()
         self.assertNotIn("at the door", html)
         self.assertNotIn("not released yet", html)
-        self.assertIn("archives on the way", html)
+        self.assertNotIn("archives on the way", html)
+        self.assertNotIn("is-soon", html)
 
     def test_faq_covers_on_request_and_20(self):
         self.authenticate(None, None)

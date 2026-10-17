@@ -19,13 +19,11 @@
         <field name="name">18.0</field>
         <field name="sequence">180</field>
     </record>
-    <!-- 20.0 : sortie, mais ses archives arrivent module par module. Tant que
-         is_upcoming est vrai, elle reste hors du choix par défaut et hors des
-         pastilles de compatibilité. -->
+    <!-- 20.0 : sortie et suivie d'office (défaut du catalogue). Une version
+         annoncée avant sa sortie se déclare avec is_upcoming. -->
     <record id="odoo_version_20" model="oski.odoo.version">
         <field name="name">20.0</field>
         <field name="sequence">200</field>
-        <field name="is_upcoming" eval="True"/>
         <field name="is_default" eval="True"/>
     </record>
     <record id="odoo_version_19" model="oski.odoo.version">

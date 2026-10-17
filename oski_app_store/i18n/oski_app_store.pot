@@ -1995,3 +1995,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "⬇ Download ("
 msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.brand_promotion_affiliate
+msgid "Powered by"
+msgstr ""

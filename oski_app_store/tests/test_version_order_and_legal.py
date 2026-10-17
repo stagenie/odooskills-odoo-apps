@@ -32,8 +32,23 @@ class TestVersionOrder(HttpCase):
         listed = re.findall(r"oski-spectrum-node[^>]*>\s*<span>([0-9]{2})</span>", html)
         self.assertEqual(listed, [v.split(".")[0] for v in EXPECTED_ORDER])
 
+    def _flag_20_upcoming(self):
+        """Odoo 20 est sortie et suivie ; ces tests rejouent le cas « archives en cours »
+        en re-marquant la 20.0 à venir (sans drapeau par défaut, qui ne peut pas
+        tomber sur une version à venir sans le flag)."""
+        self.env.ref("oski_app_store.odoo_version_20").write({"is_upcoming": True, "is_default": False})
+
+    def test_released_20_has_no_soon_marker(self):
+        """Odoo 20 sortie : ni is-soon, ni note, ni bandeau sur le catalogue par défaut."""
+        self.authenticate(None, None)
+        html = self.url_open("/apps").text
+        self.assertNotIn("is-soon", html)
+        self.assertNotIn("archives on the way", html)
+        self.assertNotIn("oski-notice", html)
+
     def test_upcoming_marked_soon(self):
-        """La 20.0 se distingue : classe is-soon + mention dans le sélecteur."""
+        """Une version à venir se distingue : classe is-soon + mention dans le sélecteur."""
+        self._flag_20_upcoming()
         self.authenticate(None, None)
         html = self.url_open("/apps").text
         self.assertIn("is-soon", html)
@@ -41,7 +56,8 @@ class TestVersionOrder(HttpCase):
         self.assertIn("archives on the way", html)
 
     def test_card_dots_skip_upcoming(self):
-        """Aucune pastille 20 sur les cartes : rien à télécharger en 20.0."""
+        """Aucune pastille 20 sur les cartes tant que la 20.0 est à venir."""
+        self._flag_20_upcoming()
         self.authenticate(None, None)
         _make_module(self.env, "oski_dots20", ["19.0"])
         html = self.url_open("/apps").text
@@ -52,7 +68,8 @@ class TestVersionOrder(HttpCase):
         )
 
     def test_upcoming_selected_shows_notice(self):
-        """?v=20.0 : le catalogue le dit au lieu de laisser croire à un bug."""
+        """?v=20.0 à venir : le catalogue le dit au lieu de laisser croire à un bug."""
+        self._flag_20_upcoming()
         self.authenticate(None, None)
         _make_module(self.env, "oski_notice20", ["19.0"])
         resp = self.url_open("/apps?v=20.0")
@@ -63,6 +80,7 @@ class TestVersionOrder(HttpCase):
 
     def test_module_page_pill_20_soon(self):
         """Fiche : pastille 20.0 présente, marquée à venir et sans archive."""
+        self._flag_20_upcoming()
         self.authenticate(None, None)
         module, _ = _make_module(self.env, "oski_pill20", ["19.0"])
         html = self.url_open(module.website_url).text

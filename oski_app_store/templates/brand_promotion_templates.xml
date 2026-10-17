@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Footer : « Powered by Odoo » pointe sur le lien d'affiliation Odoo
+         d'OdooSkills (même mécanique que oski_odoo_affiliate sur le blog :
+         remplacer tout le bloc o_brand_promotion, méthode fiable en v19).
+         Paramètre oski.odoo_affiliate_url, repli sur le lien du programme. -->
+    <template id="brand_promotion_affiliate" inherit_id="web.brand_promotion"
+              name="Footer - Odoo affiliate link">
+        <xpath expr="//div[hasclass('o_brand_promotion')]" position="replace">
+            <div class="o_brand_promotion">
+                <t t-set="aff_url"
+                   t-value="request.env['ir.config_parameter'].sudo().get_param('oski.odoo_affiliate_url', 'https://www.odoo.com/r/aff-odooskills')"/>
+                <span class="small text-muted">
+                    Powered by
+                    <a t-att-href="aff_url" target="_blank"
+                       rel="sponsored noopener nofollow" class="text-muted">Odoo</a>
+                </span>
+            </div>
+        </xpath>
+    </template>
+</odoo>
