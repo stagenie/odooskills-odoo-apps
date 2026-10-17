@@ -1717,7 +1717,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "What about Odoo 15 and 16 ?"
+msgid "What about Odoo 15, 16 and 17 ?"
 msgstr ""
 
 #. module: oski_app_store

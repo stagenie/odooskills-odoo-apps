@@ -13,6 +13,7 @@
     <record id="odoo_version_17" model="oski.odoo.version">
         <field name="name">17.0</field>
         <field name="sequence">170</field>
+        <field name="on_request" eval="True"/>
     </record>
     <record id="odoo_version_18" model="oski.odoo.version">
         <field name="name">18.0</field>

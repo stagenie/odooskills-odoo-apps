@@ -12,16 +12,17 @@ from odoo.tests.common import HttpCase, TransactionCase
 
 @tagged("post_install", "-at_install")
 class TestVersionOnRequestRegistry(TransactionCase):
-    def test_15_and_16_are_on_request(self):
+    def test_15_16_and_17_are_on_request(self):
+        """Odoo 20 sorti (2026-10) : fenêtre suivie = 20/19/18, la 17.0 rejoint 15 et 16."""
         Version = self.env["oski.odoo.version"]
-        self.assertTrue(self.env.ref("oski_app_store.odoo_version_15").on_request)
-        self.assertTrue(self.env.ref("oski_app_store.odoo_version_16").on_request)
-        self.assertEqual(Version.get_on_request(), ["16.0", "15.0"])
+        for v in ("15", "16", "17"):
+            self.assertTrue(self.env.ref("oski_app_store.odoo_version_%s" % v).on_request, v)
+        self.assertEqual(Version.get_on_request(), ["17.0", "16.0", "15.0"])
 
     def test_standard_excludes_upcoming_and_on_request(self):
         self.assertEqual(
             self.env["oski.odoo.version"].get_standard(),
-            ["19.0", "18.0", "17.0"],
+            ["19.0", "18.0"],
         )
 
     def test_released_still_lists_on_request(self):
@@ -41,8 +42,8 @@ class TestVersionOnRequestRegistry(TransactionCase):
     def test_default_falls_back_when_only_on_request_remain(self):
         """Mieux vaut ouvrir sur une version à la demande que sur un catalogue vide."""
         Version = self.env["oski.odoo.version"]
-        Version.search([("name", "in", ("19.0", "18.0", "17.0"))]).unlink()
-        self.assertEqual(Version.get_default(), "16.0")
+        Version.search([("name", "in", ("19.0", "18.0"))]).unlink()
+        self.assertEqual(Version.get_default(), "17.0")
 
     def test_upcoming_cannot_be_on_request(self):
         from odoo.exceptions import ValidationError
@@ -66,11 +67,11 @@ class TestOpenCompatibilityWording(HttpCase):
 
     def test_hero_has_no_upper_bound(self):
         html = self._catalog()
-        self.assertIn("for Odoo 17 and later", html)
+        self.assertIn("for Odoo 18 and later", html)
         self.assertNotIn("compatible from", html)
 
     def test_hero_names_on_request_versions(self):
-        self.assertIn("Odoo 15, 16 on request", self._catalog())
+        self.assertIn("Odoo 15, 16, 17 on request", self._catalog())
 
     def test_selector_marks_on_request(self):
         html = self._catalog()
@@ -83,7 +84,7 @@ class TestOpenCompatibilityWording(HttpCase):
     def test_meta_description_is_open(self):
         html = self._catalog()
         meta = re.search(r'<meta name="description" content="([^"]+)"', html).group(1)
-        self.assertIn("Odoo 17 and later", meta)
+        self.assertIn("Odoo 18 and later", meta)
         self.assertNotIn("19.0", meta)
 
     def test_released_odoo_is_not_called_unreleased(self):

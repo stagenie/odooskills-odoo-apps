@@ -1877,8 +1877,8 @@ msgstr "Website opengraph image"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
-msgid "What about Odoo 15 and 16 ?"
-msgstr "Et Odoo 15 et 16 ?"
+msgid "What about Odoo 15, 16 and 17 ?"
+msgstr "Et Odoo 15, 16 et 17 ?"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
