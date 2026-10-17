@@ -42,7 +42,7 @@ class TestVersionOnRequestRegistry(TransactionCase):
     def test_default_falls_back_when_only_on_request_remain(self):
         """Mieux vaut ouvrir sur une version à la demande que sur un catalogue vide."""
         Version = self.env["oski.odoo.version"]
-        Version.search([("name", "in", ("19.0", "18.0"))]).unlink()
+        Version.search([("name", "in", ("20.0", "19.0", "18.0"))]).unlink()
         self.assertEqual(Version.get_default(), "17.0")
 
     def test_upcoming_cannot_be_on_request(self):

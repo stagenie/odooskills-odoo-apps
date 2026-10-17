@@ -66,13 +66,16 @@ class OskiOdooVersion(models.Model):
     def get_default(self):
         """Version par défaut du catalogue (flag, sinon plus haute séquence).
 
-        Jamais une version à venir : aucun module n'en propose d'archive, le
-        catalogue s'ouvrirait sur un spectre entièrement éteint. Ni, tant
-        qu'une version suivie existe, une version servie à la demande.
+        Le drapeau `is_default` fait foi dès qu'il n'est pas posé sur une
+        version servie à la demande : il peut désigner une version dont les
+        archives arrivent encore (Odoo 20 dès sa sortie) — le catalogue
+        l'annonce alors par son bandeau « archives en cours ». Sans drapeau,
+        jamais une version à venir ni, tant qu'une version suivie existe,
+        une version servie à la demande.
         """
         released = [("is_upcoming", "=", False)]
         standard = released + [("on_request", "=", False)]
-        rec = self.search(standard + [("is_default", "=", True)], limit=1)
+        rec = self.search([("on_request", "=", False), ("is_default", "=", True)], limit=1)
         if not rec:
             rec = self.search(standard, limit=1) or self.search(released, limit=1)
         return rec.name or "19.0"

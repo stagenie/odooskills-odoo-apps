@@ -2126,8 +2126,8 @@ msgstr ""
 #. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
-msgid "soon"
-msgstr "bientôt"
+msgid "archives on the way"
+msgstr "archives en cours"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page

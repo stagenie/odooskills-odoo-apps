@@ -1944,7 +1944,7 @@ msgstr ""
 #. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
-msgid "soon"
+msgid "archives on the way"
 msgstr ""
 
 #. module: oski_app_store

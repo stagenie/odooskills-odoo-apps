@@ -166,7 +166,7 @@ class OskiAppStore(http.Controller):
                     else pv
                 ),
                 "note": (
-                    _("soon") if pv in upcoming_versions
+                    _("archives on the way") if pv in upcoming_versions
                     else _("on request") if pv in on_request_versions
                     else ""
                 ),

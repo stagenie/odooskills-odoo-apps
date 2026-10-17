@@ -30,10 +30,11 @@ class TestOdooVersionRegistry(TransactionCase):
         )
 
     def test_get_default_flag(self):
-        self.assertEqual(self.env["oski.odoo.version"].get_default(), "19.0")
+        """Odoo 20 sorti (2026-10) : le catalogue s'ouvre dessus, archives en cours annoncées."""
+        self.assertEqual(self.env["oski.odoo.version"].get_default(), "20.0")
 
     def test_get_default_never_upcoming(self):
-        """Sans flag, le défaut retombe sur la plus récente version SORTIE."""
+        """Sans flag, le défaut retombe sur la plus récente version SORTIE (et suivie)."""
         self.env["oski.odoo.version"].search([]).write({"is_default": False})
         self.assertEqual(self.env["oski.odoo.version"].get_default(), "19.0")
 
@@ -46,8 +47,8 @@ class TestOdooVersionRegistry(TransactionCase):
             self.env["oski.odoo.version"].get_supported()[0], "21.0"
         )
         self.assertEqual(
-            self.env["oski.odoo.version"].get_default(), "19.0",
-            "une version à venir ne devient jamais le défaut du catalogue",
+            self.env["oski.odoo.version"].get_default(), "20.0",
+            "une version à venir SANS drapeau ne devient jamais le défaut du catalogue",
         )
 
     def test_name_unique(self):
