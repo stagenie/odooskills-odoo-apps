@@ -87,3 +87,20 @@ class TestLeadInactivity(TransactionCase):
         not_idle = self.Lead.search([("oski_is_idle", "=", False)])
         self.assertIn(fresh, not_idle)
         self.assertNotIn(idle, not_idle)
+
+    def test_won_and_lost_leads_are_never_idle(self):
+        """Une affaire gagnée ou perdue n'est plus à relancer, même immobile."""
+        self.Param.set_param(self.PARAM_KEY, "14")
+        won = self.Lead.create({"name": "Gagnée", "type": "opportunity"})
+        lost = self.Lead.create({"name": "Perdue", "type": "opportunity"})
+        won.action_set_won()
+        lost.action_set_lost()
+        for lead in won | lost:
+            self._set_reference_date(lead, fields.Datetime.now() - timedelta(days=30))
+            self.assertGreaterEqual(lead.oski_idle_days, 29)
+            self.assertFalse(lead.oski_is_idle)
+
+        found = self.Lead.with_context(active_test=False).search(
+            [("oski_is_idle", "=", True)])
+        self.assertNotIn(won, found)
+        self.assertNotIn(lost, found)
