@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_oski_archive_reason_wizard,oski.archive.reason.wizard,oski.archive.reason.wizard,base.group_user,crud,
