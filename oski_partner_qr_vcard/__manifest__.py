@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — QR vCard Contact",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Contacts",
     "summary": "Partagez un contact Odoo en un scan : le QR code vCard se génère automatiquement sur la fiche.",
     "description": """

@@ -1,7 +1,7 @@
-import base64
 from io import BytesIO
 
 from odoo import api, fields, models
+from odoo.tools import BinaryBytes
 
 try:
     import qrcode
@@ -30,7 +30,8 @@ class ResPartner(models.Model):
     def _oski_build_vcard(self):
         """Construit la chaîne vCard 3.0 du contact."""
         self.ensure_one()
-        org = self.company_name or (self.parent_id.name if self.parent_id else "")
+        # 20.0 : res.partner.company_name supprimé ; la société = le parent.
+        org = self.parent_id.name or ""
         lines = [
             "BEGIN:VCARD",
             "VERSION:3.0",
@@ -52,7 +53,7 @@ class ResPartner(models.Model):
 
     @api.depends(
         "name", "email", "phone",
-        "function", "website", "company_name", "parent_id.name",
+        "function", "website", "parent_id.name",
     )
     def _compute_oski_qr_vcard(self):
         for partner in self:
@@ -62,4 +63,5 @@ class ResPartner(models.Model):
             img = qrcode.make(partner._oski_build_vcard())
             buffer = BytesIO()
             img.save(buffer, format="PNG")
-            partner.oski_qr_vcard = base64.b64encode(buffer.getvalue())
+            # 20.0 : un champ Binary porte un BinaryValue (octets bruts), plus du base64.
+            partner.oski_qr_vcard = BinaryBytes(buffer.getvalue(), filename="qr_vcard.png")

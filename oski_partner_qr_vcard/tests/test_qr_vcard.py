@@ -1,5 +1,3 @@
-import base64
-
 from odoo.tests.common import TransactionCase
 
 
@@ -14,7 +12,7 @@ class TestQrVcard(TransactionCase):
 
     def test_qr_is_valid_png(self):
         partner = self.env["res.partner"].create({"name": "Acme SARL"})
-        raw = base64.b64decode(partner.oski_qr_vcard)
+        raw = partner.oski_qr_vcard.content
         self.assertEqual(
             raw[:8], b"\x89PNG\r\n\x1a\n",
             "Le binaire produit doit être un PNG valide.",
