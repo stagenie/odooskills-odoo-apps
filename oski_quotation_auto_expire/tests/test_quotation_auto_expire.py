@@ -163,3 +163,20 @@ class TestQuotationAutoExpire(TransactionCase):
         self._run()
         self.assertTrue(self._activities(order))
         self.assertEqual(order.state, "draft")
+
+    def test_the_reminder_is_not_repeated_on_the_following_days(self):
+        """Une relance par échéance, pas une par jour de la fenêtre."""
+        order = self._order(self.today + timedelta(days=2))
+        self._run()
+        # Le lendemain : la relance d'hier couvre déjà cette échéance.
+        order.oski_reminder_sent_on = self.today - timedelta(days=1)
+        self._run()
+        self.assertEqual(len(self._activities(order)), 1)
+
+    def test_a_postponed_deadline_is_reminded_again(self):
+        """Une échéance repoussée ouvre une nouvelle fenêtre de relance."""
+        order = self._order(self.today + timedelta(days=2))
+        order.oski_reminder_sent_on = self.today - timedelta(days=20)
+        self._run()
+        self.assertEqual(len(self._activities(order)), 1)
+        self.assertEqual(order.oski_reminder_sent_on, self.today)
