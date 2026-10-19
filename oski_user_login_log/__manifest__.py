@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Journal des connexions",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Chaque connexion et chaque échec, avec son identifiant, son adresse IP et sa date.",
     "description": """
@@ -24,7 +24,7 @@ et une trace posée dans la transaction de la connexion disparaîtrait avec elle
         "static/description/screenshot_01_journal.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_login_log_views.xml",
     ],
     "installable": True,
