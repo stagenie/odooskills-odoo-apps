@@ -1,5 +1,5 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
 class OskiMassEditConfig(models.Model):
@@ -76,11 +76,11 @@ class OskiMassEditConfig(models.Model):
         for config in self:
             model = self.env.get(config.model_name)
             if model is None:
-                raise UserError(
+                raise ValidationError(
                     _("Le modèle « %s » n'existe pas dans ce serveur.", config.model_name)
                 )
             if model._abstract or model._transient:
-                raise UserError(
+                raise ValidationError(
                     _("« %s » est un modèle abstrait ou transitoire : il n'a pas de "
                       "vue liste durable à équiper.", config.model_name)
                 )

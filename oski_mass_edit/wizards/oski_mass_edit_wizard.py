@@ -152,9 +152,18 @@ class OskiMassEditWizard(models.TransientModel):
         records = self._target_records()
         if not records:
             raise UserError(_("Aucun enregistrement sélectionné."))
+        if self.field_id.model != self.model_name:
+            raise UserError(
+                _("Le champ « %(field)s » n'appartient pas au modèle « %(model)s ».",
+                  field=self.field_id.name, model=self.model_name)
+            )
         field = self._resolve_field()
         self._check_writable(field)
         value = self._coerce_value(field)
+        if field.required and value in (False, None, ""):
+            raise UserError(
+                _("« %s » est obligatoire : il ne peut pas être vidé.", field.string)
+            )
         # Aucun sudo : l'écriture passe par les droits et les règles de
         # l'utilisateur courant, exactement comme une saisie fiche par fiche.
         records.write({self.field_id.name: value})
