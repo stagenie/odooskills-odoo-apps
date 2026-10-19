@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Taux de change automatiques",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Accounting",
     "summary": "Les taux de change se mettent à jour tout seuls, depuis la Banque centrale européenne.",
     "description": """
