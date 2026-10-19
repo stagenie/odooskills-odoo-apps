@@ -15,7 +15,7 @@ class ResUsers(models.Model):
     def _oski_invalidate_menu_cache(self):
         # ``ir.ui.menu.load_menus`` est mis en cache par utilisateur : tant
         # qu'il n'est pas vidé, l'écran garde les menus d'avant.
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
 
     @api.model_create_multi
     def create(self, vals_list):

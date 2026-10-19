@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Menus masqués par utilisateur",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Retirez des menus de l'écran d'un utilisateur précis, sans créer de groupe ni toucher aux droits.",
     "description": """
