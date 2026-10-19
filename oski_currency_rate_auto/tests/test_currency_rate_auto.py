@@ -3,6 +3,7 @@ from unittest.mock import patch
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, tagged
+from odoo.tools import mute_logger
 
 FEED = b"""<?xml version="1.0" encoding="UTF-8"?>
 <gesmes:Envelope xmlns:gesmes="http://www.gesmes.org/xml/2002-08-01"
@@ -146,10 +147,33 @@ class TestCurrencyRateAuto(TransactionCase):
                 raise ConnectionError("la BCE ne répond pas")
             return FEED
 
-        with patch.object(type(self.env["res.company"]), "_oski_fetch_ecb_xml", fetch):
+        # La panne est journalisée en ERROR par la tâche : c'est voulu, on la
+        # tait ici pour que seul un vrai défaut colore le journal des tests.
+        with patch.object(type(self.env["res.company"]), "_oski_fetch_ecb_xml", fetch), \
+                mute_logger("odoo.addons.oski_currency_rate_auto.models.res_company"):
             self.env["res.company"]._cron_update_currency_rates()
         self.assertIn("BCE", broken.oski_rate_last_error)
         self.assertTrue(self._rate(self.usd), "l'autre société a bien été servie")
+
+    def test_a_company_failing_midway_leaves_no_half_written_rates(self):
+        """Une panne pendant l'écriture ne laisse pas une partie des taux du
+        jour inscrite : la société en panne est remise en l'état d'avant."""
+        self.company.oski_rate_auto = True
+        Rate = type(self.env["res.currency.rate"])
+        create = Rate.create
+        calls = []
+
+        def flaky_create(rates, vals_list):
+            calls.append(1)
+            if len(calls) > 1:
+                raise ValueError("écriture interrompue")
+            return create(rates, vals_list)
+
+        with self._fetch(), patch.object(Rate, "create", flaky_create), \
+                mute_logger("odoo.addons.oski_currency_rate_auto.models.res_company"):
+            self.env["res.company"]._cron_update_currency_rates()
+        self.assertFalse(self._rate(self.usd) | self._rate(self.gbp))
+        self.assertIn("interrompue", self.company.oski_rate_last_error)
 
     def test_the_cron_sleeps_until_someone_asks(self):
         cron = self.env.ref("oski_currency_rate_auto.ir_cron_oski_currency_rate")
