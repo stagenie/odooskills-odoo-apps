@@ -146,6 +146,16 @@ class TestPdfWatermark(TransactionCase):
         with self.assertRaises(ValidationError):
             self._rule(filter_domain="{'state': 'draft'}")
 
+    def test_the_color_is_a_hex_value_and_nothing_more(self):
+        """La couleur entre telle quelle dans l'attribut ``style`` : une
+        déclaration CSS glissée à sa suite y serait exécutée."""
+        self._rule(color="#abc")
+        self._rule(color="#B02A37")
+        with self.assertRaises(ValidationError):
+            self._rule(color="red;background:url(http://exemple.invalid/x.png)")
+        with self.assertRaises(ValidationError):
+            self._rule(color="B02A37")
+
     def test_the_drawing_bounds_are_enforced(self):
         with self.assertRaises(ValidationError):
             self._rule(opacity=0)

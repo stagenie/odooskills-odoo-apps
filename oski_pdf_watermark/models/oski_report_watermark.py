@@ -1,7 +1,14 @@
 import ast
+import re
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+# La couleur est recopiée telle quelle dans l'attribut ``style`` du rapport :
+# seule une notation hexadécimale y entre, jamais une déclaration CSS de plus
+# (``red;background:url(...)`` ferait charger une adresse externe au moteur
+# d'impression).
+HEX_COLOR = re.compile(r"^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$")
 
 
 class OskiReportWatermark(models.Model):
@@ -44,6 +51,14 @@ class OskiReportWatermark(models.Model):
                 raise ValidationError(_(
                     "L'opacité se donne entre 0 et 1 — 0,12 pour un filigrane "
                     "discret. Reçu : %s.", rule.opacity))
+
+    @api.constrains("color")
+    def _check_color(self):
+        for rule in self:
+            if not HEX_COLOR.match(rule.color or ""):
+                raise ValidationError(_(
+                    "La couleur se donne en hexadécimal, par exemple #B02A37. "
+                    "Reçu : %s.", rule.color))
 
     @api.constrains("angle")
     def _check_angle(self):
