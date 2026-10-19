@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Analytique obligatoire par journal",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Accounting/Accounting",
     "summary": "Le critère qui manque à Odoo — le journal — et le contrôle avant comptabilisation.",
     "description": """
@@ -32,7 +32,7 @@ produisent rien.
         "static/description/screenshot_02_missing.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_analytic_journal_rule_views.xml",
     ],
     "installable": True,
