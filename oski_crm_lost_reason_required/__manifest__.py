@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Motif de perte obligatoire",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales/CRM",
     "summary": "Aucune opportunité perdue sans motif, et ce que chaque motif coûte vraiment.",
     "description": """

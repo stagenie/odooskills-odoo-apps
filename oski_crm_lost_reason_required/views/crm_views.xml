@@ -32,7 +32,7 @@
                 <field name="oski_lost_revenue" sum="Revenu perdu"/>
                 <field name="oski_last_lost_on"/>
                 <button name="action_oski_open_leads" type="object"
-                        string="Voir" icon="fa-search-plus"/>
+                        string="Voir" icon="zoom_in"/>
             </xpath>
         </field>
     </record>
