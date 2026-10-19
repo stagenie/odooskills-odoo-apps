@@ -103,3 +103,37 @@ class TestOskiLineNumbers(TransactionCase):
             line_a.oski_line_number, 3,
             "La ligne déplacée en fin doit prendre le numéro 3.",
         )
+
+    def test_removing_a_line_renumbers(self):
+        """Supprimer une ligne -> les suivantes remontent d'un cran."""
+        order = self._new_order()
+        order.write({
+            "order_line": [
+                (0, 0, self._product_line_vals(self.products[0], 10)),
+                (0, 0, self._product_line_vals(self.products[1], 20)),
+                (0, 0, self._product_line_vals(self.products[2], 30)),
+            ]
+        })
+        line_b = order.order_line.filtered(lambda l: l.product_id == self.products[1])
+        line_c = order.order_line.filtered(lambda l: l.product_id == self.products[2])
+        order.write({"order_line": [(2, line_b.id)]})
+        self.assertEqual(line_c.oski_line_number, 2)
+
+    def test_pdf_columns_stay_aligned(self):
+        """Chaque ligne du tableau PDF porte une cellule N° (sinon le
+        tableau se décale)."""
+        order = self._new_order()
+        order.write({
+            "order_line": [
+                (0, 0, {"display_type": "line_section", "name": "Bloc", "sequence": 5}),
+                (0, 0, self._product_line_vals(self.products[0], 10)),
+                (0, 0, {"display_type": "line_section", "name": "Ouvert", "sequence": 15}),
+                (0, 0, self._product_line_vals(self.products[1], 20)),
+                (0, 0, {"display_type": "line_note", "name": "Une note", "sequence": 25}),
+            ]
+        })
+        html = self.env["ir.actions.report"]._render_qweb_html(
+            "sale.action_report_saleorder", order.ids)[0].decode()
+        self.assertIn('name="td_oski_line_number_section"', html)
+        self.assertIn('name="td_oski_line_number_note"', html)
+        self.assertIn('name="td_oski_line_number"', html)

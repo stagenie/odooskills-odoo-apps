@@ -18,10 +18,13 @@
             </td>
         </xpath>
 
-        <!-- Ligne section : cellule vide (la cellule suivante porte un colspan).
-             En v18, sections ET combos partagent la même cellule « td_section_line ». -->
+        <!-- Ligne section ou combo : en v18 les deux partagent la cellule
+             « td_section_line ». Le combo porte un numéro à l'écran, le PDF
+             l'affiche aussi (sinon la numérotation imprimée saute un chiffre). -->
         <xpath expr="//td[@name='td_section_line']" position="before">
-            <td name="td_oski_line_number_section"/>
+            <td name="td_oski_line_number_section" class="text-end text-nowrap">
+                <span t-if="line.product_type == 'combo'" t-out="line.oski_line_number"/>
+            </td>
         </xpath>
 
         <!-- Ligne note : cellule vide. En v18 la cellule est « td_note_line ». -->
