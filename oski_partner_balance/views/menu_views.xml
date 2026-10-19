@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_partner_balance"
+              name="Partner Balance"
+              parent="account.menu_finance_reports"
+              action="action_partner_balance_wizard"
+              groups="oski_partner_balance.group_partner_balance_user"
+              sequence="90"/>
+</odoo>

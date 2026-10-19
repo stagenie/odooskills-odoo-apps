@@ -1,0 +1,56 @@
+<section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
+
+  <!-- 1. HERO -->
+  <div style="text-align: center; padding: 28px 16px;">
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Partner Balance</h1>
+    <p style="color: #6b7280; font-size: 17px;">The account statement Community is missing: every invoice, credit note and payment in order, with the balance recalculated on every line &mdash; on screen, in PDF and in Excel.</p>
+  </div>
+
+  <!-- 2. THE PROBLEM -->
+  <p style="line-height: 1.6; color: #374151;">Odoo Community can tell you a customer owes $16,500. It cannot tell you <strong>how that number came about</strong>. When the customer calls to dispute it, someone has to open the invoices one by one, hunt down the payments, and re-add everything by hand &mdash; hoping to land on the same figure the customer did. The subsidiary ledger that every bookkeeper asks for in the first week simply does not exist in Community.</p>
+
+  <!-- 3. WHAT IT ADDS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">&#128196; <strong>The chronological statement</strong> &mdash; invoices, credit notes and payments in the order they happened, with the <strong>running balance recalculated on every line</strong>. The last line IS the customer's balance.</li>
+    <li style="line-height: 1.6; color: #374151;">&#128257; <strong>Opening balance</strong> &mdash; the balance at the start date sits on a single opening line, so a quarter's statement stays correct without going back to the day the account was created.</li>
+    <li style="line-height: 1.6; color: #374151;">&#127919; <strong>Four scopes</strong> &mdash; customer only, vendor only, both side by side, or <strong>netted into a single balance</strong> when the partner is both at once.</li>
+    <li style="line-height: 1.6; color: #374151;">&#128269; <strong>Journal filters</strong> &mdash; include or exclude journals that have nothing to do with the conversation at hand.</li>
+    <li style="line-height: 1.6; color: #374151;">&#9986;&#65039; <strong>Exclude a single document</strong> &mdash; a disputed invoice can be taken out of the computation with one checkbox, without touching the accounting.</li>
+    <li style="line-height: 1.6; color: #374151;">&#128228; <strong>PDF and Excel</strong> &mdash; built from what is on screen, not a second computation: the export can never contradict the screen.</li>
+  </ul>
+
+  <!-- 4. REAL SCREENSHOTS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">In screenshots</h2>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Pick the period and the scope</h3>
+  <p style="line-height: 1.6; color: #374151;">One screen: period, opening balance, scope, target entries, partners and journals. Nothing to configure before using it.</p>
+  <p><img src="screenshot_01_assistant.png" alt="Partner Balance wizard: period, opening balance, customer scope, selected partner and journal filter" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. The statement, line by line, balance included</h3>
+  <p style="line-height: 1.6; color: #374151;">The opening line, then every document with its journal, label, due date and the running balance moving forward: 4,800, 7,100, 13,250, 16,650 &mdash; then 15,250 after the payment. Every line opens on its source document.</p>
+  <p><img src="screenshot_02_releve.png" alt="Statement for Menuiserie Bel Air: opening balance line followed by five documents with the running balance in the right-hand column" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. The PDF the customer receives</h3>
+  <p style="line-height: 1.6; color: #374151;">The same statement, company header included, with the chosen period and filters restated in the subtitle &mdash; so no discussion ever starts with "which period was that?". An Excel version exports from the same screen.</p>
+  <p><img src="screenshot_03_pdf.png" alt="Statement PDF with the company header, the period subtitle and the table of entries" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+
+  <!-- 5. VALUE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
+  <ul style="padding-left: 20px;">
+    <li style="line-height: 1.6; color: #374151;">Free, LGPL-3, no dependency on an Enterprise module.</li>
+    <li style="line-height: 1.6; color: #374151;">The statement is <strong>scoped to the user who produced it</strong>: each user only sees the lines they just generated, and the figures stay reserved for accounting profiles.</li>
+    <li style="line-height: 1.6; color: #374151;">Multi-company: the statement describes the books of the document's company, never those of the session reading it.</li>
+    <li style="line-height: 1.6; color: #374151;">This is the foundation of the whole Partner Balance family &mdash; aged balance, email follow-ups, credit limit control all plug into it without recomputing anything.</li>
+  </ul>
+
+  <!-- 6. CROSS-SELL -->
+  <div style="background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 28px 0;">
+    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">The core of the Partner Balance suite</h3>
+    <p style="line-height: 1.6; color: #374151; margin: 0;">Part of the Partner Balance suite &mdash; nine paid modules and two free add-ons, built on the free Partner Balance core. Add <strong>Aged Balance</strong> (who owes what, and since when), <strong>Statement Mailing</strong> (scheduled sending and a balance certificate), <strong>Balance on Invoices</strong>, <strong>Balance on Quotations</strong> and <strong>Credit Limit Control</strong> &mdash; or take the full suite in one install. See the family on <a href="https://apps.odooskills.com" style="color:#714B67;">apps.odooskills.com</a>.</p>
+  </div>
+
+  <!-- 7. COMPATIBILITY & LICENSE -->
+  <p style="line-height: 1.6; color: #6b7280; margin-top: 28px;">License LGPL-3. Compatible with Odoo 19, 18, 17. Support: <a href="mailto:apps@odooskills.com" style="color: #714B67;">apps@odooskills.com</a>.</p>
+
+</section>
