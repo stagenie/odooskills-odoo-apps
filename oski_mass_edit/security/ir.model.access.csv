@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_mass_edit_config_user,oski.mass.edit.config.user,model_oski_mass_edit_config,base.group_user,1,0,0,0
+access_oski_mass_edit_config_admin,oski.mass.edit.config.admin,model_oski_mass_edit_config,base.group_system,1,1,1,1
+access_oski_mass_edit_wizard_user,oski.mass.edit.wizard.user,model_oski_mass_edit_wizard,base.group_user,1,1,1,1
