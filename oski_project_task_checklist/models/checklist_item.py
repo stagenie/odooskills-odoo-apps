@@ -18,4 +18,9 @@ class OskiTaskChecklistItem(models.Model):
     name = fields.Char(string="Étape", required=True)
     done = fields.Boolean(string="Fait")
     sequence = fields.Integer(string="Séquence", default=10)
-    user_id = fields.Many2one("res.users", string="Assigné à")
+    user_id = fields.Many2one(
+        "res.users",
+        string="Assigné à",
+        domain=[("share", "=", False)],
+        help="Seul un utilisateur interne peut se voir confier une étape.",
+    )
