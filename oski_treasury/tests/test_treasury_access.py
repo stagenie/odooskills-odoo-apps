@@ -203,3 +203,59 @@ class TestTreasuryAccess(TransactionCase):
         mgr = self._make_user('oski_treasury.group_treasury_manager')
         with self.assertRaises(AccessError):
             self.safe_a.with_user(mgr).write({'responsible_ids': [(4, mgr.id)]})
+
+    # ========================
+    # Odoo 20 (ir.access): permissions OR-ed per group, company scope as a
+    # group-less restriction AND-ed for everyone.
+    # ========================
+
+    def test_v20_internal_user_without_treasury_group_denied(self):
+        """A plain internal user (no treasury group) gets no permission at
+        all on the treasury models: search is refused, not just empty."""
+        internal = self.env['res.users'].create({
+            'name': 'Plain Internal', 'login': 'plain_internal_acl',
+            'email': 'plain_internal_acl@example.com',
+            'group_ids': [(6, 0, [self.env.ref('base.group_user').id])],
+        })
+        for model in ('oski.treasury.cash', 'oski.treasury.cash.operation',
+                      'oski.treasury.cash.closing', 'oski.treasury.safe',
+                      'oski.treasury.safe.operation', 'oski.treasury.transfer',
+                      'oski.treasury.operation.category'):
+            Model = self.env[model].with_user(internal)
+            self.assertFalse(Model.has_access('read'), model)
+            with self.assertRaises(AccessError, msg=model):
+                Model.search([])
+        with self.assertRaises(AccessError):
+            self.cash_a.with_user(internal).read(['name'])
+
+    def test_v20_manager_sees_only_allowed_companies(self):
+        """A manager of two companies sees both registers only when both
+        companies are allowed in the context; restricting
+        allowed_company_ids hides the other one (restriction AND-ed with
+        the manager's unrestricted permission)."""
+        company2 = self.env['res.company'].create({'name': 'ACL Company 6'})
+        cash2 = self._make_cash(company=company2)
+        cash1 = self._make_cash()
+        mgr = self._make_user('oski_treasury.group_treasury_manager')
+        mgr.write({'company_ids': [(4, company2.id)]})
+        Cash = self.env['oski.treasury.cash'].with_user(mgr)
+        both = Cash.with_context(
+            allowed_company_ids=[self.env.company.id, company2.id]).search([])
+        self.assertIn(cash1, both)
+        self.assertIn(cash2, both)
+        only1 = Cash.with_context(allowed_company_ids=[self.env.company.id]).search([])
+        self.assertIn(cash1, only1)
+        self.assertNotIn(cash2, only1)
+
+    def test_v20_user_write_limited_to_assigned_cash(self):
+        """The user permission ('ru' + assignment domain) does not grant
+        write on a register the user is not assigned to, nor create."""
+        with self.assertRaises(AccessError):
+            self.cash_a.with_user(self.user_b).write({'location': 'X'})
+        self.cash_a.with_user(self.user_a).write({'location': 'Desk'})
+        self.assertEqual(self.cash_a.location, 'Desk')
+        with self.assertRaises(AccessError):
+            self.env['oski.treasury.cash'].with_user(self.user_a).create({
+                'name': 'Nope', 'code': 'NOPE',
+                'journal_id': self.journal_cash.id,
+            })

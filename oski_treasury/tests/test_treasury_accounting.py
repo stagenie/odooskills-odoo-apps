@@ -30,11 +30,11 @@ class TestTreasuryAccounting(TransactionCase):
         cls.acc_transit = _acc('TTRA1', 'Internal Transfer', 'asset_current')
 
         params = cls.env['ir.config_parameter'].sudo()
-        params.set_param('oski_treasury.account_move_enabled', 'True')
-        params.set_param('oski_treasury.default_cash_account_id', str(cls.acc_cash.id))
-        params.set_param('oski_treasury.default_revenue_account_id', str(cls.acc_rev.id))
-        params.set_param('oski_treasury.default_expense_account_id', str(cls.acc_exp.id))
-        params.set_param('oski_treasury.default_transfer_account_id', str(cls.acc_transit.id))
+        params.set_bool('oski_treasury.account_move_enabled', True)
+        params.set_int('oski_treasury.default_cash_account_id', cls.acc_cash.id)
+        params.set_int('oski_treasury.default_revenue_account_id', cls.acc_rev.id)
+        params.set_int('oski_treasury.default_expense_account_id', cls.acc_exp.id)
+        params.set_int('oski_treasury.default_transfer_account_id', cls.acc_transit.id)
 
         cls.category_in = cls.env.ref('oski_treasury.category_vente')
         cls.category_out = cls.env.ref('oski_treasury.category_achat')
@@ -104,14 +104,14 @@ class TestTreasuryAccounting(TransactionCase):
                          "The operation must point to the payment's native move")
 
     def test_05_feature_disabled(self):
-        self.env['ir.config_parameter'].sudo().set_param(
-            'oski_treasury.account_move_enabled', 'False')
+        self.env['ir.config_parameter'].sudo().set_bool(
+            'oski_treasury.account_move_enabled', False)
         op = self._op('in', 100.0, self.category_in)
         op.action_post()
         self.assertFalse(op.move_id)
         # Restore for the other tests
-        self.env['ir.config_parameter'].sudo().set_param(
-            'oski_treasury.account_move_enabled', 'True')
+        self.env['ir.config_parameter'].sudo().set_bool(
+            'oski_treasury.account_move_enabled', True)
 
     def test_06_move_removed_on_cancel(self):
         op = self._op('in', 300.0, self.category_in)
@@ -158,10 +158,10 @@ class TestTreasuryAccounting(TransactionCase):
     def test_09_stale_account_non_blocking(self):
         """Stale default account (deleted id): no entry, no crash."""
         params = self.env['ir.config_parameter'].sudo()
-        saved = params.get_param('oski_treasury.default_cash_account_id')
-        params.set_param('oski_treasury.default_cash_account_id', '999999999')
+        saved = params.get_int('oski_treasury.default_cash_account_id', None)
+        params.set_int('oski_treasury.default_cash_account_id', 999999999)
         op = self._op('in', 120.0, self.category_in)
         op.action_post()  # must NOT raise
         self.assertEqual(op.state, 'posted')
         self.assertFalse(op.move_id)
-        params.set_param('oski_treasury.default_cash_account_id', saved or '')
+        params.set_int('oski_treasury.default_cash_account_id', saved)

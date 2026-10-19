@@ -5,7 +5,6 @@
         <field name="model">oski.treasury.cash.closing</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">oski_treasury.report_cash_closing</field>
-        <field name="report_file">oski_treasury.report_cash_closing</field>
         <field name="binding_model_id" ref="model_oski_treasury_cash_closing"/>
         <field name="binding_type">report</field>
     </record>

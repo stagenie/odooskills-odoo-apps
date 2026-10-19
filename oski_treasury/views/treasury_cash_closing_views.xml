@@ -26,13 +26,13 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_pending_operations" type="object"
-                            class="oe_stat_button" icon="fa-clock-o"
+                            class="oe_stat_button" icon="schedule"
                             invisible="state == 'validated'">
                             <field name="pending_manual_operation_count" widget="statinfo"
                                 string="Pending"/>
                         </button>
                         <button name="action_create_manual_operation" type="object"
-                            class="oe_stat_button" icon="fa-plus-circle"
+                            class="oe_stat_button" icon="add_circle"
                             invisible="state in ('validated', 'cancel')">
                             <span class="o_stat_text">Add Operation</span>
                         </button>

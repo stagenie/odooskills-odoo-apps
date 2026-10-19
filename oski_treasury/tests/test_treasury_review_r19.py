@@ -30,11 +30,11 @@ class TestTreasuryReviewR19(TransactionCase):
         cls.acc_rev = _acc('TR19R', 'R19 Revenue', 'income')
         cls.acc_exp = _acc('TR19E', 'R19 Expense', 'expense')
         params = cls.env['ir.config_parameter'].sudo()
-        params.set_param('oski_treasury.account_move_enabled', 'True')
-        params.set_param('oski_treasury.default_cash_account_id', str(cls.acc_cash.id))
-        params.set_param('oski_treasury.default_revenue_account_id', str(cls.acc_rev.id))
-        params.set_param('oski_treasury.default_expense_account_id', str(cls.acc_exp.id))
-        params.set_param('oski_treasury.journal_id', '')
+        params.set_bool('oski_treasury.account_move_enabled', True)
+        params.set_int('oski_treasury.default_cash_account_id', cls.acc_cash.id)
+        params.set_int('oski_treasury.default_revenue_account_id', cls.acc_rev.id)
+        params.set_int('oski_treasury.default_expense_account_id', cls.acc_exp.id)
+        params.set_int('oski_treasury.journal_id', None)
 
         cls.category_in = cls.env.ref('oski_treasury.category_vente')
         cls.cash = cls.env['oski.treasury.cash'].create({
@@ -76,8 +76,9 @@ class TestTreasuryReviewR19(TransactionCase):
             [('id', '!=', self.company.currency_id.id),
              ('name', 'in', ('EUR', 'USD', 'GBP'))], limit=1)
         foreign.active = True
+        # Odoo 20: a rate dated D applies from D+1 (res_currency.py `name < date`).
         self.env['res.currency.rate'].create({
-            'name': fields.Date.today(), 'rate': 2.0,
+            'name': fields.Date.subtract(fields.Date.today(), days=1), 'rate': 2.0,
             'currency_id': foreign.id, 'company_id': self.company.id,
         })
         cash = self.env['oski.treasury.cash'].create({
@@ -101,8 +102,8 @@ class TestTreasuryReviewR19(TransactionCase):
             'name': 'R19 Misc Other', 'type': 'general', 'code': 'R19O',
             'company_id': other.id,
         })
-        self.env['ir.config_parameter'].sudo().set_param(
-            'oski_treasury.journal_id', str(journal_other.id))
+        self.env['ir.config_parameter'].sudo().set_int(
+            'oski_treasury.journal_id', journal_other.id)
         op = self._op(80.0)
         op.action_post()
         self.assertTrue(op.move_id)

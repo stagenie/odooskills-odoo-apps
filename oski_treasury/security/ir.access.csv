@@ -1,0 +1,21 @@
+id,name,model_id,group_id/id,operation,domain
+access_oski_treasury_operation_category_user,Treasury categories: user,oski.treasury.operation.category,group_treasury_user,r,
+access_oski_treasury_operation_category_manager,Treasury categories: manager,oski.treasury.operation.category,group_treasury_manager,crud,
+rule_treasury_cash_user,Cash Registers: Authorized Users,oski.treasury.cash,group_treasury_user,ru,"['|', '|', ('user_ids', 'in', user.id), ('responsible_id', '=', user.id), ('create_uid', '=', user.id)]"
+rule_treasury_cash_manager,Cash Registers: Manager,oski.treasury.cash,group_treasury_manager,crud,
+rule_treasury_cash_company,Cash Registers: multi-company,oski.treasury.cash,,crud,"[('company_id', 'in', company_ids)]"
+rule_treasury_cash_operation_user,Cash Operations: By Authorized Cash Register,oski.treasury.cash.operation,group_treasury_user,crud,"['|', '|', ('cash_id.user_ids', 'in', user.id), ('cash_id.responsible_id', '=', user.id), ('cash_id.create_uid', '=', user.id)]"
+rule_treasury_cash_operation_manager,Cash Operations: Manager,oski.treasury.cash.operation,group_treasury_manager,crud,
+rule_treasury_cash_operation_company,Cash Operations: multi-company,oski.treasury.cash.operation,,crud,"[('company_id', 'in', company_ids)]"
+rule_treasury_cash_closing_user,Cash Closings: By Authorized Cash Register,oski.treasury.cash.closing,group_treasury_user,ru,"['|', '|', ('cash_id.user_ids', 'in', user.id), ('cash_id.responsible_id', '=', user.id), ('cash_id.create_uid', '=', user.id)]"
+rule_treasury_cash_closing_manager,Cash Closings: Manager,oski.treasury.cash.closing,group_treasury_manager,crud,
+rule_treasury_cash_closing_company,Cash Closings: multi-company,oski.treasury.cash.closing,,crud,"[('company_id', 'in', company_ids)]"
+rule_treasury_safe_user,Safes: Responsible/Authorized Only,oski.treasury.safe,group_treasury_user,r,"['|', '|', ('responsible_ids', 'in', user.id), ('user_ids', 'in', user.id), ('create_uid', '=', user.id)]"
+rule_treasury_safe_manager,Safes: Manager,oski.treasury.safe,group_treasury_manager,crud,
+rule_treasury_safe_company,Safes: multi-company,oski.treasury.safe,,crud,"[('company_id', 'in', company_ids)]"
+rule_treasury_safe_operation_user,Safe Operations: By Authorized Safe,oski.treasury.safe.operation,group_treasury_user,cru,"['|', '|', ('safe_id.responsible_ids', 'in', user.id), ('safe_id.user_ids', 'in', user.id), ('safe_id.create_uid', '=', user.id)]"
+rule_treasury_safe_operation_manager,Safe Operations: Manager,oski.treasury.safe.operation,group_treasury_manager,crud,
+rule_treasury_safe_operation_company,Safe Operations: multi-company,oski.treasury.safe.operation,,crud,"[('company_id', 'in', company_ids)]"
+rule_treasury_transfer_user,Transfers: By Authorized Entities,oski.treasury.transfer,group_treasury_user,cru,"['|', '|', '|', '|', '|', ('cash_from_id.user_ids', 'in', user.id), ('cash_to_id.user_ids', 'in', user.id), ('safe_from_id.responsible_ids', 'in', user.id), ('safe_to_id.responsible_ids', 'in', user.id), ('user_id', '=', user.id), ('create_uid', '=', user.id)]"
+rule_treasury_transfer_manager,Transfers: Manager,oski.treasury.transfer,group_treasury_manager,crud,
+rule_treasury_transfer_company,Transfers: multi-company,oski.treasury.transfer,,crud,"[('company_id', 'in', company_ids)]"

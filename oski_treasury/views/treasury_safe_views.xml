@@ -17,7 +17,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_operations" type="object"
-                            class="oe_stat_button" icon="fa-list">
+                            class="oe_stat_button" icon="format_list_bulleted">
                             <span class="o_stat_text">Operations</span>
                         </button>
                     </div>
@@ -91,7 +91,7 @@
                     <t t-name="card">
                         <div class="d-flex justify-content-between align-items-center">
                             <strong>
-                                <i class="fa fa-lock me-1" title="Safe" style="color: #343a40;"/>
+                                <i class="oi me-1" data-icon="lock" title="Safe" style="color: #343a40;"/>
                                 <span t-out="record.code.value"/> -
                                 <span t-out="record.name.value"/>
                             </strong>
@@ -102,7 +102,7 @@
                             <field name="current_balance" widget="monetary"/>
                         </div>
                         <div t-if="record.location.value" class="mt-1 small text-muted">
-                            <i class="fa fa-map-marker me-1" title="Location"/>
+                            <i class="oi me-1" data-icon="location_on" title="Location"/>
                             <t t-out="record.location.value"/>
                         </div>
                     </t>

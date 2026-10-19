@@ -67,7 +67,7 @@ class ResConfigSettings(models.TransientModel):
 
         def _auto(param_key, account_types):
             """Auto-detects a chart of accounts account if not yet configured."""
-            if params.get_param(param_key):
+            if params.get_int(param_key):
                 return
             account = Account.search([
                 ('account_type', 'in', account_types),

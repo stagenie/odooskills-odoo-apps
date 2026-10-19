@@ -197,9 +197,8 @@ class TreasuryCashOperation(models.Model):
     # --- Accounting ---
 
     def _treasury_account_move_enabled(self):
-        return self.env['ir.config_parameter'].sudo().get_param(
-            'oski_treasury.account_move_enabled', 'True'
-        ) in ('True', 'true', '1', True)
+        return self.env['ir.config_parameter'].sudo().get_bool(
+            'oski_treasury.account_move_enabled', True)
 
     def _get_move_accounts(self):
         """Returns (debit_account, credit_account) for the operation, or
@@ -222,10 +221,10 @@ class TreasuryCashOperation(models.Model):
         company = self.cash_id.company_id
 
         def _acc(key):
-            val = params.get_param(key)
+            val = params.get_int(key)
             if not val:
                 return Account
-            acc = Account.browse(int(val)).exists()
+            acc = Account.browse(val).exists()
             # Global setting: ignore an account not shared with the
             # register's company (multi-company).
             if acc and company not in acc.company_ids:
@@ -250,9 +249,9 @@ class TreasuryCashOperation(models.Model):
     def _get_treasury_journal(self):
         self.ensure_one()
         params = self.env['ir.config_parameter'].sudo()
-        journal_id = params.get_param('oski_treasury.journal_id')
+        journal_id = params.get_int('oski_treasury.journal_id')
         if journal_id:
-            journal = self.env['account.journal'].browse(int(journal_id)).exists()
+            journal = self.env['account.journal'].browse(journal_id).exists()
             # The setting is global (ir.config_parameter): a journal of
             # another company cannot carry this register's entry.
             if journal and journal.company_id == self.cash_id.company_id:
