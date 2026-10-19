@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Numérotation des lignes de devis/commande",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales",
     "summary": "Numérotez chaque ligne produit de vos devis et commandes — à l'écran et sur le PDF — pour des échanges client sans ambiguïté.",
     "description": """

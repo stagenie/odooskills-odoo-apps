@@ -6,8 +6,10 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <!-- Insère la colonne N° en première position de la liste des lignes. -->
-            <xpath expr="//field[@name='order_line']/list/field[@name='product_template_id']" position="before">
+            <!-- Insère la colonne N° avant la colonne Description de la liste des lignes.
+                 En 20.0 le produit est rangé dans <column name="product_and_description"> :
+                 on s'accroche à cette colonne, plus au champ product_template_id. -->
+            <xpath expr="//field[@name='order_line']/list/column[@name='product_and_description']" position="before">
                 <field name="oski_line_number" string="N°" readonly="1" optional="show"/>
             </xpath>
         </field>
