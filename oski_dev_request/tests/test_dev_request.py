@@ -29,7 +29,9 @@ class TestDevRequest(TransactionCase):
         r = self._make()
         self.assertEqual(r.state, "new")
         self.assertEqual(r.delivery_mode, "store")
-        self.assertEqual(r.odoo_version, "19.0")
+        # suit la version par défaut du catalogue (20.0 depuis la sortie d'Odoo 20)
+        self.assertEqual(r.odoo_version, self.env["oski.odoo.version"].get_default())
+        self.assertEqual(r.odoo_version, "20.0")
         self.assertEqual(r.user_id, self.env.user)
 
     def test_transitions(self):

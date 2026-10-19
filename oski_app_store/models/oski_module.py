@@ -1,11 +1,16 @@
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class OskiModule(models.Model):
     _name = "oski.module"
     _description = "OdooSkills store module"
-    _inherit = ["website.published.mixin", "website.seo.metadata"]
+    _inherit = ["mail.thread", "website.published.mixin", "website.seo.metadata"]
     _order = "name"
+    # Discussion publique en bas de fiche : un utilisateur connecté (portail ou
+    # interne) poste avec un simple droit de lecture, comme sur un billet de
+    # blog. Le contrôleur mail lit cet attribut (_get_thread_with_access_for_post).
+    _mail_post_access = "read"
 
     name = fields.Char(string="Display name", required=True, translate=True)
     technical_name = fields.Char(string="Technical name", required=True)
@@ -73,11 +78,60 @@ class OskiModule(models.Model):
         compute="_compute_purchase_count",
         help="Number of distinct customers with a confirmed order for this module.",
     )
+    # Le fil public de la fiche ne montre que les commentaires : les notes et
+    # notifications internes (suivi, changements) restent dans le backend.
+    website_message_ids = fields.One2many(
+        domain=lambda self: [("model", "=", self._name), ("message_type", "=", "comment")]
+    )
+    # Bandeau promotionnel (website_sale product.ribbon : libellé traduit,
+    # couleurs, style bandeau/badge, côté). Borné par deux dates facultatives.
+    ribbon_id = fields.Many2one(
+        "product.ribbon",
+        string="Ribbon",
+        help="Promotional ribbon shown on the catalog card and the module page "
+             "(e.g. On sale, Special offer, Black Friday).",
+    )
+    ribbon_date_from = fields.Date(
+        string="Ribbon from",
+        help="First day the ribbon is shown. Empty: shown right away.",
+    )
+    ribbon_date_to = fields.Date(
+        string="Ribbon until",
+        help="Last day the ribbon is shown (inclusive). Empty: shown until removed.",
+    )
+    ribbon_display_id = fields.Many2one(
+        "product.ribbon",
+        string="Ribbon shown today",
+        compute="_compute_ribbon_display_id",
+    )
 
     _technical_name_uniq = models.Constraint(
         "UNIQUE(technical_name)",
         "The module technical name must be unique.",
     )
+
+    @api.depends("ribbon_id", "ribbon_date_from", "ribbon_date_to")
+    def _compute_ribbon_display_id(self):
+        today = fields.Date.context_today(self)
+        for record in self:
+            ribbon = record.ribbon_id
+            if ribbon and record.ribbon_date_from and record.ribbon_date_from > today:
+                ribbon = ribbon.browse()
+            if ribbon and record.ribbon_date_to and record.ribbon_date_to < today:
+                ribbon = ribbon.browse()
+            record.ribbon_display_id = ribbon
+
+    @api.constrains("ribbon_date_from", "ribbon_date_to")
+    def _check_ribbon_dates(self):
+        for record in self:
+            if (
+                record.ribbon_date_from
+                and record.ribbon_date_to
+                and record.ribbon_date_to < record.ribbon_date_from
+            ):
+                raise ValidationError(
+                    _("The ribbon end date must be on or after its start date.")
+                )
 
     @api.depends("version_line_ids.download_count")
     def _compute_download_count(self):

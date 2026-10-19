@@ -80,7 +80,9 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
             background: $oski-pink; color: $oski-ink-deep; border-color: $oski-pink;
             box-shadow: 0 8px 22px rgba($oski-pink, .35); transform: translateY(-2px);
         }
-        // Version annoncée, pas encore sortie : contour pointillé, pas de plein.
+        // Version ancienne servie à la demande : présente, mais en retrait.
+        &.is-on-request { opacity: .6; &.is-active, &:hover { opacity: 1; } }
+        // Version dont les archives arrivent : contour pointillé, pas de plein.
         &.is-soon {
             border-style: dashed; border-color: rgba($oski-pink, .55);
             color: rgba(255,255,255,.55); background: transparent;
@@ -170,8 +172,22 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         color: $oski-muted; font-size: .78rem; font-weight: 600; }
 
     // ---- Badges / pastilles ----
+    .oski-badges { display: inline-flex; align-items: center; gap: .35rem; flex-wrap: wrap; }
     .oski-badge { padding: .15rem .55rem; border-radius: 999px;
         font-size: .72rem; font-weight: 600; }
+    // Bandeau promotionnel (product.ribbon) : couleurs inline depuis le backend.
+    .oski-ribbon {
+        font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+        line-height: 1; white-space: nowrap; pointer-events: none;
+        &.oski-ribbon-tag { padding: .3rem .6rem; border-radius: 999px;
+            box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+        &.oski-ribbon-ribbon {
+            position: absolute; top: 1.1rem; z-index: 2; width: 9.5rem; padding: .4rem 0;
+            text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.2);
+            &.oski-ribbon-left { left: -2.8rem; transform: rotate(-45deg); }
+            &.oski-ribbon-right { right: -2.8rem; transform: rotate(45deg); }
+        }
+    }
     .oski-badge-free { background: rgba($oski-green, .12); color: $oski-green; }
     .oski-badge-premium { background: rgba($oski-plum, .12); color: $oski-plum; }
     .oski-opt-note {
@@ -341,8 +357,21 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
 
     // ---- Fiche : carte technique ----
     .oski-techcard {
+        position: relative; overflow: hidden;
         background: $oski-bg-soft; border: 1px solid $oski-line;
         border-radius: 14px; padding: 1.4rem; height: 100%;
+    }
+    // ---- Discussion (chatter portail) ----
+    .oski-discussion {
+        margin-top: 3rem; padding-top: 2rem; border-top: 1px solid $oski-line;
+        .oski-discussion-title { font-family: $oski-display; font-size: 1.3rem;
+            font-weight: 700; margin-bottom: 1rem; }
+        .oski-discussion-signin { color: $oski-muted; display: flex; align-items: center;
+            gap: .6rem; flex-wrap: wrap; }
+        .oski-btn-signin { background: $oski-plum; color: #fff; font-weight: 600;
+            border-radius: 10px; padding: .4rem .9rem;
+            &:hover { background: $oski-plum-dark; color: #fff; } }
+        .o_portal_chatter { max-width: 860px; }
     }
     .oski-module-title { font-size: 1.4rem; font-weight: 700; margin: 0; }
     .oski-module-summary { color: $oski-muted; }

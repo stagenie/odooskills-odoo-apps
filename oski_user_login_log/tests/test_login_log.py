@@ -1,5 +1,5 @@
 from odoo import SUPERUSER_ID, api
-from odoo.exceptions import AccessDenied
+from odoo.exceptions import AccessDenied, AccessError
 from odoo.tests.common import TransactionCase
 
 PASSWORD = "Ceci-Est-Un-Mot-De-Passe-42"
@@ -97,13 +97,19 @@ class TestLoginLog(TransactionCase):
             raise RuntimeError("registre indisponible")
 
         self.patch(type(self.env["res.users"]), "_oski_write_login_log", explode)
-        auth_info = self._try_login(PASSWORD)
+        # La panne est attendue : elle doit partir dans le journal du serveur
+        # (vérifié ici), sans être comptée comme une erreur du test.
+        with self.assertLogs(
+            "odoo.addons.oski_user_login_log.models.res_users", level="ERROR",
+        ) as captured:
+            auth_info = self._try_login(PASSWORD)
         self.assertEqual(auth_info["uid"], self.user.id)
+        self.assertIn("écriture impossible", captured.output[0])
 
     def test_the_journal_is_reserved_to_administrators(self):
         simple = self.env["res.users"].create({
             "name": "Simple", "login": "simple.journal@example.com",
             "group_ids": [(6, 0, [self.env.ref("base.group_user").id])],
         })
-        with self.assertRaises(Exception):
+        with self.assertRaises(AccessError):
             self.env["oski.login.log"].with_user(simple).search([])

@@ -123,6 +123,14 @@ class TestDeleteGuard(TransactionCase):
         partner.with_user(self.user).unlink()
         self.assertFalse(partner.exists(), "Le cache de règles doit suivre la modification.")
 
+    def test_archiving_the_rule_reopens_the_model(self):
+        rule = self._rule(mode="block")
+        rule.active = False
+        partner = self._partner("Archivé")
+        partner.with_user(self.user).unlink()
+        self.assertFalse(partner.exists(), "Une règle archivée ne doit plus rien bloquer.")
+        self.assertFalse(self.Log.search([("model_name", "=", "res.partner")]))
+
     def test_deleting_the_rule_reopens_the_model(self):
         self._rule(mode="block").unlink()
         partner = self._partner("Libéré")

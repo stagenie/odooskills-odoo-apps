@@ -129,6 +129,31 @@ class TestMassEdit(TransactionCase):
         with self.assertRaises(UserError):
             wizard.action_apply()
 
+    def test_clearing_a_required_field_is_refused(self):
+        category = self.env["res.partner.category"].create({"name": "Garde"})
+        wizard = self.env["oski.mass.edit.wizard"].with_context(
+            active_model="res.partner.category", active_ids=category.ids,
+        ).create({
+            "model_name": "res.partner.category",
+            "field_id": self.Fields._get("res.partner.category", "name").id,
+            "operation": "clear",
+        })
+        with self.assertRaisesRegex(UserError, "obligatoire"):
+            wizard.action_apply()
+        self.assertEqual(category.name, "Garde")
+
+    def test_field_of_another_model_is_refused(self):
+        wizard = self.env["oski.mass.edit.wizard"].with_context(
+            active_model="res.partner", active_ids=self.partners.ids,
+        ).create({
+            "model_name": "res.partner",
+            "field_id": self.Fields._get("res.partner.category", "name").id,
+            "value_char": "Détourné",
+        })
+        with self.assertRaises(UserError):
+            wizard.action_apply()
+        self.assertNotIn("Détourné", self.partners.mapped("name"))
+
     def test_empty_selection_is_refused(self):
         wizard = self._wizard("ref", records=self.Partner, value_char="X")
         with self.assertRaises(UserError):

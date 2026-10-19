@@ -3,29 +3,31 @@
     <record id="odoo_version_15" model="oski.odoo.version">
         <field name="name">15.0</field>
         <field name="sequence">150</field>
+        <field name="on_request" eval="True"/>
     </record>
     <record id="odoo_version_16" model="oski.odoo.version">
         <field name="name">16.0</field>
         <field name="sequence">160</field>
+        <field name="on_request" eval="True"/>
     </record>
     <record id="odoo_version_17" model="oski.odoo.version">
         <field name="name">17.0</field>
         <field name="sequence">170</field>
+        <field name="on_request" eval="True"/>
     </record>
     <record id="odoo_version_18" model="oski.odoo.version">
         <field name="name">18.0</field>
         <field name="sequence">180</field>
     </record>
-    <!-- 20.0 : annoncée avant sa sortie, sans archive. is_upcoming la garde
-         hors du choix par défaut et hors des pastilles de compatibilité. -->
+    <!-- 20.0 : sortie et suivie d'office (défaut du catalogue). Une version
+         annoncée avant sa sortie se déclare avec is_upcoming. -->
     <record id="odoo_version_20" model="oski.odoo.version">
         <field name="name">20.0</field>
         <field name="sequence">200</field>
-        <field name="is_upcoming" eval="True"/>
+        <field name="is_default" eval="True"/>
     </record>
     <record id="odoo_version_19" model="oski.odoo.version">
         <field name="name">19.0</field>
         <field name="sequence">190</field>
-        <field name="is_default" eval="True"/>
     </record>
 </odoo>

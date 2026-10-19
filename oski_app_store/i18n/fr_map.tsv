@@ -331,3 +331,33 @@ Counters are always recorded. Display them once the store has enough traffic.	Le
 Show download and purchase counters	Afficher les compteurs de téléchargements et d'achats
 Minimum value to display a counter	Valeur minimale pour afficher un compteur
 Most downloaded	Les plus téléchargés
+Discussion	Discussion
+First day the ribbon is shown. Empty: shown right away.	Premier jour d'affichage du bandeau. Vide : affiché tout de suite.
+Last day the ribbon is shown (inclusive). Empty: shown until removed.	Dernier jour d'affichage du bandeau (inclus). Vide : affiché jusqu'à son retrait.
+Promotion	Promotion
+Promotional ribbon shown on the catalog card and the module page (e.g. On sale, Special offer, Black Friday).	Bandeau promotionnel affiché sur la carte du catalogue et la page du module (ex. En promo, Offre spéciale, Black Friday).
+Ribbon	Bandeau
+Ribbon from	Bandeau à partir du
+Ribbon shown today	Bandeau affiché aujourd'hui
+Ribbon until	Bandeau jusqu'au
+Ribbons	Bandeaux
+Sign in	Connectez-vous
+to join the discussion.	pour rejoindre la discussion.
+The ribbon end date must be on or after its start date.	La date de fin du bandeau doit être postérieure ou égale à sa date de début.
+Action Needed	Action requise
+Attachment Count	Nombre de pièces jointes
+Followers	Abonnés
+Followers (Partners)	Abonnés (partenaires)
+Has Message	A un message
+If checked, new messages require your attention.	Si coché, de nouveaux messages demandent votre attention.
+If checked, some messages have a delivery error.	Si coché, certains messages ont une erreur de livraison.
+Is Follower	Est abonné
+Message Delivery error	Erreur de livraison du message
+Number of Actions	Nombre d'actions
+Number of errors	Nombre d'erreurs
+Number of messages requiring action	Nombre de messages nécessitant une action
+Number of messages with delivery error	Nombre de messages avec une erreur de livraison
+Ratings	Évaluations
+SMS Delivery error	Erreur de livraison SMS
+Website Messages	Messages du site web
+Website communication history	Historique des communications du site web
