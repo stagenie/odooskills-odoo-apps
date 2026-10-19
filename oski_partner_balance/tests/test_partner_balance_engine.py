@@ -1,4 +1,5 @@
-from odoo.tests import TransactionCase, tagged
+from odoo.exceptions import AccessError
+from odoo.tests import TransactionCase, new_test_user, tagged
 
 
 @tagged('post_install', '-at_install', 'partner_balance')
@@ -334,3 +335,56 @@ class TestPartnerBalanceEngine(TransactionCase):
             self.assertEqual(
                 row['group_partner_id'], row['partner_id'],
                 "outside consolidation, a row's axis is its own partner")
+
+    def test_75_contact_entries_accumulate_on_the_commercial_partner(self):
+        """A payment booked on a contact is the company's money.
+
+        Company invoiced 100 on 10/02; 30 received on 01/03 through an entry
+        booked on one of its contacts. Expected by hand, statement of the
+        COMPANY: 100 then 100 - 30 = 70, one running balance. Before the fix
+        the contact's line was filtered out (partner_id IN [company]) and the
+        statement read 100.
+        """
+        company = self.env['res.partner'].create({
+            'name': 'PB Holding', 'is_company': True})
+        contact = self.env['res.partner'].create({
+            'name': 'PB Holding Accountant', 'parent_id': company.id})
+        self._make_invoice(company, '2026-02-10', 100.0)
+        receivable = company.property_account_receivable_id
+        income = self.env['account.account'].search([
+            ('account_type', '=', 'income'),
+            ('company_ids', 'in', self.env.company.id)], limit=1)
+        misc = self.env['account.journal'].search([
+            ('type', '=', 'general'),
+            ('company_id', '=', self.env.company.id)], limit=1)
+        entry = self.env['account.move'].create({
+            'move_type': 'entry', 'journal_id': misc.id, 'date': '2026-03-01',
+            'line_ids': [
+                (0, 0, {'account_id': receivable.id, 'partner_id': contact.id,
+                        'credit': 30.0, 'name': 'Paid by the accountant'}),
+                (0, 0, {'account_id': income.id, 'debit': 30.0, 'name': 'x'}),
+            ],
+        })
+        entry.action_post()
+        engine = self.env['oski.partner.balance.engine']
+        for selected in (company, contact):
+            rows = engine._build_rows(self._options(
+                partner_ids=[selected.id], include_opening=False))
+            self.assertEqual([r['cumulative'] for r in rows], [100.0, 70.0])
+            self.assertEqual({r['group_partner_id'] for r in rows}, {company.id})
+            self.assertEqual(
+                [r['partner_id'] for r in rows], [company.id, contact.id],
+                "each row keeps its own partner")
+
+    def test_76_only_managers_can_exclude_a_document(self):
+        """The exclusion flag rewrites the balance: managers only, even over RPC."""
+        move = self._make_invoice(self.partner, '2026-02-10', 100.0)
+        billing = new_test_user(
+            self.env, login='pb_billing', groups='account.group_account_invoice')
+        manager = new_test_user(
+            self.env, login='pb_manager', groups='account.group_account_manager')
+        with self.assertRaises(AccessError):
+            move.with_user(billing).oski_exclude_from_balance = True
+        self.assertFalse(move.oski_exclude_from_balance)
+        move.with_user(manager).oski_exclude_from_balance = True
+        self.assertTrue(move.oski_exclude_from_balance)
