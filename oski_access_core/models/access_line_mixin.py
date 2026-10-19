@@ -45,7 +45,8 @@ class OskiAccessLineMixin(models.AbstractModel):
         """Les domaines des ir.rule sont en ormcache par utilisateur : sans purge,
         une ligne ajoutée, modifiée ou retirée ne s'applique qu'au redémarrage.
         Les modules concrets peuvent étendre (champs calculés à invalider)."""
-        self.env.registry.clear_cache()
+        # 20 : les accès sont en cache « stable » (ir_access.py:250-283)
+        self.env["ir.access"]._clear_caches()
 
     def _resolve_levels(self, user, dimension_field):
         """Agrège les lignes personnelles (user_id) et de groupe (group_id dans
