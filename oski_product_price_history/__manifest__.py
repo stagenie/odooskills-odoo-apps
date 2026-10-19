@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Historique des prix",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales/Sales",
     "summary": "Chaque changement de prix de vente ou de coût, avec l'écart, la date et l'auteur.",
     "description": """
@@ -34,7 +34,7 @@ plus à la seule question qu'on lui pose.
         "static/description/screenshot_02_product.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_product_price_history_views.xml",
     ],
     "installable": True,

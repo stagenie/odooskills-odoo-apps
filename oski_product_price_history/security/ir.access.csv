@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_oski_price_history_user,oski.product.price.history.user,oski.product.price.history,base.group_user,r,
+access_oski_price_history_manager,oski.product.price.history.manager,oski.product.price.history,base.group_system,crud,
