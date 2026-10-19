@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Couleur de lignes de liste",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Surlignez vos listes Odoo selon vos règles métier — sans toucher une seule ligne de code.",
     "description": """
@@ -15,7 +15,7 @@ Fonctionne sur n'importe quel modèle Odoo, Community ou Enterprise.
     "license": "LGPL-3",
     "depends": ["base"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_row_color_rule_views.xml",
     ],
     "images": [

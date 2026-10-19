@@ -45,3 +45,9 @@ class TestRowColorRule(TransactionCase):
         self.assertFalse(rule.view_id.active, "Règle archivée : la couleur ne doit plus s'appliquer.")
         rule.active = True
         self.assertTrue(rule.view_id.active)
+
+    def test_decoration_reaches_the_list_sent_to_the_client(self):
+        """La vue combinée renvoyée au navigateur porte bien l'attribut (vue liste 20.0)."""
+        rule = self._make_rule()
+        arch = self.env["res.partner"].get_view(rule.view_id.inherit_id.id, "list")["arch"]
+        self.assertIn('decoration-danger="is_company == True"', arch)
