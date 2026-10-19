@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_company_view_form_oski_rates" model="ir.ui.view">
+        <field name="name">res.company.form.oski.rates</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="oski_rates" string="Taux de change">
+                    <group>
+                        <group>
+                            <field name="oski_rate_auto"/>
+                            <field name="oski_rate_provider" invisible="not oski_rate_auto"/>
+                        </group>
+                        <group>
+                            <field name="oski_rate_last_sync"/>
+                            <field name="oski_rate_last_error" invisible="not oski_rate_last_error"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-warning" role="alert" invisible="not oski_rate_last_error">
+                        La dernière mise à jour a échoué. Les taux affichés sont ceux du dernier
+                        succès.
+                    </div>
+                    <button name="action_oski_update_rates" type="object"
+                            string="Mettre à jour maintenant" class="btn-primary"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
