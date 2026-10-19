@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "OdooSkills — Alerte de stock bas",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Inventory/Inventory",
     "summary": "Évitez les ruptures silencieuses : seuil d'alerte par produit, lignes rouges et activité quotidienne pour le responsable inventaire",
     "description": """
