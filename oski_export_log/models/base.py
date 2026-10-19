@@ -20,7 +20,7 @@ class Base(models.AbstractModel):
             names = ", ".join(str(f) for f in fields_to_export)
             self.env["oski.export.log"].sudo().create({
                 "model_name": self._name,
-                "model_label": self.env["ir.model"]._get(self._name).name,
+                "model_label": self.env["ir.model"].sudo()._get(self._name).name,
                 "record_count": len(result.get("datas") or []),
                 "field_count": len(fields_to_export),
                 "field_names": names[:FIELDS_MAX],
