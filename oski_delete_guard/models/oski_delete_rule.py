@@ -14,6 +14,7 @@ class OskiDeleteRule(models.Model):
 
     model_id = fields.Many2one(
         "ir.model", string="Modèle", required=True, ondelete="cascade",
+        domain=[("transient", "=", False)],
         help="Modèle dont les suppressions sont surveillées.",
     )
     model_name = fields.Char(related="model_id.model", store=True, string="Nom technique")
