@@ -32,6 +32,9 @@
         <field name="res_model">oski.barcode.generator</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+        <!-- L'assistant est réservé aux administrateurs (droits d'accès) :
+             le proposer aux autres ne mènerait qu'à une erreur d'accès. -->
+        <field name="group_ids" eval="[(4, ref('base.group_system'))]"/>
         <field name="context">{'default_scope': 'empty'}</field>
     </record>
 
@@ -40,6 +43,9 @@
         <field name="res_model">oski.barcode.generator</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+        <!-- L'assistant est réservé aux administrateurs (droits d'accès) :
+             le proposer aux autres ne mènerait qu'à une erreur d'accès. -->
+        <field name="group_ids" eval="[(4, ref('base.group_system'))]"/>
         <field name="context">{'default_scope': 'selected'}</field>
         <field name="binding_model_id" ref="product.model_product_template"/>
         <field name="binding_view_types">list,form</field>
@@ -50,6 +56,9 @@
         <field name="res_model">oski.barcode.generator</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+        <!-- L'assistant est réservé aux administrateurs (droits d'accès) :
+             le proposer aux autres ne mènerait qu'à une erreur d'accès. -->
+        <field name="group_ids" eval="[(4, ref('base.group_system'))]"/>
         <field name="context">{'default_scope': 'selected'}</field>
         <field name="binding_model_id" ref="product.model_product_product"/>
         <field name="binding_view_types">list,form</field>
