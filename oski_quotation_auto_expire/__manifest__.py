@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Devis périmés",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales",
     "summary": "Les devis échus s'annulent d'eux-mêmes, et le vendeur est relancé avant l'échéance.",
     "description": """
