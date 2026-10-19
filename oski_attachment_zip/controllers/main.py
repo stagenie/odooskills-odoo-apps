@@ -2,7 +2,8 @@ from werkzeug.exceptions import Forbidden, NotFound
 
 from odoo import http
 from odoo.exceptions import AccessError, UserError
-from odoo.http import content_disposition, request
+from odoo.http import request
+from odoo.http.stream import content_disposition
 
 
 class OskiAttachmentZip(http.Controller):

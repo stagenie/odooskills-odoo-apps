@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Pièces jointes en archive",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Toutes les pièces jointes d'une fiche, ou de plusieurs, téléchargées en une archive ZIP.",
     "description": """

@@ -1,11 +1,10 @@
-import base64
 import io
 import zipfile
 
 from odoo.exceptions import AccessError, UserError
 from odoo.tests import HttpCase, TransactionCase, tagged
 
-CONTENT = base64.b64encode(b"contenu")
+CONTENT = b"contenu"
 
 
 class ZipCommon(TransactionCase):
@@ -24,10 +23,10 @@ class ZipCommon(TransactionCase):
         cls.second = cls.env["res.partner"].create({"name": "Fiche Deux"})
         cls.attachments = cls.env["ir.attachment"]
 
-    def _attach(self, record, name, datas=CONTENT, **values):
+    def _attach(self, record, name, raw=CONTENT, **values):
         attachment = self.env["ir.attachment"].create(dict({
             "name": name,
-            "datas": datas,
+            "raw": raw,
             "res_model": record._name,
             "res_id": record.id,
         }, **values))
@@ -141,6 +140,17 @@ class TestZipContent(ZipCommon):
         self.assertEqual(sorted(self._entries(self.first)),
                          ["devis.pdf", "plan.png"])
 
+    def test_the_archive_carries_the_bytes_of_each_file(self):
+        """Le nom ne suffit pas : en Odoo 20 une pièce créée avec ``datas=``
+        est vide, et ``raw`` est un ``BinaryValue`` — l'archive doit porter
+        les octets réels."""
+        self._attach(self.first, "devis.pdf")
+        self._attach(self.first, "vide.txt", raw=b"")
+        _name, content = self.env["ir.attachment"]._oski_zip_bytes(self.first)
+        with zipfile.ZipFile(io.BytesIO(content)) as archive:
+            self.assertEqual(archive.read("devis.pdf"), CONTENT)
+            self.assertEqual(archive.read("vide.txt"), b"")
+
     def test_binary_field_values_are_not_attachments(self):
         """``res_field`` désigne la valeur d'un champ binaire — un logo, une
         photo — et non une pièce jointe déposée sur la fiche."""
@@ -192,14 +202,14 @@ class TestZipContent(ZipCommon):
     def test_an_archive_beyond_the_limit_is_refused(self):
         self._attach(self.first, "devis.pdf")
         parameters = self.env["ir.config_parameter"].sudo()
-        parameters.set_param("oski_attachment_zip.max_size_mb", "0.000001")
+        parameters.set_str("oski_attachment_zip.max_size_mb", "0.000001")
         with self.assertRaises(UserError):
             self._entries(self.first)
         # Zéro lève la limite, et une valeur illisible retombe sur la valeur
         # par défaut : dans les deux cas le téléchargement aboutit.
-        parameters.set_param("oski_attachment_zip.max_size_mb", "0")
+        parameters.set_str("oski_attachment_zip.max_size_mb", "0")
         self.assertTrue(self._entries(self.first))
-        parameters.set_param("oski_attachment_zip.max_size_mb", "plus tard")
+        parameters.set_str("oski_attachment_zip.max_size_mb", "plus tard")
         self.assertTrue(self._entries(self.first))
 
     def test_a_user_who_cannot_read_the_record_gets_nothing(self):
@@ -223,7 +233,7 @@ class TestZipRoute(HttpCase):
     def test_the_route_serves_the_archive(self):
         partner = self.env["res.partner"].create({"name": "Fiche Servie"})
         self.env["ir.attachment"].create({
-            "name": "devis.pdf", "datas": CONTENT,
+            "name": "devis.pdf", "raw": CONTENT,
             "res_model": "res.partner", "res_id": partner.id})
         self.authenticate("admin", "admin")
         response = self.url_open(

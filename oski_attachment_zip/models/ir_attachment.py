@@ -81,9 +81,12 @@ class IrAttachment(models.Model):
         used = set()
         with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
             for attachment in attachments:
-                content = attachment.raw
-                if content is None:
+                # Odoo 20 : ``raw`` est un ``BinaryValue`` ; ses octets sont
+                # dans ``.content``. Un fichier vide garde sa place.
+                raw = attachment.raw
+                if raw is None or raw is False:
                     continue
+                content = raw.content
                 folder = ""
                 if len(records) > 1:
                     record = by_record.get(attachment.res_id)
@@ -96,7 +99,7 @@ class IrAttachment(models.Model):
 
     @api.model
     def _oski_zip_size_limit(self):
-        raw = self.env["ir.config_parameter"].sudo().get_param(
+        raw = self.env["ir.config_parameter"].sudo().get_str(
             "oski_attachment_zip.max_size_mb", DEFAULT_MAX_SIZE_MB)
         try:
             megabytes = float(raw)
