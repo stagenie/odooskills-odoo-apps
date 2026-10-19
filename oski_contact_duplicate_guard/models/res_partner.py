@@ -21,7 +21,10 @@ class ResPartner(models.Model):
         phone = self.phone if phone is None else phone
         leaves = []
         if self._oski_check_enabled("email") and email:
-            leaves.append(("email", "=ilike", email))
+            # =ilike : insensible à la casse ; « _ » et « % » échappés (sinon
+            # jean_dupont@… trouverait aussi jeanXdupont@…).
+            escaped = email.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+            leaves.append(("email", "=ilike", escaped))
         if self._oski_check_enabled("phone") and phone:
             leaves.append(("phone", "=", phone))
         if not leaves:
