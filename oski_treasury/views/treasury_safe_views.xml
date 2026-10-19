@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Safe Form -->
+    <record id="view_treasury_safe_form" model="ir.ui.view">
+        <field name="name">oski.treasury.safe.form</field>
+        <field name="model">oski.treasury.safe</field>
+        <field name="arch" type="xml">
+            <form string="Safe">
+                <header>
+                    <button name="action_lock" string="Lock" type="object"
+                        invisible="state != 'active'"
+                        confirm="Are you sure you want to lock this safe?"/>
+                    <button name="action_unlock" string="Unlock" type="object"
+                        invisible="state != 'locked'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_operations" type="object"
+                            class="oe_stat_button" icon="fa-list">
+                            <span class="o_stat_text">Operations</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Safe name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Information">
+                            <field name="code"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="location"/>
+                            <field name="is_initialized" readonly="True"/>
+                        </group>
+                        <group string="Balances and Control">
+                            <field name="current_balance" widget="monetary"/>
+                            <field name="max_capacity" widget="monetary"/>
+                            <field name="allow_negative_balance"/>
+                            <field name="min_balance" widget="monetary"/>
+                            <field name="control_level"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Responsible" name="responsible">
+                            <field name="responsible_ids" widget="many2many_tags"/>
+                        </page>
+                        <page string="Authorized Users" name="users">
+                            <field name="user_ids" widget="many2many_tags"/>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Safe List -->
+    <record id="view_treasury_safe_list" model="ir.ui.view">
+        <field name="name">oski.treasury.safe.list</field>
+        <field name="model">oski.treasury.safe</field>
+        <field name="arch" type="xml">
+            <list string="Safes">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="current_balance" widget="monetary"/>
+                <field name="location" optional="show"/>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'active'"
+                    decoration-danger="state == 'locked'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Safe Kanban -->
+    <record id="view_treasury_safe_kanban" model="ir.ui.view">
+        <field name="name">oski.treasury.safe.kanban</field>
+        <field name="model">oski.treasury.safe</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="current_balance"/>
+                <field name="currency_id"/>
+                <field name="state"/>
+                <field name="location"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong>
+                                <i class="fa fa-lock me-1" title="Safe" style="color: #343a40;"/>
+                                <span t-out="record.code.value"/> -
+                                <span t-out="record.name.value"/>
+                            </strong>
+                            <field name="state" widget="label_selection"
+                                options="{'classes': {'active': 'success', 'locked': 'danger'}}"/>
+                        </div>
+                        <div class="mt-2 fs-5 fw-bold">
+                            <field name="current_balance" widget="monetary"/>
+                        </div>
+                        <div t-if="record.location.value" class="mt-1 small text-muted">
+                            <i class="fa fa-map-marker me-1" title="Location"/>
+                            <t t-out="record.location.value"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Safe Action -->
+    <record id="action_treasury_safe" model="ir.actions.act_window">
+        <field name="name">Safes</field>
+        <field name="res_model">oski.treasury.safe</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <!-- Safe Operation Form -->
+    <record id="view_treasury_safe_operation_form" model="ir.ui.view">
+        <field name="name">oski.treasury.safe.operation.form</field>
+        <field name="model">oski.treasury.safe.operation</field>
+        <field name="arch" type="xml">
+            <form string="Safe Operation">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                        class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_done" string="Done" type="object"
+                        class="btn-primary" invisible="state != 'confirmed'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                        invisible="state in ('done', 'cancel')"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,confirmed,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="safe_id"/>
+                            <field name="operation_type"/>
+                            <field name="amount"/>
+                            <field name="currency_id" invisible="True"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="bank_reference"
+                                invisible="operation_type not in ('bank_in', 'bank_out')"/>
+                            <field name="balance_before" widget="monetary"/>
+                            <field name="balance_after" widget="monetary"/>
+                            <field name="user_id"/>
+                            <field name="validated_by" invisible="state != 'done'"/>
+                            <field name="transfer_id" readonly="True"
+                                invisible="not transfer_id"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Safe Operation List -->
+    <record id="view_treasury_safe_operation_list" model="ir.ui.view">
+        <field name="name">oski.treasury.safe.operation.list</field>
+        <field name="model">oski.treasury.safe.operation</field>
+        <field name="arch" type="xml">
+            <list string="Safe Operations">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="safe_id"/>
+                <field name="operation_type"/>
+                <field name="amount" widget="monetary" sum="Total"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Safe Operation Action -->
+    <record id="action_treasury_safe_operation" model="ir.actions.act_window">
+        <field name="name">Safe Operations</field>
+        <field name="res_model">oski.treasury.safe.operation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_treasury_safe"
+        name="Safes"
+        parent="menu_treasury_operations"
+        action="action_treasury_safe"
+        sequence="20"/>
+    <menuitem id="menu_treasury_safe_operation"
+        name="Safe Operations"
+        parent="menu_treasury_operations"
+        action="action_treasury_safe_operation"
+        sequence="21"/>
+
+    <!-- Direct shortcut: Treasury > Safes (click = kanban) -->
+    <menuitem id="menu_treasury_safe_shortcut"
+        name="Safes"
+        parent="menu_treasury_root"
+        action="action_treasury_safe"
+        sequence="4"/>
+</odoo>

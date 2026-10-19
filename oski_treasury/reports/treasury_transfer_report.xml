@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_report_transfer" model="ir.actions.report">
+        <field name="name">Transfer Slip</field>
+        <field name="model">oski.treasury.transfer</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oski_treasury.report_transfer</field>
+        <field name="report_file">oski_treasury.report_transfer</field>
+        <field name="binding_model_id" ref="model_oski_treasury_transfer"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_transfer">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="tr">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Transfer Slip</h2>
+                        <h3 class="text-center text-muted" t-out="tr.name"/>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td><strong>Type:</strong></td>
+                                        <td t-out="dict(tr._fields['transfer_type'].selection).get(tr.transfer_type)"/>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date:</strong></td>
+                                        <td t-out="tr.date" t-options="{'widget': 'datetime'}"/>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status:</strong></td>
+                                        <td t-out="dict(tr._fields['state'].selection).get(tr.state)"/>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td><strong>Created By:</strong></td>
+                                        <td t-out="tr.user_id.name"/>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Validated By:</strong></td>
+                                        <td t-out="tr.validated_by.name"/>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Amount -->
+                        <div class="text-center mt-4 mb-4">
+                            <h3>
+                                <span class="badge bg-primary p-3">
+                                    Amount: <span t-out="tr.amount"
+                                        t-options="{'widget': 'monetary', 'display_currency': tr.currency_id}"/>
+                                </span>
+                            </h3>
+                        </div>
+
+                        <!-- Source / Destination -->
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="card">
+                                    <div class="card-header bg-danger text-white">
+                                        <strong>Source</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <t t-if="tr.cash_from_id">
+                                            <p>Cash Register: <strong t-out="tr.cash_from_id.display_name"/></p>
+                                        </t>
+                                        <t t-if="tr.safe_from_id">
+                                            <p>Safe: <strong t-out="tr.safe_from_id.display_name"/></p>
+                                        </t>
+                                        <p>Balance Before: <span t-out="tr.source_balance_before"
+                                            t-options="{'widget': 'monetary', 'display_currency': tr.currency_id}"/></p>
+                                        <p>Balance After: <span t-out="tr.source_balance_after"
+                                            t-options="{'widget': 'monetary', 'display_currency': tr.currency_id}"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex align-items-center justify-content-center">
+                                <h1>&#8594;</h1>
+                            </div>
+                            <div class="col-5">
+                                <div class="card">
+                                    <div class="card-header bg-success text-white">
+                                        <strong>Destination</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <t t-if="tr.cash_to_id">
+                                            <p>Cash Register: <strong t-out="tr.cash_to_id.display_name"/></p>
+                                        </t>
+                                        <t t-if="tr.safe_to_id">
+                                            <p>Safe: <strong t-out="tr.safe_to_id.display_name"/></p>
+                                        </t>
+                                        <p>Balance Before: <span t-out="tr.dest_balance_before"
+                                            t-options="{'widget': 'monetary', 'display_currency': tr.currency_id}"/></p>
+                                        <p>Balance After: <span t-out="tr.dest_balance_after"
+                                            t-options="{'widget': 'monetary', 'display_currency': tr.currency_id}"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div t-if="tr.description" class="mt-4">
+                            <strong>Description:</strong>
+                            <p t-out="tr.description"/>
+                        </div>
+
+                        <!-- Signatures -->
+                        <div class="row mt-5">
+                            <div class="col-4 text-center">
+                                <p>Sender</p>
+                                <br/><br/>
+                                <p>_____________________</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p>Receiver</p>
+                                <br/><br/>
+                                <p>_____________________</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p>Responsible</p>
+                                <br/><br/>
+                                <p>_____________________</p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

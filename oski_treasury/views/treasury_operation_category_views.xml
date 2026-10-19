@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form -->
+    <record id="view_treasury_operation_category_form" model="ir.ui.view">
+        <field name="name">oski.treasury.operation.category.form</field>
+        <field name="model">oski.treasury.operation.category</field>
+        <field name="arch" type="xml">
+            <form string="Operation Category">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="operation_type"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                            <field name="is_customer_payment"/>
+                            <field name="is_vendor_payment"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Accounting (optional — otherwise the default accounts apply)">
+                        <field name="debit_account_id"/>
+                        <field name="credit_account_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List -->
+    <record id="view_treasury_operation_category_list" model="ir.ui.view">
+        <field name="name">oski.treasury.operation.category.list</field>
+        <field name="model">oski.treasury.operation.category</field>
+        <field name="arch" type="xml">
+            <list string="Operation Categories" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="operation_type"/>
+                <field name="debit_account_id" optional="show"/>
+                <field name="credit_account_id" optional="show"/>
+                <field name="is_customer_payment" optional="hide"/>
+                <field name="is_vendor_payment" optional="hide"/>
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_treasury_operation_category" model="ir.actions.act_window">
+        <field name="name">Operation Categories</field>
+        <field name="res_model">oski.treasury.operation.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Categories menu under Configuration -->
+    <menuitem id="menu_treasury_category"
+        name="Operation Categories"
+        parent="menu_treasury_config"
+        action="action_treasury_operation_category"
+        sequence="10"/>
+</odoo>

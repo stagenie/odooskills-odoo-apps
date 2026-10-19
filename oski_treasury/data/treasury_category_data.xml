@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="category_vente" model="oski.treasury.operation.category">
+        <field name="name">Sales</field>
+        <field name="code">VENTE</field>
+        <field name="operation_type">in</field>
+        <field name="is_customer_payment">True</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="category_service" model="oski.treasury.operation.category">
+        <field name="name">Service</field>
+        <field name="code">SERVICE</field>
+        <field name="operation_type">in</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="category_pay_client" model="oski.treasury.operation.category">
+        <field name="name">Customer Payment</field>
+        <field name="code">PAY_CLIENT</field>
+        <field name="operation_type">in</field>
+        <field name="is_customer_payment">True</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="category_achat" model="oski.treasury.operation.category">
+        <field name="name">Purchase</field>
+        <field name="code">ACHAT</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="category_pay_fournisseur" model="oski.treasury.operation.category">
+        <field name="name">Vendor Payment</field>
+        <field name="code">PAY_FOURN</field>
+        <field name="operation_type">out</field>
+        <field name="is_vendor_payment">True</field>
+        <field name="sequence">11</field>
+    </record>
+
+    <record id="category_fourniture" model="oski.treasury.operation.category">
+        <field name="name">Supplies</field>
+        <field name="code">FOURNITURE</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">12</field>
+    </record>
+
+    <record id="category_transport" model="oski.treasury.operation.category">
+        <field name="name">Transport</field>
+        <field name="code">TRANSPORT</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">13</field>
+    </record>
+
+    <record id="category_frais" model="oski.treasury.operation.category">
+        <field name="name">Miscellaneous Expenses</field>
+        <field name="code">FRAIS</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">14</field>
+    </record>
+
+    <record id="category_remboursement_client" model="oski.treasury.operation.category">
+        <field name="name">Customer Refund</field>
+        <field name="code">REFUND_CUSTOMER</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">15</field>
+    </record>
+
+    <record id="category_remboursement_fournisseur" model="oski.treasury.operation.category">
+        <field name="name">Vendor Refund</field>
+        <field name="code">REFUND_SUPPLIER</field>
+        <field name="operation_type">in</field>
+        <field name="sequence">16</field>
+    </record>
+
+    <record id="category_depot_banque" model="oski.treasury.operation.category">
+        <field name="name">Bank Deposit</field>
+        <field name="code">DEPOT_BANQUE</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">17</field>
+    </record>
+
+    <record id="category_retrait_banque" model="oski.treasury.operation.category">
+        <field name="name">Bank Withdrawal</field>
+        <field name="code">RETRAIT_BANQUE</field>
+        <field name="operation_type">in</field>
+        <field name="sequence">18</field>
+    </record>
+
+    <record id="category_transfert" model="oski.treasury.operation.category">
+        <field name="name">Transfer</field>
+        <field name="code">TRANSFERT</field>
+        <field name="operation_type">both</field>
+        <field name="sequence">19</field>
+    </record>
+
+    <record id="category_ajustement" model="oski.treasury.operation.category">
+        <field name="name">Adjustment</field>
+        <field name="code">AJUST</field>
+        <field name="operation_type">both</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Bank categories (used by Task 6, kept here as they are harmless
+         before the bank module is installed) -->
+    <record id="category_bank_customer_in" model="oski.treasury.operation.category">
+        <field name="name">Customer Collection (Bank)</field>
+        <field name="code">BANK_CUSTOMER_IN</field>
+        <field name="operation_type">in</field>
+        <field name="is_customer_payment">True</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="category_bank_supplier_out" model="oski.treasury.operation.category">
+        <field name="name">Vendor Payment (Bank)</field>
+        <field name="code">BANK_SUPPLIER_OUT</field>
+        <field name="operation_type">out</field>
+        <field name="is_vendor_payment">True</field>
+        <field name="sequence">31</field>
+    </record>
+
+    <record id="category_bank_refund_customer" model="oski.treasury.operation.category">
+        <field name="name">Customer Refund (Bank)</field>
+        <field name="code">BANK_REFUND_CUSTOMER</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">32</field>
+    </record>
+
+    <record id="category_bank_refund_supplier" model="oski.treasury.operation.category">
+        <field name="name">Vendor Refund (Bank)</field>
+        <field name="code">BANK_REFUND_SUPPLIER</field>
+        <field name="operation_type">in</field>
+        <field name="sequence">33</field>
+    </record>
+
+    <record id="category_bank_transfer_in" model="oski.treasury.operation.category">
+        <field name="name">Transfer Received (Bank)</field>
+        <field name="code">BANK_TRANSFER_IN</field>
+        <field name="operation_type">in</field>
+        <field name="sequence">34</field>
+    </record>
+
+    <record id="category_bank_transfer_out" model="oski.treasury.operation.category">
+        <field name="name">Transfer Sent (Bank)</field>
+        <field name="code">BANK_TRANSFER_OUT</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">35</field>
+    </record>
+
+    <record id="category_bank_fees" model="oski.treasury.operation.category">
+        <field name="name">Bank Fees</field>
+        <field name="code">BANK_FEES</field>
+        <field name="operation_type">out</field>
+        <field name="sequence">36</field>
+    </record>
+
+    <record id="category_bank_interest" model="oski.treasury.operation.category">
+        <field name="name">Bank Interest</field>
+        <field name="code">BANK_INTEREST</field>
+        <field name="operation_type">in</field>
+        <field name="sequence">37</field>
+    </record>
+</odoo>
