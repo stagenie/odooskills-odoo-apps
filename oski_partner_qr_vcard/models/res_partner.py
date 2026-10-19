@@ -9,6 +9,14 @@ except ImportError:  # pragma: no cover
     qrcode = None
 
 
+def _vcard_escape(value):
+    """Échappe une valeur texte vCard 3.0 (RFC 2426 §4) : \\ , ; et sauts de ligne."""
+    value = (value or "").replace("\\", "\\\\")
+    for char in (",", ";"):
+        value = value.replace(char, "\\" + char)
+    return value.replace("\r\n", "\\n").replace("\n", "\\n").replace("\r", "\\n")
+
+
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
@@ -26,25 +34,25 @@ class ResPartner(models.Model):
         lines = [
             "BEGIN:VCARD",
             "VERSION:3.0",
-            f"FN:{self.name or ''}",
-            f"N:{self.name or ''};;;;",
+            f"FN:{_vcard_escape(self.name)}",
+            f"N:{_vcard_escape(self.name)};;;;",
         ]
         if org:
-            lines.append(f"ORG:{org}")
+            lines.append(f"ORG:{_vcard_escape(org)}")
         if self.function:
-            lines.append(f"TITLE:{self.function}")
+            lines.append(f"TITLE:{_vcard_escape(self.function)}")
         if self.email:
-            lines.append(f"EMAIL;TYPE=INTERNET:{self.email}")
+            lines.append(f"EMAIL;TYPE=INTERNET:{_vcard_escape(self.email)}")
         if self.phone:
-            lines.append(f"TEL;TYPE=WORK,VOICE:{self.phone}")
+            lines.append(f"TEL;TYPE=WORK,VOICE:{_vcard_escape(self.phone)}")
         if self.website:
-            lines.append(f"URL:{self.website}")
+            lines.append(f"URL:{_vcard_escape(self.website)}")
         lines.append("END:VCARD")
         return "\r\n".join(lines)
 
     @api.depends(
         "name", "email", "phone",
-        "function", "website", "company_name", "parent_id",
+        "function", "website", "company_name", "parent_id.name",
     )
     def _compute_oski_qr_vcard(self):
         for partner in self:

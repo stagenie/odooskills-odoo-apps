@@ -35,3 +35,16 @@ class TestQrVcard(TransactionCase):
         self.assertIn("TEL;TYPE=WORK,VOICE:+213 555 00 00 00", vcard)
         self.assertIn("TITLE:Directeur", vcard)
         self.assertIn("END:VCARD", vcard)
+
+    def test_vcard_escapes_special_characters(self):
+        """Virgules, points-virgules et sauts de ligne ne doivent pas casser la vCard."""
+        company = self.env["res.partner"].create({"name": "Dupont; Fils, et Cie", "is_company": True})
+        partner = self.env["res.partner"].create({
+            "name": "Jean Test",
+            "parent_id": company.id,
+            "function": "Directeur\nCommercial",
+        })
+        vcard = partner._oski_build_vcard()
+        self.assertIn("ORG:Dupont\\; Fils\\, et Cie", vcard)
+        self.assertIn("TITLE:Directeur\\nCommercial", vcard)
+        self.assertEqual(len(vcard.split("\r\n")), 7, "Une propriété par ligne.")
