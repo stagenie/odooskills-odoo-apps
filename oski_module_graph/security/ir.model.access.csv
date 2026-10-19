@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_module_graph_admin,oski.module.graph.admin,model_oski_module_graph,base.group_system,1,1,1,1
