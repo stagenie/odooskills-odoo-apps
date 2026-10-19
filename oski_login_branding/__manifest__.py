@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Personnalisation Login",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Affichez votre marque dès la connexion : couleur de fond, couleur d'accent et logo personnalisés sans code.",
     "description": """
