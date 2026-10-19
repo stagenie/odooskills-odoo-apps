@@ -42,13 +42,9 @@ class CrmLead(models.Model):
 
     def _oski_idle_threshold(self):
         """Retourne le seuil d'inactivité (en jours) issu de la configuration."""
-        param = self.env["ir.config_parameter"].sudo().get_param(
-            "oski_crm_lead_inactivity.idle_days", default="14"
+        return self.env["ir.config_parameter"].sudo().get_int(
+            "oski_crm_lead_inactivity.idle_days", default=14
         )
-        try:
-            return int(param)
-        except (TypeError, ValueError):
-            return 14
 
     def _search_oski_is_idle(self, operator, value):
         """Recherche les pistes dormantes via un filtre Python robuste.
@@ -58,7 +54,7 @@ class CrmLead(models.Model):
         plus simple et plus sûr qu'un domaine SQL dépendant du fuseau et de la
         date de référence dérivée.
 
-        En v19, l'optimiseur de domaine convertit ``('field', '=', True)`` en
+        En v19 et v20, l'optimiseur de domaine convertit ``('field', '=', True)`` en
         ``('field', 'in', [True])`` ; on accepte donc les opérateurs ``=``,
         ``!=``, ``in`` et ``not in`` et on normalise la cible booléenne.
         """

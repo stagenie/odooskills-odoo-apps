@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Pistes dormantes CRM",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales/CRM",
     "summary": "Repérez les opportunités oubliées : surlignage, compteur de jours et filtre dormantes dans votre pipeline CRM.",
     "description": """
