@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_oski_mail_queue_check_admin,oski.mail.queue.check.admin,oski.mail.queue.check,base.group_system,crud,

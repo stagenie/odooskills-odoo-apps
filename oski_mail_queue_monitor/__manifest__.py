@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Moniteur de la file de courriels",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Sachez que vos courriels ne partent plus le jour même, pas trois mois après.",
     "description": """
@@ -27,7 +27,7 @@ lui-même son diagnostic.
         "static/description/screenshot_02_failed.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/ir_cron.xml",
         "views/oski_mail_queue_check_views.xml",
     ],

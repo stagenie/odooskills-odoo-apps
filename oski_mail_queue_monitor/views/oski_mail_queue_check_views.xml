@@ -32,7 +32,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_open_failed_mails" type="object"
-                                class="oe_stat_button" icon="fa-envelope-o">
+                                class="oe_stat_button" icon="mail">
                             <field name="failed_count" widget="statinfo" string="En échec"/>
                         </button>
                     </div>

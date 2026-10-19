@@ -56,9 +56,17 @@ class TestMailQueueMonitor(TransactionCase):
 
     def test_the_standstill_threshold_is_a_parameter(self):
         self._mail("outgoing", age_hours=48)
-        self.env["ir.config_parameter"].sudo().set_param(
-            "oski_mail_queue_monitor.max_pending_hours", "72")
+        self.env["ir.config_parameter"].sudo().set_float(
+            "oski_mail_queue_monitor.max_pending_hours", 72)
         self.assertEqual(self.Check._verdict_for(self.Check._measure_queue()), "ok")
+
+    def test_an_unreadable_threshold_falls_back_on_the_default(self):
+        """Une valeur saisie à la main et illisible ne doit pas faire planter
+        l'auscultation : le seuil par défaut (6 h) s'applique."""
+        self._mail("outgoing", age_hours=48)
+        self.env["ir.config_parameter"].sudo().set_str(
+            "oski_mail_queue_monitor.max_pending_hours", "six heures")
+        self.assertEqual(self.Check._verdict_for(self.Check._measure_queue()), "warning")
 
     def test_note_names_the_causes(self):
         self._mail("exception", failure_type="mail_smtp")

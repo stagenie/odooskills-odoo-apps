@@ -28,12 +28,9 @@ class OskiMailQueueCheck(models.Model):
     note = fields.Text(string="Détail")
 
     def _max_pending_hours(self):
-        value = self.env["ir.config_parameter"].sudo().get_param(
+        # get_float rend le défaut quand le paramètre manque ou n'est pas un nombre.
+        return self.env["ir.config_parameter"].sudo().get_float(
             "oski_mail_queue_monitor.max_pending_hours", DEFAULT_MAX_PENDING_HOURS)
-        try:
-            return float(value)
-        except (TypeError, ValueError):
-            return DEFAULT_MAX_PENDING_HOURS
 
     @api.model
     def _measure_queue(self):
