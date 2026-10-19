@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Édition en masse",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Modifiez un champ sur toute une sélection depuis la vue liste, sans passer par chaque fiche.",
     "description": """
@@ -21,7 +21,7 @@ s'appliquent normalement — le module n'écrit jamais en sudo.
         "static/description/screenshot_03_modeles_ouverts.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "wizards/oski_mass_edit_wizard_views.xml",
         "views/oski_mass_edit_config_views.xml",
     ],

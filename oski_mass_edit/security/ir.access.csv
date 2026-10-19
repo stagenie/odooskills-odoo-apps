@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_oski_mass_edit_config_user,oski.mass.edit.config.user,oski.mass.edit.config,base.group_user,r,
+access_oski_mass_edit_config_admin,oski.mass.edit.config.admin,oski.mass.edit.config,base.group_system,crud,
+access_oski_mass_edit_wizard_user,oski.mass.edit.wizard.user,oski.mass.edit.wizard,base.group_user,crud,
