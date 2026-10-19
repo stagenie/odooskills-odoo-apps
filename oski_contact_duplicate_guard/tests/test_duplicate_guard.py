@@ -35,3 +35,25 @@ class TestDuplicateGuard(TransactionCase):
         self.icp.set_param("oski_dup.check_email", "False")
         new = self.env["res.partner"].create({"name": "Copie", "email": "dup@test.dz"})
         self.assertFalse(new.oski_duplicate_id)
+
+    def test_underscore_in_email_is_not_a_wildcard(self):
+        self.env["res.partner"].create({"name": "Jean", "email": "jean_dupont@test.dz"})
+        new = self.env["res.partner"].create({"name": "Autre", "email": "jeanXdupont@test.dz"})
+        self.assertFalse(new.oski_duplicate_id, "« _ » ne doit pas jouer le rôle de joker.")
+        same = self.env["res.partner"].create({"name": "Copie", "email": "JEAN_DUPONT@test.dz"})
+        self.assertTrue(same.oski_duplicate_id)
+
+    def test_settings_can_disable_and_enable_checks(self):
+        """Décocher dans les Réglages doit réellement désactiver la détection."""
+        settings = self.env["res.config.settings"].create({})
+        self.assertTrue(settings.oski_dup_check_email, "Activé par défaut.")
+        settings.oski_dup_check_email = False
+        settings.execute()
+        self.assertFalse(self.env["res.config.settings"].create({}).oski_dup_check_email)
+        new = self.env["res.partner"].create({"name": "Copie", "email": "dup@test.dz"})
+        self.assertFalse(new.oski_duplicate_id, "Détection email désactivée par les Réglages.")
+        settings = self.env["res.config.settings"].create({"oski_dup_check_email": True})
+        settings.execute()
+        again = self.env["res.partner"].create({"name": "Copie 2", "email": "dup@test.dz"})
+        self.assertIn(again.oski_duplicate_id, self.existing | new, "Détection email réactivée.")
+        self.assertTrue(again.oski_duplicate_id)
