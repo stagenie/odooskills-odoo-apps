@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Codes-barres EAN13 en masse",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Inventory/Inventory",
     "summary": "Attribuez des codes EAN13 valides à tous les articles qui n'en ont pas, d'un geste.",
     "description": """
@@ -31,7 +31,7 @@ numéros déjà pris dans la plage sont sautés, y compris ceux venus d'un impor
         "static/description/screenshot_02_products.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_barcode_generator_views.xml",
     ],
     "installable": True,

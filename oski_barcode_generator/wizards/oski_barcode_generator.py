@@ -18,6 +18,9 @@ class OskiBarcodeGenerator(models.TransientModel):
 
     _name = "oski.barcode.generator"
     _description = "Génération de codes-barres"
+    # Odoo 20 : sans cette ligne la tâche de nettoyage lit une durée de
+    # conservation nulle et ne supprime jamais les assistants (skill odoo-v20).
+    _transient_max_hours = 1.0
 
     prefix = fields.Char(
         string="Préfixe", required=True, default="200",
