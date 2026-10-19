@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.exceptions import ValidationError
 from odoo.tests import tagged
 
 
@@ -46,3 +47,35 @@ class TestInvoiceCommentTemplate(AccountTestInvoicingCommon):
         self.invoice.oski_comment_template_id = False
         self.invoice.action_oski_apply_comment_template()
         self.assertIn("Merci de régler sous 30 jours", self.invoice.narration)
+
+    def test_templates_are_offered_by_invoice_type(self):
+        """Un modèle « Factures fournisseurs » n'est pas proposé sur une
+        facture client, et inversement ; « Toutes » l'est partout."""
+        Template = self.env["oski.invoice.comment.template"]
+        vendor_only = Template.create({
+            "name": "Autoliquidation", "body": "<p>Autoliquidation.</p>",
+            "move_types": "in"})
+        customer_only = Template.create({
+            "name": "Pénalités", "body": "<p>Pénalités de retard.</p>",
+            "move_types": "out"})
+        bill = self.init_invoice("in_invoice", products=self.product_a)
+        self.assertEqual(self.invoice.oski_comment_direction, "out")
+        self.assertEqual(bill.oski_comment_direction, "in")
+        field = self.env["account.move"]._fields["oski_comment_template_id"]
+        self.assertIn("oski_comment_direction", field.domain)
+        offered_out = Template.search(
+            [("move_types", "in", ("all", self.invoice.oski_comment_direction))])
+        offered_in = Template.search(
+            [("move_types", "in", ("all", bill.oski_comment_direction))])
+        self.assertIn(customer_only, offered_out)
+        self.assertNotIn(vendor_only, offered_out)
+        self.assertIn(vendor_only, offered_in)
+        self.assertNotIn(customer_only, offered_in)
+        self.assertIn(self.template_a, offered_out & offered_in)
+
+    def test_a_template_reserved_to_bills_is_refused_on_a_customer_invoice(self):
+        vendor_only = self.env["oski.invoice.comment.template"].create({
+            "name": "Autoliquidation", "body": "<p>Autoliquidation.</p>",
+            "move_types": "in"})
+        with self.assertRaises(ValidationError):
+            self.invoice.oski_comment_template_id = vendor_only
