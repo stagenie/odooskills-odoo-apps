@@ -1,4 +1,4 @@
-from odoo import api, fields, models, tools
+from odoo import api, fields, models
 
 
 class OskiDeleteRule(models.Model):
@@ -41,7 +41,7 @@ class OskiDeleteRule(models.Model):
     )
 
     @api.model
-    @tools.ormcache("model_name")
+    @api.ormcache("model_name")
     def _rule_for_model(self, model_name):
         """Règle applicable à un modèle, sous forme de tuple immuable.
 
@@ -57,7 +57,7 @@ class OskiDeleteRule(models.Model):
     def _invalidate_rule_cache(self):
         # Les règles sont lues à chaque suppression du serveur : elles vivent
         # dans le cache du registre, qu'il faut vider dès qu'elles changent.
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
 
     @api.model_create_multi
     def create(self, vals_list):

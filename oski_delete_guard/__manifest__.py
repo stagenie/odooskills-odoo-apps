@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Garde-fou de suppression",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Interdisez la suppression modèle par modèle, réservez-la à quelques groupes, et gardez la trace de chaque effacement.",
     "description": """
@@ -23,7 +23,7 @@ jamais bloquées : le garde-fou protège l'interface, pas la maintenance.
         "static/description/screenshot_03_journal.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_delete_rule_views.xml",
         "views/oski_delete_log_views.xml",
     ],

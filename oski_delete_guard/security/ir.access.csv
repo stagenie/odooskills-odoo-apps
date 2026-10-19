@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_oski_delete_rule_admin,oski.delete.rule.admin,oski.delete.rule,base.group_system,crud,
+access_oski_delete_log_user,oski.delete.log.user,oski.delete.log,base.group_user,r,
+access_oski_delete_log_admin,oski.delete.log.admin,oski.delete.log,base.group_system,crud,
