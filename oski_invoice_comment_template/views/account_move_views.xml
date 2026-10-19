@@ -7,6 +7,7 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='due_date']" position="after">
+                <field name="oski_comment_direction" invisible="1"/>
                 <field name="oski_comment_template_id"
                        invisible="move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')"
                        options="{'no_create_edit': True}"/>

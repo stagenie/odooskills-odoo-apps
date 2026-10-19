@@ -159,7 +159,11 @@ class ResCompany(models.Model):
         companies = self.sudo().search([("oski_rate_auto", "=", True)])
         for company in companies:
             try:
-                company._oski_update_rates()
+                # Le point de sauvegarde annule les taux déjà écrits pour une
+                # société qui tombe en cours de route, et garde la transaction
+                # utilisable pour les suivantes.
+                with self.env.cr.savepoint():
+                    company._oski_update_rates()
             except Exception as error:  # noqa: BLE001 - une panne n'arrête pas la file
                 _logger.exception("Taux de change : mise à jour impossible pour %s",
                                   company.display_name)

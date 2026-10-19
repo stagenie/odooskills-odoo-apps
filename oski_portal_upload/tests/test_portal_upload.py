@@ -161,6 +161,24 @@ class TestPortalDocumentRequest(PortalUploadCommon, TransactionCase):
         self._request(partner_id=self.stranger.id)
         self.assertFalse(self.task._oski_document_requests())
 
+
+@tagged("post_install", "-at_install")
+class TestPortalUploadSettings(TransactionCase):
+    """Ce qui s'éprouve sans fiche portail : le module ne dépend que de
+    ``portal``, et une base qui n'a rien d'autre doit quand même passer ces
+    règles au crible."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.requests = cls.env["oski.portal.document.request"]
+
+    def test_only_models_with_an_address_are_offered(self):
+        offered = dict(self.requests._selection_target_model())
+        self.assertNotIn("res.partner", offered)
+        for model in offered:
+            self.assertIn("access_url", self.env[model]._fields)
+
     def test_the_settings_fall_back_on_readable_values(self):
         parameters = self.env["ir.config_parameter"].sudo()
         self.assertIn("pdf", self.requests._oski_allowed_extensions())

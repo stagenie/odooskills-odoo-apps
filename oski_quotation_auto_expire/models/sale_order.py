@@ -43,9 +43,14 @@ class SaleOrder(models.Model):
         if days <= 0:
             return self.browse()
         limit = fields.Date.add(today, days=days)
+        # Une seule relance par échéance : sans ce garde-fou, la tâche
+        # quotidienne empilerait une activité par jour de la fenêtre. Une
+        # relance antérieure à la fenêtre (échéance repoussée depuis) ne
+        # compte plus.
         due = self.filtered(
             lambda order: order.validity_date and today <= order.validity_date <= limit
-            and order.oski_reminder_sent_on != today
+            and not (order.oski_reminder_sent_on and order.oski_reminder_sent_on
+                     >= fields.Date.subtract(order.validity_date, days=days))
             and not order.oski_expired_on)
         for order in due:
             order._oski_notify_salesperson()

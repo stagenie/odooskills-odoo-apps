@@ -37,7 +37,9 @@ class OskiBarcodeGenerator(models.TransientModel):
     @api.constrains("prefix")
     def _check_prefix(self):
         for wizard in self:
-            prefix = (wizard.prefix or "").strip()
+            # Pas de `strip()` ici : le préfixe sert tel quel à composer les
+            # codes, un espace accepté finirait dans le code-barres.
+            prefix = wizard.prefix or ""
             if not DIGITS.match(prefix):
                 raise ValidationError(_(
                     "Le préfixe ne peut contenir que des chiffres."))
@@ -105,6 +107,22 @@ class OskiBarcodeGenerator(models.TransientModel):
             if code not in taken:
                 return code, counter
 
+    @api.model
+    def _oski_taken_codes(self):
+        """Tous les codes déjà en base : deux fiches ne peuvent pas porter le
+        même. Les articles archivés comptent (les réactiver buterait sinon
+        sur un doublon), comme les codes des conditionnements, que le cœur
+        refuse de voir repris par un article."""
+        products = self.env["product.product"].sudo().with_context(
+            active_test=False).search_read(
+                [("barcode", "!=", False)], ["barcode"], load="")
+        taken = {row["barcode"] for row in products if row["barcode"]}
+        if "product.uom" in self.env:
+            packagings = self.env["product.uom"].sudo().search_read(
+                [("barcode", "!=", False)], ["barcode"], load="")
+            taken |= {row["barcode"] for row in packagings if row["barcode"]}
+        return taken
+
     def action_generate(self):
         self.ensure_one()
         candidates = self._oski_candidates()[:self.limit]
@@ -112,11 +130,7 @@ class OskiBarcodeGenerator(models.TransientModel):
             raise UserError(_(
                 "Aucun article à servir : tous ceux visés portent déjà un "
                 "code-barres."))
-        # Tous les codes déjà en base, y compris ceux des articles hors
-        # sélection : deux articles ne peuvent pas porter le même.
-        rows = self.env["product.product"].sudo().search_read(
-            [("barcode", "!=", False)], ["barcode"], load="")
-        taken = {row["barcode"] for row in rows if row["barcode"]}
+        taken = self._oski_taken_codes()
         counter = 0
         for product in candidates:
             code, counter = self._oski_next_code(counter, taken)

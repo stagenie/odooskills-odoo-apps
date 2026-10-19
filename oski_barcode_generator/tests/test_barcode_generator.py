@@ -105,6 +105,35 @@ class TestBarcodeGenerator(TransactionCase):
         with self.assertRaises(ValidationError):
             self._wizard(self.products, prefix="ABC")
 
+    def test_a_prefix_with_spaces_is_refused(self):
+        """Le préfixe compose les codes tel quel : un espace finirait dans le
+        code-barres."""
+        with self.assertRaises(ValidationError):
+            self._wizard(self.products, prefix=" 200")
+
+    def test_an_archived_product_keeps_its_code_to_itself(self):
+        """Réactiver un article archivé buterait sur un doublon."""
+        archived = self.env["product.product"].create({
+            "name": "Archivé", "type": "consu", "barcode": "2000000000018",
+            "active": False})
+        wizard = self._wizard(self.products)
+        wizard.action_generate()
+        self.assertNotIn(archived.barcode, self.products.mapped("barcode"))
+
+    def test_a_packaging_code_is_skipped(self):
+        """Le cœur interdit à un article le code d'un conditionnement."""
+        if "product.uom" not in self.env:
+            self.skipTest("pas de conditionnements à code-barres")
+        holder = self.env["product.product"].create({
+            "name": "Carton", "type": "consu"})
+        self.env["product.uom"].create({
+            "product_id": holder.id,
+            "uom_id": self.env.ref("uom.product_uom_unit").id,
+            "barcode": "2000000000018"})
+        wizard = self._wizard(self.products)
+        wizard.action_generate()
+        self.assertNotIn("2000000000018", self.products.mapped("barcode"))
+
     def test_a_prefix_never_starts_with_zero(self):
         with self.assertRaises(ValidationError):
             self._wizard(self.products, prefix="012")

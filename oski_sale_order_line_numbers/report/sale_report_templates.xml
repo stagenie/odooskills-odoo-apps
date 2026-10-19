@@ -26,9 +26,18 @@
             <td name="td_oski_line_number_note"/>
         </xpath>
 
-        <!-- Ligne combo : cellule vide. -->
+        <!-- Ligne combo : elle porte un numéro à l'écran, le PDF l'affiche aussi
+             (sinon la numérotation imprimée saute un chiffre). -->
         <xpath expr="//td[@name='td_combo_name']" position="before">
-            <td name="td_oski_line_number_combo"/>
+            <td name="td_oski_line_number_combo" class="text-end text-nowrap">
+                <span t-out="line.oski_line_number"/>
+            </td>
+        </xpath>
+
+        <!-- Section à composition masquée : ses lignes de synthèse ont aussi
+             besoin d'une cellule, sinon tout le tableau se décale d'une colonne. -->
+        <xpath expr="//td[@name='td_section_group_name']" position="before">
+            <td name="td_oski_line_number_section_group"/>
         </xpath>
 
     </template>

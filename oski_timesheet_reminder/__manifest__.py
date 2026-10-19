@@ -34,6 +34,7 @@ pas encore.
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/oski_timesheet_gap_rules.xml",
         "data/ir_cron.xml",
         "views/oski_timesheet_gap_views.xml",
         "views/res_config_settings_views.xml",
