@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_cron_oski_timesheet_reminder" model="ir.cron">
+        <field name="name">Feuilles de temps : retards de la semaine écoulée</field>
+        <field name="model_id" ref="model_oski_timesheet_gap"/>
+        <field name="state">code</field>
+        <field name="code">model._oski_cron_check_last_week()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="active" eval="True"/>
+    </record>
+
+</odoo>

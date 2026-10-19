@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oski_timesheet_gap_user,oski.timesheet.gap.user,model_oski_timesheet_gap,base.group_user,1,0,0,0
+access_oski_timesheet_gap_manager,oski.timesheet.gap.manager,model_oski_timesheet_gap,hr_timesheet.group_hr_timesheet_approver,1,1,1,1
