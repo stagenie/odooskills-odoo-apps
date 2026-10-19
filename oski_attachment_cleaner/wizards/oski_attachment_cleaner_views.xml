@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_attachment_cleaner_view_form" model="ir.ui.view">
+        <field name="name">oski.attachment.cleaner.form</field>
+        <field name="model">oski.attachment.cleaner</field>
+        <field name="arch" type="xml">
+            <form string="Nettoyage des pièces jointes">
+                <group>
+                    <group string="Ce qu'on cherche">
+                        <field name="include_orphans"/>
+                        <field name="include_duplicates"/>
+                        <field name="min_age_days"/>
+                    </group>
+                    <group string="Ce qu'on a trouvé" invisible="not scanned">
+                        <field name="scanned" invisible="1"/>
+                        <field name="orphan_count"/>
+                        <field name="duplicate_count"/>
+                        <field name="candidate_size"/>
+                        <field name="store_size"/>
+                    </group>
+                </group>
+                <div class="alert alert-info" role="status" invisible="scanned">
+                    Le relevé ne supprime rien. Il faut le lire avant de purger.
+                </div>
+                <field name="candidate_count" invisible="1"/>
+                <separator string="Pièces retenues" invisible="not scanned"/>
+                <field name="candidate_preview" nolabel="1" readonly="1"
+                       invisible="not scanned"/>
+                <footer>
+                    <button name="action_scan" type="object" string="Relever" class="btn-primary"/>
+                    <button name="action_purge" type="object" string="Purger"
+                            class="btn-danger" invisible="not scanned or candidate_count == 0"
+                            confirm="Ces pièces jointes seront supprimées définitivement. Continuer ?"/>
+                    <button string="Fermer" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="oski_attachment_cleaner_action" model="ir.actions.act_window">
+        <field name="name">Nettoyage des pièces jointes</field>
+        <field name="res_model">oski.attachment.cleaner</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="oski_attachment_cleaner_menu"
+              name="Nettoyage des pièces jointes"
+              parent="base.next_id_9"
+              action="oski_attachment_cleaner_action"
+              sequence="20"
+              groups="base.group_system"/>
+</odoo>
