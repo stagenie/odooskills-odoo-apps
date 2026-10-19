@@ -1,6 +1,9 @@
+from psycopg2 import IntegrityError
+
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import tagged
+from odoo.tools import mute_logger
 
 
 @tagged("post_install", "-at_install")
@@ -107,7 +110,9 @@ class TestAnalyticRequired(AccountTestInvoicingCommon):
         """Sans normalisation, deux règles sans préfixe cohabiteraient :
         PostgreSQL ne compare jamais deux NULL comme égaux."""
         self.assertEqual(self.rule.account_prefix, "")
-        with self.assertRaises(Exception):
+        # Le refus vient de PostgreSQL, qui le journalise en ERROR : on le
+        # tait ici, c'est précisément le comportement attendu.
+        with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
             self.env["oski.analytic.journal.rule"].create({
                 "journal_id": self.journal.id})
             self.env.flush_all()
@@ -115,7 +120,7 @@ class TestAnalyticRequired(AccountTestInvoicingCommon):
     def test_clearing_the_prefix_keeps_the_constraint_alive(self):
         second = self.env["oski.analytic.journal.rule"].create({
             "journal_id": self.journal.id, "account_prefix": "60"})
-        with self.assertRaises(Exception):
+        with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
             second.account_prefix = False
             self.env.flush_all()
 
