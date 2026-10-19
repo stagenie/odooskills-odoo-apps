@@ -71,10 +71,19 @@ class IrAttachment(models.Model):
         — un contrat type, un logo — et supprimer l'une des deux copies
         priverait un document de sa pièce.
 
+        Une pièce sans document (``res_model`` ou ``res_id`` vide) n'a pas de
+        « même document » : elle est souvent référencée par son identifiant
+        depuis un contenu HTML (``/web/image/<id>``), et supprimer une copie
+        casserait ce lien. Elle n'est jamais proposée ici.
+
         La plus ancienne de chaque groupe est conservée.
         """
         candidates = self.sudo().search(
-            self._oski_protected_domain(min_age_days) + [("checksum", "!=", False)],
+            self._oski_protected_domain(min_age_days) + [
+                ("checksum", "!=", False),
+                ("res_model", "!=", False),
+                ("res_id", "!=", False),
+            ],
             order="id asc")
         seen = set()
         duplicates = self.sudo().browse()

@@ -126,6 +126,15 @@ class TestAttachmentCleaner(TransactionCase):
         self.assertNotIn(first, duplicates)
         self.assertNotIn(second, duplicates)
 
+    def test_copies_without_a_document_are_not_redundant(self):
+        """Sans document, pas de « même document » : ces pièces sont souvent
+        référencées par leur identifiant depuis un contenu HTML."""
+        first = self._attachment()
+        second = self._attachment()
+        duplicates = self.Attachment._oski_find_duplicates(30)
+        self.assertNotIn(first, duplicates)
+        self.assertNotIn(second, duplicates)
+
     # --- relevé et purge --------------------------------------------------
 
     def test_the_scan_counts_without_deleting(self):
@@ -139,6 +148,19 @@ class TestAttachmentCleaner(TransactionCase):
         self.assertIn(attachment.name, cleaner.candidate_preview)
         self.assertGreaterEqual(cleaner.candidate_bytes, attachment.file_size)
         self.assertTrue(attachment.exists(), "le relevé ne supprime rien")
+
+    def test_a_store_beyond_two_gigabytes_fits(self):
+        """Un entier PostgreSQL de 32 bits plafonne à 2 Go : un magasin de
+        fichiers réel le dépasse, et le relevé ne doit pas échouer pour si
+        peu."""
+        cleaner = self._cleaner()
+        big = 5 * 1024 ** 3
+        cleaner.write({"store_bytes": big, "candidate_bytes": big})
+        cleaner.flush_recordset()
+        self.assertEqual(cleaner.store_bytes, big)
+        purge = self.env["oski.attachment.purge"].create({"freed_bytes": big})
+        purge.flush_recordset()
+        self.assertEqual(purge.freed_bytes, big)
 
     def test_nothing_is_purged_before_it_has_been_read(self):
         cleaner = self._cleaner()

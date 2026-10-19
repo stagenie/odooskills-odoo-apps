@@ -238,6 +238,12 @@ class TestZipRoute(HttpCase):
         response = self.url_open("/oski/attachment/zip?model=pas.un.modele&ids=1")
         self.assertEqual(response.status_code, 404)
 
+    def test_an_abstract_model_is_a_dead_end(self):
+        """Un mixin n'a pas de table : la route répond 404, pas 500."""
+        self.authenticate("admin", "admin")
+        response = self.url_open("/oski/attachment/zip?model=image.mixin&ids=1")
+        self.assertEqual(response.status_code, 404)
+
     def test_a_record_without_attachments_is_a_dead_end(self):
         partner = self.env["res.partner"].create({"name": "Fiche Nue"})
         self.authenticate("admin", "admin")

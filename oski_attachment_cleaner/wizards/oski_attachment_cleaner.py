@@ -27,8 +27,11 @@ class OskiAttachmentCleaner(models.TransientModel):
     orphan_count = fields.Integer(string="Orphelines", readonly=True)
     duplicate_count = fields.Integer(string="Copies redondantes", readonly=True)
     candidate_count = fields.Integer(string="Pièces retenues", readonly=True)
-    candidate_bytes = fields.Integer(string="Poids retenu", readonly=True)
-    store_bytes = fields.Integer(string="Poids total", readonly=True)
+    # En octets, sur une colonne numérique : un ``Integer`` est un entier
+    # PostgreSQL de 32 bits, et un magasin de fichiers dépasse vite 2 Go —
+    # l'écriture du relevé échouait alors sur « integer out of range ».
+    candidate_bytes = fields.Float(string="Poids retenu", digits=(16, 0), readonly=True)
+    store_bytes = fields.Float(string="Poids total", digits=(16, 0), readonly=True)
     candidate_size = fields.Char(string="Poids retenu", compute="_compute_sizes")
     store_size = fields.Char(string="Poids total", compute="_compute_sizes")
 

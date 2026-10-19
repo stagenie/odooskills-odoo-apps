@@ -12,6 +12,7 @@ class OskiAttachmentPurge(models.Model):
     user_id = fields.Many2one(
         "res.users", string="Par", required=True, default=lambda self: self.env.user)
     attachment_count = fields.Integer(string="Pièces supprimées")
-    freed_bytes = fields.Integer(string="Octets libérés")
+    # Colonne numérique : un entier de 32 bits plafonne à 2 Go libérés.
+    freed_bytes = fields.Float(string="Octets libérés", digits=(16, 0))
     criteria = fields.Char(string="Critères")
     detail = fields.Text(string="Pièces")
