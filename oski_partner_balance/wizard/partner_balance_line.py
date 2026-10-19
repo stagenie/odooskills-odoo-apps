@@ -5,6 +5,9 @@ class PartnerBalanceLine(models.TransientModel):
     _name = 'oski.partner.balance.line'
     _description = 'Partner Balance Line'
     _order = 'wizard_id, sequence'
+    # Odoo 20: both transient limits share one lazy cache (odoo/tools/func.py:110),
+    # so the vacuum reads 0 hours and never purges; set the age explicitly.
+    _transient_max_hours = 1.0
 
     wizard_id = fields.Many2one(
         'oski.partner.balance.wizard', required=True, ondelete='cascade', index=True)

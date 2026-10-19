@@ -1,6 +1,6 @@
 {
     "name": "Partner Balance",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Accounting/Accounting",
     "summary": "The statement Community lacks: running balance line by line, opening balance, journal filters, PDF and Excel export.",
     "description": """Odoo Community can show what a customer owes in total, but not how it got
@@ -24,8 +24,7 @@ every line.
     "depends": ["account"],
     "data": [
         "security/partner_balance_groups.xml",
-        "security/ir.model.access.csv",
-        "security/partner_balance_rules.xml",
+        "security/ir.access.csv",
         "views/account_move_views.xml",
         "views/partner_balance_wizard_views.xml",
         "views/partner_balance_line_views.xml",

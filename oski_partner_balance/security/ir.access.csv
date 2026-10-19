@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_partner_balance_wizard,partner.balance.wizard,oski.partner.balance.wizard,oski_partner_balance.group_partner_balance_user,crud,
+access_partner_balance_line,partner.balance.line,oski.partner.balance.line,oski_partner_balance.group_partner_balance_user,crud,
+rule_partner_balance_wizard_own,Partner Balance: own runs only,oski.partner.balance.wizard,,crud,"[('create_uid', '=', user.id)]"
+rule_partner_balance_line_own,Partner Balance Line: own runs only,oski.partner.balance.line,,crud,"[('create_uid', '=', user.id)]"

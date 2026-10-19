@@ -5,6 +5,9 @@ from odoo.exceptions import ValidationError
 class PartnerBalanceWizard(models.TransientModel):
     _name = 'oski.partner.balance.wizard'
     _description = 'Partner Balance'
+    # Odoo 20: both transient limits share one lazy cache (odoo/tools/func.py:110),
+    # so the vacuum reads 0 hours and never purges; set the age explicitly.
+    _transient_max_hours = 1.0
 
     date_from = fields.Date(
         required=True,

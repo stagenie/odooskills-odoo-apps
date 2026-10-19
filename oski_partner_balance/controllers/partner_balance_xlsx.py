@@ -3,7 +3,8 @@ import io
 import xlsxwriter
 
 from odoo import http
-from odoo.http import content_disposition, request
+from odoo.http import request
+from odoo.http.stream import content_disposition
 
 
 def _columns(env):
