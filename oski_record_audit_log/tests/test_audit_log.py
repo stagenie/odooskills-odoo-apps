@@ -154,3 +154,52 @@ class TestAuditLog(TransactionCase):
         rule.log_create = True
         self.Partner.create({"name": "Après bascule"})
         self.assertEqual(len(self._logs("create")), 1)
+
+    def test_archived_rule_is_ignored(self):
+        rule = self._rule()
+        rule.active = False
+        self.Partner.create({"name": "Règle archivée"})
+        self.assertFalse(self._logs("create"))
+
+    def test_deletion_can_be_switched_off(self):
+        self._rule(log_unlink=False)
+        partner = self.Partner.create({"name": "Effacée sans trace"})
+        partner_id = partner.id
+        partner.unlink()
+        self.assertFalse(self._logs("unlink", partner_id))
+
+    # ------------------------------------------------------------------
+    # Mise en forme des valeurs
+    # ------------------------------------------------------------------
+
+    def test_boolean_reads_yes_no_not_empty(self):
+        self._rule()
+        # ``is_company`` ne convient pas : res.partner l'écrit en superutilisateur.
+        partner = self.Partner.create({"name": "Salariée ?", "employee": True})
+        partner.write({"employee": False})
+        log = self._logs("write", partner.id)
+        self.assertIn("Oui → Non", log.changes)
+        self.assertNotIn("(vide)", log.changes)
+
+    def test_selection_is_written_as_its_label(self):
+        self._rule()
+        partner = self.Partner.create({"name": "Adresse", "type": "contact"})
+        partner.write({"type": "invoice"})
+        field = self.env["res.partner"]._fields["type"]
+        label = dict(field._description_selection(self.env))["invoice"]
+        log = self._logs("write", partner.id)
+        self.assertIn(label, log.changes)
+        self.assertNotIn("→ invoice", log.changes)
+
+    # ------------------------------------------------------------------
+    # Droits
+    # ------------------------------------------------------------------
+
+    def test_journal_is_reserved_to_administrators(self):
+        """Le journal porte des valeurs (anciennes et nouvelles) : un simple
+        utilisateur ne doit pas pouvoir le lire, même par RPC."""
+        from odoo.exceptions import AccessError
+        self._rule()
+        self.Partner.create({"name": "Confidentielle"})
+        with self.assertRaises(AccessError):
+            self.Log.with_user(self.user).search([])

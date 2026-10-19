@@ -35,8 +35,15 @@ class Base(models.AbstractModel):
     # ------------------------------------------------------------------
 
     def _oski_audit_format(self, field, value):
+        if field.type == "boolean":
+            # Un booléen à False n'est pas « vide » : c'est « Non ».
+            return "Oui" if value else "Non"
         if value is False or value is None:
             return "(vide)"
+        if field.type == "selection":
+            # Le libellé, pas la clé technique.
+            labels = dict(field._description_selection(self.env))
+            return str(labels.get(value, value))
         if field.type == "many2one":
             return self.env[field.comodel_name].browse(value).display_name if isinstance(value, int) else (value.display_name if value else "(vide)")
         text = str(value)
@@ -58,7 +65,7 @@ class Base(models.AbstractModel):
         self.env["oski.audit.log"].sudo().create([
             {
                 "model_name": self._name,
-                "model_label": self.env["ir.model"]._get(self._name).name,
+                "model_label": self.env["ir.model"].sudo()._get(self._name).name,
                 "res_id": res_id,
                 "res_name": res_name,
                 "operation": operation,
