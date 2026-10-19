@@ -155,6 +155,28 @@ class TestTimesheetReminder(TransactionCase):
         self.assertIn("10.0", activity.note)
         self.assertIn(str(round(self.expected, 2)), activity.note)
 
+    # -- Qui voit quoi ----------------------------------------------------
+
+    def test_an_employee_only_sees_his_own_gaps(self):
+        """Un retard de saisie est une donnée personnelle."""
+        other_user = self.env["res.users"].create({
+            "name": "Voisin", "login": "oski_timesheet_voisin",
+            "group_ids": [(6, 0, [self.env.ref("base.group_user").id])]})
+        self.env["hr.employee"].create({
+            "name": "Voisin", "user_id": other_user.id,
+            "company_id": self.company.id})
+        gaps = self.gaps._oski_check_week(self.monday)
+        self.assertGreater(len(gaps), 1)
+        seen = self.gaps.with_user(self.user).search([])
+        self.assertEqual(seen.employee_id, self.employee)
+        approver = self.env["res.users"].create({
+            "name": "Valideur", "login": "oski_timesheet_valideur",
+            "group_ids": [(6, 0, [self.env.ref(
+                "hr_timesheet.group_hr_timesheet_approver").id])]})
+        self.assertEqual(
+            self.gaps.with_user(approver).search_count([]),
+            self.gaps.search_count([("company_id", "=", self.company.id)]))
+
     # -- La semaine relevée -----------------------------------------------
 
     def test_every_employee_of_the_company_is_looked_at(self):
