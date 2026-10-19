@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Le bloc se greffe sur le fil de discussion du portail, commun au devis,
+        à la facture, au bon de commande et à la tâche : une seule inclusion
+        couvre toutes les pages qui l'affichent, sans dépendre d'aucune d'elles.
+    -->
+    <template id="portal_document_requests" inherit_id="portal.message_thread"
+              name="Documents demandés au client">
+        <xpath expr="//div[@id='discussion']" position="before">
+            <t t-set="oski_requests"
+               t-value="object._oski_document_requests() if 'access_url' in object._fields else None"/>
+            <t t-set="oski_upload_status" t-value="request.params.get('oski_upload')"/>
+
+            <div t-if="oski_upload_status" role="status"
+                 t-attf-class="alert d-print-none #{'alert-success' if oski_upload_status == 'ok' else 'alert-warning'}">
+                <t t-if="oski_upload_status == 'ok'">
+                    Document bien reçu, merci.
+                </t>
+                <t t-elif="oski_upload_status == 'extension'">
+                    Ce type de fichier n'est pas accepté. Formats attendus :
+                    <t t-out="', '.join(request.env['oski.portal.document.request'].sudo()._oski_allowed_extensions())"/>.
+                </t>
+                <t t-elif="oski_upload_status == 'size'">
+                    Ce fichier est trop lourd pour être déposé ici.
+                </t>
+                <t t-elif="oski_upload_status == 'closed'">
+                    Ce document a déjà été reçu ou n'est plus attendu.
+                </t>
+                <t t-else="">
+                    Aucun fichier n'a été choisi.
+                </t>
+            </div>
+
+            <div t-if="oski_requests" id="oski_document_requests"
+                 class="card mb-4 d-print-none">
+                <div class="card-header bg-transparent">
+                    <h5 class="mb-0">Documents attendus</h5>
+                </div>
+                <div class="card-body pb-2">
+                    <t t-foreach="oski_requests" t-as="oski_request">
+                        <div class="mb-3 pb-3 border-bottom">
+                            <div class="d-flex flex-wrap justify-content-between">
+                                <strong t-out="oski_request.name"/>
+                                <span t-if="oski_request.deadline" class="text-muted">
+                                    attendu pour <span t-field="oski_request.deadline"/>
+                                </span>
+                            </div>
+                            <p t-if="oski_request.note" class="text-muted mb-2"
+                               t-out="oski_request.note"/>
+                            <form t-attf-action="/oski/portal/document/#{oski_request.id}/upload"
+                                  method="post" enctype="multipart/form-data"
+                                  class="row g-2 align-items-center">
+                                <input type="hidden" name="csrf_token"
+                                       t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="access_token" t-att-value="token"/>
+                                <div class="col-12 col-sm-8">
+                                    <input type="file" name="ufile" required="required"
+                                           class="form-control form-control-sm"/>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        Déposer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </t>
+                    <p class="text-muted small mb-2">
+                        Le document déposé rejoint votre dossier et nous est signalé
+                        aussitôt.
+                    </p>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
