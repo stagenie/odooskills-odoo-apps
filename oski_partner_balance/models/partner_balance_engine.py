@@ -111,7 +111,9 @@ class PartnerBalanceEngine(models.AbstractModel):
         a consolidated statement where one can no longer see which company
         each entry came from is unusable for the person doing the chasing.
         """
-        partners = self.env['res.partner'].browse(sorted(partner_ids))
+        # sudo: only the commercial partner's id is read, never shown; a
+        # contact the user cannot read must not crash the whole statement.
+        partners = self.env['res.partner'].sudo().browse(sorted(partner_ids))
         # Contacts accumulate on their commercial partner: the invoices of a
         # company and a payment booked on one of its employees are one debt,
         # one running balance. A company (or a lone individual) is its own
