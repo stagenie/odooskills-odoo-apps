@@ -71,3 +71,18 @@ class TestExportLog(TransactionCase):
         log = self._logs()
         self.assertEqual(log.field_count, 900)
         self.assertLessEqual(len(log.field_names), 2000)
+
+    def test_batched_export_is_a_single_line(self):
+        """Odoo 20 découpe l'export en lots de ``IN_MAX`` enregistrements
+        (``web/controllers/export.py``) : un seul geste, une seule ligne."""
+        from odoo.tools import split_every
+        from odoo.tools.constants import IN_MAX
+        partners = self.env["res.partner"].create(
+            [{"name": "Lot %d" % i} for i in range(IN_MAX + 5)]
+        )
+        Partner = self.env["res.partner"].with_user(self.exporter)
+        for batch in split_every(IN_MAX, partners.ids, Partner.browse):
+            batch.export_data(["name"])
+        log = self._logs()
+        self.assertEqual(len(log), 1, "Un export découpé en lots reste un seul export.")
+        self.assertEqual(log.record_count, IN_MAX + 5)

@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Journal des exports",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Sachez qui sort quelles données de votre base : modèle, champs, nombre de lignes, date.",
     "description": """
@@ -24,7 +24,7 @@ a réellement quitté la base.
         "static/description/screenshot_01_journal.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_export_log_views.xml",
     ],
     "installable": True,
