@@ -25,6 +25,28 @@ class OskiAccessLineMixin(models.AbstractModel):
                     "(exactement l'un des deux)."
                 )
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._oski_access_changed()
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        self._oski_access_changed()
+        return res
+
+    def unlink(self):
+        res = super().unlink()
+        self._oski_access_changed()
+        return res
+
+    def _oski_access_changed(self):
+        """Les domaines des ir.rule sont en ormcache par utilisateur : sans purge,
+        une ligne ajoutée, modifiée ou retirée ne s'applique qu'au redémarrage.
+        Les modules concrets peuvent étendre (champs calculés à invalider)."""
+        self.env.registry.clear_cache()
+
     def _resolve_levels(self, user, dimension_field):
         """Agrège les lignes personnelles (user_id) et de groupe (group_id dans
         les groupes de `user`). Renvoie (read, full) recordsets de la dimension :
