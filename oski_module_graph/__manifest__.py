@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Graphe des dépendances",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Voyez d'un coup d'œil ce qui dépend de quoi dans votre base, en SVG.",
     "description": """
@@ -24,7 +24,7 @@ serveur.
         "static/description/screenshot_01_graph.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "wizards/oski_module_graph_views.xml",
         "views/ir_module_module_views.xml",
     ],
