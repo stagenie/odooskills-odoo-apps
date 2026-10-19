@@ -182,11 +182,11 @@ class TestPortalUploadSettings(TransactionCase):
     def test_the_settings_fall_back_on_readable_values(self):
         parameters = self.env["ir.config_parameter"].sudo()
         self.assertIn("pdf", self.requests._oski_allowed_extensions())
-        parameters.set_param("oski_portal_upload.allowed_extensions", " PDF , .ZIP ")
+        parameters.set_str("oski_portal_upload.allowed_extensions", " PDF , .ZIP ")
         self.assertEqual(self.requests._oski_allowed_extensions(), ["pdf", "zip"])
-        parameters.set_param("oski_portal_upload.max_size_mb", "un peu")
+        parameters.set_str("oski_portal_upload.max_size_mb", "un peu")
         self.assertEqual(self.requests._oski_max_size(), 15 * 1024 * 1024)
-        parameters.set_param("oski_portal_upload.max_size_mb", "3")
+        parameters.set_str("oski_portal_upload.max_size_mb", "3")
         self.assertEqual(self.requests._oski_max_size(), 3 * 1024 * 1024)
 
 
@@ -275,7 +275,7 @@ class TestPortalUploadRoute(PortalUploadCommon, HttpCase):
         self.assertIn("n'est pas accepté", response.text)
 
     def test_a_file_beyond_the_limit_is_sent_back(self):
-        self.env["ir.config_parameter"].sudo().set_param(
+        self.env["ir.config_parameter"].sudo().set_str(
             "oski_portal_upload.max_size_mb", "1")
         document_request = self._request()
         self.authenticate("oski_portal_client", "oski_portal_client")

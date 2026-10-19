@@ -140,17 +140,15 @@ class OskiPortalDocumentRequest(models.Model):
 
     @api.model
     def _oski_max_size(self):
-        raw = self.env["ir.config_parameter"].sudo().get_param(
+        # Odoo 20 : `get_int` rend la valeur par défaut pour une saisie qui
+        # n'est pas un entier (« un peu »), sans lever.
+        megabytes = self.env["ir.config_parameter"].sudo().get_int(
             "oski_portal_upload.max_size_mb", DEFAULT_MAX_SIZE_MB)
-        try:
-            megabytes = int(raw)
-        except (TypeError, ValueError):
-            megabytes = DEFAULT_MAX_SIZE_MB
         return max(megabytes, 1) * 1024 * 1024
 
     @api.model
     def _oski_allowed_extensions(self):
-        raw = self.env["ir.config_parameter"].sudo().get_param(
+        raw = self.env["ir.config_parameter"].sudo().get_str(
             "oski_portal_upload.allowed_extensions", DEFAULT_EXTENSIONS)
         return [part.strip().lower().lstrip(".")
                 for part in (raw or "").split(",") if part.strip()]

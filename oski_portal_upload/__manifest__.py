@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Dépôt de documents au portail",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Website/Portal",
     "summary": "Demandez un document au client : il le dépose depuis sa page portail, devis, facture ou tâche.",
     "description": """
@@ -35,8 +35,7 @@ page avec la raison, jamais sur une page d'erreur.
         "static/description/screenshot_02_requests.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
-        "security/oski_portal_upload_rules.xml",
+        "security/ir.access.csv",
         "views/oski_portal_document_request_views.xml",
         "views/portal_templates.xml",
     ],
