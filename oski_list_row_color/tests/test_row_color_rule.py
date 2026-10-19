@@ -1,3 +1,4 @@
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -32,3 +33,15 @@ class TestRowColorRule(TransactionCase):
         view = rule.view_id
         rule.unlink()
         self.assertFalse(view.exists(), "La vue générée doit être supprimée avec la règle.")
+
+    def test_unknown_field_in_condition_is_refused(self):
+        """Une condition qui cite un champ absent casserait la liste : refusée."""
+        with self.assertRaises(ValidationError):
+            self._make_rule(expression="champ_qui_n_existe_pas == 1")
+
+    def test_archiving_the_rule_archives_its_view(self):
+        rule = self._make_rule()
+        rule.active = False
+        self.assertFalse(rule.view_id.active, "Règle archivée : la couleur ne doit plus s'appliquer.")
+        rule.active = True
+        self.assertTrue(rule.view_id.active)

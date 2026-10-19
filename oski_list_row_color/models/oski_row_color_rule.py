@@ -60,10 +60,10 @@ class OskiRowColorRule(models.Model):
         for rule in self:
             base_view = rule._get_base_list_view()
             if not base_view:
-                raise UserError(
-                    _("Aucune vue liste principale trouvée pour le modèle « %s ».")
-                    % (rule.model_name or "")
-                )
+                raise UserError(_(
+                    "Aucune vue liste principale trouvée pour le modèle « %s ».",
+                    rule.model_name or "",
+                ))
             vals = {
                 "name": "oski.row.color.%s.%s" % (rule.model_name, rule.id),
                 "model": rule.model_name,
