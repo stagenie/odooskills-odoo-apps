@@ -105,7 +105,8 @@ class TestTimesheetReminder(TransactionCase):
         calendar = self.env["resource.calendar"].create({
             "name": "Mi-temps", "hours_per_day": 3.5,
             "attendance_ids": [(5, 0, 0)] + [
-                (0, 0, {"name": "Jour %s" % index, "dayofweek": str(index),
+                # Odoo 20 : resource.calendar.attendance n'a plus de `name`.
+                (0, 0, {"dayofweek": str(index),
                         "hour_from": 9.0, "hour_to": 12.5})
                 for index in range(5)],
         })

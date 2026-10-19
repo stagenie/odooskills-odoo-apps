@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+rule_oski_timesheet_gap_own,Retards de saisie : les siens,oski.timesheet.gap,base.group_user,r,"[('user_id', '=', user.id)]"
+rule_oski_timesheet_gap_approver,Retards de saisie : tous (valideur),oski.timesheet.gap,hr_timesheet.group_hr_timesheet_approver,crud,
+rule_oski_timesheet_gap_company,Retards de saisie : société courante,oski.timesheet.gap,,crud,"[('company_id', 'in', company_ids)]"

@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Rappel de saisie des temps",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Services/Timesheets",
     "summary": "Le tableau des retards de saisie, semaine par semaine, et le rappel qui va avec.",
     "description": """
@@ -33,8 +33,7 @@ pas encore.
         "static/description/screenshot_02_settings.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
-        "security/oski_timesheet_gap_rules.xml",
+        "security/ir.access.csv",
         "data/ir_cron.xml",
         "views/oski_timesheet_gap_views.xml",
         "views/res_config_settings_views.xml",
