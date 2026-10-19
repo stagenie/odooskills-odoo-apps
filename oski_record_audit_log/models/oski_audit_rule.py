@@ -1,4 +1,4 @@
-from odoo import api, fields, models, tools
+from odoo import api, fields, models
 
 
 class OskiAuditRule(models.Model):
@@ -29,7 +29,7 @@ class OskiAuditRule(models.Model):
     )
 
     @api.model
-    @tools.ormcache("model_name")
+    @api.ormcache("model_name")
     def _rule_for_model(self, model_name):
         """Règle applicable, en tuple immuable — jamais un recordset.
 
@@ -47,7 +47,7 @@ class OskiAuditRule(models.Model):
         )
 
     def _invalidate_rule_cache(self):
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Journal des modifications",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Qui a créé, modifié ou supprimé quoi — sur les modèles que vous désignez, sans écrire une ligne de code.",
     "description": """
@@ -25,7 +25,7 @@ le registre garde la trace des gestes humains, pas celle de la maintenance.
         "static/description/screenshot_02_regles.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_audit_rule_views.xml",
         "views/oski_audit_log_views.xml",
     ],
