@@ -10,10 +10,9 @@ class ResPartner(models.Model):
     )
 
     def _oski_check_enabled(self, kind):
-        value = self.env["ir.config_parameter"].sudo().get_param(
-            "oski_dup.check_%s" % kind, "True"
+        return self.env["ir.config_parameter"].sudo().get_bool(
+            "oski_dup.check_%s" % kind, True
         )
-        return value not in ("False", "false", "0", "", None)
 
     def _oski_find_duplicate(self, email=None, phone=None):
         """Renvoie le premier contact existant en doublon (email ou tél), ou vide."""

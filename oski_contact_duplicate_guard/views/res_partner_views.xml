@@ -8,7 +8,7 @@
             <xpath expr="//sheet" position="before">
                 <div class="alert alert-warning m-0" role="alert"
                      invisible="not oski_duplicate_id">
-                    <i class="fa fa-exclamation-triangle me-1"/>
+                    <i class="oi me-1" data-icon="warning"/>
                     Doublon possible :
                     <field name="oski_duplicate_id" readonly="1" nolabel="1"
                            class="oe_inline" options="{'no_open': False}"/>

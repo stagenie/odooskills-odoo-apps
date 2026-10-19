@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Anti-doublon Contacts",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Contacts",
     "summary": "Évitez les doublons clients : alerte dès qu'un email ou téléphone existe déjà.",
     "description": """

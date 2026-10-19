@@ -6,8 +6,8 @@ class TestDuplicateGuard(TransactionCase):
     def setUp(self):
         super().setUp()
         self.icp = self.env["ir.config_parameter"].sudo()
-        self.icp.set_param("oski_dup.check_email", "True")
-        self.icp.set_param("oski_dup.check_phone", "True")
+        self.icp.set_bool("oski_dup.check_email", True)
+        self.icp.set_bool("oski_dup.check_phone", True)
         self.existing = self.env["res.partner"].create({
             "name": "Original", "email": "dup@test.dz", "phone": "+213 5 00",
         })
@@ -32,7 +32,7 @@ class TestDuplicateGuard(TransactionCase):
         self.assertEqual(partner.oski_duplicate_id, self.existing)
 
     def test_disabled_check_skips_detection(self):
-        self.icp.set_param("oski_dup.check_email", "False")
+        self.icp.set_bool("oski_dup.check_email", False)
         new = self.env["res.partner"].create({"name": "Copie", "email": "dup@test.dz"})
         self.assertFalse(new.oski_duplicate_id)
 
@@ -57,3 +57,10 @@ class TestDuplicateGuard(TransactionCase):
         again = self.env["res.partner"].create({"name": "Copie 2", "email": "dup@test.dz"})
         self.assertIn(again.oski_duplicate_id, self.existing | new, "Détection email réactivée.")
         self.assertTrue(again.oski_duplicate_id)
+
+    def test_detection_enabled_when_parameter_unset(self):
+        """Sans paramètre (installation neuve), la détection est active."""
+        self.icp.search([("key", "like", "oski_dup.check_")]).unlink()
+        self.assertTrue(self.env["res.config.settings"].create({}).oski_dup_check_phone)
+        new = self.env["res.partner"].create({"name": "Copie", "phone": "+213 5 00"})
+        self.assertEqual(new.oski_duplicate_id, self.existing)
