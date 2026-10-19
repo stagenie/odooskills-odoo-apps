@@ -52,7 +52,16 @@ class PartnerBalanceEngine(models.AbstractModel):
         else:
             domain.append(('parent_state', '=', 'posted'))
         if options.get('partner_ids'):
-            domain.append(('partner_id', 'in', list(options['partner_ids'])))
+            # A statement speaks of a COMMERCIAL entity: an entry booked on
+            # one of its contacts (a manual entry, an imported payment) is
+            # still that entity's debt. Filtering on `partner_id` alone
+            # silently dropped those lines from the selected customer's
+            # statement. A subsidiary that is itself a company is its own
+            # commercial partner and is therefore NOT swept in.
+            commercial_ids = self.env['res.partner'].browse(
+                list(options['partner_ids'])).commercial_partner_id.ids
+            domain.append(
+                ('partner_id.commercial_partner_id', 'in', commercial_ids))
         journal_ids = list(options.get('journal_ids') or [])
         journal_filter = options.get('journal_filter', 'all')
         if journal_ids and journal_filter == 'include':
@@ -88,8 +97,9 @@ class PartnerBalanceEngine(models.AbstractModel):
     def _partner_axis(self, options, partner_ids):
         """Which partner each line's running balance accumulates on.
 
-        The identity here: a statement speaks of one partner, and its running
-        balance belongs to that partner alone.
+        By default each partner accumulates on its commercial partner: a
+        statement speaks of one commercial entity, and a contact's entries
+        belong to it (identity for companies and lone individuals).
 
         The seam exists so a consolidation module can remap a subtree of
         companies onto its root WITHOUT restating the chronological rules
@@ -101,7 +111,15 @@ class PartnerBalanceEngine(models.AbstractModel):
         a consolidated statement where one can no longer see which company
         each entry came from is unusable for the person doing the chasing.
         """
-        return {partner_id: partner_id for partner_id in partner_ids}
+        partners = self.env['res.partner'].browse(sorted(partner_ids))
+        # Contacts accumulate on their commercial partner: the invoices of a
+        # company and a payment booked on one of its employees are one debt,
+        # one running balance. A company (or a lone individual) is its own
+        # commercial partner, so the map stays the identity for them.
+        return {
+            partner.id: partner.commercial_partner_id.id or partner.id
+            for partner in partners
+        }
 
     @api.model
     def _build_rows(self, options):
