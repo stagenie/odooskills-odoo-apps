@@ -1,0 +1,126 @@
+from odoo import SUPERUSER_ID, api
+from odoo.exceptions import AccessDenied, AccessError
+from odoo.tests.common import TransactionCase
+
+PASSWORD = "Ceci-Est-Un-Mot-De-Passe-42"
+
+
+class TestLoginLog(TransactionCase):
+    """Les traces sont écrites sur une transaction propre : elles échappent au
+    retour arrière du test. Les scénarios les relisent et les effacent donc via
+    un curseur neuf."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # Le compte doit exister dans la base **validée** : la trace est écrite
+        # par un curseur neuf, qui ne verrait pas un utilisateur créé dans la
+        # transaction du test — sa clé étrangère partirait dans le vide. On
+        # emprunte donc un compte installé, et on lui pose un mot de passe le
+        # temps du test.
+        # 18.0 : _login ouvre son propre curseur ; en mode test du registre,
+        # tous les curseurs partagent celui du test (mot de passe compris).
+        cls.registry.enter_test_mode(cls.cr)
+        cls.addClassCleanup(cls.registry.leave_test_mode)
+        cls.user = cls.env.ref("base.user_admin")
+        cls.user.password = PASSWORD
+        cls.login = cls.user.login
+
+    def setUp(self):
+        super().setUp()
+        self.addCleanup(self._purge_committed_logs)
+
+    # ------------------------------------------------------------------
+    # Lecture et nettoyage hors transaction du test
+    # ------------------------------------------------------------------
+
+    def _committed_logs(self):
+        with self.env.registry.cursor() as cr:
+            env = api.Environment(cr, SUPERUSER_ID, {})
+            return env["oski.login.log"].search_read(
+                [("login", "=", self.login)],
+                ["login", "result", "ip_address", "user_id"],
+                order="id",
+            )
+
+    def _purge_committed_logs(self):
+        with self.env.registry.cursor() as cr:
+            env = api.Environment(cr, SUPERUSER_ID, {})
+            env["oski.login.log"].search([("login", "=", self.login)]).unlink()
+
+    def _try_login(self, password):
+        return self.env["res.users"]._login(
+            self.env.cr.dbname,
+            {"type": "password", "login": self.login, "password": password},
+            user_agent_env={"interactive": False},
+        )
+
+    def _try_login_denied(self, password):
+        # 18.0 : en mode test, la trace vit dans la transaction du test ; or
+        # assertRaises d'Odoo revient au point de sauvegarde et l'effacerait.
+        try:
+            self._try_login(password)
+        except AccessDenied:
+            return
+        self.fail("La connexion aurait dû être refusée.")
+
+    # ------------------------------------------------------------------
+    # Scénarios
+    # ------------------------------------------------------------------
+
+    def test_successful_login_is_recorded(self):
+        auth_info = self._try_login(PASSWORD)
+        self.assertEqual(auth_info["uid"], self.user.id)
+        logs = self._committed_logs()
+        self.assertEqual(len(logs), 1)
+        self.assertEqual(logs[0]["result"], "success")
+        self.assertEqual(logs[0]["user_id"][0], self.user.id)
+
+    def test_failed_login_survives_the_rollback(self):
+        self._try_login_denied("mauvais-mot-de-passe")
+        logs = self._committed_logs()
+        self.assertEqual(
+            len(logs), 1,
+            "L'échec annule la transaction de connexion : sa trace doit être "
+            "écrite ailleurs, sinon elle disparaît.",
+        )
+        self.assertEqual(logs[0]["result"], "failure")
+        self.assertFalse(logs[0]["user_id"])
+
+    def test_unknown_login_is_recorded_without_user(self):
+        self.login = "inconnu.total@example.com"
+        self._try_login_denied("peu importe")
+        logs = self._committed_logs()
+        self.assertEqual(len(logs), 1)
+        self.assertEqual(logs[0]["result"], "failure")
+        self.assertFalse(logs[0]["user_id"])
+
+    def test_the_burst_is_visible_line_by_line(self):
+        for _ in range(3):
+            self._try_login_denied("toujours-faux")
+        logs = self._committed_logs()
+        self.assertEqual(len(logs), 3)
+        self.assertTrue(all(log["result"] == "failure" for log in logs))
+
+    def test_journal_failure_never_blocks_the_login(self):
+        """Si le registre tombe, la connexion doit tout de même aboutir."""
+        def explode(*args, **kwargs):
+            raise RuntimeError("registre indisponible")
+
+        self.patch(type(self.env["res.users"]), "_oski_write_login_log", explode)
+        # La panne est attendue : elle doit partir dans le journal du serveur
+        # (vérifié ici), sans être comptée comme une erreur du test.
+        with self.assertLogs(
+            "odoo.addons.oski_user_login_log.models.res_users", level="ERROR",
+        ) as captured:
+            auth_info = self._try_login(PASSWORD)
+        self.assertEqual(auth_info["uid"], self.user.id)
+        self.assertIn("écriture impossible", captured.output[0])
+
+    def test_the_journal_is_reserved_to_administrators(self):
+        simple = self.env["res.users"].create({
+            "name": "Simple", "login": "simple.journal@example.com",
+            "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+        })
+        with self.assertRaises(AccessError):
+            self.env["oski.login.log"].with_user(simple).search([])
