@@ -30,10 +30,13 @@ class TestPdfWatermark(TransactionCase):
             "report_type": "qweb-html",
             "report_name": "oski_pdf_watermark.test_report",
         })
+        # Odoo 20 : ``is_company`` est calculé (entité commerciale + TVA) et
+        # n'est plus écrit à la création ; les conditions d'essai portent donc
+        # sur ``ref``, que rien ne recalcule.
         cls.company = cls.env["res.partner"].create({
-            "name": "Société Essai", "is_company": True})
+            "name": "Société Essai", "ref": "SOC"})
         cls.person = cls.env["res.partner"].create({
-            "name": "Personne Essai", "is_company": False})
+            "name": "Personne Essai", "ref": "PER"})
 
     def _rule(self, **values):
         defaults = {
@@ -55,15 +58,15 @@ class TestPdfWatermark(TransactionCase):
         self.assertFalse(self._watermark(self.company))
 
     def test_the_condition_selects_which_documents_are_marked(self):
-        self._rule(filter_domain="[('is_company', '=', True)]")
+        self._rule(filter_domain="[('ref', '=', 'SOC')]")
         self.assertEqual(self._watermark(self.company)["text"], "BROUILLON")
         self.assertFalse(self._watermark(self.person))
 
     def test_two_documents_calling_different_words_get_none(self):
         self._rule(sequence=1, text="SOCIÉTÉ",
-                   filter_domain="[('is_company', '=', True)]")
+                   filter_domain="[('ref', '=', 'SOC')]")
         self._rule(sequence=2, text="PERSONNE",
-                   filter_domain="[('is_company', '=', False)]")
+                   filter_domain="[('ref', '=', 'PER')]")
         both = self.company | self.person
         self.assertEqual(self._watermark(self.company)["text"], "SOCIÉTÉ")
         self.assertEqual(self._watermark(self.person)["text"], "PERSONNE")
@@ -73,7 +76,7 @@ class TestPdfWatermark(TransactionCase):
             "sans quoi l'un marquerait les pages de l'autre")
 
     def test_one_bare_document_disarms_the_whole_print(self):
-        self._rule(filter_domain="[('is_company', '=', True)]")
+        self._rule(filter_domain="[('ref', '=', 'SOC')]")
         self.assertFalse(self._watermark(self.company | self.person))
 
     def test_the_first_rule_in_sequence_wins(self):
@@ -98,7 +101,7 @@ class TestPdfWatermark(TransactionCase):
     def test_a_report_without_records_only_takes_an_unconditional_rule(self):
         conditional = self._rule(
             sequence=1, text="CONDITIONNEL",
-            filter_domain="[('is_company', '=', True)]")
+            filter_domain="[('ref', '=', 'SOC')]")
         self.assertFalse(self._watermark(self.env["res.partner"]))
         conditional.filter_domain = "[]"
         self.assertEqual(

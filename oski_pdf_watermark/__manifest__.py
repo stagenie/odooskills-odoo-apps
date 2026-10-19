@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Filigrane sur les rapports",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "BROUILLON, COPIE, ANNULÉ : un filigrane conditionnel sur n'importe quel rapport QWeb.",
     "description": """
@@ -32,7 +32,7 @@ fichier produit, et marquerait les autres documents à tort.
         "static/description/screenshot_02_rules.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/report_watermark_templates.xml",
         "views/oski_report_watermark_views.xml",
     ],
