@@ -13,12 +13,12 @@ class TestOskiLowStock(TransactionCase):
         # Emplacement de stock interne (WH/Stock).
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
-    def _make_product(self, name, threshold, qty):
+    def _make_product(self, name, threshold, qty, storable=True):
         """Crée un produit stockable avec une quantité en stock donnée."""
         template = self.ProductTemplate.create({
             "name": name,
             "type": "consu",
-            "is_storable": True,
+            "is_storable": storable,
             "oski_alert_threshold": threshold,
         })
         if qty:
@@ -39,6 +39,15 @@ class TestOskiLowStock(TransactionCase):
             disabled.oski_low_stock,
             "Un seuil à 0 désactive l'alerte même à quantité nulle",
         )
+
+    def test_untracked_product_is_never_low(self):
+        """Un consommable non suivi en stock est toujours à 0 : il ne doit
+        pas être en alerte permanente, ni ressortir au filtre ou au cron."""
+        untracked = self._make_product(
+            "Non suivi", threshold=10.0, qty=0.0, storable=False)
+        self.assertFalse(untracked.oski_low_stock)
+        found = self.ProductTemplate.search([("oski_low_stock", "=", True)])
+        self.assertNotIn(untracked, found)
 
     def test_low_stock_above_threshold(self):
         """Quantité au-dessus du seuil => pas d'alerte."""
