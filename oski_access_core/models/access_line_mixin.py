@@ -27,13 +27,13 @@ class OskiAccessLineMixin(models.AbstractModel):
 
     def _resolve_levels(self, user, dimension_field):
         """Agrège les lignes personnelles (user_id) et de groupe (group_id dans
-        les groupes de `user`). Renvoie (read, full) recordsets de la dimension :
+        les groupes de `user`, groupes impliqués compris, comme la restriction). Renvoie (read, full) recordsets de la dimension :
         read = read ∪ full ; full = dimensions ayant au moins une ligne 'full'.
         Le niveau maximum gagne. À appeler sur le modèle concret héritant du mixin."""
         lines = self.search([
             "|",
             ("user_id", "=", user.id),
-            ("group_id", "in", user.group_ids.ids),
+            ("group_id", "in", user.all_group_ids.ids),
         ])
         full = lines.filtered(lambda l: l.level == "full").mapped(dimension_field)
         read = lines.mapped(dimension_field)
