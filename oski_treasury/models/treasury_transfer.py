@@ -170,6 +170,29 @@ class TreasuryTransfer(models.Model):
             return self.cash_to_id
         return self.safe_to_id
 
+    def _check_transfer_legs(self):
+        """Source and destination must be set for the transfer type and
+        hold the same currency: the same `amount` is booked on both legs,
+        a cross-currency transfer would corrupt one of the two balances."""
+        self.ensure_one()
+        source = self._get_source_entity()
+        dest = self._get_dest_entity()
+        if not source or not dest:
+            raise UserError(
+                _("Transfer %s: set both the source and the destination.",
+                  self.name)
+            )
+        if source.currency_id != dest.currency_id:
+            raise UserError(
+                _("Transfer %(name)s: %(src)s (%(src_cur)s) and %(dst)s "
+                  "(%(dst_cur)s) do not use the same currency.",
+                  name=self.name, src=source.display_name,
+                  src_cur=source.currency_id.name, dst=dest.display_name,
+                  dst_cur=dest.currency_id.name)
+            )
+        if self.currency_id != source.currency_id:
+            self.currency_id = source.currency_id
+
     def _check_balance_before_transfer(self):
         """Checks the source balance before the transfer"""
         self.ensure_one()
@@ -289,6 +312,7 @@ class TreasuryTransfer(models.Model):
         for tr in self:
             if tr.state != 'draft':
                 raise UserError(_("Only draft transfers can be confirmed."))
+            tr._check_transfer_legs()
             tr._check_balance_before_transfer()
             tr._create_cash_operations()
             tr._create_safe_operations()

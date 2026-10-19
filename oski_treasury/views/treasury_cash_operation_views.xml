@@ -24,13 +24,13 @@
                     <group>
                         <group string="Operation">
                             <field name="name"/>
-                            <field name="cash_id"/>
-                            <field name="operation_type"/>
-                            <field name="category_id"
+                            <field name="cash_id" readonly="state != 'draft'"/>
+                            <field name="operation_type" readonly="state != 'draft'"/>
+                            <field name="category_id" readonly="state != 'draft'"
                                 domain="[('operation_type', 'in', [operation_type, 'both'])]"/>
-                            <field name="amount"/>
+                            <field name="amount" readonly="state != 'draft'"/>
                             <field name="currency_id" invisible="True"/>
-                            <field name="date"/>
+                            <field name="date" readonly="state != 'draft'"/>
                         </group>
                         <group string="Details">
                             <field name="partner_id"/>
