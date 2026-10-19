@@ -28,12 +28,17 @@ class ProductTemplate(models.Model):
         "est strictement inférieure à ce seuil.",
     )
 
-    @api.depends("oski_alert_threshold", "qty_available")
+    @api.depends("oski_alert_threshold", "qty_available", "is_storable")
     def _compute_oski_low_stock(self):
+        # Seuls les produits suivis en stock ont une quantité disponible qui
+        # veut dire quelque chose : un consommable non suivi est toujours à 0
+        # et serait en alerte permanente.
         for product in self:
             threshold = product.oski_alert_threshold
             product.oski_low_stock = bool(
-                threshold > 0 and product.qty_available < threshold
+                product.is_storable
+                and threshold > 0
+                and product.qty_available < threshold
             )
 
     def _search_oski_low_stock(self, operator, value):
@@ -48,7 +53,10 @@ class ProductTemplate(models.Model):
         # Normalise la requête en "produits réellement en stock bas".
         looking_for_low = (operator == "=") == bool(value)
 
-        candidates = self.search([("oski_alert_threshold", ">", 0)])
+        candidates = self.search([
+            ("oski_alert_threshold", ">", 0),
+            ("is_storable", "=", True),
+        ])
         low_ids = candidates.filtered(
             lambda p: p.qty_available < p.oski_alert_threshold
         ).ids
