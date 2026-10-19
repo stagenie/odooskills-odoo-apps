@@ -14,6 +14,10 @@ class OskiAttachmentZip(http.Controller):
     def oski_attachment_zip(self, model=None, ids="", **kwargs):
         if not model or model not in request.env:
             raise NotFound()
+        # Un modèle abstrait ou un assistant n'a pas de fiche : ``exists()``
+        # y échouerait en erreur serveur faute de table.
+        if request.env[model]._abstract or request.env[model]._transient:
+            raise NotFound()
         try:
             record_ids = [int(value) for value in (ids or "").split(",") if value]
         except ValueError:
