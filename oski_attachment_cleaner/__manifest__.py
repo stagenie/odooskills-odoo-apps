@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Nettoyage des pièces jointes",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Repérez les pièces jointes orphelines et les copies redondantes, mesurez le poids, purgez sous contrôle.",
     "description": """
@@ -31,7 +31,7 @@ tout ce qui est plus récent que l'âge minimum retenu.
         "static/description/screenshot_02_purges.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_attachment_purge_views.xml",
         "wizards/oski_attachment_cleaner_views.xml",
     ],

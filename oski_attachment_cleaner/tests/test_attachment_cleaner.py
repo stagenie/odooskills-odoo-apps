@@ -1,12 +1,11 @@
-import base64
 from datetime import timedelta
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
 from odoo.tests.common import TransactionCase, tagged
 
-CONTENT = base64.b64encode(b"contenu de recette")
-OTHER = base64.b64encode(b"un autre contenu")
+CONTENT = b"contenu de recette"
+OTHER = b"un autre contenu"
 
 
 @tagged("post_install", "-at_install")
@@ -21,7 +20,7 @@ class TestAttachmentCleaner(TransactionCase):
     def _attachment(self, age_days=90, **vals):
         values = {
             "name": vals.pop("name", "piece.txt"),
-            "datas": vals.pop("datas", CONTENT),
+            "raw": vals.pop("raw", CONTENT),
         }
         values.update(vals)
         attachment = self.Attachment.create(values)
@@ -74,7 +73,7 @@ class TestAttachmentCleaner(TransactionCase):
 
     def test_a_served_file_is_never_touched(self):
         attachment = self._attachment(
-            name="bundle.js", datas=False, url="/web/assets/1/bundle.js",
+            name="bundle.js", raw=False, url="/web/assets/1/bundle.js",
             res_model="res.partner", res_id=0)
         self.assertNotIn(attachment, self.Attachment._oski_find_orphans(30))
 
@@ -121,7 +120,7 @@ class TestAttachmentCleaner(TransactionCase):
     def test_two_different_files_are_not_redundant(self):
         first = self._attachment(res_model="res.partner", res_id=self.partner.id)
         second = self._attachment(
-            res_model="res.partner", res_id=self.partner.id, datas=OTHER)
+            res_model="res.partner", res_id=self.partner.id, raw=OTHER)
         duplicates = self.Attachment._oski_find_duplicates(30)
         self.assertNotIn(first, duplicates)
         self.assertNotIn(second, duplicates)
@@ -196,7 +195,7 @@ class TestAttachmentCleaner(TransactionCase):
     def test_a_live_attachment_survives_a_purge(self):
         kept = self._attachment(res_model="res.partner", res_id=self.partner.id)
         doomed = self.env["res.partner"].create({"name": "Client supprimé"})
-        orphan = self._attachment(res_model="res.partner", res_id=doomed.id, datas=OTHER)
+        orphan = self._attachment(res_model="res.partner", res_id=doomed.id, raw=OTHER)
         self._delete_in_db(doomed)
         cleaner = self._cleaner()
         cleaner.action_scan()
