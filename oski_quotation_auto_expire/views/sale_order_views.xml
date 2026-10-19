@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_oski_expire" model="ir.ui.view">
+        <field name="name">sale.order.form.oski.expire</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='validity_date']" position="after">
+                <field name="oski_expired_on" invisible="not oski_expired_on"/>
+                <field name="oski_reminder_sent_on"
+                       invisible="not oski_reminder_sent_on"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sales_order_filter_oski_expire" model="ir.ui.view">
+        <field name="name">sale.order.search.oski.expire</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_quotation']" position="after">
+                <separator/>
+                <filter name="oski_expired" string="Périmés"
+                        domain="[('oski_expired_on', '!=', False)]"/>
+                <filter name="oski_expiring" string="Échéance proche"
+                        domain="[('state', 'in', ('draft', 'sent')),
+                                 ('validity_date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                                 ('validity_date', '&lt;=', (context_today() + relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
