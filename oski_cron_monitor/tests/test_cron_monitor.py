@@ -90,8 +90,10 @@ class TestCronMonitor(TransactionCase):
         def boom(record, *args, **kwargs):
             raise RuntimeError("registre indisponible")
 
-        with patch.object(type(self.env["ir.cron"]), "_oski_log_run", boom):
+        with patch.object(type(self.env["ir.cron"]), "_oski_log_run", boom), \
+                self.assertLogs("odoo.addons.oski_cron_monitor.models.ir_cron", "ERROR") as logs:
             self._call(self.cron)
+        self.assertIn("registre indisponible", "\n".join(logs.output))
         self.assertFalse(self.Run.search([("cron_id", "=", self.cron.id)]))
 
     def test_error_is_truncated(self):
