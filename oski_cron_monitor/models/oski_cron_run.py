@@ -36,12 +36,9 @@ class OskiCronRun(models.Model):
         lignes par an : sans purge, le module deviendrait le problème qu'il
         cherche à révéler.
         """
-        days = self.env["ir.config_parameter"].sudo().get_param(
+        # get_int rend le défaut quand le paramètre manque ou n'est pas un entier.
+        days = self.env["ir.config_parameter"].sudo().get_int(
             "oski_cron_monitor.retention_days", DEFAULT_RETENTION_DAYS)
-        try:
-            days = int(days)
-        except (TypeError, ValueError):
-            days = DEFAULT_RETENTION_DAYS
         if days <= 0:
             return
         limit_date = fields.Datetime.now() - timedelta(days=days)

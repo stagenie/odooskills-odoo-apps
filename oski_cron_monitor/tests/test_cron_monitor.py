@@ -141,7 +141,7 @@ class TestCronMonitor(TransactionCase):
 
     def test_gc_honours_the_parameter(self):
         now = fields.Datetime.now()
-        self.env["ir.config_parameter"].sudo().set_param("oski_cron_monitor.retention_days", "1")
+        self.env["ir.config_parameter"].sudo().set_int("oski_cron_monitor.retention_days", 1)
         run = self.Run.create({"cron_name": "a", "started_at": now - timedelta(days=3),
                                "state": "success"})
         self.Run._gc_oski_cron_runs()
@@ -149,11 +149,24 @@ class TestCronMonitor(TransactionCase):
 
     def test_gc_disabled_keeps_everything(self):
         now = fields.Datetime.now()
-        self.env["ir.config_parameter"].sudo().set_param("oski_cron_monitor.retention_days", "0")
+        self.env["ir.config_parameter"].sudo().set_int("oski_cron_monitor.retention_days", 0)
         run = self.Run.create({"cron_name": "a", "started_at": now - timedelta(days=900),
                                "state": "success"})
         self.Run._gc_oski_cron_runs()
         self.assertTrue(run.exists())
+
+    def test_gc_falls_back_on_an_unreadable_parameter(self):
+        """Une valeur saisie à la main et illisible ne doit ni planter la purge
+        ni la désactiver : la rétention par défaut s'applique."""
+        now = fields.Datetime.now()
+        self.env["ir.config_parameter"].sudo().set_str("oski_cron_monitor.retention_days", "trente")
+        old = self.Run.create({"cron_name": "a", "started_at": now - timedelta(days=40),
+                               "state": "success"})
+        recent = self.Run.create({"cron_name": "a", "started_at": now - timedelta(days=2),
+                                  "state": "success"})
+        self.Run._gc_oski_cron_runs()
+        self.assertFalse(old.exists())
+        self.assertTrue(recent.exists())
 
     def test_journal_is_closed_to_ordinary_users(self):
         """``TransactionCase.env`` est superutilisateur : sans ``with_user``,

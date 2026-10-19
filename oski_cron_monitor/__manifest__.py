@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Moniteur des tâches planifiées",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Technical",
     "summary": "Chaque exécution d'une tâche planifiée : durée, réussite, erreur, et l'historique qui va avec.",
     "description": """
@@ -28,7 +28,7 @@ garder.
         "static/description/screenshot_02_cron_tab.png",
     ],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/oski_cron_run_views.xml",
         "views/ir_cron_views.xml",
     ],
