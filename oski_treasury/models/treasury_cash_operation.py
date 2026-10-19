@@ -120,6 +120,31 @@ class TreasuryCashOperation(models.Model):
                 ) or _('New')
         return super().create(vals_list)
 
+    # Fields that define the money movement: frozen once the operation has
+    # left the draft state (its balance, closing totals and GL entry were
+    # computed from them; editing a posted line would silently desync them,
+    # or rewrite the totals of an already validated closing).
+    _LOCKED_FIELDS_WHEN_POSTED = (
+        'cash_id', 'operation_type', 'amount', 'date', 'category_id',
+    )
+
+    def write(self, vals):
+        locked = set(self._LOCKED_FIELDS_WHEN_POSTED) & set(vals)
+        if locked and not self.env.su:
+            for op in self:
+                if op.state == 'draft':
+                    continue
+                if any(op[f] != op._fields[f].convert_to_record(
+                        op._fields[f].convert_to_cache(vals[f], op), op)
+                       for f in locked):
+                    raise UserError(
+                        _("Operation %s is no longer in draft: its cash "
+                          "register, type, amount, date and category can no "
+                          "longer be modified. Cancel it and reset it to "
+                          "draft first.", op.name)
+                    )
+        return super().write(vals)
+
     def unlink(self):
         for op in self:
             if op.state == 'posted':
@@ -194,13 +219,18 @@ class TreasuryCashOperation(models.Model):
             return category.debit_account_id, category.credit_account_id
 
         params = self.env['ir.config_parameter'].sudo()
+        company = self.cash_id.company_id
 
         def _acc(key):
             val = params.get_param(key)
             if not val:
                 return Account
-            acc = Account.browse(int(val))
-            return acc if acc.exists() else Account
+            acc = Account.browse(int(val)).exists()
+            # Global setting: ignore an account not shared with the
+            # register's company (multi-company).
+            if acc and company not in acc.company_ids:
+                return Account
+            return acc
 
         cash_account = _acc('oski_treasury.default_cash_account_id')
         if self.transfer_id:
@@ -222,7 +252,11 @@ class TreasuryCashOperation(models.Model):
         params = self.env['ir.config_parameter'].sudo()
         journal_id = params.get_param('oski_treasury.journal_id')
         if journal_id:
-            return self.env['account.journal'].browse(int(journal_id))
+            journal = self.env['account.journal'].browse(int(journal_id)).exists()
+            # The setting is global (ir.config_parameter): a journal of
+            # another company cannot carry this register's entry.
+            if journal and journal.company_id == self.cash_id.company_id:
+                return journal
         return self.cash_id.journal_id
 
     def _create_account_move(self):
@@ -262,25 +296,37 @@ class TreasuryCashOperation(models.Model):
             return
 
         label = self.description or self.category_id.name or self.name
+        # debit/credit are in company currency; a register held in another
+        # currency must be converted (and keep its own amount_currency).
+        move_date = self.date.date() if self.date else fields.Date.today()
+        company = journal.company_id or self.company_id
+        currency = self.currency_id or company.currency_id
+        balance = currency._convert(
+            self.amount, company.currency_id, company, move_date,
+        )
         move = self.env['account.move'].create({
             'move_type': 'entry',
             'journal_id': journal.id,
-            'date': self.date.date() if self.date else fields.Date.today(),
+            'date': move_date,
             'ref': self.name,
             'line_ids': [
                 (0, 0, {
                     'account_id': debit_account.id,
                     'partner_id': self.partner_id.id or False,
                     'name': label,
-                    'debit': self.amount,
+                    'currency_id': currency.id,
+                    'amount_currency': self.amount,
+                    'debit': balance,
                     'credit': 0.0,
                 }),
                 (0, 0, {
                     'account_id': credit_account.id,
                     'partner_id': self.partner_id.id or False,
                     'name': label,
+                    'currency_id': currency.id,
+                    'amount_currency': -self.amount,
                     'debit': 0.0,
-                    'credit': self.amount,
+                    'credit': balance,
                 }),
             ],
         })

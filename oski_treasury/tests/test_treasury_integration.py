@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta
 
+from psycopg2 import IntegrityError
+
 from odoo import fields
+from odoo.tools import mute_logger
 from odoo.tests import TransactionCase, tagged
 from odoo.exceptions import ValidationError, UserError
 
@@ -51,7 +54,8 @@ class TestTreasuryIntegration(TransactionCase):
             'name': 'Cash A', 'code': 'DUP1',
             'journal_id': self.journal_cash.id,
         })
-        with self.assertRaises(Exception):
+        # The violation is expected: mute the sql_db ERROR line it logs.
+        with self.assertRaises(IntegrityError), mute_logger('odoo.sql_db'):
             self.env['oski.treasury.cash'].create({
                 'name': 'Cash B', 'code': 'DUP1',
                 'journal_id': self.journal_cash2.id,

@@ -46,12 +46,49 @@ class AccountPayment(models.Model):
         if not self.env['oski.treasury.cash.operation'].has_access('read'):
             return res
         for payment in self:
-            if payment.treasury_operation_id:
-                continue
             if payment.journal_id.type != 'cash':
+                continue
+            op = payment.treasury_operation_id
+            if op:
+                # Payment re-posted after a reset to draft / cancel: the
+                # mirror operation was put back to draft (or cancelled) and
+                # must follow again, with the possibly edited amount/date,
+                # otherwise the register silently misses this payment.
+                if op.state in ('draft', 'cancel'):
+                    payment._resync_treasury_cash_operation()
                 continue
             payment._create_treasury_cash_operation()
         return res
+
+    def _get_treasury_operation_amount(self, cash):
+        """Payment amount expressed in the cash register's currency."""
+        self.ensure_one()
+        currency = self.currency_id or self.company_id.currency_id
+        if not cash.currency_id or currency == cash.currency_id:
+            return self.amount
+        return currency._convert(
+            self.amount, cash.currency_id, self.company_id,
+            self.date or fields.Date.context_today(self),
+        )
+
+    def _resync_treasury_cash_operation(self):
+        """Re-posts the existing mirror operation of a re-posted payment."""
+        self.ensure_one()
+        op = self.treasury_operation_id
+        operation_type, _category = self._get_cash_operation_type_and_category()
+        if op.state != 'draft':
+            op.write({'state': 'draft'})
+        vals = {
+            'operation_type': operation_type,
+            'amount': self._get_treasury_operation_amount(op.cash_id),
+            'date': fields.Datetime.to_datetime(self.date) if self.date else fields.Datetime.now(),
+            'partner_id': self.partner_id.id,
+            'move_id': False,
+        }
+        if op.closing_id and op.closing_id.state not in ('draft', 'confirmed'):
+            vals['closing_id'] = False
+        op.write(vals)
+        op.action_post()
 
     def _create_treasury_cash_operation(self):
         """Creates a cash operation from the payment."""
@@ -86,7 +123,7 @@ class AccountPayment(models.Model):
             'cash_id': cash.id,
             'operation_type': operation_type,
             'category_id': category.id,
-            'amount': self.amount,
+            'amount': self._get_treasury_operation_amount(cash),
             'date': fields.Datetime.to_datetime(self.date) if self.date else fields.Datetime.now(),
             'partner_id': self.partner_id.id,
             'description': _("Payment %s - %s", self.name or '', self.partner_id.name or ''),
