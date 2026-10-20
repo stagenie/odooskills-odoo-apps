@@ -1,6 +1,6 @@
 {
     "name": "Abonnements — Oski",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales/Subscriptions",
     "summary": "Gérez vos abonnements et facturez automatiquement chaque client au bon rythme — sans Enterprise.",
     "author": "OdooSkills",
@@ -10,7 +10,7 @@
     "depends": ["sale", "account"],
     "data": [
         "security/subscription_security.xml",
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/ir_sequence_data.xml",
         "data/ir_cron_data.xml",
         "data/subscription_plan_data.xml",
