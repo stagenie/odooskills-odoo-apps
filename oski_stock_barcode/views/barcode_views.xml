@@ -12,6 +12,7 @@
               name="Code-Barres"
               web_icon="oski_stock_barcode,static/description/icon.png"
               action="action_barcode_operations"
+              groups="stock.group_stock_user"
               sequence="45"/>
 
 </odoo>

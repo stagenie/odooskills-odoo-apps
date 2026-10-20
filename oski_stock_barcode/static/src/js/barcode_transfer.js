@@ -143,10 +143,13 @@ export class BarcodeTransfer extends Component {
             );
         }
         line.done_qty = qty;
-        await rpc('/oski_stock_barcode/update_line_qty', {
+        const r = await rpc('/oski_stock_barcode/update_line_qty', {
             picking_id: this.state.pickingId,
             product_id: line.product_id, qty,
         });
+        if (r.error) {
+            this.notification.add(r.error, { type: 'danger' });
+        }
     }
 
     _lineClass(line) {
@@ -163,10 +166,20 @@ export class BarcodeTransfer extends Component {
 
     // ── Phase 3 : valider (avec backorder si partiel) ──
     async _validateTransfer() {
-        const r = await rpc('/oski_stock_barcode/validate_picking', {
-            picking_id: this.state.pickingId,
-            create_backorder: true,
-        });
+        // Double clic / double tap : une seule validation en vol.
+        if (this._validating) {
+            return;
+        }
+        this._validating = true;
+        let r;
+        try {
+            r = await rpc('/oski_stock_barcode/validate_picking', {
+                picking_id: this.state.pickingId,
+                create_backorder: true,
+            });
+        } finally {
+            this._validating = false;
+        }
         if (r.error) {
             this.notification.add(r.error, { type: 'danger' });
             return;

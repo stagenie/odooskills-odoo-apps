@@ -54,7 +54,8 @@ export class BarcodeConsult extends Component {
         this.state.lastScan = barcode;
         this.state.lastScanStatus = 'error';
         ScanFeedback.error();
-        this.notification.add(`Article/emplacement inconnu: ${barcode}`, { type: 'danger' });
+        this.notification.add(
+            locResult.message || `Article/emplacement inconnu: ${barcode}`, { type: 'danger' });
     }
 
     async _onProductSelected(product) {
