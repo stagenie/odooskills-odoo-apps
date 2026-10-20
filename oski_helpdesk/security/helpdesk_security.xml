@@ -22,5 +22,11 @@
         <field name="name">Assistance / Responsable</field>
         <field name="privilege_id" ref="privilege_helpdesk"/>
         <field name="implied_ids" eval="[(4, ref('group_helpdesk_user'))]"/>
+        <!-- Comme les applis standard (project, sales_team) : OdooBot et
+             l'administrateur sont responsables. En 20, un Many2many valide le
+             domaine du champ même en superutilisateur : sans cela, les données
+             d'un module dépendant qui lient ce groupe à un champ filtré sur les
+             groupes de l'utilisateur (mail.canned.response.group_ids) échouent. -->
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 </odoo>

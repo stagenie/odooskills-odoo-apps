@@ -5,3 +5,4 @@ from . import test_ticket
 from . import test_assignment
 from . import test_alias
 from . import test_access
+from . import test_tour

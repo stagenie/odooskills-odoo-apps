@@ -43,3 +43,9 @@ class TestAccess(HelpdeskCase):
             [("id", "=", team_o.id)]))
         with self.assertRaises(AccessError):
             ticket_o.with_user(user).read(["name"])
+
+    def test_root_and_admin_are_managers(self):
+        """OdooBot et l'administrateur reçoivent le groupe Responsable à
+        l'installation (données des modules dépendants, accès à la config)."""
+        for xmlid in ("base.user_root", "base.user_admin"):
+            self.assertIn(self.g_mgr, self.env.ref(xmlid).all_group_ids, xmlid)

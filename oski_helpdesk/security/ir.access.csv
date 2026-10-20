@@ -1,0 +1,11 @@
+id,name,model_id,group_id/id,operation,domain
+access_helpdesk_tag_user,helpdesk.tag user,helpdesk.tag,oski_helpdesk.group_helpdesk_user,r,
+access_helpdesk_tag_manager,helpdesk.tag manager,helpdesk.tag,oski_helpdesk.group_helpdesk_manager,crud,
+access_helpdesk_stage_user,helpdesk.stage user,helpdesk.stage,oski_helpdesk.group_helpdesk_user,r,
+access_helpdesk_stage_manager,helpdesk.stage manager,helpdesk.stage,oski_helpdesk.group_helpdesk_manager,crud,
+access_helpdesk_team_user,helpdesk.team user,helpdesk.team,oski_helpdesk.group_helpdesk_user,r,
+access_helpdesk_team_manager,helpdesk.team manager,helpdesk.team,oski_helpdesk.group_helpdesk_manager,crud,
+access_helpdesk_ticket_user,helpdesk.ticket user,helpdesk.ticket,oski_helpdesk.group_helpdesk_user,crud,
+access_helpdesk_ticket_manager,helpdesk.ticket manager,helpdesk.ticket,oski_helpdesk.group_helpdesk_manager,crud,
+rule_helpdesk_team_company,Équipe d'assistance : sociétés autorisées,helpdesk.team,,crud,"[('company_id', 'in', company_ids + [False])]"
+rule_helpdesk_ticket_company,Ticket d'assistance : sociétés autorisées,helpdesk.ticket,,crud,"[('company_id', 'in', company_ids + [False])]"

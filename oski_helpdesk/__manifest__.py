@@ -1,6 +1,6 @@
 {
     "name": "Assistance (Helpdesk) — Oski",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Services/Helpdesk",
     "summary": "Gérez les demandes client sans en perdre une seule : tickets numérotés, alias email, assignation équilibrée, kanban par étape.",
     "author": "OdooSkills",
@@ -10,8 +10,7 @@
     "depends": ["base", "mail"],
     "data": [
         "security/helpdesk_security.xml",
-        "security/ir.model.access.csv",
-        "security/helpdesk_rules.xml",
+        "security/ir.access.csv",
         "data/helpdesk_stage_data.xml",
         "data/helpdesk_sequence.xml",
         "views/helpdesk_tag_views.xml",
@@ -21,6 +20,11 @@
         "views/helpdesk_menus.xml",
     ],
     "demo": ["demo/helpdesk_demo.xml"],
+    "assets": {
+        "web.assets_tests": [
+            "oski_helpdesk/static/tests/tours/**/*",
+        ],
+    },
     "images": ["static/description/screenshot_01_kanban-pipeline.png"],
     "installable": True,
     "application": True,
