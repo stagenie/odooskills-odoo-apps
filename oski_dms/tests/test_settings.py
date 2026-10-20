@@ -30,3 +30,15 @@ class TestSettings(DmsCommon):
             'file': base64.b64encode(small), 'file_name': 'small.bin',
         })
         self.assertTrue(doc.attachment_id)
+
+    def test_settings_display_matches_enforced_limit(self):
+        """Paramètre absent = illimité : l'écran doit afficher 0, pas 25."""
+        self.env['ir.config_parameter'].sudo().set_param('oski_dms.max_upload_mb', False)
+        settings = self.env['res.config.settings'].create({})
+        self.assertEqual(settings.dms_max_upload_mb, 0)
+        big = b'0' * (30 * 1024 * 1024)  # 30 Mo : accepté quand illimité
+        doc = self.env['oski.dms.document'].create({
+            'name': 'Gros', 'workspace_id': self.ws_root.id,
+            'file': base64.b64encode(big), 'file_name': 'gros.bin',
+        })
+        self.assertTrue(doc.attachment_id)

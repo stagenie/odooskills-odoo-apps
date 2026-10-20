@@ -8,8 +8,9 @@ from .common import DmsCommon
 class TestTag(DmsCommon):
 
     def test_create_tag(self):
-        tag = self.env['oski.dms.tag'].create({'name': 'Confidentiel'})
-        self.assertEqual(tag.name, 'Confidentiel')
+        # Nom absent des données de démo (« Confidentiel » y existe déjà).
+        tag = self.env['oski.dms.tag'].create({'name': 'Étiquette de test'})
+        self.assertEqual(tag.name, 'Étiquette de test')
 
     @mute_logger('odoo.sql_db')
     def test_name_unique(self):

@@ -86,3 +86,29 @@ class TestAttachExisting(DmsCommon):
         doc.unlink()
         # la PJ externe est préservée
         self.assertTrue(self.env['ir.attachment'].browse(att_id).exists())
+
+    def test_attachment_of_other_dms_document_is_not_owned(self):
+        """Classer la PJ d'un AUTRE document GED puis déposer un fichier ne doit
+        pas écraser la PJ de cet autre document, ni la supprimer à l'unlink."""
+        other = self.env['oski.dms.document'].create({
+            'name': 'Autre', 'workspace_id': self.ws_root.id,
+            'file': base64.b64encode(b'AUTRE'), 'file_name': 'autre.txt',
+        })
+        att = other.attachment_id
+        wizard = self.env['oski.dms.file.wizard'].create({
+            'attachment_id': att.id, 'workspace_id': self.ws_child.id,
+        })
+        wizard.action_file()
+        doc = self.env['oski.dms.document'].search(
+            [('attachment_id', '=', att.id), ('id', '!=', other.id)])
+        self.assertEqual(len(doc), 1)
+        doc.write({'file': base64.b64encode(b'NOUVEAU'), 'file_name': 'n.txt'})
+        self.assertEqual(base64.b64decode(att.datas), b'AUTRE')
+        self.assertNotEqual(doc.attachment_id, att)
+        doc2 = self.env['oski.dms.document'].create({
+            'name': 'Classé', 'workspace_id': self.ws_child.id,
+            'attachment_id': att.id,
+        })
+        doc2.unlink()
+        self.assertTrue(att.exists())
+        self.assertEqual(other.attachment_id, att)

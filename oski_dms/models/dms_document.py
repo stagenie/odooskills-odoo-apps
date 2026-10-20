@@ -71,7 +71,9 @@ class DmsDocument(models.Model):
             # par ex.). N'écraser QUE les attachments POSSÉDÉS par la GED :
             # sinon déposer un nouveau fichier muterait la PJ d'origine de
             # l'enregistrement métier source (perte de données).
-            owned = doc.attachment_id and doc.attachment_id.res_model == 'oski.dms.document'
+            # « Possédé » = rattaché à CE document : une PJ d'un AUTRE
+            # document GED (classée via le wizard) n'est pas à nous non plus.
+            owned = doc.attachment_id and doc._owns_attachment(doc.attachment_id)
             if owned:
                 doc.attachment_id.write({'datas': doc.file, 'name': fname})
             else:
@@ -186,14 +188,34 @@ class DmsDocument(models.Model):
             'target': 'current',
         }
 
+    def _owns_attachment(self, attachment):
+        """Vrai si `attachment` a été créé par la GED pour CE document."""
+        self.ensure_one()
+        attachment = attachment.sudo()
+        return (attachment.res_model == self._name
+                and attachment.res_id == self.id)
+
+    def write(self, vals):
+        res = super().write(vals)
+        if 'workspace_id' in vals:
+            # Le contrôle d'accès de `write` porte sur l'espace AVANT
+            # déplacement : sans ce second contrôle, on pourrait déposer un
+            # document dans un espace où l'on n'a pas le droit d'écrire.
+            self.check_access('write')
+        return res
+
     def unlink(self):
         # Ne supprimer que les attachments réellement POSSÉDÉS par la GED
         # (créés via l'upload — `res_model='oski.dms.document'`). Un document
         # peut pointer vers un attachment EXTERNE partagé (« classer une PJ
         # existante », res_model='res.partner' par ex.) : le détruire causerait
         # une perte de données sur l'enregistrement métier source.
-        owned = self.attachment_id.filtered(
-            lambda a: a.res_model == 'oski.dms.document')
+        # « Possédé » = res_model/res_id pointent vers CE document : la PJ d'un
+        # AUTRE document GED, classée ici via le wizard, ne l'est pas.
+        owned = self.env['ir.attachment']
+        for doc in self:
+            if doc.attachment_id and doc._owns_attachment(doc.attachment_id):
+                owned |= doc.attachment_id
         res = super().unlink()
         # `super().unlink()` supprime déjà les attachments possédés dont
         # res_model/res_id pointent vers ce document (nettoyage natif Odoo) ;
