@@ -44,24 +44,25 @@ class DmsDocument(models.Model):
     @api.model
     def _default_workspace(self):
         """Espace proposé par défaut, réglable via Configuration > Documents."""
-        param = self.env['ir.config_parameter'].sudo().get_param(
-            'oski_dms.default_workspace_id')
-        return int(param) if param else False
+        return self.env['ir.config_parameter'].sudo().get_int(
+            'oski_dms.default_workspace_id') or False
 
-    @api.depends('attachment_id.datas')
+    @api.depends('attachment_id.raw')
     def _compute_file(self):
         for doc in self:
-            doc.file = doc.attachment_id.datas if doc.attachment_id else False
+            # Odoo 20 : `ir.attachment.datas` n'existe plus ; `raw` porte un
+            # BinaryValue que le champ Binary accepte tel quel.
+            doc.file = doc.attachment_id.raw if doc.attachment_id else False
 
     def _inverse_file(self):
-        max_mb = int(self.env['ir.config_parameter'].sudo().get_param(
-            'oski_dms.max_upload_mb', 0) or 0)
+        max_mb = self.env['ir.config_parameter'].sudo().get_int(
+            'oski_dms.max_upload_mb')
         for doc in self:
             if not doc.file:
                 continue
             if max_mb:
-                # doc.file est du base64 ; taille binaire ≈ len*3/4
-                size_mb = (len(doc.file) * 3 / 4) / (1024 * 1024)
+                # doc.file est un BinaryValue : taille exacte en octets.
+                size_mb = doc.file.size / (1024 * 1024)
                 if size_mb > max_mb:
                     raise ValidationError(
                         self.env._("Fichier trop volumineux (max %s Mo).", max_mb))
@@ -75,11 +76,13 @@ class DmsDocument(models.Model):
             # document GED (classée via le wizard) n'est pas à nous non plus.
             owned = doc.attachment_id and doc._owns_attachment(doc.attachment_id)
             if owned:
-                doc.attachment_id.write({'datas': doc.file, 'name': fname})
+                doc.attachment_id.write({'raw': doc.file, 'name': fname})
             else:
+                # `raw=` et non `datas=` : en 20, `datas` est ignoré à la
+                # création (pièce jointe vide, simple avertissement).
                 doc.attachment_id = self.env['ir.attachment'].create({
                     'name': fname,
-                    'datas': doc.file,
+                    'raw': doc.file,
                     'res_model': 'oski.dms.document',
                     'res_id': doc.id,
                 })

@@ -1,0 +1,13 @@
+id,name,model_id,group_id/id,operation,domain
+rule_dms_workspace_read,Espace GED : lecture par groupe,oski.dms.workspace,oski_dms.group_dms_user,r,"['|', '|', ('read_group_ids', 'in', user.all_group_ids.ids), ('write_group_ids', 'in', user.all_group_ids.ids), ('manage_group_ids', 'in', user.all_group_ids.ids)]"
+rule_dms_workspace_manager,Espace GED : accès total responsable,oski.dms.workspace,oski_dms.group_dms_manager,crud,
+rule_dms_workspace_company,Espace GED : multi-société,oski.dms.workspace,,crud,"[('company_id', 'in', company_ids + [False])]"
+rule_dms_document_read,Document GED : lecture par espace,oski.dms.document,oski_dms.group_dms_user,r,"['|', '|', '|', ('workspace_id.read_group_ids', 'in', user.all_group_ids.ids), ('workspace_id.write_group_ids', 'in', user.all_group_ids.ids), ('workspace_id.manage_group_ids', 'in', user.all_group_ids.ids), ('owner_id', '=', user.id)]"
+rule_dms_document_write,Document GED : écriture par espace,oski.dms.document,oski_dms.group_dms_user,cu,"[('workspace_id.write_group_ids', 'in', user.all_group_ids.ids)]"
+rule_dms_document_unlink,Document GED : suppression par espace,oski.dms.document,oski_dms.group_dms_user,d,"[('workspace_id.manage_group_ids', 'in', user.all_group_ids.ids)]"
+rule_dms_document_manager,Document GED : accès total responsable,oski.dms.document,oski_dms.group_dms_manager,crud,
+rule_dms_document_company,Document GED : multi-société,oski.dms.document,,crud,"[('company_id', 'in', company_ids + [False])]"
+access_dms_tag_user,Étiquette GED : lecture,oski.dms.tag,oski_dms.group_dms_user,r,
+access_dms_tag_manager,Étiquette GED : gestion,oski.dms.tag,oski_dms.group_dms_manager,crud,
+access_dms_file_wizard_user,Assistant de classement GED,oski.dms.file.wizard,oski_dms.group_dms_user,crud,
+access_dms_version_wizard_user,Assistant de version GED,oski.dms.version.wizard,oski_dms.group_dms_user,crud,

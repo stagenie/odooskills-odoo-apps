@@ -34,7 +34,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button type="object" name="action_view_versions"
-                                class="oe_stat_button" icon="fa-history"
+                                class="oe_stat_button" icon="history"
                                 invisible="version_no == 1 and not version_ids">
                             <field name="version_no" widget="statinfo" string="Version"/>
                         </button>

@@ -1,4 +1,4 @@
-import base64
+from odoo.tools import BinaryBytes
 from .common import DmsCommon
 
 
@@ -7,11 +7,11 @@ class TestSearch(DmsCommon):
     def test_group_by_workspace(self):
         self.env['oski.dms.document'].create({
             'name': 'A', 'workspace_id': self.ws_root.id,
-            'file': base64.b64encode(b'a'), 'file_name': 'a.txt',
+            'file': BinaryBytes(b'a'), 'file_name': 'a.txt',
         })
         self.env['oski.dms.document'].create({
             'name': 'B', 'workspace_id': self.ws_child.id,
-            'file': base64.b64encode(b'b'), 'file_name': 'b.txt',
+            'file': BinaryBytes(b'b'), 'file_name': 'b.txt',
         })
         groups = self.env['oski.dms.document']._read_group(
             [], groupby=['workspace_id'], aggregates=['__count'])
@@ -31,7 +31,7 @@ class TestSearch(DmsCommon):
         # Les critères de recherche réels restent fonctionnels.
         self.env['oski.dms.document'].create({
             'name': 'Rapport', 'workspace_id': self.ws_root.id,
-            'file': base64.b64encode(b'r'), 'file_name': 'r.txt',
+            'file': BinaryBytes(b'r'), 'file_name': 'r.txt',
         })
         self.assertTrue(
             self.env['oski.dms.document'].search([('name', 'ilike', 'Rapport')]))

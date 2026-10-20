@@ -1,10 +1,10 @@
 {
     'name': 'Documents — GED',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Productivity/Documents',
     'summary': "Gestion électronique de documents : espaces, versionning, "
                "rattachement métier, droits par espace",
-    'description': "GED Odoo 19 : organisez en espaces cloisonnés vos pièces "
+    'description': "GED Odoo 20 : organisez en espaces cloisonnés vos pièces "
                    "jointes et fichiers, avec versionning, aperçu, rattachement "
                    "aux enregistrements métier et droits par espace.",
     'author': 'OdooSkills',
@@ -14,7 +14,7 @@
     'depends': ['base', 'mail', 'web'],
     'data': [
         'security/dms_security.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/dms_workspace_views.xml',
         'views/dms_tag_views.xml',
         'views/dms_document_views.xml',

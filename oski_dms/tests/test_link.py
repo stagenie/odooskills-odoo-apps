@@ -1,4 +1,4 @@
-import base64
+from odoo.tools import BinaryBytes
 from .common import DmsCommon
 
 
@@ -8,7 +8,7 @@ class TestLink(DmsCommon):
         partner = self.env['res.partner'].create({'name': 'Globex'})
         doc = self.env['oski.dms.document'].create({
             'name': 'D', 'workspace_id': self.ws_root.id,
-            'file': base64.b64encode(b'z'), 'file_name': 'd.txt',
+            'file': BinaryBytes(b'z'), 'file_name': 'd.txt',
             'res_model': 'res.partner', 'res_id': partner.id,
         })
         self.assertEqual(doc.res_name, 'Globex')
@@ -17,7 +17,7 @@ class TestLink(DmsCommon):
         partner = self.env['res.partner'].create({'name': 'Initech'})
         doc = self.env['oski.dms.document'].create({
             'name': 'D', 'workspace_id': self.ws_root.id,
-            'file': base64.b64encode(b'z'), 'file_name': 'd.txt',
+            'file': BinaryBytes(b'z'), 'file_name': 'd.txt',
             'res_model': 'res.partner', 'res_id': partner.id,
         })
         action = doc.action_open_linked_record()

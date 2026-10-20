@@ -1,4 +1,4 @@
-import base64
+from odoo.tools import BinaryBytes
 from .common import DmsCommon
 
 
@@ -8,7 +8,7 @@ class TestAttachExisting(DmsCommon):
         partner = self.env['res.partner'].create({'name': 'ACME'})
         att = self.env['ir.attachment'].create({
             'name': 'contrat.pdf',
-            'datas': base64.b64encode(b'PDFDATA'),
+            'raw': b'PDFDATA',
             'res_model': 'res.partner', 'res_id': partner.id,
         })
         wizard = self.env['oski.dms.file.wizard'].create({
@@ -26,11 +26,10 @@ class TestAttachExisting(DmsCommon):
 
     def test_attachment_count_unchanged(self):
         att = self.env['ir.attachment'].create({
-            'name': 'note.txt', 'datas': base64.b64encode(b'N'),
+            'name': 'note.txt', 'raw': b'N',
         })
-        # `datas` est un champ compute non stocké (search impossible en v19,
-        # ValueError "Cannot convert ... to SQL") : on compte le total des
-        # ir.attachment plutôt que de filtrer sur ce champ.
+        # On compte le total des ir.attachment : le contenu (`raw`) n'est pas
+        # un champ cherchable.
         before = self.env['ir.attachment'].search_count([])
         wizard = self.env['oski.dms.file.wizard'].create({
             'attachment_id': att.id, 'workspace_id': self.ws_root.id,
@@ -47,7 +46,7 @@ class TestAttachExisting(DmsCommon):
         partner = self.env['res.partner'].create({'name': 'ACME'})
         att = self.env['ir.attachment'].create({
             'name': 'contrat.pdf',
-            'datas': base64.b64encode(b'ORIGINAL'),
+            'raw': b'ORIGINAL',
             'res_model': 'res.partner', 'res_id': partner.id,
         })
         wizard = self.env['oski.dms.file.wizard'].create({
@@ -57,14 +56,14 @@ class TestAttachExisting(DmsCommon):
         wizard.action_file()
         doc = self.env['oski.dms.document'].search([('attachment_id', '=', att.id)])
 
-        doc.write({'file': base64.b64encode(b'MODIFIE'), 'file_name': 'contrat.pdf'})
+        doc.write({'file': BinaryBytes(b'MODIFIE'), 'file_name': 'contrat.pdf'})
 
         # (a) l'attachment externe d'origine n'est pas muté
-        self.assertEqual(att.datas, base64.b64encode(b'ORIGINAL'))
+        self.assertEqual(att.raw.content, b'ORIGINAL')
         # (b) le document pointe désormais vers un NOUVEL attachment possédé
         self.assertNotEqual(doc.attachment_id, att)
         self.assertEqual(doc.attachment_id.res_model, 'oski.dms.document')
-        self.assertEqual(base64.b64decode(doc.attachment_id.datas), b'MODIFIE')
+        self.assertEqual(doc.attachment_id.raw.content, b'MODIFIE')
 
     def test_unlink_keeps_external_attachment(self):
         """Supprimer un document GED classé depuis une PJ EXTERNE ne doit PAS
@@ -73,7 +72,7 @@ class TestAttachExisting(DmsCommon):
         partner = self.env['res.partner'].create({'name': 'ACME'})
         att = self.env['ir.attachment'].create({
             'name': 'contrat.pdf',
-            'datas': base64.b64encode(b'PDFDATA'),
+            'raw': b'PDFDATA',
             'res_model': 'res.partner', 'res_id': partner.id,
         })
         att_id = att.id
@@ -92,7 +91,7 @@ class TestAttachExisting(DmsCommon):
         pas écraser la PJ de cet autre document, ni la supprimer à l'unlink."""
         other = self.env['oski.dms.document'].create({
             'name': 'Autre', 'workspace_id': self.ws_root.id,
-            'file': base64.b64encode(b'AUTRE'), 'file_name': 'autre.txt',
+            'file': BinaryBytes(b'AUTRE'), 'file_name': 'autre.txt',
         })
         att = other.attachment_id
         wizard = self.env['oski.dms.file.wizard'].create({
@@ -102,8 +101,8 @@ class TestAttachExisting(DmsCommon):
         doc = self.env['oski.dms.document'].search(
             [('attachment_id', '=', att.id), ('id', '!=', other.id)])
         self.assertEqual(len(doc), 1)
-        doc.write({'file': base64.b64encode(b'NOUVEAU'), 'file_name': 'n.txt'})
-        self.assertEqual(base64.b64decode(att.datas), b'AUTRE')
+        doc.write({'file': BinaryBytes(b'NOUVEAU'), 'file_name': 'n.txt'})
+        self.assertEqual(att.raw.content, b'AUTRE')
         self.assertNotEqual(doc.attachment_id, att)
         doc2 = self.env['oski.dms.document'].create({
             'name': 'Classé', 'workspace_id': self.ws_child.id,

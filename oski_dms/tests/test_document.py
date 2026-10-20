@@ -1,4 +1,4 @@
-import base64
+from odoo.tools import BinaryBytes
 from .common import DmsCommon
 
 
@@ -8,14 +8,14 @@ class TestDocument(DmsCommon):
         return self.env['oski.dms.document'].create({
             'name': name,
             'workspace_id': self.ws_root.id,
-            'file': base64.b64encode(data),
+            'file': BinaryBytes(data),
             'file_name': name,
         })
 
     def test_create_document_builds_attachment(self):
         doc = self._make_doc()
         self.assertTrue(doc.attachment_id)
-        self.assertEqual(base64.b64decode(doc.attachment_id.datas), b'hello')
+        self.assertEqual(doc.attachment_id.raw.content, b'hello')
 
     def test_related_metadata(self):
         doc = self._make_doc(data=b'abcdef')

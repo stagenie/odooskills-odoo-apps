@@ -1,4 +1,4 @@
-import base64
+from odoo.tools import BinaryBytes
 from odoo.exceptions import AccessError
 from odoo.tests import tagged
 from .common import DmsCommon
@@ -25,7 +25,7 @@ class TestAcl(DmsCommon):
         })
         cls.doc_a = cls.env['oski.dms.document'].create({
             'name': 'Secret A', 'workspace_id': cls.ws_a.id,
-            'file': base64.b64encode(b'x'), 'file_name': 'a.txt',
+            'file': BinaryBytes(b'x'), 'file_name': 'a.txt',
         })
 
     def test_member_reads(self):
@@ -51,7 +51,7 @@ class TestAcl(DmsCommon):
         })
         doc = self.env['oski.dms.document'].create({
             'name': 'RO', 'workspace_id': ws_ro.id,
-            'file': base64.b64encode(b'y'), 'file_name': 'ro.txt',
+            'file': BinaryBytes(b'y'), 'file_name': 'ro.txt',
         })
         with self.assertRaises(AccessError):
             doc.with_user(self.user_b).write({'name': 'hack'})
@@ -85,7 +85,7 @@ class TestAcl(DmsCommon):
         })
         doc = self.env['oski.dms.document'].create({
             'name': 'W', 'workspace_id': ws_w.id,
-            'file': base64.b64encode(b'w'), 'file_name': 'w.txt',
+            'file': BinaryBytes(b'w'), 'file_name': 'w.txt',
         })
         self.assertEqual(doc.with_user(self.user_b).read(['name'])[0]['name'], 'W')
         doc.with_user(self.user_b).write({'name': 'W2'})
@@ -94,8 +94,8 @@ class TestAcl(DmsCommon):
         """La pièce jointe (et donc /web/content) suit le droit du document."""
         att = self.doc_a.attachment_id
         with self.assertRaises(AccessError):
-            att.with_user(self.user_b).read(['datas'])
-        self.assertTrue(att.with_user(self.user_a).read(['datas'])[0]['datas'])
+            att.with_user(self.user_b).read(['raw'])
+        self.assertEqual(att.with_user(self.user_a).raw.content, b'x')
 
     def test_read_group_and_count_do_not_leak(self):
         Doc = self.env['oski.dms.document'].with_user(self.user_b)
@@ -120,7 +120,7 @@ class TestMultiCompany(DmsCommon):
         })
         cls.doc_b = cls.env['oski.dms.document'].create({
             'name': 'Doc société B', 'workspace_id': cls.ws_b.id,
-            'file': base64.b64encode(b'b'), 'file_name': 'b.txt',
+            'file': BinaryBytes(b'b'), 'file_name': 'b.txt',
         })
 
     def test_other_company_hidden_even_for_manager(self):
