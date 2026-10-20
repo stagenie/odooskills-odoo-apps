@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         STOCK.PICKING — Ajouter barcode dans les vues list et form
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- Vue liste picking : ajouter colonne barcode -->
+    <record id="oski_vpicktree_barcode" model="ir.ui.view">
+        <field name="name">stock.picking.list.barcode</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="barcode" optional="show" string="Code-barres"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Le barcode picking est calculé depuis le name, pas besoin en vue form -->
+
+    <!-- ══════════════════════════════════════════════════════════════
+         STOCK.LOCATION — Ajouter barcode dans les vues list et form
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- Vue liste locations : ajouter colonne barcode -->
+    <record id="oski_view_location_tree_barcode" model="ir.ui.view">
+        <field name="name">stock.location.list.barcode</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='complete_name']" position="after">
+                <field name="barcode" optional="show" string="Code-barres"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vue form locations : ajouter barcode dans les infos -->
+    <record id="oski_view_location_form_barcode" model="ir.ui.view">
+        <field name="name">stock.location.form.barcode</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='additional_info']" position="inside">
+                <field name="barcode" string="Code-barres"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

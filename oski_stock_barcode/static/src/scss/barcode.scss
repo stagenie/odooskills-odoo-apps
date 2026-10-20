@@ -1,0 +1,437 @@
+// ══════════════════════════════════════════════════════════════
+// OdooSkills Stock Barcode V2 — Responsive Mobile-First
+// ══════════════════════════════════════════════════════════════
+
+$barcode-primary: #714B67;
+$barcode-success: #28a745;
+$barcode-warning: #ffc107;
+$barcode-danger: #dc3545;
+$barcode-card-radius: 8px;
+$touch-target-min: 48px;
+
+// ══════════════════════════════════════════════════════════════
+// PAGE D'ACCUEIL
+// ══════════════════════════════════════════════════════════════
+.o_barcode_main { padding: 16px; max-width: 960px; margin: 0 auto; }
+.o_barcode_title { font-size: 1.4rem; font-weight: 700; text-align: center; margin-bottom: 24px; color: #333; }
+
+.o_barcode_grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.o_barcode_card {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 140px; padding: 20px 16px; background: #fff; border: 1px solid #dee2e6;
+    border-radius: $barcode-card-radius; box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    cursor: pointer; transition: box-shadow 0.2s, transform 0.15s; text-align: center;
+    user-select: none; -webkit-tap-highlight-color: transparent;
+    &:active { transform: scale(0.97); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    .o_card_icon { font-size: 2rem; margin-bottom: 8px; color: $barcode-primary; }
+    .o_card_label { font-size: 1rem; font-weight: 600; color: #333; }
+    .o_card_count { font-size: 0.85rem; color: #666; margin-top: 4px; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// SCAN BANNER
+// ══════════════════════════════════════════════════════════════
+.o_scan_banner {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; border-radius: 8px; margin-bottom: 12px;
+    background: linear-gradient(135deg, #f5f0f4, #ece4ea);
+    border: 2px dashed $barcode-primary; transition: all 0.3s;
+
+    .o_scan_icon { font-size: 1.8rem; color: $barcode-primary; opacity: 0.7; }
+    .o_scan_text { flex: 1; }
+    .o_scan_waiting { color: #666; font-style: italic; }
+    .o_scan_product_name { font-weight: 600; font-size: 1rem; }
+
+    &.o_scan_success {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        border-color: $barcode-success;
+        .o_scan_icon { color: $barcode-success; }
+        animation: flash-success 0.6s ease-out;
+    }
+    &.o_scan_error {
+        background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+        border-color: $barcode-danger;
+        .o_scan_icon { color: $barcode-danger; }
+        animation: flash-error 0.6s ease-out;
+    }
+    &.o_scan_banner_doc {
+        border-style: solid; border-width: 1px;
+        background: #f8f9fa; padding: 8px 12px;
+        .o_scan_icon { font-size: 1.2rem; }
+        .o_scan_waiting { font-size: 0.85rem; }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// PICKING LIST
+// ══════════════════════════════════════════════════════════════
+.o_barcode_list_count {
+    font-size: 0.85rem; color: #666; margin-bottom: 8px; font-weight: 500;
+}
+
+.o_picking_card {
+    background: #fff; border: 1px solid #dee2e6; border-radius: $barcode-card-radius;
+    padding: 12px 14px; margin-bottom: 8px; cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: box-shadow 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    &:active { box-shadow: 0 0 0 2px rgba($barcode-primary, 0.3); }
+}
+
+.o_picking_card_header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;
+    .o_picking_name { font-weight: 700; font-size: 0.95rem; }
+}
+
+.o_picking_card_body {
+    font-size: 0.85rem; margin-bottom: 6px;
+}
+
+.o_picking_card_footer {
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.o_picking_progress_wrap {
+    display: flex; align-items: center; gap: 8px; flex: 1;
+}
+
+.o_picking_progress_bar {
+    flex: 1; height: 6px; background: #e9ecef; border-radius: 3px; overflow: hidden; max-width: 120px;
+}
+
+.o_picking_progress_fill {
+    height: 100%; background: $barcode-success; border-radius: 3px; transition: width 0.3s;
+}
+
+.o_picking_progress_text {
+    font-size: 0.8rem; font-weight: 600; color: #555; white-space: nowrap;
+}
+
+.o_picking_date { font-size: 0.8rem; }
+
+// ══════════════════════════════════════════════════════════════
+// ECRAN OPERATIONS (commun)
+// ══════════════════════════════════════════════════════════════
+.o_barcode_screen {
+    padding: 12px 16px; max-width: 960px; margin: 0 auto;
+    display: flex; flex-direction: column;
+    height: calc(100vh - 60px); // hauteur écran moins navbar Odoo
+}
+
+.o_barcode_header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
+}
+
+.o_barcode_back, .o_barcode_refresh {
+    min-width: $touch-target-min; min-height: $touch-target-min;
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: 1px solid #ccc; border-radius: 6px;
+    cursor: pointer; font-size: 1.1rem;
+    &:active { background: #f0f0f0; }
+}
+
+.o_barcode_screen_title { font-size: 1.2rem; font-weight: 700; }
+
+.o_barcode_mode_toggle {
+    display: flex; border: 1px solid #ccc; border-radius: 6px; overflow: hidden;
+    button {
+        padding: 6px 14px; border: none; background: #fff;
+        cursor: pointer; font-size: 0.85rem; min-height: $touch-target-min;
+        &.active { background: $barcode-primary; color: #fff; }
+    }
+}
+
+.o_barcode_picking_select {
+    width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px;
+    font-size: 1rem; margin-bottom: 12px; min-height: $touch-target-min;
+}
+
+.o_barcode_picking_info {
+    background: #f8f9fa; padding: 10px 12px; border-radius: 6px;
+    margin-bottom: 12px; font-size: 0.9rem;
+}
+
+// ══════════════════════════════════════════════════════════════
+// SEARCH INPUT
+// ══════════════════════════════════════════════════════════════
+.o_barcode_search_wrap { position: relative; margin-bottom: 12px; }
+
+.o_barcode_search_input {
+    width: 100%; padding: 10px 12px 10px 36px;
+    border: 2px solid $barcode-primary; border-radius: 6px;
+    font-size: 1rem; min-height: $touch-target-min; outline: none;
+    &:focus { border-color: darken($barcode-primary, 10%); box-shadow: 0 0 0 3px rgba($barcode-primary, 0.15); }
+}
+
+.o_barcode_search_icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999; }
+
+.o_barcode_search_dropdown {
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: #fff; border: 1px solid #dee2e6; border-radius: 0 0 6px 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12); z-index: 1000; max-height: 240px; overflow-y: auto;
+}
+
+.o_barcode_search_item {
+    padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0;
+    min-height: $touch-target-min; display: flex; align-items: center;
+    &:last-child { border-bottom: none; }
+    &:active { background: #f0f0f0; }
+    .o_search_product_name { font-weight: 500; }
+    .o_search_product_ref { font-size: 0.8rem; color: #999; margin-left: 8px; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// QTY STEPPER
+// ══════════════════════════════════════════════════════════════
+.o_qty_stepper {
+    display: inline-flex; align-items: center; gap: 4px;
+    .o_qty_btn {
+        min-width: $touch-target-min; min-height: $touch-target-min;
+        display: flex; align-items: center; justify-content: center;
+        border: 1px solid #ccc; border-radius: 6px; background: #fff;
+        font-size: 1.2rem; font-weight: 700; cursor: pointer; user-select: none;
+        &:active { background: #e9ecef; }
+        &.o_qty_minus { color: $barcode-danger; }
+        &.o_qty_plus { color: $barcode-success; }
+    }
+    .o_qty_input {
+        width: 60px; text-align: center; font-size: 1.1rem; font-weight: 600;
+        border: 1px solid #ccc; border-radius: 6px; padding: 6px; min-height: $touch-target-min;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// TABLEAU DESKTOP
+// ══════════════════════════════════════════════════════════════
+.o_barcode_table {
+    width: 100%; border-collapse: collapse; margin-bottom: 12px;
+    th { background: #f8f9fa; padding: 8px 10px; font-size: 0.85rem; font-weight: 600; border-bottom: 2px solid #dee2e6; text-align: left; }
+    td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; font-size: 0.9rem; }
+    tr.o_line_complete { background: #d4edda; }
+    tr.o_line_over { background: #fff3cd; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// CARDS MOBILE
+// ══════════════════════════════════════════════════════════════
+.o_barcode_cards { display: none; }
+
+.o_barcode_line_card {
+    background: #fff; border: 1px solid #dee2e6; border-radius: $barcode-card-radius;
+    padding: 12px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    &.o_line_complete { border-left: 4px solid $barcode-success; background: #f0faf0; }
+    &.o_line_over { border-left: 4px solid $barcode-warning; background: #fffdf0; }
+    .o_card_product_name { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .o_card_progress { display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; color: #666; }
+    .o_card_stepper_row { margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// BOUTONS ACTION
+// ══════════════════════════════════════════════════════════════
+.o_barcode_actions {
+    display: flex; gap: 8px; padding-top: 12px; flex-wrap: wrap;
+    flex-shrink: 0; // ne jamais rétrécir — toujours visible
+    .o_barcode_btn {
+        flex: 1; min-height: $touch-target-min; padding: 10px 16px; border: none;
+        border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; text-align: center;
+        &.o_btn_primary {
+            background: $barcode-primary; color: #fff;
+            &:active { background: darken($barcode-primary, 10%); }
+            &:disabled { opacity: 0.5; cursor: not-allowed; }
+        }
+        &.o_btn_secondary { background: #e9ecef; color: #333; &:active { background: #dee2e6; } }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// EMPTY STATE
+// ══════════════════════════════════════════════════════════════
+.o_barcode_empty {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 40px 20px; color: #999;
+    i { font-size: 2.5rem; margin-bottom: 12px; }
+    span { font-size: 1rem; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// LOCAL FILTER INPUT (distinct from ProductSearch to avoid OWL re-render crash)
+// ══════════════════════════════════════════════════════════════
+.o_barcode_filter_wrap {
+    position: relative;
+}
+
+.o_barcode_filter_input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    min-height: 40px;
+    outline: none;
+    &:focus { border-color: $barcode-primary; box-shadow: 0 0 0 2px rgba($barcode-primary, 0.1); }
+}
+
+// ══════════════════════════════════════════════════════════════
+// SCROLLABLE LISTS
+// ══════════════════════════════════════════════════════════════
+.o_scrollable {
+    flex: 1 1 0;
+    min-height: 0; // permet le shrink dans un flex container
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.o_barcode_picking_list {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.o_barcode_cards {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+// ══════════════════════════════════════════════════════════════
+// ANIMATIONS
+// ══════════════════════════════════════════════════════════════
+@keyframes flash-success { 0% { background-color: rgba($barcode-success, 0.3); } 100% { background-color: transparent; } }
+@keyframes flash-error { 0% { background-color: rgba($barcode-danger, 0.3); } 100% { background-color: transparent; } }
+.o_flash_success { animation: flash-success 0.6s ease-out; }
+.o_flash_error { animation: flash-error 0.6s ease-out; }
+
+// ══════════════════════════════════════════════════════════════
+// RESPONSIVE — MOBILE (< 576px)
+// ══════════════════════════════════════════════════════════════
+@media (max-width: 575.98px) {
+    .o_barcode_main { padding: 12px; }
+    .o_barcode_grid { grid-template-columns: 1fr; gap: 10px; }
+    .o_barcode_card {
+        min-height: 80px; flex-direction: row; gap: 12px; padding: 14px;
+        .o_card_icon { font-size: 1.5rem; margin-bottom: 0; }
+    }
+    .o_barcode_table_wrap { display: none; }
+    .o_barcode_cards { display: block; }
+    .o_barcode_actions {
+        position: sticky; bottom: 0; background: #fff; padding: 12px 0;
+        border-top: 1px solid #dee2e6; margin: 0 -12px; padding-left: 12px;
+        padding-right: 12px; flex-direction: column;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// RESPONSIVE — TABLET & DESKTOP (>= 576px)
+// ══════════════════════════════════════════════════════════════
+@media (min-width: 576px) {
+    .o_barcode_cards { display: none; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// CONSULTATION PRODUIT
+// ══════════════════════════════════════════════════════════════
+.o_consult_product_card {
+    margin-top: 8px;
+    background: #fff;
+    border-radius: $barcode-card-radius;
+    border: 1px solid #dee2e6;
+    overflow-y: auto;
+    flex: 1 1 0;
+    min-height: 0;
+}
+
+.o_consult_header {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.o_consult_image {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+.o_consult_no_image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.o_consult_info {
+    flex: 1;
+    min-width: 0;
+
+    h4 {
+        font-size: 1.1rem;
+        word-break: break-word;
+    }
+}
+
+.o_consult_stock_summary {
+    display: flex;
+    padding: 12px 16px;
+    gap: 8px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.o_consult_stock_item {
+    flex: 1;
+    text-align: center;
+}
+
+.o_consult_stock_label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-bottom: 2px;
+}
+
+.o_consult_stock_value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.o_consult_locations {
+    padding: 12px 16px;
+
+    h6 { color: #6c757d; text-transform: uppercase; font-size: 0.8rem; }
+
+    table {
+        font-size: 0.9rem;
+        th { font-size: 0.75rem; text-transform: uppercase; color: #6c757d; border-top: none; }
+    }
+}
+
+@media (max-width: 575px) {
+    .o_consult_header { flex-direction: column; align-items: center; text-align: center; }
+    .o_consult_image { width: 80px; height: 80px; }
+}
+
+// ══════════════════════════════════════════════════════════════
+// RESERVES V3 (lot/serie)
+// ══════════════════════════════════════════════════════════════
+.o_barcode_lot_badge { }
+.o_barcode_serial_input { }
