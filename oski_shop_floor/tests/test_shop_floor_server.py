@@ -240,3 +240,13 @@ class TestShopFloorServer(TransactionCase):
             self.wo.with_user(user_b).sf_get_detail()
         with self.assertRaises(AccessError):
             self.wo.with_user(user_b).sf_start()
+
+    def test_finish_keeps_counted_consumption(self):
+        """Le comptage de l'opérateur survit à la clôture (move « picked »)."""
+        self.wo.sf_start()
+        move = self.wo.move_raw_ids[0]
+        self.wo.sf_consume(move.id, 1.0)  # 1 compté sur 2 prévus
+        self.wo.sf_set_qty(1.0)
+        self.wo.sf_finish()
+        self.assertEqual(sum(move.move_line_ids.mapped('quantity')), 1.0)
+        self.assertTrue(move.picked)
