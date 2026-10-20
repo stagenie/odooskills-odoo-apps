@@ -3,17 +3,17 @@
 
     <t t-name="oski_shop_floor.App">
         <div class="o_shop_floor">
-            <ScreenWorkcenter t-if="state.screen === 'workcenter'"
-                              workcenters="state.workcenters"
-                              onOpen.bind="openWorkcenter"/>
-            <ScreenOrders t-if="state.screen === 'orders'"
-                          orders="state.orders"
-                          onBack.bind="goHome"
-                          onOpen.bind="openOrder"/>
-            <ScreenDetail t-if="state.screen === 'detail'"
-                          detail="state.detail"
-                          orderId="state.orderId"
-                          onBack.bind="goOrders"/>
+            <ScreenWorkcenter t-if="this.state.screen === 'workcenter'"
+                              workcenters="this.state.workcenters"
+                              onOpen.bind="this.openWorkcenter"/>
+            <ScreenOrders t-if="this.state.screen === 'orders'"
+                          orders="this.state.orders"
+                          onBack.bind="this.goHome"
+                          onOpen.bind="this.openOrder"/>
+            <ScreenDetail t-if="this.state.screen === 'detail'"
+                          detail="this.state.detail"
+                          orderId="this.state.orderId"
+                          onBack.bind="this.goOrders"/>
         </div>
     </t>
 
@@ -21,8 +21,8 @@
         <div class="o_sf_screen o_sf_workcenter">
             <h1 class="o_sf_title">Postes de charge</h1>
             <div class="o_sf_grid">
-                <button class="o_sf_card" t-foreach="props.workcenters" t-as="wc" t-key="wc.id"
-                        t-on-click="() => props.onOpen(wc.id)">
+                <button class="o_sf_card" t-foreach="this.props.workcenters" t-as="wc" t-key="wc.id"
+                        t-on-click="() => this.props.onOpen(wc.id)">
                     <span class="o_sf_card_name" t-out="wc.name"/>
                     <span class="o_sf_badges">
                         <span class="o_sf_badge o_sf_progress" t-if="wc.count_progress">
@@ -40,20 +40,20 @@
     <t t-name="oski_shop_floor.ScreenOrders">
         <div class="o_sf_screen o_sf_orders">
             <div class="o_sf_header">
-                <button class="o_sf_back" t-on-click="() => props.onBack()">← Postes</button>
+                <button class="o_sf_back" t-on-click="() => this.props.onBack()">← Postes</button>
                 <h1 class="o_sf_title">Ordres de travail</h1>
             </div>
             <div class="o_sf_list">
-                <button class="o_sf_row" t-foreach="props.orders" t-as="o" t-key="o.id"
+                <button class="o_sf_row" t-foreach="this.props.orders" t-as="o" t-key="o.id"
                         t-att-class="{ 'o_sf_row_active': o.state === 'progress' }"
-                        t-on-click="() => props.onOpen(o.id)">
+                        t-on-click="() => this.props.onOpen(o.id)">
                     <span class="o_sf_row_main">
                         <span class="o_sf_row_name" t-out="o.name"/>
                         <span class="o_sf_row_sub" t-out="o.product_name"/>
                     </span>
                     <span class="o_sf_row_state" t-out="o.state === 'progress' ? 'En cours' : 'À faire'"/>
                 </button>
-                <div class="o_sf_empty" t-if="!props.orders.length">Aucun ordre de travail sur ce poste.</div>
+                <div class="o_sf_empty" t-if="!this.props.orders.length">Aucun ordre de travail sur ce poste.</div>
             </div>
         </div>
     </t>
@@ -61,29 +61,29 @@
     <t t-name="oski_shop_floor.ScreenDetail">
         <div class="o_sf_screen o_sf_detail">
             <div class="o_sf_header">
-                <button class="o_sf_back" t-on-click="() => props.onBack()">← Ordres</button>
-                <h1 class="o_sf_title" t-out="wo.name"/>
+                <button class="o_sf_back" t-on-click="() => this.props.onBack()">← Ordres</button>
+                <h1 class="o_sf_title" t-out="this.wo.name"/>
             </div>
 
             <div class="o_sf_meta">
-                <span t-out="wo.product_name"/> · <span t-out="wo.production_name"/>
-                <span class="o_sf_state" t-out="stateLabel"/>
+                <span t-out="this.wo.product_name"/> · <span t-out="this.wo.production_name"/>
+                <span class="o_sf_state" t-out="this.stateLabel"/>
             </div>
 
             <div class="o_sf_actions">
-                <button class="o_sf_btn o_sf_start" t-if="!wo.is_user_working and wo.state !== 'done' and wo.state !== 'cancel'"
+                <button class="o_sf_btn o_sf_start" t-if="!this.wo.is_user_working and this.wo.state !== 'done' and this.wo.state !== 'cancel'"
                         t-on-click="() => this.start()">Démarrer</button>
-                <button class="o_sf_btn o_sf_pause" t-if="wo.state === 'progress' and wo.is_user_working"
+                <button class="o_sf_btn o_sf_pause" t-if="this.wo.state === 'progress' and this.wo.is_user_working"
                         t-on-click="() => this.pause()">Pause</button>
-                <button class="o_sf_btn o_sf_finish" t-if="wo.state === 'progress'"
+                <button class="o_sf_btn o_sf_finish" t-if="this.wo.state === 'progress'"
                         t-on-click="() => this.finish()">Terminer</button>
             </div>
 
             <div class="o_sf_qty">
                 <label>Quantité produite</label>
-                <input type="number" step="1" min="0" t-att-value="wo.qty_producing"
+                <input type="number" step="1" min="0" t-att-value="this.wo.qty_producing"
                        t-on-change="(ev) => this.setQty(ev)"/>
-                <span class="o_sf_qty_target">/ <t t-out="wo.qty_production"/></span>
+                <span class="o_sf_qty_target">/ <t t-out="this.wo.qty_production"/></span>
             </div>
 
             <div class="o_sf_scanbox">
@@ -93,7 +93,7 @@
 
             <div class="o_sf_components">
                 <h2>Composants</h2>
-                <div class="o_sf_comp_row" t-foreach="wo.components" t-as="comp" t-key="comp.move_id">
+                <div class="o_sf_comp_row" t-foreach="this.wo.components" t-as="comp" t-key="comp.move_id">
                     <span class="o_sf_comp_name" t-out="comp.product_name"/>
                     <span class="o_sf_comp_qty"><t t-out="comp.qty_done"/> / <t t-out="comp.qty_demand"/></span>
                     <button class="o_sf_comp_add" t-on-click="() => this.incComponent(comp)">+1</button>

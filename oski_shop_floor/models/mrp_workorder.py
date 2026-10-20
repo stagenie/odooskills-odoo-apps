@@ -71,6 +71,13 @@ class MrpWorkorder(models.Model):
         # une reprise après pause, un double clic ou une requête rejouée ne
         # doivent pas effacer les composants déjà scannés.
         first_start = self.state != 'progress'
+        # Odoo 20 a retiré de button_start() le refus « Please unblock the
+        # work center » (présent en 19) : un poste bloqué (panne, manque
+        # matière) se démarrerait sans erreur. Le flux atelier garde la règle.
+        if self.workcenter_id.working_state == 'blocked':
+            raise UserError(_(
+                "Le poste %s est bloqué : débloquez-le avant de démarrer l'ordre de travail.",
+                self.workcenter_id.display_name))
         self.button_start()
         # button_start() fixe qty_producing = qty_remaining, dont l'inverse
         # _set_qty_producing() (noyau mrp) pré-remplit automatiquement la
@@ -78,7 +85,10 @@ class MrpWorkorder(models.Model):
         # consommation attendue). Le flux Shop Floor est piloté par le scan
         # (comptage manuel composant par composant) : on neutralise cette
         # proposition pour que l'opérateur reparte de 0, sans droits élargis.
-        move_lines = self.move_raw_ids.move_line_ids
+        # Les moves « picked » portent un comptage confirmé par l'opérateur
+        # (lots posés avant le démarrage, cf. oski_shop_floor_barcode) : le
+        # noyau ne les repropose pas, on ne les efface donc pas non plus.
+        move_lines = self.move_raw_ids.filtered(lambda m: not m.picked).move_line_ids
         if first_start and move_lines:
             move_lines.quantity = 0
         self.invalidate_recordset(self._SF_STALE_COMPUTE_FIELDS)
@@ -138,14 +148,19 @@ class MrpWorkorder(models.Model):
             self.env['stock.move.line'].create({
                 'move_id': move.id,
                 'product_id': move.product_id.id,
-                'product_uom_id': move.product_uom.id,
+                'uom_id': move.uom_id.id,
                 'quantity': qty,
                 'location_id': move.location_id.id,
                 'location_dest_id': move.location_dest_id.id,
             })
+        # Quantité comptée par l'opérateur = quantité confirmée : sans
+        # « picked », button_finish() (noyau mrp) écrase le comptage par la
+        # consommation théorique de chaque move non pické.
+        move.picked = True
         detail = self.sf_get_detail()
-        detail['needs_lot'] = move.product_id.tracking != 'none'
-        detail['over_demand'] = move.product_uom.compare(qty, move.product_uom_qty) > 0
+        # Odoo 20 : product.tracking n'a plus de valeur 'none' (False).
+        detail['needs_lot'] = bool(move.product_id.tracking)
+        detail['over_demand'] = move.uom_id.compare(qty, move.product_uom_qty) > 0
         return detail
 
     def sf_scan(self, barcode):

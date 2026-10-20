@@ -1,8 +1,8 @@
 /** @odoo-module **/
 
-import { Component } from "@odoo/owl";
+import { Component, t, useProps } from "@odoo/owl";
 
 export class ScreenOrders extends Component {
     static template = "oski_shop_floor.ScreenOrders";
-    static props = { orders: Array, onBack: Function, onOpen: Function };
+    props = useProps({ orders: t.array(), onBack: t.function(), onOpen: t.function() });
 }

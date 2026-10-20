@@ -16,7 +16,17 @@ registry.category("web_tour.tours").add("oski_shop_floor_tour", {
         { trigger: ".o_sf_pause", run: "click" },
         { trigger: ".o_sf_start", run: "click" },
         { trigger: ".o_sf_pause" },
-        { trigger: ".o_sf_comp_qty:contains('1 / 1')" },
+        {
+            // Douchette : frappes clavier sur le document, captées par le
+            // BarcodePlugin (Odoo 20) puis par useShopFloorScan.
+            trigger: ".o_sf_comp_qty:contains('1 / 1')",
+            run() {
+                for (const key of [..."TOURCOMP", "Enter"]) {
+                    document.body.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+                }
+            },
+        },
+        { trigger: ".o_sf_comp_qty:contains('2 / 1')" },
         { trigger: ".o_sf_finish", run: "click" },
         { trigger: ".o_sf_workcenter, .o_sf_orders" },  // retour après clôture
     ],

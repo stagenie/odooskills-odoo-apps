@@ -1,6 +1,6 @@
 {
     'name': 'Atelier — Shop Floor',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Manufacturing',
     'summary': "Exécution atelier tactile et responsive pour les ordres de travail — l'expérience Shop Floor en Community.",
     'description': """

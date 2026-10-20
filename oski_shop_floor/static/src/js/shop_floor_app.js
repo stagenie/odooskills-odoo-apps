@@ -1,8 +1,9 @@
 /** @odoo-module **/
 
-import { Component, useState, onWillStart } from "@odoo/owl";
+import { Component, proxy, onWillStart, useProps } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
+import { standardActionServiceProps } from "@web/webclient/actions/action_plugin";
 import { ScreenWorkcenter } from "./screen_workcenter";
 import { ScreenOrders } from "./screen_orders";
 import { ScreenDetail } from "./screen_detail";
@@ -10,12 +11,13 @@ import { ScreenDetail } from "./screen_detail";
 export class ShopFloorApp extends Component {
     static template = "oski_shop_floor.App";
     static components = { ScreenWorkcenter, ScreenOrders, ScreenDetail };
-    static props = ["*"];
+    // Odoo 20 (OWL 3) : `static props` est ignoré → useProps.
+    props = useProps({ ...standardActionServiceProps });
 
     setup() {
         this.orm = useService("orm");
         this.notification = useService("notification");
-        this.state = useState({
+        this.state = proxy({
             screen: "workcenter",
             workcenterId: false,
             orderId: false,

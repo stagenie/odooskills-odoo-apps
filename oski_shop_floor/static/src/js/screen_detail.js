@@ -1,18 +1,22 @@
 /** @odoo-module **/
 
-import { Component, useState } from "@odoo/owl";
+import { Component, proxy, t, useProps } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { useShopFloorScan } from "./use_shop_floor_scan";
 import { scanFeedback } from "./scan_feedback";
 
 export class ScreenDetail extends Component {
     static template = "oski_shop_floor.ScreenDetail";
-    static props = { detail: Object, orderId: [Number, Boolean], onBack: Function };
+    props = useProps({
+        detail: t.object(),
+        orderId: t.or([t.number(), t.boolean()]),
+        onBack: t.function(),
+    });
 
     setup() {
         this.orm = useService("orm");
         this.notification = useService("notification");
-        this.state = useState({ detail: this.props.detail });
+        this.state = proxy({ detail: this.props.detail });
         useShopFloorScan((code) => this.onScan(code));
     }
 
@@ -26,8 +30,7 @@ export class ScreenDetail extends Component {
             progress: "En cours",
             done: "Terminé",
             cancel: "Annulé",
-            pending: "En attente",
-            waiting: "En attente",
+            blocked: "Bloqué",
         };
         return labels[this.wo.state] || this.wo.state;
     }
@@ -55,10 +58,25 @@ export class ScreenDetail extends Component {
         }
     }
 
-    start() { return this._call("sf_start"); }
-    pause() { return this._call("sf_pause"); }
+    // Double clic sur Démarrer / Pause / Terminer : une seule requête à la
+    // fois (le serveur refuse de toute façon une seconde clôture).
+    async _once(fn) {
+        if (this._busy) {
+            return;
+        }
+        this._busy = true;
+        try {
+            return await fn();
+        } finally {
+            this._busy = false;
+        }
+    }
 
-    async finish() {
+    start() { return this._once(() => this._call("sf_start")); }
+    pause() { return this._once(() => this._call("sf_pause")); }
+    finish() { return this._once(() => this._finish()); }
+
+    async _finish() {
         // sf_finish() clôt l'OT (state='done') : il ne reste plus sur ce
         // poste, donc l'écran Détail n'a plus de raison d'être affiché.
         // On ne retourne à la liste des ordres qu'en cas de succès — une

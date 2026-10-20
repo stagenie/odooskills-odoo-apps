@@ -1,12 +1,13 @@
 /** @odoo-module **/
 
-import { useService } from "@web/core/utils/hooks";
-import { onWillUnmount } from "@odoo/owl";
+import { usePlugin } from "@odoo/owl";
+import { useBus } from "@web/core/utils/hooks";
+import { BarcodePlugin } from "@barcodes/barcode_plugin";
 
-// S'abonne au service barcode du core ; appelle onBarcode(code) à chaque scan.
+// Odoo 20 : le service « barcode » est devenu BarcodePlugin
+// (barcodes/static/src/barcode_plugin.js) ; useService("barcode") n'est
+// plus qu'un pont provisoire (« @todo owl3 migration »).
 export function useShopFloorScan(onBarcode) {
-    const barcode = useService("barcode");
-    const handler = (ev) => onBarcode(ev.detail.barcode);
-    barcode.bus.addEventListener("barcode_scanned", handler);
-    onWillUnmount(() => barcode.bus.removeEventListener("barcode_scanned", handler));
+    const barcode = usePlugin(BarcodePlugin);
+    useBus(barcode.bus, "barcode_scanned", (ev) => onBarcode(ev.detail.barcode));
 }

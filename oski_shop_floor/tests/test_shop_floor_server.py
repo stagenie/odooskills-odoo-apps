@@ -66,7 +66,7 @@ class TestShopFloorServer(TransactionCase):
         self.env['stock.move.line'].create({
             'move_id': move.id,
             'product_id': move.product_id.id,
-            'product_uom_id': move.product_uom.id,
+            'uom_id': move.uom_id.id,
             'quantity': 1.5,
             'location_id': move.location_id.id,
             'location_dest_id': move.location_dest_id.id,
@@ -134,7 +134,7 @@ class TestShopFloorServer(TransactionCase):
         from odoo.exceptions import UserError
         other = self.env['stock.move'].create({
             'product_id': self.component.id,
-            'product_uom_qty': 1.0, 'product_uom': self.component.uom_id.id,
+            'product_uom_qty': 1.0, 'uom_id': self.component.uom_id.id,
             'location_id': self.env.ref('stock.stock_location_stock').id,
             'location_dest_id': self.env.ref('stock.stock_location_customers').id,
         })
@@ -206,7 +206,7 @@ class TestShopFloorServer(TransactionCase):
         move = self.wo.move_raw_ids[0]
         vals = {
             'move_id': move.id, 'product_id': move.product_id.id,
-            'product_uom_id': move.product_uom.id, 'quantity': 1.0,
+            'uom_id': move.uom_id.id, 'quantity': 1.0,
             'location_id': move.location_id.id,
             'location_dest_id': move.location_dest_id.id,
         }
@@ -240,3 +240,25 @@ class TestShopFloorServer(TransactionCase):
             self.wo.with_user(user_b).sf_get_detail()
         with self.assertRaises(AccessError):
             self.wo.with_user(user_b).sf_start()
+
+    def test_finish_keeps_counted_consumption(self):
+        """Le comptage de l'opérateur survit à la clôture (move « picked »)."""
+        self.wo.sf_start()
+        move = self.wo.move_raw_ids[0]
+        self.wo.sf_consume(move.id, 1.0)  # 1 compté sur 2 prévus
+        self.wo.sf_set_qty(1.0)
+        self.wo.sf_finish()
+        self.assertEqual(sum(move.move_line_ids.mapped('quantity')), 1.0)
+        self.assertTrue(move.picked)
+
+    def test_start_on_blocked_workcenter_rejected(self):
+        from odoo.exceptions import UserError
+        self.env['mrp.workcenter.productivity'].create({
+            'workcenter_id': self.wc.id,
+            'loss_id': self.env.ref('mrp.block_reason1').id,
+            'date_start': '2026-01-01 08:00:00',
+        })
+        self.assertEqual(self.wc.working_state, 'blocked')
+        with self.assertRaises(UserError):
+            self.wo.sf_start()
+        self.assertFalse(self.wo.time_ids)
