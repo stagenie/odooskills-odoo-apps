@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="demo_root" model="knowledge.article">
+        <field name="name">Documentation interne</field>
+        <field name="icon">📚</field>
+        <field name="section">workspace</field>
+        <field name="body"><![CDATA[
+            <h1>Documentation interne</h1>
+            <p>Bienvenue dans la base de connaissances de l'entreprise. Vous
+            trouverez ici les procédures, le parcours d'intégration et la FAQ.</p>
+        ]]></field>
+    </record>
+
+    <record id="demo_procedures" model="knowledge.article">
+        <field name="name">Procédures</field>
+        <field name="icon">📋</field>
+        <field name="parent_id" ref="demo_root"/>
+        <field name="body"><![CDATA[
+            <h2>Procédures</h2>
+            <p>Liste des procédures internes.</p>
+            <table class="table table-bordered">
+                <tr><th>Procédure</th><th>Responsable</th></tr>
+                <tr><td>Demande de congés</td><td>RH</td></tr>
+                <tr><td>Note de frais</td><td>Comptabilité</td></tr>
+            </table>
+        ]]></field>
+    </record>
+
+    <record id="demo_onboarding" model="knowledge.article">
+        <field name="name">Onboarding</field>
+        <field name="icon">🚀</field>
+        <field name="parent_id" ref="demo_root"/>
+        <field name="body"><![CDATA[
+            <h2>Parcours d'intégration</h2>
+            <ul>
+                <li>Créer les accès (email, Odoo)</li>
+                <li>Présenter l'équipe</li>
+                <li>Remettre le matériel</li>
+            </ul>
+        ]]></field>
+    </record>
+
+    <record id="demo_faq" model="knowledge.article">
+        <field name="name">FAQ</field>
+        <field name="icon">❓</field>
+        <field name="parent_id" ref="demo_root"/>
+        <field name="body"><![CDATA[
+            <h2>Questions fréquentes</h2>
+            <p><b>Mot de passe oublié ?</b> Contactez le support informatique.</p>
+            <p><b>Où déposer une note de frais ?</b> Dans le module Dépenses.</p>
+        ]]></field>
+    </record>
+
+    <record id="demo_private" model="knowledge.article">
+        <field name="name">Mes notes</field>
+        <field name="icon">📝</field>
+        <field name="section">private</field>
+        <field name="owner_id" ref="base.user_admin"/>
+        <field name="body"><![CDATA[
+            <p>Notes personnelles de l'administrateur.</p>
+        ]]></field>
+    </record>
+</odoo>

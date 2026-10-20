@@ -1,0 +1,14 @@
+.o_knowledge_app {
+    .o_knowledge_sidebar {
+        width: 260px;
+        min-width: 260px;
+    }
+    .o_knowledge_node {
+        cursor: pointer;
+        padding: 2px 4px;
+        border-radius: 4px;
+        &:hover { background-color: var(--gray-200, #e9ecef); }
+        &.o_knowledge_selected { background-color: var(--gray-300, #dee2e6); }
+    }
+    .o_knowledge_chevron_placeholder { width: 1em; display: inline-block; }
+}
