@@ -28,3 +28,18 @@ class TestAccess(HelpdeskCase):
         mgr = self._make_user("hd_mgr", [self.g_mgr])
         team = self.env["helpdesk.team"].with_user(mgr).create({"name": "Y"})
         self.assertTrue(team.id)
+
+    def test_multi_company_isolation(self):
+        """Un agent d'une société ne voit ni les équipes ni les tickets d'une
+        autre société."""
+        other = self.env["res.company"].create({"name": "Autre société HD"})
+        team_o = self.env["helpdesk.team"].create({"name": "TO", "company_id": other.id})
+        ticket_o = self.env["helpdesk.ticket"].create({
+            "name": "Ailleurs", "team_id": team_o.id, "company_id": other.id})
+        user = self._make_user("hd_mc", [self.g_user])
+        self.assertFalse(self.env["helpdesk.ticket"].with_user(user).search(
+            [("id", "=", ticket_o.id)]))
+        self.assertFalse(self.env["helpdesk.team"].with_user(user).search(
+            [("id", "=", team_o.id)]))
+        with self.assertRaises(AccessError):
+            ticket_o.with_user(user).read(["name"])
