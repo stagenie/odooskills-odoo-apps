@@ -8,11 +8,12 @@ class DmsWorkspace(models.Model):
     _parent_store = True
     _parent_name = 'parent_id'
     _order = 'complete_name'
+    _check_company_auto = True
 
     name = fields.Char(string="Nom", required=True, tracking=True)
     parent_id = fields.Many2one(
         'oski.dms.workspace', string="Espace parent",
-        ondelete='cascade', index=True)
+        ondelete='cascade', index=True, check_company=True)
     parent_path = fields.Char(index=True)
     complete_name = fields.Char(
         compute='_compute_complete_name', store=True, recursive=True,
