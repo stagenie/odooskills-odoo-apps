@@ -29,6 +29,54 @@ class AdiStockBarcodeController(http.Controller):
             _logger.warning("scan log failed", exc_info=True)
 
     # ══════════════════════════════════════════════════════════════
+    # GARDE-FOUS (droits, société, état, disponibilité)
+    # ══════════════════════════════════════════════════════════════
+    def _get_record(self, model, record_id):
+        """Enregistrement lisible par l'utilisateur, sinon recordset vide.
+
+        ``search`` applique droits et règles multi-société : un id d'une autre
+        société (ou forgé côté client) rend « introuvable » au lieu d'une
+        AccessError, et ne permet ni lecture ni écriture."""
+        Model = request.env[model]
+        try:
+            record_id = int(record_id)
+        except (TypeError, ValueError):
+            return Model
+        return Model.search([('id', '=', record_id)], limit=1)
+
+    def _get_picking(self, picking_id):
+        return self._get_record('stock.picking', picking_id)
+
+    def _closed_picking_error(self, picking):
+        """Message si le bon n'est plus modifiable (double clic, rejeu réseau)."""
+        if picking.state == 'done':
+            return f'{picking.name} est déjà validé : aucune modification possible.'
+        if picking.state == 'cancel':
+            return f'{picking.name} est annulé : aucune modification possible.'
+        return False
+
+    def _move_done_qty(self, move):
+        """Quantité scannée d'un mouvement (unité du mouvement).
+
+        Depuis Odoo 17, ``stock.move.line.quantity`` porte aussi la RÉSERVATION :
+        seul le drapeau ``picked`` distingue ce qui a été scanné. Les articles
+        suivis (lot / n° de série) gardent la somme des lignes, gérée par
+        oski_stock_barcode_lot."""
+        if move.product_id.tracking != 'none':
+            return sum(move.move_line_ids.mapped('quantity'))
+        return move.quantity if move.picked else 0.0
+
+    def _available_for_move(self, move):
+        """Stock utilisable par ce mouvement (unité du mouvement) : le libre de
+        l'emplacement source (sous-emplacements et lots compris) + ce que le
+        mouvement a déjà réservé pour lui-même."""
+        free = request.env['stock.quant']._get_available_quantity(
+            move.product_id, move.location_id)
+        free = move.product_id.uom_id._compute_quantity(
+            free, move.product_uom, round=False)
+        return free + move.quantity
+
+    # ══════════════════════════════════════════════════════════════
     # COMPTEURS PAGE D'ACCUEIL
     # ══════════════════════════════════════════════════════════════
     @http.route('/oski_stock_barcode/picking_counts', type='jsonrpc', auth='user')
@@ -54,7 +102,7 @@ class AdiStockBarcodeController(http.Controller):
         total_qty_demand = 0
         total_qty_done = 0
         for move in moves:
-            done_qty = sum(move.move_line_ids.mapped('quantity'))
+            done_qty = self._move_done_qty(move)
             total_qty_demand += move.product_uom_qty
             total_qty_done += done_qty
             if done_qty >= move.product_uom_qty and move.product_uom_qty > 0:
@@ -108,19 +156,9 @@ class AdiStockBarcodeController(http.Controller):
     # ══════════════════════════════════════════════════════════════
     def _prepare_line_data(self, move):
         """Prepare les donnees d'une ligne — overridable par lot module."""
-        move_lines = move.move_line_ids
-        done_qty = sum(move_lines.mapped('quantity'))
-        reserved_qty = sum(move_lines.mapped('quantity')) if move.state == 'assigned' else 0
-
-        # Disponibilite depuis le quant source
-        available_qty = 0
-        if move.location_id:
-            quant = request.env['stock.quant'].search([
-                ('product_id', '=', move.product_id.id),
-                ('location_id', '=', move.location_id.id),
-            ], limit=1)
-            if quant:
-                available_qty = quant.available_quantity
+        done_qty = self._move_done_qty(move)
+        # Disponible pour CE mouvement (sa propre réservation comprise)
+        available_qty = self._available_for_move(move) if move.location_id else 0
 
         return {
             'move_id': move.id,
@@ -136,8 +174,8 @@ class AdiStockBarcodeController(http.Controller):
 
     @http.route('/oski_stock_barcode/get_picking_lines', type='jsonrpc', auth='user')
     def get_picking_lines(self, picking_id):
-        picking = request.env['stock.picking'].browse(picking_id)
-        if not picking.exists():
+        picking = self._get_picking(picking_id)
+        if not picking:
             return {'error': 'Picking introuvable'}
 
         lines = [self._prepare_line_data(m) for m in picking.move_ids]
@@ -152,9 +190,18 @@ class AdiStockBarcodeController(http.Controller):
 
     @http.route('/oski_stock_barcode/update_line_qty', type='jsonrpc', auth='user')
     def update_line_qty(self, picking_id, product_id, qty):
-        picking = request.env['stock.picking'].browse(picking_id)
-        if not picking.exists():
+        picking = self._get_picking(picking_id)
+        if not picking:
             return {'error': 'Picking introuvable'}
+        closed = self._closed_picking_error(picking)
+        if closed:
+            return {'error': closed}
+        try:
+            qty = float(qty)
+        except (TypeError, ValueError):
+            return {'error': 'Quantité invalide'}
+        if qty < 0:
+            return {'error': 'Quantité négative refusée'}
 
         move = picking.move_ids.filtered(
             lambda m: m.product_id.id == product_id
@@ -166,29 +213,21 @@ class AdiStockBarcodeController(http.Controller):
 
         # Contrôle de disponibilité pour les sorties (outgoing/internal)
         if picking.picking_type_id.code in ('outgoing', 'internal'):
-            quant = request.env['stock.quant'].search([
-                ('product_id', '=', product_id),
-                ('location_id', '=', move.location_id.id),
-            ], limit=1)
-            available = quant.available_quantity if quant else 0
-            if qty > available:
+            available = self._available_for_move(move)
+            if move.product_uom.compare(qty, available) > 0:
                 return {
                     'error': f'Stock insuffisant : {available} disponible(s) pour {move.product_id.display_name}',
                     'available_qty': available,
                 }
 
-        move_line = move.move_line_ids[:1]
-        if move_line:
-            move_line.quantity = qty
+        if move.product_uom.compare(qty, 0) > 0:
+            # quantity (inverse) ajuste réservation et lignes ; picked = « scanné ».
+            move.quantity = qty
+            move.picked = True
         else:
-            request.env['stock.move.line'].create({
-                'move_id': move.id,
-                'picking_id': picking.id,
-                'product_id': product_id,
-                'quantity': qty,
-                'location_id': move.location_id.id,
-                'location_dest_id': move.location_dest_id.id,
-            })
+            move.picked = False
+            if move.product_uom.compare(move.quantity, move.product_uom_qty) > 0:
+                move.quantity = move.product_uom_qty
 
         code = picking.picking_type_id.code
         action = 'delivery' if code == 'outgoing' else (
@@ -203,30 +242,26 @@ class AdiStockBarcodeController(http.Controller):
 
         :param create_backorder: True = créer reliquat, False = annuler le reste
         """
-        picking = request.env['stock.picking'].browse(picking_id)
-        if not picking.exists():
+        picking = self._get_picking(picking_id)
+        if not picking:
             return {'error': 'Picking introuvable'}
+        closed = self._closed_picking_error(picking)
+        if closed:
+            return {'error': closed}
 
         # Vérifier qu'il y a au moins une quantité saisie
-        has_qty = any(
-            sum(m.move_line_ids.mapped('quantity')) > 0
-            for m in picking.move_ids
-        )
-        if not has_qty:
+        done = {m.id: self._move_done_qty(m) for m in picking.move_ids}
+        if not any(q > 0 for q in done.values()):
             return {'error': 'Aucune quantité saisie'}
 
         # Contrôle de disponibilité pour les sorties avant validation
         if picking.picking_type_id.code in ('outgoing', 'internal'):
             for move in picking.move_ids:
-                done_qty = sum(move.move_line_ids.mapped('quantity'))
+                done_qty = done[move.id]
                 if done_qty <= 0:
                     continue
-                quant = request.env['stock.quant'].search([
-                    ('product_id', '=', move.product_id.id),
-                    ('location_id', '=', move.location_id.id),
-                ], limit=1)
-                available = quant.available_quantity if quant else 0
-                if done_qty > available:
+                available = self._available_for_move(move)
+                if move.product_uom.compare(done_qty, available) > 0:
                     return {
                         'error': f'Stock insuffisant pour {move.product_id.display_name}: '
                                  f'{done_qty} demandé(s), {available} disponible(s)',
@@ -234,42 +269,53 @@ class AdiStockBarcodeController(http.Controller):
 
         # Détecter si la validation est partielle
         is_partial = any(
-            sum(m.move_line_ids.mapped('quantity')) < m.product_uom_qty
+            done[m.id] < m.product_uom_qty
             for m in picking.move_ids
             if m.product_uom_qty > 0
         )
 
-        self._log_scan('validate', picking=picking)
+        # Articles suivis (lots) : ce qui est saisi est pris. Les autres ne sont
+        # « pris » que s'ils ont été scannés : la réservation seule ne part pas.
+        to_pick = picking.move_ids.filtered(
+            lambda m: done[m.id] > 0 and not m.picked)
+        if to_pick:
+            to_pick.picked = True
 
+        ctx = {}
+        if is_partial:
+            # Bypass le wizard backorder — on gère directement
+            ctx = {
+                'skip_backorder': True,
+                'button_validate_picking_ids': picking.ids,
+            }
+            if not create_backorder:
+                ctx['picking_ids_not_to_backorder'] = picking.ids
         try:
-            if is_partial:
-                # Bypass le wizard backorder — on gère directement
-                ctx = {
-                    'skip_backorder': True,
-                    'button_validate_picking_ids': picking.ids,
-                }
-                if not create_backorder:
-                    ctx['picking_ids_not_to_backorder'] = picking.ids
+            # Savepoint : un échec en cours de validation n'en laisse rien.
+            with request.env.cr.savepoint():
                 picking.with_context(**ctx).button_validate()
-
-                backorder = request.env['stock.picking'].search([
-                    ('backorder_id', '=', picking.id),
-                    ('state', 'not in', ('done', 'cancel')),
-                ], limit=1)
-
-                return {
-                    'success': True,
-                    'state': picking.state,
-                    'is_partial': True,
-                    'backorder_created': bool(backorder),
-                    'backorder_name': backorder.name if backorder else '',
-                }
-            else:
-                picking.button_validate()
-                return {'success': True, 'state': picking.state, 'is_partial': False}
         except Exception as e:
             _logger.warning("Validation picking %s failed: %s", picking.name, e)
             return {'error': str(e)}
+        if picking.state != 'done':
+            # Un assistant (confirmation, SMS…) attend une réponse : rien n'est fait.
+            return {'error': f'{picking.name} demande une confirmation : '
+                             'terminez la validation depuis le bon dans Inventaire.'}
+
+        self._log_scan('validate', picking=picking)
+        if not is_partial:
+            return {'success': True, 'state': picking.state, 'is_partial': False}
+        backorder = request.env['stock.picking'].search([
+            ('backorder_id', '=', picking.id),
+            ('state', 'not in', ('done', 'cancel')),
+        ], limit=1)
+        return {
+            'success': True,
+            'state': picking.state,
+            'is_partial': True,
+            'backorder_created': bool(backorder),
+            'backorder_name': backorder.name if backorder else '',
+        }
 
     # ══════════════════════════════════════════════════════════════
     # RECHERCHE PRODUIT
@@ -292,11 +338,11 @@ class AdiStockBarcodeController(http.Controller):
         }
 
         if picking_id:
-            picking = request.env['stock.picking'].browse(picking_id)
+            picking = self._get_picking(picking_id)
             move = picking.move_ids.filtered(lambda m: m.product_id.id == product.id)
             if move:
                 move = move[0]
-                done_qty = sum(move.move_line_ids.mapped('quantity'))
+                done_qty = self._move_done_qty(move)
                 result['in_picking'] = True
                 result['move_id'] = move.id
                 result['demand_qty'] = move.product_uom_qty
@@ -331,8 +377,8 @@ class AdiStockBarcodeController(http.Controller):
     @http.route('/oski_stock_barcode/get_product_info', type='jsonrpc', auth='user')
     def get_product_info(self, product_id):
         """Retourne les infos détaillées d'un produit avec stock par emplacement."""
-        product = request.env['product.product'].browse(product_id)
-        if not product.exists():
+        product = self._get_record('product.product', product_id)
+        if not product:
             return {'error': 'Article introuvable'}
 
         # Stock par emplacement interne
@@ -404,21 +450,29 @@ class AdiStockBarcodeController(http.Controller):
         loc = Location.search([
             ('barcode', '=', barcode),
             ('usage', '=', 'internal'),
-        ], limit=1)
+        ], limit=2)
         if not loc:
+            # Nom court : souvent répété (« Stock » de chaque entrepôt).
             loc = Location.search([
                 ('name', '=', barcode),
                 ('usage', '=', 'internal'),
-            ], limit=1)
+            ], limit=2)
         if not loc:
             return {'found': False}
+        if len(loc) > 1:
+            return {
+                'found': False, 'ambiguous': True,
+                'message': f'« {barcode} » désigne plusieurs emplacements '
+                           f'({", ".join(loc.mapped("complete_name"))}) : '
+                           'scannez son code-barres ou choisissez-le dans la liste.',
+            }
         return {'found': True, 'id': loc.id, 'name': loc.complete_name}
 
     @http.route('/oski_stock_barcode/get_location_info', type='jsonrpc', auth='user')
     def get_location_info(self, location_id):
         """Retourne les infos d'un emplacement avec son contenu stock."""
-        location = request.env['stock.location'].browse(location_id)
-        if not location.exists():
+        location = self._get_record('stock.location', location_id)
+        if not location:
             return {'error': 'Emplacement introuvable'}
 
         quants = request.env['stock.quant'].search([
@@ -504,14 +558,17 @@ class AdiStockBarcodeController(http.Controller):
 
     @http.route('/oski_stock_barcode/get_quant_info', type='jsonrpc', auth='user')
     def get_quant_info(self, product_id, location_id):
-        quant = request.env['stock.quant'].search([
-            ('product_id', '=', product_id),
-            ('location_id', '=', location_id),
-        ], limit=1)
+        """Stock d'un article dans un emplacement (sous-emplacements et lots compris)."""
+        product = self._get_record('product.product', product_id)
+        location = self._get_record('stock.location', location_id)
+        if not product or not location:
+            return {'quantity': 0, 'reserved_quantity': 0, 'available_quantity': 0}
+        Quant = request.env['stock.quant']
+        quants = Quant._gather(product, location)
         return {
-            'quantity': quant.quantity if quant else 0,
-            'reserved_quantity': quant.reserved_quantity if quant else 0,
-            'available_quantity': quant.available_quantity if quant else 0,
+            'quantity': sum(quants.mapped('quantity')),
+            'reserved_quantity': sum(quants.mapped('reserved_quantity')),
+            'available_quantity': Quant._get_available_quantity(product, location),
         }
 
     @http.route('/oski_stock_barcode/apply_inventory', type='jsonrpc', auth='user')
@@ -525,6 +582,17 @@ class AdiStockBarcodeController(http.Controller):
         Quant = request.env['stock.quant']
         quants_to_apply = Quant
         applied_count = 0
+
+        location = self._get_record('stock.location', location_id)
+        if not location or location.usage != 'internal':
+            return {'error': 'Emplacement introuvable'}
+        for item in items:
+            try:
+                counted = float(item.get('counted_qty'))
+            except (TypeError, ValueError):
+                return {'error': 'Quantité comptée invalide'}
+            if counted < 0:
+                return {'error': 'Quantité comptée négative refusée'}
 
         for item in items:
             quant = Quant.search([
@@ -564,11 +632,37 @@ class AdiStockBarcodeController(http.Controller):
         Ne valide PAS — l'opérateur peut ajuster les quantités puis
         appeler validate_picking pour valider (avec backorder si partiel).
         """
+        src = self._get_record('stock.location', src_location_id)
+        dest = self._get_record('stock.location', dest_location_id)
+        if not src or not dest or src.usage != 'internal' or dest.usage != 'internal':
+            return {'error': 'Emplacement introuvable'}
+        if src == dest:
+            return {'error': 'Emplacements source et destination identiques'}
+        if not items:
+            return {'error': 'Aucun article à transférer'}
+        for item in items:
+            try:
+                qty = float(item.get('qty'))
+            except (TypeError, ValueError):
+                return {'error': 'Quantité invalide'}
+            if qty <= 0:
+                return {'error': 'Quantité nulle ou négative refusée'}
+            if not self._get_record('product.product', item.get('product_id')):
+                return {'error': 'Article introuvable'}
+
+        # Type d'opération de l'entrepôt (donc de la société) de la source
         PickingType = request.env['stock.picking.type']
-        picking_type = PickingType.search([
-            ('code', '=', 'internal'),
-            ('company_id', '=', request.env.company.id),
-        ], limit=1)
+        picking_type = PickingType
+        if src.warehouse_id:
+            picking_type = PickingType.search([
+                ('code', '=', 'internal'),
+                ('warehouse_id', '=', src.warehouse_id.id),
+            ], limit=1)
+        if not picking_type:
+            picking_type = PickingType.search([
+                ('code', '=', 'internal'),
+                ('company_id', '=', (src.company_id or request.env.company).id),
+            ], limit=1)
         if not picking_type:
             return {'error': 'Aucun type de transfert interne trouvé'}
 
@@ -578,11 +672,7 @@ class AdiStockBarcodeController(http.Controller):
         errors = []
         for item in items:
             product = Product.browse(item['product_id'])
-            quant = Quant.search([
-                ('product_id', '=', item['product_id']),
-                ('location_id', '=', src_location_id),
-            ], limit=1)
-            available = quant.available_quantity if quant else 0
+            available = Quant._get_available_quantity(product, src)
             if item['qty'] > available:
                 errors.append(
                     f'{product.display_name}: {item["qty"]} demandé(s), {available} disponible(s)'
@@ -592,8 +682,8 @@ class AdiStockBarcodeController(http.Controller):
 
         picking = request.env['stock.picking'].create({
             'picking_type_id': picking_type.id,
-            'location_id': src_location_id,
-            'location_dest_id': dest_location_id,
+            'location_id': src.id,
+            'location_dest_id': dest.id,
         })
 
         for item in items:
@@ -602,19 +692,18 @@ class AdiStockBarcodeController(http.Controller):
                 'product_id': product.id,
                 'product_uom_qty': item['qty'],
                 'product_uom': product.uom_id.id,
-                'location_id': src_location_id,
-                'location_dest_id': dest_location_id,
+                'location_id': src.id,
+                'location_dest_id': dest.id,
                 'picking_id': picking.id,
             })
 
         picking.action_confirm()
         picking.action_assign()
 
-        # Pré-remplir les quantités sur les move_lines
+        # Pré-remplir : les quantités demandées sont considérées comme prises
         for move in picking.move_ids:
-            move_line = move.move_line_ids[:1]
-            if move_line:
-                move_line.quantity = move.product_uom_qty
+            move.quantity = move.product_uom_qty
+            move.picked = True
 
         self._log_scan('transfer', picking=picking)
         return {
@@ -626,8 +715,8 @@ class AdiStockBarcodeController(http.Controller):
     @http.route('/oski_stock_barcode/get_report_url', type='jsonrpc', auth='user')
     def get_report_url(self, picking_id):
         """Retourne l'URL du rapport PDF pour un picking."""
-        picking = request.env['stock.picking'].browse(picking_id)
-        if not picking.exists():
+        picking = self._get_picking(picking_id)
+        if not picking:
             return {'error': 'Picking introuvable'}
 
         # Utiliser le delivery slip pour les BL, le picking report pour le reste

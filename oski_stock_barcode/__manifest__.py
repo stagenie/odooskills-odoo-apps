@@ -40,6 +40,9 @@ Fonctionne avec n'importe quelle douchette clavier (USB/Bluetooth) ou la caméra
             'oski_stock_barcode/static/src/js/barcode_session.js',
             'oski_stock_barcode/static/src/js/barcode_main.js',
         ],
+        'web.assets_tests': [
+            'oski_stock_barcode/static/tests/tours/*.js',
+        ],
     },
     'installable': True,
     'application': True,

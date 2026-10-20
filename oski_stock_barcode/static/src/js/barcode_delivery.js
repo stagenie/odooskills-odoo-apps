@@ -125,10 +125,20 @@ export class BarcodeDelivery extends Component {
     get totalDone() { return this.state.lines.reduce((s, l) => s + l.done_qty, 0); }
 
     async _validate() {
-        const r = await rpc('/oski_stock_barcode/validate_picking', {
-            picking_id: this.props.pickingId,
-            create_backorder: true,
-        });
+        // Double clic / double tap : une seule validation en vol.
+        if (this._validating) {
+            return;
+        }
+        this._validating = true;
+        let r;
+        try {
+            r = await rpc('/oski_stock_barcode/validate_picking', {
+                picking_id: this.props.pickingId,
+                create_backorder: true,
+            });
+        } finally {
+            this._validating = false;
+        }
         if (r.error) {
             this.notification.add(r.error, { type: 'danger' });
             return;
