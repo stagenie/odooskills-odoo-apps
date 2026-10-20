@@ -5,13 +5,15 @@
         <field name="model_id" ref="calendar.model_calendar_event"/>
         <field name="subject">Confirmation de votre rendez-vous : {{ object.name }}</field>
         <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
-        <field name="email_to">{{ object.partner_ids[:1].email }}</field>
+        <field name="use_default_to" eval="False"/>
+        <field name="email_to">{{ (object.appointment_partner_id or object.partner_ids[:1]).email_formatted }}</field>
         <field name="body_html" type="html">
             <div>
                 <p>Bonjour,</p>
                 <p>Votre rendez-vous <strong t-out="object.name">RDV</strong> est confirmé.</p>
                 <ul>
-                    <li>Date : <span t-out="object.start">date</span></li>
+                    <li>Date : <span t-out="format_datetime(object.start, tz=object.appointment_tz or object.appointment_type_id.resource_calendar_id.tz or 'UTC', dt_format='dd/MM/yyyy HH:mm')">date</span>
+                        (<span t-out="object.appointment_tz or object.appointment_type_id.resource_calendar_id.tz or 'UTC'">fuseau</span>)</li>
                     <li t-if="object.location">Lieu : <span t-out="object.location">lieu</span></li>
                 </ul>
                 <p>À bientôt.</p>

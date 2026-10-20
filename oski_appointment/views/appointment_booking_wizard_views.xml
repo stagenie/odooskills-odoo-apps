@@ -6,9 +6,11 @@
         <field name="arch" type="xml">
             <form string="Prendre rendez-vous">
                 <group>
-                    <field name="appointment_type_id"/>
+                    <field name="appointment_type_id" options="{'no_create': True}"/>
+                    <field name="staff_user_ids" invisible="1"/>
                     <field name="partner_id"/>
-                    <field name="staff_user_id" options="{'no_create': True}"/>
+                    <field name="staff_user_id" options="{'no_create': True}"
+                           domain="[('id', 'in', staff_user_ids)]"/>
                     <field name="slot_start"/>
                 </group>
                 <footer>
