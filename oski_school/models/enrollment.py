@@ -9,11 +9,13 @@ class SchoolEnrollment(models.Model):
     _description = 'Enrollment'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'date desc, id desc'
+    _check_company_auto = True
 
     name = fields.Char(compute='_compute_name', store=True)
-    student_id = fields.Many2one('oski.school.student', required=True, ondelete='restrict', index=True)
+    student_id = fields.Many2one('oski.school.student', required=True, ondelete='restrict', index=True,
+                                 check_company=True)
     class_id = fields.Many2one('oski.school.class', required=True, ondelete='restrict', index=True,
-                               domain="[('state', '=', 'open')]")
+                               check_company=True, domain="[('state', '=', 'open')]")
     period_id = fields.Many2one(related='class_id.period_id', store=True, index=True)
     program_id = fields.Many2one(related='class_id.program_id', store=True, index=True)
     level_id = fields.Many2one(related='class_id.level_id', store=True)
@@ -26,8 +28,10 @@ class SchoolEnrollment(models.Model):
         ('none', 'Not decided'), ('promoted', 'Promoted'),
         ('repeated', 'Repeated'), ('left', 'Left'),
     ], default='none', required=True, copy=False, tracking=True)
-    next_enrollment_id = fields.Many2one('oski.school.enrollment', readonly=True, copy=False)
-    previous_enrollment_id = fields.Many2one('oski.school.enrollment', readonly=True, copy=False)
+    next_enrollment_id = fields.Many2one('oski.school.enrollment', readonly=True, copy=False,
+                                         check_company=True)
+    previous_enrollment_id = fields.Many2one('oski.school.enrollment', readonly=True, copy=False,
+                                             check_company=True)
     withdrawal_reason = fields.Char(copy=False)
     company_id = fields.Many2one(related='class_id.company_id', store=True)
 
@@ -48,10 +52,27 @@ class SchoolEnrollment(models.Model):
                     '%(student)s already has an open enrollment in %(program)s for %(period)s.',
                     student=enr.student_id.name, program=enr.program_id.name, period=enr.period_id.name))
 
+    def write(self, vals):
+        if {'student_id', 'class_id'} & set(vals):
+            locked = self.filtered(lambda e: e.state != 'draft')
+            if locked:
+                raise UserError(self.env._(
+                    'The student and the class of %s can no longer be changed: the enrollment is '
+                    'no longer a draft. Withdraw it and create a new one.', locked[0].name))
+        return super().write(vals)
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_not_draft(self):
+        if any(e.state != 'draft' for e in self):
+            raise UserError(self.env._('Only draft enrollments can be deleted. Withdraw instead.'))
+
     def action_confirm(self):
         for enr in self:
             if enr.state != 'draft':
                 raise UserError(self.env._('Only draft enrollments can be confirmed.'))
+            if enr.period_id.state == 'closed' or enr.class_id.state == 'closed':
+                raise UserError(self.env._(
+                    'The class %s is closed: no enrollment can be confirmed in it.', enr.class_id.name))
             if enr.program_id.guardian_required and not enr.student_id.primary_guardian_id:
                 raise ValidationError(self.env._(
                     'The program %s requires a primary guardian on the student.', enr.program_id.name))
