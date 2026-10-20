@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.TextWidget">
+    <div class="p-2" t-out="props.payload.options.text or ''"/>
+</t>
+</templates>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.DashboardGrid">
+    <div class="o_oski_grid" t-ref="grid" t-att-class="{ o_oski_grid_edit: props.editMode }">
+        <div t-foreach="props.widgets" t-as="widget" t-key="widget.id"
+             class="o_oski_grid_cell" t-att-style="cellStyle(widget)"
+             t-att-data-widget-id="widget.id">
+            <WidgetShell widget="widget" dashboard="props.dashboard"
+                         editMode="props.editMode" globalFilters="props.globalFilters"
+                         reloadStamp="props.reloadStamp"
+                         onEdit="props.onEdit" onRemove="props.onRemove"/>
+            <div t-if="props.editMode" class="o_oski_resize_handle"/>
+        </div>
+    </div>
+</t>
+</templates>

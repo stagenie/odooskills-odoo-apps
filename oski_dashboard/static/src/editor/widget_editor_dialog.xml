@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+<t t-name="oski_dashboard.WidgetEditorDialog">
+    <Dialog title.translate="Widget" size="'lg'">
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-2">
+                    <label class="form-label">Titre</label>
+                    <input class="form-control o_oski_editor_name" t-model="state.values.name"/>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Type</label>
+                    <select class="form-select o_oski_editor_type" t-model="state.values.widget_type">
+                        <option t-foreach="WIDGET_TYPES" t-as="wt" t-key="wt[0]"
+                                t-att-value="wt[0]" t-out="wt[1]"/>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Modèle</label>
+                    <select class="form-select o_oski_editor_model"
+                            t-model.number="state.values.model_id" t-on-change="loadFields">
+                        <option value="">—</option>
+                        <option t-foreach="state.models" t-as="model" t-key="model.id"
+                                t-att-value="model.id" t-out="model.name"/>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Filtre (domaine)</label>
+                    <input class="form-control font-monospace" t-model="state.values.domain"/>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Grouper par</label>
+                    <select class="form-select" t-model.number="state.values.group_by_field_id">
+                        <option value="">—</option>
+                        <option t-foreach="state.fields" t-as="field" t-key="field.id"
+                                t-att-value="field.id" t-out="field.field_description"/>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Mesure</label>
+                    <select class="form-select" t-model.number="state.values.measure_field_id">
+                        <option value="">Nombre d'enregistrements</option>
+                        <option t-foreach="measureFields" t-as="field" t-key="field.id"
+                                t-att-value="field.id" t-out="field.field_description"/>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Champ de période / Période</label>
+                    <div class="d-flex gap-2">
+                        <select class="form-select" t-model.number="state.values.date_field_id">
+                            <option value="">—</option>
+                            <option t-foreach="dateFields" t-as="field" t-key="field.id"
+                                    t-att-value="field.id" t-out="field.field_description"/>
+                        </select>
+                        <select class="form-select" t-model="state.values.period">
+                            <option t-foreach="PERIODS" t-as="period" t-key="period[0]"
+                                    t-att-value="period[0]" t-out="period[1]"/>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="oski_cmp"
+                           t-model="state.values.compare_previous"/>
+                    <label class="form-check-label" for="oski_cmp">Comparer à la période précédente</label>
+                </div>
+            </div>
+            <div class="col-6 border-start">
+                <p class="text-muted small">L'aperçu s'affiche après enregistrement (v1).</p>
+            </div>
+        </div>
+        <t t-set-slot="footer">
+            <button class="btn btn-primary o_oski_editor_save" t-on-click="save">Enregistrer</button>
+            <button class="btn btn-secondary" t-on-click="props.close">Annuler</button>
+        </t>
+    </Dialog>
+</t>
+</templates>

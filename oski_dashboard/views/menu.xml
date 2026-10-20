@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_oski_dashboard" model="ir.actions.client">
+        <field name="name">Tableaux de bord</field>
+        <field name="tag">oski_dashboard.action</field>
+    </record>
+    <menuitem id="menu_oski_dashboard_root" name="Dashboards"
+              action="action_oski_dashboard" sequence="25"
+              web_icon="oski_dashboard,static/description/icon.png"/>
+</odoo>
