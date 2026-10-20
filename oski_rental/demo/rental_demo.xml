@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="demo_cat_vehicles" model="oski.rental.category">
+        <field name="name">Véhicules</field>
+    </record>
+    <record id="demo_cat_rooms" model="oski.rental.category">
+        <field name="name">Salles</field>
+    </record>
+    <record id="demo_cat_machines" model="oski.rental.category">
+        <field name="name">Engins</field>
+    </record>
+
+    <record id="demo_asset_car1" model="oski.rental.asset">
+        <field name="name">Citadine — AB-123-CD</field>
+        <field name="category_id" ref="demo_cat_vehicles"/>
+        <field name="price_day">45</field>
+        <field name="price_week">250</field>
+        <field name="deposit_amount">500</field>
+    </record>
+    <record id="demo_asset_car2" model="oski.rental.asset">
+        <field name="name">Utilitaire 12 m³ — EF-456-GH</field>
+        <field name="category_id" ref="demo_cat_vehicles"/>
+        <field name="price_day">80</field>
+        <field name="price_week">450</field>
+        <field name="deposit_amount">800</field>
+    </record>
+    <record id="demo_asset_room1" model="oski.rental.asset">
+        <field name="name">Salle Atlas — 40 places</field>
+        <field name="category_id" ref="demo_cat_rooms"/>
+        <field name="price_hour">30</field>
+        <field name="price_day">180</field>
+    </record>
+    <record id="demo_asset_room2" model="oski.rental.asset">
+        <field name="name">Salle Hoggar — 12 places</field>
+        <field name="category_id" ref="demo_cat_rooms"/>
+        <field name="price_hour">15</field>
+        <field name="price_day">90</field>
+    </record>
+    <record id="demo_asset_digger" model="oski.rental.asset">
+        <field name="name">Mini-pelle 2,5 t</field>
+        <field name="category_id" ref="demo_cat_machines"/>
+        <field name="price_day">220</field>
+        <field name="price_week">1200</field>
+        <field name="deposit_amount">1500</field>
+    </record>
+    <record id="demo_asset_lift" model="oski.rental.asset">
+        <field name="name">Nacelle 12 m</field>
+        <field name="category_id" ref="demo_cat_machines"/>
+        <field name="price_day">190</field>
+        <field name="price_week">990</field>
+        <field name="deposit_amount">1200</field>
+    </record>
+
+    <record id="demo_partner_1" model="res.partner">
+        <field name="name">BTP Kouba SARL</field>
+    </record>
+    <record id="demo_partner_2" model="res.partner">
+        <field name="name">Événements Méditerranée</field>
+    </record>
+
+    <!-- Devis (draft, futur) -->
+    <record id="demo_order_draft" model="oski.rental.order">
+        <field name="partner_id" ref="demo_partner_2"/>
+        <field name="date_start" eval="(DateTime.now() + timedelta(days=7)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=9)).replace(hour=18, minute=0, second=0)"/>
+    </record>
+    <record id="demo_order_draft_l1" model="oski.rental.order.line">
+        <field name="order_id" ref="demo_order_draft"/>
+        <field name="asset_id" ref="demo_asset_room1"/>
+        <field name="date_start" eval="(DateTime.now() + timedelta(days=7)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=9)).replace(hour=18, minute=0, second=0)"/>
+    </record>
+
+    <!-- Réservée (futur) -->
+    <record id="demo_order_reserved" model="oski.rental.order">
+        <field name="partner_id" ref="demo_partner_1"/>
+        <field name="state">reserved</field>
+        <field name="deposit_state">to_collect</field>
+        <field name="date_start" eval="(DateTime.now() + timedelta(days=3)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=10)).replace(hour=8, minute=0, second=0)"/>
+    </record>
+    <record id="demo_order_reserved_l1" model="oski.rental.order.line">
+        <field name="order_id" ref="demo_order_reserved"/>
+        <field name="asset_id" ref="demo_asset_digger"/>
+        <field name="date_start" eval="(DateTime.now() + timedelta(days=3)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=10)).replace(hour=8, minute=0, second=0)"/>
+    </record>
+
+    <!-- En cours (départ passé, fin future) -->
+    <record id="demo_order_ongoing" model="oski.rental.order">
+        <field name="partner_id" ref="demo_partner_1"/>
+        <field name="state">ongoing</field>
+        <field name="deposit_state">collected</field>
+        <field name="checkout_note">RAS au départ — plein fait.</field>
+        <field name="date_start" eval="(DateTime.now() - timedelta(days=2)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=5)).replace(hour=8, minute=0, second=0)"/>
+    </record>
+    <record id="demo_order_ongoing_l1" model="oski.rental.order.line">
+        <field name="order_id" ref="demo_order_ongoing"/>
+        <field name="asset_id" ref="demo_asset_car1"/>
+        <field name="date_start" eval="(DateTime.now() - timedelta(days=2)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=5)).replace(hour=8, minute=0, second=0)"/>
+    </record>
+
+    <!-- Retournée (passé) -->
+    <record id="demo_order_returned" model="oski.rental.order">
+        <field name="partner_id" ref="demo_partner_2"/>
+        <field name="state">returned</field>
+        <field name="deposit_state">collected</field>
+        <field name="checkout_note">Départ 9h, matériel complet.</field>
+        <field name="checkin_note">Retour conforme.</field>
+        <field name="date_start" eval="(DateTime.now() - timedelta(days=10)).replace(hour=9, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() - timedelta(days=8)).replace(hour=18, minute=0, second=0)"/>
+        <field name="actual_return_date" eval="(DateTime.now() - timedelta(days=8)).replace(hour=17, minute=30, second=0)"/>
+    </record>
+    <record id="demo_order_returned_l1" model="oski.rental.order.line">
+        <field name="order_id" ref="demo_order_returned"/>
+        <field name="asset_id" ref="demo_asset_lift"/>
+        <field name="date_start" eval="(DateTime.now() - timedelta(days=10)).replace(hour=9, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() - timedelta(days=8)).replace(hour=18, minute=0, second=0)"/>
+    </record>
+
+    <!-- Indisponibilités -->
+    <record id="demo_unav_1" model="oski.rental.unavailability">
+        <field name="asset_id" ref="demo_asset_car2"/>
+        <field name="reason">maintenance</field>
+        <field name="note">Révision 20 000 km</field>
+        <field name="date_start" eval="(DateTime.now() + timedelta(days=1)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=2)).replace(hour=18, minute=0, second=0)"/>
+    </record>
+    <record id="demo_unav_2" model="oski.rental.unavailability">
+        <field name="asset_id" ref="demo_asset_room2"/>
+        <field name="reason">immobilization</field>
+        <field name="note">Travaux peinture</field>
+        <field name="date_start" eval="(DateTime.now() + timedelta(days=4)).replace(hour=8, minute=0, second=0)"/>
+        <field name="date_end" eval="(DateTime.now() + timedelta(days=6)).replace(hour=18, minute=0, second=0)"/>
+    </record>
+</odoo>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rental_order_list" model="ir.ui.view">
+        <field name="name">oski.rental.order.list</field>
+        <field name="model">oski.rental.order</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="is_late" decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="amount_total" sum="Total"/>
+                <field name="deposit_state" optional="hide"/>
+                <field name="is_late"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'reserved'"
+                       decoration-success="state in ('ongoing', 'done')"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rental_order_form" model="ir.ui.view">
+        <field name="name">oski.rental.order.form</field>
+        <field name="model">oski.rental.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_reserve" type="object" string="Réserver"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_open_checkout" type="object" string="Départ"
+                            class="btn-primary" invisible="state != 'reserved'"/>
+                    <button name="action_open_checkin" type="object" string="Retour"
+                            class="btn-primary" invisible="state != 'ongoing'"/>
+                    <button name="action_create_invoice" type="object" string="Facturer"
+                            class="btn-primary" invisible="state != 'returned'"/>
+                    <button name="action_refund_deposit" type="object"
+                            string="Rembourser la caution"
+                            invisible="state not in ('returned', 'done') or deposit_state != 'collected'"/>
+                    <button name="action_cancel" type="object" string="Annuler"
+                            invisible="state not in ('draft', 'reserved')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,reserved,ongoing,returned,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoices" type="object"
+                                class="oe_stat_button" icon="fa-pencil-square-o"
+                                invisible="invoice_count == 0">
+                            <field name="invoice_count" widget="statinfo"
+                                   string="Factures"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="En retard" bg_color="text-bg-danger"
+                            invisible="not is_late"/>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <group name="left">
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                            <field name="origin" invisible="origin == 'manual'"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group name="right">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="actual_return_date"
+                                   invisible="not actual_return_date"/>
+                            <field name="is_late" invisible="1"/>
+                            <field name="deposit_state"
+                                   invisible="deposit_state == 'none'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="lines" string="Lignes">
+                            <field name="line_ids"
+                                   context="{'default_date_start': date_start, 'default_date_end': date_end}"
+                                   readonly="state not in ('draft', 'reserved')">
+                                <list editable="bottom">
+                                    <field name="asset_id"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="price_unit"/>
+                                    <field name="deposit" optional="show"/>
+                                    <field name="late_amount" optional="hide"/>
+                                    <field name="price_subtotal"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer">
+                                <field name="amount_subtotal"/>
+                                <field name="deposit_total"/>
+                                <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="notes" string="États des lieux"
+                              invisible="not checkout_note and not checkin_note">
+                            <group>
+                                <field name="checkout_note"/>
+                                <field name="checkin_note"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rental_order_search" model="ir.ui.view">
+        <field name="name">oski.rental.order.search</field>
+        <field name="model">oski.rental.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <filter name="filter_ongoing" string="En cours"
+                        domain="[('state', '=', 'ongoing')]"/>
+                <filter name="filter_reserved" string="Réservées"
+                        domain="[('state', '=', 'reserved')]"/>
+                <filter name="filter_late" string="En retard"
+                        domain="[('state', '=', 'ongoing'), ('date_end', '&lt;', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                <group name="group_by">
+                    <filter name="group_state" string="État"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_partner" string="Client"
+                            context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_rental_order_line_calendar" model="ir.ui.view">
+        <field name="name">oski.rental.order.line.calendar</field>
+        <field name="model">oski.rental.order.line</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date_start" date_stop="date_end"
+                      color="asset_id" mode="month" event_open_popup="1">
+                <field name="order_id"/>
+                <field name="asset_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_rental_order_pivot" model="ir.ui.view">
+        <field name="name">oski.rental.order.pivot</field>
+        <field name="model">oski.rental.order</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="partner_id" type="row"/>
+                <field name="date_start" interval="month" type="col"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_rental_order" model="ir.actions.act_window">
+        <field name="name">Réservations</field>
+        <field name="res_model">oski.rental.order</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Créez votre première location</p>
+        </field>
+    </record>
+
+    <record id="action_rental_calendar" model="ir.actions.act_window">
+        <field name="name">Calendrier</field>
+        <field name="res_model">oski.rental.order.line</field>
+        <field name="view_mode">calendar</field>
+        <field name="domain">[('state', 'not in', ('cancelled',))]</field>
+    </record>
+</odoo>
