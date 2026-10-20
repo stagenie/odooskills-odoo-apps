@@ -9,6 +9,7 @@
                 <field name="start"/>
                 <field name="stop"/>
                 <field name="user_id"/>
+                <field name="appointment_partner_id" optional="show"/>
                 <field name="appointment_type_id"/>
                 <field name="appointment_state"/>
             </list>

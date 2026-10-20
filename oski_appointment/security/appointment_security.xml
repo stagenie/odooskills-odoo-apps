@@ -21,4 +21,10 @@
         <field name="privilege_id" ref="privilege_appointment"/>
         <field name="implied_ids" eval="[(4, ref('group_appointment_user'))]"/>
     </record>
+
+    <record id="appointment_type_company_rule" model="ir.rule">
+        <field name="name">Type de RDV : multi-société</field>
+        <field name="model_id" ref="model_appointment_type"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
 </odoo>

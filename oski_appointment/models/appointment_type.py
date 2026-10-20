@@ -3,7 +3,7 @@ from datetime import datetime, time, timedelta
 import pytz
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class AppointmentType(models.Model):
@@ -76,7 +76,7 @@ class AppointmentType(models.Model):
         end = tz.localize(datetime.combine(date_to, time.max))
         intervals = cal._work_intervals_batch(start, end, resources=None, tz=tz)[False]
         delta = timedelta(hours=self.duration)
-        now_utc = datetime.utcnow()
+        now_utc = fields.Datetime.now()
         notice = now_utc + timedelta(hours=self.min_notice_hours)
         horizon = now_utc + timedelta(days=self.max_days_ahead)
         result = []
@@ -91,3 +91,55 @@ class AppointmentType(models.Model):
                         result.append((slot_start_utc, free.ids))
                 slot += delta
         return sorted(result, key=lambda r: r[0])
+
+    def _check_slot_bookable(self, slot_start_utc, staff=None):
+        """Valide une réservation et renvoie le membre du personnel retenu.
+
+        Le créneau doit être l'un de ceux que propose le moteur (horaires,
+        durée, préavis, horizon, personnel libre) : pas de créneau passé, hors
+        horaires ou décalé. Sans ``staff``, le premier membre libre est pris.
+        Le personnel retenu est verrouillé : deux réservations simultanées du
+        même créneau ne peuvent pas aboutir toutes les deux.
+        """
+        self.ensure_one()
+        if not self.active:
+            raise UserError(
+                "Le type de rendez-vous « %s » est archivé : il n'est plus réservable."
+                % self.name
+            )
+        if not slot_start_utc:
+            raise UserError("Choisissez un créneau.")
+        slot_start_utc = slot_start_utc.replace(microsecond=0)
+        day = slot_start_utc.date()
+        offered = dict(
+            self._get_available_slots(day - timedelta(days=1), day + timedelta(days=1))
+        )
+        free_ids = offered.get(slot_start_utc)
+        if not free_ids:
+            raise UserError(
+                "Ce créneau n'est pas réservable : il est passé, hors des horaires, "
+                "trop proche, trop lointain ou déjà complet."
+            )
+        if staff:
+            if staff.id not in free_ids:
+                raise UserError(
+                    "%s n'est plus disponible sur ce créneau." % staff.name
+                )
+        else:
+            staff = self.env["res.users"].browse(free_ids[0])
+        self._lock_staff(staff)
+        return staff
+
+    def _lock_staff(self, staff):
+        """Sérialise les réservations concurrentes d'un même membre du personnel.
+
+        Une mise à jour (même sans changement) de la ligne res_users fait échouer
+        par conflit de sérialisation la seconde transaction concurrente ; Odoo
+        rejoue alors la requête, qui voit la première réservation et la refuse.
+        Un simple verrou (FOR UPDATE) ne suffirait pas en REPEATABLE READ.
+        """
+        if staff:
+            self.env.cr.execute(
+                "UPDATE res_users SET write_date = write_date WHERE id IN %s",
+                [tuple(staff.ids)],
+            )

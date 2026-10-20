@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 from odoo import Command, fields, models
-from odoo.exceptions import UserError
 
 
 class AppointmentBookingWizard(models.TransientModel):
@@ -11,19 +10,19 @@ class AppointmentBookingWizard(models.TransientModel):
     appointment_type_id = fields.Many2one(
         "appointment.type", string="Type de RDV", required=True
     )
+    staff_user_ids = fields.Many2many(related="appointment_type_id.staff_user_ids")
     partner_id = fields.Many2one("res.partner", string="Client", required=True)
     slot_start = fields.Datetime(string="Créneau", required=True)
-    staff_user_id = fields.Many2one("res.users", string="Avec")
+    staff_user_id = fields.Many2one(
+        "res.users", string="Avec",
+        help="Laisser vide : le premier membre du personnel libre est retenu.",
+    )
 
     def action_confirm(self):
         self.ensure_one()
         atype = self.appointment_type_id
-        delta = timedelta(hours=atype.duration)
-        slot_stop = self.slot_start + delta
-        staff = self.staff_user_id or atype.staff_user_ids[:1]
-        free = atype._slot_free_staff(self.slot_start, slot_stop)
-        if staff not in free:
-            raise UserError("Ce créneau n'est plus disponible.")
+        staff = atype._check_slot_bookable(self.slot_start, self.staff_user_id)
+        slot_stop = self.slot_start + timedelta(hours=atype.duration)
         event = self.env["calendar.event"].create(
             {
                 "name": "%s - %s" % (atype.name, self.partner_id.name),
@@ -33,6 +32,7 @@ class AppointmentBookingWizard(models.TransientModel):
                 "partner_ids": [
                     Command.set((self.partner_id | staff.partner_id).ids)
                 ],
+                "appointment_partner_id": self.partner_id.id,
                 "appointment_type_id": atype.id,
                 "appointment_state": "booked",
                 "alarm_ids": [Command.set(atype.reminder_ids.ids)],

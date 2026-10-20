@@ -1,10 +1,11 @@
 from datetime import date, datetime, timedelta
 
-import pytz
+import psycopg2.errors
 
-from odoo import Command
-from odoo.exceptions import ValidationError
+from odoo import SUPERUSER_ID, Command, api
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 
 class TestAppointment(TransactionCase):
@@ -166,3 +167,179 @@ class TestAppointment(TransactionCase):
         self.assertNotIn(slot.hour, [s[0].hour for s in t._get_available_slots(d, d)])
         event.appointment_state = "cancelled"
         self.assertIn(slot.hour, [s[0].hour for s in t._get_available_slots(d, d)])
+
+    # ---- Contrôles de réservation (lot A24) ----
+    def test_past_slot_refused(self):
+        t = self._make_type(duration=1.0, n_staff=1)
+        y = date.today() - timedelta(days=1)
+        with self.assertRaises(UserError):
+            self._book(t, datetime(y.year, y.month, y.day, 10, 0, 0))
+
+    def test_out_of_hours_slot_refused(self):
+        t = self._make_type(duration=1.0, n_staff=1)
+        d = self._future_date(7)
+        with self.assertRaises(UserError):
+            self._book(t, datetime(d.year, d.month, d.day, 3, 0, 0))
+
+    def test_misaligned_slot_refused(self):
+        t = self._make_type(duration=1.0, n_staff=1)
+        d = self._future_date(7)
+        with self.assertRaises(UserError):
+            self._book(t, datetime(d.year, d.month, d.day, 10, 30, 0))
+
+    def test_archived_type_refused(self):
+        t = self._make_type(duration=1.0, n_staff=1)
+        slot = self._get_first_slot(t, self._future_date(7))
+        t.active = False
+        with self.assertRaises(UserError):
+            self._book(t, slot)
+
+    def test_staff_outside_type_refused(self):
+        t = self._make_type(duration=1.0, n_staff=1)
+        slot = self._get_first_slot(t, self._future_date(7))
+        intruder = self.env["res.users"].create({"name": "Hors", "login": "hors_rdv"})
+        with self.assertRaises(UserError):
+            self._book(t, slot, staff=intruder)
+
+    def test_no_staff_picks_first_free(self):
+        t = self._make_type(duration=1.0, n_staff=2)
+        slot = self._get_first_slot(t, self._future_date(7))
+        busy = t.staff_user_ids[0]
+        self.env["calendar.event"].create({
+            "name": "Occupé", "start": slot, "stop": slot + timedelta(hours=1),
+            "user_id": busy.id, "partner_ids": [Command.set(busy.partner_id.ids)],
+        })
+        wiz = self.env["appointment.booking.wizard"].create({
+            "appointment_type_id": t.id, "partner_id": self.partner.id,
+            "slot_start": slot,
+        })
+        wiz.action_confirm()
+        event = self.env["calendar.event"].search([("appointment_type_id", "=", t.id)])
+        self.assertEqual(event.user_id, t.staff_user_ids[1])
+
+    def test_confirmation_goes_to_client_not_staff(self):
+        # partner_ids est trié par nom : "Aaa" (personnel) passe avant "Zzz" (client)
+        staff = self.env["res.users"].create({
+            "name": "Aaa Personnel", "login": "aaa_rdv", "email": "staff@example.com",
+        })
+        client = self.env["res.partner"].create({"name": "Zzz Client", "email": "client@example.com"})
+        t = self._make_type(duration=1.0, n_staff=0, staff_user_ids=[Command.set(staff.ids)])
+        slot = self._get_first_slot(t, self._future_date(7))
+        self.env["appointment.booking.wizard"].create({
+            "appointment_type_id": t.id, "partner_id": client.id, "slot_start": slot,
+        }).action_confirm()
+        event = self.env["calendar.event"].search([("appointment_type_id", "=", t.id)])
+        self.assertEqual(event.appointment_partner_id, client)
+        mail = self.env["mail.mail"].search([
+            ("model", "=", "calendar.event"), ("res_id", "=", event.id),
+            ("subject", "like", "Confirmation de votre rendez-vous"),
+        ])
+        self.assertEqual(len(mail), 1)
+        # le modèle convertit l'adresse connue en destinataire partenaire
+        recipients = (mail.email_to or "") + " ".join(mail.recipient_ids.mapped("email"))
+        self.assertIn("client@example.com", recipients)
+        self.assertNotIn("staff@example.com", recipients)
+
+    def test_confirmation_date_in_calendar_timezone(self):
+        t = self._make_type(duration=1.0, n_staff=1)
+        t.resource_calendar_id.tz = "Africa/Algiers"  # UTC+1, sans heure d'été
+        slot = self._get_first_slot(t, self._future_date(7))  # 9h locale = 8h UTC
+        self.assertEqual(slot.hour, 8)
+        event = self._book(t, slot)
+        mail = self.env["mail.mail"].search([
+            ("model", "=", "calendar.event"), ("res_id", "=", event.id),
+            ("subject", "like", "Confirmation de votre rendez-vous"),
+        ])
+        self.assertIn("09:00", str(mail.body_html))
+        self.assertNotIn("08:00", str(mail.body_html))
+
+    def test_confirmation_date_in_client_timezone(self):
+        t = self._make_type(duration=1.0, n_staff=1)  # calendrier en UTC
+        slot = self._get_first_slot(t, self._future_date(7))  # 9h UTC
+        event = self._book(t, slot)
+        event.appointment_tz = "Asia/Tokyo"  # UTC+9 toute l'année
+        template = self.env.ref("oski_appointment.mail_template_appointment_confirmation")
+        body = str(template._render_field("body_html", event.ids)[event.id])
+        self.assertIn("18:00", body)
+        self.assertIn("Asia/Tokyo", body)
+
+    def test_type_multi_company_rule(self):
+        other = self.env["res.company"].create({"name": "Autre société RDV"})
+        t = self._make_type(duration=1.0, n_staff=1)
+        user_b = self.env["res.users"].create({
+            "name": "Agent B", "login": "agent_b_rdv",
+            "company_id": other.id, "company_ids": [Command.set(other.ids)],
+            "group_ids": [Command.set(self.env.ref("oski_appointment.group_appointment_user").ids)],
+        })
+        types_b = self.env["appointment.type"].with_user(user_b).search([("id", "=", t.id)])
+        self.assertFalse(types_b)
+        types_main = self.env["appointment.type"].search([("id", "=", t.id)])
+        self.assertEqual(types_main, t)
+
+
+class TestAppointmentConcurrency(TransactionCase):
+    """Deux réservations simultanées du même créneau : une seule aboutit.
+
+    Transactions réelles (curseurs distincts, données validées puis nettoyées) :
+    c'est le seul moyen de reproduire le double clic / deux visiteurs.
+    """
+
+    def test_concurrent_booking_same_slot(self):
+        registry = self.registry
+        with registry.cursor() as cr0:
+            env0 = api.Environment(cr0, SUPERUSER_ID, {})
+            cal = env0["resource.calendar"].create({
+                "name": "Concurrence RDV", "tz": "UTC",
+                "attendance_ids": [
+                    Command.create({
+                        "name": "j%s" % d, "dayofweek": str(d),
+                        "hour_from": 9.0, "hour_to": 17.0, "day_period": "morning",
+                    })
+                    for d in range(7)
+                ],
+            })
+            staff = env0["res.users"].create({"name": "Seul", "login": "seul_rdv_concur"})
+            partners = env0["res.partner"].create([{"name": "Visiteur 1"}, {"name": "Visiteur 2"}])
+            atype = env0["appointment.type"].create({
+                "name": "Concurrence", "duration": 1.0,
+                "resource_calendar_id": cal.id,
+                "staff_user_ids": [Command.set(staff.ids)],
+            })
+            ids = (cal.id, staff.id, partners.ids, atype.id)
+        cal_id, staff_id, partner_ids, type_id = ids
+        d = date.today() + timedelta(days=7)
+        cr1, cr2 = registry.cursor(), registry.cursor()
+        try:
+            env1 = api.Environment(cr1, SUPERUSER_ID, {})
+            env2 = api.Environment(cr2, SUPERUSER_ID, {})
+            slot = env1["appointment.type"].browse(type_id)._get_available_slots(d, d)[0][0]
+            # le second visiteur voit le créneau libre (instantané pris maintenant)
+            self.assertTrue(env2["appointment.type"].browse(type_id)._get_available_slots(d, d))
+
+            def book(env, partner_id):
+                env["appointment.booking.wizard"].create({
+                    "appointment_type_id": type_id, "partner_id": partner_id,
+                    "slot_start": slot,
+                }).action_confirm()
+                env.flush_all()
+
+            book(env1, partner_ids[0])
+            cr1.commit()
+            with self.assertRaises(psycopg2.errors.SerializationFailure), \
+                    mute_logger("odoo.sql_db"):
+                book(env2, partner_ids[1])
+        finally:
+            cr1.rollback()
+            cr2.rollback()
+            cr1.close()
+            cr2.close()
+            with registry.cursor() as cr3:
+                env3 = api.Environment(cr3, SUPERUSER_ID, {})
+                events = env3["calendar.event"].search([("appointment_type_id", "=", type_id)])
+                env3["mail.mail"].search(
+                    [("model", "=", "calendar.event"), ("res_id", "in", events.ids)]
+                ).unlink()
+                events.unlink()
+                env3["appointment.type"].browse(type_id).unlink()
+                env3["resource.calendar"].browse(cal_id).unlink()
+                env3["res.users"].browse(staff_id).active = False
