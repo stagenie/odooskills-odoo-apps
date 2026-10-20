@@ -2,7 +2,7 @@
 <templates xml:space="preserve">
 <t t-name="oski_dashboard.ChartWidget">
     <div class="h-100 position-relative">
-        <canvas t-ref="canvas"/>
+        <canvas t-ref="this.canvasRef"/>
     </div>
 </t>
 </templates>

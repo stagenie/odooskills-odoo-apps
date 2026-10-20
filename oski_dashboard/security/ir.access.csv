@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_oski_dashboard_user,Tableau de bord : utilisateur interne,oski.dashboard,base.group_user,crud,
+access_oski_dashboard_manager,Tableau de bord : responsable,oski.dashboard,oski_dashboard.group_dashboard_manager,crud,
+rule_dashboard_own_or_shared,Tableau de bord : lecture propriétaire ou partagé,oski.dashboard,,r,"['|', ('user_id', '=', user.id), ('group_ids', 'in', user.all_group_ids.ids)] if not user.has_group('oski_dashboard.group_dashboard_manager') else []"
+rule_dashboard_own_write,Tableau de bord : écriture propriétaire,oski.dashboard,,cud,"[('user_id', '=', user.id)] if not user.has_group('oski_dashboard.group_dashboard_manager') else []"
+access_oski_dashboard_widget_user,Widget : utilisateur interne,oski.dashboard.widget,base.group_user,crud,
+access_oski_dashboard_widget_manager,Widget : responsable,oski.dashboard.widget,oski_dashboard.group_dashboard_manager,crud,
+rule_dashboard_widget_follow,Widget : lecture suit le tableau de bord,oski.dashboard.widget,,r,"['|', ('dashboard_id.user_id', '=', user.id), ('dashboard_id.group_ids', 'in', user.all_group_ids.ids)] if not user.has_group('oski_dashboard.group_dashboard_manager') else []"
+rule_dashboard_widget_own_write,Widget : écriture propriétaire du tableau de bord,oski.dashboard.widget,,cud,"[('dashboard_id.user_id', '=', user.id)] if not user.has_group('oski_dashboard.group_dashboard_manager') else []"

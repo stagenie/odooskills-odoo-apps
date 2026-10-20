@@ -1,6 +1,8 @@
-import { Component, EventBus, useState, useSubEnv, onWillStart, onWillUnmount } from "@odoo/owl";
+import { Component, EventBus, proxy, onWillStart, onWillUnmount, useProps } from "@odoo/owl";
+import { useSubEnv } from "@web/owl2/utils";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
+import { standardActionServiceProps } from "@web/webclient/actions/action_plugin";
 import { user } from "@web/core/user";
 import { DashboardGrid } from "./grid/dashboard_grid";
 import { WidgetEditorDialog } from "./editor/widget_editor_dialog";
@@ -14,7 +16,7 @@ export const WIDGET_FIELDS = ["name", "widget_type", "model_id", "model_name",
 export class DashboardAction extends Component {
     static template = "oski_dashboard.DashboardAction";
     static components = { DashboardGrid };
-    static props = ["*"];
+    props = useProps({ ...standardActionServiceProps });
 
     setup() {
         this.orm = useService("orm");
@@ -25,7 +27,7 @@ export class DashboardAction extends Component {
         // et l'ancien layout écraser le nouveau côté serveur.
         this._layoutSaveChain = Promise.resolve();
         useSubEnv({ dashboardBus: new EventBus() });
-        this.state = useState({
+        this.state = proxy({
             dashboards: [], currentId: null, widgets: [], layout: {},
             editMode: false, globalFilters: [],
             // Estampille de (re)chargement du dashboard : incrémentée par

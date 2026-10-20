@@ -1,3 +1,7 @@
+from datetime import UTC, datetime
+from zoneinfo import ZoneInfo
+
+from odoo.exceptions import AccessError
 from odoo.tests import TransactionCase, new_test_user
 
 
@@ -9,7 +13,9 @@ class TestWidgetData(TransactionCase):
         cls.dash = cls.env['oski.dashboard'].with_user(cls.user).create({'name': 'Test'})
         cls.model_partner = cls.env['ir.model']._get('res.partner')
         cls.field_color = cls.env['ir.model.fields']._get('res.partner', 'color')
-        cls.field_company_type = cls.env['ir.model.fields']._get('res.partner', 'company_type')
+        # Odoo 20 : res.partner.company_type supprimé, is_company calculé (TVA).
+        cls.field_type = cls.env['ir.model.fields']._get('res.partner', 'type')
+        cls.field_is_public = cls.env['ir.model.fields']._get('res.partner', 'is_public')
         cls.tag = cls.env['res.partner.category'].sudo().create({'name': 'DashTag'})
         cls.partners = cls.env['res.partner'].sudo().create([
             {'name': 'P1', 'color': 2, 'is_company': True, 'category_id': [(4, cls.tag.id)]},
@@ -37,10 +43,18 @@ class TestWidgetData(TransactionCase):
         self.assertEqual(data['total'], 10)
 
     def test_group_by_selection(self):
-        widget = self._make_widget(widget_type='bar', group_by_field_id=self.field_company_type.id)
+        self.partners[2].sudo().type = 'invoice'
+        widget = self._make_widget(widget_type='bar', group_by_field_id=self.field_type.id)
         data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
         self.assertEqual(sorted(data['values']), [1, 2])
         self.assertEqual(len(data['labels']), 2)
+
+    def test_group_by_non_stored(self):
+        """Champ calculé non stocké (res.partner.is_public) : agrégation Python."""
+        widget = self._make_widget(widget_type='bar', group_by_field_id=self.field_is_public.id)
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
+        self.assertEqual(data['values'], [3])
+        self.assertEqual(data['raw_keys'], [False])
 
     def test_top_n_limit(self):
         field_id = self.env['ir.model.fields']._get('res.partner', 'id')
@@ -65,11 +79,13 @@ class TestWidgetData(TransactionCase):
 
     def test_record_rules_applied(self):
         """Argument marketing : un user restreint voit des chiffres restreints."""
-        self.env['ir.rule'].sudo().create({
+        # Odoo 20 : ir.rule n'existe plus ; une ligne ir.access SANS groupe est
+        # une restriction (ET) appliquée à tous les utilisateurs.
+        self.env['ir.access'].sudo().create({
             'name': 'test partner restrict',
             'model_id': self.model_partner.id,
-            'domain_force': "[('is_company', '=', True)]",
-            'groups': [(4, self.env.ref('base.group_user').id)],
+            'operation': 'r',
+            'domain': "[('color', '>', 2)]",
         })
         widget = self._make_widget()
         data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
@@ -126,16 +142,15 @@ class TestWidgetData(TransactionCase):
 
     def test_period_domain_datetime_utc(self):
         """Bornes datetime converties tz user -> UTC naïf (stockage Odoo)."""
-        import pytz
         self.user.sudo().write({'tz': 'America/New_York'})
         field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
         widget = self._make_widget(date_field_id=field_date.id, period='today')
         widget_as_user = widget.with_user(self.user)
         start, stop, _, _ = widget_as_user._period_window()
         domain = widget_as_user._period_domain(start, stop)
-        tz = pytz.timezone('America/New_York')
-        expected_start = tz.localize(start).astimezone(pytz.utc).replace(tzinfo=None)
-        expected_stop = tz.localize(stop).astimezone(pytz.utc).replace(tzinfo=None)
+        tz = ZoneInfo('America/New_York')
+        expected_start = start.replace(tzinfo=tz).astimezone(UTC).replace(tzinfo=None)
+        expected_stop = stop.replace(tzinfo=tz).astimezone(UTC).replace(tzinfo=None)
         self.assertEqual(domain, [
             ('create_date', '>=', expected_start),
             ('create_date', '<', expected_stop),
@@ -146,11 +161,11 @@ class TestWidgetData(TransactionCase):
         est lu en sudo (comme le cœur) au lieu de faire échouer le widget."""
         hidden = self.env['res.partner'].sudo().create({'name': 'DashHiddenParent'})
         self.partners.sudo().write({'parent_id': hidden.id})
-        self.env['ir.rule'].sudo().create({
+        self.env['ir.access'].sudo().create({
             'name': 'test hide parent',
             'model_id': self.model_partner.id,
-            'domain_force': f"[('id', '!=', {hidden.id})]",
-            'groups': [(4, self.env.ref('base.group_user').id)],
+            'operation': 'r',
+            'domain': f"[('id', '!=', {hidden.id})]",
         })
         field_parent = self.env['ir.model.fields']._get('res.partner', 'parent_id')
         widget = self._make_widget(widget_type='bar', group_by_field_id=field_parent.id)
@@ -175,3 +190,68 @@ class TestWidgetData(TransactionCase):
         data = Widget.with_user(reader).get_widget_data(widget.id)
         self.assertEqual(data['total'], 1)
         self.assertIn(('id', '=', reader.id), data['drill_domain'])
+
+    def test_period_domain_dst_day(self):
+        """Jour de changement d'heure (America/New_York, 08/03/2026 : 23 h) :
+        les bornes UTC suivent le décalage réel de chaque minuit local."""
+        self.user.sudo().write({'tz': 'America/New_York'})
+        field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
+        widget = self._make_widget(date_field_id=field_date.id, period='today')
+        domain = widget.with_user(self.user)._period_domain(
+            datetime(2026, 3, 8), datetime(2026, 3, 9))
+        self.assertEqual(domain, [
+            ('create_date', '>=', datetime(2026, 3, 8, 5, 0)),   # minuit EST = 05:00 UTC
+            ('create_date', '<', datetime(2026, 3, 9, 4, 0)),    # minuit EDT = 04:00 UTC
+        ])
+
+    def test_period_domain_context_tz(self):
+        """Fuseau du contexte (navigateur) prioritaire sur celui du profil,
+        comme context_today() qui calcule les bornes : pas de décalage d'un jour."""
+        self.user.sudo().write({'tz': 'America/New_York'})
+        field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
+        widget = self._make_widget(date_field_id=field_date.id, period='today')
+        domain = widget.with_user(self.user).with_context(tz='Asia/Tokyo')._period_domain(
+            datetime(2026, 1, 15), datetime(2026, 1, 16))
+        self.assertEqual(domain, [
+            ('create_date', '>=', datetime(2026, 1, 14, 15, 0)),
+            ('create_date', '<', datetime(2026, 1, 15, 15, 0)),
+        ])
+
+    def test_no_access_user_cannot_read_figures(self):
+        """Sécurité Odoo 20 (ir.access) : un utilisateur interne ni propriétaire,
+        ni destinataire du partage, ni responsable ne lit ni le widget ni ses chiffres."""
+        widget = self._make_widget()
+        outsider = new_test_user(self.env, login='dash_outsider')
+        Widget = self.env['oski.dashboard.widget'].with_user(outsider)
+        with self.assertRaises(AccessError):
+            Widget.get_widget_data(widget.id)
+        self.assertFalse(Widget.search([('id', '=', widget.id)]))
+        self.assertFalse(self.env['oski.dashboard'].with_user(outsider).search(
+            [('id', '=', self.dash.id)]))
+        with self.assertRaises(AccessError):
+            widget.with_user(outsider).write({'domain': '[]'})
+        with self.assertRaises(AccessError):
+            Widget.create({'dashboard_id': self.dash.id, 'name': 'Intrus',
+                           'widget_type': 'kpi', 'model_id': self.model_partner.id})
+        # Le responsable, lui, lit tout (permission sans domaine + restriction levée).
+        manager = new_test_user(self.env, login='dash_mgr_data',
+                                groups='base.group_user,oski_dashboard.group_dashboard_manager')
+        data = self.env['oski.dashboard.widget'].with_user(manager).get_widget_data(widget.id)
+        self.assertEqual(data['total'], 3)
+
+    def test_shared_reader_reads_but_cannot_change_widget(self):
+        """Lecteur partagé : lit les chiffres (avec SES droits), ne modifie rien."""
+        widget = self._make_widget()
+        group = self.env['res.groups'].sudo().create({'name': 'Lecteurs Dash RO'})
+        reader = new_test_user(self.env, login='dash_reader_ro')
+        reader.sudo().write({'group_ids': [(4, group.id)]})
+        self.dash.sudo().group_ids = group
+        Widget = self.env['oski.dashboard.widget'].with_user(reader)
+        self.assertEqual(Widget.get_widget_data(widget.id)['total'], 3)
+        with self.assertRaises(AccessError):
+            widget.with_user(reader).write({'name': 'X'})
+        with self.assertRaises(AccessError):
+            widget.with_user(reader).unlink()
+        with self.assertRaises(AccessError):
+            Widget.create({'dashboard_id': self.dash.id, 'name': 'Ajout',
+                           'widget_type': 'kpi', 'model_id': self.model_partner.id})

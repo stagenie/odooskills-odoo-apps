@@ -1,4 +1,4 @@
-import { Component, useRef } from "@odoo/owl";
+import { Component, signal, t, useProps } from "@odoo/owl";
 import { WidgetShell } from "../widgets/widget_shell";
 import { useGridDnd } from "./grid_dnd";
 import { GRID_COLS, ROW_HEIGHT } from "./grid_constants";
@@ -8,20 +8,20 @@ export { GRID_COLS, ROW_HEIGHT };
 export class DashboardGrid extends Component {
     static template = "oski_dashboard.DashboardGrid";
     static components = { WidgetShell };
-    static props = {
-        dashboard: Object,
-        widgets: Array,
-        layout: Object,
-        editMode: { type: Boolean, optional: true },
-        globalFilters: { type: Array, optional: true },
-        reloadStamp: { type: Number, optional: true },
-        onEdit: { type: Function, optional: true },
-        onRemove: { type: Function, optional: true },
-        onLayoutChange: { type: Function, optional: true },
-    };
+    props = useProps({
+        dashboard: t.object(),
+        widgets: t.array(),
+        layout: t.object(),
+        editMode: t.boolean().optional(),
+        globalFilters: t.array().optional(),
+        reloadStamp: t.number().optional(),
+        onEdit: t.function().optional(),
+        onRemove: t.function().optional(),
+        onLayoutChange: t.function().optional(),
+    });
 
     setup() {
-        this.gridRef = useRef("grid");
+        this.gridRef = signal.ref();
         useGridDnd(this.gridRef, {
             isEnabled: () => this.props.editMode,
             getLayout: () => this.props.layout,

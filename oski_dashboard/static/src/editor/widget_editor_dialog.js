@@ -1,4 +1,4 @@
-import { Component, useState, onWillStart } from "@odoo/owl";
+import { Component, proxy, onWillStart, t, useProps } from "@odoo/owl";
 import { Dialog } from "@web/core/dialog/dialog";
 import { useService } from "@web/core/utils/hooks";
 
@@ -20,14 +20,14 @@ const PERIODS = [
 export class WidgetEditorDialog extends Component {
     static template = "oski_dashboard.WidgetEditorDialog";
     static components = { Dialog };
-    static props = { dashboardId: Number, widgetId: { type: Number, optional: true },
-                     onSaved: Function, close: Function };
+    props = useProps({ dashboardId: t.number(), widgetId: t.number().optional(),
+                       onSaved: t.function(), close: t.function() });
 
     setup() {
         this.orm = useService("orm");
         this.WIDGET_TYPES = WIDGET_TYPES;
         this.PERIODS = PERIODS;
-        this.state = useState({
+        this.state = proxy({
             values: { name: "Nouveau widget", widget_type: "kpi", model_id: false,
                       domain: "[]", group_by_field_id: false, measure_field_id: false,
                       measure_agg: "sum", date_field_id: false, period: "all",

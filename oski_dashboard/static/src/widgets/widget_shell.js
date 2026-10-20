@@ -1,22 +1,22 @@
-import { Component, useState, onWillStart, onWillUpdateProps } from "@odoo/owl";
+import { Component, proxy, onWillStart, onWillUpdateProps, t, useProps } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { dashboardWidgetRegistry } from "../core/widget_registry";
 
 export class WidgetShell extends Component {
     static template = "oski_dashboard.WidgetShell";
-    static props = {
-        widget: Object,
-        dashboard: Object,
-        editMode: { type: Boolean, optional: true },
-        globalFilters: { type: Array, optional: true },
-        reloadStamp: { type: Number, optional: true },
-        onEdit: { type: Function, optional: true },
-        onRemove: { type: Function, optional: true },
-    };
+    props = useProps({
+        widget: t.object(),
+        dashboard: t.object(),
+        editMode: t.boolean().optional(),
+        globalFilters: t.array().optional(),
+        reloadStamp: t.number().optional(),
+        onEdit: t.function().optional(),
+        onRemove: t.function().optional(),
+    });
 
     setup() {
         this.orm = useService("orm");
-        this.state = useState({ payload: null, error: null });
+        this.state = proxy({ payload: null, error: null });
         this._trackFetchProps(this.props);
         onWillStart(() => this.loadData(this.props));
         // Le parent (DashboardAction/DashboardGrid) se re-rend pour des

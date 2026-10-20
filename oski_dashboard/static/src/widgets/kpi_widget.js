@@ -1,12 +1,12 @@
-import { Component } from "@odoo/owl";
+import { Component, t, useProps } from "@odoo/owl";
 import { dashboardWidgetRegistry } from "../core/widget_registry";
 
 export class KpiWidget extends Component {
     static template = "oski_dashboard.KpiWidget";
-    static props = {
-        widget: Object, payload: Object,
-        onSegmentClick: { type: Function, optional: true },
-    };
+    props = useProps({
+        widget: t.object(), payload: t.object(),
+        onSegmentClick: t.function().optional(),
+    });
 
     get deltaClass() {
         const delta = this.props.payload.delta_pct;

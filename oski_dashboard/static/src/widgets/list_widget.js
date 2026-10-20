@@ -1,12 +1,12 @@
-import { Component } from "@odoo/owl";
+import { Component, t, useProps } from "@odoo/owl";
 import { dashboardWidgetRegistry } from "../core/widget_registry";
 
 export class ListWidget extends Component {
     static template = "oski_dashboard.ListWidget";
-    static props = {
-        widget: Object, payload: Object,
-        onSegmentClick: { type: Function, optional: true },
-    };
+    props = useProps({
+        widget: t.object(), payload: t.object(),
+        onSegmentClick: t.function().optional(),
+    });
 
     get rows() {
         const { labels, values } = this.props.payload;

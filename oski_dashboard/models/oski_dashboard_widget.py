@@ -1,7 +1,6 @@
 import json
-from datetime import datetime, time, timedelta
+from datetime import UTC, datetime, time, timedelta
 
-import pytz
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
@@ -199,7 +198,7 @@ class OskiDashboardWidget(models.Model):
             if odoo_field._description_searchable:
                 domain.append((field_name, '=', value))
             else:
-                # Champ sans recherche SQL (ex. res.partner.company_type,
+                # Champ sans recherche SQL (ex. res.partner.is_public,
                 # champ interface pur compute-only sans search=) : le domaine
                 # ORM ne sait pas le convertir en SQL (ValueError "Cannot
                 # convert ... to SQL because it is not stored"), alors même
@@ -215,7 +214,7 @@ class OskiDashboardWidget(models.Model):
         # Domaine exposé au front pour l'action liste native du dernier niveau
         # (drill.js) : widget.domain + cross-filters + drill path, DÉJÀ
         # résolu ci-dessus (id-in pour les champs non cherchables comme
-        # company_type) — reconstruire ce domaine côté client à partir des
+        # is_public) — reconstruire ce domaine côté client à partir des
         # seules paires {field, value} du drill_path reproduirait le bug SQL
         # ("Cannot convert ... to SQL because it is not stored"). Capturé
         # avant l'ajout de la fenêtre de période (objets datetime Python, non
@@ -307,10 +306,13 @@ class OskiDashboardWidget(models.Model):
             start, stop = start.date(), stop.date()
         else:
             # Champ datetime : stockage en UTC naïf — les bornes calculées à
-            # minuit LOCAL (context_today) doivent être converties tz user → UTC.
-            tz = pytz.timezone(self.env.user.tz or 'UTC')
-            start = tz.localize(start).astimezone(pytz.utc).replace(tzinfo=None)
-            stop = tz.localize(stop).astimezone(pytz.utc).replace(tzinfo=None)
+            # minuit LOCAL (context_today) doivent être converties tz → UTC.
+            # Odoo 20 : pytz n'est plus une dépendance du cœur ; env.tz est un
+            # ZoneInfo (tz du contexte, sinon du profil) — le même fuseau que
+            # context_today(), qui a calculé ces bornes.
+            tz = self.env.tz
+            start = start.replace(tzinfo=tz).astimezone(UTC).replace(tzinfo=None)
+            stop = stop.replace(tzinfo=tz).astimezone(UTC).replace(tzinfo=None)
         return [(field_name, '>=', start), (field_name, '<', stop)]
 
     def _aggregate(self, Model, domain):
@@ -352,7 +354,7 @@ class OskiDashboardWidget(models.Model):
             pairs = [(self._format_group_label(key), value or 0, self._raw_key(key))
                      for key, value in groups]
         else:
-            # Champs calculés non stockés (ex. res.partner.company_type) : _read_group
+            # Champs calculés non stockés (ex. res.partner.is_public) : _read_group
             # ne sait pas les traduire en SQL, on agrège donc en Python. search()
             # applique déjà les règles d'accès de l'utilisateur courant (pas de sudo).
             pairs = self._aggregate_non_stored(Model, domain, odoo_field, measure_field)

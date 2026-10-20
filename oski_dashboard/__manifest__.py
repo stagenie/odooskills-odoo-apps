@@ -1,6 +1,6 @@
 {
     'name': 'OSKI Dashboard',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Productivity',
     'summary': "Constructeur de tableaux de bord drag-and-drop",
     'description': """Composez vos tableaux de bord Odoo sans code : grille drag-and-drop,
@@ -16,7 +16,7 @@ Chaque widget lit ses données avec les droits de l'utilisateur connecté
     'depends': ['web', 'web_tour'],
     'data': [
         'security/dashboard_security.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'views/menu.xml',
         'views/dashboard_views.xml',
     ],

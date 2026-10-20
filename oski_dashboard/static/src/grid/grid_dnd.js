@@ -1,6 +1,7 @@
 import { onMounted, onWillUnmount } from "@odoo/owl";
 import { GRID_COLS, ROW_HEIGHT } from "./grid_constants";
 
+// gridRef : signal.ref() (Odoo 20 / OWL 3) — l'élément se lit par appel, gridRef().
 export function useGridDnd(gridRef, { isEnabled, getLayout, onDrop }) {
     let dragState = null;
 
@@ -53,7 +54,7 @@ export function useGridDnd(gridRef, { isEnabled, getLayout, onDrop }) {
     }
 
     onMounted(() => {
-        const el = gridRef.el;
+        const el = gridRef();
         el.addEventListener("pointerdown", onPointerDown);
         el.addEventListener("pointermove", onPointerMove);
         window.addEventListener("pointerup", onPointerUp);
