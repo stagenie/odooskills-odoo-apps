@@ -37,8 +37,21 @@ export class ScreenDetail extends Component {
             this.state.detail = await this.orm.call(
                 "mrp.workorder", method, [[this.props.orderId], ...args]
             );
+            this._warnConsumption(this.state.detail);
         } catch (e) {
             this.notification.add(e.data?.message || e.message || "Erreur", { type: "danger" });
+        }
+    }
+
+    _warnConsumption(detail) {
+        if (detail?.over_demand) {
+            this.notification.add("Quantité consommée supérieure à la quantité prévue.", { type: "warning" });
+        }
+        if (detail?.needs_lot) {
+            this.notification.add(
+                "Composant suivi par lot ou numéro de série : renseignez-le dans l'ordre de fabrication.",
+                { type: "warning" }
+            );
         }
     }
 
@@ -75,6 +88,7 @@ export class ScreenDetail extends Component {
             if (res.found) {
                 this.state.detail = res.detail;
                 scanFeedback(true);
+                this._warnConsumption(res.detail);
             } else {
                 scanFeedback(false);
                 this.notification.add(`Code non reconnu : ${code}`, { type: "warning" });

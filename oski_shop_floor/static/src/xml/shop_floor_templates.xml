@@ -71,9 +71,9 @@
             </div>
 
             <div class="o_sf_actions">
-                <button class="o_sf_btn o_sf_start" t-if="wo.state !== 'progress' and wo.state !== 'done'"
+                <button class="o_sf_btn o_sf_start" t-if="!wo.is_user_working and wo.state !== 'done' and wo.state !== 'cancel'"
                         t-on-click="() => this.start()">Démarrer</button>
-                <button class="o_sf_btn o_sf_pause" t-if="wo.state === 'progress'"
+                <button class="o_sf_btn o_sf_pause" t-if="wo.state === 'progress' and wo.is_user_working"
                         t-on-click="() => this.pause()">Pause</button>
                 <button class="o_sf_btn o_sf_finish" t-if="wo.state === 'progress'"
                         t-on-click="() => this.finish()">Terminer</button>
