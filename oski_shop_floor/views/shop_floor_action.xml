@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_shop_floor" model="ir.actions.client">
+        <field name="name">Atelier</field>
+        <field name="tag">oski_shop_floor.app</field>
+    </record>
+
+    <menuitem id="menu_shop_floor_root"
+              name="Atelier"
+              web_icon="oski_shop_floor,static/description/icon.png"
+              action="action_shop_floor"
+              groups="mrp.group_mrp_user"
+              sequence="45"/>
+
+</odoo>
