@@ -27,6 +27,7 @@ Fonctionne avec n'importe quelle douchette clavier (USB/Bluetooth) ou la caméra
         'web.assets_backend': [
             'oski_stock_barcode/static/src/scss/barcode.scss',
             'oski_stock_barcode/static/src/xml/barcode_templates.xml',
+            'oski_stock_barcode/static/src/js/barcode_rpc.js',
             'oski_stock_barcode/static/src/js/scan_feedback.js',
             'oski_stock_barcode/static/src/js/qty_stepper.js',
             'oski_stock_barcode/static/src/js/product_search.js',

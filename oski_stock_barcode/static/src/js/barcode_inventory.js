@@ -3,7 +3,7 @@
 import { Component, useState, onMounted } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { useBus } from "@web/core/utils/hooks";
-import { rpc } from "@web/core/network/rpc";
+import { barcodeRpc } from "./barcode_rpc";
 import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
@@ -40,7 +40,7 @@ export class BarcodeInventory extends Component {
     async _loadLocations() {
         this.state.loading = true;
         try {
-            this.state.locations = await rpc('/oski_stock_barcode/get_locations', {});
+            this.state.locations = await barcodeRpc('/oski_stock_barcode/get_locations', {});
         } catch {
             this.notification.add("Erreur de chargement des emplacements", { type: 'danger' });
             this.state.locations = [];
@@ -96,7 +96,7 @@ export class BarcodeInventory extends Component {
         if (!this.state.selectedLocationId) return;
         this.state.loading = true;
         try {
-            const items = await rpc('/oski_stock_barcode/get_location_quants', {
+            const items = await barcodeRpc('/oski_stock_barcode/get_location_quants', {
                 location_id: this.state.selectedLocationId,
             });
             // Initialiser counted_qty à la quantité système pour chaque ligne
@@ -141,7 +141,7 @@ export class BarcodeInventory extends Component {
         // Sur le détail inventaire, chercher un produit
         if (!this.state.selectedLocationId) return;
 
-        const result = await rpc('/oski_stock_barcode/scan_product', { barcode });
+        const result = await barcodeRpc('/oski_stock_barcode/scan_product', { barcode });
         if (!result.found) {
             this.state.lastScan = barcode;
             this.state.lastScanStatus = 'error';
@@ -233,7 +233,7 @@ export class BarcodeInventory extends Component {
             this.notification.add("Aucune modification sur cette ligne", { type: 'warning' });
             return;
         }
-        const result = await rpc('/oski_stock_barcode/apply_inventory', {
+        const result = await barcodeRpc('/oski_stock_barcode/apply_inventory', {
             location_id: this.state.selectedLocationId,
             items: [{ product_id: item.product_id, counted_qty: item.counted_qty }],
         });
@@ -255,7 +255,7 @@ export class BarcodeInventory extends Component {
             this.notification.add("Aucun article modifié", { type: 'warning' });
             return;
         }
-        const result = await rpc('/oski_stock_barcode/apply_inventory', {
+        const result = await barcodeRpc('/oski_stock_barcode/apply_inventory', {
             location_id: this.state.selectedLocationId, items,
         });
         if (result.error) {

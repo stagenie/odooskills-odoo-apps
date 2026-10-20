@@ -3,7 +3,7 @@
 import { Component, useState, onMounted } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { useBus } from "@web/core/utils/hooks";
-import { rpc } from "@web/core/network/rpc";
+import { barcodeRpc } from "./barcode_rpc";
 import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
@@ -41,7 +41,7 @@ export class BarcodeTransfer extends Component {
     }
 
     async _loadLocations() {
-        this.state.locations = await rpc('/oski_stock_barcode/get_locations', {});
+        this.state.locations = await barcodeRpc('/oski_stock_barcode/get_locations', {});
     }
 
     _onSrcChange(ev) { this.state.srcLocationId = parseInt(ev.target.value, 10) || false; this.state.items = []; }
@@ -53,7 +53,7 @@ export class BarcodeTransfer extends Component {
             this.notification.add("Sélectionnez les emplacements", { type: 'warning' }); return;
         }
         const barcode = ev.detail.barcode;
-        const result = await rpc('/oski_stock_barcode/scan_product', { barcode });
+        const result = await barcodeRpc('/oski_stock_barcode/scan_product', { barcode });
         if (!result.found) {
             this.state.lastScan = barcode; this.state.lastScanStatus = 'error';
             ScanFeedback.error();
@@ -75,7 +75,7 @@ export class BarcodeTransfer extends Component {
     async _addOrIncrementProduct(product) {
         const existing = this.state.items.find(i => i.product_id === product.id);
         if (existing) { existing.qty += 1; return; }
-        const quantInfo = await rpc('/oski_stock_barcode/get_quant_info', {
+        const quantInfo = await barcodeRpc('/oski_stock_barcode/get_quant_info', {
             product_id: product.id, location_id: this.state.srcLocationId,
         });
         this.state.items.push({
@@ -106,7 +106,7 @@ export class BarcodeTransfer extends Component {
     async _confirmTransfer() {
         if (!this.canConfirm) return;
         const items = this.state.items.map(i => ({ product_id: i.product_id, qty: i.qty }));
-        const result = await rpc('/oski_stock_barcode/create_transfer', {
+        const result = await barcodeRpc('/oski_stock_barcode/create_transfer', {
             src_location_id: this.state.srcLocationId,
             dest_location_id: this.state.destLocationId, items,
         });
@@ -123,7 +123,7 @@ export class BarcodeTransfer extends Component {
 
     // ── Phase 2 : charger les lignes du picking créé ──
     async _loadLines() {
-        const data = await rpc('/oski_stock_barcode/get_picking_lines', {
+        const data = await barcodeRpc('/oski_stock_barcode/get_picking_lines', {
             picking_id: this.state.pickingId,
         });
         if (data.error) {
@@ -143,7 +143,7 @@ export class BarcodeTransfer extends Component {
             );
         }
         line.done_qty = qty;
-        const r = await rpc('/oski_stock_barcode/update_line_qty', {
+        const r = await barcodeRpc('/oski_stock_barcode/update_line_qty', {
             picking_id: this.state.pickingId,
             product_id: line.product_id, qty,
         });
@@ -173,7 +173,7 @@ export class BarcodeTransfer extends Component {
         this._validating = true;
         let r;
         try {
-            r = await rpc('/oski_stock_barcode/validate_picking', {
+            r = await barcodeRpc('/oski_stock_barcode/validate_picking', {
                 picking_id: this.state.pickingId,
                 create_backorder: true,
             });
@@ -195,7 +195,7 @@ export class BarcodeTransfer extends Component {
 
     // ── Impression ──
     async _printPicking() {
-        const r = await rpc('/oski_stock_barcode/get_report_url', {
+        const r = await barcodeRpc('/oski_stock_barcode/get_report_url', {
             picking_id: this.state.pickingId,
         });
         if (r.error) {

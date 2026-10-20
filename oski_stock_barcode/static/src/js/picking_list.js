@@ -3,7 +3,7 @@
 import { Component, useState, useRef, onMounted } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { useBus } from "@web/core/utils/hooks";
-import { rpc } from "@web/core/network/rpc";
+import { barcodeRpc } from "./barcode_rpc";
 import { ScanFeedback } from "./scan_feedback";
 
 export class PickingList extends Component {
@@ -33,7 +33,7 @@ export class PickingList extends Component {
     async _loadPickings() {
         this.state.loading = true;
         try {
-            this.state.pickings = await rpc('/oski_stock_barcode/get_pickings', {
+            this.state.pickings = await barcodeRpc('/oski_stock_barcode/get_pickings', {
                 picking_type_code: this.props.pickingTypeCode,
             });
         } catch {
@@ -58,7 +58,7 @@ export class PickingList extends Component {
 
     async _onBarcodeScan(ev) {
         const barcode = ev.detail.barcode;
-        const result = await rpc('/oski_stock_barcode/scan_picking', {
+        const result = await barcodeRpc('/oski_stock_barcode/scan_picking', {
             barcode: barcode,
             picking_type_code: this.props.pickingTypeCode,
         });

@@ -3,7 +3,7 @@
 import { Component, useState, onMounted } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { useBus } from "@web/core/utils/hooks";
-import { rpc } from "@web/core/network/rpc";
+import { barcodeRpc } from "./barcode_rpc";
 import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
@@ -35,7 +35,7 @@ export class BarcodeReceipt extends Component {
     }
 
     async _loadLines() {
-        const data = await rpc('/oski_stock_barcode/get_picking_lines', {
+        const data = await barcodeRpc('/oski_stock_barcode/get_picking_lines', {
             picking_id: this.props.pickingId,
         });
         if (data.error) {
@@ -52,7 +52,7 @@ export class BarcodeReceipt extends Component {
 
     async _onBarcodeScan(ev) {
         const barcode = ev.detail.barcode;
-        const result = await rpc('/oski_stock_barcode/scan_product', {
+        const result = await barcodeRpc('/oski_stock_barcode/scan_product', {
             barcode, picking_id: this.props.pickingId,
         });
         if (!result.found) {
@@ -95,7 +95,7 @@ export class BarcodeReceipt extends Component {
     }
 
     async _updateQty(productId, qty) {
-        const r = await rpc('/oski_stock_barcode/update_line_qty', {
+        const r = await barcodeRpc('/oski_stock_barcode/update_line_qty', {
             picking_id: this.props.pickingId, product_id: productId, qty,
         });
         if (r.error) {
@@ -126,7 +126,7 @@ export class BarcodeReceipt extends Component {
         this._validating = true;
         let r;
         try {
-            r = await rpc('/oski_stock_barcode/validate_picking', {
+            r = await barcodeRpc('/oski_stock_barcode/validate_picking', {
                 picking_id: this.props.pickingId,
                 create_backorder: true,
             });
@@ -146,7 +146,7 @@ export class BarcodeReceipt extends Component {
         this.notification.add(msg, { type: 'success' });
     }
     async _printSlip() {
-        const res = await rpc('/oski_stock_barcode/get_report_url',
+        const res = await barcodeRpc('/oski_stock_barcode/get_report_url',
             { picking_id: this.props.pickingId });
         if (res.error) { this.notification.add(res.error, { type: 'danger' }); return; }
         window.open(res.url, '_blank');
