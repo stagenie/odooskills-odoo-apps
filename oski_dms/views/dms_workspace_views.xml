@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dms_workspace_list" model="ir.ui.view">
+        <field name="name">oski.dms.workspace.list</field>
+        <field name="model">oski.dms.workspace</field>
+        <field name="arch" type="xml">
+            <list string="Espaces">
+                <field name="complete_name"/>
+                <field name="document_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dms_workspace_form" model="ir.ui.view">
+        <field name="name">oski.dms.workspace.form</field>
+        <field name="model">oski.dms.workspace</field>
+        <field name="arch" type="xml">
+            <form string="Espace">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="parent_id"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <notebook>
+                        <page string="Droits" name="access">
+                            <group>
+                                <field name="read_group_ids" widget="many2many_tags"/>
+                                <field name="write_group_ids" widget="many2many_tags"/>
+                                <field name="manage_group_ids" widget="many2many_tags"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dms_workspace" model="ir.actions.act_window">
+        <field name="name">Espaces</field>
+        <field name="res_model">oski.dms.workspace</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

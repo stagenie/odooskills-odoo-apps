@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="demo_ws_rh" model="oski.dms.workspace">
+        <field name="name">Ressources Humaines</field>
+    </record>
+    <record id="demo_ws_contrats" model="oski.dms.workspace">
+        <field name="name">Contrats</field>
+        <field name="parent_id" ref="demo_ws_rh"/>
+    </record>
+    <record id="demo_ws_compta" model="oski.dms.workspace">
+        <field name="name">Comptabilité</field>
+    </record>
+
+    <record id="demo_tag_confidentiel" model="oski.dms.tag">
+        <field name="name">Confidentiel</field>
+        <field name="color">1</field>
+    </record>
+    <record id="demo_tag_signe" model="oski.dms.tag">
+        <field name="name">Signé</field>
+        <field name="color">10</field>
+    </record>
+
+    <record id="demo_doc_1" model="oski.dms.document">
+        <field name="name">Note de service</field>
+        <field name="workspace_id" ref="demo_ws_rh"/>
+        <field name="file_name">note.txt</field>
+        <field name="file">bm90ZSBkZSBzZXJ2aWNl</field>
+        <field name="tag_ids" eval="[(4, ref('demo_tag_confidentiel'))]"/>
+    </record>
+    <record id="demo_doc_2" model="oski.dms.document">
+        <field name="name">Contrat type</field>
+        <field name="workspace_id" ref="demo_ws_contrats"/>
+        <field name="file_name">contrat.txt</field>
+        <field name="file">Y29udHJhdCB0eXBl</field>
+        <field name="tag_ids" eval="[(4, ref('demo_tag_signe'))]"/>
+    </record>
+</odoo>

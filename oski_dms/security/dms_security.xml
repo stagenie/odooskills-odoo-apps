@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_dms" model="ir.module.category">
+        <field name="name">Documents</field>
+        <field name="sequence">55</field>
+    </record>
+
+    <record id="group_dms_user" model="res.groups">
+        <field name="name">Documents / Utilisateur</field>
+        <field name="category_id" ref="module_category_dms"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_dms_manager" model="res.groups">
+        <field name="name">Documents / Responsable</field>
+        <field name="category_id" ref="module_category_dms"/>
+        <field name="implied_ids" eval="[(4, ref('group_dms_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <!-- ===== ir.rule — TOUTES scopées groups (anti-leak) ===== -->
+
+    <!-- Document : lecture (membre d'un des 3 groupes de l'espace, comme la
+         règle de lecture de l'espace, OU propriétaire) -->
+    <record id="rule_dms_document_read" model="ir.rule">
+        <field name="name">Document GED : lecture par espace</field>
+        <field name="model_id" ref="model_oski_dms_document"/>
+        <field name="groups" eval="[(4, ref('group_dms_user'))]"/>
+        <field name="domain_force">['|', '|', '|', ('workspace_id.read_group_ids', 'in', user.groups_id.ids), ('workspace_id.write_group_ids', 'in', user.groups_id.ids), ('workspace_id.manage_group_ids', 'in', user.groups_id.ids), ('owner_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Document : écriture/création (membre write_group) -->
+    <record id="rule_dms_document_write" model="ir.rule">
+        <field name="name">Document GED : écriture par espace</field>
+        <field name="model_id" ref="model_oski_dms_document"/>
+        <field name="groups" eval="[(4, ref('group_dms_user'))]"/>
+        <field name="domain_force">[('workspace_id.write_group_ids', 'in', user.groups_id.ids)]</field>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Document : suppression (membre manage_group) -->
+    <record id="rule_dms_document_unlink" model="ir.rule">
+        <field name="name">Document GED : suppression par espace</field>
+        <field name="model_id" ref="model_oski_dms_document"/>
+        <field name="groups" eval="[(4, ref('group_dms_user'))]"/>
+        <field name="domain_force">[('workspace_id.manage_group_ids', 'in', user.groups_id.ids)]</field>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <!-- Workspace : lecture (membre d'un des 3 groupes) -->
+    <record id="rule_dms_workspace_read" model="ir.rule">
+        <field name="name">Espace GED : lecture par groupe</field>
+        <field name="model_id" ref="model_oski_dms_workspace"/>
+        <field name="groups" eval="[(4, ref('group_dms_user'))]"/>
+        <field name="domain_force">['|', '|', ('read_group_ids', 'in', user.groups_id.ids), ('write_group_ids', 'in', user.groups_id.ids), ('manage_group_ids', 'in', user.groups_id.ids)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Manager : accès total, scopé group_dms_manager (NON global) -->
+    <record id="rule_dms_document_manager" model="ir.rule">
+        <field name="name">Document GED : accès total responsable</field>
+        <field name="model_id" ref="model_oski_dms_document"/>
+        <field name="groups" eval="[(4, ref('group_dms_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+    <record id="rule_dms_workspace_manager" model="ir.rule">
+        <field name="name">Espace GED : accès total responsable</field>
+        <field name="model_id" ref="model_oski_dms_workspace"/>
+        <field name="groups" eval="[(4, ref('group_dms_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <!-- Multi-société (globales, comme les règles société standard) -->
+    <record id="rule_dms_workspace_company" model="ir.rule">
+        <field name="name">Espace GED : multi-société</field>
+        <field name="model_id" ref="model_oski_dms_workspace"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+    <record id="rule_dms_document_company" model="ir.rule">
+        <field name="name">Document GED : multi-société</field>
+        <field name="model_id" ref="model_oski_dms_document"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+</odoo>

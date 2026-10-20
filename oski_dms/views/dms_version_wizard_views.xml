@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dms_version_wizard_form" model="ir.ui.view">
+        <field name="name">oski.dms.version.wizard.form</field>
+        <field name="model">oski.dms.version.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Nouvelle version">
+                <group>
+                    <field name="document_id" readonly="1"/>
+                    <field name="file_name" invisible="1"/>
+                    <field name="file" filename="file_name"/>
+                </group>
+                <footer>
+                    <button name="action_create_version" type="object" string="Créer la version"
+                            class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
