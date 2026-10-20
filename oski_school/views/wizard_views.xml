@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_term_generate_wizard_form" model="ir.ui.view">
+        <field name="name">oski.school.term.generate.wizard.form</field>
+        <field name="model">oski.school.term.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="period_id" readonly="1"/>
+                    <field name="count"/>
+                    <field name="label"/>
+                </group>
+                <footer>
+                    <button name="action_generate" type="object" string="Generate" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_enrollment_withdraw_wizard_form" model="ir.ui.view">
+        <field name="name">oski.school.enrollment.withdraw.wizard.form</field>
+        <field name="model">oski.school.enrollment.withdraw.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="enrollment_id" readonly="1"/>
+                    <field name="reason"/>
+                </group>
+                <footer>
+                    <button name="action_withdraw" type="object" string="Withdraw" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_promotion_wizard_form" model="ir.ui.view">
+        <field name="name">oski.school.promotion.wizard.form</field>
+        <field name="model">oski.school.promotion.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="period_id" readonly="line_ids"/>
+                        <field name="target_period_id"/>
+                    </group>
+                    <group>
+                        <field name="class_ids" widget="many2many_tags"/>
+                        <field name="line_count"/>
+                    </group>
+                </group>
+                <field name="line_ids">
+                    <list editable="bottom" create="0">
+                        <field name="class_id"/>
+                        <field name="student_id"/>
+                        <field name="level_id"/>
+                        <field name="decision"/>
+                        <field name="target_class_id" domain="[('period_id', '=', parent.target_period_id)]"/>
+                    </list>
+                </field>
+                <footer>
+                    <button name="action_load_lines" type="object" string="Reload proposal"/>
+                    <button name="action_apply" type="object" string="Apply" class="btn-primary"
+                            invisible="not line_ids" confirm="Apply these decisions? New enrollments will be created."/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_structure_duplicate_wizard_form" model="ir.ui.view">
+        <field name="name">oski.school.structure.duplicate.wizard.form</field>
+        <field name="model">oski.school.structure.duplicate.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="period_id" readonly="1"/>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                    <group>
+                        <field name="date_start"/>
+                        <field name="date_end"/>
+                        <field name="copy_terms"/>
+                        <field name="copy_classes"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_duplicate" type="object" string="Duplicate" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

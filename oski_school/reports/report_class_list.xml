@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_class_list">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2><span t-field="doc.name"/> — <span t-field="doc.period_id.name"/></h2>
+                        <p>
+                            <span t-field="doc.program_id.name"/> · <span t-field="doc.level_id.name"/>
+                            <t t-if="doc.homeroom_teacher_id"> · Homeroom: <span t-field="doc.homeroom_teacher_id.name"/></t>
+                            · <span t-field="doc.student_count"/> students
+                        </p>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr><th>#</th><th>Registration</th><th>Student</th><th>Birth date</th><th>Primary guardian</th><th>Phone</th></tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="rows" t-value="doc.enrollment_ids.filtered(lambda e: e.state in ('confirmed', 'active')).sorted(lambda e: e.student_id.name)"/>
+                                <tr t-foreach="rows" t-as="enr">
+                                    <td><t t-out="enr_index + 1"/></td>
+                                    <td><span t-field="enr.student_id.registration_number"/></td>
+                                    <td><span t-field="enr.student_id.name"/></td>
+                                    <td><span t-field="enr.student_id.birth_date"/></td>
+                                    <td><span t-field="enr.student_id.primary_guardian_id.partner_id.name"/></td>
+                                    <td><span t-field="enr.student_id.primary_guardian_id.partner_id.phone"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

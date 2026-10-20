@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_teacher_form" model="ir.ui.view">
+        <field name="name">oski.school.teacher.form</field>
+        <field name="model">oski.school.teacher</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="image_128" widget="image" class="oe_avatar"/>
+                    <div class="oe_title"><h1><field name="partner_id" placeholder="Contact"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="employee_code"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="main" string="Teaches">
+                            <field name="class_subject_ids" readonly="1">
+                                <list>
+                                    <field name="class_id"/>
+                                    <field name="subject_id"/>
+                                    <field name="period_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="skills" string="Can teach">
+                            <field name="subject_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_school_teacher_list" model="ir.ui.view">
+        <field name="name">oski.school.teacher.list</field>
+        <field name="model">oski.school.teacher</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="employee_code"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="subject_ids" widget="many2many_tags"/>
+                <field name="user_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_school_teacher" model="ir.actions.act_window">
+        <field name="name">Teachers</field>
+        <field name="res_model">oski.school.teacher</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
