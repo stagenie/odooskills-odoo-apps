@@ -293,3 +293,15 @@ class TestWidgetData(TransactionCase):
         widget = self._make_widget(limit=0)
         with self.assertRaises(ValidationError):
             widget.write({'limit': -3})
+
+    def test_non_stored_aggregate_selection_labels(self):
+        """Agrégat Python (champ non stocké) groupé par une sélection : libellés
+        affichés, pas les clés techniques (sélection = tuple en Odoo 20)."""
+        widget = self._make_widget(widget_type='bar')
+        Partner = self.env['res.partner'].with_user(self.user)
+        pairs = widget.with_user(self.user)._aggregate_non_stored(
+            Partner, [('id', 'in', self.partners.ids)], Partner._fields['type'], None)
+        labels = dict(Partner._fields['type']._description_selection(self.env))
+        self.assertEqual({p[2] for p in pairs}, {'contact'})
+        self.assertEqual([p[0] for p in pairs], [labels['contact']])
+        self.assertNotEqual(labels['contact'], 'contact')

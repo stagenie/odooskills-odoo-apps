@@ -404,8 +404,11 @@ class OskiDashboardWidget(models.Model):
                 order.append(key)
             ids_by_key[key].append(record.id)
         selection_map = {}
-        if group_field.type == 'selection' and isinstance(group_field.selection, list):
-            selection_map = dict(group_field.selection)
+        if group_field.type == 'selection':
+            # Odoo 20 : une sélection statique est un tuple (orm/fields_selection.py:176) —
+            # isinstance(..., list) était faux sans bruit (clés brutes affichées) ;
+            # _description_selection gère aussi les sélections calculées et traduites.
+            selection_map = dict(group_field._description_selection(self.env))
         pairs = []
         for key in order:
             group_records = Model.browse(ids_by_key[key])
