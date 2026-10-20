@@ -1,18 +1,18 @@
 /** @odoo-module **/
 
-import { Component, useState } from "@odoo/owl";
+import { Component, proxy, useProps, t } from "@odoo/owl";
 
 export class QtyStepper extends Component {
     static template = "oski_stock_barcode.QtyStepper";
-    static props = {
-        value: Number,
-        onChange: Function,
-        min: { type: Number, optional: true },
-        max: { type: Number, optional: true },
-    };
+    props = useProps({
+        value: t.number(),
+        onChange: t.function(),
+        min: t.number().optional(),
+        max: t.number().optional(),
+    });
 
     setup() {
-        this.state = useState({ pressing: false });
+        this.state = proxy({ pressing: false });
         this._interval = null;
     }
 

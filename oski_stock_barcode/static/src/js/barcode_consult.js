@@ -1,9 +1,10 @@
 /** @odoo-module **/
 
-import { Component, useState } from "@odoo/owl";
-import { useService } from "@web/core/utils/hooks";
+import { Component, proxy, usePlugin, useProps, t } from "@odoo/owl";
+import { NotificationPlugin } from "@web/core/notifications/notification_plugin";
 import { useBus } from "@web/core/utils/hooks";
 import { rpc } from "@web/core/network/rpc";
+import { BarcodePlugin } from "@barcodes/barcode_plugin";
 import { ProductSearch } from "./product_search";
 import { ScanBanner } from "./scan_banner";
 import { ScanFeedback } from "./scan_feedback";
@@ -11,14 +12,14 @@ import { ScanFeedback } from "./scan_feedback";
 export class BarcodeConsult extends Component {
     static template = "oski_stock_barcode.BarcodeConsult";
     static components = { ProductSearch, ScanBanner };
-    static props = { onBack: Function };
+    props = useProps({ onBack: t.function() });
 
     setup() {
-        this.notification = useService("notification");
-        const barcodeService = useService("barcode");
+        this.notification = usePlugin(NotificationPlugin);
+        const barcodeService = usePlugin(BarcodePlugin);
         useBus(barcodeService.bus, "barcode_scanned", (ev) => this._onBarcodeScan(ev));
 
-        this.state = useState({
+        this.state = proxy({
             mode: 'scan',
             // Résultat affiché : produit ou emplacement
             viewType: false, // 'product' | 'location' | false

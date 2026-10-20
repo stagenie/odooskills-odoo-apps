@@ -62,7 +62,8 @@ class AdiStockBarcodeController(http.Controller):
         seul le drapeau ``picked`` distingue ce qui a été scanné. Les articles
         suivis (lot / n° de série) gardent la somme des lignes, gérée par
         oski_stock_barcode_lot."""
-        if move.product_id.tracking != 'none':
+        # Odoo 20 : plus de valeur 'none' (non suivi = False, stock/models/product.py:835).
+        if move.product_id.tracking:
             return sum(move.move_line_ids.mapped('quantity'))
         return move.quantity if move.picked else 0.0
 
@@ -73,7 +74,7 @@ class AdiStockBarcodeController(http.Controller):
         free = request.env['stock.quant']._get_available_quantity(
             move.product_id, move.location_id)
         free = move.product_id.uom_id._compute_quantity(
-            free, move.product_uom, round=False)
+            free, move.uom_id, round=False)
         return free + move.quantity
 
     # ══════════════════════════════════════════════════════════════
@@ -169,7 +170,7 @@ class AdiStockBarcodeController(http.Controller):
             'done_qty': done_qty,
             'reserved_qty': move.product_uom_qty if move.state == 'assigned' else 0,
             'available_qty': available_qty,
-            'uom_name': move.product_uom.name if move.product_uom else '',
+            'uom_name': move.uom_id.name if move.uom_id else '',
         }
 
     @http.route('/oski_stock_barcode/get_picking_lines', type='jsonrpc', auth='user')
@@ -214,19 +215,19 @@ class AdiStockBarcodeController(http.Controller):
         # Contrôle de disponibilité pour les sorties (outgoing/internal)
         if picking.picking_type_id.code in ('outgoing', 'internal'):
             available = self._available_for_move(move)
-            if move.product_uom.compare(qty, available) > 0:
+            if move.uom_id.compare(qty, available) > 0:
                 return {
                     'error': f'Stock insuffisant : {available} disponible(s) pour {move.product_id.display_name}',
                     'available_qty': available,
                 }
 
-        if move.product_uom.compare(qty, 0) > 0:
+        if move.uom_id.compare(qty, 0) > 0:
             # quantity (inverse) ajuste réservation et lignes ; picked = « scanné ».
             move.quantity = qty
             move.picked = True
         else:
             move.picked = False
-            if move.product_uom.compare(move.quantity, move.product_uom_qty) > 0:
+            if move.uom_id.compare(move.quantity, move.product_uom_qty) > 0:
                 move.quantity = move.product_uom_qty
 
         code = picking.picking_type_id.code
@@ -261,7 +262,7 @@ class AdiStockBarcodeController(http.Controller):
                 if done_qty <= 0:
                     continue
                 available = self._available_for_move(move)
-                if move.product_uom.compare(done_qty, available) > 0:
+                if move.uom_id.compare(done_qty, available) > 0:
                     return {
                         'error': f'Stock insuffisant pour {move.product_id.display_name}: '
                                  f'{done_qty} demandé(s), {available} disponible(s)',
@@ -691,7 +692,7 @@ class AdiStockBarcodeController(http.Controller):
             request.env['stock.move'].create({
                 'product_id': product.id,
                 'product_uom_qty': item['qty'],
-                'product_uom': product.uom_id.id,
+                'uom_id': product.uom_id.id,
                 'location_id': src.id,
                 'location_dest_id': dest.id,
                 'picking_id': picking.id,
@@ -736,8 +737,8 @@ class AdiStockBarcodeController(http.Controller):
     @http.route('/oski_stock_barcode/get_session_log', type='jsonrpc', auth='user')
     def get_session_log(self, day=False):
         """Journal des scans de l'utilisateur courant pour un jour donné."""
-        import pytz
-        from datetime import datetime, time
+        from datetime import UTC, datetime, time
+        from zoneinfo import ZoneInfo
 
         Log = request.env['oski.barcode.scan.log']
         user = request.env.user
@@ -745,11 +746,11 @@ class AdiStockBarcodeController(http.Controller):
         target = fields.Date.to_date(day) if day else today
         # create_date is stored UTC; convert the user's LOCAL day bounds to UTC
         # before comparing, otherwise the window is shifted by the tz offset.
-        tz = pytz.timezone(request.env.user.tz or 'UTC')
-        local_start = tz.localize(datetime.combine(target, time.min))
-        local_end = tz.localize(datetime.combine(target, time.max))
-        start = local_start.astimezone(pytz.utc).replace(tzinfo=None)
-        end = local_end.astimezone(pytz.utc).replace(tzinfo=None)
+        tz = ZoneInfo(request.env.user.tz or 'UTC')
+        local_start = datetime.combine(target, time.min, tzinfo=tz)
+        local_end = datetime.combine(target, time.max, tzinfo=tz)
+        start = local_start.astimezone(UTC).replace(tzinfo=None)
+        end = local_end.astimezone(UTC).replace(tzinfo=None)
         records = Log.search([
             ('user_id', '=', user.id),
             ('create_date', '>=', start), ('create_date', '<=', end)])

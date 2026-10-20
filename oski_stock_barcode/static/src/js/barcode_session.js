@@ -1,16 +1,16 @@
 /** @odoo-module **/
 
-import { Component, useState, onMounted } from "@odoo/owl";
-import { useService } from "@web/core/utils/hooks";
+import { Component, onMounted, proxy, usePlugin, useProps, t } from "@odoo/owl";
+import { NotificationPlugin } from "@web/core/notifications/notification_plugin";
 import { rpc } from "@web/core/network/rpc";
 
 export class BarcodeSession extends Component {
     static template = "oski_stock_barcode.BarcodeSession";
-    static props = { onBack: Function };
+    props = useProps({ onBack: t.function() });
 
     setup() {
-        this.notification = useService("notification");
-        this.state = useState({ lines: [], summary: {}, loading: true });
+        this.notification = usePlugin(NotificationPlugin);
+        this.state = proxy({ lines: [], summary: {}, loading: true });
         onMounted(() => this._load());
     }
 

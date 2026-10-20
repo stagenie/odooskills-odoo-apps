@@ -27,7 +27,6 @@
         <field name="model">stock.location</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">oski_stock_barcode.report_location_barcode</field>
-        <field name="report_file">oski_stock_barcode.report_location_barcode</field>
         <field name="binding_model_id" ref="stock.model_stock_location"/>
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="base.paperformat_euro"/>

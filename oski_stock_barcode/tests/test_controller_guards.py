@@ -31,7 +31,7 @@ class TestControllerGuards(HttpCase):
             'location_dest_id': self.customers.id,
             'move_ids': [(0, 0, {
                 'product_id': self.product.id, 'product_uom_qty': qty,
-                'product_uom': self.product.uom_id.id,
+                'uom_id': self.product.uom_id.id,
                 'location_id': self.stock.id,
                 'location_dest_id': self.customers.id})],
         })
@@ -176,7 +176,7 @@ class TestControllerGuards(HttpCase):
             'company_id': company_b.id,
             'move_ids': [(0, 0, {
                 'product_id': product_b.id, 'product_uom_qty': 1,
-                'product_uom': product_b.uom_id.id,
+                'uom_id': product_b.uom_id.id,
                 'location_id': wh_b.lot_stock_id.id,
                 'location_dest_id': self.customers.id,
                 'company_id': company_b.id})],

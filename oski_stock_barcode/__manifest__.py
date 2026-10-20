@@ -1,10 +1,10 @@
 {
     'name': 'Code-barres Stock',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Inventory/Stock',
     'summary': "Interface tactile de scan code-barres pour les opérations de stock : "
                "réception, expédition, inventaire, transfert, consultation",
-    'description': """Application tactile mobile-first de lecture code-barres pour Odoo 19 CE.
+    'description': """Application tactile mobile-first de lecture code-barres pour Odoo 20 CE.
 Cinq écrans dédiés — réception, expédition, inventaire interne, transfert et
 consultation — avec saisie au scan ou manuelle, retour sonore et vibration,
 gestion des reliquats, étiquettes d'emplacement et code-barres sur bon de livraison.
@@ -17,8 +17,7 @@ Fonctionne avec n'importe quelle douchette clavier (USB/Bluetooth) ou la caméra
     'images': ['static/description/banner.png'],
     'depends': ['stock', 'barcodes'],
     'data': [
-        'security/ir.model.access.csv',
-        'security/barcode_security.xml',
+        'security/ir.access.csv',
         'views/barcode_views.xml',
         'views/stock_views_inherit.xml',
         'views/report_inherit.xml',

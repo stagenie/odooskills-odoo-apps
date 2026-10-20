@@ -1,29 +1,29 @@
 /** @odoo-module **/
 
-import { Component, useState, useRef, onMounted } from "@odoo/owl";
+import { Component, proxy, onMounted, signal, useProps, t } from "@odoo/owl";
 import { rpc } from "@web/core/network/rpc";
 
 export class ProductSearch extends Component {
     static template = "oski_stock_barcode.ProductSearch";
-    static props = {
-        onProductSelected: Function,
-        placeholder: { type: String, optional: true },
-        storableOnly: { type: Boolean, optional: true },
-    };
+    props = useProps({
+        onProductSelected: t.function(),
+        placeholder: t.string().optional(),
+        storableOnly: t.boolean().optional(),
+    });
 
     setup() {
-        this.state = useState({
+        this.state = proxy({
             query: '',
             results: [],
             loading: false,
             showDropdown: false,
         });
-        this.inputRef = useRef("searchInput");
+        this.inputRef = signal.ref();
         this._debounceTimer = null;
 
         onMounted(() => {
-            if (this.inputRef.el) {
-                this.inputRef.el.focus();
+            if (this.inputRef()) {
+                this.inputRef().focus();
             }
         });
     }
@@ -73,8 +73,8 @@ export class ProductSearch extends Component {
         this.state.results = [];
         this.state.showDropdown = false;
         this.props.onProductSelected(product);
-        if (this.inputRef.el) {
-            this.inputRef.el.focus();
+        if (this.inputRef()) {
+            this.inputRef().focus();
         }
     }
 

@@ -1,9 +1,10 @@
 /** @odoo-module **/
 
-import { Component, useState, onMounted } from "@odoo/owl";
-import { useService } from "@web/core/utils/hooks";
+import { Component, onMounted, proxy, usePlugin, useProps, t } from "@odoo/owl";
+import { NotificationPlugin } from "@web/core/notifications/notification_plugin";
 import { useBus } from "@web/core/utils/hooks";
 import { rpc } from "@web/core/network/rpc";
+import { BarcodePlugin } from "@barcodes/barcode_plugin";
 import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
@@ -12,14 +13,14 @@ import { ScanFeedback } from "./scan_feedback";
 export class BarcodeDelivery extends Component {
     static template = "oski_stock_barcode.BarcodeDelivery";
     static components = { ProductSearch, QtyStepper, ScanBanner };
-    static props = { onBack: Function, pickingId: Number };
+    props = useProps({ onBack: t.function(), pickingId: t.number() });
 
     setup() {
-        this.notification = useService("notification");
-        const barcodeService = useService("barcode");
+        this.notification = usePlugin(NotificationPlugin);
+        const barcodeService = usePlugin(BarcodePlugin);
         useBus(barcodeService.bus, "barcode_scanned", (ev) => this._onBarcodeScan(ev));
 
-        this.state = useState({
+        this.state = proxy({
             lines: [],
             mode: 'scan',
             pickingName: '',

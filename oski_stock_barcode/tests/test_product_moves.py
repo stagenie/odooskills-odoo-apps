@@ -14,7 +14,7 @@ class TestProductMoves(HttpCase):
         for i in range(2):
             move = self.env['stock.move'].create({
                 'product_id': product.id, 'product_uom_qty': 1,
-                'product_uom': product.uom_id.id,
+                'uom_id': product.uom_id.id,
                 'location_id': supplier.id, 'location_dest_id': stock.id})
             move._action_confirm()
             move.quantity = 1
@@ -24,13 +24,19 @@ class TestProductMoves(HttpCase):
         lines = self.env['stock.move.line'].search(
             [('product_id', '=', product.id), ('state', '=', 'done')])
         self.assertGreaterEqual(len(lines), 2)
-        self.env.cr.execute(
-            "UPDATE stock_move_line SET date = %s WHERE id = %s",
-            ('2026-01-01 08:00:00', lines[0].id))
-        self.env.cr.execute(
-            "UPDATE stock_move_line SET date = %s WHERE id = %s",
-            ('2026-06-01 08:00:00', lines[1].id))
-        self.env.cr.flush()
+        # Odoo 20 : stock.move.line.date = related stocké de move_id.date
+        # (stock/models/stock_move_line.py:61) → vider l'ORM AVANT l'UPDATE,
+        # sinon le recalcul en attente écrase la date forcée ; dater aussi le
+        # mouvement pour rester cohérent avec le related.
+        self.env.flush_all()
+        for line, date in ((lines[0], '2026-01-01 08:00:00'),
+                           (lines[1], '2026-06-01 08:00:00')):
+            self.env.cr.execute(
+                "UPDATE stock_move_line SET date = %s WHERE id = %s",
+                (date, line.id))
+            self.env.cr.execute(
+                "UPDATE stock_move SET date = %s WHERE id = %s",
+                (date, line.move_id.id))
         self.env.invalidate_all()
 
         self.authenticate('admin', 'admin')

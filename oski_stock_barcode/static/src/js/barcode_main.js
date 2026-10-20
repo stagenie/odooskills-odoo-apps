@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Component, useState, onMounted } from "@odoo/owl";
+import { Component, proxy, onMounted } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { rpc } from "@web/core/network/rpc";
 import { PickingList } from "./picking_list";
@@ -16,7 +16,7 @@ export class BarcodeMain extends Component {
     static components = { PickingList, BarcodeReceipt, BarcodeDelivery, BarcodeInventory, BarcodeTransfer, BarcodeConsult, BarcodeSession };
 
     setup() {
-        this.state = useState({
+        this.state = proxy({
             currentScreen: 'home',
             counts: { incoming: 0, outgoing: 0, internal: 0 },
             selectedPickingId: false,

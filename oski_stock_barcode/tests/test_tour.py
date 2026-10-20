@@ -19,7 +19,7 @@ class TestBarcodeTour(HttpCase):
             'origin': 'OSKI-TOUR',
             'move_ids': [(0, 0, {
                 'product_id': product.id, 'product_uom_qty': 2,
-                'product_uom': product.uom_id.id,
+                'uom_id': product.uom_id.id,
                 'location_id': stock.id, 'location_dest_id': customers.id})],
         })
         picking.action_confirm()

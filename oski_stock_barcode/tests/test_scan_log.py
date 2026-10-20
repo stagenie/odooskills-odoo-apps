@@ -58,18 +58,18 @@ class TestSessionLogEndpoint(HttpCase):
         attributed to the correct local day, even though its create_date
         (stored UTC) falls on the previous UTC calendar day. Regression test
         for the naive-UTC day-bounds bug in get_session_log."""
-        import pytz
-        from datetime import datetime, time as dtime
+        from datetime import UTC, datetime, time as dtime
+        from zoneinfo import ZoneInfo
 
         admin = self.env.ref('base.user_admin')
         admin.tz = 'Africa/Algiers'
         Log = self.env['oski.barcode.scan.log']
         log = Log.create({'action': 'delivery', 'quantity': 2, 'user_id': admin.id})
 
-        tz = pytz.timezone('Africa/Algiers')
+        tz = ZoneInfo('Africa/Algiers')
         target_local_day = datetime.now(tz).date()
-        local_early = tz.localize(datetime.combine(target_local_day, dtime(0, 30)))
-        utc_naive = local_early.astimezone(pytz.utc).replace(tzinfo=None)
+        local_early = datetime.combine(target_local_day, dtime(0, 30), tzinfo=tz)
+        utc_naive = local_early.astimezone(UTC).replace(tzinfo=None)
         self.env.cr.execute(
             "UPDATE oski_barcode_scan_log SET create_date = %s WHERE id = %s",
             (utc_naive, log.id))

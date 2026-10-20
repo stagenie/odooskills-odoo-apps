@@ -1,15 +1,15 @@
 /** @odoo-module **/
 
-import { Component, useState } from "@odoo/owl";
+import { Component, useProps, t } from "@odoo/owl";
 
 export class ScanBanner extends Component {
     static template = "oski_stock_barcode.ScanBanner";
-    static props = {
-        active: { type: Boolean, optional: true },
-        lastScan: { type: String, optional: true },
-        lastScanStatus: { type: String, optional: true },
-        message: { type: String, optional: true },
-    };
+    props = useProps({
+        active: t.boolean().optional(),
+        lastScan: t.string().optional(),
+        lastScanStatus: t.string().optional(),
+        message: t.string().optional(),
+    });
 
     get bannerClass() {
         if (this.props.lastScanStatus === 'success') return 'o_scan_banner o_scan_success';

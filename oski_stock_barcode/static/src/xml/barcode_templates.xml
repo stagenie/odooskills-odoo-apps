@@ -7,41 +7,41 @@
     <t t-name="oski_stock_barcode.BarcodeMain">
         <div class="o_barcode_main">
             <!-- Home -->
-            <t t-if="state.currentScreen === 'home'">
+            <t t-if="this.state.currentScreen === 'home'">
                 <div class="o_barcode_title">OPERATIONS STOCK</div>
                 <div class="o_barcode_grid">
                     <div class="o_barcode_card" t-on-click="() => this._navigate('receipt_list')">
-                        <span class="o_card_icon fa fa-download"/>
+                        <span class="oi o_card_icon" data-icon="download"/>
                         <span class="o_card_label">RECEPTION</span>
-                        <span class="o_card_count" t-if="state.counts.incoming > 0">
-                            <t t-out="state.counts.incoming"/> en attente
+                        <span class="o_card_count" t-if="this.state.counts.incoming > 0">
+                            <t t-out="this.state.counts.incoming"/> en attente
                         </span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('delivery_list')">
-                        <span class="o_card_icon fa fa-upload"/>
+                        <span class="oi o_card_icon" data-icon="upload"/>
                         <span class="o_card_label">EXPEDITION</span>
-                        <span class="o_card_count" t-if="state.counts.outgoing > 0">
-                            <t t-out="state.counts.outgoing"/> en attente
+                        <span class="o_card_count" t-if="this.state.counts.outgoing > 0">
+                            <t t-out="this.state.counts.outgoing"/> en attente
                         </span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('inventory')">
-                        <span class="o_card_icon fa fa-clipboard"/>
+                        <span class="oi o_card_icon" data-icon="content_paste"/>
                         <span class="o_card_label">INVENTAIRE</span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('transfer')">
-                        <span class="o_card_icon fa fa-exchange"/>
+                        <span class="oi o_card_icon" data-icon="swap_horiz"/>
                         <span class="o_card_label">TRANSFERT</span>
-                        <span class="o_card_count" t-if="state.counts.internal > 0">
-                            <t t-out="state.counts.internal"/> en attente
+                        <span class="o_card_count" t-if="this.state.counts.internal > 0">
+                            <t t-out="this.state.counts.internal"/> en attente
                         </span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('consult')">
-                        <span class="o_card_icon fa fa-info-circle"/>
+                        <span class="oi o_card_icon" data-icon="info"/>
                         <span class="o_card_label">CONSULTATION</span>
                         <span class="o_card_count">Info article</span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('session')">
-                        <span class="o_card_icon fa fa-user-circle"/>
+                        <span class="oi o_card_icon" data-icon="account_circle"/>
                         <span class="o_card_label">MA SESSION</span>
                         <span class="o_card_count">Journal du jour</span>
                     </div>
@@ -49,24 +49,24 @@
             </t>
 
             <!-- Picking Lists (navigation niveau 2) -->
-            <PickingList t-if="state.currentScreen === 'receipt_list'"
+            <PickingList t-if="this.state.currentScreen === 'receipt_list'"
                          pickingTypeCode="'incoming'" title="'RECEPTION'"
-                         onPickingSelected.bind="_onPickingSelected" onBack.bind="_goHome"/>
-            <PickingList t-if="state.currentScreen === 'delivery_list'"
+                         onPickingSelected.bind="this._onPickingSelected" onBack.bind="this._goHome"/>
+            <PickingList t-if="this.state.currentScreen === 'delivery_list'"
                          pickingTypeCode="'outgoing'" title="'EXPEDITION'"
-                         onPickingSelected.bind="_onPickingSelected" onBack.bind="_goHome"/>
+                         onPickingSelected.bind="this._onPickingSelected" onBack.bind="this._goHome"/>
 
             <!-- Detail screens (navigation niveau 3) -->
-            <BarcodeReceipt t-if="state.currentScreen === 'receipt_detail'"
-                            pickingId="state.selectedPickingId" onBack.bind="_backToList"/>
-            <BarcodeDelivery t-if="state.currentScreen === 'delivery_detail'"
-                             pickingId="state.selectedPickingId" onBack.bind="_backToList"/>
+            <BarcodeReceipt t-if="this.state.currentScreen === 'receipt_detail'"
+                            pickingId="this.state.selectedPickingId" onBack.bind="this._backToList"/>
+            <BarcodeDelivery t-if="this.state.currentScreen === 'delivery_detail'"
+                             pickingId="this.state.selectedPickingId" onBack.bind="this._backToList"/>
 
             <!-- Inventaire, Transfert, Consultation et Session (directement) -->
-            <BarcodeInventory t-if="state.currentScreen === 'inventory'" onBack.bind="_goHome"/>
-            <BarcodeTransfer t-if="state.currentScreen === 'transfer'" onBack.bind="_goHome"/>
-            <BarcodeConsult t-if="state.currentScreen === 'consult'" onBack.bind="_goHome"/>
-            <BarcodeSession t-if="state.currentScreen === 'session'" onBack.bind="_goHome"/>
+            <BarcodeInventory t-if="this.state.currentScreen === 'inventory'" onBack.bind="this._goHome"/>
+            <BarcodeTransfer t-if="this.state.currentScreen === 'transfer'" onBack.bind="this._goHome"/>
+            <BarcodeConsult t-if="this.state.currentScreen === 'consult'" onBack.bind="this._goHome"/>
+            <BarcodeSession t-if="this.state.currentScreen === 'session'" onBack.bind="this._goHome"/>
         </div>
     </t>
 
@@ -74,16 +74,16 @@
          SCAN BANNER
          ══════════════════════════════════════════════════════════════ -->
     <t t-name="oski_stock_barcode.ScanBanner">
-        <div t-att-class="bannerClass">
+        <div t-att-class="this.bannerClass">
             <div class="o_scan_icon">
-                <i class="fa fa-barcode"/>
+                <i class="oi" data-icon="barcode"/>
             </div>
             <div class="o_scan_text">
-                <t t-if="props.lastScan">
-                    <span class="o_scan_product_name" t-out="props.lastScan"/>
+                <t t-if="this.props.lastScan">
+                    <span class="o_scan_product_name" t-out="this.props.lastScan"/>
                 </t>
                 <t t-else="">
-                    <span class="o_scan_waiting"><t t-out="displayMessage"/></span>
+                    <span class="o_scan_waiting"><t t-out="this.displayMessage"/></span>
                 </t>
             </div>
         </div>
@@ -95,18 +95,18 @@
     <t t-name="oski_stock_barcode.PickingList">
         <div class="o_barcode_screen">
             <div class="o_barcode_header">
-                <button class="o_barcode_back" t-on-click="props.onBack">
-                    <i class="fa fa-arrow-left"/>
+                <button class="o_barcode_back" t-on-click="this.props.onBack">
+                    <i class="oi" data-icon="arrow_back"/>
                 </button>
-                <span class="o_barcode_screen_title"><t t-out="props.title"/></span>
-                <button class="o_barcode_refresh" t-on-click="_loadPickings">
-                    <i class="fa fa-refresh"/>
+                <span class="o_barcode_screen_title"><t t-out="this.props.title"/></span>
+                <button class="o_barcode_refresh" t-on-click="this._loadPickings">
+                    <i class="oi" data-icon="refresh"/>
                 </button>
             </div>
 
             <!-- Scan banner pour scanner un bon -->
             <div class="o_scan_banner o_scan_banner_doc">
-                <div class="o_scan_icon"><i class="fa fa-barcode"/></div>
+                <div class="o_scan_icon"><i class="oi" data-icon="barcode"/></div>
                 <div class="o_scan_text">
                     <span class="o_scan_waiting">Scannez le code-barres du bon</span>
                 </div>
@@ -114,28 +114,28 @@
 
             <!-- Recherche manuelle -->
             <div class="o_barcode_search_wrap mb-3">
-                <span class="o_barcode_search_icon fa fa-search"/>
-                <input type="text" class="o_barcode_search_input" t-ref="filterInput"
+                <span class="oi o_barcode_search_icon" data-icon="search"/>
+                <input type="text" class="o_barcode_search_input" t-ref="this.filterRef"
                        placeholder="Rechercher par réf, client, origine..."
-                       t-on-input="_onFilterInput" autocomplete="off"/>
+                       t-on-input="this._onFilterInput" autocomplete="off"/>
             </div>
 
             <!-- Compteur -->
-            <div class="o_barcode_list_count" t-if="!state.loading">
-                <t t-out="filteredPickings.length"/> opération(s)
+            <div class="o_barcode_list_count" t-if="!this.state.loading">
+                <t t-out="this.filteredPickings.length"/> opération(s)
             </div>
-            <div class="o_barcode_list_count" t-if="state.loading">
-                <i class="fa fa-spinner fa-spin"/> Chargement...
+            <div class="o_barcode_list_count" t-if="this.state.loading">
+                <i class="oi oi-spin" data-icon="progress_activity"/> Chargement...
             </div>
 
             <!-- Liste pickings -->
             <div class="o_barcode_picking_list">
-                <t t-foreach="filteredPickings" t-as="p" t-key="p.id">
+                <t t-foreach="this.filteredPickings" t-as="p" t-key="p.id">
                     <div class="o_picking_card" t-on-click="() => this._selectPicking(p.id)">
                         <div class="o_picking_card_header">
                             <span class="o_picking_name" t-out="p.name"/>
-                            <span t-att-class="'badge ' + _stateBadgeClass(p.state)"
-                                  t-out="_stateLabel(p.state)"/>
+                            <span t-att-class="'badge ' + this._stateBadgeClass(p.state)"
+                                  t-out="this._stateLabel(p.state)"/>
                         </div>
                         <div class="o_picking_card_body">
                             <span class="o_picking_partner" t-if="p.partner_name" t-out="p.partner_name"/>
@@ -145,7 +145,7 @@
                             <div class="o_picking_progress_wrap">
                                 <div class="o_picking_progress_bar">
                                     <div class="o_picking_progress_fill"
-                                         t-attf-style="width: {{ _progressPercent(p) }}%"/>
+                                         t-attf-style="width: {{ this._progressPercent(p) }}%"/>
                                 </div>
                                 <span class="o_picking_progress_text">
                                     <t t-out="p.done_lines"/>/<t t-out="p.total_lines"/> lignes
@@ -161,8 +161,8 @@
                 </t>
 
                 <!-- Empty state -->
-                <div class="o_barcode_empty" t-if="!state.loading and filteredPickings.length === 0">
-                    <i class="fa fa-check-circle"/>
+                <div class="o_barcode_empty" t-if="!this.state.loading and this.filteredPickings.length === 0">
+                    <i class="oi" data-icon="check_circle"/>
                     <span>Aucune opération en attente</span>
                 </div>
             </div>
@@ -174,31 +174,31 @@
          ══════════════════════════════════════════════════════════════ -->
     <t t-name="oski_stock_barcode.ProductSearch">
         <div class="o_barcode_search_wrap">
-            <span class="o_barcode_search_icon fa fa-search"/>
-            <input type="text" class="o_barcode_search_input" t-ref="searchInput"
-                   t-att-placeholder="placeholder" t-att-value="state.query"
-                   t-on-input="_onInput" t-on-keydown="_onKeydown" t-on-blur="_onBlur"
+            <span class="oi o_barcode_search_icon" data-icon="search"/>
+            <input type="text" class="o_barcode_search_input" t-ref="this.inputRef"
+                   t-att-placeholder="this.placeholder" t-att-value="this.state.query"
+                   t-on-input="this._onInput" t-on-keydown="this._onKeydown" t-on-blur="this._onBlur"
                    autocomplete="off"/>
-            <div class="o_barcode_search_dropdown" t-if="state.showDropdown">
-                <t t-foreach="state.results" t-as="product" t-key="product.id">
+            <div class="o_barcode_search_dropdown" t-if="this.state.showDropdown">
+                <t t-foreach="this.state.results" t-as="product" t-key="product.id">
                     <div class="o_barcode_search_item"
                          t-on-mousedown.prevent="() => this._selectProduct(product)">
                         <div class="d-flex flex-column">
                             <span class="o_search_product_name" t-out="product.name"/>
                             <div class="d-flex gap-2">
                                 <span class="o_search_product_ref" t-if="product.default_code">
-                                    <i class="fa fa-tag"/> <t t-out="product.default_code"/>
+                                    <i class="oi" data-icon="sell"/> <t t-out="product.default_code"/>
                                 </span>
                                 <span class="o_search_product_ref" t-if="product.barcode">
-                                    <i class="fa fa-barcode"/> <t t-out="product.barcode"/>
+                                    <i class="oi" data-icon="barcode"/> <t t-out="product.barcode"/>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </t>
             </div>
-            <div class="o_barcode_search_dropdown p-2 text-muted" t-if="state.loading">
-                <i class="fa fa-spinner fa-spin"/> Recherche...
+            <div class="o_barcode_search_dropdown p-2 text-muted" t-if="this.state.loading">
+                <i class="oi oi-spin" data-icon="progress_activity"/> Recherche...
             </div>
         </div>
     </t>
@@ -209,15 +209,15 @@
     <t t-name="oski_stock_barcode.QtyStepper">
         <div class="o_qty_stepper">
             <button class="o_qty_btn o_qty_minus"
-                    t-on-mousedown="_onMinusDown" t-on-mouseup="_onPointerUp"
-                    t-on-mouseleave="_onPointerUp" t-on-touchstart="_onMinusDown"
-                    t-on-touchend="_onPointerUp">-</button>
+                    t-on-mousedown="this._onMinusDown" t-on-mouseup="this._onPointerUp"
+                    t-on-mouseleave="this._onPointerUp" t-on-touchstart="this._onMinusDown"
+                    t-on-touchend="this._onPointerUp">-</button>
             <input class="o_qty_input" type="text" inputmode="numeric" pattern="[0-9]*"
-                   t-att-value="props.value" t-on-change="_onInputChange"/>
+                   t-att-value="this.props.value" t-on-change="this._onInputChange"/>
             <button class="o_qty_btn o_qty_plus"
-                    t-on-mousedown="_onPlusDown" t-on-mouseup="_onPointerUp"
-                    t-on-mouseleave="_onPointerUp" t-on-touchstart="_onPlusDown"
-                    t-on-touchend="_onPointerUp">+</button>
+                    t-on-mousedown="this._onPlusDown" t-on-mouseup="this._onPointerUp"
+                    t-on-mouseleave="this._onPointerUp" t-on-touchstart="this._onPlusDown"
+                    t-on-touchend="this._onPointerUp">+</button>
         </div>
     </t>
 
@@ -226,19 +226,19 @@
          ══════════════════════════════════════════════════════════════ -->
     <t t-name="oski_stock_barcode.ScreenHeader">
         <div class="o_barcode_header">
-            <button class="o_barcode_back" t-on-click="props.onBack">
-                <i class="fa fa-arrow-left"/>
+            <button class="o_barcode_back" t-on-click="this.props.onBack">
+                <i class="oi" data-icon="arrow_back"/>
             </button>
             <span class="o_barcode_screen_title"><t t-out="title"/></span>
             <div class="d-flex gap-1 align-items-center">
                 <div class="o_barcode_mode_toggle">
-                    <button t-att-class="{'active': state.mode === 'scan'}"
+                    <button t-att-class="{'active': this.state.mode === 'scan'}"
                             t-on-click="() => this._setMode('scan')">Scan</button>
-                    <button t-att-class="{'active': state.mode === 'manual'}"
+                    <button t-att-class="{'active': this.state.mode === 'manual'}"
                             t-on-click="() => this._setMode('manual')">Manuel</button>
                 </div>
-                <button class="o_barcode_refresh" t-on-click="_refresh">
-                    <i class="fa fa-refresh"/>
+                <button class="o_barcode_refresh" t-on-click="this._refresh">
+                    <i class="oi" data-icon="refresh"/>
                 </button>
             </div>
         </div>
@@ -249,44 +249,42 @@
          ══════════════════════════════════════════════════════════════ -->
     <t t-name="oski_stock_barcode.BarcodeReceipt">
         <div class="o_barcode_screen">
-            <t t-call="oski_stock_barcode.ScreenHeader">
-                <t t-set="title">RECEPTION</t>
-            </t>
+            <t t-call="oski_stock_barcode.ScreenHeader" title.translate="RECEPTION"/>
 
-            <div class="o_barcode_picking_info" t-if="state.pickingName">
-                <strong><t t-out="state.pickingName"/></strong>
-                <t t-if="state.partnerName"> — <t t-out="state.partnerName"/></t>
-                <t t-if="state.origin"> (<t t-out="state.origin"/>)</t>
+            <div class="o_barcode_picking_info" t-if="this.state.pickingName">
+                <strong><t t-out="this.state.pickingName"/></strong>
+                <t t-if="this.state.partnerName"> — <t t-out="this.state.partnerName"/></t>
+                <t t-if="this.state.origin"> (<t t-out="this.state.origin"/>)</t>
             </div>
 
             <!-- Scan banner -->
-            <ScanBanner t-if="state.mode === 'scan'" active="true"
-                        lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"/>
+            <ScanBanner t-if="this.state.mode === 'scan'" active="true"
+                        lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"/>
 
             <!-- Mode manuel : search -->
-            <ProductSearch t-if="state.mode === 'manual'"
-                           onProductSelected.bind="_onProductSelected"
+            <ProductSearch t-if="this.state.mode === 'manual'"
+                           onProductSelected.bind="this._onProductSelected"
                            placeholder="'Rechercher un article...'"/>
 
             <!-- Compteur lignes + total qté -->
-            <div class="o_barcode_list_count" t-if="state.lines.length > 0">
-                <t t-out="state.lines.length"/> article(s)
-                <t t-if="hasAnyQty"> — <strong><t t-out="state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="state.lines.length"/> complet(s)</strong></t>
+            <div class="o_barcode_list_count" t-if="this.state.lines.length > 0">
+                <t t-out="this.state.lines.length"/> article(s)
+                <t t-if="this.hasAnyQty"> — <strong><t t-out="this.state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="this.state.lines.length"/> complet(s)</strong></t>
                 <span class="ms-2 badge text-bg-info">
-                    Total : <t t-out="totalDone"/>/<t t-out="totalDemand"/> unité(s)
+                    Total : <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unité(s)
                 </span>
             </div>
 
             <!-- Tableau desktop -->
-            <div class="o_barcode_table_wrap o_scrollable" t-if="state.lines.length > 0">
+            <div class="o_barcode_table_wrap o_scrollable" t-if="this.state.lines.length > 0">
                 <table class="o_barcode_table">
                     <thead><tr>
                         <th>Article</th><th style="width:10%">Attendu</th>
                         <th style="width:18%">Reçu</th><th style="width:8%">Reste</th>
                     </tr></thead>
                     <tbody>
-                        <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
-                            <tr t-att-class="_lineClass(line)">
+                        <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
+                            <tr t-att-class="this._lineClass(line)">
                                 <td><t t-out="line.product_name"/></td>
                                 <td><t t-out="line.demand_qty"/></td>
                                 <td><QtyStepper value="line.done_qty"
@@ -299,9 +297,9 @@
             </div>
 
             <!-- Cards mobile -->
-            <div class="o_barcode_cards" t-if="state.lines.length > 0">
-                <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
-                    <div t-att-class="'o_barcode_line_card ' + _lineClass(line)">
+            <div class="o_barcode_cards" t-if="this.state.lines.length > 0">
+                <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
+                    <div t-att-class="'o_barcode_line_card ' + this._lineClass(line)">
                         <div class="o_card_product_name" t-out="line.product_name"/>
                         <div class="o_card_progress">
                             <span><t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
@@ -317,25 +315,25 @@
             </div>
 
             <!-- Actions : valider ou post-validation -->
-            <t t-if="!state.validated">
-                <div class="o_barcode_actions" t-if="state.lines.length > 0">
-                    <button class="o_barcode_btn o_btn_primary" t-on-click="_validate"
-                            t-att-disabled="!hasAnyQty">
-                        <t t-if="allComplete">Valider la réception</t>
+            <t t-if="!this.state.validated">
+                <div class="o_barcode_actions" t-if="this.state.lines.length > 0">
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="this._validate"
+                            t-att-disabled="!this.hasAnyQty">
+                        <t t-if="this.allComplete">Valider la réception</t>
                         <t t-else="">Réception partielle (reliquat)</t>
                     </button>
                 </div>
             </t>
-            <t t-if="state.validated">
+            <t t-if="this.state.validated">
                 <div class="o_barcode_validated text-center p-4">
-                    <i class="fa fa-check-circle fa-3x text-success mb-3"/>
-                    <div class="fw-bold mb-3" t-out="state.validationMessage"/>
+                    <i class="oi oi-3x text-success mb-3" data-icon="check_circle"/>
+                    <div class="fw-bold mb-3" t-out="this.state.validationMessage"/>
                     <div class="d-flex gap-2 justify-content-center">
-                        <button class="btn btn-outline-primary mt-2" t-on-click="_printSlip">
-                            <i class="fa fa-print me-1"/>Imprimer le bon
+                        <button class="btn btn-outline-primary mt-2" t-on-click="this._printSlip">
+                            <i class="oi me-1" data-icon="print"/>Imprimer le bon
                         </button>
-                        <button class="btn btn-primary" t-on-click="props.onBack">
-                            <i class="fa fa-arrow-left me-1"/> Retour
+                        <button class="btn btn-primary" t-on-click="this.props.onBack">
+                            <i class="oi me-1" data-icon="arrow_back"/> Retour
                         </button>
                     </div>
                 </div>
@@ -348,34 +346,32 @@
          ══════════════════════════════════════════════════════════════ -->
     <t t-name="oski_stock_barcode.BarcodeDelivery">
         <div class="o_barcode_screen">
-            <t t-call="oski_stock_barcode.ScreenHeader">
-                <t t-set="title">EXPEDITION</t>
-            </t>
+            <t t-call="oski_stock_barcode.ScreenHeader" title.translate="EXPEDITION"/>
 
-            <div class="o_barcode_picking_info" t-if="state.pickingName">
-                <strong><t t-out="state.pickingName"/></strong>
-                <t t-if="state.partnerName"> — <t t-out="state.partnerName"/></t>
-                <t t-if="state.origin"> (<t t-out="state.origin"/>)</t>
+            <div class="o_barcode_picking_info" t-if="this.state.pickingName">
+                <strong><t t-out="this.state.pickingName"/></strong>
+                <t t-if="this.state.partnerName"> — <t t-out="this.state.partnerName"/></t>
+                <t t-if="this.state.origin"> (<t t-out="this.state.origin"/>)</t>
             </div>
 
-            <ScanBanner t-if="state.mode === 'scan'" active="true"
-                        lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"/>
+            <ScanBanner t-if="this.state.mode === 'scan'" active="true"
+                        lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"/>
 
-            <ProductSearch t-if="state.mode === 'manual'"
-                           onProductSelected.bind="_onProductSelected"
+            <ProductSearch t-if="this.state.mode === 'manual'"
+                           onProductSelected.bind="this._onProductSelected"
                            placeholder="'Rechercher un article...'"/>
 
             <!-- Compteur lignes + total qté -->
-            <div class="o_barcode_list_count" t-if="state.lines.length > 0">
-                <t t-out="state.lines.length"/> article(s)
-                <t t-if="hasAnyQty"> — <strong><t t-out="state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="state.lines.length"/> complet(s)</strong></t>
+            <div class="o_barcode_list_count" t-if="this.state.lines.length > 0">
+                <t t-out="this.state.lines.length"/> article(s)
+                <t t-if="this.hasAnyQty"> — <strong><t t-out="this.state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="this.state.lines.length"/> complet(s)</strong></t>
                 <span class="ms-2 badge text-bg-info">
-                    Total : <t t-out="totalDone"/>/<t t-out="totalDemand"/> unité(s)
+                    Total : <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unité(s)
                 </span>
             </div>
 
             <!-- Tableau desktop avec dispo -->
-            <div class="o_barcode_table_wrap o_scrollable" t-if="state.lines.length > 0">
+            <div class="o_barcode_table_wrap o_scrollable" t-if="this.state.lines.length > 0">
                 <table class="o_barcode_table">
                     <thead><tr>
                         <th>Article</th><th style="width:7%">Demandé</th>
@@ -384,14 +380,14 @@
                         <th style="width:6%">Etat</th>
                     </tr></thead>
                     <tbody>
-                        <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
-                            <tr t-att-class="_lineClass(line)">
+                        <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
+                            <tr t-att-class="this._lineClass(line)">
                                 <td><t t-out="line.product_name"/></td>
                                 <td><t t-out="line.demand_qty"/></td>
-                                <td t-att-class="_availClass(line)"><t t-out="line.available_qty"/></td>
+                                <td t-att-class="this._availClass(line)"><t t-out="line.available_qty"/></td>
                                 <td><QtyStepper value="line.done_qty"
                                     onChange.bind="(qty) => this._onQtyChange(line, qty)"
-                                    min="0" max="_lineMaxQty(line)"/></td>
+                                    min="0" max="this._lineMaxQty(line)"/></td>
                                 <td><t t-out="Math.max(0, line.demand_qty - line.done_qty)"/></td>
                                 <td>
                                     <span t-if="line.done_qty >= line.demand_qty and line.demand_qty > 0"
@@ -407,9 +403,9 @@
             </div>
 
             <!-- Cards mobile -->
-            <div class="o_barcode_cards" t-if="state.lines.length > 0">
-                <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
-                    <div t-att-class="'o_barcode_line_card ' + _lineClass(line)">
+            <div class="o_barcode_cards" t-if="this.state.lines.length > 0">
+                <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
+                    <div t-att-class="'o_barcode_line_card ' + this._lineClass(line)">
                         <div class="o_card_product_name" t-out="line.product_name"/>
                         <div class="o_card_progress">
                             <span>Livré: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
@@ -421,31 +417,31 @@
                         <div class="o_card_stepper_row">
                             <QtyStepper value="line.done_qty"
                                 onChange.bind="(qty) => this._onQtyChange(line, qty)"
-                                min="0" max="_lineMaxQty(line)"/>
+                                min="0" max="this._lineMaxQty(line)"/>
                         </div>
                     </div>
                 </t>
             </div>
 
-            <t t-if="!state.validated">
-                <div class="o_barcode_actions" t-if="state.lines.length > 0">
-                    <button class="o_barcode_btn o_btn_primary" t-on-click="_validate"
-                            t-att-disabled="!hasAnyQty">
-                        <t t-if="allComplete">Valider la livraison</t>
+            <t t-if="!this.state.validated">
+                <div class="o_barcode_actions" t-if="this.state.lines.length > 0">
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="this._validate"
+                            t-att-disabled="!this.hasAnyQty">
+                        <t t-if="this.allComplete">Valider la livraison</t>
                         <t t-else="">Livraison partielle (reliquat)</t>
                     </button>
                 </div>
             </t>
-            <t t-if="state.validated">
+            <t t-if="this.state.validated">
                 <div class="o_barcode_validated text-center p-4">
-                    <i class="fa fa-check-circle fa-3x text-success mb-3"/>
-                    <div class="fw-bold mb-3" t-out="state.validationMessage"/>
+                    <i class="oi oi-3x text-success mb-3" data-icon="check_circle"/>
+                    <div class="fw-bold mb-3" t-out="this.state.validationMessage"/>
                     <div class="d-flex gap-2 justify-content-center">
-                        <button class="btn btn-outline-primary mt-2" t-on-click="_printSlip">
-                            <i class="fa fa-print me-1"/>Imprimer le bon
+                        <button class="btn btn-outline-primary mt-2" t-on-click="this._printSlip">
+                            <i class="oi me-1" data-icon="print"/>Imprimer le bon
                         </button>
-                        <button class="btn btn-primary" t-on-click="props.onBack">
-                            <i class="fa fa-arrow-left me-1"/> Retour
+                        <button class="btn btn-primary" t-on-click="this.props.onBack">
+                            <i class="oi me-1" data-icon="arrow_back"/> Retour
                         </button>
                     </div>
                 </div>
@@ -460,20 +456,20 @@
         <div class="o_barcode_screen">
 
             <!-- ═══ NIVEAU 1 : LISTE EMPLACEMENTS ═══ -->
-            <t t-if="state.screen === 'locations'">
+            <t t-if="this.state.screen === 'locations'">
                 <div class="o_barcode_header">
-                    <button class="o_barcode_back" t-on-click="props.onBack">
-                        <i class="fa fa-arrow-left"/>
+                    <button class="o_barcode_back" t-on-click="this.props.onBack">
+                        <i class="oi" data-icon="arrow_back"/>
                     </button>
                     <span class="o_barcode_screen_title">INVENTAIRE</span>
-                    <button class="o_barcode_refresh" t-on-click="_loadLocations">
-                        <i class="fa fa-refresh"/>
+                    <button class="o_barcode_refresh" t-on-click="this._loadLocations">
+                        <i class="oi" data-icon="refresh"/>
                     </button>
                 </div>
 
                 <!-- Scan banner emplacement -->
                 <div class="o_scan_banner o_scan_banner_doc">
-                    <div class="o_scan_icon"><i class="fa fa-barcode"/></div>
+                    <div class="o_scan_icon"><i class="oi" data-icon="barcode"/></div>
                     <div class="o_scan_text">
                         <span class="o_scan_waiting">Scannez le code-barres d'un emplacement</span>
                     </div>
@@ -481,88 +477,88 @@
 
                 <!-- Recherche emplacement -->
                 <div class="o_barcode_search_wrap mb-3">
-                    <span class="o_barcode_search_icon fa fa-search"/>
+                    <span class="oi o_barcode_search_icon" data-icon="search"/>
                     <input type="text" class="o_barcode_search_input"
                            placeholder="Rechercher un emplacement..."
-                           t-on-input="_onLocationFilterInput" autocomplete="off"/>
+                           t-on-input="this._onLocationFilterInput" autocomplete="off"/>
                 </div>
 
-                <div class="o_barcode_list_count" t-if="!state.loading">
-                    <t t-out="filteredLocations.length"/> emplacement(s)
+                <div class="o_barcode_list_count" t-if="!this.state.loading">
+                    <t t-out="this.filteredLocations.length"/> emplacement(s)
                 </div>
-                <div class="o_barcode_list_count" t-if="state.loading">
-                    <i class="fa fa-spinner fa-spin"/> Chargement...
+                <div class="o_barcode_list_count" t-if="this.state.loading">
+                    <i class="oi oi-spin" data-icon="progress_activity"/> Chargement...
                 </div>
 
                 <div class="o_barcode_picking_list">
-                    <t t-foreach="filteredLocations" t-as="loc" t-key="loc.id">
+                    <t t-foreach="this.filteredLocations" t-as="loc" t-key="loc.id">
                         <div class="o_picking_card" t-on-click="() => this._selectLocation(loc)">
                             <div class="o_picking_card_header">
                                 <span class="o_picking_name" t-out="loc.complete_name"/>
                             </div>
                             <div class="o_picking_card_body" t-if="loc.barcode">
-                                <span class="text-muted"><i class="fa fa-barcode"/> <t t-out="loc.barcode"/></span>
+                                <span class="text-muted"><i class="oi" data-icon="barcode"/> <t t-out="loc.barcode"/></span>
                             </div>
                         </div>
                     </t>
 
-                    <div class="o_barcode_empty" t-if="!state.loading and filteredLocations.length === 0">
-                        <i class="fa fa-map-marker"/>
+                    <div class="o_barcode_empty" t-if="!this.state.loading and this.filteredLocations.length === 0">
+                        <i class="oi" data-icon="location_on"/>
                         <span>Aucun emplacement trouvé</span>
                     </div>
                 </div>
             </t>
 
             <!-- ═══ NIVEAU 2 : DETAIL INVENTAIRE ═══ -->
-            <t t-if="state.screen === 'detail'">
+            <t t-if="this.state.screen === 'detail'">
                 <div class="o_barcode_header">
-                    <button class="o_barcode_back" t-on-click="_backToLocations">
-                        <i class="fa fa-arrow-left"/>
+                    <button class="o_barcode_back" t-on-click="this._backToLocations">
+                        <i class="oi" data-icon="arrow_back"/>
                     </button>
                     <span class="o_barcode_screen_title">INVENTAIRE</span>
                     <div class="d-flex gap-1 align-items-center">
                         <div class="o_barcode_mode_toggle">
-                            <button t-att-class="{'active': state.mode === 'scan'}"
+                            <button t-att-class="{'active': this.state.mode === 'scan'}"
                                     t-on-click="() => this._setMode('scan')">Scan</button>
-                            <button t-att-class="{'active': state.mode === 'manual'}"
+                            <button t-att-class="{'active': this.state.mode === 'manual'}"
                                     t-on-click="() => this._setMode('manual')">Manuel</button>
                         </div>
-                        <button class="o_barcode_refresh" t-on-click="_refresh">
-                            <i class="fa fa-refresh"/>
+                        <button class="o_barcode_refresh" t-on-click="this._refresh">
+                            <i class="oi" data-icon="refresh"/>
                         </button>
                     </div>
                 </div>
 
                 <div class="o_barcode_picking_info">
-                    <i class="fa fa-map-marker"/> <strong><t t-out="state.selectedLocationName"/></strong>
+                    <i class="oi" data-icon="location_on"/> <strong><t t-out="this.state.selectedLocationName"/></strong>
                 </div>
 
-                <ScanBanner t-if="state.mode === 'scan'" active="true"
-                            lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"
+                <ScanBanner t-if="this.state.mode === 'scan'" active="true"
+                            lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"
                             message="'Scannez un article pour incrémenter'"/>
 
-                <ProductSearch t-if="state.mode === 'manual'"
-                               onProductSelected.bind="_onProductSelected"
+                <ProductSearch t-if="this.state.mode === 'manual'"
+                               onProductSelected.bind="this._onProductSelected"
                                placeholder="'Ajouter un article par nom, réf ou code-barres...'"
                                storableOnly="true"/>
 
                 <!-- Filtre local sur la liste chargée -->
-                <div class="o_barcode_filter_wrap mb-2" t-if="state.items.length > 0">
+                <div class="o_barcode_filter_wrap mb-2" t-if="this.state.items.length > 0">
                     <input type="text" class="o_barcode_filter_input"
                            placeholder="Filtrer la liste..."
-                           t-on-input="_onItemFilterInput" autocomplete="off"/>
+                           t-on-input="this._onItemFilterInput" autocomplete="off"/>
                 </div>
 
-                <div class="o_barcode_list_count" t-if="state.items.length > 0">
-                    <t t-out="filteredItems.length"/> article(s)
-                    <t t-if="touchedCount > 0"> — <strong><t t-out="touchedCount"/> modifié(s)</strong></t>
+                <div class="o_barcode_list_count" t-if="this.state.items.length > 0">
+                    <t t-out="this.filteredItems.length"/> article(s)
+                    <t t-if="this.touchedCount > 0"> — <strong><t t-out="this.touchedCount"/> modifié(s)</strong></t>
                 </div>
-                <div class="o_barcode_list_count" t-if="state.loading">
-                    <i class="fa fa-spinner fa-spin"/> Chargement...
+                <div class="o_barcode_list_count" t-if="this.state.loading">
+                    <i class="oi oi-spin" data-icon="progress_activity"/> Chargement...
                 </div>
 
                 <!-- Tableau desktop -->
-                <div class="o_barcode_table_wrap o_scrollable" t-if="filteredItems.length > 0">
+                <div class="o_barcode_table_wrap o_scrollable" t-if="this.filteredItems.length > 0">
                     <table class="o_barcode_table">
                         <thead><tr>
                             <th style="width:4%">#</th>
@@ -571,8 +567,8 @@
                             <th style="width:5%"/>
                         </tr></thead>
                         <tbody>
-                            <t t-foreach="filteredItems" t-as="item" t-key="item.product_id">
-                                <tr t-att-class="_lineClass(item)">
+                            <t t-foreach="this.filteredItems" t-as="item" t-key="item.product_id">
+                                <tr t-att-class="this._lineClass(item)">
                                     <td class="text-muted"><t t-out="item_index + 1"/></td>
                                     <td>
                                         <t t-out="item.product_name"/>
@@ -584,15 +580,15 @@
                                         <QtyStepper value="item.counted_qty"
                                             onChange.bind="(qty) => this._onQtyChange(item, qty)" min="0"/>
                                     </td>
-                                    <td t-att-class="_ecartClass(item)">
-                                        <t t-out="_ecartValue(item)"/>
+                                    <td t-att-class="this._ecartClass(item)">
+                                        <t t-out="this._ecartValue(item)"/>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-outline-success"
                                                 t-att-disabled="!item.touched"
                                                 t-on-click="() => this._applyLine(item)"
                                                 title="Appliquer cette ligne">
-                                            <i class="fa fa-check"/>
+                                            <i class="oi" data-icon="check"/>
                                         </button>
                                     </td>
                                 </tr>
@@ -602,13 +598,13 @@
                 </div>
 
                 <!-- Cards mobile -->
-                <div class="o_barcode_cards" t-if="filteredItems.length > 0">
-                    <t t-foreach="filteredItems" t-as="item" t-key="item.product_id">
-                        <div t-att-class="'o_barcode_line_card ' + _lineClass(item)">
+                <div class="o_barcode_cards" t-if="this.filteredItems.length > 0">
+                    <t t-foreach="this.filteredItems" t-as="item" t-key="item.product_id">
+                        <div t-att-class="'o_barcode_line_card ' + this._lineClass(item)">
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="text-muted fw-bold">#<t t-out="item_index + 1"/></span>
-                                <span t-att-class="_ecartClass(item)">
-                                    Ecart: <t t-out="_ecartValue(item)"/>
+                                <span t-att-class="this._ecartClass(item)">
+                                    Ecart: <t t-out="this._ecartValue(item)"/>
                                 </span>
                             </div>
                             <div class="o_card_product_name" t-out="item.product_name"/>
@@ -617,7 +613,7 @@
                                 <button class="btn btn-sm btn-outline-success"
                                         t-att-disabled="!item.touched"
                                         t-on-click="() => this._applyLine(item)">
-                                    <i class="fa fa-check"/> Appliquer
+                                    <i class="oi" data-icon="check"/> Appliquer
                                 </button>
                             </div>
                             <div class="o_card_stepper_row">
@@ -629,15 +625,15 @@
                 </div>
 
                 <!-- Empty -->
-                <div class="o_barcode_empty" t-if="!state.loading and state.items.length === 0">
-                    <i class="fa fa-inbox"/>
+                <div class="o_barcode_empty" t-if="!this.state.loading and this.state.items.length === 0">
+                    <i class="oi" data-icon="inbox"/>
                     <span>Aucun article en stock — scannez ou recherchez pour ajouter</span>
                 </div>
 
                 <div class="o_barcode_actions">
-                    <button class="o_barcode_btn o_btn_primary" t-on-click="_applyInventory"
-                            t-att-disabled="touchedCount === 0">
-                        Appliquer l'inventaire (<t t-out="touchedCount"/> article(s) modifié(s))
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="this._applyInventory"
+                            t-att-disabled="this.touchedCount === 0">
+                        Appliquer l'inventaire (<t t-out="this.touchedCount"/> article(s) modifié(s))
                     </button>
                 </div>
             </t>
@@ -651,50 +647,48 @@
         <div class="o_barcode_screen">
 
             <!-- ═══ PHASE 1 : PREPARATION ═══ -->
-            <t t-if="state.screen === 'prepare'">
-                <t t-call="oski_stock_barcode.ScreenHeader">
-                    <t t-set="title">TRANSFERT</t>
-                </t>
+            <t t-if="this.state.screen === 'prepare'">
+                <t t-call="oski_stock_barcode.ScreenHeader" title.translate="TRANSFERT"/>
 
                 <div class="d-flex gap-2 mb-3 flex-wrap">
                     <div class="flex-fill">
                         <label class="form-label fw-bold">De :</label>
-                        <select class="o_barcode_picking_select" t-on-change="_onSrcChange">
+                        <select class="o_barcode_picking_select" t-on-change="this._onSrcChange">
                             <option value="">-- Source --</option>
-                            <t t-foreach="state.locations" t-as="loc" t-key="loc.id">
-                                <option t-att-value="loc.id" t-att-selected="loc.id === state.srcLocationId">
+                            <t t-foreach="this.state.locations" t-as="loc" t-key="loc.id">
+                                <option t-att-value="loc.id" t-att-selected="loc.id === this.state.srcLocationId">
                                     <t t-out="loc.complete_name"/></option>
                             </t>
                         </select>
                     </div>
                     <div class="flex-fill">
                         <label class="form-label fw-bold">Vers :</label>
-                        <select class="o_barcode_picking_select" t-on-change="_onDestChange">
+                        <select class="o_barcode_picking_select" t-on-change="this._onDestChange">
                             <option value="">-- Destination --</option>
-                            <t t-foreach="state.locations" t-as="loc" t-key="loc.id">
-                                <option t-att-value="loc.id" t-att-selected="loc.id === state.destLocationId">
+                            <t t-foreach="this.state.locations" t-as="loc" t-key="loc.id">
+                                <option t-att-value="loc.id" t-att-selected="loc.id === this.state.destLocationId">
                                     <t t-out="loc.complete_name"/></option>
                             </t>
                         </select>
                     </div>
                 </div>
 
-                <ScanBanner t-if="state.mode === 'scan' and state.srcLocationId and state.destLocationId"
-                            active="true" lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"
+                <ScanBanner t-if="this.state.mode === 'scan' and this.state.srcLocationId and this.state.destLocationId"
+                            active="true" lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"
                             message="'Scannez un article à transférer'"/>
 
-                <ProductSearch t-if="state.mode === 'manual' and state.srcLocationId and state.destLocationId"
-                               onProductSelected.bind="_onProductSelected"
+                <ProductSearch t-if="this.state.mode === 'manual' and this.state.srcLocationId and this.state.destLocationId"
+                               onProductSelected.bind="this._onProductSelected"
                                placeholder="'Rechercher un article à transférer...'"/>
 
-                <div class="o_barcode_table_wrap" t-if="state.items.length > 0">
+                <div class="o_barcode_table_wrap" t-if="this.state.items.length > 0">
                     <table class="o_barcode_table">
                         <thead><tr>
                             <th>Article</th><th style="width:18%">Quantité</th>
                             <th style="width:12%">Dispo</th><th style="width:5%"/>
                         </tr></thead>
                         <tbody>
-                            <t t-foreach="state.items" t-as="item" t-key="item.product_id">
+                            <t t-foreach="this.state.items" t-as="item" t-key="item.product_id">
                                 <tr>
                                     <td><t t-out="item.product_name"/></td>
                                     <td><QtyStepper value="item.qty"
@@ -703,21 +697,21 @@
                                     <td class="text-muted"><t t-out="item.available_qty"/> dispo</td>
                                     <td><button class="btn btn-sm btn-outline-danger"
                                         t-on-click="() => this._removeItem(item_index)">
-                                        <i class="fa fa-trash"/></button></td>
+                                        <i class="oi" data-icon="delete"/></button></td>
                                 </tr>
                             </t>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="o_barcode_cards" t-if="state.items.length > 0">
-                    <t t-foreach="state.items" t-as="item" t-key="item.product_id">
+                <div class="o_barcode_cards" t-if="this.state.items.length > 0">
+                    <t t-foreach="this.state.items" t-as="item" t-key="item.product_id">
                         <div class="o_barcode_line_card">
                             <div class="d-flex justify-content-between">
                                 <div class="o_card_product_name" t-out="item.product_name"/>
                                 <button class="btn btn-sm btn-outline-danger"
                                     t-on-click="() => this._removeItem(item_index)">
-                                    <i class="fa fa-trash"/></button>
+                                    <i class="oi" data-icon="delete"/></button>
                             </div>
                             <div class="o_card_progress text-muted"><t t-out="item.available_qty"/> disponibles</div>
                             <div class="o_card_stepper_row">
@@ -729,40 +723,40 @@
                     </t>
                 </div>
 
-                <div class="o_barcode_actions" t-if="state.srcLocationId and state.destLocationId">
-                    <button class="o_barcode_btn o_btn_primary" t-on-click="_confirmTransfer"
-                            t-att-disabled="!canConfirm">
+                <div class="o_barcode_actions" t-if="this.state.srcLocationId and this.state.destLocationId">
+                    <button class="o_barcode_btn o_btn_primary" t-on-click="this._confirmTransfer"
+                            t-att-disabled="!this.canConfirm">
                         Créer le transfert
                     </button>
                 </div>
             </t>
 
             <!-- ═══ PHASE 2 : DETAIL — ajuster quantités + valider ═══ -->
-            <t t-if="state.screen === 'detail'">
+            <t t-if="this.state.screen === 'detail'">
                 <div class="o_barcode_header">
-                    <button class="o_barcode_back" t-on-click="_backToPrepare">
-                        <i class="fa fa-arrow-left"/>
+                    <button class="o_barcode_back" t-on-click="this._backToPrepare">
+                        <i class="oi" data-icon="arrow_back"/>
                     </button>
                     <span class="o_barcode_screen_title">TRANSFERT</span>
-                    <button class="o_barcode_refresh" t-on-click="_refresh">
-                        <i class="fa fa-refresh"/>
+                    <button class="o_barcode_refresh" t-on-click="this._refresh">
+                        <i class="oi" data-icon="refresh"/>
                     </button>
                 </div>
 
                 <div class="o_barcode_picking_info">
-                    <strong><t t-out="state.pickingName"/></strong>
+                    <strong><t t-out="this.state.pickingName"/></strong>
                 </div>
 
                 <!-- Compteur -->
-                <div class="o_barcode_list_count" t-if="state.lines.length > 0">
-                    <t t-out="state.lines.length"/> article(s)
+                <div class="o_barcode_list_count" t-if="this.state.lines.length > 0">
+                    <t t-out="this.state.lines.length"/> article(s)
                     <span class="ms-2 badge text-bg-info">
-                        Total : <t t-out="totalDone"/>/<t t-out="totalDemand"/> unité(s)
+                        Total : <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unité(s)
                     </span>
                 </div>
 
                 <!-- Tableau desktop -->
-                <div class="o_barcode_table_wrap o_scrollable" t-if="state.lines.length > 0">
+                <div class="o_barcode_table_wrap o_scrollable" t-if="this.state.lines.length > 0">
                     <table class="o_barcode_table">
                         <thead><tr>
                             <th>Article</th><th style="width:8%">Demandé</th>
@@ -770,8 +764,8 @@
                             <th style="width:16%">Transféré</th><th style="width:8%">Reste</th>
                         </tr></thead>
                         <tbody>
-                            <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
-                                <tr t-att-class="_lineClass(line)">
+                            <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
+                                <tr t-att-class="this._lineClass(line)">
                                     <td><t t-out="line.product_name"/></td>
                                     <td><t t-out="line.demand_qty"/></td>
                                     <td class="text-muted"><t t-out="line.available_qty"/></td>
@@ -786,9 +780,9 @@
                 </div>
 
                 <!-- Cards mobile -->
-                <div class="o_barcode_cards" t-if="state.lines.length > 0">
-                    <t t-foreach="state.lines" t-as="line" t-key="line.move_id">
-                        <div t-att-class="'o_barcode_line_card ' + _lineClass(line)">
+                <div class="o_barcode_cards" t-if="this.state.lines.length > 0">
+                    <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
+                        <div t-att-class="'o_barcode_line_card ' + this._lineClass(line)">
                             <div class="o_card_product_name" t-out="line.product_name"/>
                             <div class="o_card_progress">
                                 <span>Transféré: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
@@ -803,28 +797,28 @@
                     </t>
                 </div>
 
-                <t t-if="!state.validated">
-                    <div class="o_barcode_actions" t-if="state.lines.length > 0">
-                        <button class="o_barcode_btn o_btn_primary" t-on-click="_validateTransfer"
-                                t-att-disabled="!hasAnyQty">
-                            <t t-if="allComplete">Valider le transfert</t>
+                <t t-if="!this.state.validated">
+                    <div class="o_barcode_actions" t-if="this.state.lines.length > 0">
+                        <button class="o_barcode_btn o_btn_primary" t-on-click="this._validateTransfer"
+                                t-att-disabled="!this.hasAnyQty">
+                            <t t-if="this.allComplete">Valider le transfert</t>
                             <t t-else="">Transfert partiel (reliquat)</t>
                         </button>
                     </div>
                 </t>
-                <t t-if="state.validated">
+                <t t-if="this.state.validated">
                     <div class="o_barcode_validated text-center p-4">
-                        <i class="fa fa-check-circle fa-3x text-success mb-3"/>
-                        <div class="fw-bold mb-3" t-out="state.validationMessage"/>
+                        <i class="oi oi-3x text-success mb-3" data-icon="check_circle"/>
+                        <div class="fw-bold mb-3" t-out="this.state.validationMessage"/>
                         <div class="d-flex gap-2 justify-content-center">
-                            <button class="btn btn-outline-primary" t-on-click="_printPicking">
-                                <i class="fa fa-print me-1"/> Imprimer
+                            <button class="btn btn-outline-primary" t-on-click="this._printPicking">
+                                <i class="oi me-1" data-icon="print"/> Imprimer
                             </button>
-                            <button class="btn btn-primary" t-on-click="_backToPrepare">
-                                <i class="fa fa-plus me-1"/> Nouveau transfert
+                            <button class="btn btn-primary" t-on-click="this._backToPrepare">
+                                <i class="oi me-1" data-icon="add"/> Nouveau transfert
                             </button>
-                            <button class="btn btn-outline-secondary" t-on-click="props.onBack">
-                                <i class="fa fa-home me-1"/> Accueil
+                            <button class="btn btn-outline-secondary" t-on-click="this.props.onBack">
+                                <i class="oi me-1" data-icon="home"/> Accueil
                             </button>
                         </div>
                     </div>
@@ -839,64 +833,64 @@
     <t t-name="oski_stock_barcode.BarcodeConsult">
         <div class="o_barcode_screen">
             <div class="o_barcode_header">
-                <button class="o_barcode_back" t-on-click="props.onBack">
-                    <i class="fa fa-arrow-left"/>
+                <button class="o_barcode_back" t-on-click="this.props.onBack">
+                    <i class="oi" data-icon="arrow_back"/>
                 </button>
                 <span class="o_barcode_screen_title">CONSULTATION</span>
                 <div class="d-flex gap-1 align-items-center">
                     <div class="o_barcode_mode_toggle">
-                        <button t-att-class="{'active': state.mode === 'scan'}"
+                        <button t-att-class="{'active': this.state.mode === 'scan'}"
                                 t-on-click="() => this._setMode('scan')">Scan</button>
-                        <button t-att-class="{'active': state.mode === 'manual'}"
+                        <button t-att-class="{'active': this.state.mode === 'manual'}"
                                 t-on-click="() => this._setMode('manual')">Manuel</button>
                     </div>
-                    <button class="o_barcode_refresh" t-on-click="_clear"
-                            t-if="state.viewType" title="Nouvelle recherche">
-                        <i class="fa fa-times"/>
+                    <button class="o_barcode_refresh" t-on-click="this._clear"
+                            t-if="this.state.viewType" title="Nouvelle recherche">
+                        <i class="oi" data-icon="close"/>
                     </button>
                 </div>
             </div>
 
-            <ScanBanner t-if="state.mode === 'scan'" active="true"
-                        lastScan="state.lastScan" lastScanStatus="state.lastScanStatus"
+            <ScanBanner t-if="this.state.mode === 'scan'" active="true"
+                        lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"
                         message="'Scannez un article ou un emplacement'"/>
 
-            <ProductSearch t-if="state.mode === 'manual'"
-                           onProductSelected.bind="_onProductSelected"
+            <ProductSearch t-if="this.state.mode === 'manual'"
+                           onProductSelected.bind="this._onProductSelected"
                            placeholder="'Rechercher par nom, réf ou code-barres...'"/>
 
             <!-- Chargement -->
-            <div class="text-center p-4" t-if="state.loading">
-                <i class="fa fa-spinner fa-spin fa-2x"/>
+            <div class="text-center p-4" t-if="this.state.loading">
+                <i class="oi oi-spin oi-2x" data-icon="progress_activity"/>
             </div>
 
             <!-- ═══ FICHE PRODUIT ═══ -->
-            <t t-if="state.viewType === 'product' and !state.loading">
+            <t t-if="this.state.viewType === 'product' and !this.state.loading">
                 <div class="o_consult_product_card">
                     <div class="o_consult_header">
                         <div class="o_consult_image">
-                            <img t-if="state.product.has_image"
-                                 t-att-src="state.product.image_url"
+                            <img t-if="this.state.product.has_image"
+                                 t-att-src="this.state.product.image_url"
                                  alt="Image produit"/>
                             <div t-else="" class="o_consult_no_image">
-                                <i class="fa fa-cube fa-3x text-muted"/>
+                                <i class="oi oi-3x text-muted" data-icon="deployed_code"/>
                             </div>
                         </div>
                         <div class="o_consult_info">
-                            <h4 class="mb-1" t-out="state.product.name"/>
+                            <h4 class="mb-1" t-out="this.state.product.name"/>
                             <div class="d-flex flex-wrap gap-2 mb-2">
-                                <span class="badge text-bg-secondary" t-if="state.product.default_code">
-                                    <i class="fa fa-tag"/> <t t-out="state.product.default_code"/>
+                                <span class="badge text-bg-secondary" t-if="this.state.product.default_code">
+                                    <i class="oi" data-icon="sell"/> <t t-out="this.state.product.default_code"/>
                                 </span>
-                                <span class="badge text-bg-secondary" t-if="state.product.barcode">
-                                    <i class="fa fa-barcode"/> <t t-out="state.product.barcode"/>
+                                <span class="badge text-bg-secondary" t-if="this.state.product.barcode">
+                                    <i class="oi" data-icon="barcode"/> <t t-out="this.state.product.barcode"/>
                                 </span>
-                                <span class="badge text-bg-light" t-if="state.product.categ_name">
-                                    <t t-out="state.product.categ_name"/>
+                                <span class="badge text-bg-light" t-if="this.state.product.categ_name">
+                                    <t t-out="this.state.product.categ_name"/>
                                 </span>
                             </div>
-                            <div class="text-muted" t-if="state.product.uom_name">
-                                UdM : <t t-out="state.product.uom_name"/>
+                            <div class="text-muted" t-if="this.state.product.uom_name">
+                                UdM : <t t-out="this.state.product.uom_name"/>
                             </div>
                         </div>
                     </div>
@@ -904,20 +898,20 @@
                     <div class="o_consult_stock_summary">
                         <div class="o_consult_stock_item">
                             <span class="o_consult_stock_label">En stock</span>
-                            <span class="o_consult_stock_value" t-out="state.product.total_qty"/>
+                            <span class="o_consult_stock_value" t-out="this.state.product.total_qty"/>
                         </div>
                         <div class="o_consult_stock_item">
                             <span class="o_consult_stock_label">Réservé</span>
-                            <span class="o_consult_stock_value text-warning" t-out="state.product.total_reserved"/>
+                            <span class="o_consult_stock_value text-warning" t-out="this.state.product.total_reserved"/>
                         </div>
                         <div class="o_consult_stock_item">
                             <span class="o_consult_stock_label">Disponible</span>
-                            <span t-att-class="'o_consult_stock_value ' + _stockClass(state.product.total_available)"
-                                  t-out="state.product.total_available"/>
+                            <span t-att-class="'o_consult_stock_value ' + this._stockClass(this.state.product.total_available)"
+                                  t-out="this.state.product.total_available"/>
                         </div>
                     </div>
 
-                    <div class="o_consult_locations" t-if="state.product.locations.length > 0">
+                    <div class="o_consult_locations" t-if="this.state.product.locations.length > 0">
                         <h6 class="mb-2">Stock par emplacement</h6>
                         <table class="table table-sm table-striped mb-0">
                             <thead><tr>
@@ -927,12 +921,12 @@
                                 <th class="text-end" style="width:20%">Dispo</th>
                             </tr></thead>
                             <tbody>
-                                <t t-foreach="state.product.locations" t-as="loc" t-key="loc.location_id">
+                                <t t-foreach="this.state.product.locations" t-as="loc" t-key="loc.location_id">
                                     <tr>
                                         <td><t t-out="loc.location_name"/></td>
                                         <td class="text-end"><t t-out="loc.quantity"/></td>
                                         <td class="text-end text-muted"><t t-out="loc.reserved_quantity"/></td>
-                                        <td t-att-class="'text-end ' + _stockClass(loc.available_quantity)">
+                                        <td t-att-class="'text-end ' + this._stockClass(loc.available_quantity)">
                                             <t t-out="loc.available_quantity"/>
                                         </td>
                                     </tr>
@@ -941,11 +935,11 @@
                         </table>
                     </div>
 
-                    <div class="text-muted text-center p-3" t-if="state.product.locations.length === 0">
-                        <i class="fa fa-info-circle"/> Aucun stock pour cet article
+                    <div class="text-muted text-center p-3" t-if="this.state.product.locations.length === 0">
+                        <i class="oi" data-icon="info"/> Aucun stock pour cet article
                     </div>
 
-                    <div class="o_consult_moves mt-3" t-if="state.recentMoves.length > 0">
+                    <div class="o_consult_moves mt-3" t-if="this.state.recentMoves.length > 0">
                         <h6 class="mb-2">Derniers mouvements</h6>
                         <table class="table table-sm table-striped mb-0">
                             <thead><tr>
@@ -953,7 +947,7 @@
                                 <th class="text-end">Qté</th><th>Lot</th>
                             </tr></thead>
                             <tbody>
-                                <t t-foreach="state.recentMoves" t-as="mv" t-key="mv_index">
+                                <t t-foreach="this.state.recentMoves" t-as="mv" t-key="mv_index">
                                     <tr>
                                         <td><t t-out="mv.date"/></td>
                                         <td><t t-out="mv.location"/></td>
@@ -969,17 +963,17 @@
             </t>
 
             <!-- ═══ FICHE EMPLACEMENT ═══ -->
-            <t t-if="state.viewType === 'location' and !state.loading">
+            <t t-if="this.state.viewType === 'location' and !this.state.loading">
                 <div class="o_consult_product_card">
                     <div class="o_consult_header">
                         <div class="o_consult_image">
-                            <i class="fa fa-map-marker fa-3x text-muted"/>
+                            <i class="oi oi-3x text-muted" data-icon="location_on"/>
                         </div>
                         <div class="o_consult_info">
-                            <h4 class="mb-1" t-out="state.location.name"/>
+                            <h4 class="mb-1" t-out="this.state.location.name"/>
                             <div class="d-flex flex-wrap gap-2 mb-2">
-                                <span class="badge text-bg-secondary" t-if="state.location.barcode">
-                                    <i class="fa fa-barcode"/> <t t-out="state.location.barcode"/>
+                                <span class="badge text-bg-secondary" t-if="this.state.location.barcode">
+                                    <i class="oi" data-icon="barcode"/> <t t-out="this.state.location.barcode"/>
                                 </span>
                             </div>
                         </div>
@@ -988,20 +982,20 @@
                     <div class="o_consult_stock_summary">
                         <div class="o_consult_stock_item">
                             <span class="o_consult_stock_label">Articles</span>
-                            <span class="o_consult_stock_value" t-out="state.location.total_products"/>
+                            <span class="o_consult_stock_value" t-out="this.state.location.total_products"/>
                         </div>
                         <div class="o_consult_stock_item">
                             <span class="o_consult_stock_label">Qté totale</span>
-                            <span class="o_consult_stock_value" t-out="state.location.total_qty"/>
+                            <span class="o_consult_stock_value" t-out="this.state.location.total_qty"/>
                         </div>
                         <div class="o_consult_stock_item">
                             <span class="o_consult_stock_label">Disponible</span>
-                            <span t-att-class="'o_consult_stock_value ' + _stockClass(state.location.total_available)"
-                                  t-out="state.location.total_available"/>
+                            <span t-att-class="'o_consult_stock_value ' + this._stockClass(this.state.location.total_available)"
+                                  t-out="this.state.location.total_available"/>
                         </div>
                     </div>
 
-                    <div class="o_consult_locations" t-if="state.location.products.length > 0">
+                    <div class="o_consult_locations" t-if="this.state.location.products.length > 0">
                         <h6 class="mb-2">Contenu de l'emplacement</h6>
                         <table class="table table-sm table-striped mb-0">
                             <thead><tr>
@@ -1011,7 +1005,7 @@
                                 <th class="text-end" style="width:18%">Dispo</th>
                             </tr></thead>
                             <tbody>
-                                <t t-foreach="state.location.products" t-as="p" t-key="p.product_id">
+                                <t t-foreach="this.state.location.products" t-as="p" t-key="p.product_id">
                                     <tr>
                                         <td>
                                             <t t-out="p.product_name"/>
@@ -1020,7 +1014,7 @@
                                         </td>
                                         <td class="text-end"><t t-out="p.quantity"/></td>
                                         <td class="text-end text-muted"><t t-out="p.reserved_quantity"/></td>
-                                        <td t-att-class="'text-end ' + _stockClass(p.available_quantity)">
+                                        <td t-att-class="'text-end ' + this._stockClass(p.available_quantity)">
                                             <t t-out="p.available_quantity"/>
                                         </td>
                                     </tr>
@@ -1029,15 +1023,15 @@
                         </table>
                     </div>
 
-                    <div class="text-muted text-center p-3" t-if="state.location.products.length === 0">
-                        <i class="fa fa-info-circle"/> Aucun article en stock
+                    <div class="text-muted text-center p-3" t-if="this.state.location.products.length === 0">
+                        <i class="oi" data-icon="info"/> Aucun article en stock
                     </div>
                 </div>
             </t>
 
             <!-- Etat initial -->
-            <div class="o_barcode_empty" t-if="!state.viewType and !state.loading">
-                <i class="fa fa-search fa-2x"/>
+            <div class="o_barcode_empty" t-if="!this.state.viewType and !this.state.loading">
+                <i class="oi oi-2x" data-icon="search"/>
                 <span>Scannez ou recherchez un article ou emplacement</span>
             </div>
         </div>
@@ -1049,30 +1043,30 @@
     <t t-name="oski_stock_barcode.BarcodeSession">
         <div class="o_barcode_screen o_barcode_session">
             <div class="o_barcode_header">
-                <button class="o_barcode_back" t-on-click="props.onBack">
-                    <i class="fa fa-arrow-left"/>
+                <button class="o_barcode_back" t-on-click="this.props.onBack">
+                    <i class="oi" data-icon="arrow_back"/>
                 </button>
                 <span class="o_barcode_screen_title">Ma session</span>
             </div>
-            <div class="p-3" t-if="!state.loading">
+            <div class="p-3" t-if="!this.state.loading">
                 <div class="o_session_summary d-flex flex-wrap gap-2 mb-3">
-                    <t t-foreach="summaryList" t-as="s" t-key="s.key">
+                    <t t-foreach="this.summaryList" t-as="s" t-key="s.key">
                         <span class="badge text-bg-primary p-2">
                             <t t-out="s.label"/> : <t t-out="s.count"/>
                             <t t-if="s.total_qty"> (<t t-out="s.total_qty"/>)</t>
                         </span>
                     </t>
                 </div>
-                <div class="text-muted" t-if="state.lines.length === 0">
+                <div class="text-muted" t-if="this.state.lines.length === 0">
                     Aucun scan aujourd'hui.
                 </div>
-                <table class="table table-sm" t-if="state.lines.length > 0">
+                <table class="table table-sm" t-if="this.state.lines.length > 0">
                     <thead><tr>
                         <th>Heure</th><th>Action</th><th>Article</th>
                         <th>Lot</th><th class="text-end">Qté</th>
                     </tr></thead>
                     <tbody>
-                        <t t-foreach="state.lines" t-as="l" t-key="l_index">
+                        <t t-foreach="this.state.lines" t-as="l" t-key="l_index">
                             <tr>
                                 <td><t t-out="l.time"/></td>
                                 <td><t t-out="l.action_label"/></td>
