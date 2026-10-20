@@ -1,7 +1,7 @@
 import logging
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -19,10 +19,12 @@ class SaleSubscription(models.Model):
     _description = "Abonnement"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "id desc"
+    _check_company_auto = True
 
     name = fields.Char(string="Référence", default="New", copy=False, tracking=True)
     partner_id = fields.Many2one(
-        "res.partner", string="Client", required=True, tracking=True
+        "res.partner", string="Client", required=True, tracking=True,
+        check_company=True,
     )
     plan_id = fields.Many2one(
         "sale.subscription.plan", string="Plan", required=True, tracking=True
@@ -33,7 +35,9 @@ class SaleSubscription(models.Model):
     currency_id = fields.Many2one(
         related="company_id.currency_id", string="Devise", store=True
     )
-    pricelist_id = fields.Many2one("product.pricelist", string="Liste de prix")
+    pricelist_id = fields.Many2one(
+        "product.pricelist", string="Liste de prix", check_company=True
+    )
     state = fields.Selection(
         [
             ("draft", "Brouillon"),
@@ -143,17 +147,61 @@ class SaleSubscription(models.Model):
             ],
         }
 
+    def _lock_for_invoicing(self):
+        """Verrou de ligne : deux facturations simultanées du même abonnement
+        (cron + bouton, double clic sur deux onglets) se sérialisent, et la
+        seconde relit l'échéance déjà avancée par la première."""
+        self.env.cr.execute(
+            "SELECT id FROM sale_subscription WHERE id IN %s FOR UPDATE",
+            [tuple(self.ids)],
+        )
+        self.invalidate_recordset(["next_invoice_date", "state"])
+
     def _generate_invoice(self):
         self.ensure_one()
-        move = self.env["account.move"].create(self._prepare_invoice_vals())
+        self._lock_for_invoicing()
+        if self.state != "progress":
+            raise UserError(
+                "Seul un abonnement en cours peut être facturé (%s)." % self.display_name
+            )
+        if not self.line_ids:
+            raise UserError(
+                "L'abonnement %s n'a aucune ligne à facturer." % self.display_name
+            )
+        if not self.next_invoice_date:
+            raise UserError(
+                "L'abonnement %s n'a pas de prochaine échéance." % self.display_name
+            )
+        if self.date_end and self.next_invoice_date > self.date_end:
+            raise UserError(
+                "L'engagement de %s se termine le %s : la période du %s n'est "
+                "plus couverte." % (self.display_name, self.date_end, self.next_invoice_date)
+            )
+        move = (
+            self.env["account.move"]
+            .with_company(self.company_id)
+            .create(self._prepare_invoice_vals())
+        )
         if self.plan_id.auto_post_invoice:
             move.action_post()
         self.invoice_ids = [fields.Command.link(move.id)]
-        self.next_invoice_date = self.plan_id._get_next_date(self.next_invoice_date)
-        if self.date_end and self.next_invoice_date > self.date_end:
+        self.next_invoice_date = self.plan_id._get_next_date(
+            self.next_invoice_date, anchor=self.date_start
+        )
+        if (
+            self.date_end
+            and self.next_invoice_date > self.date_end
+            and self._close_after_last_invoice()
+        ):
             self.action_close()
         self.message_post(body="Facture générée : %s" % (move.name or move.id))
         return move
+
+    def _close_after_last_invoice(self):
+        """Résilier dès la dernière facture de l'engagement ? Point
+        d'extension : un module de renouvellement garde l'abonnement ouvert
+        jusqu'à la fin d'engagement pour pouvoir le prolonger."""
+        return True
 
     def action_generate_invoice(self):
         self.ensure_one()
@@ -178,7 +226,19 @@ class SaleSubscription(models.Model):
         )
         for sub in subs:
             try:
-                sub._generate_invoice()
+                # savepoint : un échec (comptabilité, prélèvement…) annule
+                # la facture déjà créée au lieu de la laisser en base sans
+                # avancer l'échéance — sinon le passage suivant la refacture.
+                with self.env.cr.savepoint():
+                    sub._lock_for_invoicing()
+                    # relu sous verrou : un autre passage a pu facturer entre-temps
+                    if sub.state != "progress" or not (
+                        sub.next_invoice_date and sub.next_invoice_date <= today
+                    ):
+                        continue
+                    if sub.date_end and sub.next_invoice_date > sub.date_end:
+                        continue  # engagement échu : rien à facturer
+                    sub._generate_invoice()
             except Exception:
                 _logger.exception(
                     "Échec génération facture abonnement %s", sub.id
