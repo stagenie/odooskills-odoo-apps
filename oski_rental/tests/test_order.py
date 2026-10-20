@@ -45,3 +45,18 @@ class TestOrder(RentalCase):
             order.unlink()
         order.state = 'draft'
         order.unlink()
+
+    def test_order_dates_check(self):
+        from odoo.exceptions import ValidationError
+        with self.assertRaises(ValidationError):
+            self.env['oski.rental.order'].create({
+                'partner_id': self.partner.id,
+                'date_start': STOP, 'date_end': START,
+            })
+
+    def test_line_asset_other_company_refused(self):
+        # une ligne ne peut pas louer la ressource d'une autre société
+        other = self.env['res.company'].create({'name': 'Société Location B'})
+        asset_b = self._make_asset(name='Asset B', company_id=other.id)
+        with self.assertRaises(UserError):
+            self._make_order([asset_b], START, STOP)

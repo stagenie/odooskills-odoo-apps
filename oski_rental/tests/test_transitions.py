@@ -115,3 +115,12 @@ class TestTransitions(RentalCase):
                 'date_start': datetime(2026, 8, 2),
                 'date_end': datetime(2026, 8, 4),
             })]
+
+    def test_conflict_message_local_time(self):
+        # le message affiche l'heure locale de la société, pas l'UTC
+        self.env.company.partner_id.tz = 'Europe/Paris'
+        asset = self._make_asset()
+        self._make_order([asset], START, STOP).action_reserve()
+        clash = self._make_order([asset], START, STOP)
+        with self.assertRaisesRegex(UserError, r'01/08/2026 10:00'):
+            clash.action_reserve()

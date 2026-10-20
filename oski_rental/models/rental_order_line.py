@@ -5,11 +5,13 @@ from odoo.exceptions import ValidationError
 class RentalOrderLine(models.Model):
     _name = 'oski.rental.order.line'
     _description = 'Ligne de location'
+    _check_company_auto = True
 
     order_id = fields.Many2one(
         'oski.rental.order', string='Location', required=True, ondelete='cascade')
     asset_id = fields.Many2one(
-        'oski.rental.asset', string='Ressource', required=True)
+        'oski.rental.asset', string='Ressource', required=True,
+        check_company=True)
     date_start = fields.Datetime(string='Début', required=True)
     date_end = fields.Datetime(string='Fin', required=True)
     price_unit = fields.Monetary(

@@ -87,3 +87,11 @@ class TestRentalInvoice(AccountTestInvoicingCommon):
         order.deposit_state = 'to_collect'
         with self.assertRaises(UserError):
             order.action_refund_deposit()
+
+    def test_invoice_label_local_time(self):
+        # 08:00 UTC en août = 10:00 à Paris : le client lit l'heure locale
+        self.env.company.partner_id.tz = 'Europe/Paris'
+        order = self._returned_order()
+        order.action_create_invoice()
+        label = order.invoice_ids.invoice_line_ids.name
+        self.assertIn('du 01/08/2026 10:00 au 05/08/2026 10:00', label)
