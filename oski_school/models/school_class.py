@@ -87,7 +87,7 @@ class SchoolClassSubject(models.Model):
     _order = 'class_id, subject_id'
     _rec_name = 'subject_id'
     _check_company_auto = True
-    _rec_names_search = ['subject_id.name', 'subject_id.code', 'class_id.name']
+    _rec_names_search = ('subject_id.name', 'subject_id.code', 'class_id.name')
 
     class_id = fields.Many2one('oski.school.class', required=True, ondelete='cascade', index=True)
     subject_id = fields.Many2one('oski.school.subject', required=True, ondelete='restrict')

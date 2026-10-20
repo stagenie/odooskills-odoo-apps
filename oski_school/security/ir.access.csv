@@ -1,0 +1,44 @@
+id,name,model_id,group_id/id,operation,domain
+access_school_period_teacher,school.period.teacher,oski.school.period,oski_school.group_school_teacher,r,
+access_school_period_manager,school.period.manager,oski.school.period,oski_school.group_school_manager,crud,
+access_school_term_teacher,school.term.teacher,oski.school.term,oski_school.group_school_teacher,r,
+access_school_term_manager,school.term.manager,oski.school.term,oski_school.group_school_manager,crud,
+access_school_term_generate_wizard,school.term.generate.wizard,oski.school.term.generate.wizard,oski_school.group_school_manager,crud,
+access_school_subject_teacher,school.subject.teacher,oski.school.subject,oski_school.group_school_teacher,r,
+access_school_subject_manager,school.subject.manager,oski.school.subject,oski_school.group_school_manager,crud,
+access_school_room_teacher,school.room.teacher,oski.school.room,oski_school.group_school_teacher,r,
+access_school_room_manager,school.room.manager,oski.school.room,oski_school.group_school_manager,crud,
+access_school_program_teacher,school.program.teacher,oski.school.program,oski_school.group_school_teacher,r,
+access_school_program_manager,school.program.manager,oski.school.program,oski_school.group_school_manager,crud,
+access_school_level_teacher,school.level.teacher,oski.school.level,oski_school.group_school_teacher,r,
+access_school_level_manager,school.level.manager,oski.school.level,oski_school.group_school_manager,crud,
+access_school_teacher_teacher,school.teacher.teacher,oski.school.teacher,oski_school.group_school_teacher,r,
+access_school_teacher_manager,school.teacher.manager,oski.school.teacher,oski_school.group_school_manager,crud,
+access_school_student_teacher,school.student.teacher,oski.school.student,oski_school.group_school_teacher,r,
+access_school_student_officer,school.student.officer,oski.school.student,oski_school.group_school_officer,crud,
+access_school_guardian_teacher,school.guardian.teacher,oski.school.guardian,oski_school.group_school_teacher,r,
+access_school_guardian_officer,school.guardian.officer,oski.school.guardian,oski_school.group_school_officer,crud,
+access_school_class_teacher,school.class.teacher,oski.school.class,oski_school.group_school_teacher,r,
+access_school_class_manager,school.class.manager,oski.school.class,oski_school.group_school_manager,crud,
+access_school_class_subject_teacher,school.class.subject.teacher,oski.school.class.subject,oski_school.group_school_teacher,r,
+access_school_class_subject_manager,school.class.subject.manager,oski.school.class.subject,oski_school.group_school_manager,crud,
+access_school_enrollment_teacher,school.enrollment.teacher,oski.school.enrollment,oski_school.group_school_teacher,r,
+access_school_enrollment_officer,school.enrollment.officer,oski.school.enrollment,oski_school.group_school_officer,crud,
+access_school_enrollment_withdraw_wizard,school.enrollment.withdraw.wizard,oski.school.enrollment.withdraw.wizard,oski_school.group_school_officer,crud,
+access_school_promotion_wizard,school.promotion.wizard,oski.school.promotion.wizard,oski_school.group_school_manager,crud,
+access_school_promotion_wizard_line,school.promotion.wizard.line,oski.school.promotion.wizard.line,oski_school.group_school_manager,crud,
+access_school_structure_duplicate_wizard,school.structure.duplicate.wizard,oski.school.structure.duplicate.wizard,oski_school.group_school_manager,crud,
+rule_school_period_company,oski.school.period: multi-company,oski.school.period,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_program_company,oski.school.program: multi-company,oski.school.program,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_level_company,oski.school.level: multi-company,oski.school.level,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_room_company,oski.school.room: multi-company,oski.school.room,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_teacher_company,oski.school.teacher: multi-company,oski.school.teacher,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_student_company,oski.school.student: multi-company,oski.school.student,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_class_company,oski.school.class: multi-company,oski.school.class,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_enrollment_company,oski.school.enrollment: multi-company,oski.school.enrollment,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_guardian_company,oski.school.guardian: multi-company,oski.school.guardian,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_term_company,oski.school.term: multi-company,oski.school.term,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_class_subject_company,oski.school.class.subject: multi-company,oski.school.class.subject,,crud,"[('company_id', 'in', company_ids)]"
+rule_school_enrollment_teacher,Enrollment: own classes (teacher only),oski.school.enrollment,,r,"['|', ('class_id.subject_line_ids.teacher_id.user_id', '=', user.id), ('class_id.homeroom_teacher_id.user_id', '=', user.id)] if user.has_group('oski_school.group_school_teacher') and not user.has_group('oski_school.group_school_officer') else []"
+rule_school_student_teacher,Student: own classes (teacher only),oski.school.student,,r,"['|', ('enrollment_ids.class_id.subject_line_ids.teacher_id.user_id', '=', user.id), ('enrollment_ids.class_id.homeroom_teacher_id.user_id', '=', user.id)] if user.has_group('oski_school.group_school_teacher') and not user.has_group('oski_school.group_school_officer') else []"
+rule_school_guardian_teacher,Guardian: own classes (teacher only),oski.school.guardian,,r,"['|', ('student_id.enrollment_ids.class_id.subject_line_ids.teacher_id.user_id', '=', user.id), ('student_id.enrollment_ids.class_id.homeroom_teacher_id.user_id', '=', user.id)] if user.has_group('oski_school.group_school_teacher') and not user.has_group('oski_school.group_school_officer') else []"

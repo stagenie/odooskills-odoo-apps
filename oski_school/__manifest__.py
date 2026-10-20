@@ -1,6 +1,6 @@
 {
     'name': 'École — élèves, classes, inscriptions',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Services/Education',
     'summary': "Gérez une école privée : périodes, programmes, classes, élèves et "
                "tuteurs, inscriptions avec contrôle des places, passage d'année",
@@ -26,7 +26,7 @@ bulletins, espace enseignant, tableau de bord et communication.
     'depends': ['mail', 'contacts'],
     'data': [
         'security/school_security.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'data/sequence_data.xml',
         'views/period_views.xml',
         'views/program_views.xml',

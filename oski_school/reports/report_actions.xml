@@ -5,7 +5,6 @@
         <field name="model">oski.school.enrollment</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">oski_school.report_enrollment_certificate</field>
-        <field name="report_file">oski_school.report_enrollment_certificate</field>
         <field name="print_report_name">'Certificate - %s' % object.student_id.name</field>
         <field name="binding_model_id" ref="model_oski_school_enrollment"/>
         <field name="binding_type">report</field>
@@ -15,7 +14,6 @@
         <field name="model">oski.school.class</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">oski_school.report_class_list</field>
-        <field name="report_file">oski_school.report_class_list</field>
         <field name="print_report_name">'Class list - %s' % object.name</field>
         <field name="binding_model_id" ref="model_oski_school_class"/>
         <field name="binding_type">report</field>
