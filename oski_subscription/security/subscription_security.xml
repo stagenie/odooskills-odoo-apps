@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_subscription" model="ir.module.category">
+        <field name="name">Abonnements</field>
+        <field name="description">Gestion des abonnements récurrents.</field>
+        <field name="sequence">90</field>
+    </record>
+
+
+    <record id="group_subscription_user" model="res.groups">
+        <field name="name">Abonnements / Utilisateur</field>
+        <field name="category_id" ref="module_category_subscription"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_subscription_manager" model="res.groups">
+        <field name="name">Abonnements / Responsable</field>
+        <field name="category_id" ref="module_category_subscription"/>
+        <field name="implied_ids" eval="[(4, ref('group_subscription_user'))]"/>
+    </record>
+
+    <!-- Multi-société : chaque utilisateur ne voit que les abonnements des
+         sociétés qu'il a sélectionnées. -->
+    <record id="rule_sale_subscription_company" model="ir.rule">
+        <field name="name">Abonnement : multi-société</field>
+        <field name="model_id" ref="model_sale_subscription"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="rule_sale_subscription_line_company" model="ir.rule">
+        <field name="name">Ligne d'abonnement : multi-société</field>
+        <field name="model_id" ref="model_sale_subscription_line"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

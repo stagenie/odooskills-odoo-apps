@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="subscription_demo_1" model="sale.subscription">
+        <field name="partner_id" ref="base.res_partner_2"/>
+        <field name="plan_id" ref="plan_monthly"/>
+    </record>
+    <record id="subscription_demo_1_line" model="sale.subscription.line">
+        <field name="subscription_id" ref="subscription_demo_1"/>
+        <field name="product_id" ref="product.product_product_1"/>
+        <field name="name">Abonnement support mensuel</field>
+        <field name="quantity">1</field>
+        <field name="price_unit">49.0</field>
+    </record>
+</odoo>
