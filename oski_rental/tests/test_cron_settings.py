@@ -57,3 +57,16 @@ class TestCronSettings(RentalCase):
         get_param = self.env['ir.config_parameter'].sudo().get_param
         self.assertEqual(get_param('oski_rental.late_invoicing'), 'True')
         self.assertEqual(get_param('oski_rental.min_granularity'), 'day')
+
+    def test_cron_note_local_time(self):
+        self.env.company.partner_id.tz = 'Europe/Paris'
+        order = self._ongoing_overdue_order()
+        self.env['oski.rental.order']._cron_late_alert()
+        activity = self.env['mail.activity'].search([
+            ('res_model', '=', 'oski.rental.order'),
+            ('res_id', '=', order.id),
+        ])
+        expected = fields.Datetime.context_timestamp(
+            order.with_context(tz='Europe/Paris'), order.date_end
+        ).strftime('%d/%m/%Y %H:%M')
+        self.assertIn(expected, str(activity.note))

@@ -1,5 +1,5 @@
 from odoo import Command, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class RentalOrder(models.Model):
@@ -84,6 +84,26 @@ class RentalOrder(models.Model):
             else:
                 order.is_late = False
 
+    @api.constrains('date_start', 'date_end')
+    def _check_dates(self):
+        for order in self:
+            if order.date_end <= order.date_start:
+                raise ValidationError(
+                    "La date de fin doit être postérieure à la date de début.")
+
+    def _rental_tz(self):
+        """Fuseau d'affichage des dates (libellés, messages) : celui de la
+        société (comme la réservation en ligne), à défaut celui de l'utilisateur."""
+        self.ensure_one()
+        return self.company_id.partner_id.tz or self.env.user.tz or 'UTC'
+
+    def _format_rental_dt(self, value):
+        """Datetime UTC naïf → 'JJ/MM/AAAA HH:MM' dans le fuseau de la société."""
+        self.ensure_one()
+        local = fields.Datetime.context_timestamp(
+            self.with_context(tz=self._rental_tz()), value)
+        return local.strftime('%d/%m/%Y %H:%M')
+
     def _compute_invoice_count(self):
         for order in self:
             order.invoice_count = len(order.invoice_ids)
@@ -122,7 +142,9 @@ class RentalOrder(models.Model):
                 raise UserError(
                     "Conflit : « %s » est indisponible du %s au %s "
                     "(réservation ou indisponibilité existante)." % (
-                        line.asset_id.name, line.date_start, line.date_end))
+                        line.asset_id.name,
+                        self._format_rental_dt(line.date_start),
+                        self._format_rental_dt(line.date_end)))
             siblings = self.line_ids.filtered(
                 lambda l: l.id != line.id and l.asset_id == line.asset_id)
             for other in siblings:
@@ -179,8 +201,8 @@ class RentalOrder(models.Model):
             product = line.asset_id.product_id or default_product
             label = "%s — du %s au %s" % (
                 line.asset_id.name,
-                line.date_start.strftime('%d/%m/%Y %H:%M'),
-                line.date_end.strftime('%d/%m/%Y %H:%M'))
+                self._format_rental_dt(line.date_start),
+                self._format_rental_dt(line.date_end))
             invoice_lines.append(Command.create({
                 'product_id': product.id,
                 'name': label,
@@ -239,5 +261,6 @@ class RentalOrder(models.Model):
                 user_id=(order.user_id or self.env.user).id,
                 summary="Location en retard : %s" % order.name,
                 note="La location %s (client %s) devait être retournée le %s."
-                     % (order.name, order.partner_id.display_name, order.date_end))
+                     % (order.name, order.partner_id.display_name,
+                        order._format_rental_dt(order.date_end)))
             order.late_notified = True
