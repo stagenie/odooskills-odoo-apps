@@ -5,12 +5,12 @@ from odoo.tests import HttpCase, tagged
 class TestShopFloorTour(HttpCase):
 
     def test_shop_floor_flow_tour(self):
-        wc = self.env['mrp.workcenter'].create({'name': 'Poste Tour'})
+        wc = self.env['mrp.workcenter'].create({'name': 'Poste Tour SF'})
         component = self.env['product.product'].create({
-            'name': 'Composant Tour', 'type': 'consu', 'is_storable': True, 'barcode': 'TOURCOMP',
+            'name': 'Composant Tour SF', 'type': 'consu', 'is_storable': True, 'barcode': 'TOURCOMP',
         })
         finished = self.env['product.product'].create({
-            'name': 'Fini Tour', 'type': 'consu', 'is_storable': True,
+            'name': 'Fini Tour SF', 'type': 'consu', 'is_storable': True,
         })
         bom = self.env['mrp.bom'].create({
             'product_tmpl_id': finished.product_tmpl_id.id,

@@ -57,8 +57,20 @@ class MrpWorkorder(models.Model):
         card['components'] = components
         return card
 
+    def _sf_check_input(self, qty):
+        """Saisie de quantité : OT en cours et quantité positive ou nulle."""
+        self.ensure_one()
+        if self.state != 'progress':
+            raise UserError(_("Démarrez l'ordre de travail avant de saisir des quantités."))
+        if qty is None or qty < 0:
+            raise UserError(_("La quantité ne peut pas être négative."))
+
     def sf_start(self):
         self.ensure_one()
+        # Seul le PREMIER démarrage neutralise la proposition de consommation :
+        # une reprise après pause, un double clic ou une requête rejouée ne
+        # doivent pas effacer les composants déjà scannés.
+        first_start = self.state != 'progress'
         self.button_start()
         # button_start() fixe qty_producing = qty_remaining, dont l'inverse
         # _set_qty_producing() (noyau mrp) pré-remplit automatiquement la
@@ -67,7 +79,7 @@ class MrpWorkorder(models.Model):
         # (comptage manuel composant par composant) : on neutralise cette
         # proposition pour que l'opérateur reparte de 0, sans droits élargis.
         move_lines = self.move_raw_ids.move_line_ids
-        if move_lines:
+        if first_start and move_lines:
             move_lines.quantity = 0
         self.invalidate_recordset(self._SF_STALE_COMPUTE_FIELDS)
         return self.sf_get_detail()
@@ -99,7 +111,7 @@ class MrpWorkorder(models.Model):
         return detail
 
     def sf_set_qty(self, qty):
-        self.ensure_one()
+        self._sf_check_input(qty)
         self.qty_producing = qty
         return self.sf_get_detail()
 
@@ -110,13 +122,18 @@ class MrpWorkorder(models.Model):
         V1 : par produit uniquement ; si tracké lot/série, renvoie needs_lot=True
         (le pont barcode gèrera le lot) sans bloquer.
         """
-        self.ensure_one()
+        self._sf_check_input(qty)
         move = self.move_raw_ids.filtered(lambda m: m.id == move_id)
         if not move:
             raise UserError(_("Composant introuvable pour cet ordre de travail."))
-        line = move.move_line_ids[:1]
-        if line:
-            line.quantity = qty
+        # La quantité affichée est la SOMME des lignes : la quantité saisie
+        # devient ce total (première ligne = qty, les autres à 0), sinon
+        # « +1 » s'ajoutait aux autres lignes réservées et gonflait le total.
+        lines = move.move_line_ids
+        if lines:
+            lines[:1].quantity = qty
+            if lines[1:]:
+                lines[1:].quantity = 0
         else:
             self.env['stock.move.line'].create({
                 'move_id': move.id,
@@ -128,6 +145,7 @@ class MrpWorkorder(models.Model):
             })
         detail = self.sf_get_detail()
         detail['needs_lot'] = move.product_id.tracking != 'none'
+        detail['over_demand'] = move.product_uom.compare(qty, move.product_uom_qty) > 0
         return detail
 
     def sf_scan(self, barcode):
@@ -136,8 +154,7 @@ class MrpWorkorder(models.Model):
         move = self.move_raw_ids.filtered(lambda m: m.product_id.barcode == barcode)
         if move:
             move = move[0]
-            line = move.move_line_ids[:1]
-            new_qty = (line.quantity if line else 0.0) + 1.0
+            new_qty = sum(move.move_line_ids.mapped('quantity')) + 1.0
             detail = self.sf_consume(move.id, new_qty)
             return {'found': True, 'action': 'consume', 'move_id': move.id, 'detail': detail}
         return {'found': False}
