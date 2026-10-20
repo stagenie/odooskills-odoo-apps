@@ -30,7 +30,10 @@ class OskiDashboardWidget(models.Model):
         ], required=True, default='kpi')
     model_id = fields.Many2one('ir.model', string='Modèle', ondelete='cascade')
     model_name = fields.Char(related='model_id.model')
-    domain = fields.Char(string='Filtre', default='[]')
+    domain = fields.Char(
+        string='Filtre', default='[]',
+        help="Domaine Odoo. Variables : uid (l'utilisateur qui regarde), "
+             "context_today(), relativedelta.")
     group_by_field_id = fields.Many2one(
         'ir.model.fields', string='Grouper par',
         domain="[('model_id', '=', model_id), ('store', '=', True)]")
@@ -72,7 +75,7 @@ class OskiDashboardWidget(models.Model):
             # TransactionCase qui l'a déjà chauffé en superuser).
             model_name = widget.model_id.sudo().model
             try:
-                dom = safe_eval(widget.domain or '[]')
+                dom = widget._get_eval_domain()
                 if not isinstance(dom, list):
                     raise ValueError()
                 self.env[model_name]._search(dom, limit=1)
@@ -81,6 +84,25 @@ class OskiDashboardWidget(models.Model):
             except Exception:
                 raise ValidationError(
                     self.env._("Filtre invalide pour le modèle %s.", model_name))
+
+    def _domain_eval_context(self):
+        """Variables utilisables dans le filtre d'un widget, comme dans un
+        filtre favori Odoo : `uid` (utilisateur QUI REGARDE le tableau de bord,
+        pas son propriétaire — un tableau partagé « Mes ventes » montre donc à
+        chacun ses propres chiffres), `context_today()` et `relativedelta`.
+        Évalué par safe_eval (bac à sable), avec les droits du lecteur."""
+        return {
+            'uid': self.env.uid,
+            'context_today': lambda: fields.Date.context_today(self),
+            'relativedelta': relativedelta,
+        }
+
+    def _get_eval_domain(self):
+        """Domaine du widget évalué (liste). API publique pour les modules
+        qui étendent les widgets (pro, gantt) : à préférer à un
+        safe_eval(widget.domain) nu, qui ignore les variables ci-dessus."""
+        self.ensure_one()
+        return safe_eval(self.domain or '[]', self._domain_eval_context())
 
     @api.model
     def _check_internal_user(self):
@@ -149,7 +171,7 @@ class OskiDashboardWidget(models.Model):
         # curseur/transaction, sans le cache partagé « chaud » des tests
         # TransactionCase.
         Model = self.env[widget.model_id.sudo().model]
-        domain = safe_eval(widget.domain or '[]')
+        domain = list(widget._get_eval_domain())
         domain += widget._extra_filters_domain(global_filters or [])
         # Drill-down (hook générique, cf. _drill_groupby) : chaque étape du
         # chemin ajoute une égalité au domaine — appliqué ici, en amont du
@@ -397,5 +419,10 @@ class OskiDashboardWidget(models.Model):
         if key is None or key is False:
             return self.env._("Indéfini")
         if isinstance(key, models.BaseModel):
-            return key.display_name or self.env._("Indéfini")
+            # sudo() sur le seul libellé, comme le cœur (_read_group_format_result) :
+            # le groupe ne contient que des enregistrements lisibles par
+            # l'utilisateur, mais l'enregistrement référencé (ex. société mère
+            # d'une autre société) peut lui être interdit — sans sudo,
+            # AccessError et widget entier en erreur.
+            return key.sudo().display_name or self.env._("Indéfini")
         return str(key)

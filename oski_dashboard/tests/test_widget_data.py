@@ -140,3 +140,38 @@ class TestWidgetData(TransactionCase):
             ('create_date', '>=', expected_start),
             ('create_date', '<', expected_stop),
         ])
+
+    def test_group_by_m2o_unreadable_target_label(self):
+        """Groupe M2O vers un enregistrement interdit au lecteur : le libellé
+        est lu en sudo (comme le cœur) au lieu de faire échouer le widget."""
+        hidden = self.env['res.partner'].sudo().create({'name': 'DashHiddenParent'})
+        self.partners.sudo().write({'parent_id': hidden.id})
+        self.env['ir.rule'].sudo().create({
+            'name': 'test hide parent',
+            'model_id': self.model_partner.id,
+            'domain_force': f"[('id', '!=', {hidden.id})]",
+            'groups': [(4, self.env.ref('base.group_user').id)],
+        })
+        field_parent = self.env['ir.model.fields']._get('res.partner', 'parent_id')
+        widget = self._make_widget(widget_type='bar', group_by_field_id=field_parent.id)
+        self.env.invalidate_all()
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
+        self.assertEqual(data['values'], [3])
+        self.assertEqual(data['labels'], ['DashHiddenParent'])
+
+    def test_domain_uid_is_viewer(self):
+        """Amélioration A22 : `uid` dans le filtre = l'utilisateur qui regarde ;
+        un tableau partagé « mes enregistrements » montre à chacun les siens."""
+        model_users = self.env['ir.model']._get('res.users')
+        widget = self._make_widget(
+            model_id=model_users.id,
+            domain="[('id', '=', uid), ('create_date', '<', context_today() + relativedelta(days=1))]")
+        group = self.env['res.groups'].sudo().create({'name': 'Lecteurs Dash uid'})
+        reader = new_test_user(self.env, login='dash_reader_uid')
+        reader.sudo().write({'group_ids': [(4, group.id)]})
+        self.dash.sudo().group_ids = group
+        Widget = self.env['oski.dashboard.widget']
+        self.assertEqual(Widget.with_user(self.user).get_widget_data(widget.id)['total'], 1)
+        data = Widget.with_user(reader).get_widget_data(widget.id)
+        self.assertEqual(data['total'], 1)
+        self.assertIn(('id', '=', reader.id), data['drill_domain'])
