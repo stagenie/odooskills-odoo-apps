@@ -1,3 +1,5 @@
+import calendar
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
@@ -30,8 +32,27 @@ class SaleSubscriptionPlan(models.Model):
             if plan.billing_interval < 1:
                 raise ValidationError("L'intervalle de facturation doit être >= 1.")
 
-    def _get_next_date(self, from_date):
+    def _get_next_date(self, from_date, anchor=None):
+        """Échéance suivant ``from_date``.
+
+        Mois et années : le 31 donne le 28/29 février, mais le mois suivant
+        doit revenir au jour d'origine (31 mars), pas rester au 28. On repart
+        donc de ``anchor`` (date de début) quand ``from_date`` est sur sa
+        grille d'échéances ; à défaut, une fin de mois reste une fin de mois.
+        """
         self.ensure_one()
-        return from_date + relativedelta(
-            **{_UNIT_KEY[self.billing_unit]: self.billing_interval}
-        )
+        step = relativedelta(**{_UNIT_KEY[self.billing_unit]: self.billing_interval})
+        if self.billing_unit not in ("month", "year"):
+            return from_date + step
+        months = self.billing_interval * (12 if self.billing_unit == "year" else 1)
+        if anchor and anchor <= from_date:
+            elapsed = (from_date.year - anchor.year) * 12 + from_date.month - anchor.month
+            periods = elapsed // months
+            if anchor + relativedelta(months=periods * months) == from_date:
+                return anchor + relativedelta(months=(periods + 1) * months)
+        if from_date.day == calendar.monthrange(from_date.year, from_date.month)[1]:
+            target = from_date + step
+            return target.replace(
+                day=calendar.monthrange(target.year, target.month)[1]
+            )
+        return from_date + step
