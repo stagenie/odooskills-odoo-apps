@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_helpdesk_root" name="Assistance"
+              web_icon="oski_helpdesk,static/description/icon.png"
+              sequence="55"/>
+    <menuitem id="menu_helpdesk_tickets" name="Tickets"
+              parent="menu_helpdesk_root" action="helpdesk_ticket_action"
+              sequence="10"/>
+    <menuitem id="menu_helpdesk_config" name="Configuration"
+              parent="menu_helpdesk_root" sequence="90"
+              groups="group_helpdesk_manager"/>
+    <menuitem id="menu_helpdesk_teams" name="Équipes"
+              parent="menu_helpdesk_config" action="helpdesk_team_action"
+              sequence="10"/>
+    <menuitem id="menu_helpdesk_stages" name="Étapes"
+              parent="menu_helpdesk_config" action="helpdesk_stage_action"
+              sequence="20"/>
+    <menuitem id="menu_helpdesk_tags" name="Étiquettes"
+              parent="menu_helpdesk_config" action="helpdesk_tag_action"
+              sequence="30"/>
+</odoo>

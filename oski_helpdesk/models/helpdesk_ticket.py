@@ -1,0 +1,89 @@
+from odoo import _, api, fields, models
+
+
+class HelpdeskTicket(models.Model):
+    _name = "helpdesk.ticket"
+    _description = "Ticket d'assistance"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _order = "priority desc, id desc"
+
+    name = fields.Char(string="Sujet", required=True, tracking=True)
+    number = fields.Char(string="Numéro", readonly=True, copy=False, default="/")
+    team_id = fields.Many2one("helpdesk.team", string="Équipe", required=True, tracking=True)
+    stage_id = fields.Many2one(
+        "helpdesk.stage", string="Étape", tracking=True,
+        group_expand="_read_group_stage_ids",
+        default=lambda self: self._default_stage_id())
+    user_id = fields.Many2one("res.users", string="Assigné à", tracking=True)
+    partner_id = fields.Many2one("res.partner", string="Client")
+    partner_email = fields.Char(string="Courriel")
+    priority = fields.Selection(
+        [("0", "Basse"), ("1", "Normale"), ("2", "Haute"), ("3", "Urgente")],
+        string="Priorité", default="1")
+    kanban_state = fields.Selection(
+        [("normal", "En cours"), ("done", "Prêt"), ("blocked", "Bloqué")],
+        string="État", default="normal")
+    tag_ids = fields.Many2many("helpdesk.tag", string="Étiquettes")
+    description = fields.Html(string="Description")
+    color = fields.Integer(string="Couleur")
+    active = fields.Boolean(string="Actif", default=True)
+    company_id = fields.Many2one(
+        "res.company", string="Société", default=lambda self: self.env.company)
+
+    @api.model
+    def _default_stage_id(self):
+        return self.env["helpdesk.stage"].search([], order="sequence, id", limit=1)
+
+    @api.model
+    def _read_group_stage_ids(self, stages, domain):
+        return self.env["helpdesk.stage"].search([], order="sequence, id")
+
+    @api.model
+    def message_new(self, msg_dict, custom_values=None):
+        custom_values = dict(custom_values or {})
+        custom_values.setdefault("name", msg_dict.get("subject") or _("Sans sujet"))
+        custom_values.setdefault("partner_email", msg_dict.get("email_from"))
+        if not custom_values.get("description") and msg_dict.get("body"):
+            custom_values["description"] = msg_dict["body"]
+        return super().message_new(msg_dict, custom_values)
+
+    def _assign_balanced(self, team, pending=None):
+        """Membre le moins chargé (tickets ouverts de l'équipe).
+
+        ``pending`` : {user_id: nb} des tickets déjà attribués dans le même
+        ``create`` multiple, pas encore en base."""
+        members = team.member_ids
+        if not members:
+            return self.env["res.users"]
+        counts = {m.id: 0 for m in members}
+        data = self._read_group(
+            [("team_id", "=", team.id),
+             ("user_id", "in", members.ids),
+             ("stage_id.is_close", "=", False)],
+            ["user_id"], ["__count"])
+        for user, count in data:
+            counts[user.id] = count
+        for uid, count in (pending or {}).items():
+            if uid in counts:
+                counts[uid] += count
+        best_id = min(members.ids, key=lambda uid: counts.get(uid, 0))
+        return self.env["res.users"].browse(best_id)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        teams = self.env["helpdesk.team"].browse(
+            [v.get("team_id") for v in vals_list if v.get("team_id")])
+        team_map = {t.id: t for t in teams}
+        pending = {}  # {team_id: {user_id: nb}} attribués dans ce lot
+        for vals in vals_list:
+            if not vals.get("number") or vals["number"] == "/":
+                vals["number"] = self.env["ir.sequence"].sudo().next_by_code(
+                    "helpdesk.ticket") or "/"
+            team = team_map.get(vals.get("team_id"))
+            if team and team.assignment_method == "balanced" and not vals.get("user_id"):
+                team_pending = pending.setdefault(team.id, {})
+                user = self._assign_balanced(team, team_pending)
+                if user:
+                    vals["user_id"] = user.id
+                    team_pending[user.id] = team_pending.get(user.id, 0) + 1
+        return super().create(vals_list)
