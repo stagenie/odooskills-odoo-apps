@@ -84,7 +84,10 @@ class MrpWorkorder(models.Model):
         # consommation attendue). Le flux Shop Floor est piloté par le scan
         # (comptage manuel composant par composant) : on neutralise cette
         # proposition pour que l'opérateur reparte de 0, sans droits élargis.
-        move_lines = self.move_raw_ids.move_line_ids
+        # Les moves « picked » portent un comptage confirmé par l'opérateur
+        # (lots posés avant le démarrage, cf. oski_shop_floor_barcode) : on ne
+        # les efface pas.
+        move_lines = self.move_raw_ids.filtered(lambda m: not m.picked).move_line_ids
         if first_start and move_lines:
             move_lines.quantity = 0
         self.invalidate_recordset(self._SF_STALE_COMPUTE_FIELDS)
@@ -149,6 +152,10 @@ class MrpWorkorder(models.Model):
                 'location_id': move.location_id.id,
                 'location_dest_id': move.location_dest_id.id,
             })
+        # Quantité comptée par l'opérateur = quantité confirmée : sans
+        # « picked », button_finish() (noyau mrp) écrase le comptage par la
+        # consommation théorique de chaque move non pické.
+        move.picked = True
         detail = self.sf_get_detail()
         detail['needs_lot'] = move.product_id.tracking != 'none'
         detail['over_demand'] = float_compare(
