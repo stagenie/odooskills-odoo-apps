@@ -1,4 +1,5 @@
 from odoo.tests import TransactionCase, new_test_user
+from odoo.exceptions import ValidationError
 
 
 class TestWidgetData(TransactionCase):
@@ -175,3 +176,55 @@ class TestWidgetData(TransactionCase):
         data = Widget.with_user(reader).get_widget_data(widget.id)
         self.assertEqual(data['total'], 1)
         self.assertIn(('id', '=', reader.id), data['drill_domain'])
+
+    def test_drill_non_searchable_many2one(self):
+        """Drill sur un many2one non cherchable (res.company.country_id,
+        calculé sans search=) : la valeur reçue du front est l'id brut
+        (raw_keys) — comparer le recordset à cet id ne correspondait jamais
+        et le drill renvoyait 0 au lieu des enregistrements du pays."""
+        Company = self.env['res.company'].sudo()
+        be = self.env.ref('base.be')
+        fr = self.env.ref('base.fr')
+        companies = Company.create([
+            {'name': 'DashCo BE 1', 'country_id': be.id},
+            {'name': 'DashCo BE 2', 'country_id': be.id},
+            {'name': 'DashCo FR', 'country_id': fr.id},
+        ])
+        self.user.sudo().write({'company_ids': [(4, c.id) for c in companies]})
+        self.assertFalse(Company._fields['country_id']._description_searchable)
+        field_country = self.env['ir.model.fields']._get('res.company', 'country_id')
+        widget = self._make_widget(
+            widget_type='bar', model_id=self.env['ir.model']._get('res.company').id,
+            domain=f"[('id', 'in', {companies.ids})]",
+            group_by_field_id=field_country.id)
+        Widget = self.env['oski.dashboard.widget'].with_user(self.user)
+        data = Widget.get_widget_data(widget.id)
+        self.assertIn(be.id, data['raw_keys'])
+        data = Widget.get_widget_data(
+            widget.id, drill_path=[{'field': 'country_id', 'value': be.id}])
+        self.assertEqual(data['drill_depth'], 1)
+        self.assertEqual(data['total'], 2)
+
+    def test_top_n_negative_rejected(self):
+        """Top N négatif : `[:-n]` couperait silencieusement les n derniers
+        groupes — refusé par une contrainte."""
+        with self.assertRaises(ValidationError):
+            self._make_widget(limit=-1)
+        widget = self._make_widget(limit=0)
+        with self.assertRaises(ValidationError):
+            widget.write({'limit': -3})
+
+    def test_period_domain_uses_context_tz(self):
+        """« Aujourd'hui » : bornes locales (context_today, fuseau du contexte)
+        et conversion UTC dans le MÊME fuseau, même si le profil diffère."""
+        import pytz
+        self.user.sudo().write({'tz': 'America/New_York'})
+        field_date = self.env['ir.model.fields']._get('res.partner', 'create_date')
+        widget = self._make_widget(date_field_id=field_date.id, period='today')
+        widget_ctx = widget.with_user(self.user).with_context(tz='Asia/Tokyo')
+        start, stop, _, _ = widget_ctx._period_window()
+        tz = pytz.timezone('Asia/Tokyo')
+        self.assertEqual(widget_ctx._period_domain(start, stop), [
+            ('create_date', '>=', tz.localize(start).astimezone(pytz.utc).replace(tzinfo=None)),
+            ('create_date', '<', tz.localize(stop).astimezone(pytz.utc).replace(tzinfo=None)),
+        ])

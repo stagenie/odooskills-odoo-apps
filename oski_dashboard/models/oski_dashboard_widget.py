@@ -63,6 +63,15 @@ class OskiDashboardWidget(models.Model):
     limit = fields.Integer(string='Top N', default=0)
     options = fields.Text(string='Options', default='{}')
 
+    @api.constrains('limit')
+    def _check_limit(self):
+        # Top N négatif : la découpe [:limit] de _aggregate retirerait
+        # silencieusement les derniers groupes au lieu de garder les premiers.
+        for widget in self:
+            if widget.limit < 0:
+                raise ValidationError(self.env._(
+                    "Le « Top N » doit être positif ou nul (0 = tous les groupes)."))
+
     @api.constrains('domain', 'model_id')
     def _check_domain(self):
         for widget in self:
@@ -210,8 +219,11 @@ class OskiDashboardWidget(models.Model):
                 # correspondants en Python sur le domaine accumulé jusqu'ici,
                 # puis on bascule sur ('id', 'in', ...) — composable avec les
                 # étapes de drill suivantes.
+                # La valeur reçue est la clé BRUTE du groupe (raw_keys : id
+                # pour un many2one) — comparer le recordset tel quel à cet id
+                # ne correspondrait jamais (drill vide).
                 matched_ids = [r.id for r in Model.search(domain, limit=NON_STORED_MAX_RECORDS)
-                               if r[field_name] == value]
+                               if widget._raw_key(r[field_name]) == value]
                 domain = [('id', 'in', matched_ids)]
         payload['drill_depth'] = applied_depth
         # Domaine exposé au front pour l'action liste native du dernier niveau
@@ -310,7 +322,10 @@ class OskiDashboardWidget(models.Model):
         else:
             # Champ datetime : stockage en UTC naïf — les bornes calculées à
             # minuit LOCAL (context_today) doivent être converties tz user → UTC.
-            tz = pytz.timezone(self.env.user.tz or 'UTC')
+            # Même fuseau que context_today() (_period_window) : celui du
+            # contexte d'abord, sinon du profil — sinon les bornes locales et
+            # leur conversion UTC divergent quand les deux diffèrent.
+            tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz or 'UTC')
             start = tz.localize(start).astimezone(pytz.utc).replace(tzinfo=None)
             stop = tz.localize(stop).astimezone(pytz.utc).replace(tzinfo=None)
         return [(field_name, '>=', start), (field_name, '<', stop)]
