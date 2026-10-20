@@ -2,7 +2,7 @@
 
 import { Component, useState, onMounted } from "@odoo/owl";
 import { registry } from "@web/core/registry";
-import { rpc } from "@web/core/network/rpc";
+import { barcodeRpc } from "./barcode_rpc";
 import { PickingList } from "./picking_list";
 import { BarcodeReceipt } from "./barcode_receipt";
 import { BarcodeDelivery } from "./barcode_delivery";
@@ -27,7 +27,7 @@ export class BarcodeMain extends Component {
 
     async _loadCounts() {
         try {
-            this.state.counts = await rpc('/oski_stock_barcode/picking_counts', {});
+            this.state.counts = await barcodeRpc('/oski_stock_barcode/picking_counts', {});
         } catch { /* silent */ }
     }
 
