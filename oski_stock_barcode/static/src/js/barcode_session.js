@@ -2,7 +2,7 @@
 
 import { Component, onMounted, proxy, usePlugin, useProps, t } from "@odoo/owl";
 import { NotificationPlugin } from "@web/core/notifications/notification_plugin";
-import { rpc } from "@web/core/network/rpc";
+import { barcodeRpc } from "./barcode_rpc";
 
 export class BarcodeSession extends Component {
     static template = "oski_stock_barcode.BarcodeSession";
@@ -17,7 +17,7 @@ export class BarcodeSession extends Component {
     async _load() {
         this.state.loading = true;
         try {
-            const res = await rpc('/oski_stock_barcode/get_session_log', {});
+            const res = await barcodeRpc('/oski_stock_barcode/get_session_log', {});
             this.state.lines = res.lines || [];
             this.state.summary = res.summary || {};
         } catch {

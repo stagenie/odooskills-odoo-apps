@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import { Component, proxy, onMounted, signal, useProps, t } from "@odoo/owl";
-import { rpc } from "@web/core/network/rpc";
+import { barcodeRpc } from "./barcode_rpc";
 
 export class ProductSearch extends Component {
     static template = "oski_stock_barcode.ProductSearch";
@@ -48,7 +48,7 @@ export class ProductSearch extends Component {
 
     async _search() {
         try {
-            const products = await rpc('/oski_stock_barcode/search_products', {
+            const products = await barcodeRpc('/oski_stock_barcode/search_products', {
                 query: this.state.query,
                 storable_only: this.props.storableOnly || false,
                 limit: 10,
