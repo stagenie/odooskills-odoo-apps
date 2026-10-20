@@ -1,0 +1,23 @@
+{
+    "name": "Rendez-vous",
+    "version": "18.0.1.0.0",
+    "category": "Services/Appointment",
+    "summary": "Réservez des créneaux sans double réservation — prise de RDV structurée pour Odoo Community",
+    "author": "OdooSkills",
+    "website": "https://apps.odooskills.com",
+    "support": "apps@odooskills.com",
+    "license": "LGPL-3",
+    "depends": ["calendar", "resource", "mail"],
+    "data": [
+        "security/appointment_security.xml",
+        "security/ir.model.access.csv",
+        "data/mail_template_data.xml",
+        "views/appointment_booking_wizard_views.xml",
+        "views/appointment_type_views.xml",
+        "views/calendar_event_views.xml",
+        "views/appointment_menus.xml",
+    ],
+    "images": ["static/description/screenshot_01_type_form.png"],
+    "application": True,
+    "installable": True,
+}
