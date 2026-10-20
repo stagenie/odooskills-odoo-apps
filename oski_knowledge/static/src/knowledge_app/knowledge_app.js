@@ -1,18 +1,20 @@
-import { Component, useState, onWillStart } from "@odoo/owl";
+import { Component, proxy, onWillStart, useProps } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { View } from "@web/views/view";
+import { standardActionServiceProps } from "@web/webclient/actions/action_plugin";
 
 const ARTICLE_FIELDS = ["id", "name", "icon", "child_count", "section", "parent_id"];
 
 export class KnowledgeApp extends Component {
     static template = "oski_knowledge.KnowledgeApp";
     static components = { View };
-    static props = ["*"];
+    // Odoo 20 (OWL 3) : `static props` est ignoré ; useProps déclare les props de l'action.
+    props = useProps({ ...standardActionServiceProps });
 
     setup() {
         this.orm = useService("orm");
-        this.state = useState({
+        this.state = proxy({
             favorites: [],
             workspace: [],
             private: [],

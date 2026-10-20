@@ -49,3 +49,14 @@ class TestFavorite(TransactionCase):
             len(Fav.with_user(self.user_a).search([])), 1)
         self.assertEqual(
             len(Fav.with_user(self.user_b).search([])), 0)
+
+    def test_manager_does_not_see_others_favorites(self):
+        # Odoo 20 : « les miens » est une restriction SANS groupe (ir.access) ;
+        # posée avec un groupe, elle deviendrait une permission OU-ée avec
+        # celle du responsable, qui lirait alors les favoris de tous.
+        manager = new_test_user(
+            self.env, login='kn_m',
+            groups='base.group_user,oski_knowledge.group_knowledge_manager')
+        self.art.with_user(self.user_a).action_toggle_favorite()
+        Fav = self.env['knowledge.article.favorite'].with_user(manager)
+        self.assertFalse(Fav.search([]))

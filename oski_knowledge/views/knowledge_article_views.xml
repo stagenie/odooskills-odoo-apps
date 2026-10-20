@@ -7,13 +7,13 @@
             <form>
                 <header>
                     <button name="action_archive_to_trash" type="object"
-                            string="Archiver" icon="fa-trash"
+                            string="Archiver" icon="delete"
                             invisible="not active"/>
                     <button name="action_restore" type="object"
-                            string="Restaurer" icon="fa-undo"
+                            string="Restaurer" icon="undo"
                             invisible="active"/>
                     <button name="action_toggle_favorite" type="object"
-                            string="Favori" icon="fa-star-o"/>
+                            string="Favori" icon="star"/>
                 </header>
                 <sheet>
                     <div class="oe_title d-flex align-items-center gap-2">

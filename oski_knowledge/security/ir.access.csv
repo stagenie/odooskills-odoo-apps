@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+rule_article_global,Article : périmètre workspace/privé,knowledge.article,oski_knowledge.group_knowledge_user,crud,"['|', ('section', '=', 'workspace'), '&', ('section', '=', 'private'), ('owner_id', '=', user.id)]"
+rule_article_manager,Article : accès total responsable,knowledge.article,oski_knowledge.group_knowledge_manager,crud,
+access_knowledge_favorite_user,Favori : utilisateur,knowledge.article.favorite,oski_knowledge.group_knowledge_user,crud,
+rule_favorite_own,Favori : les miens,knowledge.article.favorite,,crud,"[('user_id', '=', user.id)]"
