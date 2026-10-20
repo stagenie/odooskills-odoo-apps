@@ -47,7 +47,11 @@ class HelpdeskTicket(models.Model):
             custom_values["description"] = msg_dict["body"]
         return super().message_new(msg_dict, custom_values)
 
-    def _assign_balanced(self, team):
+    def _assign_balanced(self, team, pending=None):
+        """Membre le moins chargé (tickets ouverts de l'équipe).
+
+        ``pending`` : {user_id: nb} des tickets déjà attribués dans le même
+        ``create`` multiple, pas encore en base."""
         members = team.member_ids
         if not members:
             return self.env["res.users"]
@@ -59,6 +63,9 @@ class HelpdeskTicket(models.Model):
             ["user_id"], ["__count"])
         for user, count in data:
             counts[user.id] = count
+        for uid, count in (pending or {}).items():
+            if uid in counts:
+                counts[uid] += count
         best_id = min(members.ids, key=lambda uid: counts.get(uid, 0))
         return self.env["res.users"].browse(best_id)
 
@@ -67,13 +74,16 @@ class HelpdeskTicket(models.Model):
         teams = self.env["helpdesk.team"].browse(
             [v.get("team_id") for v in vals_list if v.get("team_id")])
         team_map = {t.id: t for t in teams}
+        pending = {}  # {team_id: {user_id: nb}} attribués dans ce lot
         for vals in vals_list:
             if not vals.get("number") or vals["number"] == "/":
                 vals["number"] = self.env["ir.sequence"].sudo().next_by_code(
                     "helpdesk.ticket") or "/"
             team = team_map.get(vals.get("team_id"))
             if team and team.assignment_method == "balanced" and not vals.get("user_id"):
-                user = self._assign_balanced(team)
+                team_pending = pending.setdefault(team.id, {})
+                user = self._assign_balanced(team, team_pending)
                 if user:
                     vals["user_id"] = user.id
+                    team_pending[user.id] = team_pending.get(user.id, 0) + 1
         return super().create(vals_list)

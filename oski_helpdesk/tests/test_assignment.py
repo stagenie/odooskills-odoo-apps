@@ -34,3 +34,11 @@ class TestAssignment(HelpdeskCase):
         t = self.env["helpdesk.ticket"].create({
             "name": "m", "team_id": self.team_man.id})
         self.assertFalse(t.user_id)
+
+    def test_balanced_batch_create_spreads(self):
+        """Un create multiple répartit les tickets, au lieu de tout donner
+        au même membre (charge du lot prise en compte)."""
+        tickets = self.env["helpdesk.ticket"].create([
+            {"name": "lot %s" % i, "team_id": self.team_bal.id} for i in range(4)])
+        self.assertEqual(len(tickets.filtered(lambda t: t.user_id == self.u1)), 2)
+        self.assertEqual(len(tickets.filtered(lambda t: t.user_id == self.u2)), 2)
