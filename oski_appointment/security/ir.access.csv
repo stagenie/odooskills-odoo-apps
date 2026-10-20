@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_appointment_type_user,appointment.type user,appointment.type,group_appointment_user,r,
+access_appointment_type_manager,appointment.type manager,appointment.type,group_appointment_manager,crud,
+appointment_type_company_rule,Type de RDV : multi-société,appointment.type,,crud,"[('company_id', 'in', company_ids + [False])]"
+access_booking_wizard_user,appointment.booking.wizard user,appointment.booking.wizard,group_appointment_user,crud,

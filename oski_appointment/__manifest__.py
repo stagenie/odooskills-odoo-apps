@@ -1,6 +1,6 @@
 {
     "name": "Rendez-vous",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Services/Appointment",
     "summary": "Réservez des créneaux sans double réservation — prise de RDV structurée pour Odoo Community",
     "author": "OdooSkills",
@@ -10,7 +10,7 @@
     "depends": ["calendar", "resource", "mail"],
     "data": [
         "security/appointment_security.xml",
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/mail_template_data.xml",
         "views/appointment_booking_wizard_views.xml",
         "views/appointment_type_views.xml",

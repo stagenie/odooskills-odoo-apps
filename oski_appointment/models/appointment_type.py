@@ -1,8 +1,8 @@
-from datetime import datetime, time, timedelta
-
-import pytz
+from datetime import UTC, datetime, time, timedelta
+from zoneinfo import ZoneInfo
 
 from odoo import api, fields, models
+from odoo.addons.base.models.res_partner import _tz_get
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -19,6 +19,15 @@ class AppointmentType(models.Model):
         required=True,
         default=lambda self: self.env.company.resource_calendar_id,
     )
+    tz = fields.Selection(
+        _tz_get,
+        string="Fuseau horaire",
+        compute="_compute_tz",
+        store=True,
+        readonly=False,
+        help="Fuseau dans lequel les horaires de disponibilité sont exprimés. "
+        "Par défaut celui de la société du calendrier.",
+    )
     staff_user_ids = fields.Many2many(
         "res.users", string="Personnel", required=True
     )
@@ -34,6 +43,17 @@ class AppointmentType(models.Model):
         "res.company", string="Société", default=lambda self: self.env.company
     )
     active = fields.Boolean(default=True)
+
+    @api.depends("resource_calendar_id", "company_id")
+    def _compute_tz(self):
+        # Odoo 20 : resource.calendar n'a plus de fuseau, il est porté par la société.
+        for atype in self:
+            atype.tz = atype.tz or (
+                atype.resource_calendar_id.company_id.tz
+                or atype.company_id.tz
+                or self.env.company.tz
+                or "UTC"
+            )
 
     def _compute_appointment_count(self):
         Event = self.env["calendar.event"]
@@ -71,10 +91,11 @@ class AppointmentType(models.Model):
         """Créneaux libres : [(start_utc_naive, [staff_user_ids]), ...]."""
         self.ensure_one()
         cal = self.resource_calendar_id
-        tz = pytz.timezone(cal.tz or "UTC")
-        start = tz.localize(datetime.combine(date_from, time.min))
-        end = tz.localize(datetime.combine(date_to, time.max))
-        intervals = cal._work_intervals_batch(start, end, resources=None, tz=tz)[False]
+        tz = ZoneInfo(self.tz or "UTC")
+        start = datetime.combine(date_from, time.min, tzinfo=tz)
+        end = datetime.combine(date_to, time.max, tzinfo=tz)
+        # Odoo 20 : sans ressource, le fuseau des intervalles est celui des bornes.
+        intervals = cal._work_intervals_batch(start, end)[False]
         delta = timedelta(hours=self.duration)
         now_utc = fields.Datetime.now()
         notice = now_utc + timedelta(hours=self.min_notice_hours)
@@ -83,7 +104,7 @@ class AppointmentType(models.Model):
         for iv_start, iv_stop, _meta in intervals:
             slot = iv_start
             while slot + delta <= iv_stop:
-                slot_start_utc = slot.astimezone(pytz.utc).replace(tzinfo=None)
+                slot_start_utc = slot.astimezone(UTC).replace(tzinfo=None)
                 slot_stop_utc = slot_start_utc + delta
                 if notice <= slot_start_utc <= horizon:
                     free = self._slot_free_staff(slot_start_utc, slot_stop_utc)

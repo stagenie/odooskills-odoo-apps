@@ -12,8 +12,8 @@
                 <p>Bonjour,</p>
                 <p>Votre rendez-vous <strong t-out="object.name">RDV</strong> est confirmé.</p>
                 <ul>
-                    <li>Date : <span t-out="format_datetime(object.start, tz=object.appointment_tz or object.appointment_type_id.resource_calendar_id.tz or 'UTC', dt_format='dd/MM/yyyy HH:mm')">date</span>
-                        (<span t-out="object.appointment_tz or object.appointment_type_id.resource_calendar_id.tz or 'UTC'">fuseau</span>)</li>
+                    <li>Date : <span t-out="format_datetime(object.start, tz=object.appointment_tz or object.appointment_type_id.tz or 'UTC', dt_format='dd/MM/yyyy HH:mm')">date</span>
+                        (<span t-out="object.appointment_tz or object.appointment_type_id.tz or 'UTC'">fuseau</span>)</li>
                     <li t-if="object.location">Lieu : <span t-out="object.location">lieu</span></li>
                 </ul>
                 <p>À bientôt.</p>

@@ -31,6 +31,7 @@
                         <group>
                             <field name="duration"/>
                             <field name="resource_calendar_id"/>
+                            <field name="tz"/>
                             <field name="min_notice_hours"/>
                             <field name="max_days_ahead"/>
                         </group>

@@ -15,20 +15,14 @@ class TestAppointment(TransactionCase):
         cls.partner = cls.env["res.partner"].create({"name": "Client RDV"})
 
     def _make_calendar(self):
-        # Attendances 7j/7 9h–17h, tz UTC → calcul de créneaux déterministe.
+        # Attendances 7j/7 9h–17h ; le fuseau (UTC) est porté par le type
+        # (Odoo 20 : plus de fuseau sur resource.calendar).
         return self.env["resource.calendar"].create(
             {
                 "name": "Dispo RDV",
-                "tz": "UTC",
-                "attendance_ids": [
+                "attendance_ids": [Command.clear()] + [
                     Command.create(
-                        {
-                            "name": "j%s" % d,
-                            "dayofweek": str(d),
-                            "hour_from": 9.0,
-                            "hour_to": 17.0,
-                            "day_period": "morning",
-                        }
+                        {"dayofweek": str(d), "hour_from": 9.0, "hour_to": 17.0}
                     )
                     for d in range(7)
                 ],
@@ -49,6 +43,7 @@ class TestAppointment(TransactionCase):
             "duration": duration,
             "resource_calendar_id": self._make_calendar().id,
             "staff_user_ids": [Command.set(self._make_staff(n_staff).ids)],
+            "tz": "UTC",
         }
         vals.update(kw)
         return self.env["appointment.type"].create(vals)
@@ -67,6 +62,20 @@ class TestAppointment(TransactionCase):
         self.assertEqual(t.duration, 1.0)
         self.assertEqual(len(t.staff_user_ids), 2)
         self.assertEqual(t.appointment_count, 0)
+
+    def test_tz_defaults_to_calendar_company(self):
+        # Odoo 20 : le fuseau vient de la société du calendrier (resource.calendar.tz supprimé)
+        company = self.env["res.company"].create({"name": "Société Tokyo RDV", "tz": "Asia/Tokyo"})
+        cal = self._make_calendar()
+        cal.company_id = company
+        t = self.env["appointment.type"].create({
+            "name": "Fuseau", "resource_calendar_id": cal.id,
+            "staff_user_ids": [Command.set(self._make_staff(1).ids)],
+        })
+        self.assertEqual(t.tz, "Asia/Tokyo")
+        d = self._future_date(7)
+        starts = sorted(s[0] for s in t._get_available_slots(d, d))
+        self.assertEqual(starts[0], datetime(d.year, d.month, d.day, 0, 0))  # 9h Tokyo = 0h UTC
 
     def test_duration_constraint(self):
         with self.assertRaises(ValidationError):
@@ -242,7 +251,7 @@ class TestAppointment(TransactionCase):
 
     def test_confirmation_date_in_calendar_timezone(self):
         t = self._make_type(duration=1.0, n_staff=1)
-        t.resource_calendar_id.tz = "Africa/Algiers"  # UTC+1, sans heure d'été
+        t.tz = "Africa/Algiers"  # UTC+1, sans heure d'été
         slot = self._get_first_slot(t, self._future_date(7))  # 9h locale = 8h UTC
         self.assertEqual(slot.hour, 8)
         event = self._book(t, slot)
@@ -289,12 +298,9 @@ class TestAppointmentConcurrency(TransactionCase):
         with registry.cursor() as cr0:
             env0 = api.Environment(cr0, SUPERUSER_ID, {})
             cal = env0["resource.calendar"].create({
-                "name": "Concurrence RDV", "tz": "UTC",
-                "attendance_ids": [
-                    Command.create({
-                        "name": "j%s" % d, "dayofweek": str(d),
-                        "hour_from": 9.0, "hour_to": 17.0, "day_period": "morning",
-                    })
+                "name": "Concurrence RDV",
+                "attendance_ids": [Command.clear()] + [
+                    Command.create({"dayofweek": str(d), "hour_from": 9.0, "hour_to": 17.0})
                     for d in range(7)
                 ],
             })
@@ -302,7 +308,7 @@ class TestAppointmentConcurrency(TransactionCase):
             partners = env0["res.partner"].create([{"name": "Visiteur 1"}, {"name": "Visiteur 2"}])
             atype = env0["appointment.type"].create({
                 "name": "Concurrence", "duration": 1.0,
-                "resource_calendar_id": cal.id,
+                "resource_calendar_id": cal.id, "tz": "UTC",
                 "staff_user_ids": [Command.set(staff.ids)],
             })
             ids = (cal.id, staff.id, partners.ids, atype.id)
