@@ -41,6 +41,8 @@ class SchoolPeriod(models.Model):
                 period.state == 'open' and period.date_start <= today <= period.date_end)
 
     def action_open(self):
+        if any(p.state == 'closed' for p in self):
+            raise UserError(self.env._('A closed period cannot be reopened.'))
         self.write({'state': 'open'})
         self.env['oski.school.enrollment'].search([
             ('period_id', 'in', self.ids), ('state', '=', 'confirmed')]).action_activate()
@@ -95,6 +97,7 @@ class SchoolTerm(models.Model):
     _name = 'oski.school.term'
     _description = 'School Term'
     _order = 'period_id, sequence, id'
+    _check_company_auto = True
 
     period_id = fields.Many2one('oski.school.period', required=True, ondelete='cascade')
     name = fields.Char(required=True)

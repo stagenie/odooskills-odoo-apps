@@ -7,15 +7,19 @@ class SchoolClass(models.Model):
     _description = 'Class'
     _inherit = ['mail.thread']
     _order = 'period_id desc, level_id, name'
+    _check_company_auto = True
 
     name = fields.Char(compute='_compute_name', store=True, readonly=False, required=True, precompute=True)
     suffix = fields.Char(size=8, help='A, B, Morning…')
-    level_id = fields.Many2one('oski.school.level', required=True, ondelete='restrict', index=True)
+    level_id = fields.Many2one('oski.school.level', required=True, ondelete='restrict', index=True,
+                               check_company=True)
     program_id = fields.Many2one(related='level_id.program_id', store=True, index=True)
     cycle_type = fields.Selection(related='program_id.cycle_type')
-    period_id = fields.Many2one('oski.school.period', required=True, ondelete='restrict', index=True)
-    room_id = fields.Many2one('oski.school.room')
-    homeroom_teacher_id = fields.Many2one('oski.school.teacher', string='Homeroom teacher')
+    period_id = fields.Many2one('oski.school.period', required=True, ondelete='restrict', index=True,
+                                check_company=True)
+    room_id = fields.Many2one('oski.school.room', check_company=True)
+    homeroom_teacher_id = fields.Many2one('oski.school.teacher', string='Homeroom teacher',
+                                          check_company=True)
     capacity = fields.Integer(compute='_compute_capacity', store=True, readonly=False,
                                help='0 = unlimited')
     student_count = fields.Integer(compute='_compute_counts', store=True)
@@ -54,7 +58,7 @@ class SchoolClass(models.Model):
             cls.seats_available = max(cls.capacity - count, 0)
 
     @api.constrains('level_id', 'period_id', 'company_id')
-    def _check_company(self):
+    def _check_company_consistency(self):
         for cls in self:
             if cls.period_id.company_id != cls.company_id or cls.program_id.company_id != cls.company_id:
                 raise ValidationError(self.env._(
@@ -82,11 +86,13 @@ class SchoolClassSubject(models.Model):
     _description = 'Subject taught in a class'
     _order = 'class_id, subject_id'
     _rec_name = 'subject_id'
+    _check_company_auto = True
     _rec_names_search = ['subject_id.name', 'subject_id.code', 'class_id.name']
 
     class_id = fields.Many2one('oski.school.class', required=True, ondelete='cascade', index=True)
     subject_id = fields.Many2one('oski.school.subject', required=True, ondelete='restrict')
-    teacher_id = fields.Many2one('oski.school.teacher', ondelete='restrict', index=True)
+    teacher_id = fields.Many2one('oski.school.teacher', ondelete='restrict', index=True,
+                                 check_company=True)
     coefficient = fields.Float(compute='_compute_coefficient', store=True, readonly=False)
     period_id = fields.Many2one(related='class_id.period_id', store=True)
     company_id = fields.Many2one(related='class_id.company_id', store=True)

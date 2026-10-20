@@ -42,6 +42,11 @@
         <field name="model_id" ref="model_oski_school_program"/>
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
+    <record id="rule_school_level_company" model="ir.rule">
+        <field name="name">School level: multi-company</field>
+        <field name="model_id" ref="model_oski_school_level"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
     <record id="rule_school_room_company" model="ir.rule">
         <field name="name">School room: multi-company</field>
         <field name="model_id" ref="model_oski_school_room"/>

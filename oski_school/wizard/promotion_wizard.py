@@ -79,6 +79,8 @@ class PromotionWizard(models.TransientModel):
 
     def action_apply(self):
         self.ensure_one()
+        if self.period_id.state == 'closed':
+            raise UserError(self.env._('The period %s is closed.', self.period_id.name))
         Enrollment = self.env['oski.school.enrollment']
         for line in self.line_ids:
             enr = line.enrollment_id

@@ -7,8 +7,10 @@ class SchoolTeacher(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name'
     _rec_name = 'name'
+    _check_company_auto = True
 
-    partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict', index=True)
+    partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict', index=True,
+                                 check_company=True)
     name = fields.Char(related='partner_id.name', store=True, readonly=True)
     email = fields.Char(related='partner_id.email')
     phone = fields.Char(related='partner_id.phone')
