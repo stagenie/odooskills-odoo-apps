@@ -5,3 +5,4 @@ from . import test_trash
 from . import test_rules
 from . import test_search
 from . import test_tours
+from . import test_access_a25

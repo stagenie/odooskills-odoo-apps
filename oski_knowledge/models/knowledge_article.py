@@ -66,8 +66,28 @@ class KnowledgeArticle(models.Model):
         for article in self:
             article.child_count = len(article.child_ids)
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Créer sous un parent exige le droit d'écriture sur ce parent : sinon un
+        # utilisateur injecte un enfant sous l'id d'un article privé d'autrui
+        # (la règle de création ne regarde que l'enfant) et lit le titre du
+        # parent via parent_id. Le superutilisateur passe (check_access).
+        parent_ids = {vals['parent_id'] for vals in vals_list if vals.get('parent_id')}
+        if parent_ids:
+            self.browse(parent_ids).check_access('write')
+            # Un sous-article suit TOUJOURS l'espace de son parent. Le default
+            # 'workspace' (ou une section postée) court-circuite le compute à la
+            # création : un enfant créé sous un parent PRIVÉ devenait
+            # 'workspace', donc visible de tous.
+            for vals in vals_list:
+                if vals.get('parent_id'):
+                    vals['section'] = self.browse(vals['parent_id']).section
+        return super().create(vals_list)
+
     def write(self, vals):
         if vals.get('parent_id'):
+            # Déplacement : droit d'écriture exigé sur le parent cible.
+            self.browse(vals['parent_id']).check_access('write')
             # En v19, _parent_store_update() lève un UserError générique avant que
             # les @api.constrains ne tournent : ce pré-check garantit une ValidationError claire.
             new_parent = self.browse(vals['parent_id'])
