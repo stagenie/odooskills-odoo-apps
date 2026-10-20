@@ -13,8 +13,8 @@ class RentalCheckinWizard(models.TransientModel):
     checkin_note = fields.Text(string='État des lieux — retour')
     invoice_late = fields.Boolean(
         string='Facturer le retard',
-        default=lambda self: self.env['ir.config_parameter'].sudo().get_param(
-            'oski_rental.late_invoicing') == 'True')
+        default=lambda self: self.env['ir.config_parameter'].sudo().get_bool(
+            'oski_rental.late_invoicing'))
 
     def action_validate(self):
         self.ensure_one()

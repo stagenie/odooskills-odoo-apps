@@ -1,6 +1,6 @@
 {
     'name': 'Location — Gestion de location générique',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Services/Rental',
     'summary': "Louez tout type de ressource : véhicules, salles, engins, matériel",
     'description': "Gestion de location générique : ressources unitaires, réservations, "
@@ -12,7 +12,7 @@
     'depends': ['base', 'mail', 'account', 'product'],
     'data': [
         'security/rental_security.xml',
-        'security/ir.model.access.csv',
+        'security/ir.access.csv',
         'data/ir_sequence_data.xml',
         'data/product_data.xml',
         'data/ir_cron_data.xml',

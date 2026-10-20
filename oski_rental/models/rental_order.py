@@ -177,11 +177,11 @@ class RentalOrder(models.Model):
         }
 
     def _get_default_rental_product(self):
-        param = self.env['ir.config_parameter'].sudo().get_param(
+        product_id = self.env['ir.config_parameter'].sudo().get_int(
             'oski_rental.default_product_id')
         product = self.env['product.product']
-        if param and param.isdigit():
-            product = product.browse(int(param)).exists()
+        if product_id:
+            product = product.browse(product_id).exists()
         if not product:
             product = self.env.ref(
                 'oski_rental.product_rental_default', raise_if_not_found=False)

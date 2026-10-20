@@ -118,7 +118,7 @@ class RentalAsset(models.Model):
         seconds = (date_end - date_start).total_seconds()
         if seconds <= 0:
             return 0.0
-        granularity = self.env['ir.config_parameter'].sudo().get_param(
+        granularity = self.env['ir.config_parameter'].sudo().get_str(
             'oski_rental.min_granularity', 'hour')
         tiers = [
             (field_name, duration)

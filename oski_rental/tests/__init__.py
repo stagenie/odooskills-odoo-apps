@@ -2,3 +2,4 @@ from . import test_asset, test_pricing, test_availability, test_order, test_tran
 from . import test_checkout_checkin
 from . import test_invoice
 from . import test_cron_settings
+from . import test_security

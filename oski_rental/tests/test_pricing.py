@@ -41,7 +41,7 @@ class TestPricing(RentalCase):
 
     def test_min_granularity_day_ignores_hours(self):
         asset = self._make_asset(price_hour=10, price_day=100)
-        self.env['ir.config_parameter'].sudo().set_param(
+        self.env['ir.config_parameter'].sudo().set_str(
             'oski_rental.min_granularity', 'day')
         # palier heure ignoré → 1 j + 3 h arrondi à 2 jours
         self.assertEqual(self._price(asset, days=1, hours=3), 200.0)

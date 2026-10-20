@@ -1,0 +1,14 @@
+id,name,model_id,group_id/id,operation,domain
+access_rental_category_user,rental.category.user,oski.rental.category,oski_rental.group_rental_user,r,
+access_rental_category_manager,rental.category.manager,oski.rental.category,oski_rental.group_rental_manager,crud,
+access_rental_asset_user,rental.asset.user,oski.rental.asset,oski_rental.group_rental_user,cru,
+access_rental_asset_manager,rental.asset.manager,oski.rental.asset,oski_rental.group_rental_manager,crud,
+access_rental_unavailability_user,rental.unavailability.user,oski.rental.unavailability,oski_rental.group_rental_user,crud,
+access_rental_order_user,rental.order.user,oski.rental.order,oski_rental.group_rental_user,crud,
+access_rental_order_line_user,rental.order.line.user,oski.rental.order.line,oski_rental.group_rental_user,crud,
+access_rental_checkout_wizard_user,rental.checkout.wizard.user,oski.rental.checkout.wizard,oski_rental.group_rental_user,cru,
+access_rental_checkin_wizard_user,rental.checkin.wizard.user,oski.rental.checkin.wizard,oski_rental.group_rental_user,cru,
+rule_rental_asset_company,Ressource location : multi-société,oski.rental.asset,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rule_rental_order_company,Location : multi-société,oski.rental.order,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rule_rental_order_line_company,Ligne de location : multi-société,oski.rental.order.line,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+rule_rental_unavailability_company,Indisponibilité : multi-société,oski.rental.unavailability,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
