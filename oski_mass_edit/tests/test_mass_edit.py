@@ -181,3 +181,60 @@ class TestMassEdit(TransactionCase):
         with self.assertRaises(AccessError):
             wizard.action_apply()
         self.assertNotEqual(menu.name, "Détourné")
+
+
+class TestMassEditInternalUser(TransactionCase):
+    """Un utilisateur interne (non administrateur) doit pouvoir éditer en masse
+    les modèles qu'il a le droit d'écrire : ``ir.model.fields`` lui est fermé,
+    l'assistant lit donc la définition du champ en sudo et la recherche du champ
+    est déléguée en sudo, limitée au modèle qu'il peut écrire."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        Users = cls.env["res.users"]
+        group_field = "group_ids" if "group_ids" in Users._fields else "groups_id"
+        cls.internal = Users.create({
+            "name": "Interne masse", "login": "interne.masse2@example.com",
+            # interne + gestion des contacts (le droit d'écrire les contacts), sans être administrateur
+            group_field: [(6, 0, [cls.env.ref("base.group_user").id, cls.env.ref("base.group_partner_manager").id])],
+        })
+        cls.partners = cls.env["res.partner"].create([{"name": "Gamma"}, {"name": "Delta"}])
+        cls.Fields = cls.env["ir.model.fields"].with_user(cls.internal)
+
+    def test_fields_stay_closed_without_the_wizard_key(self):
+        with self.assertRaises(AccessError):
+            self.Fields.name_search("function", [("model", "=", "res.partner")])
+
+    def test_wizard_key_opens_only_the_target_model(self):
+        found = self.Fields.with_context(oski_mass_edit_model="res.partner").name_search(
+            "", [("name", "=", "function")])
+        self.assertEqual(len(found), 1, "le champ Poste des contacts doit être proposé")
+        # un domaine qui vise un autre modèle est neutralisé par le domaine imposé
+        other = self.Fields.with_context(oski_mass_edit_model="res.partner").name_search(
+            "", [("model", "=", "ir.ui.menu")])
+        self.assertFalse(other, "aucun champ d'un autre modèle ne doit sortir")
+
+    def test_wizard_key_refuses_a_model_the_user_cannot_write(self):
+        self.assertFalse(
+            self.Fields.with_context(oski_mass_edit_model="ir.ui.menu").name_search("name"),
+            "l'utilisateur n'écrit pas les menus : aucun champ proposé",
+        )
+        self.assertFalse(self.Fields.with_context(oski_mass_edit_model="n.existe.pas").name_search(""))
+
+    def test_web_name_search_follows_the_same_rule(self):
+        if not hasattr(self.Fields, "web_name_search"):
+            self.skipTest("web_name_search absent")
+        rows = self.Fields.with_context(oski_mass_edit_model="res.partner").web_name_search(
+            "", {"display_name": {}}, [("name", "=", "function")])
+        self.assertEqual(len(rows), 1)
+        self.assertTrue(rows[0].get("display_name"))
+
+    def test_internal_user_applies_a_mass_edit(self):
+        field = self.env["ir.model.fields"]._get("res.partner", "function")
+        wizard = self.env["oski.mass.edit.wizard"].with_user(self.internal).with_context(
+            active_model="res.partner", active_ids=self.partners.ids,
+        ).create({"model_name": "res.partner", "field_id": field.id, "value_char": "Acheteur"})
+        self.assertEqual(wizard.field_ttype, "char")
+        wizard.action_apply()
+        self.assertEqual(self.partners.mapped("function"), ["Acheteur", "Acheteur"])

@@ -73,11 +73,13 @@ class OskiMassEditWizard(models.TransientModel):
             if raise_if_missing:
                 raise UserError(_("Le modèle « %s » n'existe pas.", self.model_name))
             return None
-        field = model._fields.get(self.field_id.name)
+        # ir.model.fields n'est lisible que par les administrateurs : on ne lit
+        # ici que le nom du champ, en sudo ; l'écriture reste sous les droits.
+        field_name = self.field_id.sudo().name
+        field = model._fields.get(field_name)
         if field is None and raise_if_missing:
             raise UserError(
-                _("Le champ « %s » n'existe pas sur « %s ».",
-                  self.field_id.name, self.model_name)
+                _("Le champ « %s » n'existe pas sur « %s ».", field_name, self.model_name)
             )
         return field
 
@@ -152,10 +154,11 @@ class OskiMassEditWizard(models.TransientModel):
         records = self._target_records()
         if not records:
             raise UserError(_("Aucun enregistrement sélectionné."))
-        if self.field_id.model != self.model_name:
+        field_def = self.field_id.sudo()
+        if field_def.model != self.model_name:
             raise UserError(
                 _("Le champ « %(field)s » n'appartient pas au modèle « %(model)s ».",
-                  field=self.field_id.name, model=self.model_name)
+                  field=field_def.name, model=self.model_name)
             )
         field = self._resolve_field()
         self._check_writable(field)
@@ -166,5 +169,5 @@ class OskiMassEditWizard(models.TransientModel):
             )
         # Aucun sudo : l'écriture passe par les droits et les règles de
         # l'utilisateur courant, exactement comme une saisie fiche par fiche.
-        records.write({self.field_id.name: value})
+        records.write({field_def.name: value})
         return {"type": "ir.actions.act_window_close"}

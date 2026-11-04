@@ -8,7 +8,7 @@
                 <group>
                     <field name="model_name"/>
                     <field name="record_count"/>
-                    <field name="field_id" options="{'no_create': True}"/>
+                    <field name="field_id" options="{'no_create': True}" context="{'oski_mass_edit_model': model_name}"/>
                     <field name="field_ttype" invisible="1"/>
                     <field name="operation"/>
                     <field name="value_char"
