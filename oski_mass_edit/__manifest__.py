@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Édition en masse",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "category": "Technical",
     "summary": "Modifiez un champ sur toute une sélection depuis la vue liste, sans passer par chaque fiche.",
     "description": """
@@ -14,7 +14,7 @@ s'appliquent normalement — le module n'écrit jamais en sudo.
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",
     "license": "LGPL-3",
-    "depends": ["base"],
+    "depends": ["base", "web"],
     "images": [
         "static/description/screenshot_01_menu_actions.png",
         "static/description/screenshot_02_assistant.png",
