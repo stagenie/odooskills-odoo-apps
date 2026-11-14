@@ -1,8 +1,8 @@
 {
-    "name": "Abonnements — Oski",
+    "name": "Subscriptions",
     "version": "20.0.1.0.0",
     "category": "Sales/Subscriptions",
-    "summary": "Gérez vos abonnements et facturez automatiquement chaque client au bon rythme — sans Enterprise.",
+    "summary": "Manage your subscriptions and invoice each customer automatically at the right pace — without Enterprise.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",

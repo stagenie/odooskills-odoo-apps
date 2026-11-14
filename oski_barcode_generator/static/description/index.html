@@ -1,57 +1,57 @@
 <!--
-  Fiche produit OdooSkills — oski_barcode_generator
-  Styles INLINE uniquement. Accent = #714B67.
-  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+  OdooSkills product page — oski_barcode_generator
+  INLINE styles only. Accent = #714B67.
+  The screenshots are real: taken on a populated Odoo 19 database.
 -->
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Codes-barres EAN13 en masse</h1>
-    <p style="color: #6b7280; font-size: 17px;">Attribuez des codes EAN13 valides à tous les articles qui n'en ont pas, d'un geste.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Bulk EAN13 Barcodes</h1>
+    <p style="color: #6b7280; font-size: 17px;">Assign valid EAN13 codes to every product that has none, in one go.</p>
   </div>
 
-  <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">Odoo sait vérifier un code-barres et en calculer la clé ; il ne sait pas en produire. Un catalogue de mille références sans code se remplit donc à la main, un article après l'autre, avec les fautes de frappe que cela suppose — et un code faux ne se découvre qu'au moment où le scanner refuse l'étiquette, en réception ou en caisse.</p>
+  <!-- 2. THE PROBLEM -->
+  <p style="line-height: 1.6; color: #374151;">Odoo can validate a barcode and compute its check digit; it cannot generate one. A catalog of a thousand items without codes is therefore filled in by hand, one product after another, with all the typos that implies &mdash; and a wrong code only shows up when the scanner rejects the label, at receipt or at the checkout.</p>
 
-  <!-- 3. CE QUE ÇA APPORTE -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <!-- 3. WHAT IT ADDS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">🔢 <strong>Des EAN13 valides</strong>, clé de contrôle comprise — jamais un numéro qui ne passera pas au scanner.</li>
-    <li style="line-height: 1.6; color: #374151;">🎯 <strong>Sur la sélection</strong>, depuis la liste des articles ou des variantes, ou sur <strong>tous</strong> ceux qui n'ont pas encore de code.</li>
-    <li style="line-height: 1.6; color: #374151;">🔒 <strong>Un préfixe réglable</strong>, par défaut dans la plage 20-29 que la norme réserve à l'usage interne d'une entreprise.</li>
-    <li style="line-height: 1.6; color: #374151;">📋 <strong>Le compte des articles concernés</strong> affiché avant d'agir, et la liste des articles servis affichée après.</li>
+    <li style="line-height: 1.6; color: #374151;">🔢 <strong>Valid EAN13 codes</strong>, check digit included &mdash; never a number that will fail at the scanner.</li>
+    <li style="line-height: 1.6; color: #374151;">🎯 <strong>On the selection</strong>, from the product or variant list, or on <strong>all</strong> those that have no code yet.</li>
+    <li style="line-height: 1.6; color: #374151;">🔒 <strong>An adjustable prefix</strong>, by default in the 20-29 range that the standard reserves for a company's internal use.</li>
+    <li style="line-height: 1.6; color: #374151;">📋 <strong>The count of products concerned</strong> shown before acting, and the list of products served shown after.</li>
   </ul>
 
-  <!-- 4. APERÇUS RÉELS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+  <!-- 4. REAL SCREENSHOTS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshots</h2>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. L'assistant, appelé depuis la sélection</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Six articles cochés dans la liste, dix variantes concernées : le compte est annoncé avant l'action, préfixe et plafond compris. Les articles qui portent déjà un code ne figurent pas dans ce compte.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. The wizard, opened from the selection</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Six products checked in the list, ten variants concerned: the count is announced before the action, prefix and cap included. Products that already carry a code are not part of this count.</p>
   <img src="screenshot_01_wizard.png"
-       alt="Assistant Générer les codes-barres d'Odoo, ouvert sur une sélection d'articles, avec préfixe, portée et nombre d'articles concernés"
+       alt="Odoo Generate barcodes wizard, opened on a selection of products, with prefix, scope and number of products concerned"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Les articles servis</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">L'assistant rend la liste de ce qu'il vient d'attribuer, variante par variante : le contrôle se fait sur pièce, pas sur parole. Chaque code est un EAN13 complet, clé comprise.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. The products served</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">The wizard returns the list of what it just assigned, variant by variant: you check the actual records, not take its word for it. Each code is a complete EAN13, check digit included.</p>
   <img src="screenshot_02_products.png"
-       alt="Liste des variantes d'articles Odoo affichant les codes-barres EAN13 qui viennent d'être attribués"
+       alt="Odoo product variant list showing the EAN13 barcodes just assigned"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <!-- 5. POURQUOI L'ADOPTER -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <!-- 5. WHY INSTALL IT -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">Les articles qui portent déjà un code ne sont <strong>jamais</strong> touchés : écraser un code casserait les étiquettes déjà imprimées et les scanners qui les lisent.</li>
-    <li style="line-height: 1.6; color: #374151;">Les numéros <strong>déjà pris dans la plage sont sautés</strong>, y compris ceux venus d'un import — deux articles ne peuvent pas se retrouver avec le même code.</li>
-    <li style="line-height: 1.6; color: #374151;">Le préfixe par défaut commence par 2 : y déroger produirait des codes <strong>ressemblant à ceux d'un autre fabricant</strong>.</li>
-    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — il ne dépend que des articles, sans exiger l'inventaire ni la caisse.</li>
+    <li style="line-height: 1.6; color: #374151;">Products that already carry a code are <strong>never</strong> touched: overwriting a code would break the labels already printed and the scanners that read them.</li>
+    <li style="line-height: 1.6; color: #374151;">Numbers <strong>already taken in the range are skipped</strong>, including those that came from an import &mdash; two products can never end up with the same code.</li>
+    <li style="line-height: 1.6; color: #374151;">The default prefix starts with 2: departing from it would produce codes <strong>resembling another manufacturer's</strong>.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Free</strong> module, LGPL-3 license &mdash; it only depends on products, without requiring Inventory or Point of Sale.</li>
   </ul>
 
-  <!-- 6. POUR ALLER PLUS LOIN -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
-  <p style="line-height: 1.6; color: #374151;">Attribuer les codes est le préalable ; les faire travailler est la suite. La gamme OdooSkills couvre la lecture au code-barres des opérations d'entrepôt, le suivi par lot et numéro de série, et l'écran d'atelier au code-barres. Catalogue complet : apps.odooskills.com.</p>
+  <!-- 6. GOING FURTHER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Going further</h2>
+  <p style="line-height: 1.6; color: #374151;">Assigning codes is the prerequisite; putting them to work comes next. The OdooSkills range covers barcode scanning for warehouse operations, lot and serial number tracking, and the barcode-driven shop floor screen. Full catalog: apps.odooskills.com.</p>
 
-  <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : apps@odooskills.com.</p>
+  <!-- 7. COMPATIBILITY & LICENSE -->
+  <p style="line-height: 1.6; color: #6b7280;">LGPL-3 license &mdash; compatible with Odoo 19.0 Community and Enterprise. Support: apps@odooskills.com.</p>
 
 </section>

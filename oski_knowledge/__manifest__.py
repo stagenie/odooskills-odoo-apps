@@ -1,13 +1,9 @@
 {
-    'name': 'Connaissances',
+    'name': "Knowledge Base",
     'version': '20.0.1.0.0',
     'category': 'Productivity/Knowledge',
-    'summary': "Base de connaissances hiérarchique : articles arbre, éditeur "
-               "riche, espaces partagé/privé, favoris, corbeille, recherche",
-    'description': "Base de connaissances type Notion pour Odoo 20 CE : "
-                   "articles hiérarchiques illimités rédigés dans l'éditeur "
-                   "HTML natif d'Odoo, espace de travail partagé et espace "
-                   "privé, favoris ordonnés, corbeille, navigation par sidebar.",
+    'summary': "Hierarchical knowledge base: article tree, rich editor, shared/private spaces, favorites, trash, search",
+    'description': "Notion-style knowledge base for Odoo 19 CE: unlimited hierarchical articles written in Odoo's native HTML editor, shared workspace and private space, ordered favorites, trash, sidebar navigation.",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',

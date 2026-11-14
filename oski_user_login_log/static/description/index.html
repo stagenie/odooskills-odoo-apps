@@ -7,45 +7,45 @@
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Journal des connexions</h1>
-    <p style="color: #6b7280; font-size: 17px;">Chaque connexion et chaque échec, avec son identifiant, son adresse IP et sa date.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Login Log</h1>
+    <p style="color: #6b7280; font-size: 17px;">Every login and every failure, with its username, IP address and date.</p>
   </div>
 
   <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">Odoo retient la date de dernière connexion, et rien d'autre. Les tentatives échouées partent dans le fichier de journal du serveur — que personne n'ouvre, qui demande un accès système, et qui disparaît à la rotation. Une rafale de tentatives sur un compte d'administrateur peut ainsi passer inaperçue jusqu'à ce qu'elle aboutisse.</p>
+  <p style="line-height: 1.6; color: #374151;">Odoo keeps the date of the last login, and nothing else. Failed attempts go to the server log file — which nobody opens, which requires system access, and which disappears on rotation. A burst of attempts on an administrator account can therefore go unnoticed until one succeeds.</p>
 
   <!-- 3. CE QUE ÇA APPORTE -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it brings</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">🔐 <strong>Réussites et échecs</strong> — les deux, dans le même registre, consultable depuis l'interface.</li>
-    <li style="line-height: 1.6; color: #374151;">🌐 <strong>L'adresse d'où l'on entre</strong> — visible sur chaque ligne, et regroupable.</li>
-    <li style="line-height: 1.6; color: #374151;">❓ <strong>Même les identifiants inconnus</strong> — une tentative sur un compte inexistant est inscrite avec l'identifiant saisi, sans utilisateur rattaché.</li>
-    <li style="line-height: 1.6; color: #374151;">💾 <strong>Les échecs ne se perdent pas</strong> — ils sont écrits sur une transaction qui leur est propre. Une trace posée dans la transaction de la connexion refusée disparaîtrait avec elle.</li>
-    <li style="line-height: 1.6; color: #374151;">🚪 <strong>Jamais au prix d'une connexion</strong> — si le registre tombe en panne, l'incident part dans le journal du serveur et l'authentification suit son cours.</li>
+    <li style="line-height: 1.6; color: #374151;">🔐 <strong>Successes and failures</strong> — both, in the same log, viewable from the interface.</li>
+    <li style="line-height: 1.6; color: #374151;">🌐 <strong>The address people log in from</strong> — visible on every line, and groupable.</li>
+    <li style="line-height: 1.6; color: #374151;">❓ <strong>Even unknown usernames</strong> — an attempt on a non-existent account is recorded with the username entered, with no linked user.</li>
+    <li style="line-height: 1.6; color: #374151;">💾 <strong>Failures are never lost</strong> — they are written in a transaction of their own. A record written in the refused login's transaction would disappear along with it.</li>
+    <li style="line-height: 1.6; color: #374151;">🚪 <strong>Never at the cost of a login</strong> — if the log breaks down, the incident goes to the server log and authentication carries on.</li>
   </ul>
 
   <!-- 4. APERÇUS RÉELS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshots</h2>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Une rafale d'échecs se voit d'un coup d'œil</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois tentatives refusées en rouge — dont une sur un identifiant qui n'existe pas — puis la connexion qui aboutit. Les lignes du haut sont les connexions réelles de l'administrateur depuis son navigateur, adresse IP à l'appui.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. A burst of failures stands out at a glance</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Three refused attempts in red — one of them on a username that does not exist — then the login that succeeds. The top lines are the administrator's real logins from their browser, IP address included.</p>
   <img src="screenshot_01_journal.png"
-       alt="Journal des connexions : quatre réussites de l'administrateur depuis 127.0.0.1, une réussite de claire.morel, et trois échecs en rouge dont un sur l'identifiant inconnu@example.com"
+       alt="Login log: four successful administrator logins from 127.0.0.1, one success by claire.morel, and three failures in red, one of them on the username inconnu@example.com"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
   <!-- 5. POURQUOI L'ADOPTER -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why adopt it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">Le registre est réservé aux administrateurs : il contient les identifiants saisis, qui sont parfois des mots de passe tapés dans le mauvais champ.</li>
-    <li style="line-height: 1.6; color: #374151;">Aucune configuration : le module enregistre dès son installation.</li>
-    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+    <li style="line-height: 1.6; color: #374151;">The log is restricted to administrators: it contains the usernames entered, which are sometimes passwords typed into the wrong field.</li>
+    <li style="line-height: 1.6; color: #374151;">No configuration: the module starts logging as soon as it is installed.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Free</strong> module, LGPL-3 license — no subscription, no external dependency.</li>
   </ul>
 
   <!-- 6. POUR ALLER PLUS LOIN -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
-  <p style="line-height: 1.6; color: #374151;">Savoir qui entre est un début ; décider ce que chacun voit une fois entré en est la suite. la gamme OdooSkills compte une quinzaine de modules de cloisonnement — par équipe commerciale, par département, par projet, par journal comptable, par entrepôt. Catalogue complet : apps.odooskills.com.</p>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Going further</h2>
+  <p style="line-height: 1.6; color: #374151;">Knowing who gets in is a start; deciding what each person sees once inside comes next. The OdooSkills range includes some fifteen segregation modules — by sales team, by department, by project, by accounting journal, by warehouse. Full catalog: apps.odooskills.com.</p>
 
   <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : apps@odooskills.com.</p>
+  <p style="line-height: 1.6; color: #6b7280;">LGPL-3 license — compatible with Odoo 19.0 Community and Enterprise. Support : apps@odooskills.com.</p>
 
 </section>

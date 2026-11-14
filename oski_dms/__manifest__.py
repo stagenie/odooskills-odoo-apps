@@ -1,12 +1,9 @@
 {
-    'name': 'Documents — GED',
+    'name': "Documents — DMS",
     'version': '20.0.1.0.0',
     'category': 'Productivity/Documents',
-    'summary': "Gestion électronique de documents : espaces, versionning, "
-               "rattachement métier, droits par espace",
-    'description': "GED Odoo 20 : organisez en espaces cloisonnés vos pièces "
-                   "jointes et fichiers, avec versionning, aperçu, rattachement "
-                   "aux enregistrements métier et droits par espace.",
+    'summary': "Electronic document management: workspaces, versioning, links to business records, per-workspace access rights",
+    'description': "Odoo 19 DMS: organize your attachments and files in isolated workspaces, with versioning, preview, links to business records and per-workspace access rights.",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',

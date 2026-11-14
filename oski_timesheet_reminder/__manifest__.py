@@ -1,27 +1,27 @@
 {
-    "name": "OdooSkills — Rappel de saisie des temps",
+    "name": "Timesheet Reminder",
     "version": "20.0.1.0.0",
     "category": "Services/Timesheets",
-    "summary": "Le tableau des retards de saisie, semaine par semaine, et le rappel qui va avec.",
+    "summary": "The table of missing timesheet hours, week by week, and the reminder that goes with it.",
     "description": """
-Odoo Community ne rappelle rien : une feuille de temps vide le reste, et le
-chef de projet s'en aperçoit à la facturation, quand plus personne ne se
-souvient de ce qu'il a fait trois semaines plus tôt.
+Odoo Community sends no reminders: an empty timesheet stays empty, and the
+project manager notices at invoicing time, when nobody remembers anymore
+what they did three weeks earlier.
 
-Ce module compare chaque semaine les heures saisies aux heures attendues :
+Every week, this module compares the hours logged with the hours expected:
 
-- l'horaire de travail de l'employé fait foi — un mi-temps relevé sur 35
-  heures serait en retard toutes les semaines — et le réglage de la société
-  n'est qu'un recours ;
-- une **tolérance** évite de déranger pour un quart d'heure ;
-- le retard devient une **donnée** : il se relit, se totalise et se compare
-  d'une semaine à l'autre, en liste comme en tableau croisé ;
-- l'employé reçoit une **activité**, jamais un courriel, et une seule fois par
-  semaine relevée.
+- the employee's working schedule is the reference — a part-timer checked
+  against 35 hours would be behind every single week — and the company
+  setting is only a fallback;
+- a **tolerance** avoids bothering anyone over fifteen minutes;
+- missing hours become **data**: they can be reviewed, totaled and compared
+  from one week to the next, in list and pivot views alike;
+- the employee receives an **activity**, never an email, and only once per
+  week checked.
 
-La tâche planifiée relève la semaine **écoulée**, du lundi au dimanche :
-relever la semaine en cours accuserait tout le monde d'un retard qui n'existe
-pas encore.
+The scheduled action checks the **past** week, Monday to Sunday:
+checking the current week would accuse everyone of a delay that does not
+exist yet.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

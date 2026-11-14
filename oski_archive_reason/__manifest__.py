@@ -1,19 +1,19 @@
 {
-    "name": "OdooSkills — Motif d'archivage",
+    "name": "Archive Reason",
     "version": "20.0.1.0.0",
     "category": "Productivity",
-    "summary": "Gardez une trace de chaque archivage : motif obligatoire saisi avant l'action, conservé dans le chatter du contact.",
+    "summary": "Keep a record of every archiving: a mandatory reason entered before the action, kept in the contact's chatter.",
     "description": """
-Plus aucun archivage sans explication. Lorsqu'un utilisateur tente d'archiver
-un contact, une fenêtre s'ouvre et exige un motif (champ obligatoire).
-La raison est ensuite postée automatiquement dans le fil de discussion du
-contact, pour un historique complet et auditable.
+No more archiving without an explanation. When a user tries to archive
+a contact, a dialog opens and requires a reason (mandatory field).
+The reason is then posted automatically in the contact's
+chatter, for a complete and auditable history.
 
-Fonctionnalités clés :
-- Archivage bloqué sans justification (champ obligatoire)
-- Motif enregistré dans le chatter du contact
-- Zéro configuration après installation
-- Compatible avec la multi-sélection depuis la vue liste
+Key features:
+- Archiving blocked without justification (mandatory field)
+- Reason recorded in the contact's chatter
+- Zero configuration after installation
+- Compatible with multi-selection from the list view
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

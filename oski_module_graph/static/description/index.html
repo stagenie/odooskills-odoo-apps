@@ -7,44 +7,44 @@
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Graphe des dépendances des modules</h1>
-    <p style="color: #6b7280; font-size: 17px;">Voyez d'un coup d'œil ce qui tient quoi dans votre base, en SVG.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Module Dependency Graph</h1>
+    <p style="color: #6b7280; font-size: 17px;">See at a glance what holds up what in your database, in SVG.</p>
   </div>
 
   <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">La liste des applications dit ce qui est installé. Elle ne dit pas ce qui tient quoi : quel module s'effondrerait si on désinstallait celui-là, combien de couches séparent une personnalisation du cœur, ni pourquoi une mise à jour en entraîne douze autres.</p>
+  <p style="line-height: 1.6; color: #374151;">The Apps list tells you what is installed. It does not tell you what holds up what: which module would collapse if you uninstalled that one, how many layers separate a customization from the core, or why one update drags twelve others along with it.</p>
 
   <!-- 3. CE QUE ÇA APPORTE -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">🗺️ <strong>Un étage par profondeur</strong> — chaque module se place à l'étage de sa plus longue chaîne de dépendances, pour qu'aucune flèche ne remonte.</li>
-    <li style="line-height: 1.6; color: #374151;">🎯 <strong>Depuis n'importe quel module</strong> — un bouton sur sa fiche dessine son propre arbre, sans passer par la base entière.</li>
-    <li style="line-height: 1.6; color: #374151;">🖥️ <strong>Dessiné par le serveur</strong> — aucune bibliothèque tierce, aucun appel réseau, rien à charger : du SVG produit en Python.</li>
-    <li style="line-height: 1.6; color: #374151;">📏 <strong>Il refuse l'illisible</strong> — au-delà de soixante modules, le graphe le dit et demande de restreindre plutôt que de rendre une image inexploitable.</li>
+    <li style="line-height: 1.6; color: #374151;">🗺️ <strong>One level per depth</strong> — each module sits on the level of its longest dependency chain, so that no arrow ever points back up.</li>
+    <li style="line-height: 1.6; color: #374151;">🎯 <strong>From any module</strong> — a button on its form draws its own tree, without going through the whole database.</li>
+    <li style="line-height: 1.6; color: #374151;">🖥️ <strong>Drawn by the server</strong> — no third-party library, no network call, nothing to load: SVG produced in Python.</li>
+    <li style="line-height: 1.6; color: #374151;">📏 <strong>It refuses the unreadable</strong> — beyond sixty modules, the graph says so and asks you to narrow down rather than render an unusable image.</li>
   </ul>
 
   <!-- 4. APERÇU RÉEL -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçu réel</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshot</h2>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">Ce dont dépend Discussion</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Sept modules, quatorze dépendances : <code>base</code> en haut, <code>mail</code> tout en bas, et entre les deux les couches qu'il faudrait retirer avant lui.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">What Discuss depends on</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Seven modules, fourteen dependencies: <code>base</code> at the top, <code>mail</code> at the very bottom, and in between the layers you would have to remove before it.</p>
   <img src="screenshot_01_graph.png"
-       alt="Graphe SVG des dépendances du module Discussion : base, web, base_setup, bus, web_tour, html_editor et mail reliés par des flèches"
+       alt="SVG dependency graph of the Discuss module: base, web, base_setup, bus, web_tour, html_editor and mail connected by arrows"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
   <!-- 5. POURQUOI L'ADOPTER -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">Un audit de base, une reprise de projet, une désinstallation risquée : trois moments où ce dessin remplace une demi-journée de lecture de manifestes.</li>
-    <li style="line-height: 1.6; color: #374151;">Une dépendance hors du périmètre est écartée du dessin : jamais de flèche vers un nœud absent.</li>
-    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+    <li style="line-height: 1.6; color: #374151;">A database audit, a project takeover, a risky uninstall: three moments when this drawing replaces half a day of reading manifests.</li>
+    <li style="line-height: 1.6; color: #374151;">A dependency outside the scope is left out of the drawing: never an arrow pointing to a missing node.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Free</strong> module, LGPL-3 license — no subscription, no external dependency.</li>
   </ul>
 
   <!-- 6. POUR ALLER PLUS LOIN -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
-  <p style="line-height: 1.6; color: #374151;">Comprendre son instance passe aussi par ses journaux : qui s'est connecté, qui a modifié quoi, ce qui est sorti de la base, quelles tâches planifiées échouent. La gamme OdooSkills compte une famille complète d'outils d'exploitation. Catalogue complet : apps.odooskills.com.</p>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Going further</h2>
+  <p style="line-height: 1.6; color: #374151;">Understanding your instance also means reading its logs: who logged in, who changed what, what left the database, which scheduled actions fail. The OdooSkills range includes a complete family of operations tools. Full catalog: apps.odooskills.com.</p>
 
   <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : apps@odooskills.com.</p>
+  <p style="line-height: 1.6; color: #6b7280;">LGPL-3 license — compatible with Odoo 19.0 Community and Enterprise. Support: apps@odooskills.com.</p>
 
 </section>

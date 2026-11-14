@@ -1,13 +1,13 @@
 {
-    "name": "OdooSkills — Modèles de remarque sur factures",
+    "name": "Invoice Comment Templates",
     "version": "20.0.1.0.0",
     "category": "Accounting/Accounting",
-    "summary": "Fini les copier-coller : une bibliothèque de mentions validées, insérables en un clic sur la facture et imprimées dans le PDF.",
+    "summary": "No more copy-paste: a library of approved notes, inserted on the invoice in one click and printed in the PDF.",
     "description": """
-Pénalités de retard, escompte, mentions légales TVA : plus besoin de les retaper à chaque facture.
-Ce module ajoute une bibliothèque de modèles de remarques (HTML riche) sélectionnables directement
-sur le formulaire de facture. La remarque choisie se copie automatiquement dans la narration Odoo,
-imprimée nativement dans le PDF — aucune modification de rapport QWeb requise.
+Late payment penalties, early payment discount, VAT legal notices: no need to retype them on every invoice.
+This module adds a library of comment templates (rich HTML) that can be selected directly
+on the invoice form. The chosen comment is automatically copied into the Odoo narration,
+printed natively in the PDF — no QWeb report change required.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

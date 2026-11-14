@@ -1,28 +1,28 @@
 {
-    "name": "OdooSkills — Historique des prix",
+    "name": "Price History",
     "version": "20.0.1.0.0",
     "category": "Sales/Sales",
-    "summary": "Chaque changement de prix de vente ou de coût, avec l'écart, la date et l'auteur.",
+    "summary": "Every change to a sales price or a cost, with the difference, the date and the author.",
     "description": """
-Odoo n'a plus d'historique de prix. Le prix affiché est le prix d'aujourd'hui ;
-celui d'avant la dernière hausse n'existe plus nulle part, et personne ne peut
-dire qui l'a changé ni quand.
+Odoo no longer has a price history. The price shown is today's price;
+the one before the last increase no longer exists anywhere, and nobody can
+say who changed it or when.
 
-Ce module inscrit chaque mouvement :
+This module records every change:
 
-- le **prix de vente** de l'article ;
-- le **coût**, par variante et par société — c'est un champ dépendant de la
-  société, deux filiales peuvent valoriser le même article différemment ;
-- l'ancienne valeur, la nouvelle, l'écart en monnaie et en pourcentage, la
-  date et l'auteur.
+- the product's **sales price**;
+- the **cost**, per variant and per company — it is a company-dependent
+  field, so two subsidiaries can value the same product differently;
+- the old value, the new one, the difference in currency and as a percentage,
+  the date and the author.
 
-La liste se filtre sur les hausses, les baisses, l'année en cours ; la courbe
-montre la trajectoire d'un article. Un bouton sur la fiche article ouvre son
-seul historique.
+The list can be filtered on increases, decreases and the current year; the chart
+shows a product's trend. A button on the product form opens that product's
+history alone.
 
-**Aucune purge automatique**, contrairement aux journaux techniques de la
-gamme : un historique de prix qui s'efface au bout de trente jours ne répond
-plus à la seule question qu'on lui pose.
+**No automatic purge**, unlike the technical logs in the
+range: a price history that wipes itself after thirty days can no longer
+answer the only question anyone asks it.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Numérotation des lignes de devis/commande",
+    "name": "Sales Line Numbers",
     "version": "20.0.1.0.0",
     "category": "Sales",
-    "summary": "Numérotez chaque ligne produit de vos devis et commandes — à l'écran et sur le PDF — pour des échanges client sans ambiguïté.",
+    "summary": "Number every product line of your quotations and orders — on screen and on the PDF — for unambiguous customer exchanges.",
     "description": """
-Numérotation automatique des lignes de devis et de commande
-===========================================================
+Automatic numbering of quotation and sales order lines
+======================================================
 
-Ce module ajoute une colonne « N° » qui numérote automatiquement (1, 2, 3, …)
-les lignes produit de chaque devis et bon de commande, à l'écran comme sur le
-PDF imprimé.
+This module adds an "N°" column that automatically numbers (1, 2, 3, …)
+the product lines of every quotation and sales order, on screen as well as
+on the printed PDF.
 
-- Les lignes de section, sous-section et note ne sont pas numérotées.
-- La numérotation suit l'ordre d'affichage des lignes et se met à jour
-  automatiquement lorsqu'on réordonne les lignes.
-- La colonne « N° » apparaît en première position du tableau des lignes et en
-  tête du rapport PDF.
+- Section, subsection and note lines are not numbered.
+- Numbering follows the display order of the lines and updates
+  automatically when the lines are reordered.
+- The "N°" column appears in first position in the lines table and at the
+  start of the PDF report.
 
-Aucune configuration n'est nécessaire : le module fonctionne dès son
-installation.
+No configuration is needed: the module works as soon as it is
+installed.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

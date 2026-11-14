@@ -1,19 +1,19 @@
 {
-    "name": "OdooSkills — Graphe des dépendances",
+    "name": "Module Dependency Graph",
     "version": "20.0.1.0.0",
     "category": "Technical",
-    "summary": "Voyez d'un coup d'œil ce qui dépend de quoi dans votre base, en SVG.",
+    "summary": "See at a glance what depends on what in your database, in SVG.",
     "description": """
-La liste des applications dit ce qui est installé. Elle ne dit pas ce qui tient
-quoi : quel module s'effondrerait si on désinstallait celui-ci, ni combien de
-couches séparent une personnalisation du cœur.
+The Apps list tells you what is installed. It does not tell you what holds up
+what: which module would collapse if you uninstalled this one, or how many
+layers separate a customization from the core.
 
-Ce module dessine le graphe des dépendances des modules installés : un étage
-par profondeur, une flèche par dépendance, le tout en SVG lisible et
-imprimable. Depuis la fiche d'un module, un bouton montre son propre arbre.
+This module draws the dependency graph of the installed modules: one level
+per depth, one arrow per dependency, all in readable and printable SVG. From
+a module's form, a button shows its own tree.
 
-Aucune bibliothèque tierce, aucun appel réseau : le dessin est produit par le
-serveur.
+No third-party library, no network call: the drawing is produced by the
+server.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

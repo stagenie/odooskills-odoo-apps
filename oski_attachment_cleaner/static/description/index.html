@@ -1,56 +1,56 @@
 <!--
-  Fiche produit OdooSkills — oski_attachment_cleaner
-  Styles INLINE uniquement. Accent = #714B67.
-  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+  OdooSkills product page — oski_attachment_cleaner
+  INLINE styles only. Accent = #714B67.
+  The screenshots are real: taken on a populated Odoo 19 database.
 -->
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Nettoyage des pièces jointes</h1>
-    <p style="color: #6b7280; font-size: 17px;">Orphelines, copies redondantes, poids du magasin de fichiers — et une purge qui laisse une trace.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Attachment Cleaner</h1>
+    <p style="color: #6b7280; font-size: 17px;">Orphans, redundant copies, filestore size &mdash; and a purge that leaves a trail.</p>
   </div>
 
-  <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">Le magasin de fichiers d'une base vieillit mal. Des migrations, des suppressions en cascade au niveau de la base, des imports ratés laissent derrière eux des pièces jointes qui ne désignent plus rien. Odoo n'en propose aucun inventaire, et sa purge automatique ne touche qu'à ce qu'il a lui-même produit.</p>
+  <!-- 2. THE PROBLEM -->
+  <p style="line-height: 1.6; color: #374151;">A database's filestore ages badly. Migrations, cascading deletions at the database level and failed imports leave behind attachments that no longer point to anything. Odoo offers no inventory of them, and its automatic cleanup only touches what it produced itself.</p>
 
-  <!-- 3. CE QUE ÇA APPORTE -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <!-- 3. WHAT IT ADDS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">🔎 <strong>Un relevé avant tout</strong> — le module compte, pèse et nomme ; il ne supprime que sur un second geste.</li>
-    <li style="line-height: 1.6; color: #374151;">🧷 <strong>Deux critères, pas un de plus</strong> — les orphelines, et les copies redondantes du <em>même</em> document. La même pièce sur deux documents différents n'est jamais touchée : un contrat type attaché à deux clients doit le rester.</li>
-    <li style="line-height: 1.6; color: #374151;">🛡️ <strong>Un filet de sécurité explicite</strong> — valeurs de champs binaires, fichiers servis par une URL, pièces publiques, vues, et tout ce qui est plus récent que l'âge minimum : jamais proposés.</li>
-    <li style="line-height: 1.6; color: #374151;">🧾 <strong>Chaque purge laisse sa trace</strong> — qui, quand, combien de pièces, combien d'octets, sur quels critères, et la liste des fichiers supprimés.</li>
+    <li style="line-height: 1.6; color: #374151;">🔎 <strong>A report before anything else</strong> &mdash; the module counts, weighs and names; it only deletes on a second action.</li>
+    <li style="line-height: 1.6; color: #374151;">🧷 <strong>Two criteria, no more</strong> &mdash; orphans, and redundant copies on the <em>same</em> document. The same file on two different documents is never touched: a template contract attached to two customers must stay that way.</li>
+    <li style="line-height: 1.6; color: #374151;">🛡️ <strong>An explicit safety net</strong> &mdash; binary field values, files served by a URL, public attachments, views, and anything more recent than the minimum age: never offered.</li>
+    <li style="line-height: 1.6; color: #374151;">🧾 <strong>Every purge leaves its trail</strong> &mdash; who, when, how many attachments, how many bytes, on which criteria, and the list of deleted files.</li>
   </ul>
 
-  <!-- 4. APERÇUS RÉELS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+  <!-- 4. REAL SCREENSHOTS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshots</h2>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Le relevé, avant toute suppression</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Cinq orphelines et deux copies redondantes, nommées une à une avec leur document d'origine et leur poids. Le poids total du magasin est rappelé à côté, pour mesurer ce que la purge changerait réellement.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. The report, before any deletion</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Five orphans and two redundant copies, listed one by one with their source document and size. The total filestore size is shown alongside, so you can measure what the purge would really change.</p>
   <img src="screenshot_01_scan.png"
-       alt="Relevé des pièces jointes : cinq orphelines, deux copies redondantes, poids retenu et poids total, avec la liste nominative"
+       alt="Attachment report: five orphans, two redundant copies, selected size and total size, with the itemized list"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Ce qui a été purgé, et par qui</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Chaque purge est archivée : la question « qui a supprimé ces fichiers ? » ne reste pas sans réponse.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. What was purged, and by whom</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Every purge is archived: the question "who deleted these files?" never goes unanswered.</p>
   <img src="screenshot_02_purges.png"
-       alt="Historique des purges de pièces jointes avec l'auteur, le nombre de pièces supprimées et les octets libérés"
+       alt="Attachment purge history with the author, the number of attachments deleted and the bytes freed"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <!-- 5. POURQUOI L'ADOPTER -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <!-- 5. WHY INSTALL IT -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">La purge <strong>rejoue le relevé</strong> au lieu de faire confiance à la sélection enregistrée : entre les deux, la base a continué de vivre.</li>
-    <li style="line-height: 1.6; color: #374151;">Une pièce dont le modèle a disparu avec son module n'est pas déclarée orpheline : réinstaller le module la rendrait utile, et une purge est sans retour.</li>
-    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+    <li style="line-height: 1.6; color: #374151;">The purge <strong>replays the report</strong> instead of trusting the saved selection: in between, the database kept on living.</li>
+    <li style="line-height: 1.6; color: #374151;">An attachment whose model disappeared along with its module is not flagged as an orphan: reinstalling the module would make it useful again, and a purge cannot be undone.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Free</strong> module, LGPL-3 license &mdash; no subscription, no external dependency.</li>
   </ul>
 
-  <!-- 6. POUR ALLER PLUS LOIN -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
-  <p style="line-height: 1.6; color: #374151;">Nettoyer les pièces jointes est un entretien ; les organiser est un métier. La gamme OdooSkills propose une gestion documentaire complète — classement, versions, droits par dossier, signature électronique. Catalogue complet : apps.odooskills.com.</p>
+  <!-- 6. GOING FURTHER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Going further</h2>
+  <p style="line-height: 1.6; color: #374151;">Cleaning attachments is maintenance; organizing them is a job in itself. The OdooSkills range offers full document management &mdash; filing, versions, per-folder access rights, electronic signature. Full catalog: apps.odooskills.com.</p>
 
-  <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : apps@odooskills.com.</p>
+  <!-- 7. COMPATIBILITY & LICENSE -->
+  <p style="line-height: 1.6; color: #6b7280;">LGPL-3 license &mdash; compatible with Odoo 19.0 Community and Enterprise. Support: apps@odooskills.com.</p>
 
 </section>
