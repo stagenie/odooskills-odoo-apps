@@ -1,13 +1,13 @@
 {
-    "name": "OdooSkills — Personnalisation Login",
+    "name": "Login Page Branding",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Affichez votre marque dès la connexion : couleur de fond, couleur d'accent et logo personnalisés sans code.",
+    "summary": "Show your brand from the login screen: custom background color, accent color and logo, without code.",
     "description": """
-La page de connexion Odoo affiche par défaut les couleurs du framework.
-Ce module permet à tout administrateur de choisir une couleur de fond,
-une couleur d'accent (boutons, liens) et un logo propre à chaque société
-— directement depuis les Réglages, sans modifier le code source.
+By default, the Odoo login page shows the framework's colors.
+This module lets any administrator choose a background color,
+an accent color (buttons, links) and a logo for each company
+— directly from Settings, without changing the source code.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

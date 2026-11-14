@@ -1,19 +1,19 @@
 {
-    "name": "OdooSkills — Journal des exports",
+    "name": "Export Log",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Sachez qui sort quelles données de votre base : modèle, champs, nombre de lignes, date.",
+    "summary": "Know who takes which data out of your database: model, fields, number of rows, date.",
     "description": """
-Odoo ne propose qu'un interrupteur : le groupe « Autoriser l'export » est donné, ou il ne l'est
-pas. Une fois donné, plus rien n'est su — ni quel modèle a été vidé, ni combien de lignes sont
-sorties, ni quand.
+Odoo offers only an on/off switch: the export permission is granted, or it is
+not. Once granted, nothing more is known — not which model was dumped, not how many rows went
+out, not when.
 
-Ce module inscrit chaque export réellement exécuté : l'auteur, le modèle, la liste des champs
-demandés et le nombre de lignes produites. Il n'empêche rien et ne ralentit rien ; il rend
-visible ce qui sort.
+This module logs every export actually performed: the author, the model, the list of requested
+fields and the number of rows produced. It prevents nothing and slows nothing down; it makes
+visible what goes out.
 
-Les exports refusés faute de droits ne produisent aucune ligne : le journal ne recense que ce qui
-a réellement quitté la base.
+Exports refused for lack of rights produce no line: the log only records what
+actually left the database.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

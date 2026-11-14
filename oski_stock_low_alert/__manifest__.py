@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "OdooSkills — Alerte de stock bas",
+    "name": "Low Stock Alert",
     "version": "19.0.1.0.0",
     "category": "Inventory/Inventory",
-    "summary": "Évitez les ruptures silencieuses : seuil d'alerte par produit, lignes rouges et activité quotidienne pour le responsable inventaire",
+    "summary": "Avoid silent stockouts: an alert threshold per product, red rows and a daily activity for the inventory manager.",
     "description": """
-Définissez un seuil d'alerte par produit. Dès que la quantité disponible
-descend en dessous de ce seuil, le produit est signalé en « stock bas » :
-lignes rouges dans la liste, filtre dédié, et une activité quotidienne créée
-automatiquement pour le responsable de stock. Anti-doublon intégré. Aucun
-paramétrage technique requis.
+Set an alert threshold per product. As soon as the available quantity
+drops below that threshold, the product is flagged as "low stock":
+red rows in the list, a dedicated filter, and a daily activity created
+automatically for the inventory manager. Built-in duplicate prevention. No
+technical setup required.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

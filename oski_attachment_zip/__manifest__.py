@@ -1,27 +1,27 @@
 {
-    "name": "OdooSkills — Pièces jointes en archive",
+    "name": "Attachments as ZIP",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Toutes les pièces jointes d'une fiche, ou de plusieurs, téléchargées en une archive ZIP.",
+    "summary": "All the attachments of one record, or of several, downloaded as a single ZIP archive.",
     "description": """
-Odoo sait zipper les fichiers **d'un message** du fil de discussion. Personne
-ne range ses documents ainsi : une commande porte le bon signé dans un
-message, le plan dans un autre, et le reste dans la boîte à pièces jointes.
-Les récupérer demande autant de clics que de fichiers.
+Odoo can zip the files **of one message** in the chatter. Nobody files their
+documents that way: an order carries the signed delivery slip in one
+message, the drawing in another, and the rest in the attachment box.
+Retrieving them takes as many clicks as there are files.
 
-Ce module ajoute au menu d'actions l'entrée **Télécharger les pièces jointes
-(ZIP)** :
+This module adds the **Download attachments (ZIP)** entry to the Actions
+menu:
 
-- depuis une fiche, tous ses fichiers ;
-- depuis une liste, ceux de la sélection, rangés dans un dossier par fiche.
+- from a record, all of its files;
+- from a list, those of the selection, filed in one folder per record.
 
-L'entrée s'active modèle par modèle, depuis **Paramètres → Technique →
-Structure de la base de données → Téléchargement groupé (ZIP)**.
+The entry is enabled model by model, from **Settings → Technical →
+Database Structure → Bulk download (ZIP)**.
 
-Les fichiers se lisent avec les droits de qui les demande : les pièces d'une
-fiche illisible ne partent pas dans l'archive. Les valeurs de champs binaires
-et les pièces servies par une URL en sont écartées — les premières ne sont pas
-des pièces jointes, les secondes n'ont aucun contenu à archiver.
+Files are read with the rights of whoever requests them: attachments of a
+record they cannot read stay out of the archive. Binary field values and
+attachments served by a URL are left out — the former are not attachments,
+the latter have no content to archive.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

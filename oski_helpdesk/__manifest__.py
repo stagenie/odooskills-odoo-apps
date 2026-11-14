@@ -1,8 +1,8 @@
 {
-    "name": "Assistance (Helpdesk) — Oski",
+    "name": "Helpdesk",
     "version": "19.0.1.0.0",
     "category": "Services/Helpdesk",
-    "summary": "Gérez les demandes client sans en perdre une seule : tickets numérotés, alias email, assignation équilibrée, kanban par étape.",
+    "summary": "Handle customer requests without losing a single one: numbered tickets, email alias, balanced assignment, kanban by stage.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",

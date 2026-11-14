@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Pistes dormantes CRM",
+    "name": "CRM Dormant Leads",
     "version": "19.0.1.0.0",
     "category": "Sales/CRM",
-    "summary": "Repérez les opportunités oubliées : surlignage, compteur de jours et filtre dormantes dans votre pipeline CRM.",
+    "summary": "Spot forgotten opportunities: highlighting, a day counter and a dormant filter in your CRM pipeline.",
     "description": """
-Pistes dormantes CRM
-====================
+CRM Dormant Leads
+=================
 
-Met en évidence les pistes et opportunités qui n'ont connu aucun mouvement
-depuis un nombre de jours configurable. Idéal pour relancer les affaires
-oubliées dans le pipeline.
+Highlights leads and opportunities that have seen no movement for a
+configurable number of days. Ideal for following up on forgotten deals in
+the pipeline.
 
-Le seuil d'inactivité se règle dans les Réglages du CRM. Une colonne
-« Jours d'inactivité » et un surlignage des lignes apparaissent dans le
-pipeline, et un filtre « Dormantes » permet d'isoler les affaires à relancer.
+The inactivity threshold is set in the CRM Settings. A "Days inactive"
+column and row highlighting appear in the pipeline, and a "Dormant" filter
+isolates the deals to follow up on.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

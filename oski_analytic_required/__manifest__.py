@@ -1,26 +1,26 @@
 {
-    "name": "OdooSkills — Analytique obligatoire par journal",
+    "name": "Mandatory Analytic",
     "version": "19.0.1.0.0",
     "category": "Accounting/Accounting",
-    "summary": "Le critère qui manque à Odoo — le journal — et le contrôle avant comptabilisation.",
+    "summary": "The criterion Odoo lacks — the journal — and the check before posting.",
     "description": """
-Odoo sait déjà rendre l'analytique obligatoire : l'applicabilité des plans
-analytiques l'exige par domaine d'activité, par préfixe de compte et par
-catégorie d'article. Deux choses y manquent :
+Odoo can already make analytic mandatory: analytic plan applicability
+requires it by business domain, by account prefix and by
+product category. Two things are missing:
 
-- le **journal**, qui est pourtant la façon dont la plupart des cabinets
-  raisonnent — tout ce qui passe par le journal des achats est ventilé, le
-  reste ne l'est pas ;
-- le **moment** : le contrôle du cœur ne parle qu'à la comptabilisation, quand
-  la saisie est finie et que l'écran affiche une erreur au lieu d'un résultat.
+- the **journal**, which is how most accounting firms actually
+  think — everything going through the purchase journal is distributed, the
+  rest is not;
+- the **timing**: the core check only speaks up at posting, when
+  data entry is finished and the screen shows an error instead of a result.
 
-Ce module ajoute la règle par journal, restreignable à des préfixes de
-comptes, et un écran **Écritures sans analytique** qui liste, parmi les
-brouillons, les lignes qui bloqueront.
+This module adds the rule per journal, which can be restricted to account
+prefixes, and an **Entries Without Analytic** screen that lists, among
+drafts, the lines that will block.
 
-Les contreparties — comptes clients et fournisseurs — et les lignes de taxe
-sont exclues d'office : elles soldent l'écriture, elles ne consomment ni ne
-produisent rien.
+Counterpart lines — receivable and payable accounts — and tax lines
+are excluded by default: they balance the entry, they neither consume nor
+produce anything.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

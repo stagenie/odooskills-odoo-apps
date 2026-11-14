@@ -7,51 +7,51 @@
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Analytique obligatoire par journal</h1>
-    <p style="color: #6b7280; font-size: 17px;">Le critère qui manque à Odoo — le journal — et le contrôle avant comptabilisation.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Mandatory Analytic by Journal</h1>
+    <p style="color: #6b7280; font-size: 17px;">The criterion Odoo lacks — the journal — and the check before posting.</p>
   </div>
 
   <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">Odoo sait déjà rendre l'analytique obligatoire : l'applicabilité des plans analytiques l'exige par domaine d'activité, par préfixe de compte et par catégorie d'article. Deux choses y manquent. Le <strong>journal</strong>, qui est pourtant la façon dont la plupart des cabinets raisonnent — tout ce qui passe par les achats est ventilé, le reste ne l'est pas. Et le <strong>moment</strong> : le contrôle du cœur ne parle qu'à la comptabilisation, quand la saisie est finie et que l'écran affiche une erreur au lieu d'un résultat.</p>
+  <p style="line-height: 1.6; color: #374151;">Odoo can already make analytic mandatory: analytic plan applicability requires it by business domain, by account prefix and by product category. Two things are missing. The <strong>journal</strong>, which is how most accounting firms actually think — everything going through purchases is distributed, the rest is not. And the <strong>timing</strong>: the core check only speaks up at posting, when data entry is finished and the screen shows an error instead of a result.</p>
 
   <!-- 3. CE QUE ÇA APPORTE -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">📒 <strong>Une règle par journal</strong>, restreignable à une liste de préfixes de comptes — ou à tous les comptes de résultat du journal si on laisse le champ vide.</li>
-    <li style="line-height: 1.6; color: #374151;">🔍 <strong>Un écran « Écritures sans analytique »</strong> qui liste, parmi les brouillons, les lignes qui bloqueront à la comptabilisation.</li>
-    <li style="line-height: 1.6; color: #374151;">🛑 <strong>Le refus à la comptabilisation</strong>, pour que rien ne passe entre les mailles quand personne n'a regardé l'écran de contrôle.</li>
-    <li style="line-height: 1.6; color: #374151;">🏢 <strong>Une règle par société</strong>, portée par le journal lui-même.</li>
+    <li style="line-height: 1.6; color: #374151;">📒 <strong>One rule per journal</strong>, which can be restricted to a list of account prefixes — or to all income and expense accounts of the journal if the field is left empty.</li>
+    <li style="line-height: 1.6; color: #374151;">🔍 <strong>An "Entries Without Analytic" screen</strong> that lists, among drafts, the lines that will block at posting.</li>
+    <li style="line-height: 1.6; color: #374151;">🛑 <strong>Refusal at posting</strong>, so nothing slips through when nobody has looked at the control screen.</li>
+    <li style="line-height: 1.6; color: #374151;">🏢 <strong>One rule per company</strong>, carried by the journal itself.</li>
   </ul>
 
   <!-- 4. APERÇUS RÉELS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshots</h2>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Les règles, journal par journal</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Les achats sur quatre familles de charges, les ventes sur le compte de produits, la banque sur les seuls frais bancaires. Chaque règle se lit d'un coup d'œil, et se coupe sans être supprimée.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. The rules, journal by journal</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Purchases on four expense families, sales on the income account, bank on bank fees only. Each rule reads at a glance, and can be switched off without being deleted.</p>
   <img src="screenshot_01_rules.png"
-       alt="Liste des règles d'analytique obligatoire Odoo : journal, préfixes de comptes et société"
+       alt="List of Odoo mandatory analytic rules: journal, account prefixes and company"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Ce qui bloquera, avant que ça bloque</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Les lignes de brouillon que les règles réclament, avec leur compte, leur libellé et leur montant, totalisées. La correction se fait ici, à froid, plutôt qu'au moment de comptabiliser.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. What will block, before it blocks</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">The draft lines the rules require, with their account, label and amount, totaled. The fix happens here, calmly, rather than at posting time.</p>
   <img src="screenshot_02_missing.png"
-       alt="Écran Écritures sans analytique listant les lignes de factures brouillon qui manquent de ventilation"
+       alt="Entries Without Analytic screen listing draft invoice lines missing a distribution"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
   <!-- 5. POURQUOI L'ADOPTER -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">Les <strong>contreparties</strong> — comptes clients et fournisseurs — et les <strong>lignes de taxe</strong> sont exclues d'office : elles soldent l'écriture, elles ne consomment ni ne produisent rien.</li>
-    <li style="line-height: 1.6; color: #374151;">Le contrôle ne porte que sur les <strong>brouillons</strong> : une écriture comptabilisée ne bloque plus rien, et l'écran reste d'une taille lisible.</li>
-    <li style="line-height: 1.6; color: #374151;">L'indicateur n'est <strong>pas stocké en base</strong> : la règle peut changer à tout moment, une valeur figée vieillirait sans que rien ne la rafraîchisse.</li>
-    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — il complète l'applicabilité des plans analytiques du cœur, il ne la remplace pas.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Counterpart lines</strong> — receivable and payable accounts — and <strong>tax lines</strong> are excluded by default: they balance the entry, they neither consume nor produce anything.</li>
+    <li style="line-height: 1.6; color: #374151;">The check only covers <strong>drafts</strong>: a posted entry no longer blocks anything, and the screen stays a readable size.</li>
+    <li style="line-height: 1.6; color: #374151;">The indicator is <strong>not stored in the database</strong>: the rule can change at any time, and a frozen value would go stale with nothing to refresh it.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Free</strong> module, LGPL-3 license — it complements the core analytic plan applicability, it does not replace it.</li>
   </ul>
 
   <!-- 6. POUR ALLER PLUS LOIN -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
-  <p style="line-height: 1.6; color: #374151;">Exiger la ventilation est une chose ; contrôler qui saisit dans quel journal en est une autre. La gamme OdooSkills couvre le cloisonnement des journaux et des plans analytiques, l'approbation des écritures et des factures fournisseurs, et les tableaux de bord de trésorerie. Catalogue complet : apps.odooskills.com.</p>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Going further</h2>
+  <p style="line-height: 1.6; color: #374151;">Requiring a distribution is one thing; controlling who enters what in which journal is another. The OdooSkills range covers journal and analytic plan partitioning, approval of entries and vendor bills, and cash dashboards. Full catalog: apps.odooskills.com.</p>
 
   <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : apps@odooskills.com.</p>
+  <p style="line-height: 1.6; color: #6b7280;">License LGPL-3 — compatible with Odoo 19.0 Community and Enterprise. Support: apps@odooskills.com.</p>
 
 </section>

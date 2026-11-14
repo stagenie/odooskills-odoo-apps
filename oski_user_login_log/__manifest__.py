@@ -1,19 +1,19 @@
 {
-    "name": "OdooSkills — Journal des connexions",
+    "name": "Login Log",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Chaque connexion et chaque échec, avec son identifiant, son adresse IP et sa date.",
+    "summary": "Every login and every failure, with its username, IP address and date.",
     "description": """
-Odoo retient la date de dernière connexion et rien d'autre : ni les tentatives échouées, ni les
-adresses d'où l'on entre. Les échecs partent dans le fichier de journal du serveur, que personne
-n'ouvre — et qui disparaît à la rotation.
+Odoo keeps the date of the last login and nothing else: neither failed attempts nor the
+addresses people log in from. Failures go to the server log file, which nobody
+opens — and which disappears on rotation.
 
-Ce module tient un registre consultable depuis l'interface : identifiant saisi, utilisateur
-reconnu s'il y en a un, réussite ou échec, adresse IP, date. Une rafale d'échecs sur un même
-identifiant se voit alors d'un coup d'œil.
+This module keeps a log you can view from the interface: username entered, recognized
+user if any, success or failure, IP address, date. A burst of failures on the same
+username then stands out at a glance.
 
-Les échecs sont écrits sur une transaction propre : une tentative refusée annule tout le reste,
-et une trace posée dans la transaction de la connexion disparaîtrait avec elle.
+Failures are written in a transaction of their own: a refused attempt rolls back everything else,
+and a record written in the login's transaction would disappear along with it.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

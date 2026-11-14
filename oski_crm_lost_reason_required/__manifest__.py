@@ -1,29 +1,28 @@
 {
-    "name": "OdooSkills — Motif de perte obligatoire",
+    "name": "Required Lost Reason",
     "version": "19.0.1.0.0",
     "category": "Sales/CRM",
-    "summary": "Aucune opportunité perdue sans motif, et ce que chaque motif coûte vraiment.",
+    "summary": "No opportunity lost without a reason, and what each reason really costs.",
     "description": """
-Dans Odoo, le motif de perte est facultatif : l'assistant l'affiche, personne
-n'est obligé de le remplir. Six mois plus tard, la moitié du pipeline perdu
-est sans explication, et la question « pourquoi perdons-nous ? » n'a pas de
-réponse chiffrée.
+In Odoo, the lost reason is optional: the wizard shows it, nobody is required
+to fill it in. Six months later, half of the lost pipeline has no
+explanation, and the question "why are we losing?" has no answer in figures.
 
-Ce module :
+This module:
 
-- rend le **motif obligatoire**, au niveau du modèle et pas seulement de
-  l'écran — un import, une action serveur ou un appel direct sont soumis à la
-  même règle ;
-- exige au besoin une **note de clôture**, quelques mots de contexte pour
-  celui qui reprendra ce client dans un an ;
-- ajoute à chaque motif le **revenu perdu** et la date de la dernière perte,
-  totalisés dans la liste.
+- makes the **reason required**, at the model level and not just on screen
+  — an import, a server action or a direct call are subject to the same
+  rule;
+- optionally requires a **closing note**, a few words of context for
+  whoever takes over this customer a year from now;
+- adds to each reason the **lost revenue** and the date of the last loss,
+  totaled in the list.
 
-Odoo compte les opportunités par motif ; il ne dit pas ce que chacun emporte.
-« Prix trop élevé » sur deux affaires de mille euros et sur une de deux cent
-mille n'appelle pas la même réaction.
+Odoo counts opportunities per reason; it does not say what each one takes
+away. "Too expensive" on two deals of a thousand euros and on one of two
+hundred thousand does not call for the same response.
 
-Les deux exigences se règlent par société, dans les paramètres du CRM.
+Both requirements are set per company, in the CRM settings.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

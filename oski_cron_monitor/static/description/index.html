@@ -1,56 +1,56 @@
 <!--
-  Fiche produit OdooSkills — oski_cron_monitor
-  Styles INLINE uniquement. Accent = #714B67.
-  Les captures sont réelles : prises sur une base Odoo 19 peuplée.
+  OdooSkills product page — oski_cron_monitor
+  INLINE styles only. Accent = #714B67.
+  The screenshots are real: taken on a populated Odoo 19 database.
 -->
 <section style="max-width: 860px; margin: 0 auto; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; color: #111827;">
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Moniteur des tâches planifiées</h1>
-    <p style="color: #6b7280; font-size: 17px;">Chaque exécution : durée, réussite, erreur, et l'historique qui va avec.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Scheduled Action Monitor</h1>
+    <p style="color: #6b7280; font-size: 17px;">Every run: duration, success, error, and the history that goes with it.</p>
   </div>
 
-  <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">Odoo garde la date du dernier passage d'une tâche planifiée dans <code>lastcall</code>, et le nombre d'échecs consécutifs dans <code>failure_count</code>. Aucun des deux n'apparaît dans une vue. Une tâche qui échoue toutes les nuits — relances client, synchronisation, calcul de stock — ne se voit donc que dans le journal du serveur, si quelqu'un pense à l'ouvrir.</p>
+  <!-- 2. THE PROBLEM -->
+  <p style="line-height: 1.6; color: #374151;">Odoo keeps the date of a scheduled action's last run in <code>lastcall</code>, and the number of consecutive failures in <code>failure_count</code>. Neither appears in any view. An action that fails every night &mdash; customer reminders, synchronization, stock computation &mdash; therefore only shows up in the server log, if someone thinks to open it.</p>
 
-  <!-- 3. CE QUE ÇA APPORTE -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <!-- 3. WHAT IT ADDS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">⏱️ <strong>Chaque exécution inscrite</strong> — début, durée à la milliseconde, réussite ou échec, message d'erreur complet.</li>
-    <li style="line-height: 1.6; color: #374151;">🔴 <strong>Les échecs survivent à l'échec</strong> — le journal s'écrit sur une transaction distincte, car celle de la tâche est annulée quand elle tombe. C'est précisément l'échec qu'il faut garder.</li>
-    <li style="line-height: 1.6; color: #374151;">📈 <strong>La durée devient une donnée</strong> — la colonne se totalise, les tâches lentes se repèrent avant de devenir un incident.</li>
-    <li style="line-height: 1.6; color: #374151;">🧹 <strong>Purge automatique</strong> — les exécutions au-delà de 30 jours partent avec le nettoyage d'Odoo ; le délai se règle par paramètre système.</li>
+    <li style="line-height: 1.6; color: #374151;">⏱️ <strong>Every run recorded</strong> &mdash; start, duration to the millisecond, success or failure, full error message.</li>
+    <li style="line-height: 1.6; color: #374151;">🔴 <strong>Failures survive the failure</strong> &mdash; the log is written on a separate transaction, because the action's own transaction is rolled back when it fails. The failure is precisely what must be kept.</li>
+    <li style="line-height: 1.6; color: #374151;">📈 <strong>Duration becomes data</strong> &mdash; the column totals up, and slow actions are spotted before they turn into an incident.</li>
+    <li style="line-height: 1.6; color: #374151;">🧹 <strong>Automatic cleanup</strong> &mdash; runs older than 30 days go away with Odoo's cleanup; the delay is set by a system parameter.</li>
   </ul>
 
-  <!-- 4. APERÇUS RÉELS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+  <!-- 4. REAL SCREENSHOTS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshots</h2>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Tout ce qui a tourné cette nuit</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Quarante-neuf exécutions, dont une en échec, signalée en rouge au milieu des réussites. Sans ce journal, cette ligne-là n'aurait laissé aucune trace visible.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Everything that ran last night</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Forty-nine runs, one of them failed, flagged in red among the successes. Without this log, that line would have left no visible trace.</p>
   <img src="screenshot_01_runs.png"
-       alt="Liste des exécutions planifiées : date, tâche, durée en secondes et résultat, avec un échec en rouge"
+       alt="List of scheduled runs: date, action, duration in seconds and result, with one failure in red"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. L'historique, sur la tâche elle-même</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">La fiche de la tâche planifiée gagne la date du dernier passage, son résultat, sa durée, et un onglet qui déroule ses exécutions passées.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. The history, on the action itself</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">The scheduled action form gains the date of the last run, its result, its duration, and a tab that lists its past runs.</p>
   <img src="screenshot_02_cron_tab.png"
-       alt="Fiche d'une tâche planifiée Odoo avec le dernier résultat, la dernière durée et l'onglet Exécutions"
+       alt="Odoo scheduled action form with the last result, the last duration and the Runs tab"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <!-- 5. POURQUOI L'ADOPTER -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <!-- 5. WHY INSTALL IT -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">Le registre ne peut jamais faire échouer une tâche qui a réussi : une panne d'écriture part dans le journal du serveur, la tâche aboutit.</li>
-    <li style="line-height: 1.6; color: #374151;">Aucune configuration : le module s'installe et la première tâche qui tourne est déjà inscrite.</li>
-    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong>, licence LGPL-3 — aucun abonnement, aucune dépendance extérieure.</li>
+    <li style="line-height: 1.6; color: #374151;">The log can never make a successful action fail: a write failure goes to the server log, and the action completes.</li>
+    <li style="line-height: 1.6; color: #374151;">No configuration: install the module and the first action that runs is already recorded.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Free</strong> module, LGPL-3 license &mdash; no subscription, no external dependency.</li>
   </ul>
 
-  <!-- 6. POUR ALLER PLUS LOIN -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pour aller plus loin</h2>
-  <p style="line-height: 1.6; color: #374151;">Savoir qu'une tâche a échoué est un début ; voir l'activité de toute l'instance en est la suite. La gamme OdooSkills propose des tableaux de bord d'exploitation, des journaux d'accès et de modification, et une surveillance de la file de courriels. Catalogue complet : apps.odooskills.com.</p>
+  <!-- 6. GOING FURTHER -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Going further</h2>
+  <p style="line-height: 1.6; color: #374151;">Knowing that an action failed is a start; seeing the activity of the whole instance comes next. The OdooSkills range offers operations dashboards, access and change logs, and email queue monitoring. Full catalog: apps.odooskills.com.</p>
 
-  <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0 Community et Enterprise. Support : apps@odooskills.com.</p>
+  <!-- 7. COMPATIBILITY & LICENSE -->
+  <p style="line-height: 1.6; color: #6b7280;">LGPL-3 license &mdash; compatible with Odoo 19.0 Community and Enterprise. Support: apps@odooskills.com.</p>
 
 </section>

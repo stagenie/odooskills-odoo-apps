@@ -1,28 +1,29 @@
 {
-    "name": "OdooSkills — Devis périmés",
+    "name": "Quotation Auto-Expiry",
     "version": "19.0.1.0.0",
     "category": "Sales",
-    "summary": "Les devis échus s'annulent d'eux-mêmes, et le vendeur est relancé avant l'échéance.",
+    "summary": "Expired quotations cancel themselves, and the salesperson gets a reminder before the deadline.",
     "description": """
-Odoo calcule une date de validité sur chaque devis, sait dire qu'il est
-expiré… et n'en fait rien. Les devis morts s'empilent dans le tunnel, faussent
-les prévisions et le montant du pipeline, et personne ne les rouvre jamais.
+Odoo computes an expiration date on every quotation, can tell you it has
+expired... and does nothing about it. Dead quotations pile up in the funnel,
+skew the forecasts and the pipeline amount, and nobody ever reopens them.
 
-Ce module ferme la boucle :
+This module closes the loop:
 
-- une **relance** au vendeur, sous forme d'activité, quelques jours avant
-  l'échéance — le délai est réglable, et jamais un courriel de plus ;
-- une **péremption** automatique des devis dont la date de validité est
-  dépassée, avec une note au dossier qui dit pourquoi et quand.
+- a **reminder** to the salesperson, as an activity, a few days before
+  the deadline: the delay is adjustable, and never one more email;
+- automatic **expiry** of quotations whose expiration date has passed,
+  with a note in the record stating why and when.
 
-Les deux réglages sont indépendants et vivent sur la société : une filiale qui
-vend à la semaine et une maison mère qui vend au trimestre n'ont pas le même
-rythme.
+Both settings are independent and live on the company: a subsidiary that
+sells by the week and a parent company that sells by the quarter do not run
+at the same pace.
 
-La relance passe **avant** la péremption dans la même nuit : un devis relancé
-le matin puis annulé le soir ferait passer le vendeur pour un menteur.
+The reminder runs **before** the expiry in the same night: a quotation
+followed up in the morning and canceled in the evening would make the
+salesperson look like a liar.
 
-Les devis verrouillés ne sont jamais touchés.
+Locked quotations are never touched.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

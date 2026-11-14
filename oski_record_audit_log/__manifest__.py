@@ -1,19 +1,19 @@
 {
-    "name": "OdooSkills — Journal des modifications",
+    "name": "Record Audit Log",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Qui a créé, modifié ou supprimé quoi — sur les modèles que vous désignez, sans écrire une ligne de code.",
+    "summary": "Who created, changed or deleted what, on the models you choose, without writing a line of code.",
     "description": """
-Le suivi natif d'Odoo ne couvre que les champs marqués « tracking » sur les modèles dotés d'un
-chatter. Tout le reste — un prix changé sur une fiche produit, un compte bancaire réécrit, une
-ligne effacée — ne laisse aucune trace.
+Odoo's native tracking only covers fields marked "tracking" on models that
+have a chatter. Everything else (a price changed on a product form, a bank
+account rewritten, a deleted line) leaves no trace.
 
-Désignez les modèles à surveiller, choisissez les opérations (création, modification,
-suppression) et, si vous le voulez, la liste des champs qui comptent. Chaque intervention est
-inscrite avec son auteur, sa date, et le détail « ancienne valeur → nouvelle valeur ».
+Choose the models to monitor, pick the operations (create, update, delete)
+and, if you wish, the list of fields that matter. Every action is recorded
+with its author, its date, and the "old value -> new value" detail.
 
-Les opérations système — installation, mise à jour, tâches planifiées — ne sont pas journalisées :
-le registre garde la trace des gestes humains, pas celle de la maintenance.
+System operations (installation, update, scheduled actions) are not logged:
+the log keeps track of human actions, not of maintenance.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

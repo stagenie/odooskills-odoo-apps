@@ -1,21 +1,21 @@
 {
-    "name": "OdooSkills — Moniteur de la file de courriels",
+    "name": "Email Queue Monitor",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Sachez que vos courriels ne partent plus le jour même, pas trois mois après.",
+    "summary": "Find out the same day that your emails have stopped going out, not three months later.",
     "description": """
-Un serveur sortant mal configuré ne fait pas de bruit : les courriels
-s'empilent en ``mail.mail``, la file grossit, et personne ne l'apprend avant
-qu'un client demande pourquoi il n'a rien reçu. Odoo sait renvoyer un courriel
-en échec, mais ne surveille rien.
+A misconfigured outgoing server makes no noise: emails pile up in
+``mail.mail``, the queue grows, and nobody finds out until a customer asks
+why they received nothing. Odoo can resend a failed email, but monitors
+nothing.
 
-Ce module ausculte la file tous les jours : combien en attente, combien en
-échec, depuis combien de temps le plus vieux courriel attend, et pour quelles
-causes. Le verdict est inscrit, et une activité est posée aux administrateurs
-quand la file se dégrade.
+This module checks the queue every day: how many are waiting, how many have
+failed, how long the oldest email has been waiting, and for what reasons. The
+verdict is recorded, and an activity is assigned to the administrators when
+the queue degrades.
 
-L'alerte ne passe pas par un courriel — ce serait demander au malade de porter
-lui-même son diagnostic.
+The alert does not go through email — that would be asking the patient to
+deliver their own diagnosis.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

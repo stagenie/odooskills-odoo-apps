@@ -1,13 +1,13 @@
 {
-    'name': 'Atelier — Shop Floor',
+    'name': 'Shop Floor',
     'version': '19.0.1.0.0',
     'category': 'Manufacturing',
-    'summary': "Exécution atelier tactile et responsive pour les ordres de travail — l'expérience Shop Floor en Community.",
+    'summary': "Touch-friendly, responsive shop floor execution for work orders — the Shop Floor experience in Community.",
     'description': """
-Interface d'exécution atelier responsive (PC, tablette, mobile) pour piloter
-les ordres de travail Odoo Community au doigt et au scan : sélection du poste,
-démarrage/pause/fin d'un ordre, chrono, quantité produite et consommation des
-composants. Aucune licence Enterprise requise.
+Responsive shop floor execution interface (PC, tablet, phone) to run
+Odoo Community work orders by touch and by scan: work center selection,
+start/pause/finish of an order, timer, produced quantity and component
+consumption. No Enterprise license required.
 """,
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',

@@ -1,22 +1,20 @@
 {
-    "name": "OdooSkills — Moniteur des tâches planifiées",
+    "name": "Scheduled Action Monitor",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "Chaque exécution d'une tâche planifiée : durée, réussite, erreur, et l'historique qui va avec.",
+    "summary": "Every run of a scheduled action: duration, success, error, and the history that goes with it.",
     "description": """
-Odoo garde la date du dernier passage d'une tâche planifiée dans ``lastcall``
-et ne l'affiche nulle part. Le compteur d'échecs consécutifs existe lui aussi,
-invisible. Résultat : une tâche qui échoue toutes les nuits ne se voit que
-dans le journal du serveur, si quelqu'un pense à l'ouvrir.
+Odoo keeps the date of a scheduled action's last run in ``lastcall`` and
+shows it nowhere. The consecutive failure counter exists too, invisible. As
+a result, an action that fails every night only shows up in the server log,
+if someone thinks to open it.
 
-Ce module inscrit chaque exécution : début, durée, réussite ou échec, et le
-message d'erreur complet. L'onglet « Exécutions » de la tâche montre son
-historique ; le menu « Exécutions planifiées » les montre toutes, filtrables
-sur les seuls échecs.
+This module records every run: start, duration, success or failure, and the
+full error message. The action's "Runs" tab shows its history; the
+"Scheduled Runs" menu shows them all, filterable on failures only.
 
-Les échecs sont écrits sur une transaction distincte : la transaction de la
-tâche est annulée quand elle échoue, et c'est précisément l'échec qu'il faut
-garder.
+Failures are written on a separate transaction: the action's transaction is
+rolled back when it fails, and the failure is precisely what must be kept.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

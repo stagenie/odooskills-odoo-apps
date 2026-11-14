@@ -2,57 +2,57 @@
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Location de ressources</h1>
-    <p style="color: #6b7280; font-size: 17px;">Louez véhicules, salles, engins ou matériel — réservation, départ/retour et facturation dans un seul flux.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Resource Rental</h1>
+    <p style="color: #6b7280; font-size: 17px;">Rent out vehicles, rooms, machinery or equipment — booking, pickup/return and invoicing in a single flow.</p>
   </div>
 
-  <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">Odoo Community ne gère pas la location : on détourne les commandes de vente, on tient les
-  disponibilités dans un tableur, et rien n'empêche de réserver deux fois la même ressource sur les mêmes dates.
-  Personne ne sait ce qui part aujourd'hui, ce qui doit rentrer demain, ni quelle caution reste à rendre.</p>
+  <!-- 2. THE PROBLEM -->
+  <p style="line-height: 1.6; color: #374151;">Odoo Community does not handle rentals: sales orders get repurposed, availability lives in a spreadsheet,
+  and nothing prevents booking the same resource twice on the same dates.
+  Nobody knows what goes out today, what must come back tomorrow, or which deposit is still to be returned.</p>
 
-  <!-- 3. FONCTIONNALITÉS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <!-- 3. FEATURES -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">📦 <strong>Parc de ressources unitaires</strong> — décrivez chaque bien (véhicule, salle, engin, matériel) par catégorie, avec sa grille de prix heure / jour / semaine / mois.</li>
-    <li style="line-height: 1.6; color: #374151;">📅 <strong>Réservation sans double-booking</strong> — le chevauchement de dates sur une même ressource est bloqué automatiquement ; les indisponibilités (entretien, panne) se posent à la main.</li>
-    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Flux départ → retour clair</strong> — devis, réservée, en cours, retournée, facturée : chaque location suit un cycle net avec état des lieux au départ et au retour.</li>
-    <li style="line-height: 1.6; color: #374151;">💰 <strong>Caution & facturation</strong> — suivi de la caution et génération de la facture client (<code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">account.move</code>) directement depuis la location.</li>
-    <li style="line-height: 1.6; color: #374151;">⏰ <strong>Alertes de retard</strong> — une tâche planifiée repère les retours en retard pour relancer sans surveiller un tableur.</li>
+    <li style="line-height: 1.6; color: #374151;">📦 <strong>Fleet of individual resources</strong> — describe each asset (vehicle, room, machine, equipment) by category, with its hourly / daily / weekly / monthly price grid.</li>
+    <li style="line-height: 1.6; color: #374151;">📅 <strong>Booking without double-booking</strong> — overlapping dates on the same resource are blocked automatically; unavailability periods (maintenance, breakdown) are set by hand.</li>
+    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Clear pickup → return flow</strong> — quotation, reserved, ongoing, returned, invoiced: each rental follows a clean cycle with a condition report at pickup and at return.</li>
+    <li style="line-height: 1.6; color: #374151;">💰 <strong>Deposit &amp; invoicing</strong> — deposit tracking and customer invoice generation (<code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">account.move</code>) directly from the rental.</li>
+    <li style="line-height: 1.6; color: #374151;">⏰ <strong>Late return alerts</strong> — a scheduled action spots overdue returns so you can follow up without watching a spreadsheet.</li>
   </ul>
 
-  <!-- 4. APERÇUS RÉELS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">En images</h2>
+  <!-- 4. REAL SCREENSHOTS -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">In screenshots</h2>
 
-  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. La location d'un coup d'œil</h3>
-  <p style="line-height: 1.6; color: #374151;">Chaque location réunit le client, la ressource, les dates, la caution et le montant. Les boutons de départ et de retour font avancer le cycle.</p>
-  <p><img src="screenshot_01_order.png" alt="Formulaire d'une location : client, ressource, dates, caution et boutons de transition" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. The rental at a glance</h3>
+  <p style="line-height: 1.6; color: #374151;">Each rental brings together the customer, the resource, the dates, the deposit and the amount. The pickup and return buttons move the cycle forward.</p>
+  <p><img src="screenshot_01_order.png" alt="Rental form: customer, resource, dates, deposit and transition buttons" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. Le parc de ressources</h3>
-  <p style="line-height: 1.6; color: #374151;">Véhicules, salles et engins sont regroupés par catégorie, chacun avec son tarif et sa disponibilité.</p>
-  <p><img src="screenshot_02_assets.png" alt="Liste des ressources de location regroupées par catégorie" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. The resource fleet</h3>
+  <p style="line-height: 1.6; color: #374151;">Vehicles, rooms and machinery are grouped by category, each with its rate and availability.</p>
+  <p><img src="screenshot_02_assets.png" alt="List of rental resources grouped by category" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. Le calendrier des locations</h3>
-  <p style="line-height: 1.6; color: #374151;">Toutes les réservations et indisponibilités sur une même frise : ce qui part, ce qui rentre, ce qui est immobilisé.</p>
-  <p><img src="screenshot_03_calendar.png" alt="Vue calendrier des locations, colorée par état" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. The rental calendar</h3>
+  <p style="line-height: 1.6; color: #374151;">All bookings and unavailability periods on a single timeline: what goes out, what comes back, what is out of service.</p>
+  <p><img src="screenshot_03_calendar.png" alt="Rental calendar view, colored by state" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-  <!-- 5. VALEUR -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <!-- 5. VALUE -->
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">Une vraie gestion de location sur Odoo <strong>Community</strong>, sans détourner les ventes ni changer d'édition.</li>
-    <li style="line-height: 1.6; color: #374151;">Générique : le même module couvre location de véhicules, de salles, d'engins ou de matériel.</li>
-    <li style="line-height: 1.6; color: #374151;">Le double-booking devient impossible : fini les conflits de réservation découverts le jour du départ.</li>
+    <li style="line-height: 1.6; color: #374151;">Real rental management on Odoo <strong>Community</strong>, without repurposing Sales or switching editions.</li>
+    <li style="line-height: 1.6; color: #374151;">Generic: the same module covers renting vehicles, rooms, machinery or equipment.</li>
+    <li style="line-height: 1.6; color: #374151;">Double-booking becomes impossible: no more booking conflicts discovered on pickup day.</li>
   </ul>
 
-  <!-- 6. CROSS-SELL SUITE -->
+  <!-- 6. SUITE CROSS-SELL -->
   <div style="background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px 20px; margin: 28px 0;">
-    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">Cœur de la suite Location</h3>
-    <p style="line-height: 1.6; color: #374151; margin: 0;">Étendez ce cœur gratuit avec <strong>Réservation en ligne</strong> (catalogue public et portail client),
-    <strong>Paiement en ligne</strong> (acompte ou total, confirmation automatique) et <strong>Planning Gantt</strong>
-    (replanification par glisser-déposer). Suite complète sur <a href="https://apps.odooskills.com" style="color:#714B67;">apps.odooskills.com</a>.</p>
+    <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 8px; color: #714B67;">Core of the Rental suite</h3>
+    <p style="line-height: 1.6; color: #374151; margin: 0;">Extend this free core with <strong>Online Booking</strong> (public catalog and customer portal),
+    <strong>Online Payment</strong> (down payment or full amount, automatic confirmation) and <strong>Gantt Planning</strong>
+    (rescheduling by drag and drop). Full suite on <a href="https://apps.odooskills.com" style="color:#714B67;">apps.odooskills.com</a>.</p>
   </div>
 
-  <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Module gratuit LGPL-3 — compatible Odoo 19.0 Community &amp; Enterprise. Support : apps@odooskills.com.</p>
+  <!-- 7. COMPATIBILITY & LICENSE -->
+  <p style="line-height: 1.6; color: #6b7280;">Free module, LGPL-3 — compatible with Odoo 19.0 Community &amp; Enterprise. Support: apps@odooskills.com.</p>
 
 </section>

@@ -1,29 +1,29 @@
 {
-    "name": "OdooSkills — Dépôt de documents au portail",
+    "name": "Portal Document Upload",
     "version": "19.0.1.0.0",
     "category": "Website/Portal",
-    "summary": "Demandez un document au client : il le dépose depuis sa page portail, devis, facture ou tâche.",
+    "summary": "Request a document from the customer: they upload it from their portal page, quotation, invoice or task.",
     "description": """
-Un client ne peut envoyer un fichier depuis le portail qu'en écrivant un
-message dans le fil de discussion, et seulement là où ce fil est affiché.
-Rien ne dit ce qu'on attend de lui, rien ne dit si c'est arrivé.
+A customer can only send a file from the portal by writing a message in the
+discussion thread, and only where that thread is displayed. Nothing says
+what is expected of them, nothing says whether it arrived.
 
-Ce module renverse la démarche : c'est vous qui demandez.
+This module turns the process around: you are the one who asks.
 
-- Une **demande** nomme le document attendu, la fiche concernée, le client et
-  l'échéance.
-- Le client voit **Documents attendus** sur sa page portail — devis, facture,
-  bon de commande, tâche — et dépose son fichier en un geste.
-- Le fichier rejoint la fiche en pièce jointe, la demande passe à **Reçu**, et
-  le fil de discussion le signale à l'équipe.
+- A **request** names the expected document, the record concerned, the customer
+  and the due date.
+- The customer sees **Requested documents** on their portal page — quotation,
+  invoice, purchase order, task — and uploads their file in one move.
+- The file joins the record as an attachment, the request moves to **Received**,
+  and the discussion thread notifies the team.
 
-Le bloc se greffe sur le fil de discussion du portail : toute page qui
-l'affiche l'obtient, sans dépendance à un module métier.
+The block hooks into the portal discussion thread: any page that displays it
+gets it, with no dependency on a business module.
 
-Les extensions acceptées et le poids maximal se règlent par paramètres
-système, ``oski_portal_upload.allowed_extensions`` et
-``oski_portal_upload.max_size_mb``. Un fichier refusé ramène le client sur sa
-page avec la raison, jamais sur une page d'erreur.
+Accepted extensions and the maximum size are set through system parameters,
+``oski_portal_upload.allowed_extensions`` and
+``oski_portal_upload.max_size_mb``. A rejected file brings the customer back to
+their page with the reason, never to an error page.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

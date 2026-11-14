@@ -1,5 +1,5 @@
 {
-    'name': 'Treasury — Cash & Safe Management',
+    'name': "Treasury — Cash & Safes",
     'version': '19.0.1.0.1',
     'category': 'Accounting/Treasury',
     'summary': 'Cash registers, safes, closings, transfers, configurable GL entries',

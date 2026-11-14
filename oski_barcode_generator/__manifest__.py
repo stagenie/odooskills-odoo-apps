@@ -1,25 +1,25 @@
 {
-    "name": "OdooSkills — Codes-barres EAN13 en masse",
+    "name": "Bulk EAN13 Barcodes",
     "version": "19.0.1.0.0",
     "category": "Inventory/Inventory",
-    "summary": "Attribuez des codes EAN13 valides à tous les articles qui n'en ont pas, d'un geste.",
+    "summary": "Assign valid EAN13 codes to every product that has none, in one go.",
     "description": """
-Odoo sait vérifier un code-barres et en calculer la clé ; il ne sait pas en
-produire. Un catalogue de mille références sans code se remplit donc à la
-main, un article après l'autre, avec les fautes de frappe que cela suppose.
+Odoo can validate a barcode and compute its check digit; it cannot generate
+one. A catalog of a thousand items without codes is therefore filled in by
+hand, one product after another, with all the typos that implies.
 
-Ce module attribue des **EAN13 valides**, clé de contrôle comprise :
+This module assigns **valid EAN13 codes**, check digit included:
 
-- depuis la liste des articles ou des variantes, sur la sélection ;
-- ou sur **tous** les articles qui n'ont pas encore de code.
+- from the product or variant list, on the selection;
+- or on **all** products that have no code yet.
 
-Le préfixe par défaut commence par 2 : la plage 20-29 est celle que la norme
-réserve à l'usage interne d'une entreprise. Y déroger produirait des codes
-ressemblant à ceux d'un autre fabricant.
+The default prefix starts with 2: the 20-29 range is the one the standard
+reserves for a company's internal use. Departing from it would produce codes
+resembling those of another manufacturer.
 
-Les articles qui portent déjà un code ne sont **jamais** touchés — écraser un
-code casserait les étiquettes imprimées et les scanners qui les lisent. Les
-numéros déjà pris dans la plage sont sautés, y compris ceux venus d'un import.
+Products that already carry a code are **never** touched — overwriting a
+code would break the printed labels and the scanners that read them. Numbers
+already taken in the range are skipped, including those from an import.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

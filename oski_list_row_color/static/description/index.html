@@ -6,8 +6,8 @@
 
   <!-- 1. HERO -->
   <div style="text-align: center; padding: 28px 16px;">
-    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">Couleur de lignes de liste</h1>
-    <p style="color: #6b7280; font-size: 17px;">Surlignez vos commandes urgentes, vos factures en retard ou vos articles critiques — sans toucher une seule ligne de code.</p>
+    <h1 style="font-size: 30px; font-weight: 700; margin-bottom: 8px;">List Row Colors</h1>
+    <p style="color: #6b7280; font-size: 17px;">Highlight your urgent orders, overdue invoices or critical products — without touching a single line of code.</p>
     <!--
     <p style="margin-top: 16px;">
       <a href="{{LIVE_TEST_URL}}" style="display:inline-block; background:#714B67; color:#fff; text-decoration:none; font-weight:600; padding:11px 22px; border-radius:8px;">▶ Tester en ligne</a>
@@ -16,51 +16,51 @@
   </div>
 
   <!-- 2. LE PROBLÈME -->
-  <p style="line-height: 1.6; color: #374151;">Dans Odoo, colorer une ligne de liste nécessite d'éditer du XML et de connaître la syntaxe des attributs <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">decoration-*</code> — une tâche réservée aux développeurs. Résultat : les équipes opérationnelles voient des listes uniformes et doivent ouvrir chaque enregistrement pour distinguer les urgences des cas normaux. Le tri ne suffit pas : il faut une lecture instantanée de l'état à la couleur.</p>
+  <p style="line-height: 1.6; color: #374151;">In Odoo, coloring a list row requires editing XML and knowing the syntax of the <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">decoration-*</code> attributes — a job for developers. The result: operational teams see uniform lists and have to open each record to tell urgent cases from normal ones. Sorting is not enough: you need to read the status instantly from the color.</p>
 
   <!-- 3. CE QUE CA APPORTE -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Ce que ça apporte</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">What it adds</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">🎨 <strong>Règles visuelles sans code</strong> — définissez une condition Python simple (<code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">state == 'done'</code>, <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">amount_total &gt; 1000</code>) et choisissez la couleur : bleu, vert, orange, <span style="color: #dc2626;">rouge</span> ou gris.</li>
-    <li style="line-height: 1.6; color: #374151;">⚡ <strong>Application instantanée sur n'importe quel modèle</strong> — ventes, achats, factures, stock, projets… chaque liste Odoo est configurable depuis une interface unique, sans modifier les vues XML existantes.</li>
-    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Vue héritée générée et gérée automatiquement</strong> — à la sauvegarde d'une règle, le module crée (ou met à jour) la vue d'héritage correspondante ; à la suppression, elle disparaît proprement.</li>
-    <li style="line-height: 1.6; color: #374151;">✅ <strong>Activation/désactivation à la volée</strong> — basculez une règle sans la supprimer grâce au bouton toggle, idéal pour les colorisations saisonnières ou les campagnes ponctuelles.</li>
-    <li style="line-height: 1.6; color: #374151;">📊 <strong>Règles ordonnées par séquence</strong> — glissez-déposez l'ordre des règles pour contrôler la priorité quand plusieurs conditions s'appliquent au même modèle.</li>
+    <li style="line-height: 1.6; color: #374151;">🎨 <strong>Visual rules without code</strong> — define a simple Python condition (<code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">state == 'done'</code>, <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">amount_total &gt; 1000</code>) and pick the color: blue, green, orange, <span style="color: #dc2626;">red</span> or gray.</li>
+    <li style="line-height: 1.6; color: #374151;">⚡ <strong>Instant application on any model</strong> — sales, purchases, invoices, inventory, projects… every Odoo list can be configured from a single interface, without editing the existing XML views.</li>
+    <li style="line-height: 1.6; color: #374151;">🔁 <strong>Inherited view generated and managed automatically</strong> — when a rule is saved, the module creates (or updates) the matching inherited view; when it is deleted, the view is cleanly removed.</li>
+    <li style="line-height: 1.6; color: #374151;">✅ <strong>On-the-fly activation/deactivation</strong> — switch a rule off without deleting it using the toggle button, ideal for seasonal coloring or one-off campaigns.</li>
+    <li style="line-height: 1.6; color: #374151;">📊 <strong>Rules ordered by sequence</strong> — drag and drop the rules to control priority when several conditions apply to the same model.</li>
   </ul>
 
   <!-- 4. APERÇUS RÉELS -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Aperçus réels</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshots</h2>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Liste de devis colorée selon deux règles métier</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">En rouge, les commandes dépassant 5 000 € (Wood Corner, Lumber Grand, Azure Interior) ; en orange, les devis encore à l'état Quotation (S00002, S00009) — repérage visuel instantané sans filtre supplémentaire.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Quotation list colored by two business rules</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">In red, orders above €5,000 (Wood Corner, Lumber Grand, Azure Interior); in orange, quotations still in the Quotation state (S00002, S00009) — instant visual spotting with no extra filter.</p>
   <img src="screenshot_01_sale_orders_colored.png"
-       alt="Liste des devis Odoo avec lignes en rouge (montant supérieur à 5 000 €) et en orange (devis non confirmé) — clients Azure Interior, Deco Addict, Wood Corner, Lumber Grand"
+       alt="Odoo quotation list with rows in red (amount above €5,000) and in orange (unconfirmed quotation) — customers Azure Interior, Deco Addict, Wood Corner, Lumber Grand"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Formulaire de configuration d'une règle</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Trois champs suffisent : le modèle cible (Sales Order), l'expression Python de déclenchement (<code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">amount_total &gt; 5000</code>) et la couleur — la vue héritée est créée automatiquement et affichée en lecture seule.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Rule configuration form</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Three fields are enough: the target model (Sales Order), the triggering Python expression (<code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">amount_total &gt; 5000</code>) and the color — the inherited view is created automatically and shown read-only.</p>
   <img src="screenshot_02_rule_form_config.png"
-       alt="Formulaire d'une règle de couleur : modèle Sales Order, condition amount_total > 5000, couleur Rouge (danger), vue générée oski.row.color.sale.order.1"
+       alt="Color rule form: Sales Order model, condition amount_total > 5000, color Red (danger), generated view oski.row.color.sale.order.1"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">3. Vue d'ensemble des règles actives</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">L'interface liste toutes les règles avec leur modèle, condition et couleur — chaque règle peut être activée ou désactivée en un clic sans la supprimer.</p>
+  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">3. Overview of active rules</h3>
+  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">The interface lists all rules with their model, condition and color — each rule can be enabled or disabled in one click without deleting it.</p>
   <img src="screenshot_03_rules_list.png"
-       alt="Liste des deux règles de couleur : Rouge danger pour amount_total > 5000 et Orange avertissement pour state == 'draft', toutes deux actives sur Sales Order"
+       alt="List of the two color rules: Red danger for amount_total > 5000 and Orange warning for state == 'draft', both active on Sales Order"
        style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
 
   <!-- 5. POURQUOI L'ADOPTER -->
-  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Pourquoi l'adopter</h2>
+  <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>
   <ul style="padding-left: 20px;">
-    <li style="line-height: 1.6; color: #374151;">Économisez un aller-retour développeur pour chaque demande de mise en couleur — configurez vous-même en 30 secondes depuis Paramètres.</li>
-    <li style="line-height: 1.6; color: #374151;">Réduisez les erreurs de traitement : les équipes repèrent visuellement les enregistrements à traiter avant même d'ouvrir un filtre.</li>
-    <li style="line-height: 1.6; color: #374151;">Aucune dépendance extérieure — le module utilise uniquement le mécanisme natif <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">decoration-*</code> d'Odoo, garanti compatible avec toutes les vues liste de la plateforme.</li>
-    <li style="line-height: 1.6; color: #374151;">Module <strong>gratuit</strong> — fonctionne en Community et Enterprise sans aucun abonnement supplémentaire.</li>
+    <li style="line-height: 1.6; color: #374151;">Save a round trip to a developer for every coloring request — set it up yourself in 30 seconds from Settings.</li>
+    <li style="line-height: 1.6; color: #374151;">Reduce processing errors: teams visually spot the records to handle before even opening a filter.</li>
+    <li style="line-height: 1.6; color: #374151;">No external dependency — the module only uses Odoo's native <code style="background: #f8f9fb; padding: 2px 6px; border-radius: 5px;">decoration-*</code> mechanism, guaranteed compatible with every list view of the platform.</li>
+    <li style="line-height: 1.6; color: #374151;"><strong>Free</strong> module — works on Community and Enterprise with no extra subscription.</li>
   </ul>
 
   <!-- 6. CROSS-SELL — OMIS (module utilitaire standalone) -->
 
   <!-- 7. COMPATIBILITÉ & LICENCE -->
-  <p style="line-height: 1.6; color: #6b7280;">Licence LGPL-3 — compatible Odoo 19.0. Support : apps@odooskills.com.</p>
+  <p style="line-height: 1.6; color: #6b7280;">License LGPL-3 — compatible with Odoo 19.0. Support: apps@odooskills.com.</p>
 
 </section>

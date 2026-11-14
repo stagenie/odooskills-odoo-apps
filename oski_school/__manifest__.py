@@ -1,23 +1,23 @@
 {
-    'name': 'École — élèves, classes, inscriptions',
+    'name': 'School Management',
     'version': '19.0.1.0.0',
     'category': 'Services/Education',
-    'summary': "Gérez une école privée : périodes, programmes, classes, élèves et "
-               "tuteurs, inscriptions avec contrôle des places, passage d'année",
+    'summary': "Run a private school: periods, programs, classes, students and "
+               "guardians, enrollments with seat control, year-end promotion.",
     'description': """
-Cœur gratuit de la suite École — pour le primaire, le collège, le lycée, le
-supérieur, un centre de langues ou de formation professionnelle.
+Free core of the School suite — for primary, middle school, high school,
+higher education, a language center or a vocational training center.
 
-- Périodes (année scolaire, semestre, session) avec trimestres générés.
-- Programmes typés par cycle, niveaux, matières, salles, classes.
-- Élèves avec tuteurs, matricule automatique, enseignants.
-- Inscriptions avec contrôle des places, tuteur obligatoire et retrait.
-- Assistant de passage d'année (admis / redoublant / parti) et duplication de structure.
-- Certificat de scolarité et liste de classe (PDF).
+- Periods (school year, semester, session) with generated terms.
+- Programs typed by cycle, levels, subjects, rooms, classes.
+- Students with guardians, automatic student ID, teachers.
+- Enrollments with seat control, required guardian and withdrawal.
+- Year-end promotion wizard (promoted / repeating / left) and structure duplication.
+- Enrollment certificate and class list (PDF).
 
-Les modules payants de la suite ajoutent admissions et inscription en ligne,
-frais de scolarité et paiement en ligne, emploi du temps, présences, notes et
-bulletins, espace enseignant, tableau de bord et communication.
+The paid modules of the suite add admissions and online enrollment,
+tuition fees and online payment, timetable, attendance, grades and
+report cards, teacher workspace, dashboard and communication.
 """,
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',

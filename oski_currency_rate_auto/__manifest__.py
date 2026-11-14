@@ -1,21 +1,21 @@
 {
-    "name": "OdooSkills — Taux de change automatiques",
+    "name": "Automatic Currency Rates",
     "version": "19.0.1.0.0",
     "category": "Accounting",
-    "summary": "Les taux de change se mettent à jour tout seuls, depuis la Banque centrale européenne.",
+    "summary": "Exchange rates update on their own, from the European Central Bank.",
     "description": """
-Odoo Community sait tenir un tableau de taux de change ; il ne sait pas le
-remplir. Chaque matin, quelqu'un recopie donc des taux à la main, ou personne
-ne le fait et les conversions dérivent en silence.
+Odoo Community can keep a table of exchange rates; it cannot fill it. So
+every morning someone copies rates by hand, or nobody does and conversions
+drift silently.
 
-Une tâche planifiée quotidienne va chercher les taux de référence publiés par
-la Banque centrale européenne et les inscrit pour chaque société qui l'a
-demandé. Les devises inactives sont laissées de côté ; celle de la société sert
-de pivot, quelle qu'elle soit.
+A daily scheduled action fetches the reference rates published by the
+European Central Bank and records them for each company that asked for it.
+Inactive currencies are left aside; the company's currency is the pivot,
+whatever it is.
 
-Aucune clé d'interface, aucun compte à ouvrir : la BCE publie ses taux
-librement. Une panne réseau est inscrite sur la société et n'interrompt pas les
-autres.
+No API key, no account to open: the ECB publishes its rates freely. A
+network failure is recorded on the company and does not interrupt the
+others.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

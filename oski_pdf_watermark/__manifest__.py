@@ -1,26 +1,26 @@
 {
-    "name": "OdooSkills — Filigrane sur les rapports",
+    "name": "Report Watermark",
     "version": "19.0.1.0.0",
     "category": "Technical",
-    "summary": "BROUILLON, COPIE, ANNULÉ : un filigrane conditionnel sur n'importe quel rapport QWeb.",
+    "summary": "DRAFT, COPY, CANCELLED: a conditional watermark on any QWeb report.",
     "description": """
-Un devis non confirmé, une facture annulée et une réimpression sortent de
-l'imprimante avec exactement la même allure que le document valide. Odoo ne
-propose aucun filigrane.
+An unconfirmed quotation, a cancelled invoice and a reprint come out of the
+printer looking exactly like the valid document. Odoo offers no
+watermark.
 
-Ce module en pose un, décidé par une règle :
+This module adds one, decided by a rule:
 
-- un **rapport** — n'importe lequel, du devis au bon de livraison ;
-- une **condition** sur le document, écrite en domaine et vérifiée à
-  l'enregistrement, jamais du code exécuté au moment d'imprimer ;
-- un **mot**, sa couleur, son opacité, son inclinaison, sa taille.
+- a **report** — any of them, from the quotation to the delivery slip;
+- a **condition** on the document, written as a domain and checked on
+  save, never code executed at print time;
+- a **word**, its color, its opacity, its angle, its size.
 
-Le filigrane est dessiné dans le corps du rapport et se répète sur **toutes
-les pages**, y compris celles d'un document long.
+The watermark is drawn in the body of the report and repeats on **every
+page**, including those of a long document.
 
-Quand une impression groupe des documents qui appellent des filigranes
-différents, aucun n'est posé : un élément fixe vaut pour toutes les pages du
-fichier produit, et marquerait les autres documents à tort.
+When a print job groups documents that call for different watermarks, none
+is applied: a fixed element applies to every page of the generated file, and
+would wrongly mark the other documents.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
