@@ -4,12 +4,12 @@
         <field name="name">oski.export.log.list</field>
         <field name="model">oski.export.log</field>
         <field name="arch" type="xml">
-            <list string="Journal des exports" create="false" edit="false">
+            <list string="Export Log" create="false" edit="false">
                 <field name="create_date"/>
                 <field name="user_id"/>
                 <field name="model_label"/>
                 <field name="model_name" optional="hide"/>
-                <field name="record_count" sum="Lignes sorties"/>
+                <field name="record_count" sum="Total Exported Rows"/>
                 <field name="field_count"/>
                 <field name="field_names" optional="hide"/>
             </list>
@@ -20,13 +20,13 @@
         <field name="name">oski.export.log.search</field>
         <field name="model">oski.export.log</field>
         <field name="arch" type="xml">
-            <search string="Journal des exports">
+            <search string="Export Log">
                 <field name="model_name"/>
                 <field name="user_id"/>
                 <field name="field_names"/>
                 <group>
-                    <filter name="group_model" string="Modèle" domain="[]" context="{'group_by': 'model_name'}"/>
-                    <filter name="group_user" string="Auteur" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_model" string="Model" domain="[]" context="{'group_by': 'model_name'}"/>
+                    <filter name="group_user" string="Exported By" domain="[]" context="{'group_by': 'user_id'}"/>
                     <filter name="group_date" string="Date" domain="[]" context="{'group_by': 'create_date'}"/>
                 </group>
             </search>
@@ -34,13 +34,13 @@
     </record>
 
     <record id="action_oski_export_log" model="ir.actions.act_window">
-        <field name="name">Journal des exports</field>
+        <field name="name">Export Log</field>
         <field name="res_model">oski.export.log</field>
         <field name="view_mode">list</field>
     </record>
 
     <menuitem id="menu_oski_export_log"
-              name="Journal des exports"
+              name="Export Log"
               parent="base.menu_custom"
               action="action_oski_export_log"
               sequence="58"/>

@@ -5,6 +5,6 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     oski_login_logo = fields.Binary(
-        string="Logo de la page de connexion",
-        help="Logo affiché sur la page de connexion (remplace le logo société).",
+        string="Login Page Logo",
+        help="Logo shown on the login page (replaces the company logo).",
     )

@@ -1,0 +1,167 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 19:59+0000\n"
+"PO-Revision-Date: 2026-11-14 19:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields.selection,name:oski_delete_guard.selection__oski_delete_rule__mode__log
+msgid "Allow, but log"
+msgstr "Autoriser, mais journaliser"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__group_ids
+msgid "Allowed Groups"
+msgstr "Groupes autorisés"
+
+#. module: oski_delete_guard
+#: model:ir.model,name:oski_delete_guard.model_base
+msgid "Base"
+msgstr "Base"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields.selection,name:oski_delete_guard.selection__oski_delete_rule__mode__block
+msgid "Block, except for allowed groups"
+msgstr "Interdire, sauf aux groupes autorisés"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__create_uid model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__create_date model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_search
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__user_id model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_search
+msgid "Deleted By"
+msgstr "Auteur"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__res_id
+msgid "Deleted ID"
+msgstr "Identifiant supprimé"
+
+#. module: oski_delete_guard
+#: model:ir.actions.act_window,name:oski_delete_guard.action_oski_delete_log model:ir.model,name:oski_delete_guard.model_oski_delete_log model:ir.ui.menu,name:oski_delete_guard.menu_oski_delete_log model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_list model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_search
+msgid "Deletion Log"
+msgstr "Journal des suppressions"
+
+#. module: oski_delete_guard
+#: model:ir.model,name:oski_delete_guard.model_oski_delete_rule model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_rule_form
+msgid "Deletion Rule"
+msgstr "Règle de suppression"
+
+#. module: oski_delete_guard
+#: model:ir.actions.act_window,name:oski_delete_guard.action_oski_delete_rule model:ir.ui.menu,name:oski_delete_guard.menu_oski_delete_rule model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_rule_list
+msgid "Deletion Rules"
+msgstr "Règles de suppression"
+
+#. module: oski_delete_guard
+#. odoo-python
+#: code:addons/oski_delete_guard/models/base.py:0
+msgid "Deletion is not allowed on “%s”. Ask an authorized user to do it."
+msgstr "La suppression est interdite sur « %s ». Demandez-la à un utilisateur habilité."
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__display_name model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__id model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__write_uid model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__write_date model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__mode
+msgid "Mode"
+msgstr "Mode"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__model_name model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__model_id model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_search
+msgid "Model"
+msgstr "Modèle"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__model_label
+msgid "Model Description"
+msgstr "Intitulé du modèle"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,help:oski_delete_guard.field_oski_delete_rule__model_id
+msgid "Model whose deletions are watched."
+msgstr "Modèle dont les suppressions sont surveillées."
+
+#. module: oski_delete_guard
+#: model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_rule_form
+msgid "No allowed group means nobody can delete. System operations are never blocked."
+msgstr ""
+"Aucun groupe autorisé signifie : personne ne peut supprimer.\n"
+"                        Les opérations système ne sont jamais bloquées."
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__res_name
+msgid "Record"
+msgstr "Enregistrement"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__message
+msgid "Refusal Message"
+msgstr "Message de refus"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__model_name
+msgid "Technical Name"
+msgstr "Nom technique"
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,help:oski_delete_guard.field_oski_delete_rule__message
+msgid "Text shown to the blocked user. Leave empty to use the default message."
+msgstr "Texte affiché à l'utilisateur bloqué. Laisser vide utilise le message par défaut."
+
+#. module: oski_delete_guard
+#: model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_rule_form
+msgid "This document cannot be deleted: archive it instead."
+msgstr "Cette pièce ne se supprime pas : archivez-la."
+
+#. module: oski_delete_guard
+#: model:ir.model.constraint,message:oski_delete_guard.constraint_oski_delete_rule_model_uniq
+msgid "This model already has a deletion rule."
+msgstr "Ce modèle a déjà une règle de suppression."
+
+#. module: oski_delete_guard
+#: model:ir.model.fields,help:oski_delete_guard.field_oski_delete_rule__group_ids
+msgid "Users who keep the right to delete. Leave empty to block everyone."
+msgstr "Utilisateurs qui gardent le droit de supprimer. Laisser vide interdit à tous."

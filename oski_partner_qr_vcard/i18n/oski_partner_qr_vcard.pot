@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_partner_qr_vcard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 19:41+0000\n"
+"PO-Revision-Date: 2026-11-14 19:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_partner_qr_vcard
+#: model:ir.model,name:oski_partner_qr_vcard.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: oski_partner_qr_vcard
+#: model:ir.model.fields,field_description:oski_partner_qr_vcard.field_res_partner__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_partner_qr_vcard
+#: model:ir.model.fields,field_description:oski_partner_qr_vcard.field_res_partner__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_partner_qr_vcard
+#: model:ir.model.fields,help:oski_partner_qr_vcard.field_res_partner__oski_qr_vcard model:ir.model.fields,help:oski_partner_qr_vcard.field_res_users__oski_qr_vcard
+msgid "QR code encoding the contact in vCard 3.0 format (to scan with a smartphone)."
+msgstr ""
+
+#. module: oski_partner_qr_vcard
+#: model_terms:ir.ui.view,arch_db:oski_partner_qr_vcard.view_partner_form_oski_qr
+msgid "Scan this code with a smartphone camera to add the contact to the address book."
+msgstr ""
+
+#. module: oski_partner_qr_vcard
+#: model:ir.model.fields,field_description:oski_partner_qr_vcard.field_res_partner__oski_qr_vcard model:ir.model.fields,field_description:oski_partner_qr_vcard.field_res_users__oski_qr_vcard model_terms:ir.ui.view,arch_db:oski_partner_qr_vcard.view_partner_form_oski_qr
+msgid "vCard QR Code"
+msgstr ""

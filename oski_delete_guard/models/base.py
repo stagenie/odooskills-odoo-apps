@@ -25,7 +25,7 @@ class Base(models.AbstractModel):
             return
         raise UserError(
             message
-            or _("La suppression est interdite sur « %s ». Demandez-la à un utilisateur habilité.",
+            or _("Deletion is not allowed on “%s”. Ask an authorized user to do it.",
                  self.env["ir.model"]._get(self._name).name or self._name)
         )
 

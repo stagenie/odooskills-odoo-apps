@@ -1,0 +1,94 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 19:51+0000\n"
+"PO-Revision-Date: 2026-11-14 19:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "Accent Color"
+msgstr "Couleur d'accent"
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "Background Color"
+msgstr "Couleur de fond"
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "Background color of the login page."
+msgstr "Couleur d'arrière-plan de la page de connexion."
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "Color of the login page buttons and links."
+msgstr "Couleur des boutons et liens de la page de connexion."
+
+#. module: oski_login_branding
+#: model:ir.model,name:oski_login_branding.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: oski_login_branding
+#: model:ir.model,name:oski_login_branding.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: oski_login_branding
+#: model:ir.model.fields,field_description:oski_login_branding.field_res_company__display_name model:ir.model.fields,field_description:oski_login_branding.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_login_branding
+#: model:ir.model.fields,field_description:oski_login_branding.field_res_company__id model:ir.model.fields,field_description:oski_login_branding.field_res_config_settings__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_login_branding
+#: model:ir.model.fields,field_description:oski_login_branding.field_res_config_settings__oski_login_accent_color
+msgid "Login Accent Color"
+msgstr "Couleur d'accent du login"
+
+#. module: oski_login_branding
+#: model:ir.model.fields,field_description:oski_login_branding.field_res_config_settings__oski_login_bg_color
+msgid "Login Background Color"
+msgstr "Couleur de fond du login"
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "Login Page Customization"
+msgstr "Personnalisation de la page de connexion"
+
+#. module: oski_login_branding
+#: model:ir.model.fields,field_description:oski_login_branding.field_res_company__oski_login_logo
+msgid "Login Page Logo"
+msgstr "Logo de la page de connexion"
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "Logo"
+msgstr "Logo"
+
+#. module: oski_login_branding
+#: model:ir.model.fields,help:oski_login_branding.field_res_company__oski_login_logo
+msgid "Logo shown on the login page (replaces the company logo)."
+msgstr "Logo affiché sur la page de connexion (remplace le logo société)."
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "Set the logo per company"
+msgstr "Configurer le logo par société"
+
+#. module: oski_login_branding
+#: model_terms:ir.ui.view,arch_db:oski_login_branding.res_config_settings_view_form_oski_login
+msgid "The logo is set on each company (Settings > Companies)."
+msgstr "Le logo se règle sur chaque société (Réglages > Sociétés)."

@@ -10,7 +10,7 @@
             <page name="description_page" position="after">
                 <page name="oski_checklist_page" string="Checklist">
                     <field name="oski_checklist_progress" widget="progressbar"
-                           readonly="1" string="Avancement"/>
+                           readonly="1" string="Progress"/>
                     <field name="oski_checklist_ids">
                         <list editable="bottom">
                             <field name="sequence" widget="handle"/>

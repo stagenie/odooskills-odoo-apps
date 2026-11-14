@@ -8,25 +8,25 @@ GC_LIMIT = 5000
 
 class OskiCronRun(models.Model):
     _name = "oski.cron.run"
-    _description = "Exécution d'une tâche planifiée"
+    _description = "Scheduled Action Run"
     _order = "started_at desc, id desc"
     _rec_name = "cron_name"
 
     # La tâche peut disparaître (module désinstallé, action supprimée) sans que
     # son histoire perde son intérêt : le nom est recopié, et le lien se dénoue
     # au lieu d'emporter les lignes.
-    cron_id = fields.Many2one("ir.cron", string="Tâche planifiée", ondelete="set null", index=True)
-    cron_name = fields.Char(string="Tâche", required=True, index=True)
-    started_at = fields.Datetime(string="Début", required=True, index=True)
-    duration = fields.Float(string="Durée (s)", digits=(10, 3))
+    cron_id = fields.Many2one("ir.cron", string="Scheduled Job", ondelete="set null", index=True)
+    cron_name = fields.Char(string="Task", required=True, index=True)
+    started_at = fields.Datetime(string="Started On", required=True, index=True)
+    duration = fields.Float(string="Duration (s)", digits=(10, 3))
     state = fields.Selection(
-        [("success", "Réussite"), ("failure", "Échec")],
-        string="Résultat",
+        [("success", "Success"), ("failure", "Failure")],
+        string="Result",
         required=True,
         index=True,
     )
-    error = fields.Text(string="Erreur")
-    user_id = fields.Many2one("res.users", string="Exécutée en tant que")
+    error = fields.Text(string="Error")
+    user_id = fields.Many2one("res.users", string="Run As")
 
     @api.autovacuum
     def _gc_oski_cron_runs(self):

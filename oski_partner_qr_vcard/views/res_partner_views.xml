@@ -6,14 +6,13 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page name="oski_qr_vcard" string="QR vCard">
+                <page name="oski_qr_vcard" string="vCard QR Code">
                     <group>
                         <field name="oski_qr_vcard" widget="image"
                                options="{'size': [220, 220]}" nolabel="1"/>
                     </group>
                     <p class="text-muted">
-                        Scannez ce code avec l'appareil photo d'un smartphone
-                        pour ajouter le contact au carnet d'adresses.
+                        Scan this code with a smartphone camera to add the contact to the address book.
                     </p>
                 </page>
             </xpath>
