@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills App Store",
-    "version": "19.0.7.6.0",
+    "version": "19.0.7.7.0",
     "category": "Website/eCommerce",
     "summary": "Boutique de modules OdooSkills (gratuits + premium)",
     "description": "Surcouche mince de website_sale exposant les modules oski_* "
@@ -16,6 +16,7 @@
         "data/oski_module_category_data.xml",
         "data/oski_module_tag_demo.xml",
         "data/oski_odoo_version_data.xml",
+        "data/oski_trial_data.xml",
         "views/oski_module_category_views.xml",
         "views/oski_module_tag_views.xml",
         "views/oski_module_views.xml",
@@ -23,6 +24,7 @@
         "views/oski_odoo_version_views.xml",
         "views/res_config_settings_views.xml",
         "views/oski_module_download_views.xml",
+        "views/oski_module_trial_views.xml",
         "views/sale_order_views.xml",
         "views/oski_app_store_menus.xml",
         "templates/catalog_templates.xml",
@@ -32,12 +34,14 @@
         "templates/brand_promotion_templates.xml",
         "templates/faq_templates.xml",
         "templates/support_templates.xml",
+        "templates/trial_templates.xml",
     ],
     "assets": {
         "web.assets_frontend": [
             "oski_app_store/static/src/scss/oski_store_chrome.scss",
             "oski_app_store/static/src/scss/oski_app_store.scss",
             "oski_app_store/static/src/js/oski_lightbox.js",
+            "oski_app_store/static/src/js/oski_trial.js",
         ],
     },
     "installable": True,

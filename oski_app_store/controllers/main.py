@@ -294,13 +294,31 @@ class OskiAppStore(http.Controller):
             }
             for pv in supported_versions
         ]
+        # Essai 1 h : modules payants publiés, archive présente, lancement activé
+        # (`oski.trial.enabled`). Inutile pour qui possède déjà le module.
+        is_purchased = module.is_purchased_by(partner)
+        Trial = request.env["oski.module.trial"].sudo()
+        trial_versions = (
+            Trial._trial_versions(module)
+            if not is_purchased and Trial._is_enabled() else []
+        )
+        trial_url = ""
+        if trial_versions:
+            trial_version = version if version in trial_versions else (
+                "20.0" if "20.0" in trial_versions else trial_versions[0]
+            )
+            trial_url = request.env["ir.http"]._url_for(
+                "/apps/trial/start/%s?v=%s" % (module.id, trial_version)
+            )
         return request.render(
             "oski_app_store.module_page",
             {
                 "module": module,
                 "version": version,
                 "show_counters": request.env["oski.module"]._counters_settings()[0],
-                "is_purchased": module.is_purchased_by(partner),
+                "is_purchased": is_purchased,
+                "trial_url": trial_url,
+                "trial_versions": trial_versions,
                 "is_sellable": is_sellable,
                 "price_offer": price_offer,
                 "buy_url": "/apps/buy/%s" % module.id if variant else "",

@@ -470,3 +470,34 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         flex: 0 0 auto;
     }
 }
+
+// ---- Essai 1 h (bouton de la fiche, formulaire, page d'attente) ----
+.oski-store {
+    .oski-btn-trial { background: #fff; color: $oski-plum; font-weight: 600;
+        border: 2px solid $oski-plum; border-radius: 10px; padding: .55rem;
+        &:hover { background: $oski-plum; color: #fff; } }
+    .oski-trial-cta { margin-top: .75rem; }
+    .oski-trial-cta-note { color: $oski-muted; font-size: .8rem; margin: .4rem 0 0; }
+    .oski-trial { max-width: 680px; }
+    .oski-trial-card { border: 1px solid $oski-line; border-radius: 16px; padding: 1.75rem;
+        background: #fff; box-shadow: 0 6px 24px rgba(17, 24, 39, .06); margin-top: 1rem; }
+    .oski-trial-eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .14em;
+        text-transform: uppercase; color: $oski-plum; }
+    .oski-trial-title { font-family: $oski-display; font-size: 1.6rem; margin: 0; }
+    .oski-trial-points { color: $oski-muted; padding-left: 1.1rem; margin-bottom: 1.25rem;
+        li { margin-bottom: .25rem; } }
+    .oski-trial-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+    .oski-trial-status { display: flex; align-items: center; gap: .8rem; padding: 1rem;
+        border-radius: 12px; background: $oski-bg-soft; margin-bottom: 1rem; }
+    .oski-trial-message { font-size: 1.05rem; }
+    .oski-trial-spinner { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 50%;
+        border: 3px solid rgba($oski-plum, .2); border-top-color: $oski-plum;
+        animation: oski-trial-spin 1s linear infinite; }
+    .oski-trial-wait[data-state="failed"] .oski-trial-status,
+    .oski-trial-wait[data-state="error"] .oski-trial-status { background: #fff7ed; }
+    .oski-trial-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+    .oski-trial-actions .btn { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .oski-trial-left { color: $oski-muted; margin: 0; }
+    .oski-trial-foot { color: $oski-muted; font-size: .8rem; margin: 1.25rem 0 0; }
+}
+@keyframes oski-trial-spin { to { transform: rotate(360deg); } }

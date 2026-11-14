@@ -112,6 +112,16 @@
                                 <p t-else="" class="text-muted mb-0">
                                     Coming soon for sale.
                                 </p>
+                                <!-- Essai 1 h : base éphémère sur le serveur de démonstration. -->
+                                <div t-if="trial_url" class="oski-trial-cta">
+                                    <a t-att-href="trial_url" class="btn oski-btn-trial w-100">
+                                        Try it free for 1 hour
+                                    </a>
+                                    <p class="oski-trial-cta-note">
+                                        A ready-to-use Odoo database with demo data, deleted after 1 hour.
+                                        Odoo <t t-out="', '.join(v.split('.')[0] for v in trial_versions)"/>.
+                                    </p>
+                                </div>
                                 <p t-if="is_purchased and not module.is_free" class="oski-owned-note">
                                     You own this module —
                                     <a href="/my/apps">all your applications</a>.

@@ -19,6 +19,9 @@
     <menuitem id="menu_oski_downloads" name="Downloads"
               parent="menu_oski_app_store_root"
               action="oski_module_download_action" sequence="15"/>
+    <menuitem id="menu_oski_trials" name="Trials"
+              parent="menu_oski_app_store_root"
+              action="oski_module_trial_action" sequence="17"/>
     <menuitem id="oski_app_store_menu_odoo_versions"
               name="Odoo Versions"
               parent="menu_oski_app_store_root"

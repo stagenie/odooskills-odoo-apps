@@ -8,3 +8,4 @@ from . import product_template
 from . import sale_order
 from . import ir_http
 from . import res_config_settings
+from . import oski_module_trial

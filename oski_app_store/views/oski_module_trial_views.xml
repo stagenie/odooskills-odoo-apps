@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_module_trial_view_list" model="ir.ui.view">
+        <field name="name">oski.module.trial.list</field>
+        <field name="model">oski.module.trial</field>
+        <field name="arch" type="xml">
+            <list string="Trials" create="0" decoration-muted="state in ('expired', 'error')"
+                  decoration-danger="state == 'failed'" decoration-success="state == 'ready'">
+                <field name="create_date" string="Requested on"/>
+                <field name="module_id"/>
+                <field name="odoo_version"/>
+                <field name="email"/>
+                <field name="partner_id" optional="hide"/>
+                <field name="country_id"/>
+                <field name="lang" optional="hide"/>
+                <field name="state" widget="badge"/>
+                <field name="error_code" optional="show"/>
+                <field name="expires_at" optional="show"/>
+                <field name="end_mail_sent" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_module_trial_view_form" model="ir.ui.view">
+        <field name="name">oski.module.trial.form</field>
+        <field name="model">oski.module.trial</field>
+        <field name="arch" type="xml">
+            <form string="Trial" create="0">
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="new,queued,building,ready,expired"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Request">
+                            <field name="module_id"/>
+                            <field name="odoo_version"/>
+                            <field name="lang"/>
+                            <field name="email"/>
+                            <field name="partner_id"/>
+                            <field name="country_id"/>
+                            <field name="country_source"/>
+                            <field name="create_date" string="Requested on"/>
+                        </group>
+                        <group string="Trial database">
+                            <field name="remote_trial_id"/>
+                            <field name="phase"/>
+                            <field name="queue_position"/>
+                            <field name="error_code"/>
+                            <field name="ready_at"/>
+                            <field name="expires_at"/>
+                            <field name="ended_at"/>
+                            <field name="end_mail_sent"/>
+                            <field name="buy_url" widget="url"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="oski_module_trial_view_pivot" model="ir.ui.view">
+        <field name="name">oski.module.trial.pivot</field>
+        <field name="model">oski.module.trial</field>
+        <field name="arch" type="xml">
+            <pivot string="Trials" sample="1">
+                <field name="module_id" type="row"/>
+                <field name="create_date" interval="month" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="oski_module_trial_view_search" model="ir.ui.view">
+        <field name="name">oski.module.trial.search</field>
+        <field name="model">oski.module.trial</field>
+        <field name="arch" type="xml">
+            <search string="Trials">
+                <field name="email"/>
+                <field name="module_id"/>
+                <field name="partner_id"/>
+                <field name="country_id"/>
+                <filter name="filter_running" string="Running"
+                        domain="[('state', 'in', ('new', 'queued', 'building', 'ready'))]"/>
+                <filter name="filter_ended" string="Ended" domain="[('state', '=', 'expired')]"/>
+                <filter name="filter_problem" string="Failed or not started"
+                        domain="[('state', 'in', ('failed', 'error'))]"/>
+                <separator/>
+                <filter name="filter_date" string="Requested on" date="create_date"/>
+                <group>
+                    <filter name="group_module" string="Module" context="{'group_by': 'module_id'}"/>
+                    <filter name="group_version" string="Odoo version" context="{'group_by': 'odoo_version'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_country" string="Country" context="{'group_by': 'country_id'}"/>
+                    <filter name="group_month" string="Month" context="{'group_by': 'create_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oski_module_trial_action" model="ir.actions.act_window">
+        <field name="name">Trials</field>
+        <field name="res_model">oski.module.trial</field>
+        <field name="view_mode">list,pivot,form</field>
+        <field name="search_view_id" ref="oski_module_trial_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No trial yet</p>
+            <p>Each "Try it free for 1 hour" request of a premium module is listed here.</p>
+        </field>
+    </record>
+</odoo>

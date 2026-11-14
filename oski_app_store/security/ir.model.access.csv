@@ -19,3 +19,5 @@ access_product_ribbon_oski_public,product.ribbon oski public,website_sale.model_
 access_product_ribbon_oski_portal,product.ribbon oski portal,website_sale.model_product_ribbon,base.group_portal,1,0,0,0
 access_product_ribbon_oski_manager,product.ribbon oski manager,website_sale.model_product_ribbon,oski_app_store.group_manager,1,1,1,1
 access_oski_module_download_manager,oski.module.download manager,model_oski_module_download,oski_app_store.group_manager,1,0,0,0
+access_oski_module_trial_manager,oski.module.trial manager,model_oski_module_trial,oski_app_store.group_manager,1,1,1,1
+access_oski_trial_nonce_manager,oski.trial.nonce manager,model_oski_trial_nonce,oski_app_store.group_manager,1,0,0,0

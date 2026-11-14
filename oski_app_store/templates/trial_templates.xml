@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Formulaire de demande d'essai 1 h (module payant). -->
+    <template id="trial_form_page" name="Trial request">
+        <t t-call="website.layout">
+            <div class="oski-store">
+            <div class="container py-5 oski-trial">
+                <a class="oski-back" t-att-href="module.website_url">&#8592; Back to the module</a>
+                <div class="oski-trial-card">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <t t-call="oski_app_store.module_icon"/>
+                        <div>
+                            <p class="oski-trial-eyebrow mb-1">Free trial — 1 hour</p>
+                            <h1 class="oski-trial-title" t-out="module.name"/>
+                        </div>
+                    </div>
+                    <ul class="oski-trial-points">
+                        <li>A fresh Odoo database with demo data, in English and French.</li>
+                        <li>You sign in as a business user: nothing to install, no credit card.</li>
+                        <li>The database is deleted after 1 hour. One trial at a time per e-mail address.</li>
+                    </ul>
+                    <div t-if="error" class="alert alert-warning oski-trial-error" role="alert" t-out="error"/>
+                    <form t-att-action="form_action" method="post" class="oski-trial-form" novalidate="novalidate">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="form_ts" t-att-value="form_ts"/>
+                        <input type="hidden" name="form_sig" t-att-value="form_sig"/>
+                        <!-- Champ piège : invisible pour un humain, rempli par les robots. -->
+                        <div class="oski-trial-hp" aria-hidden="true">
+                            <label t-att-for="honeypot_field">Leave this field empty</label>
+                            <input type="text" t-att-id="honeypot_field" t-att-name="honeypot_field"
+                                   tabindex="-1" autocomplete="off" value=""/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="oski_trial_email" class="form-label">Work e-mail</label>
+                            <input type="email" id="oski_trial_email" name="email" required="required"
+                                   class="form-control" autocomplete="email"
+                                   placeholder="you@company.com" t-att-value="form.get('email')"/>
+                            <div class="form-text">We send you one e-mail when the trial ends, nothing else.</div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-sm-5">
+                                <label for="oski_trial_version" class="form-label">Odoo version</label>
+                                <select id="oski_trial_version" name="version" class="form-select">
+                                    <t t-foreach="versions" t-as="v">
+                                        <option t-att-value="v" t-att-selected="v == form.get('version')"
+                                                t-out="'Odoo %s' % v.split('.')[0]"/>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-sm-7">
+                                <label for="oski_trial_country" class="form-label">Country</label>
+                                <select id="oski_trial_country" name="country_id" class="form-select">
+                                    <option value="">—</option>
+                                    <t t-foreach="countries" t-as="c">
+                                        <option t-att-value="c.id" t-att-selected="c.id == form.get('country_id')"
+                                                t-out="c.name"/>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input type="checkbox" id="oski_trial_terms" name="accept_terms" value="1"
+                                   class="form-check-input" t-att-checked="form.get('accept_terms')"/>
+                            <label for="oski_trial_terms" class="form-check-label">
+                                I accept the <a t-att-href="terms_url" target="_blank">terms of use</a>.
+                            </label>
+                        </div>
+                        <button type="submit" class="btn oski-btn-trial w-100">Start my trial</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Page d'attente : sondage de l'état toutes les 3 s via le store. -->
+    <template id="trial_wait_page" name="Trial waiting page">
+        <t t-call="website.layout">
+            <div class="oski-store">
+            <div class="container py-5 oski-trial">
+                <div class="oski-trial-card oski-trial-wait"
+                     t-att-data-state="trial.state"
+                     t-att-data-status-url="status_url if pending else None"
+                     t-att-data-open-url="open_url"
+                     t-att-data-auto-open="'1' if auto_open else None">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <t t-call="oski_app_store.module_icon"/>
+                        <div>
+                            <p class="oski-trial-eyebrow mb-1">
+                                Free trial — Odoo <t t-out="trial.odoo_version.split('.')[0]"/>
+                            </p>
+                            <h1 class="oski-trial-title" t-out="module.name"/>
+                        </div>
+                    </div>
+                    <div class="oski-trial-status">
+                        <span t-if="pending" class="oski-trial-spinner" aria-hidden="true"/>
+                        <p class="oski-trial-message mb-0" role="status" aria-live="polite" t-out="message"/>
+                    </div>
+                    <div class="oski-trial-actions">
+                        <a t-att-href="open_url"
+                           t-attf-class="btn oski-btn-trial oski-trial-open #{'' if trial.state == 'ready' else 'd-none'}">
+                            Open my trial database
+                        </a>
+                        <p t-if="trial.state == 'ready' and trial.remaining_minutes" class="oski-trial-left">
+                            Time left: <t t-out="trial.remaining_minutes"/> min.
+                        </p>
+                        <t t-if="trial.state == 'expired'">
+                            <a t-att-href="module_url" class="btn oski-btn-buy">Buy the module</a>
+                        </t>
+                        <t t-if="trial.state in ('failed', 'error')">
+                            <a t-att-href="retry_url" class="btn oski-btn-buy">Try again</a>
+                            <a t-att-href="support_url" class="btn btn-link">Contact support</a>
+                        </t>
+                    </div>
+                    <p class="oski-trial-foot">
+                        Keep this page open: it updates by itself. The link of your trial database
+                        works once; come back here to reopen it.
+                    </p>
+                </div>
+            </div>
+            </div>
+        </t>
+    </template>
+</odoo>

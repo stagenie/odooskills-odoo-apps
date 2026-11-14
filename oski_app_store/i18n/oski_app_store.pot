@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-14 05:06+0000\n"
-"PO-Revision-Date: 2026-11-14 05:06+0000\n"
+"POT-Creation-Date: 2026-11-14 08:43+0000\n"
+"PO-Revision-Date: 2026-11-14 08:43+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,14 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid " Odoo %s on request."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"%(count)s person(s) ahead of you. A running trial frees its place within 1 "
+"hour at the latest."
 msgstr ""
 
 #. module: oski_app_store
@@ -53,6 +61,16 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__attachment_id
 msgid ".zip archive"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid "1-hour trials"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_trial_enabled
+msgid "1-hour trials of premium modules"
 msgstr ""
 
 #. module: oski_app_store
@@ -164,12 +182,39 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model:mail.template,body_html:oski_app_store.mail_template_trial_ended
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 14px;\">\n"
+"    <p>Hello,</p>\n"
+"    <p>\n"
+"        Your 1-hour trial of <strong t-out=\"object.module_id.name or ''\">Module</strong>\n"
+"        (Odoo <t t-out=\"object.odoo_version or ''\">20.0</t>) has ended, and the trial database has been deleted.\n"
+"    </p>\n"
+"    <p>We hope it showed you what the module can do for your company.</p>\n"
+"    <p t-if=\"object.pricing_note\" style=\"font-weight: bold;\" t-out=\"object.pricing_note\">Launch price</p>\n"
+"    <p style=\"margin: 24px 0px;\">\n"
+"        <a t-att-href=\"object.buy_url\" style=\"background-color: #714B67; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 8px; font-weight: bold;\">\n"
+"            Buy the module\n"
+"        </a>\n"
+"    </p>\n"
+"    <p>A question before buying? Simply reply to this e-mail.</p>\n"
+"    <p>The OdooSkills team</p>\n"
+"</div>\n"
+"        "
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid ""
 "<em>Odoo</em> is a registered trademark of Odoo S.A. This site is neither\n"
 "                        published nor endorsed by Odoo S.A. The modules offered are independent\n"
 "                        works designed to work with the Odoo software. Other trademarks\n"
 "                        mentioned belong to their respective owners."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "<option value=\"\">—</option>"
 msgstr ""
 
 #. module: oski_app_store
@@ -269,6 +314,11 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "A fresh Odoo database with demo data, in English and French."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid ""
 "A modified module: describe the modification, it changes\n"
@@ -297,8 +347,28 @@ msgid "A question that isn't here ?"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid ""
+"A ready-to-use Odoo database with demo data, deleted after 1 hour.\n"
+"                                        Odoo"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_tag_name_uniq
 msgid "A tag with this name already exists."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"A trial is already running for this e-mail address. Only one trial at a "
+"time: wait until it ends (1 hour at most)."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__access_token
+msgid "Access token"
 msgstr ""
 
 #. module: oski_app_store
@@ -381,6 +451,11 @@ msgid "App Store"
 msgstr ""
 
 #. module: oski_app_store
+#: model:mail.template,name:oski_app_store.mail_template_trial_ended
+msgid "App Store: trial ended"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__version_id
 msgid "Archive"
 msgstr ""
@@ -412,6 +487,21 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.portal_my_apps
 #: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
 msgid "Browse the catalog"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__phase
+msgid "Build phase"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__building
+msgid "Building"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "Buy the module"
 msgstr ""
 
 #. module: oski_app_store
@@ -458,6 +548,11 @@ msgid "Category"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__country_source__form
+msgid "Chosen by visitor"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Clear all"
 msgstr ""
@@ -493,6 +588,21 @@ msgid "Configuring Odoo itself, outside the module concerned."
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__ip_hash
+msgid "Connection fingerprint"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "Contact support"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Contact us"
 msgstr ""
@@ -511,12 +621,16 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__country_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__country_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
 msgid "Country"
 msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__country_source
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__country_source
 msgid "Country source"
 msgstr ""
 
@@ -525,8 +639,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__create_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__create_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -535,8 +651,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__create_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__create_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__create_date
 msgid "Created on"
 msgstr ""
 
@@ -569,6 +687,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__partner
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__country_source__partner
 msgid "Customer address"
 msgstr ""
 
@@ -616,8 +735,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_sale_order__display_name
@@ -665,6 +786,17 @@ msgid "Downloads"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__email
+msgid "E-mail"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_trial_action
+msgid ""
+"Each \"Try it free for 1 hour\" request of a premium module is listed here."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_download_action
 msgid ""
 "Each archive served by the store is recorded here with the country of the "
@@ -701,8 +833,29 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__end_mail_sent
+msgid "End e-mail sent"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__expired
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+msgid "Ended"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__ended_at
+msgid "Ended at"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Enlarged screenshot"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__error_code
+msgid "Error code"
 msgstr ""
 
 #. module: oski_app_store
@@ -715,6 +868,21 @@ msgstr ""
 #. module: oski_app_store
 #: model:oski.module.tag,name:oski_app_store.tag_demo_exemple
 msgid "Example"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__expires_at
+msgid "Expires at"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__failed
+msgid "Failed"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+msgid "Failed or not started"
 msgstr ""
 
 #. module: oski_app_store
@@ -748,6 +916,16 @@ msgid "Free"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "Free trial — 1 hour"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "Free trial — Odoo"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
 #: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
@@ -756,6 +934,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__geoip
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__country_source__geoip
 msgid "Geolocation"
 msgstr ""
 
@@ -795,13 +974,20 @@ msgid "Human Resources"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "I accept the"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_ir_http__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__id
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__id
 #: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__id
 #: model:ir.model.fields,field_description:oski_app_store.field_sale_order__id
@@ -893,8 +1079,20 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid ""
+"Keep this page open: it updates by itself. The link of your trial database\n"
+"                        works once; come back here to reopen it."
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module__license__lgpl-3
 msgid "LGPL-3"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__lang
+msgid "Language"
 msgstr ""
 
 #. module: oski_app_store
@@ -902,8 +1100,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__write_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__write_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -912,8 +1112,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__write_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__write_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -930,6 +1132,11 @@ msgid "Last updated: August 31, 2026."
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__pricing_note
+msgid "Launch offer"
+msgstr ""
+
+#. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "Launch price — %(percent)s%% off"
@@ -939,6 +1146,23 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "Launch price — %(percent)s%% off until %(date)s"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid "Launch price: %(amount)s (%(percent)s%% off) until %(date)s."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid "Launch price: %(amount)s (%(percent)s%% off)."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "Leave this field empty"
 msgstr ""
 
 #. module: oski_app_store
@@ -956,6 +1180,16 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__product_tmpl_id
 msgid "Linked product"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__login_url
+msgid "Login link"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__login_used
+msgid "Login link used"
 msgstr ""
 
 #. module: oski_app_store
@@ -990,9 +1224,16 @@ msgid "Minimum value to display a counter"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__remaining_minutes
+msgid "Minutes left"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__module_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__module_id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__module_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Module"
 msgstr ""
@@ -1031,6 +1272,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
 msgid "Month"
 msgstr ""
 
@@ -1074,6 +1316,11 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__new
+msgid "New"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.portal_my_apps
 msgid "No application purchased yet."
 msgstr ""
@@ -1101,6 +1348,11 @@ msgid "No module matches these filters."
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_trial_action
+msgid "No trial yet"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
 "No. Every major Odoo version changes its interface and its\n"
@@ -1112,6 +1364,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Not available in"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__error
+msgid "Not started"
 msgstr ""
 
 #. module: oski_app_store
@@ -1208,9 +1465,12 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__odoo_version
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__odoo_version
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__odoo_version_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
 msgid "Odoo version"
 msgstr ""
 
@@ -1307,6 +1567,11 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "Open my trial database"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Order"
 msgstr ""
@@ -1323,6 +1588,30 @@ msgid "Parent category"
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/trial.py:0
+msgid "Please accept the terms of use."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/trial.py:0
+msgid "Please check the form and send it again."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/trial.py:0
+msgid "Please choose an Odoo version."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/trial.py:0
+msgid "Please enter a valid e-mail address."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.brand_promotion_affiliate
 msgid "Powered by"
 msgstr ""
@@ -1334,6 +1623,20 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_kanban
 msgid "Premium"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid "Preparing your database… It takes a few seconds."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"Preparing your database… This is the first trial of this module on this Odoo"
+" version: it takes 1 to 5 minutes."
 msgstr ""
 
 #. module: oski_app_store
@@ -1414,14 +1717,39 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__buy_url
+msgid "Purchase link"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__purchase_count
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Purchases"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__queue_position
+msgid "Queue position"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__queued
+msgid "Queued"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__rating_ids
 msgid "Ratings"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__ready
+msgid "Ready"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__ready_at
+msgid "Ready at"
 msgstr ""
 
 #. module: oski_app_store
@@ -1464,6 +1792,11 @@ msgid "Reporting"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_form
+msgid "Request"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid ""
 "Request a\n"
@@ -1473,6 +1806,13 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "Request a module"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_form
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_list
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+msgid "Requested on"
 msgstr ""
 
 #. module: oski_app_store
@@ -1516,6 +1856,11 @@ msgid "Ribbons"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+msgid "Running"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_seo_optimized
 msgid "SEO optimized"
 msgstr ""
@@ -1538,6 +1883,13 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model,name:oski_app_store.model_sale_order
 msgid "Sales Order"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_trial__ip_hash
+msgid ""
+"Salted SHA-256 of the visitor IP address. The address itself is never "
+"stored."
 msgstr ""
 
 #. module: oski_app_store
@@ -1574,6 +1926,11 @@ msgid "See also"
 msgstr ""
 
 #. module: oski_app_store
+#: model:mail.template,description:oski_app_store.mail_template_trial_ended
+msgid "Sent once when a 1-hour trial database is deleted"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__seo_name
 msgid "Seo name"
 msgstr ""
@@ -1582,6 +1939,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__sequence
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__sequence
 msgid "Sequence"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__remote_trial_id
+msgid "Service trial ID"
 msgstr ""
 
 #. module: oski_app_store
@@ -1595,8 +1957,31 @@ msgid "Show download and purchase counters"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid ""
+"Shows the 'Try it free for 1 hour' button on premium modules. The shared "
+"secret is the system parameter oski.trial.secret."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "Sign in"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__signature
+msgid "Signature"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.constraint,message:oski_app_store.constraint_oski_trial_nonce_signature_uniq
+msgid "Signature already received."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_trial__login_url
+msgid ""
+"Single-use login link of the trial database. Never e-mailed nor logged."
 msgstr ""
 
 #. module: oski_app_store
@@ -1612,6 +1997,27 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Sort"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "Start my trial"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_trial__lang
+msgid "Starting language of the trial database."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__state
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+msgid "Status"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_module_trial
+msgid "Store 1-hour trial"
 msgstr ""
 
 #. module: oski_app_store
@@ -1724,6 +2130,13 @@ msgid ""
 "The data collected (account, order, message) is used to respond to\n"
 "                        requests, deliver the modules and invoice. Any request for access,\n"
 "                        rectification or deletion is made to"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid ""
+"The database is deleted after 1 hour. One trial at a time per e-mail "
+"address."
 msgstr ""
 
 #. module: oski_app_store
@@ -1860,6 +2273,22 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"The trial queue is full for this Odoo version. Please try again later, or "
+"choose another version."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"The trial service is not available right now. Please try again in a few "
+"minutes."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
 msgid ""
 "These terms are governed by the law of the State of New Mexico\n"
@@ -1885,6 +2314,14 @@ msgid "This Odoo version is already registered."
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"This module cannot be tried on this Odoo version yet. Choose another "
+"version, or contact support."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
 msgid "This page does not exist."
 msgstr ""
@@ -1898,8 +2335,67 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid "This trial has ended. The database has been deleted."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "Time left:"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"Too many trials from your connection in the last 24 hours. Please try again "
+"tomorrow."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.legal_notice
 msgid "Trademarks and rights"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_form
+msgid "Trial"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_form
+msgid "Trial database"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_trial_api_url
+msgid "Trial service URL"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_trial_nonce
+msgid "Trial webhook signature seen"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_trial_action
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_trials
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_list
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_pivot
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid "Trials"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "Try again"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Try it free for 1 hour"
 msgstr ""
 
 #. module: oski_app_store
@@ -1909,6 +2405,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__unknown
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__country_source__unknown
 msgid "Unknown"
 msgstr ""
 
@@ -1955,6 +2452,19 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__website_published
 msgid "Visible on current website"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"We could not build your database. Try another Odoo version, or contact "
+"support."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "We send you one e-mail when the trial ends, nothing else."
 msgstr ""
 
 #. module: oski_app_store
@@ -2070,6 +2580,11 @@ msgid "Which versions are covered ?"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "Work e-mail"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "Write to"
 msgstr ""
@@ -2091,8 +2606,32 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"You are in the queue. A running trial frees its place within 1 hour at the "
+"latest."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "You own this module —"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "You sign in as a business user: nothing to install, no credit card."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid "Your database is ready. Opening it…"
+msgstr ""
+
+#. module: oski_app_store
+#: model:mail.template,subject:oski_app_store.mail_template_trial_ended
+msgid "Your trial of {{ object.module_id.name }} has ended"
 msgstr ""
 
 #. module: oski_app_store
@@ -2180,6 +2719,11 @@ msgid "lws.fr"
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "min."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid ""
 "modules purchased, amount, date, invoice.\n"
@@ -2235,6 +2779,11 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "terms of use"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid "the frequently asked questions"
 msgstr ""
@@ -2262,6 +2811,11 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "you@company.com"
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "your customer area"
 msgstr ""
@@ -2281,6 +2835,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "← Back to catalog"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "← Back to the module"
 msgstr ""
 
 #. module: oski_app_store

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Service d'essai 1 h. Le secret partagé (oski.trial.secret) se pose au
+         déploiement, jamais ici. Lancement maîtrisé : désactivé par défaut. -->
+    <record id="param_trial_api_url" model="ir.config_parameter">
+        <field name="key">oski.trial.api_url</field>
+        <field name="value">https://trial.lab.odooskills.com</field>
+    </record>
+
+    <record id="mail_template_trial_ended" model="mail.template">
+        <field name="name">App Store: trial ended</field>
+        <field name="model_id" ref="oski_app_store.model_oski_module_trial"/>
+        <field name="subject">Your trial of {{ object.module_id.name }} has ended</field>
+        <field name="email_from">{{ object.env.company.email_formatted }}</field>
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field name="lang">{{ object.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="description">Sent once when a 1-hour trial database is deleted</field>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+    <p>Hello,</p>
+    <p>
+        Your 1-hour trial of <strong t-out="object.module_id.name or ''">Module</strong>
+        (Odoo <t t-out="object.odoo_version or ''">20.0</t>) has ended, and the trial database has been deleted.
+    </p>
+    <p>We hope it showed you what the module can do for your company.</p>
+    <p t-if="object.pricing_note" style="font-weight: bold;" t-out="object.pricing_note">Launch price</p>
+    <p style="margin: 24px 0px;">
+        <a t-att-href="object.buy_url"
+           style="background-color: #714B67; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+            Buy the module
+        </a>
+    </p>
+    <p>A question before buying? Simply reply to this e-mail.</p>
+    <p>The OdooSkills team</p>
+</div>
+        </field>
+    </record>
+</odoo>

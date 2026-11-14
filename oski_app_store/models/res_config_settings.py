@@ -10,3 +10,9 @@ class ResConfigSettings(models.TransientModel):
     oski_counters_min = fields.Integer(
         string="Minimum value to display a counter", default=10,
         config_parameter="oski_app_store.counters_min")
+    oski_trial_enabled = fields.Boolean(
+        string="1-hour trials of premium modules",
+        config_parameter="oski.trial.enabled")
+    oski_trial_api_url = fields.Char(
+        string="Trial service URL",
+        config_parameter="oski.trial.api_url")
