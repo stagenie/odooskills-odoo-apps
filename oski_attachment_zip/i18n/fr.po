@@ -1,0 +1,113 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 15:54+0000\n"
+"PO-Revision-Date: 2026-11-14 15:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_attachment_zip
+#. odoo-python
+#: code:addons/oski_attachment_zip/models/ir_attachment.py:0
+msgid "%(model)s - %(count)s records.zip"
+msgstr "%(model)s - %(count)s fiches.zip"
+
+#. module: oski_attachment_zip
+#: model:ir.model.fields,help:oski_attachment_zip.field_ir_model__oski_zip_enabled
+msgid "Adds the “Download attachments (ZIP)” entry to the Actions menu of this model's records and lists."
+msgstr "Ajoute l'entrée « Télécharger les pièces jointes (ZIP) » au menu d'actions des fiches et des listes de ce modèle."
+
+#. module: oski_attachment_zip
+#: model:ir.model,name:oski_attachment_zip.model_ir_attachment
+msgid "Attachment"
+msgstr "Pièce jointe"
+
+#. module: oski_attachment_zip
+#: model:ir.actions.act_window,name:oski_attachment_zip.action_oski_zip_models
+msgid "Bulk Attachment Download"
+msgstr "Téléchargement groupé des pièces jointes"
+
+#. module: oski_attachment_zip
+#: model:ir.model.fields,field_description:oski_attachment_zip.field_ir_model__oski_zip_enabled model_terms:ir.ui.view,arch_db:oski_attachment_zip.view_oski_zip_model_list
+msgid "Bulk Download"
+msgstr "Téléchargement groupé"
+
+#. module: oski_attachment_zip
+#: model:ir.ui.menu,name:oski_attachment_zip.menu_oski_zip_models
+msgid "Bulk Download (ZIP)"
+msgstr "Téléchargement groupé (ZIP)"
+
+#. module: oski_attachment_zip
+#. odoo-python
+#: code:addons/oski_attachment_zip/models/ir_attachment.py:0
+msgid "Bulk download stops at %(max)s records; %(count)s are selected."
+msgstr "Le téléchargement groupé s'arrête à %(max)s fiches ; %(count)s sont sélectionnées."
+
+#. module: oski_attachment_zip
+#: model:ir.model.fields,field_description:oski_attachment_zip.field_ir_model__oski_zip_available
+msgid "Can Hold Attachments"
+msgstr "Peut porter des pièces jointes"
+
+#. module: oski_attachment_zip
+#: model_terms:ir.actions.act_window,help:oski_attachment_zip.action_oski_zip_models
+msgid "Choose the models"
+msgstr "Choisir les modèles concernés"
+
+#. module: oski_attachment_zip
+#: model:ir.model.fields,field_description:oski_attachment_zip.field_ir_model__oski_zip_action_id
+msgid "Created Action"
+msgstr "Action posée"
+
+#. module: oski_attachment_zip
+#: model_terms:ir.ui.view,arch_db:oski_attachment_zip.view_oski_zip_model_search
+msgid "Download Enabled"
+msgstr "Téléchargement actif"
+
+#. module: oski_attachment_zip
+#. odoo-python
+#: code:addons/oski_attachment_zip/models/ir_model.py:0
+msgid "Download attachments (ZIP)"
+msgstr "Télécharger les pièces jointes (ZIP)"
+
+#. module: oski_attachment_zip
+#: model:ir.model.fields,help:oski_attachment_zip.field_ir_model__oski_zip_available
+msgid "False for abstract models and wizards: they have neither table nor record, hence never any attachment."
+msgstr "Faux pour les modèles abstraits et les assistants : ils n'ont ni table ni fiche, donc jamais de pièce jointe."
+
+#. module: oski_attachment_zip
+#: model:ir.model,name:oski_attachment_zip.model_ir_model model_terms:ir.ui.view,arch_db:oski_attachment_zip.view_oski_zip_model_search
+msgid "Models"
+msgstr "Modèles"
+
+#. module: oski_attachment_zip
+#. odoo-python
+#: code:addons/oski_attachment_zip/models/ir_attachment.py:0
+msgid "No record selected."
+msgstr "Aucune fiche sélectionnée."
+
+#. module: oski_attachment_zip
+#. odoo-python
+#: code:addons/oski_attachment_zip/models/ir_attachment.py:0
+msgid "The archive would weigh %(size)s MB, above the %(limit)s MB limit. Reduce the selection."
+msgstr "L'archive pèserait %(size)s Mo, au-delà de la limite de %(limit)s Mo. Réduisez la sélection."
+
+#. module: oski_attachment_zip
+#. odoo-python
+#: code:addons/oski_attachment_zip/models/ir_attachment.py:0
+msgid "These records carry no downloadable attachment."
+msgstr "Ces fiches ne portent aucune pièce jointe téléchargeable."
+
+#. module: oski_attachment_zip
+#: model_terms:ir.actions.act_window,help:oski_attachment_zip.action_oski_zip_models
+msgid "Ticking a model adds the “Download attachments (ZIP)” entry to the Actions menu of its records and lists. Unticking removes it."
+msgstr ""
+"Cocher un modèle ajoute l'entrée « Télécharger les pièces jointes\n"
+"                (ZIP) » au menu d'actions de ses fiches et de ses listes.\n"
+"                Décocher la retire."

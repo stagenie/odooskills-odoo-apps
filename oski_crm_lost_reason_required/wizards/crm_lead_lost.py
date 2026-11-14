@@ -14,9 +14,9 @@ class CrmLeadLost(models.TransientModel):
     _inherit = "crm.lead.lost"
 
     oski_reason_required = fields.Boolean(
-        string="Motif obligatoire", compute="_compute_oski_required")
+        string="Reason Required", compute="_compute_oski_required")
     oski_feedback_required = fields.Boolean(
-        string="Note obligatoire", compute="_compute_oski_required")
+        string="Note Required", compute="_compute_oski_required")
 
     @api.depends("lead_ids")
     def _compute_oski_required(self):
@@ -30,6 +30,7 @@ class CrmLeadLost(models.TransientModel):
     def action_lost_reason_apply(self):
         if self.oski_feedback_required and is_html_empty(self.lost_feedback):
             raise UserError(_(
-                "Quelques mots de contexte sont attendus en plus du motif : "
-                "c'est ce que relira celui qui reprendra ce client dans un an."))
+                "A few words of context are expected on top of the reason: "
+                "this is what whoever takes over this customer in a year will "
+                "read."))
         return super().action_lost_reason_apply()

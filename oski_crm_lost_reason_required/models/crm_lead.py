@@ -27,5 +27,5 @@ class CrmLead(models.Model):
                 nameless |= lead
         if nameless:
             raise UserError(_(
-                "Ces opportunités ne peuvent pas être perdues sans motif :\n%s",
+                "These opportunities cannot be lost without a reason:\n%s",
                 "\n".join("• %s" % lead.display_name for lead in nameless)))

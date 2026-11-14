@@ -1,0 +1,158 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_barcode_generator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 15:56+0000\n"
+"PO-Revision-Date: 2026-11-14 15:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields.selection,name:oski_barcode_generator.selection__oski_barcode_generator__scope__empty
+msgid "All products without a barcode"
+msgstr ""
+
+#. module: oski_barcode_generator
+#. odoo-python
+#: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+msgid "An EAN-13 code never starts with zero."
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__generated_count
+msgid "Assigned Codes"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__limit
+msgid "At Most"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model,name:oski_barcode_generator.model_oski_barcode_generator
+msgid "Barcode Generation"
+msgstr ""
+
+#. module: oski_barcode_generator
+#. odoo-python
+#: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+msgid "Barcoded Products"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model_terms:ir.ui.view,arch_db:oski_barcode_generator.view_oski_barcode_generator_form
+msgid "Discard"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model_terms:ir.ui.view,arch_db:oski_barcode_generator.view_oski_barcode_generator_form
+msgid "Generate"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.actions.act_window,name:oski_barcode_generator.action_oski_barcode_generator model:ir.actions.act_window,name:oski_barcode_generator.action_oski_barcode_generator_products model:ir.actions.act_window,name:oski_barcode_generator.action_oski_barcode_generator_variants model_terms:ir.ui.view,arch_db:oski_barcode_generator.view_oski_barcode_generator_form
+msgid "Generate Barcodes"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,help:oski_barcode_generator.field_oski_barcode_generator__prefix
+msgid "Leading digits shared by all the generated codes. The 20-29 range is reserved for internal use."
+msgstr ""
+
+#. module: oski_barcode_generator
+#. odoo-python
+#: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+msgid "Nothing to do: all the targeted products already have a barcode."
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__prefix
+msgid "Prefix"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__candidate_count
+msgid "Products Concerned"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model_terms:ir.ui.view,arch_db:oski_barcode_generator.view_oski_barcode_generator_form
+msgid "Products that already have a barcode are never touched: overwriting a code would break the labels already printed and the scanners that read them."
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,help:oski_barcode_generator.field_oski_barcode_generator__limit
+msgid "Safeguard: maximum number of codes assigned in one go."
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields,field_description:oski_barcode_generator.field_oski_barcode_generator__scope
+msgid "Scope"
+msgstr ""
+
+#. module: oski_barcode_generator
+#: model:ir.model.fields.selection,name:oski_barcode_generator.selection__oski_barcode_generator__scope__selected
+msgid "Selection only"
+msgstr ""
+
+#. module: oski_barcode_generator
+#. odoo-python
+#: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+msgid "The prefix can only contain digits."
+msgstr ""
+
+#. module: oski_barcode_generator
+#. odoo-python
+#: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+msgid "The prefix must be 1 to 7 digits long; beyond that, there would not be enough room left to number the products."
+msgstr ""
+
+#. module: oski_barcode_generator
+#. odoo-python
+#: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+msgid "The range of prefix %(prefix)s is exhausted: no free number is left in it. Choose another prefix."
+msgstr ""
+
+#. module: oski_barcode_generator
+#. odoo-python
+#: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+msgid "The “At Most” safeguard must be positive."
+msgstr ""

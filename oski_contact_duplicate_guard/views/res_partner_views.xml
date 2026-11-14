@@ -9,7 +9,7 @@
                 <div class="alert alert-warning m-0" role="alert"
                      invisible="not oski_duplicate_id">
                     <i class="fa fa-exclamation-triangle me-1"/>
-                    Doublon possible :
+                    Possible duplicate:
                     <field name="oski_duplicate_id" readonly="1" nolabel="1"
                            class="oe_inline" options="{'no_open': False}"/>
                 </div>

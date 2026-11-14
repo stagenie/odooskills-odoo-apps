@@ -22,15 +22,15 @@ class IrAttachment(models.Model):
         boîte de dialogue si.
         """
         if not records:
-            raise UserError(_("Aucune fiche sélectionnée."))
+            raise UserError(_("No record selected."))
         if len(records) > MAX_RECORDS:
             raise UserError(_(
-                "Le téléchargement groupé s'arrête à %(max)s fiches ; "
-                "%(count)s sont sélectionnées.",
+                "Bulk download stops at %(max)s records; %(count)s "
+                "are selected.",
                 max=MAX_RECORDS, count=len(records)))
         if not self._oski_zip_attachments(records):
             raise UserError(_(
-                "Ces fiches ne portent aucune pièce jointe téléchargeable."))
+                "These records carry no downloadable attachment."))
         return {
             "type": "ir.actions.act_url",
             "target": "download",
@@ -66,13 +66,13 @@ class IrAttachment(models.Model):
         attachments = self._oski_zip_attachments(records)
         if not attachments:
             raise UserError(_(
-                "Ces fiches ne portent aucune pièce jointe téléchargeable."))
+                "These records carry no downloadable attachment."))
         limit = self._oski_zip_size_limit()
         total = sum(attachments.mapped("file_size"))
         if limit and total > limit:
             raise UserError(_(
-                "L'archive pèserait %(size)s Mo, au-delà de la limite de "
-                "%(limit)s Mo. Réduisez la sélection.",
+                "The archive would weigh %(size)s MB, above the "
+                "%(limit)s MB limit. Reduce the selection.",
                 size=round(total / (1024 * 1024)),
                 limit=round(limit / (1024 * 1024))))
 
@@ -90,7 +90,7 @@ class IrAttachment(models.Model):
                     folder = self._oski_zip_safe(
                         record.display_name if record else str(attachment.res_id))
                 name = self._oski_zip_unique(
-                    folder, self._oski_zip_safe(attachment.name or "piece"), used)
+                    folder, self._oski_zip_safe(attachment.name or "file"), used)
                 archive.writestr(name, content)
         return self._oski_zip_name(records), buffer.getvalue()
 
@@ -113,7 +113,8 @@ class IrAttachment(models.Model):
             return "%s - %s.zip" % (
                 self._oski_zip_safe(label),
                 self._oski_zip_safe(records.display_name or str(records.id)))
-        return "%s - %s fiches.zip" % (self._oski_zip_safe(label), len(records))
+        return self.env._("%(model)s - %(count)s records.zip",
+                          model=self._oski_zip_safe(label), count=len(records))
 
     @api.model
     def _oski_zip_safe(self, name):
@@ -123,7 +124,7 @@ class IrAttachment(models.Model):
         dossier chez qui décompresse l'archive.
         """
         cleaned = UNSAFE.sub("_", (name or "").strip()).lstrip(". ")
-        return cleaned[:120] or "piece"
+        return cleaned[:120] or "file"
 
     @api.model
     def _oski_zip_unique(self, folder, name, used):

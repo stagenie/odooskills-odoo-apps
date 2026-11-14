@@ -12,10 +12,10 @@ class CrmLostReason(models.Model):
     _inherit = "crm.lost.reason"
 
     oski_lost_revenue = fields.Monetary(
-        string="Revenu perdu", compute="_compute_oski_lost",
+        string="Lost Revenue", compute="_compute_oski_lost",
         currency_field="oski_currency_id")
     oski_last_lost_on = fields.Date(
-        string="Dernière perte", compute="_compute_oski_lost")
+        string="Last Lost On", compute="_compute_oski_lost")
     oski_currency_id = fields.Many2one(
         "res.currency", compute="_compute_oski_currency")
 
@@ -41,7 +41,7 @@ class CrmLostReason(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Opportunités perdues — %s", self.name),
+            "name": _("Lost Opportunities — %s", self.name),
             "res_model": "crm.lead",
             "view_mode": "list,form",
             "domain": [("lost_reason_id", "=", self.id)],

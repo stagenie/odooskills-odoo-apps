@@ -1,0 +1,249 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 15:54+0000\n"
+"PO-Revision-Date: 2026-11-14 15:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "%(count)s attachment(s) deleted, %(size)s freed."
+msgstr "%(count)s pièce(s) supprimée(s), %(size)s libérés."
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "%(kinds)s, older than %(days)s days"
+msgstr "%(kinds)s, plus de %(days)s jours"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model,name:oski_attachment_cleaner.model_ir_attachment
+msgid "Attachment"
+msgstr "Pièce jointe"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0 model:ir.actions.act_window,name:oski_attachment_cleaner.oski_attachment_cleaner_action model:ir.model,name:oski_attachment_cleaner.model_oski_attachment_cleaner model:ir.ui.menu,name:oski_attachment_cleaner.oski_attachment_cleaner_menu model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "Attachment Cleanup"
+msgstr "Nettoyage des pièces jointes"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model,name:oski_attachment_cleaner.model_oski_attachment_purge
+msgid "Attachment Purge"
+msgstr "Purge de pièces jointes"
+
+#. module: oski_attachment_cleaner
+#: model:ir.actions.act_window,name:oski_attachment_cleaner.oski_attachment_purge_action model:ir.ui.menu,name:oski_attachment_cleaner.oski_attachment_purge_menu
+msgid "Attachment Purges"
+msgstr "Purges de pièces jointes"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__detail
+msgid "Attachments"
+msgstr "Pièces"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__user_id
+msgid "By"
+msgstr "Par"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "Close"
+msgstr "Fermer"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__create_uid model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__create_date model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__criteria
+msgid "Criteria"
+msgstr "Critères"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__attachment_count model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_purge_view_form
+msgid "Deleted Attachments"
+msgstr "Pièces supprimées"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__display_name model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.actions.act_window,help:oski_attachment_cleaner.oski_attachment_purge_action
+msgid "Every purge leaves its trail here: who, when, how many, on which criteria."
+msgstr "Chaque purge laisse ici sa trace : qui, quand, combien, sur quels critères."
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__freed_bytes model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_purge_view_list
+msgid "Freed Bytes"
+msgstr "Octets libérés"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__id model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__write_uid model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__write_date model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__min_age_days
+msgid "Minimum Age (Days)"
+msgstr "Âge minimum (jours)"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,help:oski_attachment_cleaner.field_oski_attachment_cleaner__min_age_days
+msgid "More recent attachments are never offered: an upload in progress does not have its record yet."
+msgstr "Les pièces plus récentes ne sont jamais proposées : un envoi en cours n'a pas encore son enregistrement."
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.actions.act_window,help:oski_attachment_cleaner.oski_attachment_purge_action
+msgid "No purge yet"
+msgstr "Aucune purge"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "Nothing left to purge: the scan is already outdated."
+msgstr "Plus rien à purger : le relevé est déjà obsolète."
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__include_orphans model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__orphan_count
+msgid "Orphans"
+msgstr "Orphelines"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "Purge"
+msgstr "Purger"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_purge_view_form
+msgid "Purge Entry"
+msgstr "Purge"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_purge__purged_on
+msgid "Purged On"
+msgstr "Purgée le"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_purge_view_list
+msgid "Purges"
+msgstr "Purges"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__duplicate_count model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__include_duplicates
+msgid "Redundant Copies"
+msgstr "Copies redondantes"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "Run the scan first: nothing is deleted blindly."
+msgstr "Faites d'abord le relevé : rien n'est supprimé à l'aveugle."
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "Scan"
+msgstr "Relever"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__scanned
+msgid "Scan Done"
+msgstr "Relevé fait"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__candidate_count model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__candidate_preview model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "Selected Attachments"
+msgstr "Pièces retenues"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__candidate_bytes model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__candidate_size
+msgid "Selected Size"
+msgstr "Poids retenu"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "The minimum age cannot be negative."
+msgstr "L'âge minimum ne peut pas être négatif."
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "The scan deletes nothing. Read it before purging."
+msgstr "Le relevé ne supprime rien. Il faut le lire avant de purger."
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "These attachments will be permanently deleted. Continue?"
+msgstr "Ces pièces jointes seront supprimées définitivement. Continuer ?"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_purge_view_list
+msgid "Total"
+msgstr "Total"
+
+#. module: oski_attachment_cleaner
+#: model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__store_bytes model:ir.model.fields,field_description:oski_attachment_cleaner.field_oski_attachment_cleaner__store_size
+msgid "Total Size"
+msgstr "Poids total"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "What Was Found"
+msgstr "Ce qu'on a trouvé"
+
+#. module: oski_attachment_cleaner
+#: model_terms:ir.ui.view,arch_db:oski_attachment_cleaner.oski_attachment_cleaner_view_form
+msgid "What to Look For"
+msgstr "Ce qu'on cherche"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "no criteria"
+msgstr "aucun critère"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "orphans"
+msgstr "orphelines"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "redundant copies"
+msgstr "copies redondantes"
+
+#. module: oski_attachment_cleaner
+#. odoo-python
+#: code:addons/oski_attachment_cleaner/wizards/oski_attachment_cleaner.py:0
+msgid "… and %s more."
+msgstr "… et %s autres."

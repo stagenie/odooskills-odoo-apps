@@ -14,7 +14,7 @@
             <!-- Champ booléen requis pour la decoration, masqué en colonne -->
             <xpath expr="//field[@name='name']" position="after">
                 <field name="oski_is_idle" column_invisible="1"/>
-                <field name="oski_idle_days" string="Jours d'inactivité" optional="show"/>
+                <field name="oski_idle_days" string="Idle Days" optional="show"/>
             </xpath>
         </field>
     </record>
@@ -29,8 +29,8 @@
                 <field name="oski_is_idle" invisible="1"/>
                 <field name="oski_idle_days" invisible="1"/>
                 <span class="badge text-bg-warning ms-2" invisible="not oski_is_idle"
-                      title="Cette piste n'a connu aucun mouvement depuis le seuil configuré.">
-                    Dormante depuis <field name="oski_idle_days" class="oe_inline"/> j
+                      title="This lead has not moved for longer than the configured threshold.">
+                    Idle for <field name="oski_idle_days" class="oe_inline"/> days
                 </span>
             </xpath>
         </field>
@@ -45,9 +45,9 @@
             <!-- v18 : le filtre « filter_rotting » de v19 n'existe pas ;
                  on ancre après « Open Opportunities » (open_opportunities). -->
             <xpath expr="//filter[@name='open_opportunities']" position="after">
-                <filter string="Dormantes" name="oski_filter_idle"
+                <filter string="Idle" name="oski_filter_idle"
                         domain="[('oski_is_idle', '=', True)]"
-                        help="Pistes et opportunités sans mouvement depuis le seuil configuré"/>
+                        help="Leads and opportunities that have not moved since the configured threshold"/>
             </xpath>
         </field>
     </record>

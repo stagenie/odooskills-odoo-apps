@@ -18,7 +18,7 @@
         <field name="name">ir.model.list.oski.zip</field>
         <field name="model">ir.model</field>
         <field name="arch" type="xml">
-            <list string="Téléchargement groupé" create="false" delete="false"
+            <list string="Bulk Download" create="false" delete="false"
                   editable="bottom">
                 <field name="name"/>
                 <field name="model"/>
@@ -31,17 +31,17 @@
         <field name="name">ir.model.search.oski.zip</field>
         <field name="model">ir.model</field>
         <field name="arch" type="xml">
-            <search string="Modèles">
+            <search string="Models">
                 <field name="name"/>
                 <field name="model"/>
-                <filter name="enabled" string="Téléchargement actif"
+                <filter name="enabled" string="Download Enabled"
                         domain="[('oski_zip_enabled', '=', True)]"/>
             </search>
         </field>
     </record>
 
     <record id="action_oski_zip_models" model="ir.actions.act_window">
-        <field name="name">Téléchargement groupé des pièces jointes</field>
+        <field name="name">Bulk Attachment Download</field>
         <field name="res_model">ir.model</field>
         <field name="view_mode">list</field>
         <field name="domain">[('oski_zip_available', '=', True)]</field>
@@ -49,17 +49,15 @@
         <field name="view_id" ref="view_oski_zip_model_list"/>
         <field name="search_view_id" ref="view_oski_zip_model_search"/>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Choisir les modèles concernés</p>
+            <p class="o_view_nocontent_smiling_face">Choose the models</p>
             <p>
-                Cocher un modèle ajoute l'entrée « Télécharger les pièces jointes
-                (ZIP) » au menu d'actions de ses fiches et de ses listes.
-                Décocher la retire.
+                Ticking a model adds the “Download attachments (ZIP)” entry to the Actions menu of its records and lists. Unticking removes it.
             </p>
         </field>
     </record>
 
     <menuitem id="menu_oski_zip_models"
-              name="Téléchargement groupé (ZIP)"
+              name="Bulk Download (ZIP)"
               parent="base.next_id_9"
               action="action_oski_zip_models"
               sequence="45"/>

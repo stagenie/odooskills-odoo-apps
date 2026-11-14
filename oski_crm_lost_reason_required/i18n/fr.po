@@ -1,0 +1,126 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 15:56+0000\n"
+"PO-Revision-Date: 2026-11-14 15:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_crm_lost_reason_required
+#. odoo-python
+#: code:addons/oski_crm_lost_reason_required/wizards/crm_lead_lost.py:0
+msgid "A few words of context are expected on top of the reason: this is what whoever takes over this customer in a year will read."
+msgstr "Quelques mots de contexte sont attendus en plus du motif : c'est ce que relira celui qui reprendra ce client dans un an."
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,help:oski_crm_lost_reason_required.field_res_company__oski_lost_feedback_required model:ir.model.fields,help:oski_crm_lost_reason_required.field_res_config_settings__oski_lost_feedback_required
+msgid "Also requires a few words of context, beyond the reason picked from the list."
+msgstr "Exige en plus quelques mots de contexte, au-delà du motif choisi dans la liste."
+
+#. module: oski_crm_lost_reason_required
+#: model_terms:ir.ui.view,arch_db:oski_crm_lost_reason_required.res_config_settings_view_form_oski_lost
+msgid "Also requires a few words of context: this is what whoever takes over this customer in a year will read."
+msgstr "Exige en plus quelques mots de contexte : c'est ce que relira celui qui reprendra ce client dans un an."
+
+#. module: oski_crm_lost_reason_required
+#: model_terms:ir.ui.view,arch_db:oski_crm_lost_reason_required.res_config_settings_view_form_oski_lost
+msgid "An opportunity can no longer be lost without saying why — from the screen as well as from an import or a server action."
+msgstr "Une opportunité ne peut plus être perdue sans dire pourquoi — depuis l'écran comme depuis un import ou une action serveur."
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model,name:oski_crm_lost_reason_required.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model,name:oski_crm_lost_reason_required.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,help:oski_crm_lost_reason_required.field_res_company__oski_lost_reason_required model:ir.model.fields,help:oski_crm_lost_reason_required.field_res_config_settings__oski_lost_reason_required
+msgid "Forbids losing an opportunity without saying why."
+msgstr "Interdit de perdre une opportunité sans dire pourquoi."
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model,name:oski_crm_lost_reason_required.model_crm_lead_lost
+msgid "Get Lost Reason"
+msgstr "Obtenir le motif de perte"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_crm_lost_reason__oski_last_lost_on
+msgid "Last Lost On"
+msgstr "Dernière perte"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model,name:oski_crm_lost_reason_required.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Piste/opportunité"
+
+#. module: oski_crm_lost_reason_required
+#. odoo-python
+#: code:addons/oski_crm_lost_reason_required/models/crm_lost_reason.py:0
+msgid "Lost Opportunities — %s"
+msgstr "Opportunités perdues — %s"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_crm_lost_reason__oski_lost_revenue model_terms:ir.ui.view,arch_db:oski_crm_lost_reason_required.crm_lost_reason_view_list_oski
+msgid "Lost Revenue"
+msgstr "Revenu perdu"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_res_company__oski_lost_feedback_required model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_res_config_settings__oski_lost_feedback_required model_terms:ir.ui.view,arch_db:oski_crm_lost_reason_required.res_config_settings_view_form_oski_lost
+msgid "Mandatory Closing Note"
+msgstr "Note de clôture obligatoire"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_res_company__oski_lost_reason_required model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_res_config_settings__oski_lost_reason_required model_terms:ir.ui.view,arch_db:oski_crm_lost_reason_required.res_config_settings_view_form_oski_lost
+msgid "Mandatory Lost Reason"
+msgstr "Motif de perte obligatoire"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_crm_lead_lost__oski_feedback_required
+msgid "Note Required"
+msgstr "Note obligatoire"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model,name:oski_crm_lost_reason_required.model_crm_lost_reason
+msgid "Opp. Lost Reason"
+msgstr "Motif de la perte d'opportunité"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_crm_lost_reason__oski_currency_id
+msgid "Oski Currency"
+msgstr "Oski Currency"
+
+#. module: oski_crm_lost_reason_required
+#: model:ir.model.fields,field_description:oski_crm_lost_reason_required.field_crm_lead_lost__oski_reason_required
+msgid "Reason Required"
+msgstr "Motif obligatoire"
+
+#. module: oski_crm_lost_reason_required
+#. odoo-python
+#: code:addons/oski_crm_lost_reason_required/models/crm_lead.py:0
+msgid ""
+"These opportunities cannot be lost without a reason:\n"
+"%s"
+msgstr ""
+"Ces opportunités ne peuvent pas être perdues sans motif :\n"
+"%s"
+
+#. module: oski_crm_lost_reason_required
+#: model_terms:ir.ui.view,arch_db:oski_crm_lost_reason_required.crm_lost_reason_view_list_oski
+msgid "View"
+msgstr "Voir"
+
+#. module: oski_crm_lost_reason_required
+#: model_terms:ir.ui.view,arch_db:oski_crm_lost_reason_required.crm_lead_lost_view_form_oski
+msgid "What the customer answered, and what it would have taken to win."
+msgstr "Ce que le client a répondu, et ce qu'il aurait fallu pour l'emporter."

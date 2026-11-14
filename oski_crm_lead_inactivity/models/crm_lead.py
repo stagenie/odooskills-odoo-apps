@@ -6,17 +6,17 @@ class CrmLead(models.Model):
     _inherit = "crm.lead"
 
     oski_idle_days = fields.Integer(
-        string="Jours d'inactivité",
+        string="Idle Days",
         compute="_compute_oski_idle",
-        help="Nombre de jours écoulés depuis le dernier mouvement de la piste "
-        "(dernier changement d'étape, ou création à défaut).",
+        help="Number of days since the lead last moved (last stage change, or "
+        "creation otherwise).",
     )
     oski_is_idle = fields.Boolean(
-        string="Dormante",
+        string="Is Idle",
         compute="_compute_oski_idle",
         search="_search_oski_is_idle",
-        help="Piste active, non gagnée et non perdue, immobile depuis au moins "
-        "le seuil d'inactivité configuré dans les Réglages CRM.",
+        help="Active lead, neither won nor lost, that has not moved for at "
+        "least the idle threshold set in the CRM Settings.",
     )
 
     @api.depends("date_last_stage_update", "create_date", "probability", "active")
@@ -70,7 +70,7 @@ class CrmLead(models.Model):
             want_idle = truthy
             negate = operator == "not in"
         else:
-            raise ValueError("Opérateur non supporté : %s" % operator)
+            raise ValueError("Unsupported operator: %s" % operator)
 
         if negate:
             want_idle = not want_idle
