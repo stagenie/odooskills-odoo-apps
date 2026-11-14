@@ -1,0 +1,42 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 19:40+0000\n"
+"PO-Revision-Date: 2026-11-14 19:40+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_menu_visibility
+#: model:ir.model.fields,field_description:oski_menu_visibility.field_res_users__oski_hidden_menu_ids model_terms:ir.ui.view,arch_db:oski_menu_visibility.view_users_form_oski_hidden_menus
+msgid "Hidden Menus"
+msgstr "Menus masqués"
+
+#. module: oski_menu_visibility
+#: model:ir.model,name:oski_menu_visibility.model_ir_ui_menu
+msgid "Menu"
+msgstr "Menu"
+
+#. module: oski_menu_visibility
+#: model:ir.model.fields,help:oski_menu_visibility.field_res_users__oski_hidden_menu_ids
+msgid "Menus removed from this user's screen. Hiding a menu also hides everything it contains."
+msgstr "Menus retirés de l'écran de cet utilisateur. Masquer un menu masque aussi tout ce qu'il contient."
+
+#. module: oski_menu_visibility
+#: model_terms:ir.ui.view,arch_db:oski_menu_visibility.view_users_form_oski_hidden_menus
+msgid "These menus disappear from this user's screen, and from theirs only. Hiding a menu also hides everything it contains. This setting tidies the screen; it does not replace access rights."
+msgstr ""
+"Ces menus disparaissent de l'écran de cet utilisateur, et de lui seul.\n"
+"                        Masquer un menu masque aussi tout ce qu'il contient.\n"
+"                        Ce réglage range l'écran ; il ne remplace pas des droits d'accès."
+
+#. module: oski_menu_visibility
+#: model:ir.model,name:oski_menu_visibility.model_res_users
+msgid "User"
+msgstr "Utilisateur"

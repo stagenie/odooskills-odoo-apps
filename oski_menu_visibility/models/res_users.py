@@ -7,9 +7,9 @@ class ResUsers(models.Model):
     oski_hidden_menu_ids = fields.Many2many(
         "ir.ui.menu",
         "oski_user_hidden_menu_rel", "user_id", "menu_id",
-        string="Menus masqués",
-        help="Menus retirés de l'écran de cet utilisateur. Masquer un menu masque "
-             "aussi tout ce qu'il contient.",
+        string="Hidden Menus",
+        help="Menus removed from this user's screen. Hiding a menu also hides "
+             "everything it contains.",
     )
 
     def _oski_invalidate_menu_cache(self):

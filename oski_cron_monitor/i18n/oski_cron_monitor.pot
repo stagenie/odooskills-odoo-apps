@@ -1,0 +1,166 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_cron_monitor
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 19:50+0000\n"
+"PO-Revision-Date: 2026-11-14 19:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_search
+msgid "Day"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__duration
+msgid "Duration (s)"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__error model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_form
+msgid "Error"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields.selection,name:oski_cron_monitor.selection__ir_cron__oski_last_state__failure model:ir.model.fields.selection,name:oski_cron_monitor.selection__oski_cron_run__state__failure
+msgid "Failure"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_search
+msgid "Failures"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_ir_cron__oski_last_duration
+msgid "Last Duration (s)"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_ir_cron__oski_last_state
+msgid "Last Result"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_ir_cron__oski_last_run_id
+msgid "Last Run"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.actions.act_window,help:oski_cron_monitor.oski_cron_run_action
+msgid "No run recorded yet"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__state model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_search
+msgid "Result"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_form
+msgid "Run"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__user_id
+msgid "Run As"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_ir_cron__oski_run_ids model_terms:ir.ui.view,arch_db:oski_cron_monitor.ir_cron_view_form_oski
+msgid "Runs"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model,name:oski_cron_monitor.model_oski_cron_run
+msgid "Scheduled Action Run"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model,name:oski_cron_monitor.model_ir_cron
+msgid "Scheduled Actions"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__cron_id
+msgid "Scheduled Job"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.actions.act_window,name:oski_cron_monitor.oski_cron_run_action model:ir.ui.menu,name:oski_cron_monitor.oski_cron_run_menu model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_list model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_search
+msgid "Scheduled Runs"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.actions.act_window,help:oski_cron_monitor.oski_cron_run_action
+msgid "Scheduled actions record every run here, successful or not."
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__started_at
+msgid "Started On"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields.selection,name:oski_cron_monitor.selection__ir_cron__oski_last_state__success model:ir.model.fields.selection,name:oski_cron_monitor.selection__oski_cron_run__state__success
+msgid "Success"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_search
+msgid "Successes"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model:ir.model.fields,field_description:oski_cron_monitor.field_oski_cron_run__cron_name model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_search
+msgid "Task"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_search
+msgid "Today"
+msgstr ""
+
+#. module: oski_cron_monitor
+#: model_terms:ir.ui.view,arch_db:oski_cron_monitor.oski_cron_run_view_list
+msgid "Total Duration"
+msgstr ""

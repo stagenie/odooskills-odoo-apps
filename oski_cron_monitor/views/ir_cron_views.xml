@@ -11,7 +11,7 @@
                 <field name="oski_last_duration" readonly="1"/>
             </field>
             <xpath expr="//notebook" position="inside">
-                <page name="oski_runs" string="Exécutions">
+                <page name="oski_runs" string="Runs">
                     <field name="oski_run_ids" readonly="1">
                         <list decoration-danger="state == 'failure'">
                             <field name="started_at"/>
