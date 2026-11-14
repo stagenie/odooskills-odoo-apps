@@ -241,7 +241,7 @@ class TestAppointment(TransactionCase):
         self.assertEqual(event.appointment_partner_id, client)
         mail = self.env["mail.mail"].search([
             ("model", "=", "calendar.event"), ("res_id", "=", event.id),
-            ("subject", "like", "Confirmation de votre rendez-vous"),
+            ("subject", "like", "Appointment confirmation"),
         ])
         self.assertEqual(len(mail), 1)
         # le modèle convertit l'adresse connue en destinataire partenaire
@@ -257,7 +257,7 @@ class TestAppointment(TransactionCase):
         event = self._book(t, slot)
         mail = self.env["mail.mail"].search([
             ("model", "=", "calendar.event"), ("res_id", "=", event.id),
-            ("subject", "like", "Confirmation de votre rendez-vous"),
+            ("subject", "like", "Appointment confirmation"),
         ])
         self.assertIn("09:00", str(mail.body_html))
         self.assertNotIn("08:00", str(mail.body_html))
@@ -271,6 +271,23 @@ class TestAppointment(TransactionCase):
         body = str(template._render_field("body_html", event.ids)[event.id])
         self.assertIn("18:00", body)
         self.assertIn("Asia/Tokyo", body)
+
+    def test_booking_with_location_sends_calendar_invitation(self):
+        # Les invitations de calendar lisent appointment_type_id.location_id :
+        # une réservation avec un lieu plantait au rendu (AttributeError).
+        t = self._make_type(duration=1.0, n_staff=1, location="Room 2")
+        t.staff_user_ids.email = "staff.lieu@example.com"
+        client = self.env["res.partner"].create({"name": "Client Lieu", "email": "lieu@example.com"})
+        slot = self._get_first_slot(t, self._future_date(7))
+        self.env["appointment.booking.wizard"].create({
+            "appointment_type_id": t.id, "partner_id": client.id, "slot_start": slot,
+        }).action_confirm()
+        event = self.env["calendar.event"].search([("appointment_type_id", "=", t.id)])
+        self.assertEqual(event.location, "Room 2")
+        self.assertFalse(t.location_id)
+        invitation = self.env.ref("calendar.calendar_template_meeting_invitation")
+        body = invitation._render_field("body_html", event.attendee_ids.ids)
+        self.assertTrue(all("Room 2" in str(b) for b in body.values()))
 
     def test_type_multi_company_rule(self):
         other = self.env["res.company"].create({"name": "Autre société RDV"})

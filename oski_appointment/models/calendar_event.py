@@ -5,22 +5,22 @@ class CalendarEvent(models.Model):
     _inherit = "calendar.event"
 
     appointment_type_id = fields.Many2one(
-        "appointment.type", string="Type de RDV", index=True
+        "appointment.type", string="Appointment Type", index=True
     )
     appointment_partner_id = fields.Many2one(
-        "res.partner", string="Client du RDV", index=True,
-        help="Client qui a pris le rendez-vous (destinataire de la confirmation).",
+        "res.partner", string="Appointment Customer", index=True,
+        help="Customer who booked the appointment (recipient of the confirmation).",
     )
     appointment_tz = fields.Char(
-        string="Fuseau du client",
-        help="Fuseau dans lequel le client a choisi son créneau (dates des courriels).",
+        string="Customer Time Zone",
+        help="Time zone in which the customer chose the time slot (dates shown in emails).",
     )
     appointment_state = fields.Selection(
         [
-            ("booked", "Réservé"),
-            ("done", "Honoré"),
-            ("cancelled", "Annulé"),
-            ("no_show", "Absent"),
+            ("booked", "Booked"),
+            ("done", "Attended"),
+            ("cancelled", "Cancelled"),
+            ("no_show", "No Show"),
         ],
-        string="État du RDV",
+        string="Appointment Status",
     )
