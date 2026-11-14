@@ -1,0 +1,513 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 07:07+0000\n"
+"PO-Revision-Date: 2026-11-14 07:07+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_team__alias_defaults
+msgid "A Python dictionary that will be evaluated to provide default values when creating new records for this alias."
+msgstr "Un dictionnaire Python qui sera interprété pour fournir les valeurs par défaut lors de la création de nouveaux enregistrements pour cet alias."
+
+#. module: oski_helpdesk
+#: model:ir.model.constraint,message:oski_helpdesk.constraint_helpdesk_tag_unique_name
+msgid "A tag with the same name already exists."
+msgstr "Une étiquette de ce nom existe déjà."
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Indicateur d’exception d’activité"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_state
+msgid "Activity State"
+msgstr "Statut de l'activité"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône de type d'activité"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__alias_id
+msgid "Alias"
+msgstr "Alias"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__alias_domain_id
+msgid "Alias Domain"
+msgstr "Domaine alias"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__alias_domain
+msgid "Alias Domain Name"
+msgstr "Nom d'alias de domaine"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__alias_name
+msgid "Alias Name"
+msgstr "Nom de l'alias"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__user_id
+msgid "Assigned to"
+msgstr "Assigné à"
+
+#. module: oski_helpdesk
+#: model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_search
+msgid "Assignee"
+msgstr "Assigné"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__assignment_method
+msgid "Assignment Method"
+msgstr "Méthode d'assignation"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_team__assignment_method__balanced
+msgid "Balanced (by workload)"
+msgstr "Équilibrée (par charge)"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_ticket__kanban_state__blocked
+msgid "Blocked"
+msgstr "Bloqué"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__is_close
+msgid "Closing Stage"
+msgstr "Étape terminale"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__color model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__color
+msgid "Color"
+msgstr "Couleur"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__company_id model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oski_helpdesk
+#: model:ir.ui.menu,name:oski_helpdesk.menu_helpdesk_config
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__create_uid model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__create_uid model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__create_uid model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__create_date model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__create_date model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__create_date model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__partner_id
+msgid "Customer"
+msgstr "Client"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__alias_defaults
+msgid "Default Values"
+msgstr "Valeurs par défaut"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__description model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_form
+msgid "Description"
+msgstr "Description"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__display_name model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__display_name model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__display_name model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__partner_email
+msgid "Email"
+msgstr "Courriel"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__alias_email
+msgid "Email Alias"
+msgstr "Alias de messagerie"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_team__alias_domain
+msgid "Email domain e.g. 'example.com' in 'odoo@example.com'"
+msgstr "Domaine de l'e-mail e.g. 'example.com' dans 'odoo@example.com'"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__fold
+msgid "Folded in Kanban"
+msgstr "Repliée"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome par ex. fa-tasks"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: oski_helpdesk
+#: model:ir.module.category,name:oski_helpdesk.module_category_helpdesk model:ir.ui.menu,name:oski_helpdesk.menu_helpdesk_root model:res.groups.privilege,name:oski_helpdesk.privilege_helpdesk
+msgid "Helpdesk"
+msgstr "Assistance"
+
+#. module: oski_helpdesk
+#: model:res.groups,name:oski_helpdesk.group_helpdesk_manager
+msgid "Helpdesk / Manager"
+msgstr "Assistance / Responsable"
+
+#. module: oski_helpdesk
+#: model:res.groups,name:oski_helpdesk.group_helpdesk_user
+msgid "Helpdesk / User"
+msgstr "Assistance / Utilisateur"
+
+#. module: oski_helpdesk
+#: model:ir.model,name:oski_helpdesk.model_helpdesk_stage
+msgid "Helpdesk Stage"
+msgstr "Étape d'assistance"
+
+#. module: oski_helpdesk
+#: model:ir.model,name:oski_helpdesk.model_helpdesk_tag
+msgid "Helpdesk Tag"
+msgstr "Étiquette d'assistance"
+
+#. module: oski_helpdesk
+#: model:ir.model,name:oski_helpdesk.model_helpdesk_team
+msgid "Helpdesk Team"
+msgstr "Équipe d'assistance"
+
+#. module: oski_helpdesk
+#: model:ir.model,name:oski_helpdesk.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
+msgstr "Ticket d'assistance"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_ticket__priority__2
+msgid "High"
+msgstr "Haute"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__id model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__id model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__id model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour indiquer une activité d'exception."
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur de livraison."
+
+#. module: oski_helpdesk
+#: model:helpdesk.stage,name:oski_helpdesk.stage_in_progress model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_ticket__kanban_state__normal
+msgid "In Progress"
+msgstr "En cours"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__write_uid model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__write_uid model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__write_uid model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__write_date model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__write_date model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__write_date model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_ticket__priority__0
+msgid "Low"
+msgstr "Basse"
+
+#. module: oski_helpdesk
+#: model:ir.module.category,description:oski_helpdesk.module_category_helpdesk
+msgid "Manage helpdesk tickets."
+msgstr "Gestion des tickets d'assistance."
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_team__assignment_method__manual
+msgid "Manual"
+msgstr "Manuelle"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__member_ids model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_team_view_form
+msgid "Members"
+msgstr "Membres"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Échéance de mon activité"
+
+#. module: oski_helpdesk
+#: model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_search
+msgid "My Tickets"
+msgstr "Mes tickets"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__name model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_tag__name model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: oski_helpdesk
+#: model:helpdesk.stage,name:oski_helpdesk.stage_new
+msgid "New"
+msgstr "Nouveau"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'activité à venir"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de l'activité suivante"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'activités à venir"
+
+#. module: oski_helpdesk
+#. odoo-python
+#: code:addons/oski_helpdesk/models/helpdesk_ticket.py:0
+msgid "No Subject"
+msgstr "Sans sujet"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_ticket__priority__1
+msgid "Normal"
+msgstr "Normale"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__number
+msgid "Number"
+msgstr "Numéro"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: oski_helpdesk
+#: model:helpdesk.stage,name:oski_helpdesk.stage_waiting
+msgid "On Hold"
+msgstr "En attente"
+
+#. module: oski_helpdesk
+#: model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_search
+msgid "Open"
+msgstr "Ouverts"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__priority model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_search
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_ticket__kanban_state__done
+msgid "Ready"
+msgstr "Prêt"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_stage__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oski_helpdesk
+#: model:helpdesk.stage,name:oski_helpdesk.stage_done
+msgid "Solved"
+msgstr "Résolu"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__stage_id model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_search
+msgid "Stage"
+msgstr "Étape"
+
+#. module: oski_helpdesk
+#: model:ir.actions.act_window,name:oski_helpdesk.helpdesk_stage_action model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__stage_ids model:ir.ui.menu,name:oski_helpdesk.menu_helpdesk_stages model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_team_view_form
+msgid "Stages"
+msgstr "Étapes"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__kanban_state
+msgid "Status"
+msgstr "État"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__name
+msgid "Subject"
+msgstr "Sujet"
+
+#. module: oski_helpdesk
+#: model:ir.actions.act_window,name:oski_helpdesk.helpdesk_tag_action model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__tag_ids model:ir.ui.menu,name:oski_helpdesk.menu_helpdesk_tags
+msgid "Tags"
+msgstr "Étiquettes"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_ticket__team_id model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_search
+msgid "Team"
+msgstr "Équipe"
+
+#. module: oski_helpdesk
+#: model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_team_view_form
+msgid "Team name"
+msgstr "Nom de l'équipe"
+
+#. module: oski_helpdesk
+#: model:ir.actions.act_window,name:oski_helpdesk.helpdesk_team_action model:ir.ui.menu,name:oski_helpdesk.menu_helpdesk_teams
+msgid "Teams"
+msgstr "Équipes"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_team__alias_name
+msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.odoo.com>"
+msgstr "Le nom de l'alias, par exemple 'carrières' pour récupérer les e-mails de <carrières@example.odoo.com>"
+
+#. module: oski_helpdesk
+#: model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_form
+msgid "Ticket subject"
+msgstr "Sujet du ticket"
+
+#. module: oski_helpdesk
+#: model:ir.actions.act_window,name:oski_helpdesk.helpdesk_ticket_action model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__ticket_count model:ir.ui.menu,name:oski_helpdesk.menu_helpdesk_tickets
+msgid "Tickets"
+msgstr "Tickets"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_stage__is_close
+msgid "Tickets in this stage are considered solved."
+msgstr "Les tickets dans cette étape sont considérés comme résolus."
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,help:oski_helpdesk.field_helpdesk_ticket__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type d'activité d'exception enregistrée."
+
+#. module: oski_helpdesk
+#: model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_ticket_view_search
+msgid "Unassigned"
+msgstr "Non assignés"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields.selection,name:oski_helpdesk.selection__helpdesk_ticket__priority__3
+msgid "Urgent"
+msgstr "Urgente"
+
+#. module: oski_helpdesk
+#: model:ir.model.fields,field_description:oski_helpdesk.field_helpdesk_team__use_alias
+msgid "Use Email Alias"
+msgstr "Activer l'alias email"
+
+#. module: oski_helpdesk
+#: model_terms:ir.ui.view,arch_db:oski_helpdesk.helpdesk_team_view_form
+msgid "e.g. support"
+msgstr "ex. support"

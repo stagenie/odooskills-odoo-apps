@@ -7,20 +7,20 @@
             <form>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" placeholder="Nom de l'équipe"/></h1>
+                        <h1><field name="name" placeholder="Team name"/></h1>
                     </div>
                     <group>
                         <field name="assignment_method"/>
                         <field name="use_alias"/>
                         <field name="alias_name" invisible="not use_alias"
-                               placeholder="ex. support"/>
+                               placeholder="e.g. support"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                     </group>
                     <notebook>
-                        <page name="members" string="Membres">
+                        <page name="members" string="Members">
                             <field name="member_ids"/>
                         </page>
-                        <page name="stages" string="Étapes">
+                        <page name="stages" string="Stages">
                             <field name="stage_ids"/>
                         </page>
                     </notebook>
@@ -41,7 +41,7 @@
     </record>
 
     <record id="helpdesk_team_action" model="ir.actions.act_window">
-        <field name="name">Équipes</field>
+        <field name="name">Teams</field>
         <field name="res_model">helpdesk.team</field>
         <field name="view_mode">list,form</field>
     </record>

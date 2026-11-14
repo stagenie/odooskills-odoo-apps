@@ -4,14 +4,14 @@
         <field name="name">oski.archive.reason.wizard.form</field>
         <field name="model">oski.archive.reason.wizard</field>
         <field name="arch" type="xml">
-            <form string="Motif d'archivage">
+            <form string="Archive Reason">
                 <group>
-                    <field name="reason" placeholder="Pourquoi archiver cet enregistrement ?"/>
+                    <field name="reason" placeholder="Why archive this record?"/>
                 </group>
                 <footer>
-                    <button name="action_confirm" type="object" string="Archiver"
+                    <button name="action_confirm" type="object" string="Archive"
                             class="btn-primary"/>
-                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    <button string="Discard" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>

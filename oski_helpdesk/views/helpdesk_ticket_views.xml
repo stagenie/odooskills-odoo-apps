@@ -59,7 +59,7 @@
                 <sheet>
                     <div class="oe_title">
                         <label for="name"/>
-                        <h1><field name="name" placeholder="Sujet du ticket"/></h1>
+                        <h1><field name="name" placeholder="Ticket subject"/></h1>
                         <field name="number" readonly="1"/>
                     </div>
                     <group>
@@ -96,20 +96,20 @@
                 <field name="number"/>
                 <field name="partner_id"/>
                 <field name="team_id"/>
-                <filter name="my_tickets" string="Mes tickets"
+                <filter name="my_tickets" string="My Tickets"
                         domain="[('user_id', '=', uid)]"/>
-                <filter name="unassigned" string="Non assignés"
+                <filter name="unassigned" string="Unassigned"
                         domain="[('user_id', '=', False)]"/>
-                <filter name="open" string="Ouverts"
+                <filter name="open" string="Open"
                         domain="[('stage_id.is_close', '=', False)]"/>
                 <separator/>
-                <filter name="group_team" string="Équipe"
+                <filter name="group_team" string="Team"
                         context="{'group_by': 'team_id'}"/>
-                <filter name="group_stage" string="Étape"
+                <filter name="group_stage" string="Stage"
                         context="{'group_by': 'stage_id'}"/>
-                <filter name="group_user" string="Assigné"
+                <filter name="group_user" string="Assignee"
                         context="{'group_by': 'user_id'}"/>
-                <filter name="group_priority" string="Priorité"
+                <filter name="group_priority" string="Priority"
                         context="{'group_by': 'priority'}"/>
             </search>
         </field>
