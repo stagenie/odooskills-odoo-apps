@@ -6,6 +6,7 @@ import { useBus } from "@web/core/utils/hooks";
 import { barcodeRpc } from "./barcode_rpc";
 import { BarcodePlugin } from "@barcodes/barcode_plugin";
 import { ScanFeedback } from "./scan_feedback";
+import { _t } from "@web/core/l10n/translation";
 
 export class PickingList extends Component {
     static template = "oski_stock_barcode.PickingList";
@@ -38,7 +39,7 @@ export class PickingList extends Component {
                 picking_type_code: this.props.pickingTypeCode,
             });
         } catch {
-            this.notification.add("Erreur de chargement", { type: 'danger' });
+            this.notification.add(_t("Loading error"), { type: 'danger' });
         }
         this.state.loading = false;
     }
@@ -65,11 +66,11 @@ export class PickingList extends Component {
         });
         if (result.found) {
             ScanFeedback.success();
-            this.notification.add(`${result.picking.name} trouvé`, { type: 'success' });
+            this.notification.add(_t("%s found", result.picking.name), { type: 'success' });
             this.props.onPickingSelected(result.picking.id);
         } else {
             ScanFeedback.error();
-            this.notification.add(`Aucun bon trouvé: ${barcode}`, { type: 'warning' });
+            this.notification.add(_t("No transfer found: %s", barcode), { type: 'warning' });
         }
     }
 
@@ -79,10 +80,10 @@ export class PickingList extends Component {
 
     _stateLabel(state) {
         const labels = {
-            'draft': 'Brouillon',
-            'waiting': 'En attente',
-            'confirmed': 'En attente',
-            'assigned': 'Prêt',
+            'draft': _t("Draft"),
+            'waiting': _t("Waiting"),
+            'confirmed': _t("Waiting"),
+            'assigned': _t("Ready"),
         };
         return labels[state] || state;
     }

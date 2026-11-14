@@ -2,6 +2,7 @@
 
 import { Component, proxy, onMounted, signal, useProps, t } from "@odoo/owl";
 import { barcodeRpc } from "./barcode_rpc";
+import { _t } from "@web/core/l10n/translation";
 
 export class ProductSearch extends Component {
     static template = "oski_stock_barcode.ProductSearch";
@@ -29,7 +30,7 @@ export class ProductSearch extends Component {
     }
 
     get placeholder() {
-        return this.props.placeholder || "Rechercher par nom, réf ou code-barres...";
+        return this.props.placeholder || _t("Search by name, reference or barcode...");
     }
 
     _onInput(ev) {

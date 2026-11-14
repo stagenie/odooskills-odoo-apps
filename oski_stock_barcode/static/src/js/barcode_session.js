@@ -3,6 +3,7 @@
 import { Component, onMounted, proxy, usePlugin, useProps, t } from "@odoo/owl";
 import { NotificationPlugin } from "@web/core/notifications/notification_plugin";
 import { barcodeRpc } from "./barcode_rpc";
+import { _t } from "@web/core/l10n/translation";
 
 export class BarcodeSession extends Component {
     static template = "oski_stock_barcode.BarcodeSession";
@@ -21,7 +22,7 @@ export class BarcodeSession extends Component {
             this.state.lines = res.lines || [];
             this.state.summary = res.summary || {};
         } catch {
-            this.notification.add("Erreur de chargement", { type: 'danger' });
+            this.notification.add(_t("Loading error"), { type: 'danger' });
         }
         this.state.loading = false;
     }

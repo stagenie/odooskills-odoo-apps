@@ -9,6 +9,7 @@ import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
 import { ScanFeedback } from "./scan_feedback";
+import { _t } from "@web/core/l10n/translation";
 
 export class BarcodeDelivery extends Component {
     static template = "oski_stock_barcode.BarcodeDelivery";
@@ -49,7 +50,7 @@ export class BarcodeDelivery extends Component {
         if (!result.found) {
             this.state.lastScan = barcode; this.state.lastScanStatus = 'error';
             ScanFeedback.error();
-            this.notification.add(`Article inconnu: ${barcode}`, { type: 'danger' }); return;
+            this.notification.add(_t("Unknown item: %s", barcode), { type: 'danger' }); return;
         }
         this.state.lastScan = result.name;
         const line = this.state.lines.find(l => l.product_id === result.id);
@@ -59,7 +60,7 @@ export class BarcodeDelivery extends Component {
                 this.state.lastScanStatus = 'error';
                 ScanFeedback.warning();
                 this.notification.add(
-                    `${result.name} — ${line.available_qty < line.demand_qty ? 'stock insuffisant' : 'quantité max atteinte'}`,
+                    (line.available_qty < line.demand_qty ? _t("%s — insufficient stock", result.name) : _t("%s — maximum quantity reached", result.name)),
                     { type: 'warning' }
                 );
                 return;
@@ -71,16 +72,16 @@ export class BarcodeDelivery extends Component {
         } else {
             this.state.lastScanStatus = 'error';
             ScanFeedback.warning();
-            this.notification.add(`${result.name} — pas dans cette livraison`, { type: 'warning' });
+            this.notification.add(_t("%s — not in this delivery", result.name), { type: 'warning' });
         }
     }
 
     _onProductSelected(product) {
         const line = this.state.lines.find(l => l.product_id === product.id);
-        if (!line) { this.notification.add(`${product.name} — pas dans cette livraison`, { type: 'warning' }); return; }
+        if (!line) { this.notification.add(_t("%s — not in this delivery", product.name), { type: 'warning' }); return; }
         const maxQty = Math.min(line.demand_qty, line.available_qty);
         if (line.done_qty >= maxQty) {
-            this.notification.add(`${product.name} — ${line.available_qty < line.demand_qty ? 'stock insuffisant' : 'quantité max'}`, { type: 'warning' });
+            this.notification.add((line.available_qty < line.demand_qty ? _t("%s — insufficient stock", product.name) : _t("%s — maximum quantity", product.name)), { type: 'warning' });
             return;
         }
         line.done_qty += 1;
@@ -92,7 +93,7 @@ export class BarcodeDelivery extends Component {
         if (qty > maxQty) {
             qty = maxQty;
             this.notification.add(
-                `Limité à ${maxQty} (${line.available_qty < line.demand_qty ? 'stock insuffisant' : 'demande atteinte'})`,
+                (line.available_qty < line.demand_qty ? _t("Limited to %s (insufficient stock)", maxQty) : _t("Limited to %s (demand reached)", maxQty)),
                 { type: 'warning' }
             );
         }
@@ -144,9 +145,9 @@ export class BarcodeDelivery extends Component {
             this.notification.add(r.error, { type: 'danger' });
             return;
         }
-        let msg = "Livraison validée !";
+        let msg = _t("Delivery validated!");
         if (r.is_partial && r.backorder_created) {
-            msg += ` Reliquat créé : ${r.backorder_name}`;
+            msg += " " + _t("Backorder created: %s", r.backorder_name);
         }
         this.state.validated = true;
         this.state.validationMessage = msg;

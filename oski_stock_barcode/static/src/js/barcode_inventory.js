@@ -9,6 +9,7 @@ import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
 import { ScanFeedback } from "./scan_feedback";
+import { _t } from "@web/core/l10n/translation";
 
 export class BarcodeInventory extends Component {
     static template = "oski_stock_barcode.BarcodeInventory";
@@ -43,7 +44,7 @@ export class BarcodeInventory extends Component {
         try {
             this.state.locations = await barcodeRpc('/oski_stock_barcode/get_locations', {});
         } catch {
-            this.notification.add("Erreur de chargement des emplacements", { type: 'danger' });
+            this.notification.add(_t("Error while loading locations"), { type: 'danger' });
             this.state.locations = [];
         }
         this.state.loading = false;
@@ -85,7 +86,7 @@ export class BarcodeInventory extends Component {
         );
         if (loc) {
             ScanFeedback.success();
-            this.notification.add(`Emplacement ${loc.complete_name} trouvé`, { type: 'success' });
+            this.notification.add(_t("Location %s found", loc.complete_name), { type: 'success' });
             await this._selectLocation(loc);
             return true;
         }
@@ -107,7 +108,7 @@ export class BarcodeInventory extends Component {
             }
             this.state.items = items;
         } catch (e) {
-            this.notification.add("Erreur de chargement des articles", { type: 'danger' });
+            this.notification.add(_t("Error while loading items"), { type: 'danger' });
             this.state.items = [];
         }
         this.state.loading = false;
@@ -135,7 +136,7 @@ export class BarcodeInventory extends Component {
         if (this.state.screen === 'locations') {
             const found = await this._onBarcodeScanLocation(barcode);
             if (found) return;
-            this.notification.add(`Emplacement inconnu: ${barcode}`, { type: 'warning' });
+            this.notification.add(_t("Unknown location: %s", barcode), { type: 'warning' });
             return;
         }
 
@@ -147,14 +148,14 @@ export class BarcodeInventory extends Component {
             this.state.lastScan = barcode;
             this.state.lastScanStatus = 'error';
             ScanFeedback.error();
-            this.notification.add(`Article inconnu: ${barcode}`, { type: 'danger' });
+            this.notification.add(_t("Unknown item: %s", barcode), { type: 'danger' });
             return;
         }
         if (!result.is_storable) {
             this.state.lastScan = result.name;
             this.state.lastScanStatus = 'error';
             ScanFeedback.warning();
-            this.notification.add(`${result.name} — article non stockable`, { type: 'warning' });
+            this.notification.add(_t("%s — item not tracked in stock", result.name), { type: 'warning' });
             return;
         }
         this.state.lastScan = result.name;
@@ -166,7 +167,7 @@ export class BarcodeInventory extends Component {
     _onProductSelected(product) {
         if (!this.state.selectedLocationId) return;
         if (product.is_storable === false) {
-            this.notification.add(`${product.name} — non stockable`, { type: 'warning' });
+            this.notification.add(_t("%s — not tracked in stock", product.name), { type: 'warning' });
             return;
         }
         this._incrementProduct(product);
@@ -231,7 +232,7 @@ export class BarcodeInventory extends Component {
 
     async _applyLine(item) {
         if (!item.touched) {
-            this.notification.add("Aucune modification sur cette ligne", { type: 'warning' });
+            this.notification.add(_t("No change on this line"), { type: 'warning' });
             return;
         }
         const result = await barcodeRpc('/oski_stock_barcode/apply_inventory', {
@@ -241,7 +242,7 @@ export class BarcodeInventory extends Component {
         if (result.error) {
             this.notification.add(result.error, { type: 'danger' });
         } else {
-            this.notification.add(`${item.product_name} — inventaire appliqué !`, { type: 'success' });
+            this.notification.add(_t("%s — inventory applied!", item.product_name), { type: 'success' });
             item.quantity = item.counted_qty;
             item.touched = false;
         }
@@ -253,7 +254,7 @@ export class BarcodeInventory extends Component {
             counted_qty: i.counted_qty,
         }));
         if (items.length === 0) {
-            this.notification.add("Aucun article modifié", { type: 'warning' });
+            this.notification.add(_t("No item changed"), { type: 'warning' });
             return;
         }
         const result = await barcodeRpc('/oski_stock_barcode/apply_inventory', {
@@ -262,7 +263,7 @@ export class BarcodeInventory extends Component {
         if (result.error) {
             this.notification.add(result.error, { type: 'danger' });
         } else {
-            this.notification.add(`Inventaire appliqué (${items.length} articles) !`, { type: 'success' });
+            this.notification.add(_t("Inventory applied (%s items)!", items.length), { type: 'success' });
             await this._loadQuants();
         }
     }

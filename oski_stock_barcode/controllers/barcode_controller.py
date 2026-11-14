@@ -50,9 +50,9 @@ class AdiStockBarcodeController(http.Controller):
     def _closed_picking_error(self, picking):
         """Message si le bon n'est plus modifiable (double clic, rejeu réseau)."""
         if picking.state == 'done':
-            return f'{picking.name} est déjà validé : aucune modification possible.'
+            return request.env._("%s is already validated: no change possible.", picking.name)
         if picking.state == 'cancel':
-            return f'{picking.name} est annulé : aucune modification possible.'
+            return request.env._("%s is cancelled: no change possible.", picking.name)
         return False
 
     def _move_done_qty(self, move):
@@ -177,7 +177,7 @@ class AdiStockBarcodeController(http.Controller):
     def get_picking_lines(self, picking_id):
         picking = self._get_picking(picking_id)
         if not picking:
-            return {'error': 'Picking introuvable'}
+            return {'error': request.env._("Transfer not found")}
 
         lines = [self._prepare_line_data(m) for m in picking.move_ids]
         return {
@@ -193,22 +193,22 @@ class AdiStockBarcodeController(http.Controller):
     def update_line_qty(self, picking_id, product_id, qty):
         picking = self._get_picking(picking_id)
         if not picking:
-            return {'error': 'Picking introuvable'}
+            return {'error': request.env._("Transfer not found")}
         closed = self._closed_picking_error(picking)
         if closed:
             return {'error': closed}
         try:
             qty = float(qty)
         except (TypeError, ValueError):
-            return {'error': 'Quantité invalide'}
+            return {'error': request.env._("Invalid quantity")}
         if qty < 0:
-            return {'error': 'Quantité négative refusée'}
+            return {'error': request.env._("Negative quantity refused")}
 
         move = picking.move_ids.filtered(
             lambda m: m.product_id.id == product_id
         )
         if not move:
-            return {'error': 'Article non trouvé dans ce picking'}
+            return {'error': request.env._("Item not found in this transfer")}
 
         move = move[0]
 
@@ -217,7 +217,8 @@ class AdiStockBarcodeController(http.Controller):
             available = self._available_for_move(move)
             if move.uom_id.compare(qty, available) > 0:
                 return {
-                    'error': f'Stock insuffisant : {available} disponible(s) pour {move.product_id.display_name}',
+                    'error': request.env._("Insufficient stock: %(available)s available for %(product)s",
+                                            available=available, product=move.product_id.display_name),
                     'available_qty': available,
                 }
 
@@ -245,7 +246,7 @@ class AdiStockBarcodeController(http.Controller):
         """
         picking = self._get_picking(picking_id)
         if not picking:
-            return {'error': 'Picking introuvable'}
+            return {'error': request.env._("Transfer not found")}
         closed = self._closed_picking_error(picking)
         if closed:
             return {'error': closed}
@@ -253,7 +254,7 @@ class AdiStockBarcodeController(http.Controller):
         # Vérifier qu'il y a au moins une quantité saisie
         done = {m.id: self._move_done_qty(m) for m in picking.move_ids}
         if not any(q > 0 for q in done.values()):
-            return {'error': 'Aucune quantité saisie'}
+            return {'error': request.env._("No quantity entered")}
 
         # Contrôle de disponibilité pour les sorties avant validation
         if picking.picking_type_id.code in ('outgoing', 'internal'):
@@ -264,8 +265,9 @@ class AdiStockBarcodeController(http.Controller):
                 available = self._available_for_move(move)
                 if move.uom_id.compare(done_qty, available) > 0:
                     return {
-                        'error': f'Stock insuffisant pour {move.product_id.display_name}: '
-                                 f'{done_qty} demandé(s), {available} disponible(s)',
+                        'error': request.env._(
+                            "Insufficient stock for %(product)s: %(requested)s requested, %(available)s available",
+                            product=move.product_id.display_name, requested=done_qty, available=available),
                     }
 
         # Détecter si la validation est partielle
@@ -300,8 +302,9 @@ class AdiStockBarcodeController(http.Controller):
             return {'error': str(e)}
         if picking.state != 'done':
             # Un assistant (confirmation, SMS…) attend une réponse : rien n'est fait.
-            return {'error': f'{picking.name} demande une confirmation : '
-                             'terminez la validation depuis le bon dans Inventaire.'}
+            return {'error': request.env._(
+                "%s needs a confirmation: finish the validation from the transfer in Inventory.",
+                picking.name)}
 
         self._log_scan('validate', picking=picking)
         if not is_partial:
@@ -380,7 +383,7 @@ class AdiStockBarcodeController(http.Controller):
         """Retourne les infos détaillées d'un produit avec stock par emplacement."""
         product = self._get_record('product.product', product_id)
         if not product:
-            return {'error': 'Article introuvable'}
+            return {'error': request.env._("Item not found")}
 
         # Stock par emplacement interne
         quants = request.env['stock.quant'].search([
@@ -463,9 +466,10 @@ class AdiStockBarcodeController(http.Controller):
         if len(loc) > 1:
             return {
                 'found': False, 'ambiguous': True,
-                'message': f'« {barcode} » désigne plusieurs emplacements '
-                           f'({", ".join(loc.mapped("complete_name"))}) : '
-                           'scannez son code-barres ou choisissez-le dans la liste.',
+                'message': request.env._(
+                    "“%(barcode)s” matches several locations (%(locations)s): "
+                    "scan its barcode or pick it from the list.",
+                    barcode=barcode, locations=", ".join(loc.mapped("complete_name"))),
             }
         return {'found': True, 'id': loc.id, 'name': loc.complete_name}
 
@@ -474,7 +478,7 @@ class AdiStockBarcodeController(http.Controller):
         """Retourne les infos d'un emplacement avec son contenu stock."""
         location = self._get_record('stock.location', location_id)
         if not location:
-            return {'error': 'Emplacement introuvable'}
+            return {'error': request.env._("Location not found")}
 
         quants = request.env['stock.quant'].search([
             ('location_id', '=', location_id),
@@ -586,14 +590,14 @@ class AdiStockBarcodeController(http.Controller):
 
         location = self._get_record('stock.location', location_id)
         if not location or location.usage != 'internal':
-            return {'error': 'Emplacement introuvable'}
+            return {'error': request.env._("Location not found")}
         for item in items:
             try:
                 counted = float(item.get('counted_qty'))
             except (TypeError, ValueError):
-                return {'error': 'Quantité comptée invalide'}
+                return {'error': request.env._("Invalid counted quantity")}
             if counted < 0:
-                return {'error': 'Quantité comptée négative refusée'}
+                return {'error': request.env._("Negative counted quantity refused")}
 
         for item in items:
             quant = Quant.search([
@@ -620,7 +624,7 @@ class AdiStockBarcodeController(http.Controller):
                 _logger.warning("Inventaire barcode failed: %s", e)
                 return {'error': str(e)}
 
-        self._log_scan('inventory', note=f'{applied_count} ligne(s)')
+        self._log_scan('inventory', note=f'{applied_count} line(s)')
         return {'success': True, 'applied_count': applied_count}
 
     # ══════════════════════════════════════════════════════════════
@@ -636,20 +640,20 @@ class AdiStockBarcodeController(http.Controller):
         src = self._get_record('stock.location', src_location_id)
         dest = self._get_record('stock.location', dest_location_id)
         if not src or not dest or src.usage != 'internal' or dest.usage != 'internal':
-            return {'error': 'Emplacement introuvable'}
+            return {'error': request.env._("Location not found")}
         if src == dest:
-            return {'error': 'Emplacements source et destination identiques'}
+            return {'error': request.env._("Source and destination locations are identical")}
         if not items:
-            return {'error': 'Aucun article à transférer'}
+            return {'error': request.env._("No item to transfer")}
         for item in items:
             try:
                 qty = float(item.get('qty'))
             except (TypeError, ValueError):
-                return {'error': 'Quantité invalide'}
+                return {'error': request.env._("Invalid quantity")}
             if qty <= 0:
-                return {'error': 'Quantité nulle ou négative refusée'}
+                return {'error': request.env._("Zero or negative quantity refused")}
             if not self._get_record('product.product', item.get('product_id')):
-                return {'error': 'Article introuvable'}
+                return {'error': request.env._("Item not found")}
 
         # Type d'opération de l'entrepôt (donc de la société) de la source
         PickingType = request.env['stock.picking.type']
@@ -665,7 +669,7 @@ class AdiStockBarcodeController(http.Controller):
                 ('company_id', '=', (src.company_id or request.env.company).id),
             ], limit=1)
         if not picking_type:
-            return {'error': 'Aucun type de transfert interne trouvé'}
+            return {'error': request.env._("No internal transfer operation type found")}
 
         # Contrôle de disponibilité avant création
         Quant = request.env['stock.quant']
@@ -676,10 +680,11 @@ class AdiStockBarcodeController(http.Controller):
             available = Quant._get_available_quantity(product, src)
             if item['qty'] > available:
                 errors.append(
-                    f'{product.display_name}: {item["qty"]} demandé(s), {available} disponible(s)'
+                    request.env._("%(product)s: %(requested)s requested, %(available)s available",
+                                  product=product.display_name, requested=item["qty"], available=available)
                 )
         if errors:
-            return {'error': 'Stock insuffisant:\n' + '\n'.join(errors)}
+            return {'error': request.env._("Insufficient stock:") + '\n' + '\n'.join(errors)}
 
         picking = request.env['stock.picking'].create({
             'picking_type_id': picking_type.id,
@@ -718,7 +723,7 @@ class AdiStockBarcodeController(http.Controller):
         """Retourne l'URL du rapport PDF pour un picking."""
         picking = self._get_picking(picking_id)
         if not picking:
-            return {'error': 'Picking introuvable'}
+            return {'error': request.env._("Transfer not found")}
 
         # Utiliser le delivery slip pour les BL, le picking report pour le reste
         if picking.picking_type_id.code == 'outgoing':
@@ -754,7 +759,7 @@ class AdiStockBarcodeController(http.Controller):
         records = Log.search([
             ('user_id', '=', user.id),
             ('create_date', '>=', start), ('create_date', '<=', end)])
-        labels = dict(Log._fields['action'].selection)
+        labels = dict(Log._fields['action']._description_selection(request.env))
         lines, summary = [], {}
         for r in records:
             lines.append({

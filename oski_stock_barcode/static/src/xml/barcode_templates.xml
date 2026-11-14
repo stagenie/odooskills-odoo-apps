@@ -8,52 +8,52 @@
         <div class="o_barcode_main">
             <!-- Home -->
             <t t-if="this.state.currentScreen === 'home'">
-                <div class="o_barcode_title">OPERATIONS STOCK</div>
+                <div class="o_barcode_title">STOCK OPERATIONS</div>
                 <div class="o_barcode_grid">
                     <div class="o_barcode_card" t-on-click="() => this._navigate('receipt_list')">
                         <span class="oi o_card_icon" data-icon="download"/>
-                        <span class="o_card_label">RECEPTION</span>
+                        <span class="o_card_label">RECEIPT</span>
                         <span class="o_card_count" t-if="this.state.counts.incoming > 0">
-                            <t t-out="this.state.counts.incoming"/> en attente
+                            <t t-out="this.state.counts.incoming"/> waiting
                         </span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('delivery_list')">
                         <span class="oi o_card_icon" data-icon="upload"/>
-                        <span class="o_card_label">EXPEDITION</span>
+                        <span class="o_card_label">DELIVERY</span>
                         <span class="o_card_count" t-if="this.state.counts.outgoing > 0">
-                            <t t-out="this.state.counts.outgoing"/> en attente
+                            <t t-out="this.state.counts.outgoing"/> waiting
                         </span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('inventory')">
                         <span class="oi o_card_icon" data-icon="content_paste"/>
-                        <span class="o_card_label">INVENTAIRE</span>
+                        <span class="o_card_label">INVENTORY</span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('transfer')">
                         <span class="oi o_card_icon" data-icon="swap_horiz"/>
-                        <span class="o_card_label">TRANSFERT</span>
+                        <span class="o_card_label">TRANSFER</span>
                         <span class="o_card_count" t-if="this.state.counts.internal > 0">
-                            <t t-out="this.state.counts.internal"/> en attente
+                            <t t-out="this.state.counts.internal"/> waiting
                         </span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('consult')">
                         <span class="oi o_card_icon" data-icon="info"/>
-                        <span class="o_card_label">CONSULTATION</span>
-                        <span class="o_card_count">Info article</span>
+                        <span class="o_card_label">LOOKUP</span>
+                        <span class="o_card_count">Item Info</span>
                     </div>
                     <div class="o_barcode_card" t-on-click="() => this._navigate('session')">
                         <span class="oi o_card_icon" data-icon="account_circle"/>
-                        <span class="o_card_label">MA SESSION</span>
-                        <span class="o_card_count">Journal du jour</span>
+                        <span class="o_card_label">MY SESSION</span>
+                        <span class="o_card_count">Today's Log</span>
                     </div>
                 </div>
             </t>
 
             <!-- Picking Lists (navigation niveau 2) -->
             <PickingList t-if="this.state.currentScreen === 'receipt_list'"
-                         pickingTypeCode="'incoming'" title="'RECEPTION'"
+                         pickingTypeCode="'incoming'" title.translate="RECEIPT"
                          onPickingSelected.bind="this._onPickingSelected" onBack.bind="this._goHome"/>
             <PickingList t-if="this.state.currentScreen === 'delivery_list'"
-                         pickingTypeCode="'outgoing'" title="'EXPEDITION'"
+                         pickingTypeCode="'outgoing'" title.translate="DELIVERY"
                          onPickingSelected.bind="this._onPickingSelected" onBack.bind="this._goHome"/>
 
             <!-- Detail screens (navigation niveau 3) -->
@@ -108,7 +108,7 @@
             <div class="o_scan_banner o_scan_banner_doc">
                 <div class="o_scan_icon"><i class="oi" data-icon="barcode"/></div>
                 <div class="o_scan_text">
-                    <span class="o_scan_waiting">Scannez le code-barres du bon</span>
+                    <span class="o_scan_waiting">Scan the transfer barcode</span>
                 </div>
             </div>
 
@@ -116,16 +116,16 @@
             <div class="o_barcode_search_wrap mb-3">
                 <span class="oi o_barcode_search_icon" data-icon="search"/>
                 <input type="text" class="o_barcode_search_input" t-ref="this.filterRef"
-                       placeholder="Rechercher par réf, client, origine..."
+                       placeholder="Search by reference, customer, source..."
                        t-on-input="this._onFilterInput" autocomplete="off"/>
             </div>
 
             <!-- Compteur -->
             <div class="o_barcode_list_count" t-if="!this.state.loading">
-                <t t-out="this.filteredPickings.length"/> opération(s)
+                <t t-out="this.filteredPickings.length"/> operation(s)
             </div>
             <div class="o_barcode_list_count" t-if="this.state.loading">
-                <i class="oi oi-spin" data-icon="progress_activity"/> Chargement...
+                <i class="oi oi-spin" data-icon="progress_activity"/> Loading data...
             </div>
 
             <!-- Liste pickings -->
@@ -148,10 +148,10 @@
                                          t-attf-style="width: {{ this._progressPercent(p) }}%"/>
                                 </div>
                                 <span class="o_picking_progress_text">
-                                    <t t-out="p.done_lines"/>/<t t-out="p.total_lines"/> lignes
+                                    <t t-out="p.done_lines"/>/<t t-out="p.total_lines"/> lines
                                 </span>
                                 <span class="o_picking_qty_text text-muted ms-2" t-if="p.total_qty_demand > 0">
-                                    (<t t-out="p.total_qty_done"/>/<t t-out="p.total_qty_demand"/> unités)
+                                    (<t t-out="p.total_qty_done"/>/<t t-out="p.total_qty_demand"/> units)
                                 </span>
                             </div>
                             <span class="o_picking_date text-muted" t-if="p.scheduled_date"
@@ -163,7 +163,7 @@
                 <!-- Empty state -->
                 <div class="o_barcode_empty" t-if="!this.state.loading and this.filteredPickings.length === 0">
                     <i class="oi" data-icon="check_circle"/>
-                    <span>Aucune opération en attente</span>
+                    <span>No pending operation</span>
                 </div>
             </div>
         </div>
@@ -198,7 +198,7 @@
                 </t>
             </div>
             <div class="o_barcode_search_dropdown p-2 text-muted" t-if="this.state.loading">
-                <i class="oi oi-spin" data-icon="progress_activity"/> Recherche...
+                <i class="oi oi-spin" data-icon="progress_activity"/> Searching...
             </div>
         </div>
     </t>
@@ -235,7 +235,7 @@
                     <button t-att-class="{'active': this.state.mode === 'scan'}"
                             t-on-click="() => this._setMode('scan')">Scan</button>
                     <button t-att-class="{'active': this.state.mode === 'manual'}"
-                            t-on-click="() => this._setMode('manual')">Manuel</button>
+                            t-on-click="() => this._setMode('manual')">Manual</button>
                 </div>
                 <button class="o_barcode_refresh" t-on-click="this._refresh">
                     <i class="oi" data-icon="refresh"/>
@@ -264,14 +264,14 @@
             <!-- Mode manuel : search -->
             <ProductSearch t-if="this.state.mode === 'manual'"
                            onProductSelected.bind="this._onProductSelected"
-                           placeholder="'Rechercher un article...'"/>
+                           placeholder.translate="Search for an item..."/>
 
             <!-- Compteur lignes + total qté -->
             <div class="o_barcode_list_count" t-if="this.state.lines.length > 0">
-                <t t-out="this.state.lines.length"/> article(s)
-                <t t-if="this.hasAnyQty"> — <strong><t t-out="this.state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="this.state.lines.length"/> complet(s)</strong></t>
+                <t t-out="this.state.lines.length"/> item(s)
+                <t t-if="this.hasAnyQty"> — <strong><t t-out="this.state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="this.state.lines.length"/> complete</strong></t>
                 <span class="ms-2 badge text-bg-info">
-                    Total : <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unité(s)
+                    Total: <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unit(s)
                 </span>
             </div>
 
@@ -279,8 +279,8 @@
             <div class="o_barcode_table_wrap o_scrollable" t-if="this.state.lines.length > 0">
                 <table class="o_barcode_table">
                     <thead><tr>
-                        <th>Article</th><th style="width:10%">Attendu</th>
-                        <th style="width:18%">Reçu</th><th style="width:8%">Reste</th>
+                        <th>Item</th><th style="width:10%">Expected</th>
+                        <th style="width:18%">Received</th><th style="width:8%">Remaining</th>
                     </tr></thead>
                     <tbody>
                         <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
@@ -319,8 +319,8 @@
                 <div class="o_barcode_actions" t-if="this.state.lines.length > 0">
                     <button class="o_barcode_btn o_btn_primary" t-on-click="this._validate"
                             t-att-disabled="!this.hasAnyQty">
-                        <t t-if="this.allComplete">Valider la réception</t>
-                        <t t-else="">Réception partielle (reliquat)</t>
+                        <t t-if="this.allComplete">Validate Receipt</t>
+                        <t t-else="">Partial Receipt (backorder)</t>
                     </button>
                 </div>
             </t>
@@ -330,10 +330,10 @@
                     <div class="fw-bold mb-3" t-out="this.state.validationMessage"/>
                     <div class="d-flex gap-2 justify-content-center">
                         <button class="btn btn-outline-primary mt-2" t-on-click="this._printSlip">
-                            <i class="oi me-1" data-icon="print"/>Imprimer le bon
+                            <i class="oi me-1" data-icon="print"/>Print Slip
                         </button>
                         <button class="btn btn-primary" t-on-click="this.props.onBack">
-                            <i class="oi me-1" data-icon="arrow_back"/> Retour
+                            <i class="oi me-1" data-icon="arrow_back"/> Back
                         </button>
                     </div>
                 </div>
@@ -359,14 +359,14 @@
 
             <ProductSearch t-if="this.state.mode === 'manual'"
                            onProductSelected.bind="this._onProductSelected"
-                           placeholder="'Rechercher un article...'"/>
+                           placeholder.translate="Search for an item..."/>
 
             <!-- Compteur lignes + total qté -->
             <div class="o_barcode_list_count" t-if="this.state.lines.length > 0">
-                <t t-out="this.state.lines.length"/> article(s)
-                <t t-if="this.hasAnyQty"> — <strong><t t-out="this.state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="this.state.lines.length"/> complet(s)</strong></t>
+                <t t-out="this.state.lines.length"/> item(s)
+                <t t-if="this.hasAnyQty"> — <strong><t t-out="this.state.lines.filter(l => l.done_qty >= l.demand_qty).length"/>/<t t-out="this.state.lines.length"/> complete</strong></t>
                 <span class="ms-2 badge text-bg-info">
-                    Total : <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unité(s)
+                    Total: <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unit(s)
                 </span>
             </div>
 
@@ -374,10 +374,10 @@
             <div class="o_barcode_table_wrap o_scrollable" t-if="this.state.lines.length > 0">
                 <table class="o_barcode_table">
                     <thead><tr>
-                        <th>Article</th><th style="width:7%">Demandé</th>
-                        <th style="width:7%">Dispo</th>
-                        <th style="width:15%">Livré</th><th style="width:7%">Reste</th>
-                        <th style="width:6%">Etat</th>
+                        <th>Item</th><th style="width:7%">Requested</th>
+                        <th style="width:7%">Avail.</th>
+                        <th style="width:15%">Delivered</th><th style="width:7%">Remaining</th>
+                        <th style="width:6%">State</th>
                     </tr></thead>
                     <tbody>
                         <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
@@ -393,7 +393,7 @@
                                     <span t-if="line.done_qty >= line.demand_qty and line.demand_qty > 0"
                                           class="badge text-bg-success">OK</span>
                                     <span t-elif="line.available_qty &lt; line.demand_qty"
-                                          class="badge text-bg-danger" title="Stock insuffisant">!</span>
+                                          class="badge text-bg-danger" title="Insufficient stock">!</span>
                                     <span t-else="">--</span>
                                 </td>
                             </tr>
@@ -408,10 +408,10 @@
                     <div t-att-class="'o_barcode_line_card ' + this._lineClass(line)">
                         <div class="o_card_product_name" t-out="line.product_name"/>
                         <div class="o_card_progress">
-                            <span>Livré: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
-                            <span class="text-muted ms-2">Dispo: <t t-out="line.available_qty"/></span>
+                            <span>Delivered: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
+                            <span class="text-muted ms-2">Avail.: <t t-out="line.available_qty"/></span>
                             <span class="ms-2" t-if="line.demand_qty - line.done_qty > 0">
-                                Reste: <strong><t t-out="line.demand_qty - line.done_qty"/></strong>
+                                Remaining: <strong><t t-out="line.demand_qty - line.done_qty"/></strong>
                             </span>
                         </div>
                         <div class="o_card_stepper_row">
@@ -427,8 +427,8 @@
                 <div class="o_barcode_actions" t-if="this.state.lines.length > 0">
                     <button class="o_barcode_btn o_btn_primary" t-on-click="this._validate"
                             t-att-disabled="!this.hasAnyQty">
-                        <t t-if="this.allComplete">Valider la livraison</t>
-                        <t t-else="">Livraison partielle (reliquat)</t>
+                        <t t-if="this.allComplete">Validate Delivery</t>
+                        <t t-else="">Partial Delivery (backorder)</t>
                     </button>
                 </div>
             </t>
@@ -438,10 +438,10 @@
                     <div class="fw-bold mb-3" t-out="this.state.validationMessage"/>
                     <div class="d-flex gap-2 justify-content-center">
                         <button class="btn btn-outline-primary mt-2" t-on-click="this._printSlip">
-                            <i class="oi me-1" data-icon="print"/>Imprimer le bon
+                            <i class="oi me-1" data-icon="print"/>Print Slip
                         </button>
                         <button class="btn btn-primary" t-on-click="this.props.onBack">
-                            <i class="oi me-1" data-icon="arrow_back"/> Retour
+                            <i class="oi me-1" data-icon="arrow_back"/> Back
                         </button>
                     </div>
                 </div>
@@ -461,7 +461,7 @@
                     <button class="o_barcode_back" t-on-click="this.props.onBack">
                         <i class="oi" data-icon="arrow_back"/>
                     </button>
-                    <span class="o_barcode_screen_title">INVENTAIRE</span>
+                    <span class="o_barcode_screen_title">INVENTORY</span>
                     <button class="o_barcode_refresh" t-on-click="this._loadLocations">
                         <i class="oi" data-icon="refresh"/>
                     </button>
@@ -471,7 +471,7 @@
                 <div class="o_scan_banner o_scan_banner_doc">
                     <div class="o_scan_icon"><i class="oi" data-icon="barcode"/></div>
                     <div class="o_scan_text">
-                        <span class="o_scan_waiting">Scannez le code-barres d'un emplacement</span>
+                        <span class="o_scan_waiting">Scan a location barcode</span>
                     </div>
                 </div>
 
@@ -479,15 +479,15 @@
                 <div class="o_barcode_search_wrap mb-3">
                     <span class="oi o_barcode_search_icon" data-icon="search"/>
                     <input type="text" class="o_barcode_search_input"
-                           placeholder="Rechercher un emplacement..."
+                           placeholder="Search for a location..."
                            t-on-input="this._onLocationFilterInput" autocomplete="off"/>
                 </div>
 
                 <div class="o_barcode_list_count" t-if="!this.state.loading">
-                    <t t-out="this.filteredLocations.length"/> emplacement(s)
+                    <t t-out="this.filteredLocations.length"/> location(s)
                 </div>
                 <div class="o_barcode_list_count" t-if="this.state.loading">
-                    <i class="oi oi-spin" data-icon="progress_activity"/> Chargement...
+                    <i class="oi oi-spin" data-icon="progress_activity"/> Loading data...
                 </div>
 
                 <div class="o_barcode_picking_list">
@@ -504,7 +504,7 @@
 
                     <div class="o_barcode_empty" t-if="!this.state.loading and this.filteredLocations.length === 0">
                         <i class="oi" data-icon="location_on"/>
-                        <span>Aucun emplacement trouvé</span>
+                        <span>No location found</span>
                     </div>
                 </div>
             </t>
@@ -515,13 +515,13 @@
                     <button class="o_barcode_back" t-on-click="this._backToLocations">
                         <i class="oi" data-icon="arrow_back"/>
                     </button>
-                    <span class="o_barcode_screen_title">INVENTAIRE</span>
+                    <span class="o_barcode_screen_title">INVENTORY</span>
                     <div class="d-flex gap-1 align-items-center">
                         <div class="o_barcode_mode_toggle">
                             <button t-att-class="{'active': this.state.mode === 'scan'}"
                                     t-on-click="() => this._setMode('scan')">Scan</button>
                             <button t-att-class="{'active': this.state.mode === 'manual'}"
-                                    t-on-click="() => this._setMode('manual')">Manuel</button>
+                                    t-on-click="() => this._setMode('manual')">Manual</button>
                         </div>
                         <button class="o_barcode_refresh" t-on-click="this._refresh">
                             <i class="oi" data-icon="refresh"/>
@@ -535,26 +535,26 @@
 
                 <ScanBanner t-if="this.state.mode === 'scan'" active="true"
                             lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"
-                            message="'Scannez un article pour incrémenter'"/>
+                            message.translate="Scan an item to increase its quantity"/>
 
                 <ProductSearch t-if="this.state.mode === 'manual'"
                                onProductSelected.bind="this._onProductSelected"
-                               placeholder="'Ajouter un article par nom, réf ou code-barres...'"
+                               placeholder.translate="Add an item by name, reference or barcode..."
                                storableOnly="true"/>
 
                 <!-- Filtre local sur la liste chargée -->
                 <div class="o_barcode_filter_wrap mb-2" t-if="this.state.items.length > 0">
                     <input type="text" class="o_barcode_filter_input"
-                           placeholder="Filtrer la liste..."
+                           placeholder="Filter the list..."
                            t-on-input="this._onItemFilterInput" autocomplete="off"/>
                 </div>
 
                 <div class="o_barcode_list_count" t-if="this.state.items.length > 0">
-                    <t t-out="this.filteredItems.length"/> article(s)
-                    <t t-if="this.touchedCount > 0"> — <strong><t t-out="this.touchedCount"/> modifié(s)</strong></t>
+                    <t t-out="this.filteredItems.length"/> item(s)
+                    <t t-if="this.touchedCount > 0"> — <strong><t t-out="this.touchedCount"/> changed</strong></t>
                 </div>
                 <div class="o_barcode_list_count" t-if="this.state.loading">
-                    <i class="oi oi-spin" data-icon="progress_activity"/> Chargement...
+                    <i class="oi oi-spin" data-icon="progress_activity"/> Loading data...
                 </div>
 
                 <!-- Tableau desktop -->
@@ -562,8 +562,8 @@
                     <table class="o_barcode_table">
                         <thead><tr>
                             <th style="width:4%">#</th>
-                            <th>Article</th><th style="width:9%">Système</th>
-                            <th style="width:16%">Compté</th><th style="width:7%">Ecart</th>
+                            <th>Item</th><th style="width:9%">System</th>
+                            <th style="width:16%">Counted</th><th style="width:7%">Difference</th>
                             <th style="width:5%"/>
                         </tr></thead>
                         <tbody>
@@ -587,7 +587,7 @@
                                         <button class="btn btn-sm btn-outline-success"
                                                 t-att-disabled="!item.touched"
                                                 t-on-click="() => this._applyLine(item)"
-                                                title="Appliquer cette ligne">
+                                                title="Apply this line">
                                             <i class="oi" data-icon="check"/>
                                         </button>
                                     </td>
@@ -604,16 +604,16 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="text-muted fw-bold">#<t t-out="item_index + 1"/></span>
                                 <span t-att-class="this._ecartClass(item)">
-                                    Ecart: <t t-out="this._ecartValue(item)"/>
+                                    Difference: <t t-out="this._ecartValue(item)"/>
                                 </span>
                             </div>
                             <div class="o_card_product_name" t-out="item.product_name"/>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span>Système: <t t-out="item.quantity"/></span>
+                                <span>System: <t t-out="item.quantity"/></span>
                                 <button class="btn btn-sm btn-outline-success"
                                         t-att-disabled="!item.touched"
                                         t-on-click="() => this._applyLine(item)">
-                                    <i class="oi" data-icon="check"/> Appliquer
+                                    <i class="oi" data-icon="check"/> Apply
                                 </button>
                             </div>
                             <div class="o_card_stepper_row">
@@ -627,13 +627,13 @@
                 <!-- Empty -->
                 <div class="o_barcode_empty" t-if="!this.state.loading and this.state.items.length === 0">
                     <i class="oi" data-icon="inbox"/>
-                    <span>Aucun article en stock — scannez ou recherchez pour ajouter</span>
+                    <span>No item in stock — scan or search to add one</span>
                 </div>
 
                 <div class="o_barcode_actions">
                     <button class="o_barcode_btn o_btn_primary" t-on-click="this._applyInventory"
                             t-att-disabled="this.touchedCount === 0">
-                        Appliquer l'inventaire (<t t-out="this.touchedCount"/> article(s) modifié(s))
+                        Apply inventory (<t t-out="this.touchedCount"/> item(s) changed)
                     </button>
                 </div>
             </t>
@@ -652,7 +652,7 @@
 
                 <div class="d-flex gap-2 mb-3 flex-wrap">
                     <div class="flex-fill">
-                        <label class="form-label fw-bold">De :</label>
+                        <label class="form-label fw-bold">Source:</label>
                         <select class="o_barcode_picking_select" t-on-change="this._onSrcChange">
                             <option value="">-- Source --</option>
                             <t t-foreach="this.state.locations" t-as="loc" t-key="loc.id">
@@ -662,7 +662,7 @@
                         </select>
                     </div>
                     <div class="flex-fill">
-                        <label class="form-label fw-bold">Vers :</label>
+                        <label class="form-label fw-bold">Destination:</label>
                         <select class="o_barcode_picking_select" t-on-change="this._onDestChange">
                             <option value="">-- Destination --</option>
                             <t t-foreach="this.state.locations" t-as="loc" t-key="loc.id">
@@ -675,17 +675,17 @@
 
                 <ScanBanner t-if="this.state.mode === 'scan' and this.state.srcLocationId and this.state.destLocationId"
                             active="true" lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"
-                            message="'Scannez un article à transférer'"/>
+                            message.translate="Scan an item to transfer"/>
 
                 <ProductSearch t-if="this.state.mode === 'manual' and this.state.srcLocationId and this.state.destLocationId"
                                onProductSelected.bind="this._onProductSelected"
-                               placeholder="'Rechercher un article à transférer...'"/>
+                               placeholder.translate="Search for an item to transfer..."/>
 
                 <div class="o_barcode_table_wrap" t-if="this.state.items.length > 0">
                     <table class="o_barcode_table">
                         <thead><tr>
-                            <th>Article</th><th style="width:18%">Quantité</th>
-                            <th style="width:12%">Dispo</th><th style="width:5%"/>
+                            <th>Item</th><th style="width:18%">Quantity</th>
+                            <th style="width:12%">Avail.</th><th style="width:5%"/>
                         </tr></thead>
                         <tbody>
                             <t t-foreach="this.state.items" t-as="item" t-key="item.product_id">
@@ -694,7 +694,7 @@
                                     <td><QtyStepper value="item.qty"
                                         onChange.bind="(qty) => this._onQtyChange(item, qty)"
                                         min="1" max="item.available_qty"/></td>
-                                    <td class="text-muted"><t t-out="item.available_qty"/> dispo</td>
+                                    <td class="text-muted"><t t-out="item.available_qty"/> avail.</td>
                                     <td><button class="btn btn-sm btn-outline-danger"
                                         t-on-click="() => this._removeItem(item_index)">
                                         <i class="oi" data-icon="delete"/></button></td>
@@ -713,7 +713,7 @@
                                     t-on-click="() => this._removeItem(item_index)">
                                     <i class="oi" data-icon="delete"/></button>
                             </div>
-                            <div class="o_card_progress text-muted"><t t-out="item.available_qty"/> disponibles</div>
+                            <div class="o_card_progress text-muted"><t t-out="item.available_qty"/> available</div>
                             <div class="o_card_stepper_row">
                                 <QtyStepper value="item.qty"
                                     onChange.bind="(qty) => this._onQtyChange(item, qty)"
@@ -726,7 +726,7 @@
                 <div class="o_barcode_actions" t-if="this.state.srcLocationId and this.state.destLocationId">
                     <button class="o_barcode_btn o_btn_primary" t-on-click="this._confirmTransfer"
                             t-att-disabled="!this.canConfirm">
-                        Créer le transfert
+                        Create Transfer
                     </button>
                 </div>
             </t>
@@ -737,7 +737,7 @@
                     <button class="o_barcode_back" t-on-click="this._backToPrepare">
                         <i class="oi" data-icon="arrow_back"/>
                     </button>
-                    <span class="o_barcode_screen_title">TRANSFERT</span>
+                    <span class="o_barcode_screen_title">TRANSFER</span>
                     <button class="o_barcode_refresh" t-on-click="this._refresh">
                         <i class="oi" data-icon="refresh"/>
                     </button>
@@ -749,9 +749,9 @@
 
                 <!-- Compteur -->
                 <div class="o_barcode_list_count" t-if="this.state.lines.length > 0">
-                    <t t-out="this.state.lines.length"/> article(s)
+                    <t t-out="this.state.lines.length"/> item(s)
                     <span class="ms-2 badge text-bg-info">
-                        Total : <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unité(s)
+                        Total: <t t-out="this.totalDone"/>/<t t-out="this.totalDemand"/> unit(s)
                     </span>
                 </div>
 
@@ -759,9 +759,9 @@
                 <div class="o_barcode_table_wrap o_scrollable" t-if="this.state.lines.length > 0">
                     <table class="o_barcode_table">
                         <thead><tr>
-                            <th>Article</th><th style="width:8%">Demandé</th>
-                            <th style="width:8%">Dispo</th>
-                            <th style="width:16%">Transféré</th><th style="width:8%">Reste</th>
+                            <th>Item</th><th style="width:8%">Requested</th>
+                            <th style="width:8%">Avail.</th>
+                            <th style="width:16%">Transferred</th><th style="width:8%">Remaining</th>
                         </tr></thead>
                         <tbody>
                             <t t-foreach="this.state.lines" t-as="line" t-key="line.move_id">
@@ -785,8 +785,8 @@
                         <div t-att-class="'o_barcode_line_card ' + this._lineClass(line)">
                             <div class="o_card_product_name" t-out="line.product_name"/>
                             <div class="o_card_progress">
-                                <span>Transféré: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
-                                <span class="text-muted ms-2">Dispo: <t t-out="line.available_qty"/></span>
+                                <span>Transferred: <t t-out="line.done_qty"/>/<t t-out="line.demand_qty"/></span>
+                                <span class="text-muted ms-2">Avail.: <t t-out="line.available_qty"/></span>
                             </div>
                             <div class="o_card_stepper_row">
                                 <QtyStepper value="line.done_qty"
@@ -801,8 +801,8 @@
                     <div class="o_barcode_actions" t-if="this.state.lines.length > 0">
                         <button class="o_barcode_btn o_btn_primary" t-on-click="this._validateTransfer"
                                 t-att-disabled="!this.hasAnyQty">
-                            <t t-if="this.allComplete">Valider le transfert</t>
-                            <t t-else="">Transfert partiel (reliquat)</t>
+                            <t t-if="this.allComplete">Validate Transfer</t>
+                            <t t-else="">Partial Transfer (backorder)</t>
                         </button>
                     </div>
                 </t>
@@ -812,13 +812,13 @@
                         <div class="fw-bold mb-3" t-out="this.state.validationMessage"/>
                         <div class="d-flex gap-2 justify-content-center">
                             <button class="btn btn-outline-primary" t-on-click="this._printPicking">
-                                <i class="oi me-1" data-icon="print"/> Imprimer
+                                <i class="oi me-1" data-icon="print"/> Print
                             </button>
                             <button class="btn btn-primary" t-on-click="this._backToPrepare">
-                                <i class="oi me-1" data-icon="add"/> Nouveau transfert
+                                <i class="oi me-1" data-icon="add"/> New Transfer
                             </button>
                             <button class="btn btn-outline-secondary" t-on-click="this.props.onBack">
-                                <i class="oi me-1" data-icon="home"/> Accueil
+                                <i class="oi me-1" data-icon="home"/> Home
                             </button>
                         </div>
                     </div>
@@ -836,16 +836,16 @@
                 <button class="o_barcode_back" t-on-click="this.props.onBack">
                     <i class="oi" data-icon="arrow_back"/>
                 </button>
-                <span class="o_barcode_screen_title">CONSULTATION</span>
+                <span class="o_barcode_screen_title">LOOKUP</span>
                 <div class="d-flex gap-1 align-items-center">
                     <div class="o_barcode_mode_toggle">
                         <button t-att-class="{'active': this.state.mode === 'scan'}"
                                 t-on-click="() => this._setMode('scan')">Scan</button>
                         <button t-att-class="{'active': this.state.mode === 'manual'}"
-                                t-on-click="() => this._setMode('manual')">Manuel</button>
+                                t-on-click="() => this._setMode('manual')">Manual</button>
                     </div>
                     <button class="o_barcode_refresh" t-on-click="this._clear"
-                            t-if="this.state.viewType" title="Nouvelle recherche">
+                            t-if="this.state.viewType" title="New Search">
                         <i class="oi" data-icon="close"/>
                     </button>
                 </div>
@@ -853,11 +853,11 @@
 
             <ScanBanner t-if="this.state.mode === 'scan'" active="true"
                         lastScan="this.state.lastScan" lastScanStatus="this.state.lastScanStatus"
-                        message="'Scannez un article ou un emplacement'"/>
+                        message.translate="Scan an item or a location"/>
 
             <ProductSearch t-if="this.state.mode === 'manual'"
                            onProductSelected.bind="this._onProductSelected"
-                           placeholder="'Rechercher par nom, réf ou code-barres...'"/>
+                           placeholder.translate="Search by name, reference or barcode..."/>
 
             <!-- Chargement -->
             <div class="text-center p-4" t-if="this.state.loading">
@@ -871,7 +871,7 @@
                         <div class="o_consult_image">
                             <img t-if="this.state.product.has_image"
                                  t-att-src="this.state.product.image_url"
-                                 alt="Image produit"/>
+                                 alt="Product Image"/>
                             <div t-else="" class="o_consult_no_image">
                                 <i class="oi oi-3x text-muted" data-icon="deployed_code"/>
                             </div>
@@ -890,35 +890,35 @@
                                 </span>
                             </div>
                             <div class="text-muted" t-if="this.state.product.uom_name">
-                                UdM : <t t-out="this.state.product.uom_name"/>
+                                UoM: <t t-out="this.state.product.uom_name"/>
                             </div>
                         </div>
                     </div>
 
                     <div class="o_consult_stock_summary">
                         <div class="o_consult_stock_item">
-                            <span class="o_consult_stock_label">En stock</span>
+                            <span class="o_consult_stock_label">In Stock</span>
                             <span class="o_consult_stock_value" t-out="this.state.product.total_qty"/>
                         </div>
                         <div class="o_consult_stock_item">
-                            <span class="o_consult_stock_label">Réservé</span>
+                            <span class="o_consult_stock_label">Reserved</span>
                             <span class="o_consult_stock_value text-warning" t-out="this.state.product.total_reserved"/>
                         </div>
                         <div class="o_consult_stock_item">
-                            <span class="o_consult_stock_label">Disponible</span>
+                            <span class="o_consult_stock_label">Available</span>
                             <span t-att-class="'o_consult_stock_value ' + this._stockClass(this.state.product.total_available)"
                                   t-out="this.state.product.total_available"/>
                         </div>
                     </div>
 
                     <div class="o_consult_locations" t-if="this.state.product.locations.length > 0">
-                        <h6 class="mb-2">Stock par emplacement</h6>
+                        <h6 class="mb-2">Stock by Location</h6>
                         <table class="table table-sm table-striped mb-0">
                             <thead><tr>
-                                <th>Emplacement</th>
-                                <th class="text-end" style="width:20%">En stock</th>
-                                <th class="text-end" style="width:20%">Réservé</th>
-                                <th class="text-end" style="width:20%">Dispo</th>
+                                <th>Location</th>
+                                <th class="text-end" style="width:20%">In Stock</th>
+                                <th class="text-end" style="width:20%">Reserved</th>
+                                <th class="text-end" style="width:20%">Avail.</th>
                             </tr></thead>
                             <tbody>
                                 <t t-foreach="this.state.product.locations" t-as="loc" t-key="loc.location_id">
@@ -936,15 +936,15 @@
                     </div>
 
                     <div class="text-muted text-center p-3" t-if="this.state.product.locations.length === 0">
-                        <i class="oi" data-icon="info"/> Aucun stock pour cet article
+                        <i class="oi" data-icon="info"/> No stock for this item
                     </div>
 
                     <div class="o_consult_moves mt-3" t-if="this.state.recentMoves.length > 0">
-                        <h6 class="mb-2">Derniers mouvements</h6>
+                        <h6 class="mb-2">Latest Moves</h6>
                         <table class="table table-sm table-striped mb-0">
                             <thead><tr>
-                                <th>Date</th><th>De</th><th>Vers</th>
-                                <th class="text-end">Qté</th><th>Lot</th>
+                                <th>Date</th><th>From</th><th>To</th>
+                                <th class="text-end">Qty</th><th>Lot</th>
                             </tr></thead>
                             <tbody>
                                 <t t-foreach="this.state.recentMoves" t-as="mv" t-key="mv_index">
@@ -981,28 +981,28 @@
 
                     <div class="o_consult_stock_summary">
                         <div class="o_consult_stock_item">
-                            <span class="o_consult_stock_label">Articles</span>
+                            <span class="o_consult_stock_label">Items</span>
                             <span class="o_consult_stock_value" t-out="this.state.location.total_products"/>
                         </div>
                         <div class="o_consult_stock_item">
-                            <span class="o_consult_stock_label">Qté totale</span>
+                            <span class="o_consult_stock_label">Total Qty</span>
                             <span class="o_consult_stock_value" t-out="this.state.location.total_qty"/>
                         </div>
                         <div class="o_consult_stock_item">
-                            <span class="o_consult_stock_label">Disponible</span>
+                            <span class="o_consult_stock_label">Available</span>
                             <span t-att-class="'o_consult_stock_value ' + this._stockClass(this.state.location.total_available)"
                                   t-out="this.state.location.total_available"/>
                         </div>
                     </div>
 
                     <div class="o_consult_locations" t-if="this.state.location.products.length > 0">
-                        <h6 class="mb-2">Contenu de l'emplacement</h6>
+                        <h6 class="mb-2">Location Content</h6>
                         <table class="table table-sm table-striped mb-0">
                             <thead><tr>
-                                <th>Article</th>
-                                <th class="text-end" style="width:18%">En stock</th>
-                                <th class="text-end" style="width:18%">Réservé</th>
-                                <th class="text-end" style="width:18%">Dispo</th>
+                                <th>Item</th>
+                                <th class="text-end" style="width:18%">In Stock</th>
+                                <th class="text-end" style="width:18%">Reserved</th>
+                                <th class="text-end" style="width:18%">Avail.</th>
                             </tr></thead>
                             <tbody>
                                 <t t-foreach="this.state.location.products" t-as="p" t-key="p.product_id">
@@ -1024,7 +1024,7 @@
                     </div>
 
                     <div class="text-muted text-center p-3" t-if="this.state.location.products.length === 0">
-                        <i class="oi" data-icon="info"/> Aucun article en stock
+                        <i class="oi" data-icon="info"/> No item in stock
                     </div>
                 </div>
             </t>
@@ -1032,7 +1032,7 @@
             <!-- Etat initial -->
             <div class="o_barcode_empty" t-if="!this.state.viewType and !this.state.loading">
                 <i class="oi oi-2x" data-icon="search"/>
-                <span>Scannez ou recherchez un article ou emplacement</span>
+                <span>Scan or search for an item or a location</span>
             </div>
         </div>
     </t>
@@ -1046,7 +1046,7 @@
                 <button class="o_barcode_back" t-on-click="this.props.onBack">
                     <i class="oi" data-icon="arrow_back"/>
                 </button>
-                <span class="o_barcode_screen_title">Ma session</span>
+                <span class="o_barcode_screen_title">My Session</span>
             </div>
             <div class="p-3" t-if="!this.state.loading">
                 <div class="o_session_summary d-flex flex-wrap gap-2 mb-3">
@@ -1058,12 +1058,12 @@
                     </t>
                 </div>
                 <div class="text-muted" t-if="this.state.lines.length === 0">
-                    Aucun scan aujourd'hui.
+                    No scan today.
                 </div>
                 <table class="table table-sm" t-if="this.state.lines.length > 0">
                     <thead><tr>
-                        <th>Heure</th><th>Action</th><th>Article</th>
-                        <th>Lot</th><th class="text-end">Qté</th>
+                        <th>Hour</th><th>Action</th><th>Item</th>
+                        <th>Lot</th><th class="text-end">Qty</th>
                     </tr></thead>
                     <tbody>
                         <t t-foreach="this.state.lines" t-as="l" t-key="l_index">
