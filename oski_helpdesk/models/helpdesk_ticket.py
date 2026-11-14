@@ -3,32 +3,32 @@ from odoo import _, api, fields, models
 
 class HelpdeskTicket(models.Model):
     _name = "helpdesk.ticket"
-    _description = "Ticket d'assistance"
+    _description = "Helpdesk Ticket"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "priority desc, id desc"
 
-    name = fields.Char(string="Sujet", required=True, tracking=True)
-    number = fields.Char(string="Numéro", readonly=True, copy=False, default="/")
-    team_id = fields.Many2one("helpdesk.team", string="Équipe", required=True, tracking=True)
+    name = fields.Char(string="Subject", required=True, tracking=True)
+    number = fields.Char(string="Number", readonly=True, copy=False, default="/")
+    team_id = fields.Many2one("helpdesk.team", string="Team", required=True, tracking=True)
     stage_id = fields.Many2one(
-        "helpdesk.stage", string="Étape", tracking=True,
+        "helpdesk.stage", string="Stage", tracking=True,
         group_expand="_read_group_stage_ids",
         default=lambda self: self._default_stage_id())
-    user_id = fields.Many2one("res.users", string="Assigné à", tracking=True)
-    partner_id = fields.Many2one("res.partner", string="Client")
-    partner_email = fields.Char(string="Courriel")
+    user_id = fields.Many2one("res.users", string="Assigned to", tracking=True)
+    partner_id = fields.Many2one("res.partner", string="Customer")
+    partner_email = fields.Char(string="Email")
     priority = fields.Selection(
-        [("0", "Basse"), ("1", "Normale"), ("2", "Haute"), ("3", "Urgente")],
-        string="Priorité", default="1")
+        [("0", "Low"), ("1", "Normal"), ("2", "High"), ("3", "Urgent")],
+        string="Priority", default="1")
     kanban_state = fields.Selection(
-        [("normal", "En cours"), ("done", "Prêt"), ("blocked", "Bloqué")],
-        string="État", default="normal")
-    tag_ids = fields.Many2many("helpdesk.tag", string="Étiquettes")
+        [("normal", "In Progress"), ("done", "Ready"), ("blocked", "Blocked")],
+        string="Status", default="normal")
+    tag_ids = fields.Many2many("helpdesk.tag", string="Tags")
     description = fields.Html(string="Description")
-    color = fields.Integer(string="Couleur")
-    active = fields.Boolean(string="Actif", default=True)
+    color = fields.Integer(string="Color")
+    active = fields.Boolean(string="Active", default=True)
     company_id = fields.Many2one(
-        "res.company", string="Société", default=lambda self: self.env.company)
+        "res.company", string="Company", default=lambda self: self.env.company)
 
     @api.model
     def _default_stage_id(self):
@@ -41,7 +41,7 @@ class HelpdeskTicket(models.Model):
     @api.model
     def message_new(self, msg_dict, custom_values=None):
         custom_values = dict(custom_values or {})
-        custom_values.setdefault("name", msg_dict.get("subject") or _("Sans sujet"))
+        custom_values.setdefault("name", msg_dict.get("subject") or _("No Subject"))
         custom_values.setdefault("partner_email", msg_dict.get("email_from"))
         if not custom_values.get("description") and msg_dict.get("body"):
             custom_values["description"] = msg_dict["body"]

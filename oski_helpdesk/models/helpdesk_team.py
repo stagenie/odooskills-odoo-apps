@@ -3,19 +3,19 @@ from odoo import api, fields, models
 
 class HelpdeskTeam(models.Model):
     _name = "helpdesk.team"
-    _description = "Équipe d'assistance"
+    _description = "Helpdesk Team"
     _inherit = ["mail.alias.mixin.optional"]
     _order = "name"
 
-    name = fields.Char(string="Nom", required=True)
-    use_alias = fields.Boolean(string="Activer l'alias email")
-    member_ids = fields.Many2many("res.users", string="Membres")
+    name = fields.Char(string="Name", required=True)
+    use_alias = fields.Boolean(string="Use Email Alias")
+    member_ids = fields.Many2many("res.users", string="Members")
     assignment_method = fields.Selection(
-        [("manual", "Manuelle"), ("balanced", "Équilibrée (par charge)")],
-        string="Méthode d'assignation", default="manual", required=True)
-    stage_ids = fields.Many2many("helpdesk.stage", string="Étapes")
+        [("manual", "Manual"), ("balanced", "Balanced (by workload)")],
+        string="Assignment Method", default="manual", required=True)
+    stage_ids = fields.Many2many("helpdesk.stage", string="Stages")
     company_id = fields.Many2one(
-        "res.company", string="Société",
+        "res.company", string="Company",
         default=lambda self: self.env.company)
     ticket_count = fields.Integer(string="Tickets", compute="_compute_ticket_count")
 

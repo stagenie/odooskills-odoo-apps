@@ -7,5 +7,5 @@ access_helpdesk_team_user,helpdesk.team user,helpdesk.team,oski_helpdesk.group_h
 access_helpdesk_team_manager,helpdesk.team manager,helpdesk.team,oski_helpdesk.group_helpdesk_manager,crud,
 access_helpdesk_ticket_user,helpdesk.ticket user,helpdesk.ticket,oski_helpdesk.group_helpdesk_user,crud,
 access_helpdesk_ticket_manager,helpdesk.ticket manager,helpdesk.ticket,oski_helpdesk.group_helpdesk_manager,crud,
-rule_helpdesk_team_company,Équipe d'assistance : sociétés autorisées,helpdesk.team,,crud,"[('company_id', 'in', company_ids + [False])]"
-rule_helpdesk_ticket_company,Ticket d'assistance : sociétés autorisées,helpdesk.ticket,,crud,"[('company_id', 'in', company_ids + [False])]"
+rule_helpdesk_team_company,Helpdesk Team: allowed companies,helpdesk.team,,crud,"[('company_id', 'in', company_ids + [False])]"
+rule_helpdesk_ticket_company,Helpdesk Ticket: allowed companies,helpdesk.ticket,,crud,"[('company_id', 'in', company_ids + [False])]"

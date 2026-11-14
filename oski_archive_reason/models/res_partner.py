@@ -29,7 +29,7 @@ class ResPartner(models.Model):
             return super().action_archive()
         return {
             "type": "ir.actions.act_window",
-            "name": "Motif d'archivage",
+            "name": self.env._("Archive Reason"),
             "res_model": "oski.archive.reason.wizard",
             "view_mode": "form",
             "views": [(False, "form")],
