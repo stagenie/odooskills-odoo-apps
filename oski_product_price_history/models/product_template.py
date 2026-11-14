@@ -5,9 +5,9 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     oski_price_history_ids = fields.One2many(
-        "oski.product.price.history", "product_tmpl_id", string="Historique des prix")
+        "oski.product.price.history", "product_tmpl_id", string="Price History")
     oski_price_history_count = fields.Integer(
-        string="Changements de prix", compute="_compute_oski_price_history_count")
+        string="Price Changes", compute="_compute_oski_price_history_count")
 
     def _compute_oski_price_history_count(self):
         counts = {
@@ -31,9 +31,12 @@ class ProductTemplate(models.Model):
 
     def action_oski_price_history(self):
         self.ensure_one()
+        # Libellé sorti du dict : l'extracteur d'Odoo 19/20 prendrait aussi le
+        # tuple du domaine qui suit pour un texte à traduire.
+        name = self.env._("Price History")
         return {
             "type": "ir.actions.act_window",
-            "name": self.env._("Historique des prix"),
+            "name": name,
             "res_model": "oski.product.price.history",
             "view_mode": "list,graph",
             "domain": [("product_tmpl_id", "=", self.id)],

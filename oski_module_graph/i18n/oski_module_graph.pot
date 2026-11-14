@@ -1,0 +1,119 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_module_graph
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:09+0000\n"
+"PO-Revision-Date: 2026-11-14 21:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_module_graph
+#. odoo-python
+#: code:addons/oski_module_graph/wizards/oski_module_graph.py:0
+msgid "%(count)s modules to draw: beyond %(max)s the graph is no longer readable. Narrow the selection, or untick Follow Dependencies."
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,help:oski_module_graph.field_oski_module_graph__with_dependencies
+msgid "Adds to the drawing everything the chosen modules depend on, step by step."
+msgstr ""
+
+#. module: oski_module_graph
+#. odoo-python
+#: code:addons/oski_module_graph/wizards/oski_module_graph.py:0
+msgid "Choose at least one module."
+msgstr ""
+
+#. module: oski_module_graph
+#: model_terms:ir.ui.view,arch_db:oski_module_graph.oski_module_graph_view_form
+msgid "Close"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__edge_count
+msgid "Dependencies"
+msgstr ""
+
+#. module: oski_module_graph
+#. odoo-python
+#: code:addons/oski_module_graph/models/ir_module_module.py:0
+msgid "Dependencies of %s"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.actions.act_window,name:oski_module_graph.oski_module_graph_action model:ir.ui.menu,name:oski_module_graph.oski_module_graph_menu model_terms:ir.ui.view,arch_db:oski_module_graph.ir_module_module_view_form_oski_graph model_terms:ir.ui.view,arch_db:oski_module_graph.oski_module_graph_view_form
+msgid "Dependency Graph"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_module_graph
+#: model_terms:ir.ui.view,arch_db:oski_module_graph.oski_module_graph_view_form
+msgid "Draw"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__with_dependencies
+msgid "Follow Dependencies"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__svg
+msgid "Graph"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model,name:oski_module_graph.model_ir_module_module
+msgid "Module"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model,name:oski_module_graph.model_oski_module_graph
+msgid "Module Dependency Graph"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__module_ids
+msgid "Modules"
+msgstr ""
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__node_count
+msgid "Modules Drawn"
+msgstr ""

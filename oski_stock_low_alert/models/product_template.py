@@ -5,27 +5,27 @@ from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
-# Libellé unique de l'activité d'alerte : sert aussi de clé d'anti-doublon.
-ALERT_SUMMARY = "Stock bas"
+# Le libellé de l'activité d'alerte sert aussi de clé d'anti-doublon : il est
+# cherché dans chaque langue installée (``_oski_alert_summaries``).
 
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     oski_alert_threshold = fields.Float(
-        string="Seuil d'alerte stock",
+        string="Stock Alert Threshold",
         default=0.0,
-        help="En dessous de cette quantité disponible, le produit est signalé "
-        "en stock bas. Laisser à 0 pour désactiver l'alerte.",
+        help="Below this available quantity, the product is flagged as low on "
+        "stock. Leave at 0 to disable the alert.",
     )
     # Non stocké : qty_available est calculé dynamiquement par le module stock,
     # le stocker produirait des valeurs périmées dès qu'un mouvement a lieu.
     oski_low_stock = fields.Boolean(
-        string="Stock bas",
+        string="Low Stock",
         compute="_compute_oski_low_stock",
         search="_search_oski_low_stock",
-        help="Vrai lorsqu'un seuil est défini et que la quantité disponible "
-        "est strictement inférieure à ce seuil.",
+        help="True when a threshold is set and the available quantity is "
+        "strictly below it.",
     )
 
     @api.depends("oski_alert_threshold", "qty_available", "is_storable")
@@ -47,7 +47,7 @@ class ProductTemplate(models.Model):
         directement en SQL)."""
         if operator not in ("=", "!="):
             raise NotImplementedError(
-                "Opérateur non supporté pour oski_low_stock : %s" % operator
+                "Unsupported operator for oski_low_stock: %s" % operator
             )
 
         # Normalise la requête en "produits réellement en stock bas".
@@ -77,6 +77,18 @@ class ProductTemplate(models.Model):
         return self.env.ref("base.user_admin")
 
     @api.model
+    def _oski_alert_summaries(self):
+        """Le libellé de l'alerte dans chaque langue installée.
+
+        Il sert de clé d'anti-doublon : une activité posée quand le
+        responsable lisait une autre langue doit encore être reconnue.
+        """
+        codes = {code for code, _label in self.env["res.lang"].get_installed()}
+        return sorted({
+            self.with_context(lang=code).env._("Low Stock")
+            for code in codes | {"en_US"}})
+
+    @api.model
     def _oski_cron_low_stock_alert(self):
         """Cron quotidien : planifie une activité « à faire » sur chaque produit
         en stock bas pour le responsable de stock, sans créer de doublon."""
@@ -85,10 +97,13 @@ class ProductTemplate(models.Model):
             return
 
         responsible = self._oski_low_stock_responsible()
+        # La tâche planifiée tourne sans langue : l'activité est écrite dans
+        # celle du responsable, qui la lit.
+        reader = self.with_context(lang=responsible.lang or self.env.lang)
         existing = self.env["mail.activity"].search([
             ("res_model", "=", self._name),
             ("res_id", "in", low_products.ids),
-            ("summary", "=", ALERT_SUMMARY),
+            ("summary", "in", self._oski_alert_summaries()),
         ])
         already_flagged = set(existing.mapped("res_id"))
 
@@ -96,18 +111,16 @@ class ProductTemplate(models.Model):
             if product.id in already_flagged:
                 continue
 
-            note = (
-                "Le produit « %s » est passé sous son seuil d'alerte "
-                "(disponible : %s, seuil : %s)."
-                % (
-                    product.display_name,
-                    product.qty_available,
-                    product.oski_alert_threshold,
-                )
+            note = reader.env._(
+                "Product “%(product)s” fell below its alert threshold "
+                "(available: %(available)s, threshold: %(threshold)s).",
+                product=product.with_context(lang=reader.env.lang).display_name,
+                available=product.qty_available,
+                threshold=product.oski_alert_threshold,
             )
             product.activity_schedule(
                 "mail.mail_activity_data_todo",
-                summary=ALERT_SUMMARY,
+                summary=reader.env._("Low Stock"),
                 note=note,
                 user_id=responsible.id,
             )

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="ir_cron_oski_currency_rate" model="ir.cron">
-        <field name="name">Taux de change : mise à jour quotidienne</field>
+        <field name="name">Exchange rates: daily update</field>
         <field name="model_id" ref="base.model_res_company"/>
         <field name="state">code</field>
         <field name="code">model._cron_update_currency_rates()</field>

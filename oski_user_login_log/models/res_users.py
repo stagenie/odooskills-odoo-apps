@@ -22,7 +22,7 @@ class ResUsers(models.Model):
         with cls.pool.cursor() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
             env["oski.login.log"].create({
-                "login": login or "(vide)",
+                "login": login or "(empty)",
                 "user_id": uid or False,
                 "result": result,
                 "ip_address": ip_address,
@@ -40,7 +40,7 @@ class ResUsers(models.Model):
         try:
             cls._oski_write_login_log(login, result, ip_address, uid=uid)
         except Exception:  # noqa: BLE001 - jamais au prix d'une connexion
-            _logger.exception("Journal des connexions : écriture impossible")
+            _logger.exception("Login log: could not write the entry")
 
     @classmethod
     def _login(cls, db, credential, user_agent_env):

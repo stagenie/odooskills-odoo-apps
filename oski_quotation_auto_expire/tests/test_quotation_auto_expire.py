@@ -63,8 +63,22 @@ class TestQuotationAutoExpire(TransactionCase):
         posted = order.message_ids - known
         self.assertTrue(posted, "l'annulation nocturne doit laisser une trace")
         self.assertTrue(
-            any("périmé" in message.body.lower() for message in posted),
+            any("expired" in message.body.lower() for message in posted),
             "la trace doit dire POURQUOI le devis a été annulé")
+
+    def test_the_trace_speaks_the_salesperson_language(self):
+        """La tâche planifiée tourne sans langue : la note et l'activité
+        sont écrites dans la langue du vendeur."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        self.salesperson.lang = "fr_FR"
+        reminded = self._order(self.today + timedelta(days=2))
+        expired = self._order(self.today - timedelta(days=1))
+        known = expired.message_ids
+        self._run()
+        self.assertEqual(self._activities(reminded).summary,
+                         "Devis à relancer avant échéance")
+        self.assertTrue(any("Devis périmé le" in message.body
+                            for message in expired.message_ids - known))
 
     def test_a_quotation_still_valid_is_left_alone(self):
         order = self._order(self.today + timedelta(days=10))

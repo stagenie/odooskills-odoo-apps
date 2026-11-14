@@ -8,7 +8,7 @@
             <xpath expr="//sheet" position="before">
                 <header>
                     <button name="action_oski_module_graph" type="object"
-                            string="Graphe des dépendances" class="btn-secondary"/>
+                            string="Dependency Graph" class="btn-secondary"/>
                 </header>
             </xpath>
         </field>

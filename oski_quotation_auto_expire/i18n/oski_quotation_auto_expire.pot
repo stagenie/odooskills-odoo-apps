@@ -1,0 +1,129 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_quotation_auto_expire
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:01+0000\n"
+"PO-Revision-Date: 2026-11-14 21:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.res_config_settings_view_form_oski_expire
+msgid "<span>Remind</span>"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.res_config_settings_view_form_oski_expire
+msgid "<span>day(s) before the expiration date</span>"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.res_config_settings_view_form_oski_expire
+msgid "Cancel every night the quotations whose expiration date has passed. The cancelled quotation keeps a record of its expiry."
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model,name:oski_quotation_auto_expire.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model,name:oski_quotation_auto_expire.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model.fields,help:oski_quotation_auto_expire.field_sale_order__oski_expired_on
+msgid "Date on which the scheduled action cancelled this expired quotation."
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model.fields,field_description:oski_quotation_auto_expire.field_res_company__oski_quote_expire_active model:ir.model.fields,field_description:oski_quotation_auto_expire.field_res_config_settings__oski_quote_expire_active
+msgid "Expire Overdue Quotations"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.view_sales_order_filter_oski_expire
+msgid "Expired"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model.fields,field_description:oski_quotation_auto_expire.field_sale_order__oski_expired_on
+msgid "Expired On"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.view_sales_order_filter_oski_expire
+msgid "Expiring Soon"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#. odoo-python
+#: code:addons/oski_quotation_auto_expire/models/sale_order.py:0
+msgid "Follow up on the quotation before it expires"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model.fields,help:oski_quotation_auto_expire.field_res_company__oski_quote_reminder_days model:ir.model.fields,help:oski_quotation_auto_expire.field_res_config_settings__oski_quote_reminder_days
+msgid "Number of days before the expiration date when the salesperson gets a reminder activity. Zero: no reminder."
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.res_config_settings_view_form_oski_expire
+msgid "Quotation Expiry"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#. odoo-python
+#: code:addons/oski_quotation_auto_expire/models/sale_order.py:0
+msgid "Quotation expired on %(date)s: its expiration date had passed."
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.actions.server,name:oski_quotation_auto_expire.ir_cron_oski_quotation_expire_ir_actions_server
+msgid "Quotations: reminder and expiry"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.res_config_settings_view_form_oski_expire
+msgid "Reminder Before Expiry"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model.fields,field_description:oski_quotation_auto_expire.field_res_company__oski_quote_reminder_days model:ir.model.fields,field_description:oski_quotation_auto_expire.field_res_config_settings__oski_quote_reminder_days
+msgid "Reminder Before Expiry (days)"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model.fields,field_description:oski_quotation_auto_expire.field_sale_order__oski_reminder_sent_on
+msgid "Reminder Sent On"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model,name:oski_quotation_auto_expire.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model_terms:ir.ui.view,arch_db:oski_quotation_auto_expire.res_config_settings_view_form_oski_expire
+msgid "The salesperson gets an activity — never one more email — on quotations nearing their expiration date. Zero: no reminder. The reminder does not depend on expiry."
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#: model:ir.model.fields,help:oski_quotation_auto_expire.field_res_company__oski_quote_expire_active model:ir.model.fields,help:oski_quotation_auto_expire.field_res_config_settings__oski_quote_expire_active
+msgid "The scheduled action cancels every night the quotations whose expiration date has passed."
+msgstr ""
+
+#. module: oski_quotation_auto_expire
+#. odoo-python
+#: code:addons/oski_quotation_auto_expire/models/sale_order.py:0
+msgid "This quotation expires on %(date)s."
+msgstr ""

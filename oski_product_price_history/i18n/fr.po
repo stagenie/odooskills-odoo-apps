@@ -1,0 +1,178 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:04+0000\n"
+"PO-Revision-Date: 2026-11-14 21:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__new_value
+msgid "After"
+msgstr "Après"
+
+#. module: oski_product_price_history
+#: model_terms:ir.actions.act_window,help:oski_product_price_history.action_oski_price_history
+msgid "As soon as a sales price or a cost changes, the line is recorded here: the old value, the new one, the difference, the date and the author."
+msgstr ""
+"Dès qu'un prix de vente ou un coût change, la ligne s'inscrit\n"
+"                ici : l'ancienne valeur, la nouvelle, l'écart, la date et\n"
+"                l'auteur."
+
+#. module: oski_product_price_history
+#: model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Author"
+msgstr "Auteur"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__old_value
+msgid "Before"
+msgstr "Avant"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__user_id
+msgid "Changed By"
+msgstr "Par"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__changed_on
+msgid "Changed On"
+msgstr "Le"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields.selection,name:oski_product_price_history.selection__oski_product_price_history__field_name__standard_price model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Cost"
+msgstr "Coût"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: oski_product_price_history
+#: model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_product_price_history
+#: model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Decreases"
+msgstr "Baisses"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__variation
+msgid "Difference"
+msgstr "Écart"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__variation_percent
+msgid "Difference (%)"
+msgstr "Écart (%)"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,help:oski_product_price_history.field_oski_product_price_history__product_id
+msgid "Filled in for the cost, which is kept per variant."
+msgstr "Renseignée pour le coût, qui se tient par variante."
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_product_price_history
+#: model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Increases"
+msgstr "Hausses"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__product_tmpl_id model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Item"
+msgstr "Article"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_product_price_history
+#: model_terms:ir.actions.act_window,help:oski_product_price_history.action_oski_price_history
+msgid "No price has changed yet"
+msgstr "Aucun prix n'a encore bougé"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__field_name model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search model_terms:ir.ui.view,arch_db:oski_product_price_history.view_product_template_form_oski_history
+msgid "Price"
+msgstr "Prix"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_product_product__oski_price_history_count model:ir.model.fields,field_description:oski_product_price_history.field_product_template__oski_price_history_count
+msgid "Price Changes"
+msgstr "Changements de prix"
+
+#. module: oski_product_price_history
+#. odoo-python
+#: code:addons/oski_product_price_history/models/product_template.py:0 model:ir.actions.act_window,name:oski_product_price_history.action_oski_price_history model:ir.model,name:oski_product_price_history.model_oski_product_price_history model:ir.model.fields,field_description:oski_product_price_history.field_product_product__oski_price_history_ids model:ir.model.fields,field_description:oski_product_price_history.field_product_template__oski_price_history_ids model:ir.ui.menu,name:oski_product_price_history.menu_oski_price_history model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_graph model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_list model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Price History"
+msgstr "Historique des prix"
+
+#. module: oski_product_price_history
+#: model:ir.model,name:oski_product_price_history.model_product_template
+msgid "Product"
+msgstr "Produit"
+
+#. module: oski_product_price_history
+#: model:ir.ui.menu,name:oski_product_price_history.menu_oski_price_root
+msgid "Product Prices"
+msgstr "Prix des articles"
+
+#. module: oski_product_price_history
+#: model:ir.model,name:oski_product_price_history.model_product_product
+msgid "Product Variant"
+msgstr "Variante de produit"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields.selection,name:oski_product_price_history.selection__oski_product_price_history__field_name__list_price model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "Sales Price"
+msgstr "Prix de vente"
+
+#. module: oski_product_price_history
+#: model_terms:ir.ui.view,arch_db:oski_product_price_history.view_oski_price_history_search
+msgid "This Year"
+msgstr "Cette année"
+
+#. module: oski_product_price_history
+#: model:ir.model.fields,field_description:oski_product_price_history.field_oski_product_price_history__product_id
+msgid "Variant"
+msgstr "Variante"

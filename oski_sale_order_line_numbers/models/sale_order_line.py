@@ -6,11 +6,11 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     oski_line_number = fields.Integer(
-        string="N°",
+        string="No.",
         compute="_compute_oski_line_number",
         store=True,
-        help="Numéro d'ordre 1..n des lignes produit de la commande. "
-        "Les sections et notes ne sont pas numérotées (0).",
+        help="Sequence number 1..n of the order's product lines. "
+        "Sections and notes are not numbered (0).",
     )
 
     @api.depends(

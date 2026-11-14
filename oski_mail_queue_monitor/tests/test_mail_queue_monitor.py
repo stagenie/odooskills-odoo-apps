@@ -117,6 +117,18 @@ class TestMailQueueMonitor(TransactionCase):
         with self.assertRaises(AccessError):
             self.Check.with_user(user).search([])[:1].read(["verdict"])
 
+    def test_the_alert_speaks_each_administrator_language(self):
+        """La tâche planifiée tourne sans langue : l'alerte est écrite dans
+        la langue de son assigné, le relevé dans celle de l'administrateur."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        admin = self.env.ref("base.user_admin")
+        admin.lang = "fr_FR"
+        self._mail("outgoing", age_hours=48)
+        check = self.Check.with_context(lang=False)._cron_check_queue()
+        self.assertIn("Le plus vieux courriel en attente", check.note)
+        alert = check._open_alerts().filtered(lambda a: a.user_id == admin)
+        self.assertEqual(alert.summary, "File de courriels à l'arrêt depuis 48.0 h")
+
     def test_the_alert_sends_no_mail(self):
         """La promesse du module : l'alerte ne passe pas par la file qu'elle
         surveille. Odoo notifie l'assigné d'une activité par courriel ; ce

@@ -1,0 +1,56 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:06+0000\n"
+"PO-Revision-Date: 2026-11-14 21:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_stock_low_alert
+#: model:ir.model.fields,help:oski_stock_low_alert.field_product_product__oski_alert_threshold model:ir.model.fields,help:oski_stock_low_alert.field_product_template__oski_alert_threshold
+msgid "Below this available quantity, the product is flagged as low on stock. Leave at 0 to disable the alert."
+msgstr "En dessous de cette quantité disponible, le produit est signalé en stock bas. Laisser à 0 pour désactiver l'alerte."
+
+#. module: oski_stock_low_alert
+#. odoo-python
+#: code:addons/oski_stock_low_alert/models/product_template.py:0 model:ir.model.fields,field_description:oski_stock_low_alert.field_product_product__oski_low_stock model:ir.model.fields,field_description:oski_stock_low_alert.field_product_template__oski_low_stock model_terms:ir.ui.view,arch_db:oski_stock_low_alert.oski_product_template_search_view
+msgid "Low Stock"
+msgstr "Stock bas"
+
+#. module: oski_stock_low_alert
+#: model_terms:ir.ui.view,arch_db:oski_stock_low_alert.oski_product_template_form_view
+msgid "Low Stock Alert"
+msgstr "Alerte de stock bas"
+
+#. module: oski_stock_low_alert
+#: model:ir.actions.server,name:oski_stock_low_alert.oski_ir_cron_low_stock_alert_ir_actions_server
+msgid "Low stock alert: create activities"
+msgstr "Alerte stock bas : créer les activités"
+
+#. module: oski_stock_low_alert
+#: model:ir.model,name:oski_stock_low_alert.model_product_template
+msgid "Product"
+msgstr "Produit"
+
+#. module: oski_stock_low_alert
+#. odoo-python
+#: code:addons/oski_stock_low_alert/models/product_template.py:0
+msgid "Product “%(product)s” fell below its alert threshold (available: %(available)s, threshold: %(threshold)s)."
+msgstr "Le produit « %(product)s » est passé sous son seuil d'alerte (disponible : %(available)s, seuil : %(threshold)s)."
+
+#. module: oski_stock_low_alert
+#: model:ir.model.fields,field_description:oski_stock_low_alert.field_product_product__oski_alert_threshold model:ir.model.fields,field_description:oski_stock_low_alert.field_product_template__oski_alert_threshold
+msgid "Stock Alert Threshold"
+msgstr "Seuil d'alerte stock"
+
+#. module: oski_stock_low_alert
+#: model:ir.model.fields,help:oski_stock_low_alert.field_product_product__oski_low_stock model:ir.model.fields,help:oski_stock_low_alert.field_product_template__oski_low_stock
+msgid "True when a threshold is set and the available quantity is strictly below it."
+msgstr "Vrai lorsqu'un seuil est défini et que la quantité disponible est strictement inférieure à ce seuil."
