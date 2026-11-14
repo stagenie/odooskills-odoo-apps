@@ -21,9 +21,9 @@
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='my_quotation']" position="after">
                 <separator/>
-                <filter name="oski_expired" string="Périmés"
+                <filter name="oski_expired" string="Expired"
                         domain="[('oski_expired_on', '!=', False)]"/>
-                <filter name="oski_expiring" string="Échéance proche"
+                <filter name="oski_expiring" string="Expiring Soon"
                         domain="[('state', 'in', ('draft', 'sent')),
                                  ('validity_date', '&gt;=', context_today().strftime('%Y-%m-%d')),
                                  ('validity_date', '&lt;=', (context_today() + relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>

@@ -104,7 +104,7 @@ class TestLoginLog(TransactionCase):
         ) as captured:
             auth_info = self._try_login(PASSWORD)
         self.assertEqual(auth_info["uid"], self.user.id)
-        self.assertIn("écriture impossible", captured.output[0])
+        self.assertIn("could not write", captured.output[0])
 
     def test_the_journal_is_reserved_to_administrators(self):
         simple = self.env["res.users"].create({

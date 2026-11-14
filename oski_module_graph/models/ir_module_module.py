@@ -14,7 +14,7 @@ class IrModuleModule(models.Model):
         wizard.action_draw()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Dépendances de %s", self.shortdesc or self.name),
+            "name": _("Dependencies of %s", self.shortdesc or self.name),
             "res_model": "oski.module.graph",
             "res_id": wizard.id,
             "view_mode": "form",

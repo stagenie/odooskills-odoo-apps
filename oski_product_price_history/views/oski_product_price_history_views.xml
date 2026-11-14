@@ -5,7 +5,7 @@
         <field name="name">oski.product.price.history.list</field>
         <field name="model">oski.product.price.history</field>
         <field name="arch" type="xml">
-            <list string="Historique des prix" create="false" delete="false"
+            <list string="Price History" create="false" delete="false"
                   decoration-danger="variation &gt; 0" decoration-success="variation &lt; 0">
                 <field name="changed_on"/>
                 <field name="product_tmpl_id"/>
@@ -26,7 +26,7 @@
         <field name="name">oski.product.price.history.graph</field>
         <field name="model">oski.product.price.history</field>
         <field name="arch" type="xml">
-            <graph string="Historique des prix" type="line" sample="0">
+            <graph string="Price History" type="line" sample="0">
                 <field name="changed_on" interval="day"/>
                 <field name="new_value" type="measure"/>
             </graph>
@@ -37,25 +37,25 @@
         <field name="name">oski.product.price.history.search</field>
         <field name="model">oski.product.price.history</field>
         <field name="arch" type="xml">
-            <search string="Historique des prix">
+            <search string="Price History">
                 <field name="product_tmpl_id"/>
                 <field name="user_id"/>
-                <filter name="sales" string="Prix de vente"
+                <filter name="sales" string="Sales Price"
                         domain="[('field_name', '=', 'list_price')]"/>
-                <filter name="cost" string="Coût"
+                <filter name="cost" string="Cost"
                         domain="[('field_name', '=', 'standard_price')]"/>
                 <separator/>
-                <filter name="increase" string="Hausses" domain="[('variation', '&gt;', 0)]"/>
-                <filter name="decrease" string="Baisses" domain="[('variation', '&lt;', 0)]"/>
+                <filter name="increase" string="Increases" domain="[('variation', '&gt;', 0)]"/>
+                <filter name="decrease" string="Decreases" domain="[('variation', '&lt;', 0)]"/>
                 <separator/>
-                <filter name="this_year" string="Cette année"
+                <filter name="this_year" string="This Year"
                         domain="[('changed_on', '&gt;=', context_today().strftime('%Y-01-01'))]"/>
                 <group>
-                    <filter name="group_product" string="Article" domain="[]"
+                    <filter name="group_product" string="Item" domain="[]"
                             context="{'group_by': 'product_tmpl_id'}"/>
-                    <filter name="group_field" string="Prix" domain="[]"
+                    <filter name="group_field" string="Price" domain="[]"
                             context="{'group_by': 'field_name'}"/>
-                    <filter name="group_user" string="Auteur" domain="[]"
+                    <filter name="group_user" string="Author" domain="[]"
                             context="{'group_by': 'user_id'}"/>
                     <filter name="group_date" string="Date" domain="[]"
                             context="{'group_by': 'changed_on:month'}"/>
@@ -65,16 +65,14 @@
     </record>
 
     <record id="action_oski_price_history" model="ir.actions.act_window">
-        <field name="name">Historique des prix</field>
+        <field name="name">Price History</field>
         <field name="res_model">oski.product.price.history</field>
         <field name="view_mode">list,graph</field>
         <field name="context">{}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Aucun prix n'a encore bougé</p>
+            <p class="o_view_nocontent_smiling_face">No price has changed yet</p>
             <p>
-                Dès qu'un prix de vente ou un coût change, la ligne s'inscrit
-                ici : l'ancienne valeur, la nouvelle, l'écart, la date et
-                l'auteur.
+                As soon as a sales price or a cost changes, the line is recorded here: the old value, the new one, the difference, the date and the author.
             </p>
         </field>
     </record>
@@ -86,12 +84,12 @@
         modules installé.
     -->
     <menuitem id="menu_oski_price_root"
-              name="Prix des articles"
+              name="Product Prices"
               web_icon="oski_product_price_history,static/description/icon.png"
               sequence="96"/>
 
     <menuitem id="menu_oski_price_history"
-              name="Historique des prix"
+              name="Price History"
               parent="menu_oski_price_root"
               action="action_oski_price_history"
               sequence="10"/>
@@ -106,7 +104,7 @@
                         class="oe_stat_button" icon="show_chart"
                         invisible="not oski_price_history_count">
                     <field name="oski_price_history_count" widget="statinfo"
-                           string="Prix"/>
+                           string="Price"/>
                 </button>
             </xpath>
         </field>

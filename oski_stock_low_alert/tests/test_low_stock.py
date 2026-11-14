@@ -71,6 +71,19 @@ class TestOskiLowStock(TransactionCase):
         self.assertIn(high, not_low)
         self.assertIn(disabled, not_low)
 
+    def test_the_alert_speaks_the_responsible_language(self):
+        """La tâche planifiée tourne sans langue : l'activité est écrite
+        dans la langue du responsable, et l'anti-doublon la reconnaît."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        self.ProductTemplate._oski_low_stock_responsible().lang = "fr_FR"
+        low = self._make_product("Cron bas FR", threshold=10.0, qty=1.0)
+        self.ProductTemplate._oski_cron_low_stock_alert()
+        self.ProductTemplate._oski_cron_low_stock_alert()
+        activities = self.env["mail.activity"].search([
+            ("res_model", "=", "product.template"), ("res_id", "=", low.id)])
+        self.assertEqual(activities.mapped("summary"), ["Stock bas"])
+        self.assertIn("est passé sous son seuil", str(activities.note))
+
     def test_cron_creates_activity_and_no_duplicate(self):
         """Le cron crée 1 activité ; une seconde exécution n'en recrée pas."""
         low = self._make_product("Cron bas", threshold=10.0, qty=1.0)
@@ -79,7 +92,7 @@ class TestOskiLowStock(TransactionCase):
         activities = self.env["mail.activity"].search([
             ("res_model", "=", "product.template"),
             ("res_id", "=", low.id),
-            ("summary", "=", "Stock bas"),
+            ("summary", "=", "Low Stock"),
         ])
         self.assertEqual(len(activities), 1, "Une activité doit être créée pour le produit bas")
 
@@ -88,6 +101,6 @@ class TestOskiLowStock(TransactionCase):
         activities = self.env["mail.activity"].search([
             ("res_model", "=", "product.template"),
             ("res_id", "=", low.id),
-            ("summary", "=", "Stock bas"),
+            ("summary", "=", "Low Stock"),
         ])
         self.assertEqual(len(activities), 1, "Le cron ne doit pas créer de doublon")

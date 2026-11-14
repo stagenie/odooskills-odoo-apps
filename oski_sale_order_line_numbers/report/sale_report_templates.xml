@@ -6,7 +6,7 @@
 
         <!-- En-tête : colonne « N° » en tête du tableau. -->
         <xpath expr="//th[@name='th_description']" position="before">
-            <th name="th_oski_line_number" class="text-end text-nowrap">N°</th>
+            <th name="th_oski_line_number" class="text-end text-nowrap">No.</th>
         </xpath>
 
         <!-- Ligne produit : affiche le numéro calculé. -->

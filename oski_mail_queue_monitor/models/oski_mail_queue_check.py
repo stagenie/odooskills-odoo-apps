@@ -13,19 +13,19 @@ class OskiMailQueueCheck(models.Model):
     # d'office le destinataire au fil du document : le modèle doit donc porter
     # ``mail.thread``, faute de quoi la création d'activité échoue.
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Auscultation de la file de courriels"
+    _description = "Email Queue Check"
     _order = "checked_on desc, id desc"
     _rec_name = "checked_on"
 
     checked_on = fields.Datetime(
-        string="Auscultée le", required=True, default=fields.Datetime.now, index=True)
-    pending_count = fields.Integer(string="En attente")
-    failed_count = fields.Integer(string="En échec")
-    oldest_pending_hours = fields.Float(string="Plus vieux en attente (h)", digits=(10, 1))
+        string="Checked On", required=True, default=fields.Datetime.now, index=True)
+    pending_count = fields.Integer(string="Pending")
+    failed_count = fields.Integer(string="Failed")
+    oldest_pending_hours = fields.Float(string="Oldest Pending (h)", digits=(10, 1))
     verdict = fields.Selection(
-        [("ok", "Saine"), ("warning", "Ralentie"), ("critical", "En échec")],
+        [("ok", "Healthy"), ("warning", "Slowed Down"), ("critical", "Failed")],
         string="Verdict", required=True, default="ok", index=True)
-    note = fields.Text(string="Détail")
+    note = fields.Text(string="Details")
 
     def _max_pending_hours(self):
         # get_float rend le défaut quand le paramètre manque ou n'est pas un nombre.
@@ -48,8 +48,9 @@ class OskiMailQueueCheck(models.Model):
             oldest_hours = delta.total_seconds() / 3600.0
         causes = {}
         for mail in failed:
-            label = dict(Mail._fields["failure_type"].selection).get(
-                mail.failure_type, _("Cause non renseignée"))
+            label = dict(Mail._fields["failure_type"]._description_selection(
+                self.env)).get(
+                mail.failure_type, _("Unspecified cause"))
             causes[label] = causes.get(label, 0) + 1
         return {
             "pending_count": len(pending),
@@ -72,14 +73,19 @@ class OskiMailQueueCheck(models.Model):
     def _note_for(self, measure):
         lines = []
         if measure["oldest_pending_hours"]:
-            lines.append(_("Le plus vieux courriel en attente date de %.1f h.",
+            lines.append(_("The oldest pending email has been waiting for %.1f h.",
                            measure["oldest_pending_hours"]))
         for label, count in sorted(measure["causes"].items(), key=lambda item: -item[1]):
-            lines.append("%s : %s" % (label, count))
+            lines.append(self.env._("%(cause)s: %(count)s", cause=label, count=count))
         return "\n".join(lines) or False
 
     @api.model
     def _cron_check_queue(self):
+        if not self.env.context.get("lang"):
+            # Une tâche planifiée tourne sans langue : le relevé est écrit
+            # dans celle de l'administrateur, qui le lit.
+            admin = self.env.ref("base.user_admin", raise_if_not_found=False)
+            self = self.with_context(lang=(admin or self.env.user).lang)
         measure = self._measure_queue()
         check = self.create({
             "checked_on": fields.Datetime.now(),
@@ -127,10 +133,13 @@ class OskiMailQueueCheck(models.Model):
             return False
         activity_type = self.env.ref("mail.mail_activity_data_todo")
         model_id = self.env["ir.model"]._get(self._name).id
-        summary = (_("Courriels en échec : %s", self.failed_count)
-                   if self.verdict == "critical"
-                   else _("File de courriels à l'arrêt depuis %.1f h",
-                          self.oldest_pending_hours))
+        def summary_for(user):
+            # Chaque administrateur lit l'alerte dans sa langue.
+            env = self.with_context(lang=user.lang or self.env.lang).env
+            if self.verdict == "critical":
+                return env._("Failed emails: %s", self.failed_count)
+            return env._("Email queue stalled for %.1f h",
+                         self.oldest_pending_hours)
         # ``mail_activity_quick_update`` coupe la notification que Odoo
         # enverrait à l'assigné : prévenir d'une file de courriels morte par
         # courriel reviendrait à confier le diagnostic au malade.
@@ -139,16 +148,19 @@ class OskiMailQueueCheck(models.Model):
             "res_model_id": model_id,
             "res_id": self.id,
             "activity_type_id": activity_type.id,
-            "summary": summary,
+            "summary": summary_for(user),
             "note": self.note or False,
             "user_id": user.id,
         } for user in self._alert_user_ids()])
         return activities
 
     def action_open_failed_mails(self):
+        # Libellé sorti du dict : l'extracteur d'Odoo 19/20 prendrait aussi
+        # le tuple du domaine qui suit pour un texte à traduire.
+        name = self.env._("Failed Emails")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Courriels en échec"),
+            "name": name,
             "res_model": "mail.mail",
             "view_mode": "list,form",
             "domain": [("state", "=", "exception")],

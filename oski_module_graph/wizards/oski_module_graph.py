@@ -14,19 +14,19 @@ MARGIN = 24
 
 class OskiModuleGraph(models.TransientModel):
     _name = "oski.module.graph"
-    _description = "Graphe des dépendances des modules"
+    _description = "Module Dependency Graph"
 
     module_ids = fields.Many2many(
         "ir.module.module", string="Modules",
         domain=[("state", "=", "installed")],
         default=lambda self: self._default_modules())
     with_dependencies = fields.Boolean(
-        string="Suivre les dépendances", default=True,
-        help="Ajoute au dessin tout ce dont les modules choisis dépendent, "
-             "de proche en proche.")
-    svg = fields.Html(string="Graphe", sanitize=False, readonly=True)
-    node_count = fields.Integer(string="Modules dessinés", readonly=True)
-    edge_count = fields.Integer(string="Dépendances", readonly=True)
+        string="Follow Dependencies", default=True,
+        help="Adds to the drawing everything the chosen modules depend on, "
+             "step by step.")
+    svg = fields.Html(string="Graph", sanitize=False, readonly=True)
+    node_count = fields.Integer(string="Modules Drawn", readonly=True)
+    edge_count = fields.Integer(string="Dependencies", readonly=True)
 
     @api.model
     def _default_modules(self):
@@ -140,13 +140,12 @@ class OskiModuleGraph(models.TransientModel):
     def action_draw(self):
         self.ensure_one()
         if not self.module_ids:
-            raise UserError(_("Choisissez au moins un module."))
+            raise UserError(_("Choose at least one module."))
         graph = self._dependency_map(self.module_ids, follow=self.with_dependencies)
         if len(graph) > MAX_NODES:
             raise UserError(_(
-                "%(count)s modules à dessiner : au-delà de %(max)s le graphe cesse "
-                "d'être lisible. Restreignez la sélection, ou décochez le suivi "
-                "des dépendances.", count=len(graph), max=MAX_NODES))
+                "%(count)s modules to draw: beyond %(max)s the graph is no longer "
+                "readable. Narrow the selection, or untick Follow Dependencies.", count=len(graph), max=MAX_NODES))
         layers = self._layers(graph)
         self.write({
             "svg": self._render_svg(graph, layers),
@@ -155,6 +154,7 @@ class OskiModuleGraph(models.TransientModel):
         })
         return {
             "type": "ir.actions.act_window",
+            "name": self.env.ref("oski_module_graph.oski_module_graph_action").name,
             "res_model": self._name,
             "res_id": self.id,
             "view_mode": "form",

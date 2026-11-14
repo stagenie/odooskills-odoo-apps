@@ -10,7 +10,7 @@
                  En 20.0 le produit est rangé dans <column name="product_and_description"> :
                  on s'accroche à cette colonne, plus au champ product_template_id. -->
             <xpath expr="//field[@name='order_line']/list/column[@name='product_and_description']" position="before">
-                <field name="oski_line_number" string="N°" readonly="1" optional="show"/>
+                <field name="oski_line_number" string="No." readonly="1" optional="show"/>
             </xpath>
         </field>
     </record>

@@ -17,14 +17,14 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     oski_rate_auto = fields.Boolean(
-        string="Taux de change automatiques",
-        help="Une tâche planifiée quotidienne inscrit les taux publiés par la "
-             "Banque centrale européenne.")
+        string="Automatic Exchange Rates",
+        help="A daily scheduled action records the rates published by the "
+             "European Central Bank.")
     oski_rate_provider = fields.Selection(
-        [("ecb", "Banque centrale européenne")],
-        string="Source des taux", default="ecb", required=True)
-    oski_rate_last_sync = fields.Datetime(string="Dernière mise à jour", readonly=True)
-    oski_rate_last_error = fields.Char(string="Dernière erreur", readonly=True)
+        [("ecb", "European Central Bank")],
+        string="Rate Source", default="ecb", required=True)
+    oski_rate_last_sync = fields.Datetime(string="Last Rate Update", readonly=True)
+    oski_rate_last_error = fields.Char(string="Last Error", readonly=True)
 
     # --- interrupteur -----------------------------------------------------
 
@@ -83,7 +83,7 @@ class ResCompany(models.Model):
                 except (KeyError, ValueError):
                     continue
         if len(rates) == 1:
-            raise UserError(_("La source n'a rendu aucun taux exploitable."))
+            raise UserError(_("The source returned no usable rate."))
         return rate_date or fields.Date.context_today(self), rates
 
     # --- écriture ---------------------------------------------------------
@@ -99,7 +99,7 @@ class ResCompany(models.Model):
         pivot = rates.get(self.currency_id.name)
         if not pivot:
             raise UserError(_(
-                "La source ne publie pas de taux pour %s, la devise de la société.",
+                "The source publishes no rate for %s, the company's currency.",
                 self.currency_id.name))
         Rate = self.env["res.currency.rate"].sudo()
         currencies = self.env["res.currency"].search([
@@ -144,7 +144,7 @@ class ResCompany(models.Model):
             "tag": "display_notification",
             "params": {
                 "type": "success",
-                "message": _("%s taux mis à jour.", len(written)),
+                "message": _("%s rates updated.", len(written)),
                 "next": {"type": "ir.actions.act_window_close"},
             },
         }
@@ -158,6 +158,10 @@ class ResCompany(models.Model):
         """
         companies = self.sudo().search([("oski_rate_auto", "=", True)])
         for company in companies:
+            # La tâche planifiée tourne sans langue : l'erreur inscrite sur la
+            # société l'est dans la langue de sa fiche, pas en anglais pour tous.
+            company = company.with_context(
+                lang=company.partner_id.lang or self.env.lang)
             try:
                 # Le point de sauvegarde annule les taux déjà écrits pour une
                 # société qui tombe en cours de route, et garde la transaction
@@ -165,7 +169,7 @@ class ResCompany(models.Model):
                 with self.env.cr.savepoint():
                     company._oski_update_rates()
             except Exception as error:  # noqa: BLE001 - une panne n'arrête pas la file
-                _logger.exception("Taux de change : mise à jour impossible pour %s",
+                _logger.exception("Exchange rates: update failed for %s",
                                   company.display_name)
                 company.write({"oski_rate_last_error": str(error)[:250]})
         return True
