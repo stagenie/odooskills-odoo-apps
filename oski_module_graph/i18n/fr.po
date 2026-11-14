@@ -1,0 +1,117 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:09+0000\n"
+"PO-Revision-Date: 2026-11-14 21:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_module_graph
+#. odoo-python
+#: code:addons/oski_module_graph/wizards/oski_module_graph.py:0
+msgid "%(count)s modules to draw: beyond %(max)s the graph is no longer readable. Narrow the selection, or untick Follow Dependencies."
+msgstr "%(count)s modules à dessiner : au-delà de %(max)s le graphe cesse d'être lisible. Restreignez la sélection, ou décochez le suivi des dépendances."
+
+#. module: oski_module_graph
+#: model:ir.model.fields,help:oski_module_graph.field_oski_module_graph__with_dependencies
+msgid "Adds to the drawing everything the chosen modules depend on, step by step."
+msgstr "Ajoute au dessin tout ce dont les modules choisis dépendent, de proche en proche."
+
+#. module: oski_module_graph
+#. odoo-python
+#: code:addons/oski_module_graph/wizards/oski_module_graph.py:0
+msgid "Choose at least one module."
+msgstr "Choisissez au moins un module."
+
+#. module: oski_module_graph
+#: model_terms:ir.ui.view,arch_db:oski_module_graph.oski_module_graph_view_form
+msgid "Close"
+msgstr "Fermer"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__edge_count
+msgid "Dependencies"
+msgstr "Dépendances"
+
+#. module: oski_module_graph
+#. odoo-python
+#: code:addons/oski_module_graph/models/ir_module_module.py:0
+msgid "Dependencies of %s"
+msgstr "Dépendances de %s"
+
+#. module: oski_module_graph
+#: model:ir.actions.act_window,name:oski_module_graph.oski_module_graph_action model:ir.ui.menu,name:oski_module_graph.oski_module_graph_menu model_terms:ir.ui.view,arch_db:oski_module_graph.ir_module_module_view_form_oski_graph model_terms:ir.ui.view,arch_db:oski_module_graph.oski_module_graph_view_form
+msgid "Dependency Graph"
+msgstr "Graphe des dépendances"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_ir_module_module__display_name model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_module_graph
+#: model_terms:ir.ui.view,arch_db:oski_module_graph.oski_module_graph_view_form
+msgid "Draw"
+msgstr "Dessiner"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__with_dependencies
+msgid "Follow Dependencies"
+msgstr "Suivre les dépendances"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__svg
+msgid "Graph"
+msgstr "Graphe"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_ir_module_module__id model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_module_graph
+#: model:ir.model,name:oski_module_graph.model_ir_module_module
+msgid "Module"
+msgstr "Module"
+
+#. module: oski_module_graph
+#: model:ir.model,name:oski_module_graph.model_oski_module_graph
+msgid "Module Dependency Graph"
+msgstr "Graphe des dépendances des modules"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__module_ids
+msgid "Modules"
+msgstr "Modules"
+
+#. module: oski_module_graph
+#: model:ir.model.fields,field_description:oski_module_graph.field_oski_module_graph__node_count
+msgid "Modules Drawn"
+msgstr "Modules dessinés"

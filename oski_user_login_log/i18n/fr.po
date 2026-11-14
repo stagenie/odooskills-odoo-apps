@@ -1,0 +1,99 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:13+0000\n"
+"PO-Revision-Date: 2026-11-14 21:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__create_date model_terms:ir.ui.view,arch_db:oski_user_login_log.view_oski_login_log_search
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__display_name model:ir.model.fields,field_description:oski_user_login_log.field_res_users__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,help:oski_user_login_log.field_oski_login_log__user_id
+msgid "Empty when the login entered matches no account."
+msgstr "Vide quand l'identifiant saisi ne correspond à aucun compte."
+
+#. module: oski_user_login_log
+#: model:ir.model.fields.selection,name:oski_user_login_log.selection__oski_login_log__result__failure
+msgid "Failure"
+msgstr "Échec"
+
+#. module: oski_user_login_log
+#: model_terms:ir.ui.view,arch_db:oski_user_login_log.view_oski_login_log_search
+msgid "Failures"
+msgstr "Échecs"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__id model:ir.model.fields,field_description:oski_user_login_log.field_res_users__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__ip_address model_terms:ir.ui.view,arch_db:oski_user_login_log.view_oski_login_log_search
+msgid "IP Address"
+msgstr "Adresse IP"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_user_login_log
+#: model_terms:ir.ui.view,arch_db:oski_user_login_log.view_oski_login_log_search
+msgid "Login"
+msgstr "Identifiant"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__login
+msgid "Login Entered"
+msgstr "Identifiant saisi"
+
+#. module: oski_user_login_log
+#: model:ir.actions.act_window,name:oski_user_login_log.action_oski_login_log model:ir.model,name:oski_user_login_log.model_oski_login_log model:ir.ui.menu,name:oski_user_login_log.menu_oski_login_log model_terms:ir.ui.view,arch_db:oski_user_login_log.view_oski_login_log_list model_terms:ir.ui.view,arch_db:oski_user_login_log.view_oski_login_log_search
+msgid "Login Log"
+msgstr "Journal des connexions"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__result
+msgid "Result"
+msgstr "Résultat"
+
+#. module: oski_user_login_log
+#: model:ir.model.fields.selection,name:oski_user_login_log.selection__oski_login_log__result__success
+msgid "Success"
+msgstr "Réussite"
+
+#. module: oski_user_login_log
+#: model_terms:ir.ui.view,arch_db:oski_user_login_log.view_oski_login_log_search
+msgid "Successes"
+msgstr "Réussites"
+
+#. module: oski_user_login_log
+#: model:ir.model,name:oski_user_login_log.model_res_users model:ir.model.fields,field_description:oski_user_login_log.field_oski_login_log__user_id
+msgid "User"
+msgstr "Utilisateur"

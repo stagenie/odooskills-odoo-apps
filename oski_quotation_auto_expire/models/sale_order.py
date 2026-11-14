@@ -2,7 +2,7 @@ import logging
 
 from markupsafe import Markup
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -13,10 +13,10 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     oski_expired_on = fields.Date(
-        string="Périmé le", readonly=True, copy=False,
-        help="Date à laquelle la tâche planifiée a annulé ce devis échu.")
+        string="Expired On", readonly=True, copy=False,
+        help="Date on which the scheduled action cancelled this expired quotation.")
     oski_reminder_sent_on = fields.Date(
-        string="Relance envoyée le", readonly=True, copy=False)
+        string="Reminder Sent On", readonly=True, copy=False)
 
     # -- Tâche planifiée --------------------------------------------------
 
@@ -67,14 +67,24 @@ class SaleOrder(models.Model):
             # Le journal du devis doit dire QUI l'a annulé et pourquoi : sans
             # cette trace, une annulation nocturne passe pour une manipulation.
             order.message_post(
-                body=Markup("<p>%s</p>") % _(
-                    "Devis périmé le %(date)s : la date de validité était "
-                    "dépassée.", date=order.validity_date),
+                body=Markup("<p>%s</p>") % order._oski_reader_env()._(
+                    "Quotation expired on %(date)s: its expiration date "
+                    "had passed.", date=order.validity_date),
                 subtype_xmlid="mail.mt_note")
         if stale:
             stale._action_cancel()
             stale.write({"oski_expired_on": today})
         return stale
+
+    def _oski_reader_env(self):
+        """L'environnement dans la langue du vendeur, qui lit la trace.
+
+        La tâche planifiée tourne sans langue : sans cela, la note et
+        l'activité seraient écrites en anglais pour tous.
+        """
+        self.ensure_one()
+        user = self.user_id or self.create_uid
+        return self.with_context(lang=user.lang or self.env.lang).env
 
     def _oski_notify_salesperson(self):
         """Une activité, jamais un courriel.
@@ -86,6 +96,7 @@ class SaleOrder(models.Model):
         user = self.user_id or self.create_uid
         if not user or not user.active:
             return
+        reader = self._oski_reader_env()
         self.env["mail.activity"].sudo().with_context(
             mail_activity_quick_update=True).create({
                 "res_model_id": self.env["ir.model"]._get_id("sale.order"),
@@ -94,7 +105,7 @@ class SaleOrder(models.Model):
                     "mail.mail_activity_data_todo").id,
                 "user_id": user.id,
                 "date_deadline": self.validity_date,
-                "summary": _("Devis à relancer avant échéance"),
-                "note": Markup("<p>%s</p>") % _(
-                    "Ce devis expire le %(date)s.", date=self.validity_date),
+                "summary": reader._("Follow up on the quotation before it expires"),
+                "note": Markup("<p>%s</p>") % reader._(
+                    "This quotation expires on %(date)s.", date=self.validity_date),
             })

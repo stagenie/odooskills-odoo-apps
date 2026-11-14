@@ -1,8 +1,8 @@
 from odoo import api, fields, models
 
 FIELDS = [
-    ("list_price", "Prix de vente"),
-    ("standard_price", "Coût"),
+    ("list_price", "Sales Price"),
+    ("standard_price", "Cost"),
 ]
 
 
@@ -16,31 +16,31 @@ class OskiProductPriceHistory(models.Model):
     """
 
     _name = "oski.product.price.history"
-    _description = "Historique des prix"
+    _description = "Price History"
     _order = "changed_on desc, id desc"
     _rec_name = "product_tmpl_id"
 
     product_tmpl_id = fields.Many2one(
-        "product.template", string="Article", required=True, index=True,
+        "product.template", string="Item", required=True, index=True,
         ondelete="cascade")
     product_id = fields.Many2one(
-        "product.product", string="Variante", index=True, ondelete="cascade",
-        help="Renseignée pour le coût, qui se tient par variante.")
-    field_name = fields.Selection(FIELDS, string="Prix", required=True, index=True)
-    old_value = fields.Float(string="Avant", digits="Product Price", readonly=True)
-    new_value = fields.Float(string="Après", digits="Product Price", readonly=True)
+        "product.product", string="Variant", index=True, ondelete="cascade",
+        help="Filled in for the cost, which is kept per variant.")
+    field_name = fields.Selection(FIELDS, string="Price", required=True, index=True)
+    old_value = fields.Float(string="Before", digits="Product Price", readonly=True)
+    new_value = fields.Float(string="After", digits="Product Price", readonly=True)
     variation = fields.Float(
-        string="Écart", digits="Product Price", compute="_compute_variation",
+        string="Difference", digits="Product Price", compute="_compute_variation",
         store=True)
     variation_percent = fields.Float(
-        string="Écart (%)", digits=(5, 2), compute="_compute_variation", store=True)
+        string="Difference (%)", digits=(5, 2), compute="_compute_variation", store=True)
     changed_on = fields.Datetime(
-        string="Le", required=True, index=True, default=fields.Datetime.now)
+        string="Changed On", required=True, index=True, default=fields.Datetime.now)
     user_id = fields.Many2one(
-        "res.users", string="Par", default=lambda self: self.env.user,
+        "res.users", string="Changed By", default=lambda self: self.env.user,
         ondelete="set null")
     company_id = fields.Many2one(
-        "res.company", string="Société", required=True,
+        "res.company", string="Company", required=True,
         default=lambda self: self.env.company)
     currency_id = fields.Many2one(
         "res.currency", related="company_id.currency_id", readonly=True)

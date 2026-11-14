@@ -1,0 +1,99 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_currency_rate_auto
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:00+0000\n"
+"PO-Revision-Date: 2026-11-14 21:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_currency_rate_auto
+#. odoo-python
+#: code:addons/oski_currency_rate_auto/models/res_company.py:0
+msgid "%s rates updated."
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,help:oski_currency_rate_auto.field_res_company__oski_rate_auto
+msgid "A daily scheduled action records the rates published by the European Central Bank."
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_auto
+msgid "Automatic Exchange Rates"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model,name:oski_currency_rate_auto.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields.selection,name:oski_currency_rate_auto.selection__res_company__oski_rate_provider__ecb
+msgid "European Central Bank"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model_terms:ir.ui.view,arch_db:oski_currency_rate_auto.res_company_view_form_oski_rates
+msgid "Exchange Rates"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.actions.server,name:oski_currency_rate_auto.ir_cron_oski_currency_rate_ir_actions_server
+msgid "Exchange rates: daily update"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_last_error
+msgid "Last Error"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_last_sync
+msgid "Last Rate Update"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_provider
+msgid "Rate Source"
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model_terms:ir.ui.view,arch_db:oski_currency_rate_auto.res_company_view_form_oski_rates
+msgid "The last update failed. The rates shown are those of the last successful one."
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#. odoo-python
+#: code:addons/oski_currency_rate_auto/models/res_company.py:0
+msgid "The source publishes no rate for %s, the company's currency."
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#. odoo-python
+#: code:addons/oski_currency_rate_auto/models/res_company.py:0
+msgid "The source returned no usable rate."
+msgstr ""
+
+#. module: oski_currency_rate_auto
+#: model_terms:ir.ui.view,arch_db:oski_currency_rate_auto.res_company_view_form_oski_rates
+msgid "Update Now"
+msgstr ""

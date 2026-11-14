@@ -12,10 +12,10 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     oski_quote_expire_active = fields.Boolean(
-        string="Périmer les devis échus", default=False,
-        help="La tâche planifiée annule chaque nuit les devis dont la date de "
-             "validité est dépassée.")
+        string="Expire Overdue Quotations", default=False,
+        help="The scheduled action cancels every night the quotations whose "
+             "expiration date has passed.")
     oski_quote_reminder_days = fields.Integer(
-        string="Relance avant échéance (jours)", default=3,
-        help="Nombre de jours avant l'échéance où le vendeur reçoit une "
-             "activité de relance. Zéro : aucune relance.")
+        string="Reminder Before Expiry (days)", default=3,
+        help="Number of days before the expiration date when the "
+             "salesperson gets a reminder activity. Zero: no reminder.")

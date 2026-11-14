@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <!-- Insère la colonne N° en première position de la liste des lignes. -->
             <xpath expr="//field[@name='order_line']/list/field[@name='product_template_id']" position="before">
-                <field name="oski_line_number" string="N°" readonly="1" optional="show"/>
+                <field name="oski_line_number" string="No." readonly="1" optional="show"/>
             </xpath>
         </field>
     </record>

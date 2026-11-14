@@ -1,0 +1,99 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:00+0000\n"
+"PO-Revision-Date: 2026-11-14 21:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_currency_rate_auto
+#. odoo-python
+#: code:addons/oski_currency_rate_auto/models/res_company.py:0
+msgid "%s rates updated."
+msgstr "%s taux mis à jour."
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,help:oski_currency_rate_auto.field_res_company__oski_rate_auto
+msgid "A daily scheduled action records the rates published by the European Central Bank."
+msgstr "Une tâche planifiée quotidienne inscrit les taux publiés par la Banque centrale européenne."
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_auto
+msgid "Automatic Exchange Rates"
+msgstr "Taux de change automatiques"
+
+#. module: oski_currency_rate_auto
+#: model:ir.model,name:oski_currency_rate_auto.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields.selection,name:oski_currency_rate_auto.selection__res_company__oski_rate_provider__ecb
+msgid "European Central Bank"
+msgstr "Banque centrale européenne"
+
+#. module: oski_currency_rate_auto
+#: model_terms:ir.ui.view,arch_db:oski_currency_rate_auto.res_company_view_form_oski_rates
+msgid "Exchange Rates"
+msgstr "Taux de change"
+
+#. module: oski_currency_rate_auto
+#: model:ir.actions.server,name:oski_currency_rate_auto.ir_cron_oski_currency_rate_ir_actions_server
+msgid "Exchange rates: daily update"
+msgstr "Taux de change : mise à jour quotidienne"
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_last_error
+msgid "Last Error"
+msgstr "Dernière erreur"
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_last_sync
+msgid "Last Rate Update"
+msgstr "Dernière mise à jour"
+
+#. module: oski_currency_rate_auto
+#: model:ir.model.fields,field_description:oski_currency_rate_auto.field_res_company__oski_rate_provider
+msgid "Rate Source"
+msgstr "Source des taux"
+
+#. module: oski_currency_rate_auto
+#: model_terms:ir.ui.view,arch_db:oski_currency_rate_auto.res_company_view_form_oski_rates
+msgid "The last update failed. The rates shown are those of the last successful one."
+msgstr ""
+"La dernière mise à jour a échoué. Les taux affichés sont ceux du dernier\n"
+"                        succès."
+
+#. module: oski_currency_rate_auto
+#. odoo-python
+#: code:addons/oski_currency_rate_auto/models/res_company.py:0
+msgid "The source publishes no rate for %s, the company's currency."
+msgstr "La source ne publie pas de taux pour %s, la devise de la société."
+
+#. module: oski_currency_rate_auto
+#. odoo-python
+#: code:addons/oski_currency_rate_auto/models/res_company.py:0
+msgid "The source returned no usable rate."
+msgstr "La source n'a rendu aucun taux exploitable."
+
+#. module: oski_currency_rate_auto
+#: model_terms:ir.ui.view,arch_db:oski_currency_rate_auto.res_company_view_form_oski_rates
+msgid "Update Now"
+msgstr "Mettre à jour maintenant"

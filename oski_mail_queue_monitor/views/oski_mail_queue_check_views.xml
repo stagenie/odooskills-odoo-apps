@@ -4,7 +4,7 @@
         <field name="name">oski.mail.queue.check.list</field>
         <field name="model">oski.mail.queue.check</field>
         <field name="arch" type="xml">
-            <list string="Auscultations" create="false" edit="false"
+            <list string="Queue Checks" create="false" edit="false"
                   decoration-danger="verdict == 'critical'"
                   decoration-warning="verdict == 'warning'">
                 <field name="checked_on"/>
@@ -23,17 +23,17 @@
         <field name="name">oski.mail.queue.check.form</field>
         <field name="model">oski.mail.queue.check</field>
         <field name="arch" type="xml">
-            <form string="Auscultation" create="false">
+            <form string="Queue Check" create="false">
                 <header>
                     <button name="action_retry_failed_mails" type="object"
-                            string="Renvoyer les courriels en échec"
+                            string="Resend Failed Emails"
                             class="btn-primary" invisible="failed_count == 0"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_open_failed_mails" type="object"
                                 class="oe_stat_button" icon="fa-envelope-o">
-                            <field name="failed_count" widget="statinfo" string="En échec"/>
+                            <field name="failed_count" widget="statinfo" string="Failed"/>
                         </button>
                     </div>
                     <h1><field name="verdict" readonly="1"/></h1>
@@ -47,7 +47,7 @@
                             <field name="oldest_pending_hours" readonly="1"/>
                         </group>
                     </group>
-                    <group string="Détail">
+                    <group string="Details">
                         <field name="note" nolabel="1" readonly="1"/>
                     </group>
                 </sheet>
@@ -60,12 +60,12 @@
         <field name="name">oski.mail.queue.check.search</field>
         <field name="model">oski.mail.queue.check</field>
         <field name="arch" type="xml">
-            <search string="Auscultations">
+            <search string="Queue Checks">
                 <filter name="not_ok" string="Anomalies" domain="[('verdict', '!=', 'ok')]"/>
                 <group>
                     <filter name="group_verdict" string="Verdict" domain="[]"
                             context="{'group_by': 'verdict'}"/>
-                    <filter name="group_day" string="Jour" domain="[]"
+                    <filter name="group_day" string="Day" domain="[]"
                             context="{'group_by': 'checked_on:day'}"/>
                 </group>
             </search>
@@ -73,17 +73,17 @@
     </record>
 
     <record id="oski_mail_queue_check_action" model="ir.actions.act_window">
-        <field name="name">Santé de la file de courriels</field>
+        <field name="name">Email Queue Health</field>
         <field name="res_model">oski.mail.queue.check</field>
         <field name="view_mode">list,form</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Aucune auscultation</p>
-            <p>La tâche planifiée quotidienne inscrit ici l'état de la file d'envoi.</p>
+            <p class="o_view_nocontent_smiling_face">No queue check yet</p>
+            <p>The daily scheduled action records the state of the outgoing queue here.</p>
         </field>
     </record>
 
     <menuitem id="oski_mail_queue_check_menu"
-              name="Santé de la file"
+              name="Queue Health"
               parent="base.menu_email"
               action="oski_mail_queue_check_action"
               sequence="25"

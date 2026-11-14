@@ -1,0 +1,323 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 21:11+0000\n"
+"PO-Revision-Date: 2026-11-14 21:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_mail_queue_monitor
+#. odoo-python
+#: code:addons/oski_mail_queue_monitor/models/oski_mail_queue_check.py:0
+msgid "%(cause)s: %(count)s"
+msgstr "%(cause)s : %(count)s"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Indicateur d’exception d’activité"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_state
+msgid "Activity State"
+msgstr "Statut de l'activité"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône de type d'activité"
+
+#. module: oski_mail_queue_monitor
+#: model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_search
+msgid "Anomalies"
+msgstr "Anomalies"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__checked_on
+msgid "Checked On"
+msgstr "Auscultée le"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_mail_queue_monitor
+#: model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_search
+msgid "Day"
+msgstr "Jour"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__note model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_form
+msgid "Details"
+msgstr "Détail"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model,name:oski_mail_queue_monitor.model_oski_mail_queue_check
+msgid "Email Queue Check"
+msgstr "Auscultation de la file de courriels"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.actions.act_window,name:oski_mail_queue_monitor.oski_mail_queue_check_action
+msgid "Email Queue Health"
+msgstr "Santé de la file de courriels"
+
+#. module: oski_mail_queue_monitor
+#. odoo-python
+#: code:addons/oski_mail_queue_monitor/models/oski_mail_queue_check.py:0
+msgid "Email queue stalled for %.1f h"
+msgstr "File de courriels à l'arrêt depuis %.1f h"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.actions.server,name:oski_mail_queue_monitor.ir_cron_oski_mail_queue_check_ir_actions_server
+msgid "Emails: check the outgoing queue"
+msgstr "Courriels : auscultation de la file"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__failed_count model:ir.model.fields.selection,name:oski_mail_queue_monitor.selection__oski_mail_queue_check__verdict__critical model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_form
+msgid "Failed"
+msgstr "En échec"
+
+#. module: oski_mail_queue_monitor
+#. odoo-python
+#: code:addons/oski_mail_queue_monitor/models/oski_mail_queue_check.py:0
+msgid "Failed Emails"
+msgstr "Courriels en échec"
+
+#. module: oski_mail_queue_monitor
+#. odoo-python
+#: code:addons/oski_mail_queue_monitor/models/oski_mail_queue_check.py:0
+msgid "Failed emails: %s"
+msgstr "Courriels en échec : %s"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome par ex. fa-tasks"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields.selection,name:oski_mail_queue_monitor.selection__oski_mail_queue_check__verdict__ok
+msgid "Healthy"
+msgstr "Saine"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour indiquer une activité d'exception."
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur de livraison."
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Échéance de mon activité"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'activité à venir"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de l'activité suivante"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'activités à venir"
+
+#. module: oski_mail_queue_monitor
+#: model_terms:ir.actions.act_window,help:oski_mail_queue_monitor.oski_mail_queue_check_action
+msgid "No queue check yet"
+msgstr "Aucune auscultation"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__oldest_pending_hours
+msgid "Oldest Pending (h)"
+msgstr "Plus vieux en attente (h)"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__pending_count
+msgid "Pending"
+msgstr "En attente"
+
+#. module: oski_mail_queue_monitor
+#: model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_form
+msgid "Queue Check"
+msgstr "Auscultation"
+
+#. module: oski_mail_queue_monitor
+#: model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_list model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_search
+msgid "Queue Checks"
+msgstr "Auscultations"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.ui.menu,name:oski_mail_queue_monitor.oski_mail_queue_check_menu
+msgid "Queue Health"
+msgstr "Santé de la file"
+
+#. module: oski_mail_queue_monitor
+#: model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_form
+msgid "Resend Failed Emails"
+msgstr "Renvoyer les courriels en échec"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields.selection,name:oski_mail_queue_monitor.selection__oski_mail_queue_check__verdict__warning
+msgid "Slowed Down"
+msgstr "Ralentie"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
+
+#. module: oski_mail_queue_monitor
+#: model_terms:ir.actions.act_window,help:oski_mail_queue_monitor.oski_mail_queue_check_action
+msgid "The daily scheduled action records the state of the outgoing queue here."
+msgstr "La tâche planifiée quotidienne inscrit ici l'état de la file d'envoi."
+
+#. module: oski_mail_queue_monitor
+#. odoo-python
+#: code:addons/oski_mail_queue_monitor/models/oski_mail_queue_check.py:0
+msgid "The oldest pending email has been waiting for %.1f h."
+msgstr "Le plus vieux courriel en attente date de %.1f h."
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,help:oski_mail_queue_monitor.field_oski_mail_queue_check__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type d'activité d'exception enregistrée."
+
+#. module: oski_mail_queue_monitor
+#. odoo-python
+#: code:addons/oski_mail_queue_monitor/models/oski_mail_queue_check.py:0
+msgid "Unspecified cause"
+msgstr "Cause non renseignée"
+
+#. module: oski_mail_queue_monitor
+#: model:ir.model.fields,field_description:oski_mail_queue_monitor.field_oski_mail_queue_check__verdict model_terms:ir.ui.view,arch_db:oski_mail_queue_monitor.oski_mail_queue_check_view_search
+msgid "Verdict"
+msgstr "Verdict"
