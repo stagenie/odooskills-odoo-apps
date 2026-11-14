@@ -7,8 +7,8 @@
         <field name="inherit_id" ref="crm.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//app[@name='crm']//block[1]" position="inside">
-                <setting string="Pistes dormantes"
-                         help="Seuil de jours sans mouvement au-delà duquel une piste est considérée comme dormante">
+                <setting string="Idle Leads"
+                         help="Number of days without movement after which a lead is considered idle">
                     <field name="oski_crm_idle_days"/>
                 </setting>
             </xpath>

@@ -9,10 +9,10 @@ class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
     oski_dup_check_email = fields.Boolean(
-        string="Détecter les doublons d'email",
+        string="Detect Email Duplicates",
         config_parameter="oski_dup.check_email", default=True,
     )
     oski_dup_check_phone = fields.Boolean(
-        string="Détecter les doublons de téléphone",
+        string="Detect Phone Duplicates",
         config_parameter="oski_dup.check_phone", default=True,
     )

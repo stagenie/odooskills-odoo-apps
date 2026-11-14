@@ -5,8 +5,8 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     oski_duplicate_id = fields.Many2one(
-        "res.partner", string="Doublon possible", readonly=True,
-        help="Contact existant partageant le même email ou téléphone.",
+        "res.partner", string="Possible Duplicate", readonly=True,
+        help="Existing contact sharing the same email or phone.",
     )
 
     def _oski_check_enabled(self, kind):
@@ -42,8 +42,8 @@ class ResPartner(models.Model):
         self.oski_duplicate_id = dup
         if dup:
             return {"warning": {
-                "title": _("Doublon possible"),
-                "message": _("Un contact avec cet email existe déjà : %s") % dup.display_name,
+                "title": _("Possible Duplicate"),
+                "message": _("A contact with this email already exists: %s") % dup.display_name,
             }}
 
     @api.onchange("phone")
@@ -54,8 +54,8 @@ class ResPartner(models.Model):
         if dup:
             self.oski_duplicate_id = dup
             return {"warning": {
-                "title": _("Doublon possible"),
-                "message": _("Un contact avec ce téléphone existe déjà : %s") % dup.display_name,
+                "title": _("Possible Duplicate"),
+                "message": _("A contact with this phone already exists: %s") % dup.display_name,
             }}
 
     @api.model_create_multi

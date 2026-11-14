@@ -17,25 +17,25 @@ class OskiBarcodeGenerator(models.TransientModel):
     """
 
     _name = "oski.barcode.generator"
-    _description = "Génération de codes-barres"
+    _description = "Barcode Generation"
     # Odoo 20 : sans cette ligne la tâche de nettoyage lit une durée de
     # conservation nulle et ne supprime jamais les assistants (skill odoo-v20).
     _transient_max_hours = 1.0
 
     prefix = fields.Char(
-        string="Préfixe", required=True, default="200",
-        help="Chiffres de tête, communs à tous les codes produits. "
-             "La plage 20-29 est réservée à l'usage interne.")
+        string="Prefix", required=True, default="200",
+        help="Leading digits shared by all the generated codes. "
+             "The 20-29 range is reserved for internal use.")
     scope = fields.Selection(
-        [("empty", "Tous les articles sans code-barres"),
-         ("selected", "Uniquement la sélection")],
-        string="Portée", required=True, default="empty")
+        [("empty", "All products without a barcode"),
+         ("selected", "Selection only")],
+        string="Scope", required=True, default="empty")
     limit = fields.Integer(
-        string="Au plus", default=500,
-        help="Garde-fou : nombre maximal de codes attribués en une fois.")
+        string="At Most", default=500,
+        help="Safeguard: maximum number of codes assigned in one go.")
     candidate_count = fields.Integer(
-        string="Articles concernés", compute="_compute_candidate_count")
-    generated_count = fields.Integer(string="Codes attribués", readonly=True)
+        string="Products Concerned", compute="_compute_candidate_count")
+    generated_count = fields.Integer(string="Assigned Codes", readonly=True)
 
     @api.constrains("prefix")
     def _check_prefix(self):
@@ -45,20 +45,21 @@ class OskiBarcodeGenerator(models.TransientModel):
             prefix = wizard.prefix or ""
             if not DIGITS.match(prefix):
                 raise ValidationError(_(
-                    "Le préfixe ne peut contenir que des chiffres."))
+                    "The prefix can only contain digits."))
             if not 1 <= len(prefix) <= 7:
                 raise ValidationError(_(
-                    "Le préfixe tient entre 1 et 7 chiffres ; au-delà il ne "
-                    "resterait pas assez de place pour numéroter les articles."))
+                    "The prefix must be 1 to 7 digits long; beyond that, "
+                    "there would not be enough room left to number the "
+                    "products."))
             if prefix[0] == "0":
                 raise ValidationError(_(
-                    "Un EAN13 ne commence pas par zéro."))
+                    "An EAN-13 code never starts with zero."))
 
     @api.constrains("limit")
     def _check_limit(self):
         for wizard in self:
             if wizard.limit <= 0:
-                raise ValidationError(_("Le garde-fou doit être positif."))
+                raise ValidationError(_("The “At Most” safeguard must be positive."))
 
     @api.depends("scope")
     def _compute_candidate_count(self):
@@ -97,8 +98,8 @@ class OskiBarcodeGenerator(models.TransientModel):
             counter += 1
             if counter >= 10 ** body_length:
                 raise UserError(_(
-                    "La plage du préfixe %(prefix)s est épuisée : il n'y reste "
-                    "aucun numéro libre. Choisissez un autre préfixe.",
+                    "The range of prefix %(prefix)s is exhausted: no free "
+                    "number is left in it. Choose another prefix.",
                     prefix=self.prefix))
             body = str(counter).zfill(body_length)
             # `get_barcode_check_digit` RETIRE le dernier caractère avant de
@@ -131,8 +132,8 @@ class OskiBarcodeGenerator(models.TransientModel):
         candidates = self._oski_candidates()[:self.limit]
         if not candidates:
             raise UserError(_(
-                "Aucun article à servir : tous ceux visés portent déjà un "
-                "code-barres."))
+                "Nothing to do: all the targeted products already have a "
+                "barcode."))
         taken = self._oski_taken_codes()
         counter = 0
         for product in candidates:
@@ -142,7 +143,7 @@ class OskiBarcodeGenerator(models.TransientModel):
         self.generated_count = len(candidates)
         return {
             "type": "ir.actions.act_window",
-            "name": _("Articles servis"),
+            "name": _("Barcoded Products"),
             "res_model": "product.product",
             "view_mode": "list,form",
             "domain": [("id", "in", candidates.ids)],

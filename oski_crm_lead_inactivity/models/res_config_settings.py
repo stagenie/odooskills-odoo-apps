@@ -6,9 +6,9 @@ class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
     oski_crm_idle_days = fields.Integer(
-        string="Seuil d'inactivité (jours)",
+        string="Idle Threshold (Days)",
         config_parameter="oski_crm_lead_inactivity.idle_days",
         default=14,
-        help="Nombre de jours sans mouvement au-delà duquel une piste ou une "
-        "opportunité est considérée comme dormante.",
+        help="Number of days without movement after which a lead or an "
+        "opportunity is considered idle.",
     )

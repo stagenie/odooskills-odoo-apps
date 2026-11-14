@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_crm_lead_inactivity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 15:35+0000\n"
+"PO-Revision-Date: 2026-11-14 15:35+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,help:oski_crm_lead_inactivity.field_crm_lead__oski_is_idle
+msgid "Active lead, neither won nor lost, that has not moved for at least the idle threshold set in the CRM Settings."
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model,name:oski_crm_lead_inactivity.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,field_description:oski_crm_lead_inactivity.field_crm_lead__display_name model:ir.model.fields,field_description:oski_crm_lead_inactivity.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,field_description:oski_crm_lead_inactivity.field_crm_lead__id model:ir.model.fields,field_description:oski_crm_lead_inactivity.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.oski_view_crm_case_opportunities_filter
+msgid "Idle"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,field_description:oski_crm_lead_inactivity.field_crm_lead__oski_idle_days model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.oski_crm_case_tree_view_oppor
+msgid "Idle Days"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.res_config_settings_view_form_oski_crm_inactivity
+msgid "Idle Leads"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,field_description:oski_crm_lead_inactivity.field_res_config_settings__oski_crm_idle_days
+msgid "Idle Threshold (Days)"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.oski_crm_lead_view_form
+msgid "Idle for"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,field_description:oski_crm_lead_inactivity.field_crm_lead__oski_is_idle
+msgid "Is Idle"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model,name:oski_crm_lead_inactivity.model_crm_lead
+msgid "Lead"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.oski_view_crm_case_opportunities_filter
+msgid "Leads and opportunities that have not moved since the configured threshold"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,help:oski_crm_lead_inactivity.field_crm_lead__oski_idle_days
+msgid "Number of days since the lead last moved (last stage change, or creation otherwise)."
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.res_config_settings_view_form_oski_crm_inactivity
+msgid "Number of days without movement after which a lead is considered idle"
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model:ir.model.fields,help:oski_crm_lead_inactivity.field_res_config_settings__oski_crm_idle_days
+msgid "Number of days without movement after which a lead or an opportunity is considered idle."
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.oski_crm_lead_view_form
+msgid "This lead has not moved for longer than the configured threshold."
+msgstr ""
+
+#. module: oski_crm_lead_inactivity
+#: model_terms:ir.ui.view,arch_db:oski_crm_lead_inactivity.oski_crm_lead_view_form
+msgid "days"
+msgstr ""

@@ -1,0 +1,101 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 15:34+0000\n"
+"PO-Revision-Date: 2026-11-14 15:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_contact_duplicate_guard
+#: model_terms:ir.ui.view,arch_db:oski_contact_duplicate_guard.view_partner_form_oski_dup
+msgid ""
+"<i class=\"oi me-1\" data-icon=\"warning\"/>\n"
+"                    Possible duplicate:"
+msgstr ""
+"<i class=\"oi me-1\" data-icon=\"warning\"/>\n"
+"                    Doublon possible :"
+
+#. module: oski_contact_duplicate_guard
+#. odoo-python
+#: code:addons/oski_contact_duplicate_guard/models/res_partner.py:0
+msgid "A contact with this email already exists: %s"
+msgstr "Un contact avec cet email existe déjà : %s"
+
+#. module: oski_contact_duplicate_guard
+#. odoo-python
+#: code:addons/oski_contact_duplicate_guard/models/res_partner.py:0
+msgid "A contact with this phone already exists: %s"
+msgstr "Un contact avec ce téléphone existe déjà : %s"
+
+#. module: oski_contact_duplicate_guard
+#: model:ir.model,name:oski_contact_duplicate_guard.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: oski_contact_duplicate_guard
+#: model:ir.model,name:oski_contact_duplicate_guard.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: oski_contact_duplicate_guard
+#: model_terms:ir.ui.view,arch_db:oski_contact_duplicate_guard.res_config_settings_view_form_oski_dup
+msgid "Contact Duplicate Guard"
+msgstr "Anti-doublon Contacts"
+
+#. module: oski_contact_duplicate_guard
+#: model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_config_settings__oski_dup_check_email
+msgid "Detect Email Duplicates"
+msgstr "Détecter les doublons d'email"
+
+#. module: oski_contact_duplicate_guard
+#: model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_config_settings__oski_dup_check_phone
+msgid "Detect Phone Duplicates"
+msgstr "Détecter les doublons de téléphone"
+
+#. module: oski_contact_duplicate_guard
+#: model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_config_settings__display_name model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_contact_duplicate_guard
+#: model_terms:ir.ui.view,arch_db:oski_contact_duplicate_guard.res_config_settings_view_form_oski_dup
+msgid "Email Duplicates"
+msgstr "Doublons d'email"
+
+#. module: oski_contact_duplicate_guard
+#: model:ir.model.fields,help:oski_contact_duplicate_guard.field_res_partner__oski_duplicate_id model:ir.model.fields,help:oski_contact_duplicate_guard.field_res_users__oski_duplicate_id
+msgid "Existing contact sharing the same email or phone."
+msgstr "Contact existant partageant le même email ou téléphone."
+
+#. module: oski_contact_duplicate_guard
+#: model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_config_settings__id model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_contact_duplicate_guard
+#: model_terms:ir.ui.view,arch_db:oski_contact_duplicate_guard.res_config_settings_view_form_oski_dup
+msgid "Phone Duplicates"
+msgstr "Doublons de téléphone"
+
+#. module: oski_contact_duplicate_guard
+#. odoo-python
+#: code:addons/oski_contact_duplicate_guard/models/res_partner.py:0 model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_partner__oski_duplicate_id model:ir.model.fields,field_description:oski_contact_duplicate_guard.field_res_users__oski_duplicate_id
+msgid "Possible Duplicate"
+msgstr "Doublon possible"
+
+#. module: oski_contact_duplicate_guard
+#: model_terms:ir.ui.view,arch_db:oski_contact_duplicate_guard.res_config_settings_view_form_oski_dup
+msgid "Warns when a contact has the same email as another one."
+msgstr "Avertit si un contact a le même email qu'un autre."
+
+#. module: oski_contact_duplicate_guard
+#: model_terms:ir.ui.view,arch_db:oski_contact_duplicate_guard.res_config_settings_view_form_oski_dup
+msgid "Warns when a contact has the same phone as another one."
+msgstr "Avertit si un contact a le même téléphone qu'un autre."
