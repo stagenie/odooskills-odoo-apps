@@ -1,0 +1,302 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_appointment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 13:32+0000\n"
+"PO-Revision-Date: 2026-11-14 13:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_appointment
+#. odoo-python
+#: code:addons/oski_appointment/models/appointment_type.py:0
+msgid "%s is no longer available for this time slot."
+msgstr ""
+
+#. module: oski_appointment
+#: model:mail.template,body_html:oski_appointment.mail_template_appointment_confirmation
+msgid ""
+"<div>\n"
+"                <p>Hello,</p>\n"
+"                <p>Your appointment <strong t-out=\"object.name\">Appointment</strong> is confirmed.</p>\n"
+"                <ul>\n"
+"                    <li>Date: <span t-out=\"format_datetime(object.start, tz=object.appointment_tz or object.appointment_type_id.resource_calendar_id.tz or 'UTC', dt_format='dd/MM/yyyy HH:mm')\">date</span>\n"
+"                        (<span t-out=\"object.appointment_tz or object.appointment_type_id.resource_calendar_id.tz or 'UTC'\">time zone</span>)</li>\n"
+"                    <li t-if=\"object.location\">Location: <span t-out=\"object.location\">location</span></li>\n"
+"                </ul>\n"
+"                <p>See you soon.</p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__active
+msgid "Active"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model,name:oski_appointment.model_appointment_booking_wizard
+msgid "Appointment Booking"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model,name:oski_appointment.model_appointment_type
+msgid "Appointment Booking Type"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_calendar_event__appointment_partner_id
+msgid "Appointment Customer"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_calendar_event__appointment_state
+msgid "Appointment Status"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__appointment_type_id model:ir.model.fields,field_description:oski_appointment.field_calendar_event__appointment_type_id
+msgid "Appointment Type"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.actions.act_window,name:oski_appointment.action_appointment_type model:ir.ui.menu,name:oski_appointment.menu_appointment_type
+msgid "Appointment Types"
+msgstr ""
+
+#. module: oski_appointment
+#: model:mail.template,subject:oski_appointment.mail_template_appointment_confirmation
+msgid "Appointment confirmation: {{ object.name }}"
+msgstr ""
+
+#. module: oski_appointment
+#. odoo-python
+#: code:addons/oski_appointment/models/appointment_type.py:0
+msgid "Appointment type “%s” is archived: it can no longer be booked."
+msgstr ""
+
+#. module: oski_appointment
+#: model:mail.template,name:oski_appointment.mail_template_appointment_confirmation
+msgid "Appointment: Confirmation"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.actions.act_window,name:oski_appointment.action_appointment_event model:ir.model.fields,field_description:oski_appointment.field_appointment_type__appointment_count model:ir.module.category,name:oski_appointment.module_category_appointment model:ir.ui.menu,name:oski_appointment.menu_appointment_event model:ir.ui.menu,name:oski_appointment.menu_appointment_root model:res.groups.privilege,name:oski_appointment.privilege_appointment
+msgid "Appointments"
+msgstr ""
+
+#. module: oski_appointment
+#: model:res.groups,name:oski_appointment.group_appointment_manager
+msgid "Appointments / Manager"
+msgstr ""
+
+#. module: oski_appointment
+#: model:res.groups,name:oski_appointment.group_appointment_user
+msgid "Appointments / User"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields.selection,name:oski_appointment.selection__calendar_event__appointment_state__done
+msgid "Attended"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__resource_calendar_id
+msgid "Availability"
+msgstr ""
+
+#. module: oski_appointment
+#: model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_type_form
+msgid "Book"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.actions.act_window,name:oski_appointment.action_appointment_booking_wizard model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_booking_wizard_form
+msgid "Book an Appointment"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields.selection,name:oski_appointment.selection__calendar_event__appointment_state__booked
+msgid "Booked"
+msgstr ""
+
+#. module: oski_appointment
+#: model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_event_search
+msgid "Booked Appointments"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__max_days_ahead
+msgid "Booking Window (days)"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model,name:oski_appointment.model_calendar_event
+msgid "Calendar Event"
+msgstr ""
+
+#. module: oski_appointment
+#: model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_booking_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields.selection,name:oski_appointment.selection__calendar_event__appointment_state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: oski_appointment
+#. odoo-python
+#: code:addons/oski_appointment/models/appointment_type.py:0
+msgid "Choose a time slot."
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.ui.menu,name:oski_appointment.menu_appointment_config
+msgid "Configuration"
+msgstr ""
+
+#. module: oski_appointment
+#: model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_booking_wizard_form
+msgid "Confirm"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__create_uid model:ir.model.fields,field_description:oski_appointment.field_appointment_type__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__create_date model:ir.model.fields,field_description:oski_appointment.field_appointment_type__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__partner_id
+msgid "Customer"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_calendar_event__appointment_tz
+msgid "Customer Time Zone"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,help:oski_appointment.field_calendar_event__appointment_partner_id
+msgid "Customer who booked the appointment (recipient of the confirmation)."
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__description
+msgid "Description"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__display_name model:ir.model.fields,field_description:oski_appointment.field_appointment_type__display_name model:ir.model.fields,field_description:oski_appointment.field_calendar_event__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__duration
+msgid "Duration (hours)"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__id model:ir.model.fields,field_description:oski_appointment.field_appointment_type__id model:ir.model.fields,field_description:oski_appointment.field_calendar_event__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__write_uid model:ir.model.fields,field_description:oski_appointment.field_appointment_type__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__write_date model:ir.model.fields,field_description:oski_appointment.field_appointment_type__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,help:oski_appointment.field_appointment_booking_wizard__staff_user_id
+msgid "Leave empty: the first available staff member is assigned."
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__location
+msgid "Location"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__location_id
+msgid "Location Address"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__min_notice_hours
+msgid "Minimum Notice (hours)"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__name
+msgid "Name"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields.selection,name:oski_appointment.selection__calendar_event__appointment_state__no_show
+msgid "No Show"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_type__reminder_ids model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_type_form
+msgid "Reminders"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__staff_user_ids model:ir.model.fields,field_description:oski_appointment.field_appointment_type__staff_user_ids model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_event_search model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_type_form
+msgid "Staff"
+msgstr ""
+
+#. module: oski_appointment
+#. odoo-python
+#: code:addons/oski_appointment/models/appointment_type.py:0
+msgid "The duration must be strictly positive."
+msgstr ""
+
+#. module: oski_appointment
+#. odoo-python
+#: code:addons/oski_appointment/models/appointment_type.py:0
+msgid "This time slot cannot be booked: it is in the past, outside working hours, too soon, too far ahead or already full."
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__slot_start
+msgid "Time Slot"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,help:oski_appointment.field_calendar_event__appointment_tz
+msgid "Time zone in which the customer chose the time slot (dates shown in emails)."
+msgstr ""
+
+#. module: oski_appointment
+#: model_terms:ir.ui.view,arch_db:oski_appointment.view_appointment_event_search
+msgid "Type"
+msgstr ""
+
+#. module: oski_appointment
+#: model:ir.model.fields,field_description:oski_appointment.field_appointment_booking_wizard__staff_user_id
+msgid "With"
+msgstr ""

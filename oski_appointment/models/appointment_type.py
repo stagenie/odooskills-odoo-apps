@@ -8,30 +8,36 @@ from odoo.exceptions import UserError, ValidationError
 
 class AppointmentType(models.Model):
     _name = "appointment.type"
-    _description = "Type de rendez-vous"
+    _description = "Appointment Booking Type"
     _order = "name"
 
-    name = fields.Char(string="Nom", required=True)
-    duration = fields.Float(string="Durée (heures)", required=True, default=1.0)
+    name = fields.Char(string="Name", required=True)
+    duration = fields.Float(string="Duration (hours)", required=True, default=1.0)
     resource_calendar_id = fields.Many2one(
         "resource.calendar",
-        string="Disponibilité",
+        string="Availability",
         required=True,
         default=lambda self: self.env.company.resource_calendar_id,
     )
     staff_user_ids = fields.Many2many(
-        "res.users", string="Personnel", required=True
+        "res.users", string="Staff", required=True
     )
-    min_notice_hours = fields.Float(string="Préavis minimum (heures)", default=1.0)
-    max_days_ahead = fields.Integer(string="Horizon (jours)", default=30)
-    reminder_ids = fields.Many2many("calendar.alarm", string="Rappels")
-    location = fields.Char(string="Lieu")
+    min_notice_hours = fields.Float(string="Minimum Notice (hours)", default=1.0)
+    max_days_ahead = fields.Integer(string="Booking Window (days)", default=30)
+    reminder_ids = fields.Many2many("calendar.alarm", string="Reminders")
+    location = fields.Char(string="Location")
+    # Les gabarits d'invitation du module calendar (18/19/20) lisent
+    # appointment_type_id.location_id (modèle appointment.type d'Odoo Enterprise) : sans ce
+    # champ, toute réservation avec un lieu plantait au rendu de l'invitation des participants.
+    location_id = fields.Many2one(
+        "res.partner", string="Location Address", compute="_compute_location_id"
+    )
     description = fields.Html(string="Description")
     appointment_count = fields.Integer(
-        string="Rendez-vous", compute="_compute_appointment_count"
+        string="Appointments", compute="_compute_appointment_count"
     )
     company_id = fields.Many2one(
-        "res.company", string="Société", default=lambda self: self.env.company
+        "res.company", string="Company", default=lambda self: self.env.company
     )
     active = fields.Boolean(default=True)
 
@@ -44,11 +50,15 @@ class AppointmentType(models.Model):
                 else 0
             )
 
+    def _compute_location_id(self):
+        # Toujours vide : le lieu est le champ texte `location`, recopié sur le rendez-vous.
+        self.location_id = False
+
     @api.constrains("duration")
     def _check_duration(self):
         for atype in self:
             if atype.duration <= 0:
-                raise ValidationError("La durée doit être strictement positive.")
+                raise ValidationError(self.env._("The duration must be strictly positive."))
 
     def _slot_free_staff(self, slot_start_utc, slot_stop_utc):
         """res.users du staff libres sur [slot_start, slot_stop[ (UTC naïf)."""
@@ -104,11 +114,12 @@ class AppointmentType(models.Model):
         self.ensure_one()
         if not self.active:
             raise UserError(
-                "Le type de rendez-vous « %s » est archivé : il n'est plus réservable."
-                % self.name
+                self.env._(
+                    "Appointment type “%s” is archived: it can no longer be booked.",
+                    self.name)
             )
         if not slot_start_utc:
-            raise UserError("Choisissez un créneau.")
+            raise UserError(self.env._("Choose a time slot."))
         slot_start_utc = slot_start_utc.replace(microsecond=0)
         day = slot_start_utc.date()
         offered = dict(
@@ -117,13 +128,14 @@ class AppointmentType(models.Model):
         free_ids = offered.get(slot_start_utc)
         if not free_ids:
             raise UserError(
-                "Ce créneau n'est pas réservable : il est passé, hors des horaires, "
-                "trop proche, trop lointain ou déjà complet."
+                self.env._(
+                    "This time slot cannot be booked: it is in the past, outside working hours, "
+                    "too soon, too far ahead or already full.")
             )
         if staff:
             if staff.id not in free_ids:
                 raise UserError(
-                    "%s n'est plus disponible sur ce créneau." % staff.name
+                    self.env._("%s is no longer available for this time slot.", staff.name)
                 )
         else:
             staff = self.env["res.users"].browse(free_ids[0])
