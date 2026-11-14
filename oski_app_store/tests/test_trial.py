@@ -415,6 +415,19 @@ class TestTrial(HttpCase):
         replay, _sig = self._webhook(self._payload(trial), raw_sig=sig)
         self.assertEqual(replay.status_code, 401)
 
+    def test_webhook_short_lang_code(self):
+        """Essai enregistré en « en » (1er essai réel du 14/11 : webhook 422)."""
+        trial = self._ready_trial(lang="en", email="short-lang@example.com")
+        self.assertEqual(trial.lang, "en_US")
+        trial.write({"lang": "fr"})
+        self.assertEqual(trial.lang, "fr_FR" if self.env["res.lang"]._lang_get("fr_FR") else "en_US")
+        trial.write({"lang": "xx"})
+        self.assertEqual(trial.lang, "en_US")
+        resp, _sig = self._webhook(self._payload(trial))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(trial.state, "expired")
+        self.assertEqual(len(self._end_mails(trial)), 1)
+
     def test_webhook_bad_signature_refused(self):
         trial = self._ready_trial()
         resp, _sig = self._webhook(self._payload(trial), secret="wrong" * 10)

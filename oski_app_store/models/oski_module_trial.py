@@ -283,6 +283,40 @@ class OskiModuleTrial(models.Model):
         return None
 
     # ------------------------------------------------------------------
+    # Langue
+    # ------------------------------------------------------------------
+
+    @api.model
+    def _normalize_lang(self, code):
+        """Code de langue Odoo actif (« en » → « en_US ») ; « en_US » à défaut.
+
+        `lang` sert de langue au courriel de fin : un code court y lève
+        « Invalid language code » et fait échouer le webhook (422).
+        """
+        Lang = self.env["res.lang"].sudo()
+        code = (code or "").strip().replace("-", "_")
+        if code and Lang._lang_get(code):
+            return code
+        prefix = code.split("_")[0].lower()
+        if prefix:
+            for lang_code, _name in Lang.get_installed():
+                if lang_code.split("_")[0].lower() == prefix:
+                    return lang_code
+        return "en_US"
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if "lang" in vals:
+                vals["lang"] = self._normalize_lang(vals["lang"])
+        return super().create(vals_list)
+
+    def write(self, vals):
+        if "lang" in vals:
+            vals = dict(vals, lang=self._normalize_lang(vals["lang"]))
+        return super().write(vals)
+
+    # ------------------------------------------------------------------
     # Contact
     # ------------------------------------------------------------------
 
