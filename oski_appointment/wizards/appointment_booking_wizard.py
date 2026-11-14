@@ -5,17 +5,17 @@ from odoo import Command, fields, models
 
 class AppointmentBookingWizard(models.TransientModel):
     _name = "appointment.booking.wizard"
-    _description = "Prise de rendez-vous"
+    _description = "Appointment Booking"
 
     appointment_type_id = fields.Many2one(
-        "appointment.type", string="Type de RDV", required=True
+        "appointment.type", string="Appointment Type", required=True
     )
     staff_user_ids = fields.Many2many(related="appointment_type_id.staff_user_ids")
-    partner_id = fields.Many2one("res.partner", string="Client", required=True)
-    slot_start = fields.Datetime(string="Créneau", required=True)
+    partner_id = fields.Many2one("res.partner", string="Customer", required=True)
+    slot_start = fields.Datetime(string="Time Slot", required=True)
     staff_user_id = fields.Many2one(
-        "res.users", string="Avec",
-        help="Laisser vide : le premier membre du personnel libre est retenu.",
+        "res.users", string="With",
+        help="Leave empty: the first available staff member is assigned.",
     )
 
     def action_confirm(self):

@@ -4,7 +4,7 @@
         <field name="name">appointment.booking.wizard.form</field>
         <field name="model">appointment.booking.wizard</field>
         <field name="arch" type="xml">
-            <form string="Prendre rendez-vous">
+            <form string="Book an Appointment">
                 <group>
                     <field name="appointment_type_id" options="{'no_create': True}"/>
                     <field name="staff_user_ids" invisible="1"/>
@@ -14,16 +14,16 @@
                     <field name="slot_start"/>
                 </group>
                 <footer>
-                    <button name="action_confirm" type="object" string="Confirmer"
+                    <button name="action_confirm" type="object" string="Confirm"
                             class="btn-primary"/>
-                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
 
     <record id="action_appointment_booking_wizard" model="ir.actions.act_window">
-        <field name="name">Prendre rendez-vous</field>
+        <field name="name">Book an Appointment</field>
         <field name="res_model">appointment.booking.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
