@@ -8,6 +8,7 @@ import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
 import { ScanFeedback } from "./scan_feedback";
+import { _t } from "@web/core/l10n/translation";
 
 export class BarcodeReceipt extends Component {
     static template = "oski_stock_barcode.BarcodeReceipt";
@@ -59,7 +60,7 @@ export class BarcodeReceipt extends Component {
             this.state.lastScan = barcode;
             this.state.lastScanStatus = 'error';
             ScanFeedback.error();
-            this.notification.add(`Article inconnu: ${barcode}`, { type: 'danger' });
+            this.notification.add(_t("Unknown item: %s", barcode), { type: 'danger' });
             return;
         }
         this.state.lastScan = result.name;
@@ -70,12 +71,12 @@ export class BarcodeReceipt extends Component {
             this.state.lastScanStatus = 'success';
             ScanFeedback.success();
             if (line.done_qty >= line.demand_qty) {
-                this.notification.add(`${result.name} — complet !`, { type: 'success' });
+                this.notification.add(_t("%s — complete!", result.name), { type: 'success' });
             }
         } else {
             this.state.lastScanStatus = 'error';
             ScanFeedback.warning();
-            this.notification.add(`${result.name} — pas dans ce bon`, { type: 'warning' });
+            this.notification.add(_t("%s — not in this transfer", result.name), { type: 'warning' });
         }
     }
 
@@ -85,7 +86,7 @@ export class BarcodeReceipt extends Component {
             line.done_qty += 1;
             this._updateQty(line.product_id, line.done_qty);
         } else {
-            this.notification.add(`${product.name} — pas dans ce bon`, { type: 'warning' });
+            this.notification.add(_t("%s — not in this transfer", product.name), { type: 'warning' });
         }
     }
 
@@ -137,9 +138,9 @@ export class BarcodeReceipt extends Component {
             this.notification.add(r.error, { type: 'danger' });
             return;
         }
-        let msg = "Réception validée !";
+        let msg = _t("Receipt validated!");
         if (r.is_partial && r.backorder_created) {
-            msg += ` Reliquat créé : ${r.backorder_name}`;
+            msg += " " + _t("Backorder created: %s", r.backorder_name);
         }
         this.state.validated = true;
         this.state.validationMessage = msg;

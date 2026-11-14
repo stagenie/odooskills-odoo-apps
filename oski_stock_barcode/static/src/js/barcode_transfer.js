@@ -8,6 +8,7 @@ import { ProductSearch } from "./product_search";
 import { QtyStepper } from "./qty_stepper";
 import { ScanBanner } from "./scan_banner";
 import { ScanFeedback } from "./scan_feedback";
+import { _t } from "@web/core/l10n/translation";
 
 export class BarcodeTransfer extends Component {
     static template = "oski_stock_barcode.BarcodeTransfer";
@@ -50,14 +51,14 @@ export class BarcodeTransfer extends Component {
     async _onBarcodeScan(ev) {
         if (this.state.screen !== 'prepare') return;
         if (!this.state.srcLocationId || !this.state.destLocationId) {
-            this.notification.add("Sélectionnez les emplacements", { type: 'warning' }); return;
+            this.notification.add(_t("Select the locations"), { type: 'warning' }); return;
         }
         const barcode = ev.detail.barcode;
         const result = await barcodeRpc('/oski_stock_barcode/scan_product', { barcode });
         if (!result.found) {
             this.state.lastScan = barcode; this.state.lastScanStatus = 'error';
             ScanFeedback.error();
-            this.notification.add(`Article inconnu: ${barcode}`, { type: 'danger' }); return;
+            this.notification.add(_t("Unknown item: %s", barcode), { type: 'danger' }); return;
         }
         this.state.lastScan = result.name;
         this.state.lastScanStatus = 'success';
@@ -67,7 +68,7 @@ export class BarcodeTransfer extends Component {
 
     async _onProductSelected(product) {
         if (!this.state.srcLocationId || !this.state.destLocationId) {
-            this.notification.add("Sélectionnez les emplacements", { type: 'warning' }); return;
+            this.notification.add(_t("Select the locations"), { type: 'warning' }); return;
         }
         await this._addOrIncrementProduct(product);
     }
@@ -88,7 +89,7 @@ export class BarcodeTransfer extends Component {
 
     _onQtyChange(item, qty) {
         if (qty > item.available_qty) {
-            this.notification.add(`Stock insuffisant (${item.available_qty} dispo)`, { type: 'warning' });
+            this.notification.add(_t("Insufficient stock (%s available)", item.available_qty), { type: 'warning' });
             qty = item.available_qty;
         }
         item.qty = qty;
@@ -138,7 +139,7 @@ export class BarcodeTransfer extends Component {
         if (qty > maxQty) {
             qty = maxQty;
             this.notification.add(
-                `Limité à ${maxQty} (${line.available_qty < line.demand_qty ? 'stock insuffisant' : 'demande atteinte'})`,
+                (line.available_qty < line.demand_qty ? _t("Limited to %s (insufficient stock)", maxQty) : _t("Limited to %s (demand reached)", maxQty)),
                 { type: 'warning' }
             );
         }
@@ -184,9 +185,9 @@ export class BarcodeTransfer extends Component {
             this.notification.add(r.error, { type: 'danger' });
             return;
         }
-        let msg = `Transfert ${this.state.pickingName} validé !`;
+        let msg = _t("Transfer %s validated!", this.state.pickingName);
         if (r.is_partial && r.backorder_created) {
-            msg += ` Reliquat créé : ${r.backorder_name}`;
+            msg += " " + _t("Backorder created: %s", r.backorder_name);
         }
         this.state.validated = true;
         this.state.validationMessage = msg;
