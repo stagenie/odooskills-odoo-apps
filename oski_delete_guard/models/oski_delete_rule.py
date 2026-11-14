@@ -9,35 +9,37 @@ class OskiDeleteRule(models.Model):
     """
 
     _name = "oski.delete.rule"
-    _description = "Règle de suppression"
+    _description = "Deletion Rule"
     _order = "model_name"
+    # Sans nom affichable, le fil d'Ariane de la fiche montrait « oski.delete.rule,2 ».
+    _rec_name = "model_id"
 
     model_id = fields.Many2one(
-        "ir.model", string="Modèle", required=True, ondelete="cascade",
+        "ir.model", string="Model", required=True, ondelete="cascade",
         domain=[("transient", "=", False)],
-        help="Modèle dont les suppressions sont surveillées.",
+        help="Model whose deletions are watched.",
     )
-    model_name = fields.Char(related="model_id.model", store=True, string="Nom technique")
+    model_name = fields.Char(related="model_id.model", store=True, string="Technical Name")
     mode = fields.Selection(
         [
-            ("block", "Interdire, sauf aux groupes autorisés"),
-            ("log", "Autoriser, mais journaliser"),
+            ("block", "Block, except for allowed groups"),
+            ("log", "Allow, but log"),
         ],
         string="Mode", default="block", required=True,
     )
     group_ids = fields.Many2many(
-        "res.groups", string="Groupes autorisés",
-        help="Utilisateurs qui gardent le droit de supprimer. Laisser vide interdit à tous.",
+        "res.groups", string="Allowed Groups",
+        help="Users who keep the right to delete. Leave empty to block everyone.",
     )
     message = fields.Char(
-        string="Message de refus",
-        help="Texte affiché à l'utilisateur bloqué. Laisser vide utilise le message par défaut.",
+        string="Refusal Message",
+        help="Text shown to the blocked user. Leave empty to use the default message.",
     )
     active = fields.Boolean(default=True)
 
     _model_uniq = models.Constraint(
         "UNIQUE (model_id)",
-        "Ce modèle a déjà une règle de suppression.",
+        "This model already has a deletion rule.",
     )
 
     @api.model

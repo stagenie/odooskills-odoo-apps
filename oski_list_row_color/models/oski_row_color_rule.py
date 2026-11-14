@@ -6,34 +6,34 @@ from odoo.exceptions import UserError
 
 class OskiRowColorRule(models.Model):
     _name = "oski.row.color.rule"
-    _description = "Règle de couleur de ligne de liste"
+    _description = "List Row Color Rule"
     _order = "model_id, sequence, id"
 
-    name = fields.Char(string="Nom", required=True)
+    name = fields.Char(string="Name", required=True)
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
     model_id = fields.Many2one(
-        "ir.model", string="Modèle", required=True, ondelete="cascade",
-        help="Modèle dont les lignes de liste seront colorées.",
+        "ir.model", string="Model", required=True, ondelete="cascade",
+        help="Model whose list rows will be colored.",
     )
-    model_name = fields.Char(related="model_id.model", store=True, string="Nom technique")
+    model_name = fields.Char(related="model_id.model", store=True, string="Technical Name")
     decoration = fields.Selection(
         [
-            ("info", "Bleu (info)"),
-            ("success", "Vert (succès)"),
-            ("warning", "Orange (avertissement)"),
-            ("danger", "Rouge (danger)"),
-            ("muted", "Gris (atténué)"),
-            ("primary", "Primaire"),
+            ("info", "Blue (info)"),
+            ("success", "Green (success)"),
+            ("warning", "Orange (warning)"),
+            ("danger", "Red (danger)"),
+            ("muted", "Grey (muted)"),
+            ("primary", "Primary"),
         ],
-        string="Couleur", required=True, default="info",
+        string="Color", required=True, default="info",
     )
     expression = fields.Char(
         string="Condition", required=True,
-        help="Expression Python évaluée par ligne, ex : state == 'done' ou amount_total > 1000.",
+        help="Python expression evaluated for each row, e.g. state == 'done' or amount_total > 1000.",
     )
     view_id = fields.Many2one(
-        "ir.ui.view", string="Vue générée", readonly=True, ondelete="set null",
+        "ir.ui.view", string="Generated View", readonly=True, ondelete="set null",
     )
 
     def _get_base_list_view(self):
@@ -61,7 +61,7 @@ class OskiRowColorRule(models.Model):
             base_view = rule._get_base_list_view()
             if not base_view:
                 raise UserError(_(
-                    "Aucune vue liste principale trouvée pour le modèle « %s ».",
+                    "No primary list view found for model “%s”.",
                     rule.model_name or "",
                 ))
             vals = {

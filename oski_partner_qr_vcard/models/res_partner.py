@@ -21,10 +21,10 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     oski_qr_vcard = fields.Binary(
-        string="QR vCard",
+        string="vCard QR Code",
         compute="_compute_oski_qr_vcard",
         attachment=True,
-        help="Code QR encodant la fiche au format vCard 3.0 (à scanner avec un smartphone).",
+        help="QR code encoding the contact in vCard 3.0 format (to scan with a smartphone).",
     )
 
     def _oski_build_vcard(self):

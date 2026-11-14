@@ -12,13 +12,13 @@ class ProjectTask(models.Model):
         string="Checklist",
     )
     oski_checklist_progress = fields.Float(
-        string="Avancement checklist",
+        string="Checklist Progress",
         compute="_compute_oski_checklist_progress",
         store=True,
-        help="Pourcentage d'étapes terminées dans la checklist de la tâche.",
+        help="Percentage of completed steps in the task checklist.",
     )
     oski_checklist_count = fields.Integer(
-        string="Nombre d'étapes",
+        string="Number of Steps",
         compute="_compute_oski_checklist_progress",
         store=True,
     )

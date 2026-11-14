@@ -1,0 +1,162 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 19:42+0000\n"
+"PO-Revision-Date: 2026-11-14 19:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields.selection,name:oski_list_row_color.selection__oski_row_color_rule__decoration__info
+msgid "Blue (info)"
+msgstr "Bleu (info)"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__decoration
+msgid "Color"
+msgstr "Couleur"
+
+#. module: oski_list_row_color
+#: model_terms:ir.ui.view,arch_db:oski_list_row_color.view_oski_row_color_rule_form
+msgid "Color Rule"
+msgstr "Règle de couleur"
+
+#. module: oski_list_row_color
+#: model_terms:ir.ui.view,arch_db:oski_list_row_color.view_oski_row_color_rule_list
+msgid "Color Rules"
+msgstr "Règles de couleur"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__expression
+msgid "Condition"
+msgstr "Condition"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__view_id
+msgid "Generated View"
+msgstr "Vue générée"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields.selection,name:oski_list_row_color.selection__oski_row_color_rule__decoration__success
+msgid "Green (success)"
+msgstr "Vert (succès)"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields.selection,name:oski_list_row_color.selection__oski_row_color_rule__decoration__muted
+msgid "Grey (muted)"
+msgstr "Gris (atténué)"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_list_row_color
+#: model:ir.model,name:oski_list_row_color.model_oski_row_color_rule
+msgid "List Row Color Rule"
+msgstr "Règle de couleur de ligne de liste"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__model_id
+msgid "Model"
+msgstr "Modèle"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,help:oski_list_row_color.field_oski_row_color_rule__model_id
+msgid "Model whose list rows will be colored."
+msgstr "Modèle dont les lignes de liste seront colorées."
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: oski_list_row_color
+#. odoo-python
+#: code:addons/oski_list_row_color/models/oski_row_color_rule.py:0
+msgid "No primary list view found for model “%s”."
+msgstr "Aucune vue liste principale trouvée pour le modèle « %s »."
+
+#. module: oski_list_row_color
+#: model:ir.model.fields.selection,name:oski_list_row_color.selection__oski_row_color_rule__decoration__warning
+msgid "Orange (warning)"
+msgstr "Orange (avertissement)"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields.selection,name:oski_list_row_color.selection__oski_row_color_rule__decoration__primary
+msgid "Primary"
+msgstr "Primaire"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,help:oski_list_row_color.field_oski_row_color_rule__expression
+msgid "Python expression evaluated for each row, e.g. state == 'done' or amount_total > 1000."
+msgstr "Expression Python évaluée par ligne, ex : state == 'done' ou amount_total > 1000."
+
+#. module: oski_list_row_color
+#: model:ir.model.fields.selection,name:oski_list_row_color.selection__oski_row_color_rule__decoration__danger
+msgid "Red (danger)"
+msgstr "Rouge (danger)"
+
+#. module: oski_list_row_color
+#: model:ir.actions.act_window,name:oski_list_row_color.action_oski_row_color_rule model:ir.ui.menu,name:oski_list_row_color.menu_oski_row_color_rule
+msgid "Row Colors"
+msgstr "Couleurs de lignes"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oski_list_row_color
+#: model:ir.model.fields,field_description:oski_list_row_color.field_oski_row_color_rule__model_name
+msgid "Technical Name"
+msgstr "Nom technique"
+
+#. module: oski_list_row_color
+#: model_terms:ir.ui.view,arch_db:oski_list_row_color.view_oski_row_color_rule_form
+msgid "The condition is a Python expression evaluated for each row (same rules as Odoo's <code>decoration-*</code> attributes)."
+msgstr ""
+"La condition est une expression Python évaluée pour chaque ligne\n"
+"                        (mêmes règles que les attributs <code>decoration-*</code> d'Odoo)."
+
+#. module: oski_list_row_color
+#: model_terms:ir.ui.view,arch_db:oski_list_row_color.view_oski_row_color_rule_form
+msgid "state == 'done'"
+msgstr "state == 'done'"

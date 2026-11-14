@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_export_log
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 19:41+0000\n"
+"PO-Revision-Date: 2026-11-14 19:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_export_log
+#: model:ir.model,name:oski_export_log.model_base
+msgid "Base"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__create_date model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_search
+msgid "Date"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.actions.act_window,name:oski_export_log.action_oski_export_log model:ir.model,name:oski_export_log.model_oski_export_log model:ir.ui.menu,name:oski_export_log.menu_oski_export_log model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_list model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_search
+msgid "Export Log"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__user_id model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_search
+msgid "Exported By"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__field_names
+msgid "Exported Fields"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__record_count
+msgid "Exported Rows"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__field_count
+msgid "Field Count"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__model_name model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_search
+msgid "Model"
+msgstr ""
+
+#. module: oski_export_log
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__model_label
+msgid "Model Description"
+msgstr ""
+
+#. module: oski_export_log
+#: model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_list
+msgid "Total Exported Rows"
+msgstr ""

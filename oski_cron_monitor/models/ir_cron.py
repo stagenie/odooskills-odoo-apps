@@ -13,17 +13,17 @@ ERROR_MAX = 4000
 class IrCron(models.Model):
     _inherit = "ir.cron"
 
-    oski_run_ids = fields.One2many("oski.cron.run", "cron_id", string="Exécutions")
+    oski_run_ids = fields.One2many("oski.cron.run", "cron_id", string="Runs")
     # Trois champs calculés ensemble, et sans ``related`` : un ``related`` posé
     # sur un calcul non stocké fait réclamer à Odoo un champ « searchable » et
     # laisse un avertissement à chaque écriture sur une tâche planifiée.
     oski_last_run_id = fields.Many2one(
-        "oski.cron.run", string="Dernière exécution", compute="_compute_oski_last_run")
+        "oski.cron.run", string="Last Run", compute="_compute_oski_last_run")
     oski_last_state = fields.Selection(
-        [("success", "Réussite"), ("failure", "Échec")],
-        string="Dernier résultat", compute="_compute_oski_last_run")
+        [("success", "Success"), ("failure", "Failure")],
+        string="Last Result", compute="_compute_oski_last_run")
     oski_last_duration = fields.Float(
-        string="Dernière durée (s)", digits=(10, 3), compute="_compute_oski_last_run")
+        string="Last Duration (s)", digits=(10, 3), compute="_compute_oski_last_run")
 
     def _compute_oski_last_run(self):
         runs = self.env["oski.cron.run"].search([("cron_id", "in", self.ids)], order="started_at desc, id desc")
@@ -66,7 +66,7 @@ class IrCron(models.Model):
         try:
             self._oski_log_run(started_at, duration, state, error=error)
         except Exception:  # noqa: BLE001 - jamais au prix d'une tâche
-            _logger.exception("Moniteur des tâches planifiées : écriture impossible")
+            _logger.exception("Cron monitor: could not write the run log")
 
     def _callback(self, cron_name, server_action_id):
         started_at = fields.Datetime.now()
