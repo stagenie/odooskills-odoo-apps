@@ -1,0 +1,87 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 07:13+0000\n"
+"PO-Revision-Date: 2026-11-14 07:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_archive_reason
+#: model_terms:ir.ui.view,arch_db:oski_archive_reason.view_oski_archive_reason_wizard_form
+msgid "Archive"
+msgstr "Archiver"
+
+#. module: oski_archive_reason
+#. odoo-python
+#: code:addons/oski_archive_reason/models/res_partner.py:0 model:ir.model,name:oski_archive_reason.model_oski_archive_reason_wizard model_terms:ir.ui.view,arch_db:oski_archive_reason.view_oski_archive_reason_wizard_form
+msgid "Archive Reason"
+msgstr "Motif d'archivage"
+
+#. module: oski_archive_reason
+#. odoo-python
+#: code:addons/oski_archive_reason/wizards/archive_reason_wizard.py:0
+msgid "Archived — reason: %s"
+msgstr "Archivé — motif : %s"
+
+#. module: oski_archive_reason
+#: model:ir.model,name:oski_archive_reason.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: oski_archive_reason
+#: model:ir.model.fields,field_description:oski_archive_reason.field_oski_archive_reason_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_archive_reason
+#: model:ir.model.fields,field_description:oski_archive_reason.field_oski_archive_reason_wizard__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_archive_reason
+#: model_terms:ir.ui.view,arch_db:oski_archive_reason.view_oski_archive_reason_wizard_form
+msgid "Discard"
+msgstr "Annuler"
+
+#. module: oski_archive_reason
+#: model:ir.model.fields,field_description:oski_archive_reason.field_oski_archive_reason_wizard__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_archive_reason
+#: model:ir.model.fields,field_description:oski_archive_reason.field_oski_archive_reason_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_archive_reason
+#: model:ir.model.fields,field_description:oski_archive_reason.field_oski_archive_reason_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_archive_reason
+#: model:ir.model.fields,field_description:oski_archive_reason.field_oski_archive_reason_wizard__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_archive_reason
+#. odoo-python
+#: code:addons/oski_archive_reason/wizards/archive_reason_wizard.py:0
+msgid "No record to archive."
+msgstr "Aucun enregistrement à archiver."
+
+#. module: oski_archive_reason
+#: model:ir.model.fields,field_description:oski_archive_reason.field_oski_archive_reason_wizard__reason
+msgid "Reason"
+msgstr "Motif"
+
+#. module: oski_archive_reason
+#: model_terms:ir.ui.view,arch_db:oski_archive_reason.view_oski_archive_reason_wizard_form
+msgid "Why archive this record?"
+msgstr "Pourquoi archiver cet enregistrement ?"

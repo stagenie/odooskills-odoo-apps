@@ -14,7 +14,7 @@
     </record>
 
     <record id="helpdesk_stage_action" model="ir.actions.act_window">
-        <field name="name">Étapes</field>
+        <field name="name">Stages</field>
         <field name="res_model">helpdesk.stage</field>
         <field name="view_mode">list</field>
     </record>

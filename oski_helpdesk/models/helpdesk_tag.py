@@ -3,12 +3,12 @@ from odoo import fields, models
 
 class HelpdeskTag(models.Model):
     _name = "helpdesk.tag"
-    _description = "Étiquette d'assistance"
+    _description = "Helpdesk Tag"
     _order = "name"
 
-    name = fields.Char(string="Nom", required=True)
-    color = fields.Integer(string="Couleur")
+    name = fields.Char(string="Name", required=True)
+    color = fields.Integer(string="Color")
 
     _sql_constraints = [
-        ("unique_name", "UNIQUE(name)", "Une étiquette de ce nom existe déjà."),
+        ("unique_name", "UNIQUE(name)", "A tag with the same name already exists."),
     ]
