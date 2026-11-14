@@ -16,7 +16,7 @@ def oski_wanted(operator, value):
     if operator in ("=", "!="):
         return bool(value) if operator == "=" else not bool(value)
     raise NotImplementedError(
-        "Opérateur non pris en charge sur ce champ : %s" % operator)
+        "Unsupported operator on this field: %s" % operator)
 
 
 
@@ -32,18 +32,18 @@ class IrModel(models.Model):
     _inherit = "ir.model"
 
     oski_zip_enabled = fields.Boolean(
-        string="Téléchargement groupé",
-        help="Ajoute l'entrée « Télécharger les pièces jointes (ZIP) » au menu "
-             "d'actions des fiches et des listes de ce modèle.")
+        string="Bulk Download",
+        help="Adds the “Download attachments (ZIP)” entry to the Actions menu "
+             "of this model's records and lists.")
     oski_zip_action_id = fields.Many2one(
-        "ir.actions.server", string="Action posée", readonly=True,
+        "ir.actions.server", string="Created Action", readonly=True,
         ondelete="set null", copy=False)
     oski_zip_available = fields.Boolean(
-        string="Peut porter des pièces jointes",
+        string="Can Hold Attachments",
         compute="_compute_oski_zip_available",
         search="_search_oski_zip_available",
-        help="Faux pour les modèles abstraits et les assistants : ils n'ont ni "
-             "table ni fiche, donc jamais de pièce jointe.")
+        help="False for abstract models and wizards: they have neither table "
+             "nor record, hence never any attachment.")
 
     def _oski_zip_is_available(self):
         """Un modèle abstrait — ``mail.thread``, un mixin — n'a pas de fiche.
@@ -92,16 +92,33 @@ class IrModel(models.Model):
             wanted = model.oski_zip_enabled and model.oski_zip_available
             action = model.oski_zip_action_id.sudo()
             if wanted and not action:
-                model.sudo().oski_zip_action_id = self.env[
-                    "ir.actions.server"].sudo().create(model._oski_zip_values())
+                # Créée en en_US (la source), puis traduite dans chaque langue
+                # installée : le libellé du menu Action ne dépend pas de la
+                # langue de qui a coché la case.
+                action = self.env["ir.actions.server"].sudo().with_context(
+                    lang="en_US").create(model.with_context(lang="en_US")._oski_zip_values())
+                action.update_field_translations(
+                    "name", model._oski_zip_name_translations())
+                model.sudo().oski_zip_action_id = action
             elif not wanted and action:
                 # ondelete='set null' remet le champ à vide de lui-même.
                 action.unlink()
 
+    def _oski_zip_name_translations(self):
+        """Le libellé de l'entrée de menu dans chaque langue installée.
+
+        en_US toujours compris : en 20, quand en_US n'est pas active, écrire
+        une autre langue recopie sa valeur dans en_US (``fields_textual.py``).
+        """
+        codes = {code for code, _label in self.env["res.lang"].get_installed()}
+        return {
+            code: self.with_context(lang=code)._oski_zip_values()["name"]
+            for code in codes | {"en_US"}}
+
     def _oski_zip_values(self):
         self.ensure_one()
         return {
-            "name": _("Télécharger les pièces jointes (ZIP)"),
+            "name": _("Download attachments (ZIP)"),
             "model_id": self.id,
             "binding_model_id": self.id,
             "binding_type": "action",

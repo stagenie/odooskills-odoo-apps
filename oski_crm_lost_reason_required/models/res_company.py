@@ -5,9 +5,9 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     oski_lost_reason_required = fields.Boolean(
-        string="Motif de perte obligatoire", default=True,
-        help="Interdit de perdre une opportunité sans dire pourquoi.")
+        string="Mandatory Lost Reason", default=True,
+        help="Forbids losing an opportunity without saying why.")
     oski_lost_feedback_required = fields.Boolean(
-        string="Note de clôture obligatoire", default=False,
-        help="Exige en plus quelques mots de contexte, au-delà du motif choisi "
-             "dans la liste.")
+        string="Mandatory Closing Note", default=False,
+        help="Also requires a few words of context, beyond the reason picked "
+             "from the list.")

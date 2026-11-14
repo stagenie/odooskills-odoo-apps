@@ -11,13 +11,13 @@
                  donc au seul réglage identifié du bloc. -->
             <xpath expr="//setting[@id='crm_lead']" position="after">
                 <setting id="oski_lost_reason"
-                         string="Motif de perte obligatoire"
-                         help="Une opportunité ne peut plus être perdue sans dire pourquoi — depuis l'écran comme depuis un import ou une action serveur.">
+                         string="Mandatory Lost Reason"
+                         help="An opportunity can no longer be lost without saying why — from the screen as well as from an import or a server action.">
                     <field name="oski_lost_reason_required"/>
                 </setting>
                 <setting id="oski_lost_feedback"
-                         string="Note de clôture obligatoire"
-                         help="Exige en plus quelques mots de contexte : c'est ce que relira celui qui reprendra ce client dans un an.">
+                         string="Mandatory Closing Note"
+                         help="Also requires a few words of context: this is what whoever takes over this customer in a year will read.">
                     <field name="oski_lost_feedback_required"/>
                 </setting>
             </xpath>

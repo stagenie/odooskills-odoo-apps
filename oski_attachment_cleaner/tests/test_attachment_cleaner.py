@@ -180,7 +180,7 @@ class TestAttachmentCleaner(TransactionCase):
         self.assertEqual(purge.attachment_count, 1)
         self.assertEqual(purge.freed_bytes, size)
         self.assertEqual(purge.user_id, self.env.user)
-        self.assertIn("orphelines", purge.criteria)
+        self.assertIn("orphans", purge.criteria)
 
     def test_the_purge_recomputes_and_never_trusts_the_scan(self):
         """Entre le relevé et la purge, la base a continué de vivre."""

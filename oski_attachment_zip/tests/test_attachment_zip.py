@@ -53,6 +53,16 @@ class TestZipActivation(ZipCommon):
         self.assertEqual(action.binding_view_types, "list,form")
         self.assertEqual(action.state, "code")
 
+    def test_the_menu_entry_speaks_every_installed_language(self):
+        """Le libellé ne dépend pas de la langue de qui coche la case."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        self.partner_model.with_context(lang="fr_FR").oski_zip_enabled = True
+        action = self.partner_model.oski_zip_action_id
+        self.assertEqual(action.with_context(lang="en_US").name,
+                         "Download attachments (ZIP)")
+        self.assertEqual(action.with_context(lang="fr_FR").name,
+                         "Télécharger les pièces jointes (ZIP)")
+
     def test_unticking_it_removes_the_entry(self):
         self.partner_model.oski_zip_enabled = True
         action = self.partner_model.oski_zip_action_id
@@ -181,7 +191,7 @@ class TestZipContent(ZipCommon):
         self._attach(self.second, "devis.pdf")
         name, _content = self.env["ir.attachment"]._oski_zip_bytes(
             self.first | self.second)
-        self.assertIn("2 fiches", name)
+        self.assertIn("2 records", name)
 
     def test_too_many_records_are_refused(self):
         partners = self.env["res.partner"].create(

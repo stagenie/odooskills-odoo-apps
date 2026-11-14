@@ -12,8 +12,8 @@ OSKI_DUP_PARAMS = {
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    oski_dup_check_email = fields.Boolean(string="Détecter les doublons d'email")
-    oski_dup_check_phone = fields.Boolean(string="Détecter les doublons de téléphone")
+    oski_dup_check_email = fields.Boolean(string="Detect Email Duplicates")
+    oski_dup_check_phone = fields.Boolean(string="Detect Phone Duplicates")
 
     @api.model
     def get_values(self):
