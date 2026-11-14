@@ -13,7 +13,7 @@
             <div class="text-end mb-2">
                 <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 300, 50)"
                      style="width:250px;height:40px;"
-                     alt="Code-barres"/>
+                     alt="Barcode"/>
             </div>
         </xpath>
     </template>
@@ -23,7 +23,7 @@
          ══════════════════════════════════════════════════════════════ -->
 
     <record id="action_report_location_barcode" model="ir.actions.report">
-        <field name="name">Étiquettes code-barres</field>
+        <field name="name">Barcode Labels</field>
         <field name="model">stock.location</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">oski_stock_barcode.report_location_barcode</field>

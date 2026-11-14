@@ -5,7 +5,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     barcode = fields.Char(
-        string='Code-barres', copy=False, index=True,
+        string='Barcode', copy=False, index=True,
         compute='_compute_barcode', store=True,
     )
 

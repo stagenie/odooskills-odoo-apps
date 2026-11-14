@@ -15,7 +15,7 @@ registry.category("web_tour.tours").add("oski_stock_barcode_company_tour", {
     steps: () => [
         {
             content: "Accueil : tuile Expédition",
-            trigger: ".o_barcode_card:contains(EXPEDITION)",
+            trigger: ".o_barcode_card:contains(DELIVERY)",
             run: "click",
         },
         {
@@ -42,12 +42,12 @@ registry.category("web_tour.tours").add("oski_stock_barcode_company_tour", {
         },
         {
             content: "Valider la livraison",
-            trigger: ".o_barcode_btn.o_btn_primary:contains(Valider la livraison):enabled",
+            trigger: ".o_barcode_btn.o_btn_primary:contains(Validate Delivery):enabled",
             run: "click",
         },
         {
             content: "Livraison validée",
-            trigger: ".o_barcode_validated:contains(Livraison validée)",
+            trigger: ".o_barcode_validated:contains(Delivery validated)",
         },
     ],
 });

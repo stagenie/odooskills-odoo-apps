@@ -1,6 +1,7 @@
 /** @odoo-module **/
 
 import { Component, useState } from "@odoo/owl";
+import { _t } from "@web/core/l10n/translation";
 
 export class ScanBanner extends Component {
     static template = "oski_stock_barcode.ScanBanner";
@@ -18,6 +19,6 @@ export class ScanBanner extends Component {
     }
 
     get displayMessage() {
-        return this.props.message || "Scannez un article avec la douchette";
+        return this.props.message || _t("Scan an item with the barcode scanner");
     }
 }

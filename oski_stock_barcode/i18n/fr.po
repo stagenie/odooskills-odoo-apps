@@ -1,0 +1,1073 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 07:54+0000\n"
+"PO-Revision-Date: 2026-11-14 07:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "%(product)s: %(requested)s requested, %(available)s available"
+msgstr "%(product)s: %(requested)s demandé(s), %(available)s disponible(s)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/picking_list.js:0
+msgid "%s found"
+msgstr "%s trouvé"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "%s is already validated: no change possible."
+msgstr "%s est déjà validé : aucune modification possible."
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "%s is cancelled: no change possible."
+msgstr "%s est annulé : aucune modification possible."
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "%s needs a confirmation: finish the validation from the transfer in Inventory."
+msgstr "%s demande une confirmation : terminez la validation depuis le bon dans Inventaire."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_receipt.js:0
+msgid "%s — complete!"
+msgstr "%s — complet !"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0
+msgid "%s — insufficient stock"
+msgstr "%s — stock insuffisant"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "%s — inventory applied!"
+msgstr "%s — inventaire appliqué !"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "%s — item not tracked in stock"
+msgstr "%s — article non stockable"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0
+msgid "%s — maximum quantity"
+msgstr "%s — quantité max"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0
+msgid "%s — maximum quantity reached"
+msgstr "%s — quantité max atteinte"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0
+msgid "%s — not in this delivery"
+msgstr "%s — pas dans cette livraison"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_receipt.js:0
+msgid "%s — not in this transfer"
+msgstr "%s — pas dans ce bon"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "%s — not tracked in stock"
+msgstr "%s — non stockable"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "-- Destination --"
+msgstr "-- Destination --"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "-- Source --"
+msgstr "-- Source --"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0 model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__action
+msgid "Action"
+msgstr "Action"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Add an item by name, reference or barcode..."
+msgstr "Ajouter un article par nom, réf ou code-barres..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Apply"
+msgstr "Appliquer"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Apply inventory ("
+msgstr "Appliquer l'inventaire ("
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Apply this line"
+msgstr "Appliquer cette ligne"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Avail."
+msgstr "Dispo"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Avail.:"
+msgstr "Dispo:"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Available"
+msgstr "Disponible"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Back"
+msgstr "Retour"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_receipt.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_transfer.js:0
+msgid "Backorder created: %s"
+msgstr "Reliquat créé : %s"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_stock_picking__barcode model_terms:ir.ui.view,arch_db:oski_stock_barcode.oski_report_delivery_barcode model_terms:ir.ui.view,arch_db:oski_stock_barcode.oski_view_location_form_barcode model_terms:ir.ui.view,arch_db:oski_stock_barcode.oski_view_location_tree_barcode model_terms:ir.ui.view,arch_db:oski_stock_barcode.oski_vpicktree_barcode
+msgid "Barcode"
+msgstr "Code-barres"
+
+#. module: oski_stock_barcode
+#: model:ir.actions.report,name:oski_stock_barcode.action_report_location_barcode
+msgid "Barcode Labels"
+msgstr "Étiquettes code-barres"
+
+#. module: oski_stock_barcode
+#: model:ir.actions.client,name:oski_stock_barcode.action_barcode_operations
+msgid "Barcode Operations"
+msgstr "Opérations Code-Barres"
+
+#. module: oski_stock_barcode
+#: model:ir.model,name:oski_stock_barcode.model_oski_barcode_scan_log
+msgid "Barcode Scan Log"
+msgstr "Journal des scans code-barres"
+
+#. module: oski_stock_barcode
+#: model:ir.ui.menu,name:oski_stock_barcode.menu_barcode_root
+msgid "Barcodes"
+msgstr "Code-Barres"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Counted"
+msgstr "Compté"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Create Transfer"
+msgstr "Créer le transfert"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "DELIVERY"
+msgstr "EXPEDITION"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Delivered"
+msgstr "Livré"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Delivered:"
+msgstr "Livré:"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields.selection,name:oski_stock_barcode.selection__oski_barcode_scan_log__action__delivery
+msgid "Delivery"
+msgstr "Expédition"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0
+msgid "Delivery validated!"
+msgstr "Livraison validée !"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Destination:"
+msgstr "Vers :"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Difference"
+msgstr "Ecart"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Difference:"
+msgstr "Ecart:"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/picking_list.js:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "Error while loading items"
+msgstr "Erreur de chargement des articles"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "Error while loading locations"
+msgstr "Erreur de chargement des emplacements"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Expected"
+msgstr "Attendu"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Filter the list..."
+msgstr "Filtrer la liste..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "From"
+msgstr "De"
+
+#. module: oski_stock_barcode
+#: model:ir.model,name:oski_stock_barcode.model_ir_http
+msgid "HTTP Routing"
+msgstr "Routage HTTP"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Home"
+msgstr "Accueil"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Hour"
+msgstr "Heure"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "INVENTORY"
+msgstr "INVENTAIRE"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "In Stock"
+msgstr "En stock"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Insufficient stock"
+msgstr "Stock insuffisant"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_transfer.js:0
+msgid "Insufficient stock (%s available)"
+msgstr "Stock insuffisant (%s dispo)"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Insufficient stock for %(product)s: %(requested)s requested, %(available)s available"
+msgstr "Stock insuffisant pour %(product)s: %(requested)s demandé(s), %(available)s disponible(s)"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Insufficient stock:"
+msgstr "Stock insuffisant:"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Insufficient stock: %(available)s available for %(product)s"
+msgstr "Stock insuffisant : %(available)s disponible(s) pour %(product)s"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Invalid counted quantity"
+msgstr "Quantité comptée invalide"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Invalid quantity"
+msgstr "Quantité invalide"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields.selection,name:oski_stock_barcode.selection__oski_barcode_scan_log__action__inventory
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "Inventory applied (%s items)!"
+msgstr "Inventaire appliqué (%s articles) !"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0 model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__product_id
+msgid "Item"
+msgstr "Article"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Item Info"
+msgstr "Info article"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Item not found"
+msgstr "Article introuvable"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Item not found in this transfer"
+msgstr "Article non trouvé dans ce picking"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Items"
+msgstr "Articles"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "LOOKUP"
+msgstr "CONSULTATION"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Latest Moves"
+msgstr "Derniers mouvements"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_transfer.js:0
+msgid "Limited to %s (demand reached)"
+msgstr "Limité à %s (demande atteinte)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_transfer.js:0
+msgid "Limited to %s (insufficient stock)"
+msgstr "Limité à %s (stock insuffisant)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Loading data..."
+msgstr "Chargement..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_consult.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_session.js:0 code:addons/oski_stock_barcode/static/src/js/picking_list.js:0
+msgid "Loading error"
+msgstr "Erreur de chargement"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "Location %s found"
+msgstr "Emplacement %s trouvé"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Location Content"
+msgstr "Contenu de l'emplacement"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Location not found"
+msgstr "Emplacement introuvable"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Lot"
+msgstr "Lot"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__lot_id
+msgid "Lot/Serial No."
+msgstr "Lot/N° série"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "MY SESSION"
+msgstr "MA SESSION"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Manual"
+msgstr "Manuel"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "My Session"
+msgstr "Ma session"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Negative counted quantity refused"
+msgstr "Quantité comptée négative refusée"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Negative quantity refused"
+msgstr "Quantité négative refusée"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "New Search"
+msgstr "Nouvelle recherche"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "New Transfer"
+msgstr "Nouveau transfert"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "No change on this line"
+msgstr "Aucune modification sur cette ligne"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "No internal transfer operation type found"
+msgstr "Aucun type de transfert interne trouvé"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "No item changed"
+msgstr "Aucun article modifié"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "No item in stock"
+msgstr "Aucun article en stock"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "No item in stock — scan or search to add one"
+msgstr "Aucun article en stock — scannez ou recherchez pour ajouter"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "No item to transfer"
+msgstr "Aucun article à transférer"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "No location found"
+msgstr "Aucun emplacement trouvé"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "No pending operation"
+msgstr "Aucune opération en attente"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "No quantity entered"
+msgstr "Aucune quantité saisie"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "No scan today."
+msgstr "Aucun scan aujourd'hui."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "No stock for this item"
+msgstr "Aucun stock pour cet article"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/picking_list.js:0
+msgid "No transfer found: %s"
+msgstr "Aucun bon trouvé: %s"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__note
+msgid "Note"
+msgstr "Note"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "OK"
+msgstr "OK"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__user_id
+msgid "Operator"
+msgstr "Opérateur"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Partial Delivery (backorder)"
+msgstr "Livraison partielle (reliquat)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Partial Receipt (backorder)"
+msgstr "Réception partielle (reliquat)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Partial Transfer (backorder)"
+msgstr "Transfert partiel (reliquat)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Print Slip"
+msgstr "Imprimer le bon"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Product Image"
+msgstr "Image produit"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0 model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__quantity
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "RECEIPT"
+msgstr "RECEPTION"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/picking_list.js:0
+msgid "Ready"
+msgstr "Prêt"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields.selection,name:oski_stock_barcode.selection__oski_barcode_scan_log__action__receipt
+msgid "Receipt"
+msgstr "Réception"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_receipt.js:0
+msgid "Receipt validated!"
+msgstr "Réception validée !"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Received"
+msgstr "Reçu"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Remaining"
+msgstr "Reste"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Remaining:"
+msgstr "Reste:"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Requested"
+msgstr "Demandé"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Reserved"
+msgstr "Réservé"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "STOCK OPERATIONS"
+msgstr "OPERATIONS STOCK"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Scan"
+msgstr "Scan"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Scan a location barcode"
+msgstr "Scannez le code-barres d'un emplacement"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Scan an item or a location"
+msgstr "Scannez un article ou un emplacement"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Scan an item to increase its quantity"
+msgstr "Scannez un article pour incrémenter"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Scan an item to transfer"
+msgstr "Scannez un article à transférer"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/scan_banner.js:0
+msgid "Scan an item with the barcode scanner"
+msgstr "Scannez un article avec la douchette"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Scan or search for an item or a location"
+msgstr "Scannez ou recherchez un article ou emplacement"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Scan the transfer barcode"
+msgstr "Scannez le code-barres du bon"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/product_search.js:0 code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Search by name, reference or barcode..."
+msgstr "Rechercher par nom, réf ou code-barres..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Search by reference, customer, source..."
+msgstr "Rechercher par réf, client, origine..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Search for a location..."
+msgstr "Rechercher un emplacement..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Search for an item to transfer..."
+msgstr "Rechercher un article à transférer..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Search for an item..."
+msgstr "Rechercher un article..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Searching..."
+msgstr "Recherche..."
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_transfer.js:0
+msgid "Select the locations"
+msgstr "Sélectionnez les emplacements"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields.selection,name:oski_stock_barcode.selection__oski_barcode_scan_log__action__serial_gen
+msgid "Serial Generation"
+msgstr "Génération série"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Source and destination locations are identical"
+msgstr "Emplacements source et destination identiques"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Source:"
+msgstr "De :"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "State"
+msgstr "Etat"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Stock by Location"
+msgstr "Stock par emplacement"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "System"
+msgstr "Système"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "System:"
+msgstr "Système:"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "TRANSFER"
+msgstr "TRANSFERT"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "To"
+msgstr "Vers"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Today's Log"
+msgstr "Journal du jour"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Total Qty"
+msgstr "Qté totale"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Total:"
+msgstr "Total :"
+
+#. module: oski_stock_barcode
+#: model:ir.model,name:oski_stock_barcode.model_stock_picking model:ir.model.fields,field_description:oski_stock_barcode.field_oski_barcode_scan_log__picking_id model:ir.model.fields.selection,name:oski_stock_barcode.selection__oski_barcode_scan_log__action__transfer
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_transfer.js:0
+msgid "Transfer %s validated!"
+msgstr "Transfert %s validé !"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Transfer not found"
+msgstr "Picking introuvable"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Transferred"
+msgstr "Transféré"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Transferred:"
+msgstr "Transféré:"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_consult.js:0
+msgid "Unknown item/location: %s"
+msgstr "Article/emplacement inconnu: %s"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_delivery.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_receipt.js:0 code:addons/oski_stock_barcode/static/src/js/barcode_transfer.js:0
+msgid "Unknown item: %s"
+msgstr "Article inconnu: %s"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/barcode_inventory.js:0
+msgid "Unknown location: %s"
+msgstr "Emplacement inconnu: %s"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "UoM:"
+msgstr "UdM :"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Validate Delivery"
+msgstr "Valider la livraison"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Validate Receipt"
+msgstr "Valider la réception"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "Validate Transfer"
+msgstr "Valider le transfert"
+
+#. module: oski_stock_barcode
+#: model:ir.model.fields.selection,name:oski_stock_barcode.selection__oski_barcode_scan_log__action__validate
+msgid "Validation"
+msgstr "Validation"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/js/picking_list.js:0
+msgid "Waiting"
+msgstr "En attente"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "Zero or negative quantity refused"
+msgstr "Quantité nulle ou négative refusée"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "avail."
+msgstr "dispo"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "available"
+msgstr "disponibles"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "changed"
+msgstr "modifié(s)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "complete"
+msgstr "complet(s)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "item(s)"
+msgstr "article(s)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "item(s) changed)"
+msgstr "article(s) modifié(s))"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "lines"
+msgstr "lignes"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "location(s)"
+msgstr "emplacement(s)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "operation(s)"
+msgstr "opération(s)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "unit(s)"
+msgstr "unité(s)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "units)"
+msgstr "unités)"
+
+#. module: oski_stock_barcode
+#. odoo-javascript
+#: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
+msgid "waiting"
+msgstr "en attente"
+
+#. module: oski_stock_barcode
+#. odoo-python
+#: code:addons/oski_stock_barcode/controllers/barcode_controller.py:0
+msgid "“%(barcode)s” matches several locations (%(locations)s): scan its barcode or pick it from the list."
+msgstr "« %(barcode)s » désigne plusieurs emplacements (%(locations)s) : scannez son code-barres ou choisissez-le dans la liste."

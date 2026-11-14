@@ -88,7 +88,7 @@ class TestCompanyContext(HttpCase):
         self.assertEqual(self.picking_b.state, 'done')
         # Le bon de A, hors sélection, n'est pas atteignable.
         res = self._call('get_picking_lines', b, picking_id=self.picking_a.id)
-        self.assertIn('introuvable', res.get('error', ''))
+        self.assertIn('not found', res.get('error', ''))
         # A et B cochées : les deux sont visibles.
         self.assertTrue(self._found(self.picking_a, [self.company_a.id,
                                                      self.company_b.id]))
@@ -103,7 +103,7 @@ class TestCompanyContext(HttpCase):
         self.assertFalse(self._found(self.picking_a, forged))
         res = self._call('get_picking_lines', forged,
                          picking_id=self.picking_c.id)
-        self.assertIn('introuvable', res.get('error', ''))
+        self.assertIn('not found', res.get('error', ''))
         # Rien d'autorisé : comportement par défaut (sociétés de l'utilisateur).
         self.assertFalse(self._found(self.picking_c, [self.company_c.id]))
         self.assertTrue(self._found(self.picking_a, [self.company_c.id]))

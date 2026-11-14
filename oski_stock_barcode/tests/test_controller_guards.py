@@ -77,11 +77,11 @@ class TestControllerGuards(HttpCase):
                                    picking_id=picking.id).get('success'))
         done_lines = picking.move_line_ids
         res = self._call('validate_picking', picking_id=picking.id)
-        self.assertIn('déjà', res.get('error', ''))
+        self.assertIn('already', res.get('error', ''))
         # Rien ne bouge sur un bon terminé : ni quantité, ni ligne.
         res = self._call('update_line_qty', picking_id=picking.id,
                          product_id=self.product.id, qty=1)
-        self.assertIn('déjà', res.get('error', ''))
+        self.assertIn('already', res.get('error', ''))
         picking.invalidate_recordset()
         self.assertEqual(picking.move_line_ids, done_lines)
         self.assertEqual(sum(done_lines.mapped('quantity')), 4)
@@ -107,7 +107,7 @@ class TestControllerGuards(HttpCase):
         self.authenticate('oski_bc_op', 'oski_bc_op')
         res = self._call('update_line_qty', picking_id=picking.id,
                          product_id=self.product.id, qty=-3)
-        self.assertIn('négative', res.get('error', ''))
+        self.assertIn('Negative', res.get('error', ''))
         self.assertGreaterEqual(min(picking.move_line_ids.mapped('quantity')), 0)
 
     def test_ambiguous_location_name(self):
@@ -122,7 +122,7 @@ class TestControllerGuards(HttpCase):
         res = self._call('scan_location', barcode='OSKI-DUP')
         self.assertFalse(res['found'])
         self.assertTrue(res.get('ambiguous'))
-        self.assertIn('plusieurs', res.get('message', ''))
+        self.assertIn('several', res.get('message', ''))
 
     def test_transfer_rejects_bad_input(self):
         dest = self.env['stock.location'].create({
@@ -191,7 +191,7 @@ class TestControllerGuards(HttpCase):
                 ('validate_picking', {}),
                 ('get_report_url', {})):
             res = self._call(route, picking_id=picking_b.id, **params)
-            self.assertIn('introuvable', res.get('error', ''), route)
+            self.assertIn('not found', res.get('error', ''), route)
         self.assertFalse(picking_b.move_line_ids.filtered('quantity'))
         res = self._call('scan_product', barcode='OSKIGUARD01',
                          picking_id=picking_b.id)

@@ -7,6 +7,7 @@ import { barcodeRpc } from "./barcode_rpc";
 import { ProductSearch } from "./product_search";
 import { ScanBanner } from "./scan_banner";
 import { ScanFeedback } from "./scan_feedback";
+import { _t } from "@web/core/l10n/translation";
 
 export class BarcodeConsult extends Component {
     static template = "oski_stock_barcode.BarcodeConsult";
@@ -55,7 +56,7 @@ export class BarcodeConsult extends Component {
         this.state.lastScanStatus = 'error';
         ScanFeedback.error();
         this.notification.add(
-            locResult.message || `Article/emplacement inconnu: ${barcode}`, { type: 'danger' });
+            locResult.message || _t("Unknown item/location: %s", barcode), { type: 'danger' });
     }
 
     async _onProductSelected(product) {
@@ -78,7 +79,7 @@ export class BarcodeConsult extends Component {
                 this.state.recentMoves = [];
             }
         } catch {
-            this.notification.add("Erreur de chargement", { type: 'danger' });
+            this.notification.add(_t("Loading error"), { type: 'danger' });
             this._clear();
         }
         if (this.state.viewType === 'product' && this.state.product) {
@@ -109,7 +110,7 @@ export class BarcodeConsult extends Component {
                 this.state.viewType = 'location';
             }
         } catch {
-            this.notification.add("Erreur de chargement", { type: 'danger' });
+            this.notification.add(_t("Loading error"), { type: 'danger' });
             this._clear();
         }
         this.state.loading = false;

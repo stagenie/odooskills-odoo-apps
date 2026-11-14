@@ -15,7 +15,7 @@ registry.category("web_tour.tours").add("oski_stock_barcode_delivery_tour", {
     steps: () => [
         {
             content: "Accueil : tuile Expédition",
-            trigger: ".o_barcode_card:contains(EXPEDITION)",
+            trigger: ".o_barcode_card:contains(DELIVERY)",
             run: "click",
         },
         {
@@ -25,7 +25,7 @@ registry.category("web_tour.tours").add("oski_stock_barcode_delivery_tour", {
         },
         {
             content: "Ligne chargée, stock réservé disponible",
-            trigger: ".o_barcode_list_count:contains(Total : 0/2)",
+            trigger: ".o_barcode_list_count:contains(Total: 0/2)",
         },
         {
             content: "Premier scan",
@@ -34,7 +34,7 @@ registry.category("web_tour.tours").add("oski_stock_barcode_delivery_tour", {
         },
         {
             content: "Une unité comptée",
-            trigger: ".o_barcode_list_count:contains(Total : 1/2)",
+            trigger: ".o_barcode_list_count:contains(Total: 1/2)",
             run: () => scan("OSKITOUR01"),
         },
         {
@@ -43,12 +43,12 @@ registry.category("web_tour.tours").add("oski_stock_barcode_delivery_tour", {
         },
         {
             content: "Valider la livraison",
-            trigger: ".o_barcode_btn.o_btn_primary:contains(Valider la livraison):enabled",
+            trigger: ".o_barcode_btn.o_btn_primary:contains(Validate Delivery):enabled",
             run: "click",
         },
         {
             content: "Livraison validée",
-            trigger: ".o_barcode_validated:contains(Livraison validée)",
+            trigger: ".o_barcode_validated:contains(Delivery validated)",
         },
     ],
 });
