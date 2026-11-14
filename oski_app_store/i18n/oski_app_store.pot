@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-17 21:20+0000\n"
-"PO-Revision-Date: 2026-10-17 21:20+0000\n"
+"POT-Creation-Date: 2026-11-14 05:06+0000\n"
+"PO-Revision-Date: 2026-11-14 05:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -381,6 +381,11 @@ msgid "App Store"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__version_id
+msgid "Archive"
+msgstr ""
+
+#. module: oski_app_store
 #: model:oski.module.category,name:oski_app_store.cat_assets
 msgid "Assets & Maintenance"
 msgstr ""
@@ -505,8 +510,20 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__country_id
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Country"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__country_source
+msgid "Country source"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__create_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__create_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__create_uid
@@ -516,6 +533,7 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__create_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__create_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__create_date
@@ -542,6 +560,27 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__currency_id
 msgid "Currency"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__partner_id
+msgid "Customer"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__partner
+msgid "Customer address"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_sale_order__oski_country_id
+msgid "Customer country"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__date
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Date"
 msgstr ""
 
 #. module: oski_app_store
@@ -575,11 +614,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_ir_http__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_sale_order__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -610,11 +651,24 @@ msgid "Download purchased modules, all versions"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_download_action
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__download_count
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__download_count
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_downloads
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_graph
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_list
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_pivot
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
 msgid "Downloads"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_download_action
+msgid ""
+"Each archive served by the store is recorded here with the country of the "
+"visitor. The IP address itself is never stored."
 msgstr ""
 
 #. module: oski_app_store
@@ -682,9 +736,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_free
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__is_free
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__pricing__free
 #: model:oski.module.tag,name:oski_app_store.tag_demo_gratuit
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_kanban
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
 msgid "Free"
@@ -695,6 +752,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
 #: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
 msgid "Frequently asked questions"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__geoip
+msgid "Geolocation"
 msgstr ""
 
 #. module: oski_app_store
@@ -736,11 +798,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_ir_http__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__id
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__id
 #: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__id
+#: model:ir.model.fields,field_description:oski_app_store.field_sale_order__id
 msgid "ID"
 msgstr ""
 
@@ -836,6 +900,7 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__write_uid
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__write_uid
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__write_uid
@@ -845,6 +910,7 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__write_date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__write_date
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__write_date
@@ -861,6 +927,18 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
 msgid "Last updated: August 31, 2026."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Launch price — %(percent)s%% off"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Launch price — %(percent)s%% off until %(date)s"
 msgstr ""
 
 #. module: oski_app_store
@@ -912,7 +990,9 @@ msgid "Minimum value to display a counter"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__module_id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__module_id
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Module"
 msgstr ""
@@ -935,6 +1015,7 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__module_version
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__module_version
 msgid "Module version"
 msgstr ""
@@ -946,6 +1027,11 @@ msgstr ""
 #: model:ir.ui.menu,name:oski_app_store.menu_oski_modules
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list
 msgid "Modules"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Month"
 msgstr ""
 
 #. module: oski_app_store
@@ -995,6 +1081,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "No archive available."
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_download_action
+msgid "No download yet"
 msgstr ""
 
 #. module: oski_app_store
@@ -1116,8 +1207,10 @@ msgid "Odoo modules"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__odoo_version
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__odoo_version_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
 msgid "Odoo version"
 msgstr ""
 
@@ -1131,6 +1224,12 @@ msgstr ""
 msgid ""
 "Odoo version not yet released: announced in the catalog and the selector, "
 "but without a downloadable archive."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_download__odoo_version
+msgid ""
+"Odoo version of the archive served, kept even if the archive is removed."
 msgstr ""
 
 #. module: oski_app_store
@@ -1213,6 +1312,12 @@ msgid "Order"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__pricing__paid
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Paid"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__parent_id
 msgid "Parent category"
 msgstr ""
@@ -1235,6 +1340,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__price
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Price"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__pricing
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Pricing"
 msgstr ""
 
 #. module: oski_app_store
@@ -1425,6 +1536,11 @@ msgid "Sales & CRM"
 msgstr ""
 
 #. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__screenshot_ids
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Screenshots"
@@ -1496,6 +1612,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Sort"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_module_download
+msgid "Store download"
 msgstr ""
 
 #. module: oski_app_store
@@ -1784,6 +1905,16 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "Under what license ?"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__unknown
+msgid "Unknown"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Unknown country"
 msgstr ""
 
 #. module: oski_app_store

@@ -16,3 +16,5 @@ from . import test_counters
 from . import test_version_on_request
 from . import test_ribbon
 from . import test_discussion
+from . import test_download_country
+from . import test_launch_price

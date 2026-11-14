@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_module_download_view_list" model="ir.ui.view">
+        <field name="name">oski.module.download.list</field>
+        <field name="model">oski.module.download</field>
+        <field name="arch" type="xml">
+            <list string="Downloads" create="0" edit="0" delete="0">
+                <field name="date"/>
+                <field name="module_id"/>
+                <field name="odoo_version"/>
+                <field name="module_version" optional="hide"/>
+                <field name="pricing"/>
+                <field name="partner_id" optional="show"/>
+                <field name="country_id"/>
+                <field name="country_source" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_module_download_view_pivot" model="ir.ui.view">
+        <field name="name">oski.module.download.pivot</field>
+        <field name="model">oski.module.download</field>
+        <field name="arch" type="xml">
+            <pivot string="Downloads" sample="1">
+                <field name="country_id" type="row"/>
+                <field name="date" interval="month" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="oski_module_download_view_graph" model="ir.ui.view">
+        <field name="name">oski.module.download.graph</field>
+        <field name="model">oski.module.download</field>
+        <field name="arch" type="xml">
+            <graph string="Downloads" type="bar" sample="1">
+                <field name="country_id"/>
+                <field name="pricing"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="oski_module_download_view_search" model="ir.ui.view">
+        <field name="name">oski.module.download.search</field>
+        <field name="model">oski.module.download</field>
+        <field name="arch" type="xml">
+            <search string="Downloads">
+                <field name="module_id"/>
+                <field name="country_id"/>
+                <field name="partner_id"/>
+                <field name="odoo_version"/>
+                <filter name="filter_free" string="Free" domain="[('pricing', '=', 'free')]"/>
+                <filter name="filter_paid" string="Paid" domain="[('pricing', '=', 'paid')]"/>
+                <separator/>
+                <filter name="filter_unknown_country" string="Unknown country"
+                        domain="[('country_id', '=', False)]"/>
+                <separator/>
+                <filter name="filter_date" string="Date" date="date"/>
+                <group>
+                    <filter name="group_country" string="Country" context="{'group_by': 'country_id'}"/>
+                    <filter name="group_module" string="Module" context="{'group_by': 'module_id'}"/>
+                    <filter name="group_month" string="Month" context="{'group_by': 'date:month'}"/>
+                    <filter name="group_odoo_version" string="Odoo version" context="{'group_by': 'odoo_version'}"/>
+                    <filter name="group_pricing" string="Pricing" context="{'group_by': 'pricing'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oski_module_download_action" model="ir.actions.act_window">
+        <field name="name">Downloads</field>
+        <field name="res_model">oski.module.download</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="oski_module_download_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No download yet</p>
+            <p>Each archive served by the store is recorded here with the country of the visitor. The IP address itself is never stored.</p>
+        </field>
+    </record>
+</odoo>

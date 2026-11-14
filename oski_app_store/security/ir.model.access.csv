@@ -18,3 +18,4 @@ access_oski_odoo_version_portal,oski.odoo.version portal,model_oski_odoo_version
 access_product_ribbon_oski_public,product.ribbon oski public,website_sale.model_product_ribbon,base.group_public,1,0,0,0
 access_product_ribbon_oski_portal,product.ribbon oski portal,website_sale.model_product_ribbon,base.group_portal,1,0,0,0
 access_product_ribbon_oski_manager,product.ribbon oski manager,website_sale.model_product_ribbon,oski_app_store.group_manager,1,1,1,1
+access_oski_module_download_manager,oski.module.download manager,model_oski_module_download,oski_app_store.group_manager,1,0,0,0

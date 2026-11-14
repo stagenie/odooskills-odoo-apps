@@ -7,17 +7,23 @@ Route Task 9 : /apps/download/<version_id>
   - module payant, connecté sans achat confirmé → redirect vers la page module
   - module payant, acheteur confirmé (sale.order.line state='sale') → zip servi
 """
+import logging
 import time
 from urllib.parse import urlencode, urlparse
 
+from babel.dates import format_date as babel_format_date
+
 from odoo import _, http
 from odoo.http import request
+from odoo.tools.misc import babel_locale_parse
 from odoo.addons.oski_app_store.controllers.url_state import build_query, toggle
 
 # Un visiteur qui rafraîchit la page ou relance le téléchargement ne doit pas
 # gonfler le compteur public à chaque clic : une seule incrémentation par
 # version et par session dans cette fenêtre.
 DOWNLOAD_COUNT_GUARD_SECONDS = 6 * 3600
+
+_logger = logging.getLogger(__name__)
 
 
 class OskiAppStore(http.Controller):
@@ -273,6 +279,7 @@ class OskiAppStore(http.Controller):
         product = module.sudo().product_tmpl_id
         variant = product.product_variant_id
         is_sellable = bool(variant) and product.is_published and product.sale_ok
+        price_offer = self._price_offer(product) if is_sellable else None
         # Même raison que _version_option côté catalogue : le titre traduit
         # ne peut pas se construire dans le gabarit, QWeb n'y expose pas `_`.
         on_request_versions = request.env["oski.odoo.version"].sudo().get_on_request()
@@ -295,6 +302,7 @@ class OskiAppStore(http.Controller):
                 "show_counters": request.env["oski.module"]._counters_settings()[0],
                 "is_purchased": module.is_purchased_by(partner),
                 "is_sellable": is_sellable,
+                "price_offer": price_offer,
                 "buy_url": "/apps/buy/%s" % module.id if variant else "",
                 "pill_versions": pill_versions,
                 "upcoming_versions": upcoming_versions,
@@ -307,6 +315,57 @@ class OskiAppStore(http.Controller):
                 "back_url": self._catalog_back_url(),
             },
         )
+
+    def _price_offer(self, product):
+        """Remise de la liste de prix du site sur ce produit, ou None.
+
+        La liste de prix est la seule source du prix payé : la fiche montre ce
+        que le panier facturera (`_get_combination_info`, l'API des fiches
+        produit de website_sale). Pourcentage et date de fin viennent de la
+        règle appliquée, jamais d'un texte en dur. Sans remise → None, et la
+        fiche garde son affichage habituel.
+        """
+        product = product.sudo()
+        variant = product.product_variant_id
+        if not variant:
+            return None
+        info = product._get_combination_info(product_id=variant.id)
+        if not info.get("has_discounted_price"):
+            return None
+        pricelist = request.pricelist
+        rule = request.env["product.pricelist.item"].sudo()
+        if pricelist:
+            _price, rule_id = pricelist._get_product_price_rule(variant, 1.0)
+            rule = rule.browse(rule_id)
+        list_price, price = info["list_price"], info["price"]
+        if rule.compute_price == "percentage":
+            percent = rule.percent_price
+        else:
+            percent = round(100.0 * (1.0 - price / list_price)) if list_price else 0
+        percent_label = (
+            "%d" % percent if float(percent).is_integer() else ("%s" % percent)
+        )
+        end = info.get("discount_end_date") or rule.date_end
+        end_label = ""
+        if end:
+            locale = babel_locale_parse(request.env.lang or "en_US")
+            end_label = babel_format_date(end.date(), format="long", locale=locale)
+        if end_label:
+            note = _(
+                "Launch price — %(percent)s%% off until %(date)s",
+                percent=percent_label,
+                date=end_label,
+            )
+        else:
+            note = _("Launch price — %(percent)s%% off", percent=percent_label)
+        return {
+            "list_price": list_price,
+            "price": price,
+            "currency": request.website.currency_id,
+            "percent": percent,
+            "date_end": end,
+            "note": note,
+        }
 
     @http.route(
         ["/apps/buy/<int:module_id>"],
@@ -365,6 +424,42 @@ class OskiAppStore(http.Controller):
         request.session["oski_dl_counted"] = counted
         return should_count
 
+    def _download_country(self, partner):
+        """(pays, source) du téléchargement ; jamais d'adresse IP conservée.
+
+        Pays du partenaire connecté s'il est renseigné, sinon géolocalisation
+        de la requête (`request.geoip`). Sans base GeoLite2 sur le serveur,
+        `country_code` vaut None : pays vide (« Inconnu »), sans erreur.
+        """
+        Country = request.env["res.country"].sudo()
+        if partner:
+            country = partner.country_id or partner.commercial_partner_id.country_id
+            if country:
+                return country, "partner"
+        try:
+            code = request.geoip.country_code
+        except Exception:  # noqa: BLE001 — la géoloc ne doit jamais bloquer le zip
+            _logger.debug("Géolocalisation indisponible", exc_info=True)
+            code = None
+        if code:
+            country = Country.search([("code", "=", code.upper())], limit=1)
+            if country:
+                return country, "geoip"
+        return Country, "unknown"
+
+    def _log_download(self, version):
+        """Trace le téléchargement servi (module, version, pays). Jamais bloquant."""
+        try:
+            user = request.env.user
+            partner = user.partner_id if not user._is_public() else False
+            country, source = self._download_country(partner)
+            with request.env.cr.savepoint():
+                request.env["oski.module.download"]._log(
+                    version, partner=partner, country=country, source=source
+                )
+        except Exception:  # noqa: BLE001 — le visiteur doit recevoir son archive
+            _logger.exception("Téléchargement %s non tracé", version.id)
+
     @http.route(
         ["/apps/download/<int:version_id>"],
         type="http",
@@ -410,6 +505,7 @@ class OskiAppStore(http.Controller):
 
         if self._should_count_download(version.id):
             version._bump_download_count()
+            self._log_download(version)
 
         # Lecture sudo de la pièce jointe pour garantir l'accès au binaire
         attachment = version.attachment_id.sudo()

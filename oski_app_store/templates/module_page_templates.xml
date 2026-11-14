@@ -82,6 +82,25 @@
                                    class="btn oski-btn-download w-100">
                                     &#x2B07; Download (<t t-out="target.odoo_version"/>)
                                 </a>
+                                <t t-elif="is_sellable and price_offer">
+                                    <!-- Remise de la liste de prix du site : le prix
+                                         affiché est celui que le panier facturera. -->
+                                    <p class="oski-price-offer mb-2">
+                                        <del class="oski-price-list text-muted"
+                                             t-out="price_offer['list_price']"
+                                             t-options='{"widget": "monetary", "display_currency": price_offer["currency"]}'/>
+                                        <strong class="oski-price-launch"
+                                                t-out="price_offer['price']"
+                                                t-options='{"widget": "monetary", "display_currency": price_offer["currency"]}'/>
+                                    </p>
+                                    <a t-att-href="buy_url"
+                                       class="btn oski-btn-buy w-100">
+                                        Buy —
+                                        <span t-out="price_offer['price']"
+                                              t-options='{"widget": "monetary", "display_currency": price_offer["currency"]}'/>
+                                    </a>
+                                    <p class="oski-price-offer-note" t-out="price_offer['note']"/>
+                                </t>
                                 <t t-elif="is_sellable">
                                     <a t-att-href="buy_url"
                                        class="btn oski-btn-buy w-100">

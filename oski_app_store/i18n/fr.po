@@ -2347,3 +2347,115 @@ msgstr "Historique des communications du site web"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "to join the discussion."
 msgstr "pour rejoindre la discussion."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__version_id
+msgid "Archive"
+msgstr "Archive"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__country_id
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Country"
+msgstr "Pays"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__country_source
+msgid "Country source"
+msgstr "Origine du pays"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__partner_id
+msgid "Customer"
+msgstr "Client"
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__partner
+msgid "Customer address"
+msgstr "Adresse du client"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_sale_order__oski_country_id
+msgid "Customer country"
+msgstr "Pays du client"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__date
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_download_action
+msgid ""
+"Each archive served by the store is recorded here with the country of the "
+"visitor. The IP address itself is never stored."
+msgstr ""
+"Chaque archive servie par le store est enregistrée ici avec le pays du "
+"visiteur. L'adresse IP elle-même n'est jamais conservée."
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__geoip
+msgid "Geolocation"
+msgstr "Géolocalisation"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Launch price — %(percent)s%% off"
+msgstr "Prix de lancement — −%(percent)s %%"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Launch price — %(percent)s%% off until %(date)s"
+msgstr "Prix de lancement — −%(percent)s %% jusqu'au %(date)s"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Month"
+msgstr "Mois"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_download_action
+msgid "No download yet"
+msgstr "Aucun téléchargement pour l'instant"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_download__odoo_version
+msgid ""
+"Odoo version of the archive served, kept even if the archive is removed."
+msgstr ""
+"Version Odoo de l'archive servie, conservée même si l'archive est supprimée."
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__pricing__paid
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Paid"
+msgstr "Payant"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__pricing
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Pricing"
+msgstr "Tarif"
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_sale_order
+msgid "Sales Order"
+msgstr "Commande client"
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_module_download
+msgid "Store download"
+msgstr "Téléchargement du store"
+
+#. module: oski_app_store
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__country_source__unknown
+msgid "Unknown"
+msgstr "Inconnu"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+msgid "Unknown country"
+msgstr "Pays inconnu"

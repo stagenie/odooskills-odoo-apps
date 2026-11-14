@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_view_form_oski_country" model="ir.ui.view">
+        <field name="name">sale.order.form.oski.country</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="oski_country_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_view_list_oski_country" model="ir.ui.view">
+        <field name="name">sale.order.list.oski.country</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="oski_country_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_view_quotation_list_oski_country" model="ir.ui.view">
+        <field name="name">sale.order.quotation.list.oski.country</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="oski_country_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>

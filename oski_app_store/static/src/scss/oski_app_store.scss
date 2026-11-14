@@ -401,6 +401,11 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         border-radius: 10px; padding: .6rem;
         &:hover { background: $oski-plum-dark; color: #fff; } }
     .oski-fallback-note { color: $oski-muted; font-size: .8rem; margin-top: .5rem; }
+    // Prix de lancement (liste de prix du site) : catalogue barré + prix payé.
+    .oski-price-offer { display: flex; align-items: baseline; gap: .6rem; font-size: 1.15rem; }
+    .oski-price-list { font-size: .95rem; }
+    .oski-price-launch { color: $oski-plum; }
+    .oski-price-offer-note { color: $oski-plum; font-size: .85rem; font-weight: 600; margin: .5rem 0 0; }
     .oski-btn-primary { background: $oski-plum; color: #fff;
         &:hover { background: $oski-plum-dark; color: #fff; } }
 
