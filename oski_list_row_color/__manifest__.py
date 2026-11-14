@@ -1,13 +1,13 @@
 {
-    "name": "OdooSkills — Couleur de lignes de liste",
+    "name": "List Row Colors",
     "version": "18.0.1.0.0",
     "category": "Technical",
-    "summary": "Surlignez vos listes Odoo selon vos règles métier — sans toucher une seule ligne de code.",
+    "summary": "Highlight your Odoo lists according to your business rules — without touching a single line of code.",
     "description": """
-Repérez en un coup d'œil vos commandes urgentes, factures en retard ou articles critiques.
-Définissez une condition Python (ex : state == 'done'), choisissez une couleur (rouge, vert,
-orange…) et le module génère automatiquement la vue liste héritée — aucun XML à modifier.
-Fonctionne sur n'importe quel modèle Odoo, Community ou Enterprise.
+Spot your urgent orders, overdue invoices or critical products at a glance.
+Define a Python condition (e.g. state == 'done'), pick a color (red, green,
+orange…) and the module automatically generates the inherited list view — no XML to edit.
+Works on any Odoo model, Community or Enterprise.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

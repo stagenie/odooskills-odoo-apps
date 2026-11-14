@@ -1,13 +1,13 @@
 {
-    'name': 'OSKI Dashboard',
+    'name': "OSKI Dashboard",
     'version': '18.0.1.0.0',
     'category': 'Productivity',
-    'summary': "Constructeur de tableaux de bord drag-and-drop",
-    'description': """Composez vos tableaux de bord Odoo sans code : grille drag-and-drop,
-9 types de widgets (KPI, barres, lignes, aires, camembert, donut, liste, jauge, texte),
-périodes calendaires avec comparaison N-1, favoris et auto-refresh.
-Chaque widget lit ses données avec les droits de l'utilisateur connecté
-(règles propriétaire / partage en lecture par groupes).""",
+    'summary': "Drag-and-drop dashboard builder",
+    'description': """Build your Odoo dashboards without code: drag-and-drop grid,
+9 widget types (KPI, bars, lines, areas, pie, donut, list, gauge, text),
+calendar periods with previous-period comparison, favorites and auto-refresh.
+Each widget reads its data with the logged-in user's access rights
+(owner / read-sharing by group rules).""",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',

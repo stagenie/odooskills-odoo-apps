@@ -1,13 +1,14 @@
 {
-    "name": "OdooSkills — Anti-doublon Contacts",
+    "name": "Contact Duplicate Guard",
     "version": "18.0.1.0.0",
     "category": "Contacts",
-    "summary": "Évitez les doublons clients : alerte dès qu'un email ou téléphone existe déjà.",
+    "summary": "Avoid duplicate customers: get an alert as soon as an email or phone number already exists.",
     "description": """
-Avertit l'utilisateur dès la saisie lorsqu'un contact partage le même email
-ou le même téléphone qu'un contact existant. La détection est non bloquante :
-le contact peut être créé, mais un bandeau et un lien vers le doublon possible
-sont affichés. Email et téléphone activables séparément depuis les Réglages.
+Warns the user at entry time when a contact shares the same email or the
+same phone number as an existing contact. Detection is non-blocking: the
+contact can be created, but a banner and a link to the possible duplicate
+are displayed. Email and phone detection can be enabled separately from the
+Settings.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

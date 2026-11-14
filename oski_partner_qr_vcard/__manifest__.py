@@ -1,14 +1,14 @@
 {
-    "name": "OdooSkills — QR vCard Contact",
+    "name": "QR vCard Contact",
     "version": "18.0.1.0.0",
     "category": "Contacts",
-    "summary": "Partagez un contact Odoo en un scan : le QR code vCard se génère automatiquement sur la fiche.",
+    "summary": "Share an Odoo contact with a single scan: the vCard QR code is generated automatically on the contact form.",
     "description": """
-Fini la saisie manuelle des coordonnées en réunion ou en salon.
-Ce module ajoute un onglet "QR vCard" sur chaque fiche contact Odoo.
-L'interlocuteur scanne le code avec son téléphone et le contact (nom, société,
-fonction, e-mail, téléphone, site web) s'ajoute à son carnet d'adresses
-en un tap — aucune application tierce requise.
+No more typing contact details by hand in meetings or at trade shows.
+This module adds a "QR vCard" tab to every Odoo contact form.
+The other person scans the code with their phone and the contact (name, company,
+job position, email, phone, website) is added to their address book
+in one tap — no third-party app required.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

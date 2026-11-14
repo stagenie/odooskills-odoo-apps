@@ -1,8 +1,8 @@
 {
-    "name": "Rendez-vous",
+    "name": "Appointment Booking",
     "version": "18.0.1.0.0",
     "category": "Services/Appointment",
-    "summary": "Réservez des créneaux sans double réservation — prise de RDV structurée pour Odoo Community",
+    "summary": "Book time slots with no double booking — structured appointment scheduling for Odoo Community",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",

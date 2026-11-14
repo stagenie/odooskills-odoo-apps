@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Checklist d'étapes sur les tâches de projet",
+    "name": "Task Checklist",
     "version": "18.0.1.0.0",
     "category": "Services/Project",
-    "summary": "Ne laissez plus rien passer : chaque tâche gagne une checklist cochable avec barre de progression et assignation par étape.",
+    "summary": "Never let anything slip: every task gets a checkable checklist with a progress bar and per-step assignment.",
     "description": """
-Checklist d'étapes sur les tâches de projet
-===========================================
+Step Checklist on Project Tasks
+===============================
 
-Les micro-étapes d'une tâche finissent souvent dans les commentaires ou les
-e-mails — sources d'oublis. Ce module ajoute un onglet « Checklist » sur chaque
-tâche de projet pour lister, cocher et assigner chaque sous-étape.
+The micro-steps of a task often end up in comments or
+emails — a source of oversights. This module adds a "Checklist" tab to every
+project task to list, check and assign each sub-step.
 
-- Onglet « Checklist » avec liste éditable inline (réordonnable par glisser-déposer).
-- Barre de progression calculée automatiquement (% d'étapes terminées).
-- Assignation de chaque étape à un utilisateur différent.
-- Colonne d'avancement optionnelle dans la vue liste des tâches.
+- "Checklist" tab with an inline-editable list (reorderable by drag and drop).
+- Automatically computed progress bar (% of steps completed).
+- Each step can be assigned to a different user.
+- Optional progress column in the task list view.
 
-Aucune configuration requise : fonctionne dès l'installation.
+No configuration required: works right after installation.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

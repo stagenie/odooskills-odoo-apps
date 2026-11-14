@@ -1,16 +1,17 @@
 {
-    "name": "OdooSkills — Menus masqués par utilisateur",
+    "name": "Hidden Menus per User",
     "version": "18.0.1.0.0",
     "category": "Technical",
-    "summary": "Retirez des menus de l'écran d'un utilisateur précis, sans créer de groupe ni toucher aux droits.",
+    "summary": "Remove menus from one specific user's screen, without creating a group or touching access rights.",
     "description": """
-Un utilisateur n'a besoin que d'une partie de ce que son rôle lui ouvre. Plutôt que d'inventer un
-groupe pour chaque exception, désignez sur sa fiche les menus qu'il ne verra plus : ils
-disparaissent de son écran, et de lui seul. Masquer un menu masque aussi tout ce qu'il contient.
+A user only needs part of what their role opens up to them. Rather than inventing
+a group for every exception, list on their user form the menus they will no longer
+see: they disappear from their screen, and theirs alone. Hiding a menu also hides
+everything it contains.
 
-Ce module range l'écran, il ne verrouille pas la donnée : un menu masqué reste atteignable par
-son adresse directe. Pour interdire réellement l'accès, il faut des droits — c'est le rôle des
-modules de cloisonnement OdooSkills.
+This module tidies the screen, it does not lock the data: a hidden menu remains
+reachable through its direct URL. To really forbid access, you need access
+rights — that is the job of the OdooSkills partitioning modules.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

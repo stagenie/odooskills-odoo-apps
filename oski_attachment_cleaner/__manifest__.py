@@ -1,25 +1,25 @@
 {
-    "name": "OdooSkills — Nettoyage des pièces jointes",
+    "name": "Attachment Cleaner",
     "version": "18.0.1.0.0",
     "category": "Technical",
-    "summary": "Repérez les pièces jointes orphelines et les copies redondantes, mesurez le poids, purgez sous contrôle.",
+    "summary": "Find orphan attachments and redundant copies, measure their size, and purge them under control.",
     "description": """
-Le magasin de fichiers d'une base vieillit mal : un enregistrement supprimé
-laisse ses pièces jointes derrière lui, et la même pièce finit attachée deux ou
-trois fois au même document. Odoo ne propose aucun inventaire, et sa purge
-automatique ne touche qu'à ce qu'il a lui-même produit.
+A database's filestore ages badly: a deleted record leaves its attachments
+behind, and the same file ends up attached two or three times to the same
+document. Odoo offers no inventory, and its automatic cleanup only touches
+what it produced itself.
 
-Ce module recense, mesure, puis purge sur demande :
+This module lists, measures, then purges on request:
 
-- les **orphelines** — la pièce désigne un enregistrement qui n'existe plus ;
-- les **copies redondantes** — même empreinte, même document, plusieurs fois.
+- **orphans** — the attachment points to a record that no longer exists;
+- **redundant copies** — same checksum, same document, several times.
 
-Rien n'est supprimé sans un relevé préalable, et chaque purge laisse une trace
-nominative.
+Nothing is deleted without a prior report, and every purge leaves a named
+trail.
 
-Sont écartées d'office, et jamais proposées : les valeurs de champs binaires,
-les fichiers servis par une URL, les pièces publiques, celles des vues, et
-tout ce qui est plus récent que l'âge minimum retenu.
+Excluded by design, and never offered: binary field values, files served by
+a URL, public attachments, those of views, and anything more recent than the
+selected minimum age.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

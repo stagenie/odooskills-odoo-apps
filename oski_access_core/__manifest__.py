@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "OdooSkills — Socle d'accès granulaire (Oski Access)",
+    "name": "Access Core",
     "version": "18.0.1.0.0",
     "category": "Technical",
-    "summary": "Installez ce socle gratuit pour restreindre l'accès Odoo par journal, entrepôt, département ou équipe — sans modifier le code source.",
+    "summary": "Install this free foundation to restrict Odoo access by journal, warehouse, department or team — without changing the source code.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",

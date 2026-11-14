@@ -1,10 +1,11 @@
 {
-    'name': 'Location — Gestion de location générique',
+    'name': "Rental Management",
     'version': '18.0.1.0.0',
     'category': 'Services/Rental',
-    'summary': "Louez tout type de ressource : véhicules, salles, engins, matériel",
-    'description': "Gestion de location générique : ressources unitaires, réservations, "
-                   "départ/retour avec état des lieux, caution, facturation, alertes retard.",
+    'summary': "Rent out any type of resource: vehicles, rooms, machinery, equipment",
+    'description': """
+Generic rental management: individual resources, bookings, pickup/return with condition report, deposit, invoicing, late return alerts.
+""",
     'author': 'OdooSkills',
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',

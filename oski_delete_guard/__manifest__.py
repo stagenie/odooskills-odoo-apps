@@ -1,16 +1,16 @@
 {
-    "name": "OdooSkills — Garde-fou de suppression",
+    "name": "Delete Guard",
     "version": "18.0.1.0.0",
     "category": "Technical",
-    "summary": "Interdisez la suppression modèle par modèle, réservez-la à quelques groupes, et gardez la trace de chaque effacement.",
+    "summary": "Block deletion model by model, reserve it for a few groups, and keep a record of every deletion.",
     "description": """
-Une suppression ne laisse aucune trace dans Odoo : l'enregistrement disparaît, et avec lui son
-chatter. Ce module ferme la porte modèle par modèle — commandes, contacts, factures, ce que vous
-décidez — et n'ouvre l'exception qu'aux groupes que vous désignez. Chaque suppression réellement
-exécutée sur un modèle surveillé est inscrite dans un journal consultable : qui, quoi, quand.
+A deletion leaves no trace in Odoo: the record disappears, and its
+chatter with it. This module closes the door model by model — orders, contacts, invoices, whatever you
+decide — and only opens the exception to the groups you designate. Every deletion actually
+performed on a monitored model is written to a searchable log: who, what, when.
 
-Les opérations système (installation, mise à jour, désinstallation, tâches planifiées) ne sont
-jamais bloquées : le garde-fou protège l'interface, pas la maintenance.
+System operations (installation, upgrade, uninstallation, scheduled actions) are
+never blocked: the guard protects the interface, not maintenance.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
