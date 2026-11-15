@@ -4,63 +4,63 @@ from odoo.exceptions import UserError, ValidationError
 
 class RentalOrder(models.Model):
     _name = 'oski.rental.order'
-    _description = 'Location'
+    _description = 'Rental'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'date_start desc, id desc'
 
-    name = fields.Char(string='Référence', default='Nouveau', readonly=True, copy=False)
+    name = fields.Char(string='Reference', default=lambda self: self.env._('New'), readonly=True, copy=False)
     partner_id = fields.Many2one(
-        'res.partner', string='Client', required=True, tracking=True)
+        'res.partner', string='Customer', required=True, tracking=True)
     user_id = fields.Many2one(
-        'res.users', string='Responsable', tracking=True,
+        'res.users', string='Responsible', tracking=True,
         default=lambda self: self.env.user)
     company_id = fields.Many2one(
-        'res.company', string='Société', required=True,
+        'res.company', string='Company', required=True,
         default=lambda self: self.env.company)
     currency_id = fields.Many2one(related='company_id.currency_id')
-    date_start = fields.Datetime(string='Début', required=True, tracking=True)
-    date_end = fields.Datetime(string='Fin prévue', required=True, tracking=True)
+    date_start = fields.Datetime(string='Start', required=True, tracking=True)
+    date_end = fields.Datetime(string='Planned End', required=True, tracking=True)
     origin = fields.Selection([
-        ('manual', 'Manuel'),
-        ('website', 'Site web'),
-    ], string='Origine', default='manual', readonly=True)
+        ('manual', 'Manual'),
+        ('website', 'Website'),
+    ], string='Origin', default='manual', readonly=True)
     state = fields.Selection([
-        ('draft', 'Devis'),
-        ('reserved', 'Réservée'),
-        ('ongoing', 'En cours'),
-        ('returned', 'Retournée'),
-        ('done', 'Facturée'),
-        ('cancelled', 'Annulée'),
-    ], string='État', default='draft', tracking=True, copy=False)
+        ('draft', 'Quotation'),
+        ('reserved', 'Reserved'),
+        ('ongoing', 'Ongoing'),
+        ('returned', 'Returned'),
+        ('done', 'Invoiced'),
+        ('cancelled', 'Cancelled'),
+    ], string='Status', default='draft', tracking=True, copy=False)
     line_ids = fields.One2many(
-        'oski.rental.order.line', 'order_id', string='Lignes', copy=True)
-    actual_return_date = fields.Datetime(string='Retour effectif', readonly=True, copy=False)
-    is_late = fields.Boolean(string='En retard', compute='_compute_is_late')
+        'oski.rental.order.line', 'order_id', string='Lines', copy=True)
+    actual_return_date = fields.Datetime(string='Actual Return', readonly=True, copy=False)
+    is_late = fields.Boolean(string='Late', compute='_compute_is_late')
     late_notified = fields.Boolean(copy=False)
-    checkout_note = fields.Text(string='État des lieux — départ', copy=False)
-    checkin_note = fields.Text(string='État des lieux — retour', copy=False)
+    checkout_note = fields.Text(string='Condition Report: Pickup', copy=False)
+    checkin_note = fields.Text(string='Condition Report: Return', copy=False)
     deposit_state = fields.Selection([
-        ('none', 'Sans caution'),
-        ('to_collect', 'À percevoir'),
-        ('collected', 'Perçue'),
-        ('refunded', 'Remboursée'),
-    ], string='Caution', default='none', tracking=True, copy=False)
+        ('none', 'No Deposit'),
+        ('to_collect', 'To Collect'),
+        ('collected', 'Collected'),
+        ('refunded', 'Refunded'),
+    ], string='Deposit', default='none', tracking=True, copy=False)
     amount_subtotal = fields.Monetary(
-        string='Sous-total', compute='_compute_amounts', store=True)
+        string='Subtotal', compute='_compute_amounts', store=True)
     deposit_total = fields.Monetary(
-        string='Total caution', compute='_compute_amounts', store=True)
+        string='Total Deposit', compute='_compute_amounts', store=True)
     amount_total = fields.Monetary(
         string='Total', compute='_compute_amounts', store=True)
     invoice_ids = fields.Many2many(
-        'account.move', string='Factures', copy=False)
+        'account.move', string='Invoices', copy=False)
     invoice_count = fields.Integer(compute='_compute_invoice_count')
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if not vals.get('name') or vals['name'] == 'Nouveau':
+            if not vals.get('name') or vals['name'] in ('New', 'Nouveau', self.env._('New')):
                 vals['name'] = self.env['ir.sequence'].sudo().next_by_code(
-                    'oski.rental.order') or 'Nouveau'
+                    'oski.rental.order') or self.env._('New')
         return super().create(vals_list)
 
     @api.depends('line_ids.price_subtotal', 'line_ids.deposit', 'line_ids.late_amount')
@@ -89,7 +89,7 @@ class RentalOrder(models.Model):
         for order in self:
             if order.date_end <= order.date_start:
                 raise ValidationError(
-                    "La date de fin doit être postérieure à la date de début.")
+                    self.env._("The end date must be after the start date."))
 
     def _rental_tz(self):
         """Fuseau d'affichage des dates (libellés, messages) : celui de la
@@ -111,15 +111,15 @@ class RentalOrder(models.Model):
     def unlink(self):
         if any(order.state not in ('draft', 'cancelled') for order in self):
             raise UserError(
-                "Seule une location en devis ou annulée peut être supprimée.")
+                self.env._("Only a quotation or cancelled rental can be deleted."))
         return super().unlink()
 
     def action_reserve(self):
         for order in self:
             if order.state != 'draft':
-                raise UserError("Seul un devis peut être réservé.")
+                raise UserError(self.env._("Only a quotation can be reserved."))
             if not order.line_ids:
-                raise UserError("Ajoutez au moins une ligne de location.")
+                raise UserError(self.env._("Add at least one rental line."))
             order._check_conflicts()
             order.write({
                 'state': 'reserved',
@@ -130,7 +130,7 @@ class RentalOrder(models.Model):
         for order in self:
             if order.state not in ('draft', 'reserved'):
                 raise UserError(
-                    "Seule une location en devis ou réservée peut être annulée.")
+                    self.env._("Only a quotation or reserved rental can be cancelled."))
             order.write({'state': 'cancelled'})
 
     def _check_conflicts(self):
@@ -140,8 +140,9 @@ class RentalOrder(models.Model):
                     line.date_start, line.date_end,
                     exclude_line_ids=self.line_ids.ids):
                 raise UserError(
-                    "Conflit : « %s » est indisponible du %s au %s "
-                    "(réservation ou indisponibilité existante)." % (
+                    self.env._(
+                        "Conflict: “%s” is unavailable from %s to %s (existing booking or "
+                        "unavailability).",
                         line.asset_id.name,
                         self._format_rental_dt(line.date_start),
                         self._format_rental_dt(line.date_end)))
@@ -151,14 +152,15 @@ class RentalOrder(models.Model):
                 if line.date_start < other.date_end \
                         and line.date_end > other.date_start:
                     raise UserError(
-                        "Conflit interne : « %s » figure deux fois sur des "
-                        "périodes qui se chevauchent." % line.asset_id.name)
+                        self.env._(
+                            "Internal conflict: “%s” appears twice on overlapping periods.",
+                            line.asset_id.name))
 
     def action_open_checkout(self):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Départ — état des lieux',
+            'name': self.env._("Pickup: Condition Report"),
             'res_model': 'oski.rental.checkout.wizard',
             'view_mode': 'form',
             'target': 'new',
@@ -169,7 +171,7 @@ class RentalOrder(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Retour — état des lieux',
+            'name': self.env._("Return: Condition Report"),
             'res_model': 'oski.rental.checkin.wizard',
             'view_mode': 'form',
             'target': 'new',
@@ -187,22 +189,24 @@ class RentalOrder(models.Model):
                 'oski_rental.product_rental_default', raise_if_not_found=False)
         if not product:
             raise UserError(
-                "Aucun article de facturation configuré "
-                "(Paramètres > Location).")
+                self.env._("No invoicing product configured (Settings > Rental)."))
         return product
 
     def action_create_invoice(self):
         self.ensure_one()
         if self.state != 'returned':
-            raise UserError("Seule une location retournée peut être facturée.")
+            raise UserError(self.env._("Only a returned rental can be invoiced."))
         default_product = self._get_default_rental_product()
+        # libellés lus par le client : dans sa langue, pas dans celle de qui facture
+        customer_env = self.with_context(lang=self.partner_id.lang or self.env.lang).env
         invoice_lines = []
         for line in self.line_ids:
             product = line.asset_id.product_id or default_product
-            label = "%s — du %s au %s" % (
-                line.asset_id.name,
-                self._format_rental_dt(line.date_start),
-                self._format_rental_dt(line.date_end))
+            label = customer_env._(
+                "%(resource)s — from %(start)s to %(end)s",
+                resource=line.asset_id.name,
+                start=self._format_rental_dt(line.date_start),
+                end=self._format_rental_dt(line.date_end))
             invoice_lines.append(Command.create({
                 'product_id': product.id,
                 'name': label,
@@ -212,7 +216,7 @@ class RentalOrder(models.Model):
             if line.late_amount:
                 invoice_lines.append(Command.create({
                     'product_id': product.id,
-                    'name': "Retard — %s" % line.asset_id.name,
+                    'name': customer_env._("Late return — %s", line.asset_id.name),
                     'quantity': 1.0,
                     'price_unit': line.late_amount,
                 }))
@@ -231,9 +235,10 @@ class RentalOrder(models.Model):
 
     def action_view_invoices(self):
         self.ensure_one()
+        name = self.env._("Invoices")
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Factures',
+            'name': name,
             'res_model': 'account.move',
             'view_mode': 'list,form',
             'domain': [('id', 'in', self.invoice_ids.ids)],
@@ -245,8 +250,8 @@ class RentalOrder(models.Model):
             if order.state not in ('returned', 'done') \
                     or order.deposit_state != 'collected':
                 raise UserError(
-                    "La caution ne peut être remboursée qu'après retour, "
-                    "si elle a été perçue.")
+                    self.env._(
+                        "The deposit can only be refunded after return, if it was collected."))
             order.write({'deposit_state': 'refunded'})
 
     def _cron_late_alert(self):
@@ -256,11 +261,16 @@ class RentalOrder(models.Model):
             ('late_notified', '=', False),
         ])
         for order in overdue:
+            # tâche planifiée sans langue : l'activité est écrite dans la langue
+            # de qui la reçoit (le responsable de la location)
+            assignee = order.user_id or self.env.user
+            order = order.with_context(lang=assignee.lang)
             order.activity_schedule(
                 'mail.mail_activity_data_todo',
-                user_id=(order.user_id or self.env.user).id,
-                summary="Location en retard : %s" % order.name,
-                note="La location %s (client %s) devait être retournée le %s."
-                     % (order.name, order.partner_id.display_name,
-                        order._format_rental_dt(order.date_end)))
+                user_id=assignee.id,
+                summary=order.env._("Late rental: %s", order.name),
+                note=order.env._(
+                    "Rental %(name)s (customer %(customer)s) was due back on %(date)s.",
+                    name=order.name, customer=order.partner_id.display_name,
+                    date=order._format_rental_dt(order.date_end)))
             order.late_notified = True

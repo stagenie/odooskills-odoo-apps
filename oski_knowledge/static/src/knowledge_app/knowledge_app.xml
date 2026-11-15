@@ -9,7 +9,7 @@
             <div class="o_knowledge_sidebar border-end p-2 overflow-auto">
                 <!-- Favoris -->
                 <div class="o_knowledge_favorites mb-3" t-if="this.state.favorites.length">
-                    <div class="text-muted small text-uppercase fw-bold mb-1">Favoris</div>
+                    <div class="text-muted small text-uppercase fw-bold mb-1">Favorites</div>
                     <t t-foreach="this.state.favorites" t-as="node" t-key="'fav_' + node.id">
                         <div class="o_knowledge_node d-flex align-items-center gap-1"
                              t-att-class="{ 'o_knowledge_selected': node.id === this.state.currentId }"
@@ -22,9 +22,9 @@
                 <!-- Espace de travail -->
                 <div class="o_knowledge_workspace mb-3">
                     <div class="d-flex align-items-center">
-                        <span class="text-muted small text-uppercase fw-bold flex-grow-1">Espace de travail</span>
+                        <span class="text-muted small text-uppercase fw-bold flex-grow-1">Workspace</span>
                         <button class="btn btn-sm btn-link p-0 o_knowledge_new_workspace"
-                                title="Nouvel article" t-on-click="() => this.createRoot('workspace')">
+                                title="New Article" t-on-click="() => this.createRoot('workspace')">
                             <i class="oi" data-icon="add"/>
                         </button>
                     </div>
@@ -33,9 +33,9 @@
                 <!-- Privé -->
                 <div class="o_knowledge_private mb-3">
                     <div class="d-flex align-items-center">
-                        <span class="text-muted small text-uppercase fw-bold flex-grow-1">Privé</span>
+                        <span class="text-muted small text-uppercase fw-bold flex-grow-1">Private</span>
                         <button class="btn btn-sm btn-link p-0 o_knowledge_new_private"
-                                title="Nouvel article privé" t-on-click="() => this.createRoot('private')">
+                                title="New Private Article" t-on-click="() => this.createRoot('private')">
                             <i class="oi" data-icon="add"/>
                         </button>
                     </div>
@@ -47,9 +47,9 @@
                     <View t-key="this.state.currentId" t-props="this.viewProps"/>
                 </t>
                 <div t-else="" class="d-flex flex-column align-items-center justify-content-center h-100 text-muted">
-                    <p>Aucun article sélectionné.</p>
+                    <p>No article selected.</p>
                     <button class="btn btn-primary" t-on-click="() => this.createRoot('workspace')">
-                        Créer un article
+                        Create an Article
                     </button>
                 </div>
             </div>
@@ -70,13 +70,13 @@
                 <span class="o_knowledge_node_name flex-grow-1 text-truncate" t-out="node.name"
                       t-on-click="() => this.selectArticle(node)"/>
                 <button class="btn btn-sm btn-link p-0 o_knowledge_fav_toggle"
-                        t-att-title="this.isFavorite(node) ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+                        t-att-title="this.favoriteTitle(node)"
                         t-on-click="() => this.toggleFavorite(node)">
                     <i class="oi" data-icon="star"
                        t-att-class="this.isFavorite(node) ? 'oi-filled text-warning' : ''"/>
                 </button>
                 <button class="btn btn-sm btn-link p-0 o_knowledge_new_child"
-                        title="Nouveau sous-article" t-on-click="() => this.createChild(node)">
+                        title="New Sub-article" t-on-click="() => this.createChild(node)">
                     <i class="oi" data-icon="add"/>
                 </button>
             </div>

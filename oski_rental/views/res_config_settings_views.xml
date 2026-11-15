@@ -6,19 +6,19 @@
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
-                <app data-string="Location" string="Location" name="oski_rental">
-                    <block title="Facturation">
-                        <setting string="Article de facturation"
-                                 help="Article service porté par défaut sur les factures de location">
+                <app data-string="Location" string="Rental" name="oski_rental">
+                    <block title="Invoicing">
+                        <setting string="Invoicing Product"
+                                 help="Service product used by default on rental invoices">
                             <field name="rental_default_product_id"/>
                         </setting>
-                        <setting string="Facturer les retards par défaut">
+                        <setting string="Invoice Late Returns by Default">
                             <field name="rental_late_invoicing"/>
                         </setting>
                     </block>
-                    <block title="Tarification">
-                        <setting string="Granularité minimale"
-                                 help="En mode Jour, le palier horaire est ignoré">
+                    <block title="Pricing">
+                        <setting string="Minimum Granularity"
+                                 help="In Day mode, the hourly rate is ignored">
                             <field name="rental_min_granularity"/>
                         </setting>
                     </block>
@@ -28,7 +28,7 @@
     </record>
 
     <record id="action_rental_config_settings" model="ir.actions.act_window">
-        <field name="name">Paramètres</field>
+        <field name="name">Settings</field>
         <field name="res_model">res.config.settings</field>
         <field name="view_mode">form</field>
         <field name="context">{'module': 'oski_rental'}</field>

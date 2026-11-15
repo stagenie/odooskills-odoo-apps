@@ -5,11 +5,11 @@
         <div class="card-header d-flex align-items-center py-1 px-2">
             <span class="fw-bold text-truncate flex-grow-1" t-out="this.props.widget.name"/>
             <t t-if="this.props.editMode">
-                <button class="btn btn-sm btn-link o_oski_widget_edit" title="Modifier"
+                <button class="btn btn-sm btn-link o_oski_widget_edit" title="Edit"
                         t-on-click="() => this.props.onEdit and this.props.onEdit(this.props.widget)">
                     <i class="oi" data-icon="edit"/>
                 </button>
-                <button class="btn btn-sm btn-link text-danger o_oski_widget_remove" title="Supprimer"
+                <button class="btn btn-sm btn-link text-danger o_oski_widget_remove" title="Delete"
                         t-on-click="() => this.props.onRemove and this.props.onRemove(this.props.widget)">
                     <i class="oi" data-icon="delete"/>
                 </button>

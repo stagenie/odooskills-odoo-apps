@@ -14,16 +14,16 @@
                         t-out="dashboard.name"/>
             </select>
             <button class="btn btn-link p-1 o_oski_toggle_favorite" t-if="this.current"
-                    t-att-title="this.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+                    t-att-title="this.favoriteTitle"
                     t-on-click="this.toggleFavorite">
                 <i class="oi" data-icon="star" t-att-class="this.isFavorite ? 'oi-filled text-warning' : ''"/>
             </button>
             <button class="btn btn-secondary o_oski_new_dashboard" t-on-click="this.createDashboard">
-                Nouveau
+                New
             </button>
             <div class="flex-grow-1"/>
             <button class="btn btn-outline-secondary o_oski_refresh" t-if="this.current"
-                    title="Rafraîchir" t-on-click="this.refreshWidgets">
+                    title="Refresh Widgets" t-on-click="this.refreshWidgets">
                 <i class="oi" data-icon="refresh"/>
             </button>
             <button class="btn btn-outline-secondary o_oski_add_widget" t-if="this.state.editMode"
@@ -33,7 +33,7 @@
             <button class="btn o_oski_toggle_edit" t-if="this.current"
                     t-att-class="this.state.editMode ? 'btn-primary' : 'btn-outline-primary'"
                     t-on-click="this.toggleEdit">
-                <i class="oi me-1" data-icon="edit"/>Éditer
+                <i class="oi me-1" data-icon="edit"/>Edit Dashboard
             </button>
         </div>
         <div class="o_oski_filters_bar d-flex align-items-center flex-wrap gap-2 p-2 border-bottom"
@@ -47,8 +47,8 @@
         </div>
         <div class="flex-grow-1 overflow-auto p-2">
             <div t-if="!this.state.dashboards.length" class="o_oski_empty text-center text-muted mt-5">
-                <p>Aucun tableau de bord.</p>
-                <button class="btn btn-primary" t-on-click="this.createDashboard">Créer le premier</button>
+                <p>No dashboard yet.</p>
+                <button class="btn btn-primary" t-on-click="this.createDashboard">Create the first one</button>
             </div>
             <DashboardGrid t-if="this.current" dashboard="this.current" widgets="this.state.widgets"
                            layout="this.state.layout" editMode="this.state.editMode"

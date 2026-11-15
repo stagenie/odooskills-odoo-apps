@@ -34,7 +34,7 @@
                                     <field name="code"/> · <field name="category_id"/>
                                 </div>
                                 <div>
-                                    <field name="price_day" widget="monetary"/>/jour
+                                    <field name="price_day" widget="monetary"/>/day
                                 </div>
                                 <field name="is_available_now" widget="boolean"
                                        class="badge"/>
@@ -57,17 +57,17 @@
                         <button name="action_view_orders" type="object"
                                 class="oe_stat_button" icon="calendar_today">
                             <field name="order_count" widget="statinfo"
-                                   string="Locations"/>
+                                   string="Rentals"/>
                         </button>
                         <button name="action_view_unavailabilities" type="object"
                                 class="oe_stat_button" icon="build">
                             <field name="unavailability_count" widget="statinfo"
-                                   string="Indispos"/>
+                                   string="Unavailable"/>
                         </button>
                     </div>
                     <field name="image_1920" widget="image" class="oe_avatar"/>
                     <div class="oe_title">
-                        <h1><field name="name" placeholder="Nom de la ressource"/></h1>
+                        <h1><field name="name" placeholder="Resource name"/></h1>
                         <h3><field name="code"/></h3>
                     </div>
                     <group>
@@ -77,7 +77,7 @@
                             <field name="company_id" groups="base.group_multi_company"/>
                             <field name="product_id"/>
                         </group>
-                        <group name="pricing" string="Tarifs">
+                        <group name="pricing" string="Rates">
                             <field name="currency_id" invisible="1"/>
                             <field name="price_hour"/>
                             <field name="price_day"/>
@@ -105,10 +105,10 @@
                 <field name="name"/>
                 <field name="code"/>
                 <field name="category_id"/>
-                <filter name="archived" string="Archivées"
+                <filter name="archived" string="Archived"
                         domain="[('active', '=', False)]"/>
                 <group name="group_by">
-                    <filter name="group_category" string="Catégorie"
+                    <filter name="group_category" string="Category"
                             context="{'group_by': 'category_id'}"/>
                 </group>
             </search>
@@ -116,12 +116,12 @@
     </record>
 
     <record id="action_rental_asset" model="ir.actions.act_window">
-        <field name="name">Ressources</field>
+        <field name="name">Resources</field>
         <field name="res_model">oski.rental.asset</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Créez votre première ressource louable</p>
-            <p>Véhicule, salle, engin, matériel : tout ce qui se loue.</p>
+            <p class="o_view_nocontent_smiling_face">Create your first rentable resource</p>
+            <p>Vehicle, room, machine, equipment: anything that can be rented.</p>
         </field>
     </record>
 </odoo>

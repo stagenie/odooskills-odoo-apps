@@ -43,6 +43,14 @@ class TestWidgetData(TransactionCase):
         data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
         self.assertEqual(data['total'], 10)
 
+    def test_group_by_stored_selection_label(self):
+        """Sélection stockée : _read_group rend la clé brute, le widget affiche le libellé."""
+        field_type = self.env['ir.model.fields']._get('res.partner', 'type')
+        widget = self._make_widget(widget_type='bar', group_by_field_id=field_type.id)
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
+        self.assertEqual(data['labels'], ['Contact'])
+        self.assertEqual(data['raw_keys'], ['contact'])
+
     def test_group_by_selection(self):
         self.partners[2].sudo().type = 'invoice'
         widget = self._make_widget(widget_type='bar', group_by_field_id=self.field_type.id)

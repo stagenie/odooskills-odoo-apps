@@ -1,0 +1,435 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 07:33+0000\n"
+"PO-Revision-Date: 2026-11-15 07:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_knowledge
+#. odoo-python
+#: code:addons/oski_knowledge/models/knowledge_article.py:0
+msgid "A private article must have an owner."
+msgstr "Un article privé doit avoir un propriétaire."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Indicateur d’exception d’activité"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_plans_ids
+msgid "Activity Plans"
+msgstr "Plans d'activité"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_state
+msgid "Activity State"
+msgstr "Statut de l'activité"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône de type d'activité"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.js:0
+msgid "Add Article to Favorites"
+msgstr "Ajouter aux favoris"
+
+#. module: oski_knowledge
+#: model:ir.actions.act_window,name:oski_knowledge.action_article_all model:ir.ui.menu,name:oski_knowledge.menu_article_all
+msgid "All Articles"
+msgstr "Tous les articles"
+
+#. module: oski_knowledge
+#. odoo-python
+#: code:addons/oski_knowledge/models/knowledge_article.py:0
+msgid "An article cannot be its own ancestor."
+msgstr "Un article ne peut pas être son propre ancêtre."
+
+#. module: oski_knowledge
+#: model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_form
+msgid "Archive"
+msgstr "Archiver"
+
+#. module: oski_knowledge
+#: model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_search
+msgid "Archived"
+msgstr "Archivés"
+
+#. module: oski_knowledge
+#: model:ir.model,name:oski_knowledge.model_knowledge_article model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__article_id
+msgid "Article"
+msgstr "Article"
+
+#. module: oski_knowledge
+#: model:ir.model,name:oski_knowledge.model_knowledge_article_favorite
+msgid "Article Favorite"
+msgstr "Favori d'article"
+
+#. module: oski_knowledge
+#: model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_form
+msgid "Article title"
+msgstr "Titre de l'article"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oski_knowledge
+#: model:ir.ui.menu,name:oski_knowledge.menu_knowledge_config
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__body
+msgid "Content"
+msgstr "Contenu"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0
+msgid "Create an Article"
+msgstr "Créer un article"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__create_uid model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__create_date model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__display_name model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__is_user_favorite model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_form
+msgid "Favorite"
+msgstr "Favori"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0
+msgid "Favorites"
+msgstr "Favoris"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: oski_knowledge
+#: model:res.groups,comment:oski_knowledge.group_knowledge_manager
+msgid "Full access (including other users' private articles) and trash emptying."
+msgstr "Accès total (y compris articles privés d'autrui) et vidage de la corbeille."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__id model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_exception_icon model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour indiquer une activité d'exception."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur de livraison."
+
+#. module: oski_knowledge
+#: model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_form
+msgid "Info"
+msgstr "Infos"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: oski_knowledge
+#: model:ir.actions.client,name:oski_knowledge.action_knowledge_app model:ir.module.category,name:oski_knowledge.module_category_knowledge model:ir.ui.menu,name:oski_knowledge.menu_knowledge_root model:res.groups.privilege,name:oski_knowledge.privilege_knowledge
+msgid "Knowledge"
+msgstr "Connaissances"
+
+#. module: oski_knowledge
+#: model:res.groups,name:oski_knowledge.group_knowledge_manager
+msgid "Knowledge / Manager"
+msgstr "Connaissances / Responsable"
+
+#. module: oski_knowledge
+#: model:res.groups,name:oski_knowledge.group_knowledge_user
+msgid "Knowledge / User"
+msgstr "Connaissances / Utilisateur"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__write_uid model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__write_date model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__activity_type_icon
+msgid "Material Symbols icon e.g. checklist"
+msgstr "Material Symbols icon e.g. checklist"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Échéance de mon activité"
+
+#. module: oski_knowledge
+#: model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_search
+msgid "My Articles"
+msgstr "Mes articles"
+
+#. module: oski_knowledge
+#: model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_search
+msgid "My Favorites"
+msgstr "Mes favoris"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#. odoo-python
+#: code:addons/oski_knowledge/models/knowledge_article.py:0 code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.js:0 code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0
+msgid "New Article"
+msgstr "Nouvel article"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0
+msgid "New Private Article"
+msgstr "Nouvel article privé"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0
+msgid "New Sub-article"
+msgstr "Nouveau sous-article"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'activité à venir"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de l'activité suivante"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'activités à venir"
+
+#. module: oski_knowledge
+#: model:res.groups.privilege,placeholder:oski_knowledge.privilege_knowledge
+msgid "No"
+msgstr "Non"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0
+msgid "No article selected."
+msgstr "Aucun article sélectionné."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__owner_id
+msgid "Owner"
+msgstr "Propriétaire"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__parent_id
+msgid "Parent Article"
+msgstr "Article parent"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__parent_path
+msgid "Parent Path"
+msgstr "Chemin parent"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__body_text
+msgid "Plain Text"
+msgstr "Texte"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0 model:ir.model.fields.selection,name:oski_knowledge.selection__knowledge_article__section__private model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_search
+msgid "Private"
+msgstr "Privé"
+
+#. module: oski_knowledge
+#: model:res.groups,comment:oski_knowledge.group_knowledge_user
+msgid "Reads, creates and manages own articles; sees the shared workspace."
+msgstr "Consulte, crée et gère ses articles ; voit l'espace de travail partagé."
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.js:0
+msgid "Remove Article from Favorites"
+msgstr "Retirer des favoris"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: oski_knowledge
+#: model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_form
+msgid "Restore"
+msgstr "Restaurer"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__root_article_id
+msgid "Root Article"
+msgstr "Article racine"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__section model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_search
+msgid "Section"
+msgstr "Espace"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__sequence model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : l'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifié : activités futures."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__child_count
+msgid "Sub-article Count"
+msgstr "Nombre de sous-articles"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__child_ids model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_form
+msgid "Sub-articles"
+msgstr "Sous-articles"
+
+#. module: oski_knowledge
+#: model:ir.model.constraint,message:oski_knowledge.constraint_knowledge_article_favorite_unique_user_article
+msgid "This article is already in your favorites."
+msgstr "Cet article est déjà dans vos favoris."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article__name
+msgid "Title"
+msgstr "Titre"
+
+#. module: oski_knowledge
+#: model:ir.actions.act_window,name:oski_knowledge.action_article_trash model:ir.ui.menu,name:oski_knowledge.menu_article_trash
+msgid "Trash"
+msgstr "Corbeille"
+
+#. module: oski_knowledge
+#: model:ir.model.fields,help:oski_knowledge.field_knowledge_article__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type d'activité d'exception enregistrée."
+
+#. module: oski_knowledge
+#: model:ir.model.fields,field_description:oski_knowledge.field_knowledge_article_favorite__user_id
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: oski_knowledge
+#. odoo-javascript
+#: code:addons/oski_knowledge/static/src/knowledge_app/knowledge_app.xml:0 model:ir.model.fields.selection,name:oski_knowledge.selection__knowledge_article__section__workspace model_terms:ir.ui.view,arch_db:oski_knowledge.view_article_search
+msgid "Workspace"
+msgstr "Espace de travail"

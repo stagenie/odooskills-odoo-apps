@@ -11,12 +11,12 @@
                     <field name="deposit_total" invisible="deposit_total == 0"/>
                     <field name="deposit_collected" invisible="deposit_total == 0"/>
                     <field name="checkout_note"
-                           placeholder="État de la ressource au départ…"/>
+                           placeholder="Condition of the resource at pickup…"/>
                 </group>
                 <footer>
                     <button name="action_validate" type="object"
-                            string="Confirmer le départ" class="btn-primary"/>
-                    <button string="Annuler" special="cancel"/>
+                            string="Confirm Pickup" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
                 </footer>
             </form>
         </field>
@@ -32,12 +32,12 @@
                     <field name="actual_return_date"/>
                     <field name="invoice_late"/>
                     <field name="checkin_note"
-                           placeholder="État de la ressource au retour…"/>
+                           placeholder="Condition of the resource at return…"/>
                 </group>
                 <footer>
                     <button name="action_validate" type="object"
-                            string="Confirmer le retour" class="btn-primary"/>
-                    <button string="Annuler" special="cancel"/>
+                            string="Confirm Return" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
                 </footer>
             </form>
         </field>

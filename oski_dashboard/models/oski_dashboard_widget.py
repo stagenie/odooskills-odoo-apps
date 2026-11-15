@@ -15,50 +15,50 @@ NON_STORED_MAX_RECORDS = 5000
 
 class OskiDashboardWidget(models.Model):
     _name = 'oski.dashboard.widget'
-    _description = 'Widget de tableau de bord'
+    _description = 'Dashboard Widget'
     _order = 'id'
 
     dashboard_id = fields.Many2one(
         'oski.dashboard', required=True, index=True, ondelete='cascade')
-    name = fields.Char(string='Titre', required=True)
+    name = fields.Char(string='Title', required=True)
     widget_type = fields.Selection(
         selection=[
-            ('kpi', 'KPI'), ('bar', 'Barres'), ('line', 'Lignes'), ('area', 'Aires'),
-            ('pie', 'Camembert'), ('donut', 'Donut'), ('list', 'Liste'),
-            ('gauge', 'Jauge'), ('text', 'Texte'),
+            ('kpi', 'KPI'), ('bar', 'Bar'), ('line', 'Line'), ('area', 'Area'),
+            ('pie', 'Pie'), ('donut', 'Donut'), ('list', 'List'),
+            ('gauge', 'Gauge'), ('text', 'Text'),
         ], required=True, default='kpi')
-    model_id = fields.Many2one('ir.model', string='Modèle', ondelete='cascade')
+    model_id = fields.Many2one('ir.model', string='Model', ondelete='cascade')
     model_name = fields.Char(related='model_id.model')
     domain = fields.Char(
-        string='Filtre', default='[]',
-        help="Domaine Odoo. Variables : uid (l'utilisateur qui regarde), "
+        string='Filter', default='[]',
+        help="Odoo domain. Variables: uid (the viewing user), "
              "context_today(), relativedelta.")
     group_by_field_id = fields.Many2one(
-        'ir.model.fields', string='Grouper par',
+        'ir.model.fields', string='Group By Field',
         domain="[('model_id', '=', model_id), ('store', '=', True)]")
     group_by_field_name = fields.Char(related='group_by_field_id.name')
     group_by_granularity = fields.Selection(
-        selection=[('day', 'Jour'), ('week', 'Semaine'), ('month', 'Mois'),
-                   ('quarter', 'Trimestre'), ('year', 'Année')], default='month')
+        selection=[('day', 'Day'), ('week', 'Week'), ('month', 'Month'),
+                   ('quarter', 'Quarter'), ('year', 'Year')], default='month')
     measure_field_id = fields.Many2one(
-        'ir.model.fields', string='Mesure',
+        'ir.model.fields', string='Measure',
         domain="[('model_id', '=', model_id), ('ttype', 'in', ('integer', 'float', 'monetary')), ('store', '=', True)]",
-        help="Vide = comptage d'enregistrements.")
+        help="Empty = record count.")
     measure_agg = fields.Selection(
-        selection=[('sum', 'Somme'), ('avg', 'Moyenne'), ('min', 'Min'), ('max', 'Max')],
-        string='Agrégat', default='sum')
+        selection=[('sum', 'Sum'), ('avg', 'Average'), ('min', 'Min'), ('max', 'Max')],
+        string='Aggregate', default='sum')
     date_field_id = fields.Many2one(
-        'ir.model.fields', string='Champ de période',
+        'ir.model.fields', string='Period Field',
         domain="[('model_id', '=', model_id), ('ttype', 'in', ('date', 'datetime')), ('store', '=', True)]")
     period = fields.Selection(
         selection=[
-            ('today', "Aujourd'hui"), ('this_week', 'Cette semaine'),
-            ('this_month', 'Ce mois'), ('this_quarter', 'Ce trimestre'),
-            ('this_year', 'Cette année'), ('last_7d', '7 derniers jours'),
-            ('last_30d', '30 derniers jours'), ('last_90d', '90 derniers jours'),
-            ('last_12m', '12 derniers mois'), ('all', 'Tout'),
-        ], string='Période', default='all')
-    compare_previous = fields.Boolean(string='Comparer à la période précédente')
+            ('today', "Today"), ('this_week', 'This Week'),
+            ('this_month', 'This Month'), ('this_quarter', 'This Quarter'),
+            ('this_year', 'This Year'), ('last_7d', 'Last 7 Days'),
+            ('last_30d', 'Last 30 Days'), ('last_90d', 'Last 90 Days'),
+            ('last_12m', 'Last 12 Months'), ('all', 'All'),
+        ], string='Period', default='all')
+    compare_previous = fields.Boolean(string='Compare to Previous Period')
     limit = fields.Integer(string='Top N', default=0)
     options = fields.Text(string='Options', default='{}')
 
@@ -69,7 +69,7 @@ class OskiDashboardWidget(models.Model):
         for widget in self:
             if widget.limit < 0:
                 raise ValidationError(self.env._(
-                    "Le « Top N » doit être positif ou nul (0 = tous les groupes)."))
+                    "“Top N” must be positive or zero (0 = all groups)."))
 
     @api.constrains('domain', 'model_id')
     def _check_domain(self):
@@ -91,7 +91,7 @@ class OskiDashboardWidget(models.Model):
                 raise
             except Exception:
                 raise ValidationError(
-                    self.env._("Filtre invalide pour le modèle %s.", model_name))
+                    self.env._("Invalid filter for model %s.", model_name))
 
     def _domain_eval_context(self):
         """Variables utilisables dans le filtre d'un widget, comme dans un
@@ -119,7 +119,7 @@ class OskiDashboardWidget(models.Model):
         internes pour ne pas laisser un compte portail énumérer le schéma."""
         if not self.env.su and not self.env.user._is_internal():
             raise AccessError(
-                self.env._("Réservé aux utilisateurs internes."))
+                self.env._("Reserved for internal users."))
 
     @api.model
     def get_available_models(self):
@@ -363,7 +363,11 @@ class OskiDashboardWidget(models.Model):
             if odoo_field.type in ('date', 'datetime'):
                 groupby = f'{groupby}:{self.group_by_granularity or "month"}'
             groups = Model._read_group(domain, [groupby], [aggregate])
-            pairs = [(self._format_group_label(key), value or 0, self._raw_key(key))
+            # sélection stockée : _read_group rend la clé brute ('draft') -> libellé traduit
+            selection_labels = (dict(odoo_field._description_selection(self.env))
+                                if odoo_field.type == 'selection' else {})
+            pairs = [(selection_labels.get(key) or self._format_group_label(key),
+                      value or 0, self._raw_key(key))
                      for key, value in groups]
         else:
             # Champs calculés non stockés (ex. res.partner.is_public) : _read_group
@@ -434,12 +438,12 @@ class OskiDashboardWidget(models.Model):
 
     def _format_group_label(self, key):
         if key is None or key is False:
-            return self.env._("Indéfini")
+            return self.env._("Undefined")
         if isinstance(key, models.BaseModel):
             # sudo() sur le seul libellé, comme le cœur (_read_group_format_result) :
             # le groupe ne contient que des enregistrements lisibles par
             # l'utilisateur, mais l'enregistrement référencé (ex. société mère
             # d'une autre société) peut lui être interdit — sans sudo,
             # AccessError et widget entier en erreur.
-            return key.sudo().display_name or self.env._("Indéfini")
+            return key.sudo().display_name or self.env._("Undefined")
         return str(key)

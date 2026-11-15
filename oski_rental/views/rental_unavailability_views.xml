@@ -27,7 +27,7 @@
     </record>
 
     <record id="action_rental_unavailability" model="ir.actions.act_window">
-        <field name="name">Indisponibilités</field>
+        <field name="name">Unavailabilities</field>
         <field name="res_model">oski.rental.unavailability</field>
         <field name="view_mode">list,calendar,form</field>
     </record>

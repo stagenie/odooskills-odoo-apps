@@ -4,18 +4,18 @@ from odoo.exceptions import ValidationError
 
 class RentalUnavailability(models.Model):
     _name = 'oski.rental.unavailability'
-    _description = 'Indisponibilité de ressource'
+    _description = 'Resource Unavailability'
     _order = 'date_start desc'
 
     asset_id = fields.Many2one(
-        'oski.rental.asset', string='Ressource', required=True, ondelete='cascade')
-    date_start = fields.Datetime(string='Du', required=True)
-    date_end = fields.Datetime(string='Au', required=True)
+        'oski.rental.asset', string='Resource', required=True, ondelete='cascade')
+    date_start = fields.Datetime(string='From', required=True)
+    date_end = fields.Datetime(string='To', required=True)
     reason = fields.Selection([
         ('maintenance', 'Maintenance'),
-        ('immobilization', 'Immobilisation'),
-        ('other', 'Autre'),
-    ], string='Motif', required=True, default='maintenance')
+        ('immobilization', 'Downtime'),
+        ('other', 'Other'),
+    ], string='Reason', required=True, default='maintenance')
     note = fields.Text(string='Note')
     company_id = fields.Many2one(related='asset_id.company_id', store=True)
 
@@ -24,4 +24,4 @@ class RentalUnavailability(models.Model):
         for record in self:
             if record.date_end <= record.date_start:
                 raise ValidationError(
-                    "La date de fin doit être postérieure à la date de début.")
+                    self.env._("The end date must be after the start date."))

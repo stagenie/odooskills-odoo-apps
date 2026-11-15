@@ -6,24 +6,24 @@ from odoo.exceptions import ValidationError
 
 class OskiDashboard(models.Model):
     _name = 'oski.dashboard'
-    _description = 'Tableau de bord'
+    _description = 'Dashboard'
     _order = 'sequence, id'
 
-    name = fields.Char(string='Nom', required=True)
+    name = fields.Char(string='Name', required=True)
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
     user_id = fields.Many2one(
-        'res.users', string='Propriétaire', required=True, index=True,
+        'res.users', string='Owner', required=True, index=True,
         default=lambda self: self.env.user)
-    group_ids = fields.Many2many('res.groups', string='Partagé avec (lecture)')
-    company_id = fields.Many2one('res.company', string='Société')
+    group_ids = fields.Many2many('res.groups', string='Shared With (Read)')
+    company_id = fields.Many2one('res.company', string='Company')
     favorite_user_ids = fields.Many2many(
         'res.users', 'oski_dashboard_favorite_rel', 'dashboard_id', 'user_id',
-        string='Favori de')
-    layout_json = fields.Text(string='Disposition', default='{}')
+        string='Favorite of')
+    layout_json = fields.Text(string='Layout', default='{}')
     refresh_interval = fields.Integer(
-        string='Rafraîchissement (s)', default=0,
-        help="0 = manuel. Sinon, re-lecture automatique toutes les N secondes.")
+        string='Refresh Interval (s)', default=0,
+        help="0 = manual. Otherwise, automatic reload every N seconds.")
     widget_ids = fields.One2many('oski.dashboard.widget', 'dashboard_id', string='Widgets')
 
     @api.constrains('layout_json')
@@ -32,13 +32,13 @@ class OskiDashboard(models.Model):
             try:
                 parsed = json.loads(dashboard.layout_json or '{}')
             except ValueError:
-                raise ValidationError(self.env._("Disposition invalide (JSON attendu)."))
+                raise ValidationError(self.env._("Invalid layout (JSON expected)."))
             # JSON valide mais pas un objet (ex. "null", "[]", "42") : le
             # frontend fait toujours JSON.parse(layout_json || "{}") et
             # itère les clés comme un dict de positions — "null" (JSON
             # valide) plante au premier accès côté client.
             if not isinstance(parsed, dict):
-                raise ValidationError(self.env._("Disposition invalide (objet JSON attendu)."))
+                raise ValidationError(self.env._("Invalid layout (JSON object expected)."))
 
     def save_layout(self, layout_json):
         self.ensure_one()
