@@ -294,9 +294,10 @@ class TreasuryCashClosing(models.Model):
     def action_view_pending_operations(self):
         """Shows all draft manual operations of this cash register"""
         self.ensure_one()
+        name = _('Draft Operations')
         return {
             'type': 'ir.actions.act_window',
-            'name': _('Draft Operations'),
+            'name': name,
             'res_model': 'oski.treasury.cash.operation',
             'view_mode': 'list,form',
             'domain': [

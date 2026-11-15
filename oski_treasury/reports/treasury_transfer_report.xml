@@ -22,7 +22,7 @@
                                 <table class="table table-sm">
                                     <tr>
                                         <td><strong>Type:</strong></td>
-                                        <td t-out="dict(tr._fields['transfer_type'].selection).get(tr.transfer_type)"/>
+                                        <td t-out="dict(tr._fields['transfer_type']._description_selection(tr.env)).get(tr.transfer_type)"/>
                                     </tr>
                                     <tr>
                                         <td><strong>Date:</strong></td>
@@ -30,7 +30,7 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Status:</strong></td>
-                                        <td t-out="dict(tr._fields['state'].selection).get(tr.state)"/>
+                                        <td t-out="dict(tr._fields['state']._description_selection(tr.env)).get(tr.state)"/>
                                     </tr>
                                 </table>
                             </div>
