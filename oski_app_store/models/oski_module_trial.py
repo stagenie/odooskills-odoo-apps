@@ -373,7 +373,7 @@ class OskiModuleTrial(models.Model):
             raise TrialServiceError("HTTP %s" % response.status_code)
         if response.status_code == 401:
             # Mauvais secret ou horloge : jamais la faute du visiteur.
-            _logger.error("Service d'essai : signature refusée (%s)", data.get("error"))
+            _logger.error("Trial service: signature rejected (%s)", data.get("error"))
             raise TrialServiceError("signature refused")
         return response.status_code, data
 
@@ -422,7 +422,7 @@ class OskiModuleTrial(models.Model):
             trial._apply_remote(data)
             return
         code = data.get("error") or "http_%s" % status
-        _logger.info("Essai %s refusé par le service : %s %s", trial.id, status, code)
+        _logger.info("Trial %s rejected by the service: %s %s", trial.id, status, code)
         trial.write({"state": "error", "error_code": code})
 
     def _refresh(self):
@@ -459,7 +459,7 @@ class OskiModuleTrial(models.Model):
                 "POST", "/trial/%s/login" % trial.remote_trial_id
             )
         except TrialServiceError as exc:
-            _logger.warning("Essai %s : nouveau lien impossible (%s)", trial.id, exc)
+            _logger.warning("Trial %s: new link failed (%s)", trial.id, exc)
             return False
         if status == 200 and data.get("login_url"):
             trial._apply_remote(data)

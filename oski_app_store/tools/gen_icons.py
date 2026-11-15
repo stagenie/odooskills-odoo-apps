@@ -108,7 +108,7 @@ def main():
                 continue
             targets.append((tech, descdir, icon))
 
-    print("icônes à générer:", len(targets))
+    print("icons to generate:", len(targets))
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page(viewport={"width": 512, "height": 512}, device_scale_factor=1)
@@ -119,7 +119,7 @@ def main():
             el = pg.query_selector(".tile")
             el.screenshot(path=icon, omit_background=True)
         b.close()
-    print("généré:", len(targets))
+    print("generated:", len(targets))
     for tech, _, _ in targets[:8]:
         print("  ", tech, "->", glyph_for(tech)[:0] or "ok")
 

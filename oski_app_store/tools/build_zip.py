@@ -19,7 +19,7 @@ def build_module_zip(module_path, output_path):
     module_path = os.path.abspath(module_path.rstrip(os.sep))
     parent = os.path.dirname(module_path)
     if not os.path.isfile(os.path.join(module_path, "__manifest__.py")):
-        raise ValueError("Pas de __manifest__.py dans %s" % module_path)
+        raise ValueError("No __manifest__.py in %s" % module_path)
 
     with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for root, dirs, files in os.walk(module_path):

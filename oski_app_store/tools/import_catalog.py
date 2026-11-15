@@ -131,7 +131,7 @@ if VERSION == "19.0":
 else:
     ov = env["oski.odoo.version"].sudo().search([("name", "=", VERSION)], limit=1)
     if not ov:
-        raise SystemExit("oski.odoo.version %s absente : la créer en backend d'abord" % VERSION)
+        raise SystemExit("oski.odoo.version %s missing: create it in the backend first" % VERSION)
 
 Currency = env["res.currency"].sudo()
 _cur_cache = {}
@@ -166,7 +166,7 @@ for sub, default_license in APPS:
             rec = Module.search([("technical_name", "=", tech)], limit=1)
 
             if VERSION != "19.0" and not rec:
-                print("fiche absente pour %s : importer la 19.0 d'abord" % tech)
+                print("no listing for %s: import 19.0 first" % tech)
                 continue
 
             if VERSION == "19.0":
@@ -250,7 +250,7 @@ for sub, default_license in APPS:
                             field,
                             {"en_US": rec.with_context(lang="en_US")[field] or "", "fr_FR": value},
                         )
-                    print("  fiche FR posée (store_fr.json)")
+                    print("  FR listing set (store_fr.json)")
 
             zip_path = "/tmp/oski_%s_%s.zip" % (tech, VERSION)
             build_module_zip(mdir, zip_path)
@@ -328,7 +328,7 @@ if REPORT:
     import json
     with open(REPORT, "w", encoding="utf-8") as fh:
         json.dump(report, fh, ensure_ascii=False, indent=2)
-    print("rapport écrit", REPORT)
+    print("report written", REPORT)
 
 print("=== IMPORT CATALOG ===")
 print("created:", len(created))

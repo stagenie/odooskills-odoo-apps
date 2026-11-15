@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 10:05+0000\n"
-"PO-Revision-Date: 2026-11-15 10:05+0000\n"
+"POT-Creation-Date: 2026-11-15 18:53+0000\n"
+"PO-Revision-Date: 2026-11-15 18:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -133,11 +133,6 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "4. Who else has access"
-msgstr ""
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
-msgid "404"
 msgstr ""
 
 #. module: oski_app_store

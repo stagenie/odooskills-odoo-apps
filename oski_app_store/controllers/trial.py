@@ -163,7 +163,7 @@ class OskiAppStoreTrial(OskiAppStore):
         if post.get(HONEYPOT_FIELD) or not self._form_stamp_ok(
             post.get("form_ts"), post.get("form_sig")
         ):
-            _logger.info("Essai %s : envoi rejeté par le filtre anti-robot", module.technical_name)
+            _logger.info("Trial %s: submission rejected by the anti-bot filter", module.technical_name)
             return self._render_form(
                 module, versions, values,
                 error=request.env._("Please check the form and send it again."),
@@ -304,7 +304,7 @@ class OskiAppStoreTrial(OskiAppStore):
         ):
             error = "replayed"
         if error:
-            _logger.warning("Webhook d'essai refusé : %s", error)
+            _logger.warning("Trial webhook rejected: %s", error)
             return request.make_json_response({"error": error}, status=401)
         try:
             payload = json.loads(body or b"{}")

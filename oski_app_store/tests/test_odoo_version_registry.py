@@ -56,7 +56,8 @@ class TestOdooVersionRegistry(TransactionCase):
 
     def test_name_unique(self):
         from psycopg2.errors import UniqueViolation
-        with self.assertRaises(UniqueViolation), self.env.cr.savepoint():
+        from odoo.tools import mute_logger
+        with self.assertRaises(UniqueViolation), self.env.cr.savepoint(), mute_logger("odoo.sql_db"):
             self.env["oski.odoo.version"].create(
                 {"name": "19.0", "sequence": 999}
             )

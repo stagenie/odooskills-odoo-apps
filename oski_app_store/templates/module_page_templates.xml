@@ -26,7 +26,7 @@
                             <p class="oski-module-summary" t-out="module.summary"/>
                             <table class="oski-techtable">
                                 <tr><th>Technical name</th><td><code t-out="module.technical_name"/></td></tr>
-                                <tr><th>License</th><td t-out="dict(module._fields['license'].selection).get(module.license)"/></tr>
+                                <tr><th>License</th><td t-out="dict(module._fields['license']._description_selection(module.env)).get(module.license)"/></tr>
                                 <tr><th>Author</th><td t-out="module.author"/></tr>
                                 <tr t-if="module.counters_visible('download')">
                                     <th>Downloads</th>

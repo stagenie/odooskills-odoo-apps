@@ -506,7 +506,7 @@ class OskiAppStore(http.Controller):
         try:
             code = request.geoip.country_code
         except Exception:  # noqa: BLE001 — la géoloc ne doit jamais bloquer le zip
-            _logger.debug("Géolocalisation indisponible", exc_info=True)
+            _logger.debug("Geolocation unavailable", exc_info=True)
             code = None
         if code:
             country = Country.search([("code", "=", code.upper())], limit=1)
@@ -525,7 +525,7 @@ class OskiAppStore(http.Controller):
                     version, partner=partner, country=country, source=source
                 )
         except Exception:  # noqa: BLE001 — le visiteur doit recevoir son archive
-            _logger.exception("Téléchargement %s non tracé", version.id)
+            _logger.exception("Download %s not tracked", version.id)
 
     @http.route(
         ["/apps/download/<int:version_id>"],
