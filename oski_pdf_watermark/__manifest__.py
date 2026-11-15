@@ -1,6 +1,6 @@
 {
     "name": "Report Watermark",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "category": "Technical",
     "summary": "DRAFT, COPY, CANCELLED: a conditional watermark on any QWeb report.",
     "description": """
@@ -15,12 +15,11 @@ This module adds one, decided by a rule:
   save, never code executed at print time;
 - a **word**, its color, its opacity, its angle, its size.
 
-The watermark is drawn in the body of the report and repeats on **every
-page**, including those of a long document.
+The watermark is stamped on **every page** of the generated PDF, including
+those of a long document, behind the text, which stays readable.
 
 When a print job groups documents that call for different watermarks, none
-is applied: a fixed element applies to every page of the generated file, and
-would wrongly mark the other documents.
+is applied: better to mark nothing than to mark wrongly.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
