@@ -209,6 +209,10 @@ class TestPartnerBalanceWizard(TransactionCase):
         self.assertIn(b'Vendor', html, "the payable section is unlabelled")
         self.assertIn(b'Closing balance', html)
         self.assertIn(b'PBWPU', html, "the journal filter is not restated")
+        self.assertIn(b'Only the selected journals', html,
+                      "the journal filter must print its label, not its key")
+        self.assertNotIn(b'(include)', html)
+        self.assertNotIn(b'2026-03-01', html, "dates must not print in raw ISO")
 
     def test_62_pdf_groups_and_foots_on_the_group_axis(self):
         """A consolidated group (2 subsidiaries under one root) must foot ONE
@@ -357,6 +361,29 @@ class TestPartnerBalanceWizard(TransactionCase):
             first[2], datetime, "the date must stay a date, not a string")
         self.assertIsInstance(
             first[9], (int, float), "the running balance must stay a number")
+
+    def test_73_xlsx_speaks_the_readers_language(self):
+        """Headers AND the section column follow the reader's language.
+
+        The section used to be `env._(<variable>)`: never extracted to the
+        .pot, so it stayed English on a French export."""
+        import io
+
+        import openpyxl
+
+        from odoo.addons.oski_partner_balance.controllers.partner_balance_xlsx import (
+            build_xlsx,
+        )
+        self.env['res.lang']._activate_lang('fr_FR')
+        wizard = self._wizard()
+        wizard._generate_lines()
+        sheet = openpyxl.load_workbook(io.BytesIO(
+            build_xlsx(wizard.with_context(lang='fr_FR')))).active
+        self.assertEqual(sheet.cell(1, 1).value, 'Tiers')
+        self.assertEqual(sheet.cell(2, 2).value, 'Client')
+        sheet = openpyxl.load_workbook(io.BytesIO(
+            build_xlsx(wizard.with_context(lang='en_US')))).active
+        self.assertEqual(sheet.cell(2, 2).value, 'Customer')
 
     def test_80_scoped_to_the_readers_own_company(self):
         """C2: two sets of books do not add up to one statement.

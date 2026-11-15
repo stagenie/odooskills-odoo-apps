@@ -65,9 +65,13 @@ class PartnerBalanceWizard(models.TransientModel):
     def action_view_lines(self):
         self.ensure_one()
         self._generate_lines()
+        # Label taken out of the dict: Odoo's extractor also picks up the
+        # `('wizard_id', ...)` tuple that follows a `_()` in the same dict
+        # (msgid « wizard_id » in the .pot, without translation).
+        name = _('Partner Balance')
         return {
             'type': 'ir.actions.act_window',
-            'name': _('Partner Balance'),
+            'name': name,
             'res_model': 'oski.partner.balance.line',
             'view_mode': 'list',
             'domain': [('wizard_id', '=', self.id)],
