@@ -3,28 +3,28 @@ from odoo import api, fields, models
 
 class SaleSubscriptionLine(models.Model):
     _name = "sale.subscription.line"
-    _description = "Ligne d'abonnement"
+    _description = "Subscription Line"
     _check_company_auto = True
 
     subscription_id = fields.Many2one(
-        "sale.subscription", string="Abonnement", required=True, ondelete="cascade"
+        "sale.subscription", string="Subscription", required=True, ondelete="cascade"
     )
     company_id = fields.Many2one(
-        related="subscription_id.company_id", string="Société", store=True
+        related="subscription_id.company_id", string="Company", store=True
     )
     product_id = fields.Many2one(
-        "product.product", string="Produit", required=True, check_company=True
+        "product.product", string="Product", required=True, check_company=True
     )
     name = fields.Char(string="Description")
-    quantity = fields.Float(string="Quantité", default=1.0)
-    price_unit = fields.Float(string="Prix unitaire")
-    discount = fields.Float(string="Remise (%)", default=0.0)
+    quantity = fields.Float(string="Quantity", default=1.0)
+    price_unit = fields.Float(string="Unit Price")
+    discount = fields.Float(string="Discount (%)", default=0.0)
     tax_ids = fields.Many2many("account.tax", string="Taxes", check_company=True)
     currency_id = fields.Many2one(
-        related="subscription_id.currency_id", string="Devise"
+        related="subscription_id.currency_id", string="Currency"
     )
     price_subtotal = fields.Monetary(
-        string="Sous-total", compute="_compute_price_subtotal", store=True
+        string="Subtotal", compute="_compute_price_subtotal", store=True
     )
 
     @api.depends("quantity", "price_unit", "discount")

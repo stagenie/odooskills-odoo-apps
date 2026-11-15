@@ -113,6 +113,17 @@ class TestSubscriptionBilling(TransactionCase):
         self.assertEqual(sub.next_invoice_date, date(2026, 4, 30))
         self.assertEqual(len(sub.invoice_ids), 3)
 
+    def test_cron_note_speaks_the_reader_language(self):
+        """La tâche planifiée tourne sans langue : la note « Facture générée »
+        est écrite dans la langue de qui suit l'abonnement."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        sub = self._sub(start=fields.Date.today())
+        sub.create_uid.lang = "fr_FR"
+        self.env["sale.subscription"].with_context(lang=None)._cron_generate_invoices()
+        bodies = " ".join(str(b) for b in sub.message_ids.mapped("body"))
+        self.assertIn("Facture générée", bodies)
+        self.assertNotIn("Invoice generated", bodies)
+
     def test_cron_twice_same_day_bills_once(self):
         today = fields.Date.today()
         sub = self._sub(start=today)
