@@ -527,7 +527,7 @@ msgstr "Description"
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_term__display_name
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Nom d'affichage"
 
 #. module: oski_school
 #: model:ir.model.fields.selection,name:oski_school.selection__oski_school_class__state__draft
