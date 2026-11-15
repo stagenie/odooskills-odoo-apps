@@ -720,8 +720,12 @@ msgstr "Votre demande"
 msgid "has been recorded."
 msgstr "a bien été enregistrée."
 
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__b_1500_5000
 msgid "€1,500 – €5,000"
 msgstr "1 500 – 5 000 €"
 
+#. module: oski_dev_request
+#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__b_500_1500
 msgid "€500 – €1,500"
 msgstr "500 – 1 500 €"
