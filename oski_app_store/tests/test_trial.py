@@ -45,13 +45,16 @@ class FakeTrialService:
         self.status = "queued"
         self.extra = {"queue_position": 2}
         self.create_response = None   # (statut, corps) pour forcer un refus
+        self.create_once = []         # réponses à un seul usage, prises avant create_response
+        self.deleted = []
         self.down = False
         self.login_counter = 0
 
     def trial(self, **extra):
         data = {
             "trial_id": "remote123",
-            "store_trial_id": self.calls[0]["payload"]["store_trial_id"] if self.calls else "0",
+            "store_trial_id": next(
+                (c["payload"]["store_trial_id"] for c in self.calls if c["payload"]), "0"),
             "module": "oski_trial_demo",
             "version": "20.0",
             "status": self.status,
@@ -76,11 +79,18 @@ class FakeTrialService:
         if error:
             return FakeResponse(401, {"error": "bad_signature", "message": "x"})
         if method == "POST" and path == "/trial":
+            if self.create_once:
+                return FakeResponse(*self.create_once.pop(0))
             if self.create_response:
                 return FakeResponse(*self.create_response)
             return FakeResponse(202, self.trial())
         if method == "GET":
-            return FakeResponse(200, self.trial())
+            return FakeResponse(200, self.trial(trial_id=path.rsplit("/", 1)[1]))
+        if method == "DELETE":
+            remote_id = path.rsplit("/", 1)[1]
+            self.deleted.append(remote_id)
+            return FakeResponse(200, self.trial(trial_id=remote_id, status="expired",
+                                                expires_at="2026-11-14T08:42:23Z"))
         if method == "POST" and path.endswith("/login"):
             self.login_counter += 1
             if self.status != "ready":
@@ -491,3 +501,159 @@ class TestTrial(HttpCase):
         trial = self._ready_trial()
         self.assertIn("Launch price:", trial.pricing_note)
         self.assertIn("(30% off) until December 31, 2099", trial.pricing_note)
+
+    # -- ré-essai après la fin d'un essai ---------------------------------------------
+
+    def _age(self, trial, **delta):
+        """Vieillit un essai (create_date n'est pas écrivable par l'ORM)."""
+        self.env.cr.execute(
+            "UPDATE oski_module_trial SET create_date = %s WHERE id = %s",
+            (fields.Datetime.now() - timedelta(**delta), trial.id))
+        trial.invalidate_recordset(["create_date"])
+
+    def _posts(self):
+        return [c for c in self.service.calls if c["method"] == "POST" and c["path"] == "/trial"]
+
+    def test_new_trial_after_webhook_expiry(self):
+        """Même e-mail, même module, même version : accepté une fois l'essai terminé."""
+        first_resp = self._submit()
+        first = self._trials()
+        self.assertEqual(first.state, "queued")
+        resp, _sig = self._webhook(self._payload(first))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(first.state, "expired")
+        second_resp = self._submit()
+        self.assertEqual(second_resp.status_code, 303)
+        self.assertNotEqual(second_resp.headers["Location"], first_resp.headers["Location"])
+        self.assertEqual(len(self._trials()), 2)
+        self.assertEqual(len(self._posts()), 2)
+
+    def test_hour_elapsed_before_purge_ends_old_trial(self):
+        """Heure écoulée, base pas encore purgée (≤ 5 min) : DELETE puis nouvel essai."""
+        old = self._ready_trial(email="visitor@example.com", remote_trial_id="oldremote",
+                                expires_at=fields.Datetime.now() - timedelta(minutes=2))
+        resp = self._submit()
+        self.assertEqual(resp.status_code, 303)
+        self.assertEqual(self.service.deleted, ["oldremote"])
+        self.assertEqual(old.state, "expired")
+        self.assertTrue(old.ended_at)
+        self.assertEqual(len(self._posts()), 1)
+        # Le webhook de la purge arrive ensuite : courriel de fin envoyé une fois.
+        self._webhook(dict(self._payload(old), trial_id="oldremote"))
+        self.assertEqual(len(self._end_mails(old)), 1)
+
+    def test_service_409_on_finished_trial_retries_once(self):
+        """Le service cite un essai fini que le store croyait en cours : terminé, redemandé."""
+        old = self._ready_trial(email="other-state@example.com", remote_trial_id="oldremote",
+                                state="building", expires_at=False)
+        self._age(old, hours=7)
+        self.service.create_once = [
+            (409, {"error": "already_active", "message": "x", "trial_id": "oldremote"})]
+        self.service.status = "queued"
+        resp = self._submit()
+        self.assertEqual(resp.status_code, 303)
+        new = self._trials() - old
+        self.assertEqual(new.state, "queued")
+        self.assertEqual(self.service.deleted, ["oldremote"])
+        self.assertEqual(len(self._posts()), 2)
+
+    def test_running_trial_refused_with_time_left(self):
+        self._ready_trial(email="visitor@example.com",
+                          expires_at=fields.Datetime.now() + timedelta(minutes=30))
+        resp = self._submit()
+        self.assertEqual(resp.status_code, 429)
+        self.assertRegex(resp.text, r"it ends in about (29|30) min, then you can start a new one")
+        self.assertNotIn("Return to my current trial", resp.text)
+        self.assertFalse(self.service.calls)
+
+    def test_running_trial_link_only_for_its_browser(self):
+        first_resp = self._submit()
+        wait_url = first_resp.headers["Location"]
+        again = self._submit()
+        self.assertEqual(again.status_code, 429)
+        self.assertIn("Return to my current trial", again.text)
+        self.assertIn('href="%s"' % wait_url, again.text)
+        self.assertEqual(len(self._posts()), 1)
+        # Autre navigateur (pas de session) : refus sans lien vers la base d'un autre.
+        self.opener.cookies.clear()
+        other = self._submit()
+        self.assertEqual(other.status_code, 429)
+        self.assertIn("as soon as it ends (1 hour at most)", other.text)
+        self.assertNotIn("Return to my current trial", other.text)
+        self.assertNotIn(wait_url, other.text)
+
+    def test_stale_pending_trial_does_not_block(self):
+        """Webhook perdu : un essai resté « en file » depuis 7 h ne bloque plus l'e-mail."""
+        old = self._ready_trial(email="visitor@example.com", state="queued", expires_at=False)
+        self._age(old, hours=7)
+        self.assertEqual(self._submit().status_code, 303)
+
+    def test_email_limit_per_day(self):
+        for _i in range(3):
+            self._ready_trial(email="visitor@example.com", state="expired")
+        resp = self._submit()
+        self.assertEqual(resp.status_code, 429)
+        self.assertIn("You have used the 3 trials allowed per e-mail address in 24 hours.", resp.text)
+        self.assertRegex(resp.text, r"You can start a new one in about (23|24) hour\(s\)")
+        self.assertFalse(self.service.calls)
+        # Paramètre système : la limite se règle sans code.
+        self.env["ir.config_parameter"].sudo().set_param("oski.trial.max_per_email_per_day", "4")
+        self.assertEqual(self._submit().status_code, 303)
+
+    def test_email_limit_counts_last_24_hours_only(self):
+        for _i in range(3):
+            self._age(self._ready_trial(email="visitor@example.com", state="expired"), hours=25)
+        self.assertEqual(self._submit().status_code, 303)
+
+    def test_email_limit_waits_for_oldest_trial(self):
+        trials = [self._ready_trial(email="visitor@example.com", state="expired") for _i in range(3)]
+        self._age(trials[0], hours=22, minutes=30)
+        resp = self._submit()
+        self.assertRegex(resp.text, r"in about 2 hour\(s\)")
+
+    def test_refused_and_failed_trials_do_not_count(self):
+        self._ready_trial(email="visitor@example.com", state="error", error_code="unavailable")
+        self._ready_trial(email="visitor@example.com", state="error", error_code="queue_full")
+        self._ready_trial(email="visitor@example.com", state="failed", error_code="build_failed")
+        self._ready_trial(email="visitor@example.com", state="expired")
+        self.assertEqual(self._submit().status_code, 303)
+
+    def test_bad_limit_parameter_falls_back_to_default(self):
+        Param = self.env["ir.config_parameter"].sudo()
+        for value in ("0", "-1", "abc"):
+            Param.set_param("oski.trial.max_per_email_per_day", value)
+            self.assertEqual(self.env["oski.module.trial"]._limit_param(
+                "oski.trial.max_per_email_per_day", 3), 3)
+
+    def test_expired_wait_page_offers_new_trial(self):
+        resp = self._submit()
+        trial = self._trials()
+        self._webhook(self._payload(trial))
+        page = self.url_open(resp.headers["Location"]).text
+        self.assertIn("This trial has ended.", page)
+        self.assertIn("Start a new trial", page)
+        self.assertIn("/apps/trial/start/%s?v=20.0" % self.module.id, page)
+
+    def test_retry_messages_in_french(self):
+        activate_french(self.env)
+        running = self._ready_trial(email="visitor@example.com",
+                                    expires_at=fields.Datetime.now() + timedelta(minutes=30))
+        resp = self._submit(lang="/fr")
+        self.assertEqual(resp.status_code, 429)
+        self.assertIn("Un essai est déjà en cours pour cette adresse e-mail.", resp.text)
+        self.assertRegex(resp.text, r"il se termine dans environ (29|30) min")
+        running.state = "expired"
+        for _i in range(2):
+            self._ready_trial(email="visitor@example.com", state="expired")
+        resp = self._submit(lang="/fr")
+        self.assertIn("Vous avez utilisé les 3 essais autorisés par adresse e-mail sur 24 heures.",
+                      resp.text)
+        self.assertRegex(resp.text, r"Vous pourrez en lancer un nouveau dans environ (23|24) heure\(s\)")
+        self.env["ir.config_parameter"].sudo().set_param("oski.trial.max_per_email_per_day", "5")
+        first = self._submit(lang="/fr")
+        again = self._submit(lang="/fr")
+        self.assertIn("Revenir à mon essai en cours", again.text)
+        trial = self._trials().filtered(lambda t: t.state == "queued")
+        self._webhook(self._payload(trial))
+        page = self.url_open(first.headers["Location"]).text
+        self.assertIn("Lancer un nouvel essai", page)

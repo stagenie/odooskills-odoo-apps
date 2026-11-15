@@ -6,6 +6,15 @@
         <field name="key">oski.trial.api_url</field>
         <field name="value">https://trial.lab.odooskills.com</field>
     </record>
+    <!-- Ré-essai : un essai actif à la fois par e-mail, puis au plus N par 24 h glissantes. -->
+    <record id="param_trial_max_per_email" model="ir.config_parameter">
+        <field name="key">oski.trial.max_per_email_per_day</field>
+        <field name="value">3</field>
+    </record>
+    <record id="param_trial_max_per_ip" model="ir.config_parameter">
+        <field name="key">oski.trial.max_per_ip_per_day</field>
+        <field name="value">3</field>
+    </record>
 
     <record id="mail_template_trial_ended" model="mail.template">
         <field name="name">App Store: trial ended</field>

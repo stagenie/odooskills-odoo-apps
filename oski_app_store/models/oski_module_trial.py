@@ -11,6 +11,7 @@ import hashlib
 import hmac
 import json
 import logging
+import math
 import secrets
 import time
 from datetime import datetime, timedelta
@@ -29,6 +30,8 @@ PARAM_API_URL = "oski.trial.api_url"
 PARAM_SECRET = "oski.trial.secret"
 PARAM_IP_SALT = "oski.trial.ip_salt"
 PARAM_STORE_URL = "oski.trial.store_url"
+PARAM_MAX_PER_EMAIL = "oski.trial.max_per_email_per_day"
+PARAM_MAX_PER_IP = "oski.trial.max_per_ip_per_day"
 DEFAULT_API_URL = "https://trial.lab.odooskills.com"
 DEFAULT_STORE_URL = "https://apps.odooskills.com"
 
@@ -36,6 +39,11 @@ DEFAULT_STORE_URL = "https://apps.odooskills.com"
 TRIAL_VERSIONS = ("20.0", "19.0", "18.0")
 DEFAULT_TRIAL_VERSION = "20.0"
 
+# Limites par 24 h glissantes (paramètres système ci-dessus ; absent, invalide ou ≤ 0 =
+# valeur par défaut : Réglages efface le paramètre quand on y saisit 0).
+# 3 par e-mail : trois modules ou versions dans la journée, ou un nouvel essai après
+# un premier, sans enchaîner une base gratuite heure après heure.
+MAX_PER_EMAIL_PER_DAY = 3
 MAX_PER_IP_PER_DAY = 3
 SIGNATURE_WINDOW = 300          # ± secondes acceptées sur l'horodatage
 NONCE_TTL = 600                 # anti-rejeu : signatures gardées 10 min
@@ -43,6 +51,13 @@ HTTP_TIMEOUT = 15
 
 ACTIVE_STATES = ("new", "queued", "building", "ready")
 PENDING_STATES = ("queued", "building")
+# Essais qui ont pris (ou prennent) une base : comptés dans les limites par 24 h.
+# Un refus (`error`) ou un échec de construction (`failed`) ne coûte rien au visiteur.
+COUNTED_STATES = ACTIVE_STATES + ("expired",)
+# Au-delà, un essai resté en attente ne bloque plus l'e-mail (webhook perdu, service muet).
+STALE_NEW = timedelta(minutes=10)
+STALE_PENDING = timedelta(hours=6)
+TRIAL_LENGTH = timedelta(hours=1, minutes=5)
 
 
 def sign(secret, method, path, body, ts):
@@ -255,30 +270,92 @@ class OskiModuleTrial(models.Model):
         return [v for v in TRIAL_VERSIONS if v in available]
 
     # ------------------------------------------------------------------
-    # Limites (spéc. : 1 essai actif par e-mail, 3 par IP / 24 h)
+    # Limites : un essai actif par e-mail, N essais par e-mail et par IP / 24 h
     # ------------------------------------------------------------------
 
     @api.model
+    def _limit_param(self, key, default):
+        """Limite lue dans `ir.config_parameter` ; absente, invalide ou ≤ 0 → `default`."""
+        try:
+            value = int(self._param(key, str(default)).strip())
+        except (TypeError, ValueError):
+            return default
+        return value if value > 0 else default
+
+    def _is_running(self, now=None):
+        """Vrai tant que l'essai occupe (ou va occuper) une base.
+
+        Un essai prêt l'est jusqu'à son expiration ; un essai en attente l'est
+        tant qu'il n'est pas anormalement vieux (webhook perdu, service muet).
+        """
+        self.ensure_one()
+        now = now or fields.Datetime.now()
+        if self.state == "ready":
+            end = self.expires_at or (self.ready_at or self.create_date) + TRIAL_LENGTH
+            return end > now
+        if self.state == "new":
+            return self.create_date > now - STALE_NEW
+        if self.state in PENDING_STATES:
+            return self.create_date > now - STALE_PENDING
+        return False
+
+    @api.model
     def _active_for_email(self, email):
+        """Essai en cours pour cet e-mail, après mise à jour auprès du service.
+
+        Un essai dont l'heure est écoulée mais que la purge du service (toutes les
+        5 min) n'a pas encore supprimé est terminé tout de suite (DELETE) : sa base
+        est détruite et le service accepte alors un nouvel essai du même e-mail.
+        """
         now = fields.Datetime.now()
         trials = self.sudo().search([("email", "=", email), ("state", "in", ACTIVE_STATES)])
-        return trials.filtered(lambda t: not t.expires_at or t.expires_at > now)[:1]
+        for trial in trials:
+            if trial.state in PENDING_STATES:
+                trial._refresh()
+            if trial._is_running(now):
+                return trial
+            if trial.state == "ready":
+                trial._end_remote()
+        return self.browse()
+
+    @api.model
+    def _counted_since(self, domain):
+        since = fields.Datetime.now() - timedelta(hours=24)
+        return self.sudo().search(
+            domain + [("create_date", ">=", since), ("state", "in", COUNTED_STATES)],
+            order="create_date asc, id asc",
+        )
+
+    @api.model
+    def _count_for_email(self, email):
+        return len(self._counted_since([("email", "=", email)]))
 
     @api.model
     def _count_for_ip(self, ip_hash):
         if not ip_hash:
             return 0
-        since = fields.Datetime.now() - timedelta(hours=24)
-        return self.sudo().search_count(
-            [("ip_hash", "=", ip_hash), ("create_date", ">=", since)]
-        )
+        return len(self._counted_since([("ip_hash", "=", ip_hash)]))
+
+    @api.model
+    def _hours_until_slot(self, email):
+        """Heures (arrondies au-dessus) avant que le plus ancien essai compté sorte des 24 h."""
+        trials = self._counted_since([("email", "=", email)])
+        if not trials:
+            return 1
+        free_at = trials[0].create_date + timedelta(hours=24)
+        seconds = (free_at - fields.Datetime.now()).total_seconds()
+        return max(1, math.ceil(seconds / 3600))
 
     @api.model
     def _check_limits(self, email, ip_hash):
         """None si la demande passe, sinon le code de refus."""
         if self._active_for_email(email):
             return "already_active"
-        if self._count_for_ip(ip_hash) >= MAX_PER_IP_PER_DAY:
+        max_email = self._limit_param(PARAM_MAX_PER_EMAIL, MAX_PER_EMAIL_PER_DAY)
+        if self._count_for_email(email) >= max_email:
+            return "email_limit"
+        max_ip = self._limit_param(PARAM_MAX_PER_IP, MAX_PER_IP_PER_DAY)
+        if self._count_for_ip(ip_hash) >= max_ip:
             return "ip_limit"
         return None
 
@@ -414,6 +491,10 @@ class OskiModuleTrial(models.Model):
         }
         try:
             status, data = self._service_call("POST", "/trial", payload)
+            if status == 409 and data.get("error") == "already_active" \
+                    and self._end_finished_remote(data.get("trial_id"), exclude=trial):
+                # L'essai précédent avait fini son heure : base supprimée, on redemande.
+                status, data = self._service_call("POST", "/trial", payload)
         except TrialServiceError as exc:
             _logger.warning("Essai %s : service injoignable (%s)", trial.id, exc)
             trial.write({"state": "error", "error_code": "unavailable"})
@@ -440,6 +521,43 @@ class OskiModuleTrial(models.Model):
             trial._apply_remote(data)
         elif status == 404:
             trial.write({"state": "failed", "error_code": "not_found"})
+
+    def _end_remote(self):
+        """DELETE /trial/<id> : base supprimée tout de suite (API.md § 5).
+
+        Rend True si le service tient désormais l'essai pour terminé. Le webhook
+        de la purge suivante arrive ensuite et envoie, une fois, le courriel de fin.
+        """
+        self.ensure_one()
+        trial = self.sudo()
+        if not trial.remote_trial_id:
+            return False
+        try:
+            status, data = self._service_call("DELETE", "/trial/%s" % trial.remote_trial_id)
+        except TrialServiceError as exc:
+            _logger.warning("Trial %s: early end failed (%s)", trial.id, exc)
+            return False
+        if status == 404:
+            data = {"status": "expired"}
+        elif status != 200:
+            return False
+        if data.get("status") != "expired":
+            trial._apply_remote(data)
+            return False
+        trial._apply_remote(data)
+        if not trial.ended_at:
+            trial.ended_at = fields.Datetime.now()
+        return True
+
+    @api.model
+    def _end_finished_remote(self, remote_trial_id, exclude=None):
+        """409 du service : l'essai qu'il cite est-il un des nôtres, à l'heure écoulée ?"""
+        if not remote_trial_id:
+            return False
+        previous = self.sudo().search([("remote_trial_id", "=", remote_trial_id)], limit=1)
+        if not previous or previous == exclude or previous._is_running():
+            return False
+        return previous._end_remote()
 
     def _fresh_login_url(self):
         """Lien d'ouverture : le lien reçu la première fois, un nouveau ensuite.
@@ -506,14 +624,30 @@ class OskiModuleTrial(models.Model):
                 "We could not build your database. Try another Odoo version, "
                 "or contact support."
             )
-        return self._refusal_message(self.error_code)
+        return self._refusal_message(self.error_code, self.email)
 
     @api.model
-    def _refusal_message(self, code):
+    def _refusal_message(self, code, email=False):
         if code == "already_active":
+            active = self._active_for_email(email) if email else self.browse()
+            if active and active.state == "ready" and active.expires_at:
+                minutes = max(1, math.ceil(
+                    (active.expires_at - fields.Datetime.now()).total_seconds() / 60))
+                return _(
+                    "A trial is already running for this e-mail address. Only one trial "
+                    "at a time: it ends in about %(minutes)s min, then you can start a new one.",
+                    minutes=minutes,
+                )
             return _(
                 "A trial is already running for this e-mail address. Only one trial "
-                "at a time: wait until it ends (1 hour at most)."
+                "at a time: you can start a new one as soon as it ends (1 hour at most)."
+            )
+        if code == "email_limit":
+            return _(
+                "You have used the %(count)s trials allowed per e-mail address in 24 hours. "
+                "You can start a new one in about %(hours)s hour(s).",
+                count=self._limit_param(PARAM_MAX_PER_EMAIL, MAX_PER_EMAIL_PER_DAY),
+                hours=self._hours_until_slot(email) if email else 24,
             )
         if code == "ip_limit":
             return _(

@@ -16,3 +16,11 @@ class ResConfigSettings(models.TransientModel):
     oski_trial_api_url = fields.Char(
         string="Trial service URL",
         config_parameter="oski.trial.api_url")
+    oski_trial_max_per_email = fields.Integer(
+        string="Trials per e-mail address in 24 hours",
+        default=3,
+        config_parameter="oski.trial.max_per_email_per_day")
+    oski_trial_max_per_ip = fields.Integer(
+        string="Trials per connection in 24 hours",
+        default=3,
+        config_parameter="oski.trial.max_per_ip_per_day")

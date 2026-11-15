@@ -19,7 +19,10 @@
                         <li>You sign in as a business user: nothing to install, no credit card.</li>
                         <li>The database is deleted after 1 hour. One trial at a time per e-mail address.</li>
                     </ul>
-                    <div t-if="error" class="alert alert-warning oski-trial-error" role="alert" t-out="error"/>
+                    <div t-if="error" class="alert alert-warning oski-trial-error" role="alert">
+                        <span t-out="error"/>
+                        <a t-if="active_url" t-att-href="active_url" class="d-block mt-2 fw-bold">Return to my current trial</a>
+                    </div>
                     <form t-att-action="form_action" method="post" class="oski-trial-form" novalidate="novalidate">
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                         <input type="hidden" name="form_ts" t-att-value="form_ts"/>
@@ -106,6 +109,7 @@
                         </p>
                         <t t-if="trial.state == 'expired'">
                             <a t-att-href="module_url" class="btn oski-btn-buy">Buy the module</a>
+                            <a t-att-href="retry_url" class="btn btn-link oski-trial-again">Start a new trial</a>
                         </t>
                         <t t-if="trial.state in ('failed', 'error')">
                             <a t-att-href="retry_url" class="btn oski-btn-buy">Try again</a>

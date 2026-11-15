@@ -25,6 +25,17 @@
                                 <field name="oski_trial_api_url" class="o_light_label"/>
                             </div>
                         </setting>
+                        <setting string="Trial limits"
+                                 help="One running trial at a time per e-mail address. A new trial is accepted once the previous one has ended and its database is deleted, within these limits (rolling 24 hours; refused or failed trials do not count).">
+                            <div>
+                                <label for="oski_trial_max_per_email"/>
+                                <field name="oski_trial_max_per_email" class="o_light_label"/>
+                            </div>
+                            <div>
+                                <label for="oski_trial_max_per_ip"/>
+                                <field name="oski_trial_max_per_ip" class="o_light_label"/>
+                            </div>
+                        </setting>
                     </block>
                 </app>
             </xpath>

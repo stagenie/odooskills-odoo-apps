@@ -421,10 +421,22 @@ msgstr "Un tag du même nom existe déjà."
 #: code:addons/oski_app_store/models/oski_module_trial.py:0
 msgid ""
 "A trial is already running for this e-mail address. Only one trial at a "
-"time: wait until it ends (1 hour at most)."
+"time: it ends in about %(minutes)s min, then you can start a new one."
 msgstr ""
 "Un essai est déjà en cours pour cette adresse e-mail. Un seul essai à la "
-"fois : attendez qu'il se termine (1 heure au plus)."
+"fois : il se termine dans environ %(minutes)s min, vous pourrez ensuite en "
+"lancer un nouveau."
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"A trial is already running for this e-mail address. Only one trial at a "
+"time: you can start a new one as soon as it ends (1 hour at most)."
+msgstr ""
+"Un essai est déjà en cours pour cette adresse e-mail. Un seul essai à la "
+"fois : vous pourrez en lancer un nouveau dès qu'il sera terminé (1 heure au "
+"plus)."
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__access_token
@@ -1693,6 +1705,18 @@ msgstr ""
 "                        après installation."
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid ""
+"One running trial at a time per e-mail address. A new trial is accepted once"
+" the previous one has ended and its database is deleted, within these limits"
+" (rolling 24 hours; refused or failed trials do not count)."
+msgstr ""
+"Un seul essai en cours à la fois par adresse e-mail. Un nouvel essai est "
+"accepté dès que le précédent est terminé et sa base supprimée, dans ces "
+"limites (24 heures glissantes ; les essais refusés ou en échec ne comptent "
+"pas)."
+
+#. module: oski_app_store
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_module_version_version_uniq
 msgid "Only one archive per Odoo version for a given module."
 msgstr "Une seule archive par version Odoo pour un module donné."
@@ -1992,6 +2016,11 @@ msgid "Restart the Odoo service."
 msgstr "Redémarrez le service Odoo."
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
+msgid "Return to my current trial"
+msgstr "Revenir à mon essai en cours"
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__ribbon_id
 msgid "Ribbon"
 msgstr "Bandeau"
@@ -2165,6 +2194,11 @@ msgstr "Éditeur du site"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Sort"
 msgstr "Tri"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
+msgid "Start a new trial"
+msgstr "Lancer un nouvel essai"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
@@ -2599,6 +2633,11 @@ msgid "Trial database"
 msgstr "Base d'essai"
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
+msgid "Trial limits"
+msgstr "Limites des essais"
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_trial_api_url
 msgid "Trial service URL"
 msgstr "URL du service d'essai"
@@ -2617,6 +2656,16 @@ msgstr "Signature de webhook d'essai reçue"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.res_config_settings_view_form
 msgid "Trials"
 msgstr "Essais"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_trial_max_per_ip
+msgid "Trials per connection in 24 hours"
+msgstr "Essais par connexion sur 24 heures"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_res_config_settings__oski_trial_max_per_email
+msgid "Trials per e-mail address in 24 hours"
+msgstr "Essais par adresse e-mail sur 24 heures"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
@@ -2857,6 +2906,16 @@ msgid ""
 msgstr ""
 "Vous êtes dans la file d'attente. Un essai en cours libère sa place au plus "
 "tard en 1 heure."
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/models/oski_module_trial.py:0
+msgid ""
+"You have used the %(count)s trials allowed per e-mail address in 24 hours. "
+"You can start a new one in about %(hours)s hour(s)."
+msgstr ""
+"Vous avez utilisé les %(count)s essais autorisés par adresse e-mail sur 24 "
+"heures. Vous pourrez en lancer un nouveau dans environ %(hours)s heure(s)."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page

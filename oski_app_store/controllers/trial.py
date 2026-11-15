@@ -28,6 +28,11 @@ MIN_FORM_SECONDS = 3
 MAX_FORM_SECONDS = 2 * 3600
 HONEYPOT_FIELD = "company_website"
 WEBHOOK_PATH = "/apps/trial/webhook"
+# Essais lancés depuis ce navigateur : seuls eux ont droit au lien « revenir à mon
+# essai » quand l'e-mail est déjà pris (le lien ouvre la base, il ne se donne pas
+# à qui tape l'adresse d'un autre).
+SESSION_KEY = "oski_trial_ids"
+SESSION_MAX = 10
 
 
 class OskiAppStoreTrial(OskiAppStore):
@@ -94,7 +99,18 @@ class OskiAppStoreTrial(OskiAppStore):
     # Formulaire
     # ------------------------------------------------------------------
 
-    def _render_form(self, module, versions, values=None, error=None, status=200):
+    def _remember_trial(self, trial):
+        ids = [i for i in request.session.get(SESSION_KEY, []) if i != trial.id]
+        request.session[SESSION_KEY] = (ids + [trial.id])[-SESSION_MAX:]
+
+    def _own_trial_url(self, trial):
+        """Page d'attente de cet essai s'il a été lancé depuis ce navigateur, sinon False."""
+        if trial and trial.id in request.session.get(SESSION_KEY, []):
+            return self._trial_urls(trial)["wait_url"]
+        return False
+
+    def _render_form(self, module, versions, values=None, error=None, status=200,
+                     active_url=False):
         Country = request.env["res.country"].sudo()
         user = request.env.user
         partner = user.partner_id if not user._is_public() else False
@@ -117,6 +133,7 @@ class OskiAppStoreTrial(OskiAppStore):
                 "countries": Country.search([]),
                 "form": values,
                 "error": error,
+                "active_url": active_url,
                 "form_ts": form_ts,
                 "form_sig": form_sig,
                 "honeypot_field": HONEYPOT_FIELD,
@@ -190,8 +207,12 @@ class OskiAppStoreTrial(OskiAppStore):
         ip_hash = Trial._hash_ip(request.httprequest.remote_addr)
         refusal = Trial._check_limits(email, ip_hash)
         if refusal:
+            active_url = False
+            if refusal == "already_active":
+                active_url = self._own_trial_url(Trial._active_for_email(email))
             return self._render_form(
-                module, versions, values, error=Trial._refusal_message(refusal), status=429,
+                module, versions, values, error=Trial._refusal_message(refusal, email),
+                status=429, active_url=active_url,
             )
 
         user = request.env.user
@@ -216,6 +237,7 @@ class OskiAppStoreTrial(OskiAppStore):
             "ip_hash": ip_hash,
             "buy_url": self._public_module_url(module, values["version"]),
         })
+        self._remember_trial(trial)
         trial._start()
         return request.redirect(self._trial_urls(trial)["wait_url"])
 
