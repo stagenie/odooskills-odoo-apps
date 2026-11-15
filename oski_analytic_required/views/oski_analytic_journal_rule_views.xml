@@ -5,7 +5,7 @@
         <field name="name">oski.analytic.journal.rule.list</field>
         <field name="model">oski.analytic.journal.rule</field>
         <field name="arch" type="xml">
-            <list string="Analytique obligatoire" editable="bottom">
+            <list string="Mandatory Analytic" editable="bottom">
                 <field name="journal_id"/>
                 <field name="account_prefix" placeholder="60, 61, 62"/>
                 <field name="company_id" groups="base.group_multi_company" optional="show"/>
@@ -21,7 +21,7 @@
         <field name="name">oski.analytic.journal.rule.form</field>
         <field name="model">oski.analytic.journal.rule</field>
         <field name="arch" type="xml">
-            <form string="Analytique obligatoire">
+            <form string="Mandatory Analytic">
                 <sheet>
                     <group>
                         <field name="journal_id"/>
@@ -30,12 +30,7 @@
                         <field name="active" invisible="1"/>
                     </group>
                     <div class="text-muted">
-                        Odoo sait déjà exiger l'analytique par domaine d'activité,
-                        préfixe de compte et catégorie d'article, dans
-                        l'applicabilité des plans analytiques. Cette règle-ci
-                        ajoute le seul critère qui y manque — le journal — et
-                        signale les écritures fautives <b>avant</b> la
-                        comptabilisation.
+                        Odoo can already require analytics by business domain, account prefix and product category, in the applicability of analytic plans. This rule adds the one criterion missing there — the journal — and flags faulty entries <b>before</b> posting.
                     </div>
                 </sheet>
             </form>
@@ -52,10 +47,10 @@
         <field name="name">oski.analytic.journal.rule.search</field>
         <field name="model">oski.analytic.journal.rule</field>
         <field name="arch" type="xml">
-            <search string="Analytique obligatoire">
+            <search string="Mandatory Analytic">
                 <field name="journal_id"/>
                 <field name="account_prefix"/>
-                <filter name="oski_inactive" string="Archivées"
+                <filter name="oski_inactive" string="Archived"
                         domain="[('active', '=', False)]"/>
                 <group>
                     <filter name="group_journal" string="Journal" domain="[]"
@@ -66,17 +61,15 @@
     </record>
 
     <record id="action_oski_analytic_rule" model="ir.actions.act_window">
-        <field name="name">Analytique obligatoire par journal</field>
+        <field name="name">Mandatory Analytic per Journal</field>
         <field name="res_model">oski.analytic.journal.rule</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_oski_analytic_rule_search"/>
         <field name="context">{}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Poser une première règle</p>
+            <p class="o_view_nocontent_smiling_face">Create a first rule</p>
             <p>
-                Choisissez un journal : ses écritures ne pourront plus être
-                comptabilisées sans ventilation analytique. Les préfixes de
-                comptes restreignent l'exigence à une partie du plan.
+                Choose a journal: its entries can no longer be posted without an analytic distribution. Account prefixes restrict the requirement to part of the chart of accounts.
             </p>
         </field>
     </record>
@@ -85,7 +78,7 @@
         <field name="name">account.move.line.list.oski.analytic</field>
         <field name="model">account.move.line</field>
         <field name="arch" type="xml">
-            <list string="Lignes sans analytique" create="false" delete="false">
+            <list string="Lines without Analytic" create="false" delete="false">
                 <field name="date"/>
                 <field name="move_id"/>
                 <field name="journal_id"/>
@@ -93,8 +86,8 @@
                 <field name="name"/>
                 <field name="analytic_distribution" widget="analytic_distribution"
                        groups="analytic.group_analytic_accounting"/>
-                <field name="debit" sum="Débit"/>
-                <field name="credit" sum="Crédit"/>
+                <field name="debit" sum="Debit"/>
+                <field name="credit" sum="Credit"/>
             </list>
         </field>
     </record>
@@ -103,18 +96,18 @@
         <field name="name">account.move.line.search.oski.analytic</field>
         <field name="model">account.move.line</field>
         <field name="arch" type="xml">
-            <search string="Lignes sans analytique">
+            <search string="Lines without Analytic">
                 <field name="move_id"/>
                 <field name="account_id"/>
                 <field name="journal_id"/>
-                <filter name="oski_missing" string="Analytique manquante"
+                <filter name="oski_missing" string="Missing Analytic"
                         domain="[('oski_analytic_missing', '=', True)]"/>
-                <filter name="draft" string="Brouillons"
+                <filter name="draft" string="Drafts"
                         domain="[('move_id.state', '=', 'draft')]"/>
                 <group>
                     <filter name="group_journal" string="Journal" domain="[]"
                             context="{'group_by': 'journal_id'}"/>
-                    <filter name="group_account" string="Compte" domain="[]"
+                    <filter name="group_account" string="Account" domain="[]"
                             context="{'group_by': 'account_id'}"/>
                 </group>
             </search>
@@ -122,7 +115,7 @@
     </record>
 
     <record id="action_oski_analytic_missing_lines" model="ir.actions.act_window">
-        <field name="name">Écritures sans analytique</field>
+        <field name="name">Entries without Analytic</field>
         <field name="res_model">account.move.line</field>
         <field name="view_mode">list</field>
         <field name="view_id" ref="view_move_line_list_oski_analytic"/>
@@ -130,22 +123,21 @@
         <field name="domain">[('oski_analytic_missing', '=', True), ('move_id.state', '=', 'draft')]</field>
         <field name="context">{}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Rien ne bloquera</p>
+            <p class="o_view_nocontent_smiling_face">Nothing will be blocked</p>
             <p>
-                Aucune écriture en brouillon ne manque de ventilation là où un
-                journal l'exige.
+                No draft entry lacks a distribution where a journal requires one.
             </p>
         </field>
     </record>
 
     <menuitem id="menu_oski_analytic_rule"
-              name="Analytique obligatoire"
+              name="Mandatory Analytic"
               parent="account.menu_finance_configuration"
               action="action_oski_analytic_rule"
               sequence="45"/>
 
     <menuitem id="menu_oski_analytic_missing"
-              name="Écritures sans analytique"
+              name="Entries without Analytic"
               parent="account.menu_finance_entries"
               action="action_oski_analytic_missing_lines"
               sequence="45"/>

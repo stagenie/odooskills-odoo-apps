@@ -13,31 +13,31 @@ class OskiTimesheetGap(models.Model):
     """
 
     _name = "oski.timesheet.gap"
-    _description = "Retard de saisie des temps"
+    _description = "Timesheet Gap"
     _order = "date_from desc, employee_id"
     _rec_name = "employee_id"
 
     employee_id = fields.Many2one(
-        "hr.employee", string="Employé", required=True, ondelete="cascade",
+        "hr.employee", string="Employee", required=True, ondelete="cascade",
         index=True)
     user_id = fields.Many2one(
-        "res.users", string="Utilisateur", related="employee_id.user_id",
+        "res.users", string="User", related="employee_id.user_id",
         store=True, readonly=True)
-    date_from = fields.Date(string="Du", required=True, index=True)
-    date_to = fields.Date(string="Au", required=True)
-    expected_hours = fields.Float(string="Attendu", digits=(6, 2))
-    logged_hours = fields.Float(string="Saisi", digits=(6, 2))
+    date_from = fields.Date(string="From", required=True, index=True)
+    date_to = fields.Date(string="To", required=True)
+    expected_hours = fields.Float(string="Expected", digits=(6, 2))
+    logged_hours = fields.Float(string="Logged", digits=(6, 2))
     missing_hours = fields.Float(
-        string="Manquant", digits=(6, 2), compute="_compute_missing",
+        string="Missing", digits=(6, 2), compute="_compute_missing",
         store=True)
-    reminded_on = fields.Datetime(string="Rappelé le", readonly=True)
+    reminded_on = fields.Datetime(string="Reminded On", readonly=True)
     company_id = fields.Many2one(
-        "res.company", string="Société", required=True,
+        "res.company", string="Company", required=True,
         default=lambda self: self.env.company)
 
     _sql_constraints = [
         ("unique_week", "UNIQUE(employee_id, date_from)",
-         "Ce retard est déjà consigné pour cette semaine."),
+         "This gap is already recorded for this week."),
     ]
 
     @api.depends("expected_hours", "logged_hours")
@@ -116,6 +116,10 @@ class OskiTimesheetGap(models.Model):
         self.ensure_one()
         if self.reminded_on or not self.employee_id.user_id:
             return False
+        # La tâche planifiée tourne sans langue : le rappel est écrit dans
+        # celle de l'employé, qui le lit.
+        reader = self.with_context(
+            lang=self.employee_id.user_id.lang or self.env.lang)
         activity = self.env["mail.activity"].sudo().with_context(
             mail_activity_quick_update=True).create({
                 "res_model_id": self.env["ir.model"]._get_id("hr.employee"),
@@ -124,10 +128,10 @@ class OskiTimesheetGap(models.Model):
                     "mail.mail_activity_data_todo").id,
                 "user_id": self.employee_id.user_id.id,
                 "date_deadline": fields.Date.context_today(self),
-                "summary": _("Feuille de temps incomplète"),
-                "note": Markup("<p>%s</p>") % _(
-                    "Semaine du %(from)s au %(to)s : %(logged)s h saisies sur "
-                    "%(expected)s h attendues.",
+                "summary": reader.env._("Incomplete Timesheet"),
+                "note": Markup("<p>%s</p>") % reader.env._(
+                    "Week from %(from)s to %(to)s: %(logged)s h logged out of "
+                    "%(expected)s h expected.",
                     **{"from": self.date_from, "to": self.date_to,
                        "logged": round(self.logged_hours, 2),
                        "expected": round(self.expected_hours, 2)}),

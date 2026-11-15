@@ -1,0 +1,274 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_portal_upload
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:31+0000\n"
+"PO-Revision-Date: 2026-11-15 04:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_form
+msgid "Cancel"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields.selection,name:oski_portal_upload.selection__oski_portal_document_request__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__partner_id model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_search
+msgid "Customer"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model,name:oski_portal_upload.model_oski_portal_document_request
+msgid "Customer Document Request"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.ui.menu,name:oski_portal_upload.menu_oski_portal_upload_root
+msgid "Customer Documents"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_search
+msgid "Deadline"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__note
+msgid "Details"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_form
+msgid "Details shown to the customer"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "Document received, thank you."
+msgstr ""
+
+#. module: oski_portal_upload
+#. odoo-python
+#: code:addons/oski_portal_upload/models/oski_portal_document_request.py:0
+msgid "Document uploaded from the portal: %(request)s — %(filename)s"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__deadline
+msgid "Expected By"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "Expected Documents"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_search
+msgid "Late"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__res_model
+msgid "Model"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "No file was chosen."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_form
+msgid "Open Record"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields.selection,name:oski_portal_upload.selection__oski_portal_document_request__state__pending
+msgid "Pending"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_search
+msgid "Pending Documents"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model,name:oski_portal_upload.model_portal_mixin
+msgid "Portal Mixin"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields.selection,name:oski_portal_upload.selection__oski_portal_document_request__state__received
+msgid "Received"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__attachment_id
+msgid "Received Document"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_search
+msgid "Received Documents"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__received_on
+msgid "Received On"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__resource_ref
+msgid "Record"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__res_id
+msgid "Record ID"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_form
+msgid "Reopen"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.actions.act_window,help:oski_portal_upload.action_oski_portal_document_request
+msgid "Request a first document"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__name model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_form
+msgid "Requested Document"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.actions.act_window,name:oski_portal_upload.action_oski_portal_document_request model:ir.ui.menu,name:oski_portal_upload.menu_oski_portal_document_request model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_list model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_search
+msgid "Requested Documents"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_form
+msgid "Signed purchase order"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,field_description:oski_portal_upload.field_oski_portal_document_request__state model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_search
+msgid "Status"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,help:oski_portal_upload.field_oski_portal_document_request__note
+msgid "Text shown to the customer under the document name."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,help:oski_portal_upload.field_oski_portal_document_request__partner_id
+msgid "The contact the document is requested from. Other contacts of the same company can upload it too."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.actions.act_window,help:oski_portal_upload.action_oski_portal_document_request
+msgid "The document appears on the portal page of the target record. The customer uploads it from there, and you find it attached to the record, announced in its chatter."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model:ir.model.fields,help:oski_portal_upload.field_oski_portal_document_request__resource_ref
+msgid "The portal record on which the customer will upload the document."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.view_oski_portal_document_request_form
+msgid "The signed and dated order, cover page included."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "The uploaded document joins your file and we are notified right away."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "This document has already been received or is no longer expected."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "This file is too large to be uploaded here."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "This file type is not accepted. Expected formats:"
+msgstr ""
+
+#. module: oski_portal_upload
+#. odoo-python
+#: code:addons/oski_portal_upload/models/oski_portal_document_request.py:0
+msgid "This record no longer exists."
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "Upload"
+msgstr ""
+
+#. module: oski_portal_upload
+#: model_terms:ir.ui.view,arch_db:oski_portal_upload.portal_document_requests
+msgid "expected by"
+msgstr ""
+
+#. module: oski_portal_upload
+#. odoo-python
+#: code:addons/oski_portal_upload/models/oski_portal_document_request.py:0
+msgid "“%s” has already been received: cancel the request rather than reopening it, the upload history must remain readable."
+msgstr ""

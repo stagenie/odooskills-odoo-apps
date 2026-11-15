@@ -18,7 +18,7 @@ def oski_wanted(operator, value):
     if operator in ("=", "!="):
         return bool(value) if operator == "=" else not bool(value)
     raise NotImplementedError(
-        "Opérateur non pris en charge sur ce champ : %s" % operator)
+        "Unsupported operator on this field: %s" % operator)
 
 
 
@@ -26,12 +26,12 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     oski_analytic_missing = fields.Boolean(
-        string="Analytique manquante",
+        string="Missing Analytic",
         compute="_compute_oski_analytic_missing",
         search="_search_oski_analytic_missing",
-        help="Vrai quand un journal exige une ventilation que cette ligne "
-             "n'a pas. Non stocké : la règle peut changer à tout moment, une "
-             "valeur en base vieillirait sans que rien ne la rafraîchisse.")
+        help="True when a journal requires a distribution this line lacks. "
+             "Not stored: the rule can change at any time, and a stored "
+             "value would grow stale with nothing to refresh it.")
 
     def _oski_analytic_is_missing(self):
         self.ensure_one()

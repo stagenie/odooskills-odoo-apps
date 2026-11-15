@@ -17,8 +17,7 @@ class AccountMove(models.Model):
         if not missing:
             return
         raise UserError(_(
-            "Ces lignes doivent porter une ventilation analytique avant "
-            "comptabilisation :\n%s",
+            "These lines need an analytic distribution before posting:\n%s",
             "\n".join(
                 "• %(move)s — %(account)s — %(label)s" % {
                     "move": line.move_id.display_name,

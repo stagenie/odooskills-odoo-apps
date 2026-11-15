@@ -13,7 +13,7 @@ class OskiAnalyticJournalRule(models.Model):
     """
 
     _name = "oski.analytic.journal.rule"
-    _description = "Analytique obligatoire par journal"
+    _description = "Mandatory Analytic per Journal"
     _order = "journal_id, id"
     _rec_name = "journal_id"
 
@@ -21,18 +21,18 @@ class OskiAnalyticJournalRule(models.Model):
         "account.journal", string="Journal", required=True, ondelete="cascade",
         index=True)
     account_prefix = fields.Char(
-        string="Préfixes de comptes", default="",
-        help="Limite l'exigence aux comptes dont le code commence par l'un de "
-             "ces préfixes, séparés par des virgules. Vide : tous les comptes "
-             "de résultat du journal.")
-    active = fields.Boolean(string="Actif", default=True)
+        string="Account Prefixes", default="",
+        help="Restricts the requirement to accounts whose code starts with "
+             "one of these comma-separated prefixes. Empty: all income and "
+             "expense accounts of the journal.")
+    active = fields.Boolean(string="Active", default=True)
     company_id = fields.Many2one(
-        "res.company", string="Société", related="journal_id.company_id",
+        "res.company", string="Company", related="journal_id.company_id",
         store=True, readonly=True)
 
     _sql_constraints = [
         ("unique_journal_prefix", "UNIQUE(journal_id, account_prefix)",
-         "Ce journal a déjà une règle pour ces préfixes."),
+         "This journal already has a rule for these prefixes."),
     ]
 
     @api.model_create_multi
@@ -55,8 +55,8 @@ class OskiAnalyticJournalRule(models.Model):
             for prefix in rule._oski_prefixes():
                 if not prefix.isdigit():
                     raise ValidationError(_(
-                        "Un préfixe de compte ne contient que des chiffres : "
-                        "« %s » n'en est pas un.", prefix))
+                        "An account prefix contains digits only: “%s” is not "
+                        "one.", prefix))
 
     def _oski_prefixes(self):
         self.ensure_one()

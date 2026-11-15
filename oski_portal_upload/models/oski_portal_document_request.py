@@ -16,33 +16,33 @@ class OskiPortalDocumentRequest(models.Model):
     """
 
     _name = "oski.portal.document.request"
-    _description = "Document demandé au client"
+    _description = "Customer Document Request"
     _order = "deadline, id"
 
-    name = fields.Char(string="Document demandé", required=True)
+    name = fields.Char(string="Requested Document", required=True)
     resource_ref = fields.Reference(
-        selection="_selection_target_model", string="Fiche", required=True,
-        help="La fiche du portail sur laquelle le client déposera son document.")
+        selection="_selection_target_model", string="Record", required=True,
+        help="The portal record on which the customer will upload the document.")
     res_model = fields.Char(
-        string="Modèle", compute="_compute_resource", store=True, index=True)
+        string="Model", compute="_compute_resource", store=True, index=True)
     res_id = fields.Integer(
-        string="Identifiant", compute="_compute_resource", store=True, index=True)
+        string="Record ID", compute="_compute_resource", store=True, index=True)
     partner_id = fields.Many2one(
-        "res.partner", string="Client", required=True, index=True,
-        help="Le contact à qui le document est demandé. Les autres contacts de "
-             "la même société peuvent également le déposer.")
+        "res.partner", string="Customer", required=True, index=True,
+        help="The contact the document is requested from. Other contacts of "
+             "the same company can upload it too.")
     state = fields.Selection(
-        [("pending", "Attendu"), ("received", "Reçu"), ("cancelled", "Annulé")],
-        string="État", default="pending", required=True, index=True)
-    deadline = fields.Date(string="Attendu pour")
+        [("pending", "Pending"), ("received", "Received"), ("cancelled", "Cancelled")],
+        string="Status", default="pending", required=True, index=True)
+    deadline = fields.Date(string="Expected By")
     note = fields.Text(
-        string="Précisions", help="Texte affiché au client sous le nom du document.")
+        string="Details", help="Text shown to the customer under the document name.")
     attachment_id = fields.Many2one(
-        "ir.attachment", string="Document reçu", readonly=True, copy=False,
+        "ir.attachment", string="Received Document", readonly=True, copy=False,
         ondelete="set null")
-    received_on = fields.Datetime(string="Reçu le", readonly=True, copy=False)
+    received_on = fields.Datetime(string="Received On", readonly=True, copy=False)
     company_id = fields.Many2one(
-        "res.company", string="Société", required=True,
+        "res.company", string="Company", required=True,
         default=lambda self: self.env.company)
 
     @api.model
@@ -72,7 +72,7 @@ class OskiPortalDocumentRequest(models.Model):
         for request in self:
             record = request.resource_ref
             if record and not record.exists():
-                raise ValidationError(_("Cette fiche n'existe plus."))
+                raise ValidationError(_("This record no longer exists."))
 
     def action_cancel(self):
         self.write({"state": "cancelled"})
@@ -81,8 +81,9 @@ class OskiPortalDocumentRequest(models.Model):
         for request in self:
             if request.state == "received":
                 raise UserError(_(
-                    "« %s » a déjà été reçu : annulez la demande plutôt que de "
-                    "la rouvrir, l'historique du dépôt doit rester lisible.",
+                    "“%s” has already been received: cancel the request rather "
+                    "than reopening it, the upload history must remain "
+                    "readable.",
                     request.name))
         self.write({"state": "pending"})
 
@@ -128,10 +129,15 @@ class OskiPortalDocumentRequest(models.Model):
             "received_on": fields.Datetime.now(),
         })
         record = self.sudo().resource_ref
+        # La note est lue par l'équipe, pas par le visiteur du portail (dont
+        # la requête porte la langue) : elle est écrite dans la langue de qui
+        # a demandé le document.
+        reader = self.with_context(
+            lang=self.sudo().create_uid.lang or self.env.lang)
         if record and hasattr(record, "message_post"):
             record.message_post(
-                body=Markup("<p>%s</p>") % _(
-                    "Document déposé depuis le portail : %(request)s — "
+                body=Markup("<p>%s</p>") % reader.env._(
+                    "Document uploaded from the portal: %(request)s — "
                     "%(filename)s",
                     request=self.name, filename=attachment.name),
                 attachment_ids=attachment.ids,

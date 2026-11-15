@@ -5,7 +5,7 @@
         <field name="name">oski.portal.document.request.list</field>
         <field name="model">oski.portal.document.request</field>
         <field name="arch" type="xml">
-            <list string="Documents demandés"
+            <list string="Requested Documents"
                   decoration-muted="state == 'cancelled'"
                   decoration-danger="state == 'pending' and deadline and deadline &lt; current_date">
                 <field name="name"/>
@@ -26,14 +26,14 @@
         <field name="name">oski.portal.document.request.form</field>
         <field name="model">oski.portal.document.request</field>
         <field name="arch" type="xml">
-            <form string="Document demandé">
+            <form string="Requested Document">
                 <header>
-                    <button name="action_cancel" type="object" string="Annuler"
+                    <button name="action_cancel" type="object" string="Cancel"
                             invisible="state != 'pending'"/>
-                    <button name="action_reset" type="object" string="Réattendre"
+                    <button name="action_reset" type="object" string="Reopen"
                             invisible="state != 'cancelled'"/>
                     <button name="action_open_record" type="object"
-                            string="Ouvrir la fiche" class="btn-secondary"
+                            string="Open Record" class="btn-secondary"
                             invisible="not res_model"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="pending,received"/>
@@ -41,7 +41,7 @@
                 <sheet>
                     <div class="oe_title">
                         <label for="name"/>
-                        <h1><field name="name" placeholder="Bon de commande signé"/></h1>
+                        <h1><field name="name" placeholder="Signed purchase order"/></h1>
                     </div>
                     <group>
                         <group>
@@ -56,9 +56,9 @@
                             <field name="received_on" invisible="state != 'received'"/>
                         </group>
                     </group>
-                    <group string="Précisions affichées au client">
+                    <group string="Details shown to the customer">
                         <field name="note" nolabel="1" colspan="2"
-                               placeholder="Le bon signé et daté, page de garde comprise."/>
+                               placeholder="The signed and dated order, cover page included."/>
                     </group>
                 </sheet>
             </form>
@@ -69,22 +69,22 @@
         <field name="name">oski.portal.document.request.search</field>
         <field name="model">oski.portal.document.request</field>
         <field name="arch" type="xml">
-            <search string="Documents demandés">
+            <search string="Requested Documents">
                 <field name="name"/>
                 <field name="partner_id"/>
-                <filter name="pending" string="Attendus"
+                <filter name="pending" string="Pending Documents"
                         domain="[('state', '=', 'pending')]"/>
-                <filter name="received" string="Reçus"
+                <filter name="received" string="Received Documents"
                         domain="[('state', '=', 'received')]"/>
                 <separator/>
-                <filter name="late" string="En retard"
+                <filter name="late" string="Late"
                         domain="[('state', '=', 'pending'), ('deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
                 <group>
-                    <filter name="group_state" string="État" domain="[]"
+                    <filter name="group_state" string="Status" domain="[]"
                             context="{'group_by': 'state'}"/>
-                    <filter name="group_partner" string="Client" domain="[]"
+                    <filter name="group_partner" string="Customer" domain="[]"
                             context="{'group_by': 'partner_id'}"/>
-                    <filter name="group_deadline" string="Échéance" domain="[]"
+                    <filter name="group_deadline" string="Deadline" domain="[]"
                             context="{'group_by': 'deadline'}"/>
                 </group>
             </search>
@@ -92,27 +92,25 @@
     </record>
 
     <record id="action_oski_portal_document_request" model="ir.actions.act_window">
-        <field name="name">Documents demandés</field>
+        <field name="name">Requested Documents</field>
         <field name="res_model">oski.portal.document.request</field>
         <field name="view_mode">list,form</field>
         <field name="context">{'search_default_pending': 1}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Demander un premier document</p>
+            <p class="o_view_nocontent_smiling_face">Request a first document</p>
             <p>
-                Le document apparaît sur la page portail de la fiche visée. Le
-                client le dépose depuis là, et vous le retrouvez en pièce jointe
-                de la fiche, signalé dans son fil de discussion.
+                The document appears on the portal page of the target record. The customer uploads it from there, and you find it attached to the record, announced in its chatter.
             </p>
         </field>
     </record>
 
     <menuitem id="menu_oski_portal_upload_root"
-              name="Documents client"
+              name="Customer Documents"
               web_icon="oski_portal_upload,static/description/icon.png"
               sequence="95"/>
 
     <menuitem id="menu_oski_portal_document_request"
-              name="Documents demandés"
+              name="Requested Documents"
               parent="menu_oski_portal_upload_root"
               action="action_oski_portal_document_request"
               sequence="10"/>

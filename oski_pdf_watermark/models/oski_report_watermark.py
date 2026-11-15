@@ -20,52 +20,52 @@ class OskiReportWatermark(models.Model):
     """
 
     _name = "oski.report.watermark"
-    _description = "Filigrane de rapport"
+    _description = "Report Watermark"
     _order = "sequence, id"
 
-    name = fields.Char(string="Nom", required=True)
-    sequence = fields.Integer(string="Séquence", default=10)
-    active = fields.Boolean(string="Actif", default=True)
+    name = fields.Char(string="Name", required=True)
+    sequence = fields.Integer(string="Sequence", default=10)
+    active = fields.Boolean(string="Active", default=True)
     report_id = fields.Many2one(
-        "ir.actions.report", string="Rapport", required=True, ondelete="cascade",
+        "ir.actions.report", string="Report", required=True, ondelete="cascade",
         domain=[("report_type", "in", ("qweb-pdf", "qweb-html"))])
     model_name = fields.Char(
-        string="Modèle", related="report_id.model", readonly=True)
+        string="Model", related="report_id.model", readonly=True)
     filter_domain = fields.Char(
         string="Condition", default="[]",
-        help="Domaine évalué sur l'enregistrement imprimé. Vide, la règle "
-             "s'applique à toutes les impressions du rapport.")
-    text = fields.Char(string="Mot", required=True, default="BROUILLON")
-    color = fields.Char(string="Couleur", required=True, default="#B02A37")
-    opacity = fields.Float(string="Opacité", default=0.12, digits=(3, 2))
-    angle = fields.Integer(string="Inclinaison", default=-30)
-    font_size = fields.Integer(string="Taille", default=90)
+        help="Domain evaluated on the printed record. Empty, the rule "
+             "applies to every print of the report.")
+    text = fields.Char(string="Word", required=True, default=lambda self: self.env._("DRAFT"))
+    color = fields.Char(string="Color", required=True, default="#B02A37")
+    opacity = fields.Float(string="Opacity", default=0.12, digits=(3, 2))
+    angle = fields.Integer(string="Angle", default=-30)
+    font_size = fields.Integer(string="Size", default=90)
     company_id = fields.Many2one(
-        "res.company", string="Société",
-        help="Vide, la règle vaut pour toutes les sociétés.")
+        "res.company", string="Company",
+        help="Empty, the rule applies to all companies.")
 
     @api.constrains("opacity")
     def _check_opacity(self):
         for rule in self:
             if not 0 < rule.opacity <= 1:
                 raise ValidationError(_(
-                    "L'opacité se donne entre 0 et 1 — 0,12 pour un filigrane "
-                    "discret. Reçu : %s.", rule.opacity))
+                    "The opacity must be between 0 and 1 — 0.12 for a "
+                    "discreet watermark. Received: %s.", rule.opacity))
 
     @api.constrains("color")
     def _check_color(self):
         for rule in self:
             if not HEX_COLOR.match(rule.color or ""):
                 raise ValidationError(_(
-                    "La couleur se donne en hexadécimal, par exemple #B02A37. "
-                    "Reçu : %s.", rule.color))
+                    "The color must be hexadecimal, for example #B02A37. "
+                    "Received: %s.", rule.color))
 
     @api.constrains("angle")
     def _check_angle(self):
         for rule in self:
             if not -90 <= rule.angle <= 90:
                 raise ValidationError(_(
-                    "L'inclinaison se donne entre -90 et 90 degrés. Reçu : %s.",
+                    "The angle must be between -90 and 90 degrees. Received: %s.",
                     rule.angle))
 
     @api.constrains("font_size")
@@ -73,7 +73,7 @@ class OskiReportWatermark(models.Model):
         for rule in self:
             if not 10 <= rule.font_size <= 400:
                 raise ValidationError(_(
-                    "La taille se donne entre 10 et 400 points. Reçu : %s.",
+                    "The size must be between 10 and 400 points. Received: %s.",
                     rule.font_size))
 
     @api.constrains("filter_domain", "report_id")
@@ -93,7 +93,7 @@ class OskiReportWatermark(models.Model):
                 self.env[model].search_count(domain, limit=1)
             except Exception as error:
                 raise ValidationError(_(
-                    "La condition ne s'applique pas au modèle %(model)s : "
+                    "The condition does not apply to model %(model)s: "
                     "%(error)s", model=model, error=error))
 
     def _oski_domain(self, raise_on_error=False):
@@ -106,12 +106,12 @@ class OskiReportWatermark(models.Model):
         except (SyntaxError, ValueError) as error:
             if raise_on_error:
                 raise ValidationError(_(
-                    "La condition n'est pas un domaine lisible : %s", error))
+                    "The condition is not a readable domain: %s", error))
             return []
         if not isinstance(domain, list):
             if raise_on_error:
                 raise ValidationError(_(
-                    "La condition doit être une liste, par exemple "
+                    "The condition must be a list, for example "
                     "[('state', '=', 'draft')]."))
             return []
         return domain

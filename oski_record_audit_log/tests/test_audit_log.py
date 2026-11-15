@@ -178,8 +178,20 @@ class TestAuditLog(TransactionCase):
         partner = self.Partner.create({"name": "Salariée ?", "employee": True})
         partner.write({"employee": False})
         log = self._logs("write", partner.id)
-        self.assertIn("Oui → Non", log.changes)
-        self.assertNotIn("(vide)", log.changes)
+        self.assertIn("Yes → No", log.changes)
+        self.assertNotIn("(empty)", log.changes)
+
+    def test_the_detail_speaks_the_author_language(self):
+        """Texte stocké : écrit dans la langue de qui agit, libellé du champ
+        compris."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        self._rule()
+        partner = self.Partner.with_context(lang="fr_FR").create(
+            {"name": "Salariée FR", "employee": True})
+        partner.write({"employee": False})
+        label = partner._fields["employee"]._description_string(partner.env)
+        log = self._logs("write", partner.id)
+        self.assertEqual(log.changes, "%s : Oui → Non" % label)
 
     def test_selection_is_written_as_its_label(self):
         self._rule()

@@ -28,6 +28,19 @@ class TestMassEdit(TransactionCase):
     # Configuration
     # ------------------------------------------------------------------
 
+    def test_the_generated_action_speaks_every_installed_language(self):
+        """Le libellé ne dépend pas de la langue de qui crée la configuration."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        model = self.env["ir.model"]._get("res.partner")
+        config = self.env["oski.mass.edit.config"].with_context(
+            lang="fr_FR").create({"model_id": model.id})
+        action = config.action_id
+        self.assertEqual(action.with_context(lang="en_US").name, "Mass Edit")
+        self.assertEqual(action.with_context(lang="fr_FR").name, "Édition en masse")
+        config.with_context(lang="fr_FR").active = False
+        config.with_context(lang="fr_FR").active = True
+        self.assertEqual(action.with_context(lang="en_US").name, "Mass Edit")
+
     def test_config_creates_and_removes_binding(self):
         model = self.env["ir.model"]._get("res.partner")
         config = self.env["oski.mass.edit.config"].create({"model_id": model.id})
@@ -138,7 +151,7 @@ class TestMassEdit(TransactionCase):
             "field_id": self.Fields._get("res.partner.category", "name").id,
             "operation": "clear",
         })
-        with self.assertRaisesRegex(UserError, "obligatoire"):
+        with self.assertRaisesRegex(UserError, "required"):
             wizard.action_apply()
         self.assertEqual(category.name, "Garde")
 

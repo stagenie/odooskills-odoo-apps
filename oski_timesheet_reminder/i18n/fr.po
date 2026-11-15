@@ -1,0 +1,213 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:34+0000\n"
+"PO-Revision-Date: 2026-11-15 04:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.res_config_settings_view_form_oski_timesheet
+msgid "<span>Do not disturb below</span>"
+msgstr "<span>Ne pas déranger en deçà de</span>"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.res_config_settings_view_form_oski_timesheet
+msgid "<span>Without a working schedule, expect</span>"
+msgstr "<span>À défaut d'horaire de travail, attendre</span>"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.res_config_settings_view_form_oski_timesheet
+msgid "<span>hour(s) of gap</span>"
+msgstr "<span>heure(s) d'écart</span>"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.res_config_settings_view_form_oski_timesheet
+msgid "<span>hours per week</span>"
+msgstr "<span>heures par semaine</span>"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,help:oski_timesheet_reminder.field_res_company__oski_timesheet_tolerance model:ir.model.fields,help:oski_timesheet_reminder.field_res_config_settings__oski_timesheet_tolerance
+msgid "Below this gap, the employee is not disturbed."
+msgstr "En deçà de cet écart, l'employé n'est pas dérangé."
+
+#. module: oski_timesheet_reminder
+#: model:ir.model,name:oski_timesheet_reminder.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model,name:oski_timesheet_reminder.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model,name:oski_timesheet_reminder.model_hr_employee model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__employee_id model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_search
+msgid "Employee"
+msgstr "Employé"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.res_config_settings_view_form_oski_timesheet
+msgid "Every week, logged hours are compared with expected hours. An employee who is behind receives an activity — never an email."
+msgstr "Chaque semaine, les heures saisies sont comparées aux heures attendues. L'employé en retard reçoit une activité — jamais un courriel."
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.actions.act_window,help:oski_timesheet_reminder.action_oski_timesheet_gap
+msgid "Every week, the scheduled action compares logged hours with expected hours and records here what is missing."
+msgstr ""
+"Chaque semaine, la tâche planifiée compare les heures saisies\n"
+"                aux heures attendues et consigne ici ce qui manque."
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__expected_hours model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_list
+msgid "Expected"
+msgstr "Attendu"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_res_company__oski_timesheet_expected_hours model:ir.model.fields,field_description:oski_timesheet_reminder.field_res_config_settings__oski_timesheet_expected_hours
+msgid "Expected Hours per Week"
+msgstr "Heures attendues par semaine"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__date_from
+msgid "From"
+msgstr "Du"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_timesheet_reminder
+#. odoo-python
+#: code:addons/oski_timesheet_reminder/models/oski_timesheet_gap.py:0
+msgid "Incomplete Timesheet"
+msgstr "Feuille de temps incomplète"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__logged_hours model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_list
+msgid "Logged"
+msgstr "Saisi"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__missing_hours model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_list
+msgid "Missing"
+msgstr "Manquant"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.actions.act_window,help:oski_timesheet_reminder.action_oski_timesheet_gap
+msgid "Nobody is behind"
+msgstr "Personne n'est en retard"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_search
+msgid "Not Reminded"
+msgstr "Sans rappel"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_search
+msgid "One day or more"
+msgstr "Une journée ou plus"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__reminded_on
+msgid "Reminded On"
+msgstr "Rappelé le"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.constraint,message:oski_timesheet_reminder.constraint_oski_timesheet_gap_unique_week
+msgid "This gap is already recorded for this week."
+msgstr "Ce retard est déjà consigné pour cette semaine."
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_res_company__oski_timesheet_reminder_active model:ir.model.fields,field_description:oski_timesheet_reminder.field_res_config_settings__oski_timesheet_reminder_active
+msgid "Timesheet Entry Reminder"
+msgstr "Rappel de saisie des temps"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model,name:oski_timesheet_reminder.model_oski_timesheet_gap
+msgid "Timesheet Gap"
+msgstr "Retard de saisie des temps"
+
+#. module: oski_timesheet_reminder
+#: model:ir.actions.act_window,name:oski_timesheet_reminder.action_oski_timesheet_gap model:ir.ui.menu,name:oski_timesheet_reminder.menu_oski_timesheet_gap model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_list model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_pivot model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_search
+msgid "Timesheet Gaps"
+msgstr "Retards de saisie"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.res_config_settings_view_form_oski_timesheet
+msgid "Timesheet Reminder"
+msgstr "Rappel de saisie"
+
+#. module: oski_timesheet_reminder
+#: model:ir.actions.server,name:oski_timesheet_reminder.ir_cron_oski_timesheet_reminder_ir_actions_server
+msgid "Timesheets: gaps of the past week"
+msgstr "Feuilles de temps : retards de la semaine écoulée"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__date_to
+msgid "To"
+msgstr "Au"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_res_company__oski_timesheet_tolerance model:ir.model.fields,field_description:oski_timesheet_reminder.field_res_config_settings__oski_timesheet_tolerance
+msgid "Tolerance (Hours)"
+msgstr "Tolérance (heures)"
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,help:oski_timesheet_reminder.field_res_company__oski_timesheet_expected_hours model:ir.model.fields,help:oski_timesheet_reminder.field_res_config_settings__oski_timesheet_expected_hours
+msgid "Used for employees whose working schedule says nothing. Otherwise, the employee's working schedule prevails."
+msgstr "Utilisé pour les employés dont l'horaire de travail ne dit rien. Sinon, c'est l'horaire de l'employé qui fait foi."
+
+#. module: oski_timesheet_reminder
+#: model:ir.model.fields,field_description:oski_timesheet_reminder.field_oski_timesheet_gap__user_id
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: oski_timesheet_reminder
+#: model_terms:ir.ui.view,arch_db:oski_timesheet_reminder.view_oski_timesheet_gap_search
+msgid "Week"
+msgstr "Semaine"
+
+#. module: oski_timesheet_reminder
+#. odoo-python
+#: code:addons/oski_timesheet_reminder/models/oski_timesheet_gap.py:0
+msgid "Week from %(from)s to %(to)s: %(logged)s h logged out of %(expected)s h expected."
+msgstr "Semaine du %(from)s au %(to)s : %(logged)s h saisies sur %(expected)s h attendues."
