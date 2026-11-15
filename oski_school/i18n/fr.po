@@ -100,13 +100,13 @@ msgstr "Une période clôturée ne peut pas être rouverte."
 #. odoo-python
 #: code:addons/oski_school/models/student.py:0
 msgid "A student has a single paying guardian."
-msgstr "Un étudiant n'a qu'un seul tuteur payeur."
+msgstr "Un élève n'a qu'un seul tuteur payeur."
 
 #. module: oski_school
 #. odoo-python
 #: code:addons/oski_school/models/student.py:0
 msgid "A student has a single primary guardian."
-msgstr "Un étudiant n'a qu'un seul tuteur principal."
+msgstr "Un élève n'a qu'un seul tuteur principal."
 
 #. module: oski_school
 #: model:ir.model.constraint,message:oski_school.constraint_oski_school_class_subject_class_subject_uniq
@@ -908,7 +908,7 @@ msgstr "Responsable"
 #. module: oski_school
 #: model:res.groups,comment:oski_school.group_school_officer
 msgid "Manages students, guardians and enrollments."
-msgstr "Gère les étudiants, les tuteurs et les inscriptions."
+msgstr "Gère les élèves, les tuteurs et les inscriptions."
 
 #. module: oski_school
 #: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__promotion_mode__manual
@@ -1262,7 +1262,7 @@ msgstr "Prospects"
 #. module: oski_school
 #: model:res.groups,comment:oski_school.group_school_teacher
 msgid "Reads the structure and the students of their own classes."
-msgstr "Consulte la structure et les étudiants de ses propres classes."
+msgstr "Consulte la structure et les élèves de ses propres classes."
 
 #. module: oski_school
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__reason
@@ -1431,12 +1431,12 @@ msgstr "Structure"
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__student_id
 #: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
 msgid "Student"
-msgstr "Étudiant"
+msgstr "Élève"
 
 #. module: oski_school
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_class__student_count
 msgid "Student Count"
-msgstr "Nombre d'étudiants"
+msgstr "Nombre d'élèves"
 
 #. module: oski_school
 #: model:ir.actions.act_window,name:oski_school.action_school_student
@@ -1444,7 +1444,7 @@ msgstr "Nombre d'étudiants"
 #: model:ir.ui.menu,name:oski_school.menu_school_students_students
 #: model_terms:ir.ui.view,arch_db:oski_school.view_school_class_form
 msgid "Students"
-msgstr "Étudiants"
+msgstr "Élèves"
 
 #. module: oski_school
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__subject_id
@@ -1547,7 +1547,7 @@ msgstr "Le coefficient doit être positif."
 #: code:addons/oski_school/models/program.py:0
 msgid "The cycle type of %s is locked: students are already enrolled."
 msgstr ""
-"Le type de cycle de %s est verrouillé : des étudiants y sont déjà inscrits."
+"Le type de cycle de %s est verrouillé : des élèves y sont déjà inscrits."
 
 #. module: oski_school
 #: model:ir.model.constraint,message:oski_school.constraint_oski_school_level_code_program_uniq
@@ -1581,7 +1581,7 @@ msgstr "Le code de la période doit être unique par société."
 #. odoo-python
 #: code:addons/oski_school/models/enrollment.py:0
 msgid "The program %s requires a primary guardian on the student."
-msgstr "Le programme %s exige un tuteur principal sur l’étudiant."
+msgstr "Le programme %s exige un tuteur principal sur l’élève."
 
 #. module: oski_school
 #: model:ir.model.constraint,message:oski_school.constraint_oski_school_program_code_company_uniq
@@ -1624,12 +1624,12 @@ msgstr ""
 #. module: oski_school
 #: model:ir.model.constraint,message:oski_school.constraint_oski_school_guardian_student_partner_uniq
 msgid "This contact is already a guardian of this student."
-msgstr "Ce contact est déjà tuteur de cet étudiant."
+msgstr "Ce contact est déjà tuteur de cet élève."
 
 #. module: oski_school
 #: model:ir.model.constraint,message:oski_school.constraint_oski_school_student_partner_uniq
 msgid "This contact is already a student."
-msgstr "Ce contact est déjà étudiant."
+msgstr "Ce contact est déjà élève."
 
 #. module: oski_school
 #: model:ir.model.constraint,message:oski_school.constraint_oski_school_teacher_partner_uniq
@@ -1674,7 +1674,7 @@ msgstr "Formation professionnelle"
 #. module: oski_school
 #: model:ir.model.fields,help:oski_school.field_oski_school_student__billing_partner_id
 msgid "Who receives the invoices: the billing guardian, else the student."
-msgstr "Qui reçoit les factures : le tuteur payeur, sinon l'étudiant."
+msgstr "Qui reçoit les factures : le tuteur payeur, sinon l'élève."
 
 #. module: oski_school
 #. odoo-python
@@ -1732,7 +1732,7 @@ msgstr "du programme"
 #. module: oski_school
 #: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
 msgid "students"
-msgstr "étudiants"
+msgstr "élèves"
 
 #. module: oski_school
 #: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
