@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 07:42+0000\n"
-"PO-Revision-Date: 2026-11-15 07:42+0000\n"
+"POT-Creation-Date: 2026-11-15 08:15+0000\n"
+"PO-Revision-Date: 2026-11-15 08:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,7 @@ msgstr ""
 
 #. module: oski_shop_floor
 #. odoo-javascript
-#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0 code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
 msgid "In Progress"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 
 #. module: oski_shop_floor
 #. odoo-javascript
-#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0 code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
 msgid "To Do"
 msgstr ""
 
