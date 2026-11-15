@@ -77,6 +77,12 @@
 
     <template id="catalog_page" name="Catalogue des modules">
         <t t-call="website.layout">
+            <!-- Pagination : liens prev/next pour les moteurs (chaque page
+                 garde son propre canonical, posé par website.layout). -->
+            <t t-set="head">
+                <link t-if="rel_prev" rel="prev" t-att-href="rel_prev"/>
+                <link t-if="rel_next" rel="next" t-att-href="rel_next"/>
+            </t>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
             <link rel="stylesheet"
@@ -151,6 +157,10 @@
                         Only some modules have their <t t-out="version"/> archive today&#160;; the others ship in their latest available version.
                     </div>
 
+                    <p t-if="modules" class="oski-result-count" role="status">
+                        <t t-out="result_count_label"/>
+                    </p>
+
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3">
                         <t t-foreach="modules" t-as="module">
                             <div class="col">
@@ -158,6 +168,12 @@
                             </div>
                         </t>
                     </div>
+                    <nav t-if="pager['page_count'] &gt; 1" class="oski-pager"
+                         aria-label="Catalog pages">
+                        <t t-call="website.pager">
+                            <t t-set="classname" t-value="'justify-content-center flex-wrap'"/>
+                        </t>
+                    </nav>
                     <div t-if="not modules and has_filters" class="oski-empty-state text-center">
                         <span class="oski-empty-icon" aria-hidden="true">
                             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M8 11h6"/></svg>

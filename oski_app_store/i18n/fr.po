@@ -3093,3 +3093,26 @@ msgstr "vous@societe.com"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
 msgid "← Back to the module"
 msgstr "← Retour au module"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "%s modules"
+msgstr "%s modules"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "1 module"
+msgstr "1 module"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Catalog pages"
+msgstr "Pages du catalogue"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Odoo modules — page %(page)s of %(count)s"
+msgstr "Modules Odoo — page %(page)s sur %(count)s"

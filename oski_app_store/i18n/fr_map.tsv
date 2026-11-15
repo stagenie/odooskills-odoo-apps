@@ -361,3 +361,7 @@ Ratings	Évaluations
 SMS Delivery error	Erreur de livraison SMS
 Website Messages	Messages du site web
 Website communication history	Historique des communications du site web
+Catalog pages	Pages du catalogue
+%s modules	%s modules
+1 module	1 module
+Odoo modules — page %(page)s of %(count)s	Modules Odoo — page %(page)s sur %(count)s

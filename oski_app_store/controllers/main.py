@@ -8,6 +8,7 @@ Route Task 9 : /apps/download/<version_id>
   - module payant, acheteur confirmé (sale.order.line state='sale') → zip servi
 """
 import logging
+import re
 import time
 from urllib.parse import urlencode, urlparse
 
@@ -16,12 +17,18 @@ from babel.dates import format_date as babel_format_date
 from odoo import _, http
 from odoo.http import request
 from odoo.tools.misc import babel_locale_parse
-from odoo.addons.oski_app_store.controllers.url_state import build_query, toggle
+from odoo.addons.oski_app_store.controllers.url_state import build_query, query_params, toggle
 
 # Un visiteur qui rafraîchit la page ou relance le téléchargement ne doit pas
 # gonfler le compteur public à chaque clic : une seule incrémentation par
 # version et par session dans cette fenêtre.
 DOWNLOAD_COUNT_GUARD_SECONDS = 6 * 3600
+
+# Cartes par page du catalogue : la grille passe de 1 à 2, 3 puis 4 colonnes
+# (row-cols-1 / sm-2 / md-3 / xl-4). 24 est le plus petit multiple commun
+# de 2, 3 et 4 au-delà de 12 : chaque page pleine remplit toutes ses rangées,
+# quel que soit l'écran (6 rangées de 4, 8 de 3, 12 de 2).
+CATALOG_PAGE_SIZE = 24
 
 _logger = logging.getLogger(__name__)
 
@@ -42,8 +49,9 @@ class OskiAppStore(http.Controller):
             return ["19.0"], "19.0", []  # garde-fou base vide
         return supported, Versions.get_default(), Versions.get_upcoming()
 
-    @http.route(["/apps"], type="http", auth="public", website=True, sitemap=True)
-    def apps_catalog(self, **kw):
+    @http.route(["/apps", "/apps/page/<int:page>"], type="http", auth="public",
+                website=True, sitemap=True)
+    def apps_catalog(self, page=1, **kw):
         """Catalogue public avec facettes (catégorie/tags/prix), tri et version.
 
         Behavior B : aucun module masqué par la version (pills + tri compatibles-d'abord).
@@ -111,6 +119,29 @@ class OskiAppStore(http.Controller):
             modules = modules.sorted(
                 key=lambda m: (not m.supports(version), m.name.lower())
             )
+
+        # Pagination : le tri (compatibles d'abord) se fait en Python, la page
+        # est donc découpée après le tri, sur l'ensemble filtré.
+        filter_args = query_params(cats, tags, pricing, sort, search, version, default_version)
+        total = len(modules)
+        page_count = max(1, -(-total // CATALOG_PAGE_SIZE))
+        if page == 1 and request.httprequest.path.rstrip("/").endswith("/page/1"):
+            # /apps/page/1 doublonne /apps : une seule URL pour la page 1.
+            # _url_for garde le préfixe de langue (/fr/...).
+            return request.redirect(request.env["ir.http"]._url_for(build_query(
+                cats, tags, pricing, sort, search, version, default_version)), code=301)
+        if page < 1 or page > page_count:
+            # Hors bornes (lien périmé après un filtre ou un retrait) : dernière
+            # page existante, en redirection temporaire (le total varie).
+            last = page_count if page > page_count else 1
+            target = "/apps/page/%d" % last if last > 1 else "/apps"
+            return request.redirect(request.env["ir.http"]._url_for(build_query(
+                cats, tags, pricing, sort, search, version, default_version, path=target)))
+        pager = request.website.pager(
+            url="/apps", total=total, page=page, step=CATALOG_PAGE_SIZE,
+            scope=5, url_args=filter_args,
+        )
+        modules = modules[pager["offset"]:pager["offset"] + CATALOG_PAGE_SIZE]
 
         categories = request.env["oski.module.category"].search([])
         all_tags = request.env["oski.module.tag"].search([])
@@ -195,8 +226,25 @@ class OskiAppStore(http.Controller):
         if on_request_label:
             meta_description += _(" Odoo %s on request.") % on_request_label
 
+        additional_title = _("Odoo modules")
+        if page > 1:
+            # Titres distincts par page : pas de doublon de <title> en SEO.
+            additional_title = _("Odoo modules — page %(page)s of %(count)s") % {
+                "page": page, "count": page_count,
+            }
+
         values = {
             "modules": modules,
+            "pager": pager,
+            "result_total": total,
+            "result_count_label": (
+                _("1 module") if total == 1 else _("%s modules") % total
+            ),
+            # La carte « demande de module » (oski_dev_request) ne s'affiche
+            # qu'en fin de catalogue, pas au bas de chaque page.
+            "catalog_more_pages": page < page_count,
+            "rel_prev": pager["page_previous"]["url"] if page > 1 else False,
+            "rel_next": pager["page_next"]["url"] if page < page_count else False,
             "version_spectrum": version_spectrum,
             "catalog_count": OskiModule.search_count([]),
             "free_count": OskiModule.search_count([("is_free", "=", True)]),
@@ -233,7 +281,7 @@ class OskiAppStore(http.Controller):
             ),
             # Référencement : sans ces deux clés, chaque page hérite du titre
             # générique du site et n'a aucune description.
-            "additional_title": _("Odoo modules"),
+            "additional_title": additional_title,
             "website_meta_description": meta_description,
         }
         return request.render("oski_app_store.catalog_page", values)
@@ -241,15 +289,16 @@ class OskiAppStore(http.Controller):
     def _catalog_back_url(self):
         """URL de retour vers le catalogue, filtres conservés.
 
-        N'accepte que les Referer du même host pointant exactement sur /apps
+        N'accepte que les Referer du même host pointant sur /apps ou /apps/page/<n>
         (anti open-redirect) ; sinon fallback /apps nu.
         """
         referer = request.httprequest.headers.get("Referer", "")
         parsed = urlparse(referer)
-        if parsed.path == "/apps" and (
+        # La page du catalogue (/apps/page/<n>) fait partie de l'état à rendre.
+        if re.fullmatch(r"/apps(/page/[0-9]{1,4})?", parsed.path) and (
             not parsed.netloc or parsed.netloc == request.httprequest.host
         ):
-            return "/apps?%s" % parsed.query if parsed.query else "/apps"
+            return "%s?%s" % (parsed.path, parsed.query) if parsed.query else parsed.path
         return "/apps"
 
     @http.route(

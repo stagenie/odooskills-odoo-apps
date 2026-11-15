@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-14 08:43+0000\n"
-"PO-Revision-Date: 2026-11-14 08:43+0000\n"
+"POT-Creation-Date: 2026-11-15 10:05+0000\n"
+"PO-Revision-Date: 2026-11-15 10:05+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,12 @@ msgstr ""
 msgid ""
 "%(count)s person(s) ahead of you. A running trial frees its place within 1 "
 "hour at the latest."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "%s modules"
 msgstr ""
 
 #. module: oski_app_store
@@ -61,6 +67,12 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__attachment_id
 msgid ".zip archive"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "1 module"
 msgstr ""
 
 #. module: oski_app_store
@@ -531,6 +543,11 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__can_publish
 msgid "Can Publish"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+msgid "Catalog pages"
 msgstr ""
 
 #. module: oski_app_store
@@ -1461,6 +1478,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid "Odoo modules"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Odoo modules — page %(page)s of %(count)s"
 msgstr ""
 
 #. module: oski_app_store
