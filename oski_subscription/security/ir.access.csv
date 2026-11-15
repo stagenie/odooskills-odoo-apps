@@ -6,5 +6,5 @@ access_sub_user,sale.subscription user,sale.subscription,oski_subscription.group
 access_sub_manager,sale.subscription manager,sale.subscription,oski_subscription.group_subscription_manager,crud,
 access_subline_user,sale.subscription.line user,sale.subscription.line,oski_subscription.group_subscription_user,crud,
 access_subline_manager,sale.subscription.line manager,sale.subscription.line,oski_subscription.group_subscription_manager,crud,
-rule_sale_subscription_company,Abonnement : multi-société,sale.subscription,,crud,"[('company_id', 'in', company_ids)]"
-rule_sale_subscription_line_company,Ligne d'abonnement : multi-société,sale.subscription.line,,crud,"[('company_id', 'in', company_ids)]"
+rule_sale_subscription_company,Subscription: multi-company,sale.subscription,,crud,"[('company_id', 'in', company_ids)]"
+rule_sale_subscription_line_company,Subscription Line: multi-company,sale.subscription.line,,crud,"[('company_id', 'in', company_ids)]"

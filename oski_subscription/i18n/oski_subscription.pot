@@ -1,0 +1,528 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_subscription
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 06:14+0000\n"
+"PO-Revision-Date: 2026-11-15 06:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__active
+msgid "Active"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_plans_ids
+msgid "Activity Plans"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__auto_post_invoice
+msgid "Auto-post Invoice"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__billing_unit
+msgid "Billing Unit"
+msgstr ""
+
+#. module: oski_subscription
+#: model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_form
+msgid "Close"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription__state__closed model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_search
+msgid "Closed"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__date_closed
+msgid "Closed On"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__date_end
+msgid "Commitment End"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__company_id model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.ui.menu,name:oski_subscription.menu_subscription_config
+msgid "Configuration"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__create_uid model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__create_uid model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__create_date model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__create_date model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__currency_id model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__partner_id model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_search
+msgid "Customer"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription_plan__billing_unit__day
+msgid "Day"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__name
+msgid "Description"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__discount
+msgid "Discount (%)"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__display_name model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__display_name model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__id model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__id model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__message_has_error model:ir.model.fields,help:oski_subscription.field_sale_subscription__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription__state__progress model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_search
+msgid "In Progress"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__billing_interval
+msgid "Interval"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__invoice_count
+msgid "Invoice Count"
+msgstr ""
+
+#. module: oski_subscription
+#: model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_form
+msgid "Invoice Now"
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription.py:0
+msgid "Invoice generated: %s"
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription.py:0 model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__invoice_ids model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_form
+msgid "Invoices"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__write_uid model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__write_uid model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__write_date model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__write_date model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__line_ids model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_form
+msgid "Lines"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__mrr
+msgid "MRR"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__activity_type_icon
+msgid "Material Symbols icon e.g. checklist"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription_plan__billing_unit__month
+msgid "Month"
+msgstr ""
+
+#. module: oski_subscription
+#: model:sale.subscription.plan,name:oski_subscription.plan_monthly
+msgid "Monthly"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_plan__name
+msgid "Name"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__next_invoice_date
+msgid "Next Invoice"
+msgstr ""
+
+#. module: oski_subscription
+#: model:res.groups.privilege,placeholder:oski_subscription.privilege_subscription
+msgid "No"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__mrr
+msgid "Normalized monthly recurring revenue."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription.py:0
+msgid "Only a subscription in progress can be invoiced (%s)."
+msgstr ""
+
+#. module: oski_subscription
+#: model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_form
+msgid "Pause"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription__state__paused model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_search
+msgid "Paused"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__plan_id model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_search
+msgid "Plan"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.ui.menu,name:oski_subscription.menu_subscription_plan
+msgid "Plans"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__pricelist_id
+msgid "Pricelist"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__product_id
+msgid "Product"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__recurring_total
+msgid "Recurring Total"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.module.category,description:oski_subscription.module_category_subscription
+msgid "Recurring subscription management."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__name
+msgid "Reference"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: oski_subscription
+#: model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_form
+msgid "Resume"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: oski_subscription
+#: model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_form
+msgid "Start"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__date_start
+msgid "Start Date"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription__state model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_search
+msgid "Status"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model,name:oski_subscription.model_sale_subscription model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__subscription_id
+msgid "Subscription"
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription.py:0
+msgid "Subscription %s has no line to invoice."
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription.py:0
+msgid "Subscription %s has no next invoice date."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model,name:oski_subscription.model_sale_subscription_line
+msgid "Subscription Line"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model,name:oski_subscription.model_sale_subscription_plan
+msgid "Subscription Plan"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.actions.act_window,name:oski_subscription.action_sale_subscription_plan
+msgid "Subscription Plans"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.actions.act_window,name:oski_subscription.action_sale_subscription model:ir.module.category,name:oski_subscription.module_category_subscription model:ir.ui.menu,name:oski_subscription.menu_subscription_main model:ir.ui.menu,name:oski_subscription.menu_subscription_root model:res.groups.privilege,name:oski_subscription.privilege_subscription
+msgid "Subscriptions"
+msgstr ""
+
+#. module: oski_subscription
+#: model:res.groups,name:oski_subscription.group_subscription_manager
+msgid "Subscriptions / Manager"
+msgstr ""
+
+#. module: oski_subscription
+#: model:res.groups,name:oski_subscription.group_subscription_user
+msgid "Subscriptions / User"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.actions.server,name:oski_subscription.ir_cron_subscription_invoice_ir_actions_server
+msgid "Subscriptions: Generate Invoices"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__price_subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__tax_ids
+msgid "Taxes"
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription_plan.py:0
+msgid "The billing interval must be at least 1."
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription.py:0
+msgid "The commitment end cannot be earlier than the start date."
+msgstr ""
+
+#. module: oski_subscription
+#. odoo-python
+#: code:addons/oski_subscription/models/sale_subscription.py:0
+msgid "The commitment of %s ends on %s: the period starting %s is no longer covered."
+msgstr ""
+
+#. module: oski_subscription
+#: model_terms:ir.ui.view,arch_db:oski_subscription.view_sale_subscription_search
+msgid "To Invoice"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,help:oski_subscription.field_sale_subscription__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields,field_description:oski_subscription.field_sale_subscription_line__price_unit
+msgid "Unit Price"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription_plan__billing_unit__week
+msgid "Week"
+msgstr ""
+
+#. module: oski_subscription
+#: model:ir.model.fields.selection,name:oski_subscription.selection__sale_subscription_plan__billing_unit__year
+msgid "Year"
+msgstr ""
+
+#. module: oski_subscription
+#: model:sale.subscription.plan,name:oski_subscription.plan_yearly
+msgid "Yearly"
+msgstr ""

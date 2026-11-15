@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="seq_sale_subscription" model="ir.sequence">
-        <field name="name">Abonnement</field>
+        <field name="name">Subscription</field>
         <field name="code">sale.subscription</field>
         <field name="prefix">SUB/</field>
         <field name="padding">5</field>

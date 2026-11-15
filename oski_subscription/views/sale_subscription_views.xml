@@ -6,15 +6,15 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_start" string="Démarrer" type="object"
+                    <button name="action_start" string="Start" type="object"
                             class="btn-primary" invisible="state != 'draft'"/>
-                    <button name="action_generate_invoice" string="Facturer maintenant"
+                    <button name="action_generate_invoice" string="Invoice Now"
                             type="object" invisible="state != 'progress'"/>
-                    <button name="action_pause" string="Suspendre" type="object"
+                    <button name="action_pause" string="Pause" type="object"
                             invisible="state != 'progress'"/>
-                    <button name="action_resume" string="Reprendre" type="object"
+                    <button name="action_resume" string="Resume" type="object"
                             invisible="state != 'paused'"/>
-                    <button name="action_close" string="Résilier" type="object"
+                    <button name="action_close" string="Close" type="object"
                             invisible="state not in ('progress', 'paused')"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,progress,closed"/>
@@ -23,7 +23,7 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_invoices" type="object"
                                 class="oe_stat_button" icon="receipt_long">
-                            <field name="invoice_count" widget="statinfo" string="Factures"/>
+                            <field name="invoice_count" widget="statinfo" string="Invoices"/>
                         </button>
                     </div>
                     <div class="oe_title">
@@ -45,7 +45,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="lines" string="Lignes">
+                        <page name="lines" string="Lines">
                             <field name="line_ids">
                                 <list editable="bottom">
                                     <field name="product_id"/>
@@ -96,16 +96,16 @@
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="plan_id"/>
-                <filter name="f_progress" string="En cours" domain="[('state','=','progress')]"/>
-                <filter name="f_paused" string="Suspendu" domain="[('state','=','paused')]"/>
-                <filter name="f_closed" string="Résilié" domain="[('state','=','closed')]"/>
+                <filter name="f_progress" string="In Progress" domain="[('state','=','progress')]"/>
+                <filter name="f_paused" string="Paused" domain="[('state','=','paused')]"/>
+                <filter name="f_closed" string="Closed" domain="[('state','=','closed')]"/>
                 <separator/>
-                <filter name="f_to_invoice" string="À facturer"
+                <filter name="f_to_invoice" string="To Invoice"
                         domain="[('state','=','progress'),('next_invoice_date','&lt;=',context_today().strftime('%Y-%m-%d'))]"/>
                 <separator/>
                 <filter name="g_plan" string="Plan" context="{'group_by': 'plan_id'}"/>
-                <filter name="g_partner" string="Client" context="{'group_by': 'partner_id'}"/>
-                <filter name="g_state" string="État" context="{'group_by': 'state'}"/>
+                <filter name="g_partner" string="Customer" context="{'group_by': 'partner_id'}"/>
+                <filter name="g_state" string="Status" context="{'group_by': 'state'}"/>
             </search>
         </field>
     </record>
@@ -134,7 +134,7 @@
     </record>
 
     <record id="action_sale_subscription" model="ir.actions.act_window">
-        <field name="name">Abonnements</field>
+        <field name="name">Subscriptions</field>
         <field name="res_model">sale.subscription</field>
         <field name="view_mode">list,form,pivot,graph</field>
     </record>

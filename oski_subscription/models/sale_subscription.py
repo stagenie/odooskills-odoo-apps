@@ -16,58 +16,58 @@ _MRR_FACTOR = {
 
 class SaleSubscription(models.Model):
     _name = "sale.subscription"
-    _description = "Abonnement"
+    _description = "Subscription"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "id desc"
     _check_company_auto = True
 
-    name = fields.Char(string="Référence", default="New", copy=False, tracking=True)
+    name = fields.Char(string="Reference", default="New", copy=False, tracking=True)
     partner_id = fields.Many2one(
-        "res.partner", string="Client", required=True, tracking=True,
+        "res.partner", string="Customer", required=True, tracking=True,
         check_company=True,
     )
     plan_id = fields.Many2one(
         "sale.subscription.plan", string="Plan", required=True, tracking=True
     )
     company_id = fields.Many2one(
-        "res.company", string="Société", required=True, default=lambda s: s.env.company
+        "res.company", string="Company", required=True, default=lambda s: s.env.company
     )
     currency_id = fields.Many2one(
-        related="company_id.currency_id", string="Devise", store=True
+        related="company_id.currency_id", string="Currency", store=True
     )
     pricelist_id = fields.Many2one(
-        "product.pricelist", string="Liste de prix", check_company=True
+        "product.pricelist", string="Pricelist", check_company=True
     )
     state = fields.Selection(
         [
-            ("draft", "Brouillon"),
-            ("progress", "En cours"),
-            ("paused", "Suspendu"),
-            ("closed", "Résilié"),
+            ("draft", "Draft"),
+            ("progress", "In Progress"),
+            ("paused", "Paused"),
+            ("closed", "Closed"),
         ],
-        string="État",
+        string="Status",
         default="draft",
         tracking=True,
     )
-    date_start = fields.Date(string="Début")
-    date_end = fields.Date(string="Fin d'engagement")
-    next_invoice_date = fields.Date(string="Prochaine facture")
-    date_closed = fields.Date(string="Résilié le")
+    date_start = fields.Date(string="Start Date")
+    date_end = fields.Date(string="Commitment End")
+    next_invoice_date = fields.Date(string="Next Invoice")
+    date_closed = fields.Date(string="Closed On")
     line_ids = fields.One2many(
-        "sale.subscription.line", "subscription_id", string="Lignes"
+        "sale.subscription.line", "subscription_id", string="Lines"
     )
     invoice_ids = fields.Many2many(
-        "account.move", string="Factures", copy=False
+        "account.move", string="Invoices", copy=False
     )
     invoice_count = fields.Integer(
-        string="Nb factures", compute="_compute_invoice_count"
+        string="Invoice Count", compute="_compute_invoice_count"
     )
     recurring_total = fields.Monetary(
-        string="Total récurrent", compute="_compute_recurring_total", store=True
+        string="Recurring Total", compute="_compute_recurring_total", store=True
     )
     mrr = fields.Monetary(
         string="MRR", compute="_compute_mrr", store=True,
-        help="Revenu mensuel récurrent normalisé.",
+        help="Normalized monthly recurring revenue.",
     )
 
     @api.depends("line_ids.price_subtotal")
@@ -94,7 +94,7 @@ class SaleSubscription(models.Model):
         for sub in self:
             if sub.date_start and sub.date_end and sub.date_end < sub.date_start:
                 raise ValidationError(
-                    "La fin d'engagement ne peut précéder le début."
+                    self.env._("The commitment end cannot be earlier than the start date.")
                 )
 
     def action_start(self):
@@ -162,20 +162,26 @@ class SaleSubscription(models.Model):
         self._lock_for_invoicing()
         if self.state != "progress":
             raise UserError(
-                "Seul un abonnement en cours peut être facturé (%s)." % self.display_name
+                self.env._(
+                    "Only a subscription in progress can be invoiced (%s).",
+                    self.display_name)
             )
         if not self.line_ids:
             raise UserError(
-                "L'abonnement %s n'a aucune ligne à facturer." % self.display_name
+                self.env._("Subscription %s has no line to invoice.", self.display_name)
             )
         if not self.next_invoice_date:
             raise UserError(
-                "L'abonnement %s n'a pas de prochaine échéance." % self.display_name
+                self.env._("Subscription %s has no next invoice date.", self.display_name)
             )
         if self.date_end and self.next_invoice_date > self.date_end:
             raise UserError(
-                "L'engagement de %s se termine le %s : la période du %s n'est "
-                "plus couverte." % (self.display_name, self.date_end, self.next_invoice_date)
+                self.env._(
+                    "The commitment of %s ends on %s: the period starting %s is no longer "
+                    "covered.",
+                    self.display_name,
+                    self.date_end,
+                    self.next_invoice_date)
             )
         move = (
             self.env["account.move"]
@@ -194,7 +200,7 @@ class SaleSubscription(models.Model):
             and self._close_after_last_invoice()
         ):
             self.action_close()
-        self.message_post(body="Facture générée : %s" % (move.name or move.id))
+        self.message_post(body=self.env._("Invoice generated: %s", move.name or move.id))
         return move
 
     def _close_after_last_invoice(self):
@@ -210,13 +216,26 @@ class SaleSubscription(models.Model):
 
     def action_view_invoices(self):
         self.ensure_one()
+        # libellé sorti du dict : l'extracteur 19/20 prendrait le tuple du domaine (lot 17)
+        name = self.env._("Invoices")
         return {
             "type": "ir.actions.act_window",
-            "name": "Factures",
+            "name": name,
             "res_model": "account.move",
             "view_mode": "list,form",
             "domain": [("id", "in", self.invoice_ids.ids)],
         }
+
+    def _oski_reader_lang(self):
+        """Langue de qui suit l'abonnement : ce qu'écrit une tâche planifiée
+        (sans langue) ou un visiteur du portail est lu par lui. Point
+        d'extension : un module qui ajoute un responsable le préfère."""
+        self.ensure_one()
+        return (
+            self.create_uid.lang
+            or self.company_id.partner_id.lang
+            or self.env.lang
+        )
 
     @api.model
     def _cron_generate_invoices(self):
@@ -225,6 +244,9 @@ class SaleSubscription(models.Model):
             [("state", "=", "progress"), ("next_invoice_date", "<=", today)]
         )
         for sub in subs:
+            # la tâche planifiée tourne sans langue : la note « Facture générée »
+            # (et celles d'un module de prélèvement) est écrite pour qui la lit
+            sub = sub.with_context(lang=sub._oski_reader_lang())
             try:
                 # savepoint : un échec (comptabilité, prélèvement…) annule
                 # la facture déjà créée au lieu de la laisser en base sans
@@ -241,5 +263,5 @@ class SaleSubscription(models.Model):
                     sub._generate_invoice()
             except Exception:
                 _logger.exception(
-                    "Échec génération facture abonnement %s", sub.id
+                    "Invoice generation failed for subscription %s", sub.id
                 )
