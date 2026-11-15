@@ -2,7 +2,7 @@
     "name": "OdooSkills Hello",
     "version": "20.0.1.0.0",
     "category": "Productivity",
-    "summary": "Module exemple OdooSkills (démo du store)",
+    "summary": "OdooSkills sample module (store demo)",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
     "license": "LGPL-3",
