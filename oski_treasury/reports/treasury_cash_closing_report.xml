@@ -47,7 +47,7 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Status:</strong></td>
-                                        <td t-out="dict(closing._fields['state'].selection).get(closing.state)"/>
+                                        <td t-out="dict(closing._fields['state']._description_selection(closing.env)).get(closing.state)"/>
                                     </tr>
                                 </table>
                             </div>
@@ -106,7 +106,7 @@
                                         <td t-out="op.date" t-options="{'widget': 'datetime'}"/>
                                         <td t-out="op.name"/>
                                         <td t-out="op.category_id.name"/>
-                                        <td t-out="'In' if op.operation_type == 'in' else 'Out'"/>
+                                        <td t-out="dict(op._fields['operation_type']._description_selection(op.env)).get(op.operation_type)"/>
                                         <td class="text-end" t-out="op.amount"
                                             t-options="{'widget': 'monetary', 'display_currency': closing.currency_id}"/>
                                     </tr>

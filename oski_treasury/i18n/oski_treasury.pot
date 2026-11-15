@@ -1,0 +1,1949 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_treasury
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 09:42+0000\n"
+"PO-Revision-Date: 2026-11-15 09:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_account_payment__journal_type
+msgid ""
+"\n"
+"        Select 'Sale' for customer invoices journals.\n"
+"        Select 'Purchase' for vendor bills journals.\n"
+"        Select 'Cash', 'Bank' or 'Credit Card' for journals that are used in customer or vendor payments.\n"
+"        Select 'General' for miscellaneous operations journals.\n"
+"        "
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid ""
+"<i class=\"fa fa-arrows-h me-1\" title=\"Balance in motion\"/>\n"
+"                                In motion:"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid ""
+"<i class=\"fa fa-clock-o me-1\"/>\n"
+"                                Closing in progress"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "<i class=\"fa fa-folder-open me-1\"/>Last closing"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "<i class=\"fa fa-list me-1\"/>Operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_kanban
+msgid "<i class=\"fa fa-lock me-1\" title=\"Safe\" style=\"color: #343a40;\"/>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_kanban
+msgid "<i class=\"fa fa-map-marker me-1\" title=\"Location\"/>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "<i class=\"fa fa-money me-1 text-success\" title=\"Cash register\"/>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "<i class=\"fa fa-print me-1\"/>Report"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "<i class=\"fa fa-user me-1\" title=\"Responsible\"/>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+msgid "<span class=\"o_stat_text\">Add Operation</span>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "<span class=\"o_stat_text\">Operations</span>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Actual Balance (counted)</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Cash Register:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Closing No.:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Created By:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Date:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Description:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Destination</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Difference</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Notes:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Source</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Starting Balance</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Status:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Theoretical Balance</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Total In (+)</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "<strong>Total Out (-)</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Type:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "<strong>Validated By:</strong>"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_operation_category__credit_account_id
+msgid "Account credited by the accounting entry. If empty, uses the default account configured in Treasury Settings."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_operation_category__debit_account_id
+msgid "Account debited by the accounting entry. If empty, uses the default account configured in Treasury Settings."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_operation_category_form
+msgid "Accounting (optional — otherwise the default accounts apply)"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Accounting entry not created: accounts not configured. Set up the accounts in Settings > Treasury or on the category."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Accounting entry not created: no treasury journal."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Accounts used if the category does not define any. Auto-detected from the chart of accounts, editable."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_needaction model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_needaction model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_needaction model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_needaction model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_needaction model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__active model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__active model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__active model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe__state__active
+msgid "Active"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__balance_end_real
+msgid "Actual Balance"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__operation_type__adjustment model:oski.treasury.operation.category,name:oski_treasury.category_ajustement
+msgid "Adjustment"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__adjustment_operation_id
+msgid "Adjustment Operation"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "All transfer legs must belong to the transfer's company."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__allow_negative_balance model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__allow_negative_balance
+msgid "Allow Negative Balance"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__amount model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__amount model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__amount model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "Amount"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Amount:"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_search
+msgid "Archived"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Are you sure you want to cancel this operation?"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Are you sure you want to lock this cash register?"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Are you sure you want to lock this safe?"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_attachment_count model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_attachment_count model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_attachment_count model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_attachment_count model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_attachment_count model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__attachment_ids model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Attachments"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__user_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__user_ids model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Authorized Users"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__balance_after
+msgid "Balance After"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Balance After:"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__balance_before
+msgid "Balance Before"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Balance Before:"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__balance_in_motion
+msgid "Balance In Motion"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Balance Simulation"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "Balance Summary"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Balances"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Balances and Control"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_depot_banque
+msgid "Bank Deposit"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_fees
+msgid "Bank Fees"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__operation_type__bank_in
+msgid "Bank In"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_interest
+msgid "Bank Interest"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__operation_type__bank_out
+msgid "Bank Out"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__bank_reference
+msgid "Bank Reference"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_retrait_banque
+msgid "Bank Withdrawal"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash__control_level__blocking model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe__control_level__blocking
+msgid "Blocking"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_operation_category__operation_type__both
+msgid "Both"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__can_reset_to_draft
+msgid "Can Reset To Draft"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Cancel"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_closing__state__cancel model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_operation__state__cancel model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__state__cancel model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__state__cancel
+msgid "Cancelled"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_safe_operation.py:0
+msgid "Cannot cancel a done operation."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Cannot cancel a done transfer."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "Cannot cancel a validated closing."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Cannot cancel an operation in a validated closing."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Cannot delete a posted operation. Cancel it first."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Cannot delete an operation linked to a transfer. Cancel the transfer first."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Cannot delete an operation linked to a validated closing."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Cash Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.report,name:oski_treasury.action_report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+msgid "Cash Closing"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.act_window,name:oski_treasury.action_treasury_cash_closing model:ir.ui.menu,name:oski_treasury.menu_treasury_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_list
+msgid "Cash Closings"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__cash_operation_in_id
+msgid "Cash In Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__journal_id
+msgid "Cash Journal"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_account_payment__treasury_operation_id model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Cash Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.act_window,name:oski_treasury.action_treasury_cash_operation model:ir.ui.menu,name:oski_treasury.menu_treasury_cash_operation model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_list
+msgid "Cash Operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__cash_operation_out_id
+msgid "Cash Out Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_account_payment__cash_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__cash_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__cash_id model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "Cash Register"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__transfer_type__cash_to_cash
+msgid "Cash Register -> Cash Register"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__transfer_type__cash_to_safe
+msgid "Cash Register -> Safe"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Cash Register:"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.act_window,name:oski_treasury.action_treasury_cash model:ir.ui.menu,name:oski_treasury.menu_treasury_cash model:ir.ui.menu,name:oski_treasury.menu_treasury_cash_shortcut model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_list model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_search
+msgid "Cash Registers"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/account_payment.py:0
+msgid "Cash operation created: %s"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_account_payment__cash_id
+msgid "Cash register automatically determined from the journal"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Cash register name"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "Cashier"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__category_id model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "Category"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Close"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash__state__closed
+msgid "Closed"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0 model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__closing_id model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Closing"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0
+msgid "Closing - %s"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__closing_count
+msgid "Closing Count"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__closing_date
+msgid "Closing Date"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__auto_close_days
+msgid "Closing Deadline (days)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__has_pending_closing
+msgid "Closing In Progress"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__is_closing_late
+msgid "Closing Late"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__closing_number
+msgid "Closing Number"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_search
+msgid "Closing Overdue"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__require_closing
+msgid "Closing Required"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "Closing adjustment %s: shortfall of %s"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "Closing adjustment %s: surplus of %s"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__closing_ids model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Closings"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0
+msgid "Closings - %s"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__code model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__code model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__code
+msgid "Code"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__color model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__color
+msgid "Color"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__company_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__company_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__company_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__company_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__company_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__company_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.ui.menu,name:oski_treasury.menu_treasury_config
+msgid "Configuration"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Confirm"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_closing__state__confirmed model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__state__confirmed model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__state__confirm model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Confirmed"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Control"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__control_date
+msgid "Control Date"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__control_level model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__control_level
+msgid "Control Level"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__control_checked
+msgid "Control Performed"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Controlled"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__control_user_id
+msgid "Controlled By"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.actions.act_window,help:oski_treasury.action_treasury_cash
+msgid "Create your first cash register"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__user_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__user_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__user_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__user_id
+msgid "Created By"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__create_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__create_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__create_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__create_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__create_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__create_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__create_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__create_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__create_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__create_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__create_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__create_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_res_config_settings__treasury_account_move_enabled
+msgid "Creates an accounting entry (account.move) when a cash operation is posted. Operations originating from a payment (account.payment) are linked to their native entry without duplication."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Creates an accounting entry when a cash operation is posted. Operations originating from a payment are linked to the native entry without duplication."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__credit_account_id
+msgid "Credit Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__currency_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__currency_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__currency_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__currency_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__currency_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__current_balance model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__current_balance
+msgid "Current Balance"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_customer_in
+msgid "Customer Collection (Bank)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__is_customer_payment model:oski.treasury.operation.category,name:oski_treasury.category_pay_client
+msgid "Customer Payment"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_remboursement_client
+msgid "Customer Refund"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_refund_customer
+msgid "Customer Refund (Bank)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__date model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Date"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__days_since_closing
+msgid "Days Since Closing"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__debit_account_id
+msgid "Debit Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Default Accounts"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_config_settings__treasury_cash_account_id
+msgid "Default Cash Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_config_settings__treasury_expense_account_id
+msgid "Default Expense Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_config_settings__treasury_revenue_account_id
+msgid "Default Revenue Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__description model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__description model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__description model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Description"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__dest_balance_after
+msgid "Destination Balance After"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__dest_balance_before
+msgid "Destination Balance Before"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__cash_to_id
+msgid "Destination Cash Register"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__safe_to_id
+msgid "Destination Safe"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Details"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__difference
+msgid "Difference"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "Director"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__display_name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__display_name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__display_name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__display_name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__display_name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__display_name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__state__done model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__state__done model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Done"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_closing__state__draft model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_operation__state__draft model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__state__draft model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__state__draft model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Draft"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "Draft Operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Entries Journal"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Expense Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__reference
+msgid "External Reference"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_follower_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_follower_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_follower_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_follower_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_follower_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_partner_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_partner_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_partner_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_partner_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_partner_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__force_transfer
+msgid "Force Transfer"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "General Information"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_config_settings__treasury_account_move_enabled model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Generate Accounting Entries"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__has_message model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__has_message model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__has_message model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__has_message model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__has_message model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_users__has_treasury_cash
+msgid "Has Treasury Cash"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_users__has_treasury_safe
+msgid "Has Treasury Safe"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__message_needaction model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__message_needaction model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_operation__message_needaction model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__message_needaction model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe_operation__message_needaction model:ir.model.fields,help:oski_treasury.field_oski_treasury_transfer__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__message_has_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__message_has_sms_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__message_has_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__message_has_sms_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_operation__message_has_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_operation__message_has_sms_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__message_has_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__message_has_sms_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe_operation__message_has_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe_operation__message_has_sms_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_transfer__message_has_error model:ir.model.fields,help:oski_treasury.field_oski_treasury_transfer__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_operation__operation_type__in model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_operation_category__operation_type__in model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "In"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Information"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__operation_type__initial
+msgid "Initialization"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__is_initialized
+msgid "Initialized"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Insufficient balance in '%s'. Balance: %s, Amount: %s"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Insufficient balance in cash register '%s'. Balance: %s, Amount: %s"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_safe_operation.py:0
+msgid "Insufficient balance in safe '%s'."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Insufficient balance: %s (available: %s)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_config_settings__treasury_transfer_account_id model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Internal Transfer Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Internal notes..."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_is_follower model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_is_follower model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_is_follower model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_is_follower model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_is_follower model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__is_this_month
+msgid "Is This Month"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__is_this_week
+msgid "Is This Week"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__is_today
+msgid "Is Today"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__move_id
+msgid "Journal Entry"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_account_payment__journal_type
+msgid "Journal Type"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_res_config_settings__treasury_journal_id
+msgid "Journal used for the accounting entries of cash operations. If empty, the cash register's journal is used."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__last_closing_balance
+msgid "Last Closing Balance"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__last_closing_date
+msgid "Last Closing Date"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__write_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__write_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__write_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__write_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__write_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__write_uid model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__write_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__write_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__write_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__write_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__write_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__write_date model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Linked Operations"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "Loading is only possible in draft state."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__location model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__location
+msgid "Location"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Lock"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash__state__locked model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe__state__locked
+msgid "Locked"
+msgstr ""
+
+#. module: oski_treasury
+#: model:res.groups,name:oski_treasury.group_treasury_manager
+msgid "Manager"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__is_manual
+msgid "Manual Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__max_amount
+msgid "Maximum Amount"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__max_capacity
+msgid "Maximum Capacity"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_ir_ui_menu
+msgid "Menu"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_has_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_has_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_has_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_has_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_has_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__min_balance model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__min_balance
+msgid "Minimum Balance"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_frais
+msgid "Miscellaneous Expenses"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__name
+msgid "Name"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__balance_in_motion
+msgid "Net amount of posted operations already attached to an ongoing closing (draft/confirmed), not yet validated. Indicates the part of the current balance that will be frozen when the closing is validated."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0 code:addons/oski_treasury/models/treasury_cash_operation.py:0 code:addons/oski_treasury/models/treasury_safe_operation.py:0 code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "New"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "New Manual Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0
+msgid "No closing to print for this cash register."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/account_payment.py:0
+msgid "No open cash register found for journal '%s'. The cash operation was not created."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash__control_level__none model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe__control_level__none
+msgid "None"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Not Controlled"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__notes model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__notes model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__notes model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Notes"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_needaction_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_needaction_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_needaction_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_needaction_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_needaction_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_has_error_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_has_error_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_has_error_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_has_error_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_has_error_counter model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__message_needaction_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__message_needaction_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_operation__message_needaction_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__message_needaction_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe_operation__message_needaction_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_transfer__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__message_has_error_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__message_has_error_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_operation__message_has_error_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__message_has_error_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe_operation__message_has_error_counter model:ir.model.fields,help:oski_treasury.field_oski_treasury_transfer__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__observations model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Observations"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0
+msgid "Ongoing Closings - %s"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_safe.py:0
+msgid "Only Safe Administrators may change safe responsibles."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0
+msgid "Only Treasury Managers may assign cash register users/responsible."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Only cancelled operations can be reset to draft."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Only cancelled transfers can be reset to draft."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "Only confirmed closings can be validated."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_safe_operation.py:0
+msgid "Only confirmed operations can be marked done."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Only confirmed transfers can be marked done."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_closing.py:0
+msgid "Only draft closings can be confirmed."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_safe_operation.py:0
+msgid "Only draft operations can be confirmed."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Only draft operations can be posted."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Only draft transfers can be confirmed."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Only posted operations can be reset to draft."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash__state__open model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_search
+msgid "Open"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "Open last closing"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__opening_date
+msgid "Opening Date"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Operation"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "Operation %s is no longer in draft: its cash register, type, amount, date and category can no longer be modified. Cancel it and reset it to draft first."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.act_window,name:oski_treasury.action_treasury_operation_category model:ir.ui.menu,name:oski_treasury.menu_treasury_category model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_operation_category_list
+msgid "Operation Categories"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_operation_category_form
+msgid "Operation Category"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__operation_count
+msgid "Operation Count"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "Operation Details"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Operation description..."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__operation_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__operation_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__operation_ids model:ir.ui.menu,name:oski_treasury.menu_treasury_operations model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "Operations"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0 code:addons/oski_treasury/models/treasury_safe.py:0
+msgid "Operations - %s"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__operation_type__other_in
+msgid "Other In"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe_operation__operation_type__other_out
+msgid "Other Out"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_operation__operation_type__out model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_operation_category__operation_type__out model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "Out"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__payment_id
+msgid "Payment"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/account_payment.py:0
+msgid "Payment %s - %s"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_account_payment
+msgid "Payments"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+msgid "Pending"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__pending_manual_operation_count
+msgid "Pending Operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form
+msgid "Post"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_operation__state__posted model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "Posted"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+msgid "Print Report"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "Print closing report"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_achat
+msgid "Purchase"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Receiver"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__name model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__name model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing
+msgid "Reference"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+msgid "Reload Operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__responsible_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__responsible_ids model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Responsible"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Revenue Account"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__message_has_sms_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__message_has_sms_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__message_has_sms_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__message_has_sms_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__message_has_sms_error model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__safe_id model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Safe"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_safe_operation.py:0
+msgid "Safe '%s' is already initialized."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__transfer_type__safe_to_cash
+msgid "Safe -> Cash Register"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_transfer__transfer_type__safe_to_safe
+msgid "Safe -> Safe"
+msgstr ""
+
+#. module: oski_treasury
+#: model:res.groups,name:oski_treasury.group_treasury_safe_admin
+msgid "Safe Administrator"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__safe_operation_in_id
+msgid "Safe In Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_form
+msgid "Safe Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.act_window,name:oski_treasury.action_treasury_safe_operation model:ir.ui.menu,name:oski_treasury.menu_treasury_safe_operation model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_list
+msgid "Safe Operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__safe_operation_out_id
+msgid "Safe Out Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Safe name"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Safe:"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.act_window,name:oski_treasury.action_treasury_safe model:ir.ui.menu,name:oski_treasury.menu_treasury_safe model:ir.ui.menu,name:oski_treasury.menu_treasury_safe_shortcut model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_list
+msgid "Safes"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_vente
+msgid "Sales"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Sender"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__closing_number
+msgid "Sequential number for closings of the same day"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_service
+msgid "Service"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Source '%s' is locked: transfer impossible."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Source / Destination"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__source_balance_after
+msgid "Source Balance After"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__source_balance_before
+msgid "Source Balance Before"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__cash_from_id
+msgid "Source Cash Register"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__safe_from_id
+msgid "Source Safe"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__balance_start
+msgid "Starting Balance"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__balance_start
+msgid "Starting balance = actual balance of the last validated closing of this cash register (frozen at confirmation). Allows chaining several closings on the same day."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__state model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__state model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__state model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__state model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__state model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__state model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Status"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_fourniture
+msgid "Supplies"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0 code:addons/oski_treasury/models/treasury_safe_operation.py:0
+msgid "The amount must be strictly positive."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.constraint,message:oski_treasury.constraint_oski_treasury_cash_code_company_uniq
+msgid "The cash register code must be unique per company."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.constraint,message:oski_treasury.constraint_oski_treasury_operation_category_code_company_uniq
+msgid "The category code must be unique per company."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0
+msgid "The maximum amount cannot be negative."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash.py:0
+msgid "The minimum balance cannot be negative if negative balance is not allowed."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.constraint,message:oski_treasury.constraint_oski_treasury_safe_code_company_uniq
+msgid "The safe code must be unique per company."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "The source and destination must be different."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "The transfer amount must be strictly positive."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__balance_end_theoretical
+msgid "Theoretical Balance"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "This Month"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.constraint,message:oski_treasury.constraint_oski_treasury_cash_journal_company_uniq
+msgid "This journal is already used by another cash register."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "This operation belongs to validated closing %s."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "This operation is linked to payment %s."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_cash_operation.py:0
+msgid "This operation is linked to transfer %s."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/account_payment.py:0
+msgid "This payment is locked by a confirmed treasury closing. Reset the closing to draft first."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/account_payment.py:0
+msgid "This payment is locked by a validated treasury closing."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search
+msgid "Today"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_list model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_list model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_list
+msgid "Total"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__total_in
+msgid "Total In"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__total_out
+msgid "Total Out"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__transfer_id model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__transfer_id model:oski.treasury.operation.category,name:oski_treasury.category_transfert model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Transfer"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Transfer %(name)s: %(src)s (%(src_cur)s) and %(dst)s (%(dst_cur)s) do not use the same currency."
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Transfer %s from %s"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Transfer %s to %s"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/treasury_transfer.py:0
+msgid "Transfer %s: set both the source and the destination."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_form
+msgid "Transfer Control"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_transfer_in
+msgid "Transfer Received (Bank)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_transfer_out
+msgid "Transfer Sent (Bank)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.report,name:oski_treasury.action_report_transfer model_terms:ir.ui.view,arch_db:oski_treasury.report_transfer
+msgid "Transfer Slip"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__transfer_type
+msgid "Transfer Type"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Transfer description..."
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.act_window,name:oski_treasury.action_treasury_transfer model:ir.ui.menu,name:oski_treasury.menu_treasury_transfer model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_list model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Transfers"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_res_config_settings__treasury_transfer_account_id
+msgid "Transit account used as the counterpart for transfer operations (cash register <-> safe <-> bank)."
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_transport
+msgid "Transport"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.module.category,name:oski_treasury.module_category_treasury model:ir.ui.menu,name:oski_treasury.menu_treasury_root model_terms:ir.ui.view,arch_db:oski_treasury.view_account_payment_form_inherit_treasury
+msgid "Treasury"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_oski_treasury_cash_closing
+msgid "Treasury Cash Closing"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_oski_treasury_cash_operation
+msgid "Treasury Cash Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_oski_treasury_cash
+msgid "Treasury Cash Register"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_res_config_settings__treasury_journal_id
+msgid "Treasury Entries Journal"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_oski_treasury_operation_category
+msgid "Treasury Operation Category"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_oski_treasury_safe
+msgid "Treasury Safe"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_oski_treasury_safe_operation
+msgid "Treasury Safe Operation"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_oski_treasury_transfer model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Treasury Transfer"
+msgstr ""
+
+#. module: oski_treasury
+#. odoo-python
+#: code:addons/oski_treasury/models/account_payment.py:0
+msgid "Treasury category not found. The cash operation was not created."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.res_config_settings_view_form_treasury
+msgid "Treasury — Accounting"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.actions.server,name:oski_treasury.ir_cron_treasury_update_days_since_closing_ir_actions_server
+msgid "Treasury: refresh days since closing"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__operation_type model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__operation_type model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__operation_type model_terms:ir.ui.view,arch_db:oski_treasury.report_cash_closing model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_search model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_search
+msgid "Type"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_form
+msgid "Unlock"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model,name:oski_treasury.model_res_users model:res.groups,name:oski_treasury.group_treasury_user
+msgid "User"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__user_ids
+msgid "Users authorized to view this safe (in addition to the responsible users)."
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+msgid "Validate"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+msgid "Validate Pending Operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash_closing__state__validated model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_search
+msgid "Validated"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__validated_by model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__validated_by model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__validated_by
+msgid "Validated By"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_operation_category__is_vendor_payment model:oski.treasury.operation.category,name:oski_treasury.category_pay_fournisseur
+msgid "Vendor Payment"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_supplier_out
+msgid "Vendor Payment (Bank)"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_remboursement_fournisseur
+msgid "Vendor Refund"
+msgstr ""
+
+#. module: oski_treasury
+#: model:oski.treasury.operation.category,name:oski_treasury.category_bank_refund_supplier
+msgid "Vendor Refund (Bank)"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_transfer_form
+msgid "Verification"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_kanban
+msgid "View all operations"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_cash__control_level__warning model:ir.model.fields.selection,name:oski_treasury.selection__oski_treasury_safe__control_level__warning
+msgid "Warning"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__control_warning
+msgid "Warnings"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash__website_message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_closing__website_message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__website_message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe__website_message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__website_message_ids model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_operation__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe_operation__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_transfer__website_message_ids
+msgid "Website communication history"
+msgstr ""
