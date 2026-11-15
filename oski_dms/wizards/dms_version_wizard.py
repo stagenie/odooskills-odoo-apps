@@ -3,11 +3,11 @@ from odoo import fields, models
 
 class DmsVersionWizard(models.TransientModel):
     _name = 'oski.dms.version.wizard'
-    _description = "Nouvelle version de document"
+    _description = "New Document Version"
 
     document_id = fields.Many2one('oski.dms.document', string="Document", required=True)
-    file = fields.Binary(string="Nouveau fichier", required=True)
-    file_name = fields.Char(string="Nom du fichier")
+    file = fields.Binary(string="New File", required=True)
+    file_name = fields.Char(string="File Name")
 
     def action_create_version(self):
         """Crée la nouvelle version via `action_new_version` et l'ouvre."""

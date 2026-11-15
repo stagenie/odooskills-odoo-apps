@@ -4,12 +4,12 @@
               web_icon="oski_dms,static/description/icon.png"/>
     <menuitem id="menu_dms_document" name="Documents"
               parent="menu_dms_root" action="action_dms_document" sequence="10"/>
-    <menuitem id="menu_dms_workspace" name="Espaces"
+    <menuitem id="menu_dms_workspace" name="Workspaces"
               parent="menu_dms_root" action="action_dms_workspace" sequence="20"/>
-    <menuitem id="menu_dms_tag" name="Étiquettes"
+    <menuitem id="menu_dms_tag" name="Tags"
               parent="menu_dms_root" action="action_dms_tag" sequence="40"/>
     <menuitem id="menu_dms_config" name="Configuration"
               parent="menu_dms_root" sequence="90" groups="base.group_system"/>
-    <menuitem id="menu_dms_settings" name="Paramètres"
+    <menuitem id="menu_dms_settings" name="Settings"
               parent="menu_dms_config" action="action_dms_config_settings" sequence="10"/>
 </odoo>

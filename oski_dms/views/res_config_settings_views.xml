@@ -7,13 +7,13 @@
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app data-string="Documents" string="Documents" name="oski_dms">
-                    <block title="Général">
-                        <setting string="Espace par défaut"
-                                 help="Espace proposé par défaut au classement">
+                    <block title="General">
+                        <setting string="Default Workspace"
+                                 help="Workspace offered by default when classifying">
                             <field name="dms_default_workspace_id"/>
                         </setting>
-                        <setting string="Taille max upload (Mo)"
-                                 help="0 = illimité">
+                        <setting string="Max Upload Size (MB)"
+                                 help="0 = unlimited">
                             <field name="dms_max_upload_mb"/>
                         </setting>
                     </block>
@@ -23,7 +23,7 @@
     </record>
 
     <record id="action_dms_config_settings" model="ir.actions.act_window">
-        <field name="name">Paramètres</field>
+        <field name="name">Settings</field>
         <field name="res_model">res.config.settings</field>
         <field name="view_mode">form</field>
         <field name="context">{'module': 'oski_dms'}</field>

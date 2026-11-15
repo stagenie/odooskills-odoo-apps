@@ -5,27 +5,27 @@ class OskiAuditRule(models.Model):
     """Ce qu'il faut surveiller, et sur quel modèle."""
 
     _name = "oski.audit.rule"
-    _description = "Règle de journalisation"
+    _description = "Logging Rule"
     _order = "model_name"
 
     model_id = fields.Many2one(
-        "ir.model", string="Modèle", required=True, ondelete="cascade",
+        "ir.model", string="Model", required=True, ondelete="cascade",
     )
-    model_name = fields.Char(related="model_id.model", store=True, string="Nom technique")
-    log_create = fields.Boolean(string="Créations", default=True)
-    log_write = fields.Boolean(string="Modifications", default=True)
-    log_unlink = fields.Boolean(string="Suppressions", default=True)
+    model_name = fields.Char(related="model_id.model", store=True, string="Technical Name")
+    log_create = fields.Boolean(string="Creations", default=True)
+    log_write = fields.Boolean(string="Updates", default=True)
+    log_unlink = fields.Boolean(string="Deletions", default=True)
     field_ids = fields.Many2many(
-        "ir.model.fields", string="Champs surveillés",
+        "ir.model.fields", string="Watched Fields",
         domain="[('model_id', '=', model_id)]",
-        help="Limite la journalisation des modifications à ces champs. "
-             "Laisser vide surveille tous les champs stockés.",
+        help="Restricts update logging to these fields. Leave empty to "
+             "watch all stored fields.",
     )
     active = fields.Boolean(default=True)
 
     _model_uniq = models.Constraint(
         "UNIQUE (model_id)",
-        "Ce modèle a déjà une règle de journalisation.",
+        "This model already has a logging rule.",
     )
 
     @api.model

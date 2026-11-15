@@ -4,7 +4,7 @@
         <field name="name">oski.audit.rule.list</field>
         <field name="model">oski.audit.rule</field>
         <field name="arch" type="xml">
-            <list string="Règles de journalisation">
+            <list string="Logging Rules">
                 <field name="model_id"/>
                 <field name="model_name"/>
                 <field name="log_create"/>
@@ -20,28 +20,26 @@
         <field name="name">oski.audit.rule.form</field>
         <field name="model">oski.audit.rule</field>
         <field name="arch" type="xml">
-            <form string="Règle de journalisation">
+            <form string="Logging Rule">
                 <sheet>
                     <group>
-                        <group string="Modèle">
+                        <group string="Model">
                             <field name="model_id"/>
                             <field name="model_name"/>
                             <field name="active"/>
                         </group>
-                        <group string="Opérations suivies">
+                        <group string="Tracked Operations">
                             <field name="log_create"/>
                             <field name="log_write"/>
                             <field name="log_unlink"/>
                         </group>
                     </group>
-                    <group string="Champs surveillés" invisible="not log_write">
+                    <group string="Watched Fields" invisible="not log_write">
                         <field name="field_ids" widget="many2many_tags" nolabel="1"
                                options="{'no_create': True}"/>
                     </group>
                     <p class="text-muted">
-                        Sans champ désigné, toutes les modifications de champs stockés sont
-                        journalisées. Les pièces jointes, images et listes liées sont ignorées :
-                        leur contenu ne tient pas sur une ligne de journal.
+                        With no field selected, updates to all stored fields are logged. Attachments, images and linked lists are ignored: their content does not fit on a log line.
                     </p>
                 </sheet>
             </form>
@@ -49,13 +47,13 @@
     </record>
 
     <record id="action_oski_audit_rule" model="ir.actions.act_window">
-        <field name="name">Journalisation</field>
+        <field name="name">Change Logging</field>
         <field name="res_model">oski.audit.rule</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_oski_audit_rule"
-              name="Règles de journalisation"
+              name="Logging Rules"
               parent="base.menu_custom"
               action="action_oski_audit_rule"
               sequence="56"/>

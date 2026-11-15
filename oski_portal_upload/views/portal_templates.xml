@@ -7,7 +7,7 @@
         couvre toutes les pages qui l'affichent, sans dépendre d'aucune d'elles.
     -->
     <template id="portal_document_requests" inherit_id="portal.message_thread"
-              name="Documents demandés au client">
+              name="Customer document requests">
         <xpath expr="//div[@id='discussion']" position="before">
             <t t-set="oski_requests"
                t-value="object._oski_document_requests() if 'access_url' in object._fields else None"/>
@@ -16,27 +16,27 @@
             <div t-if="oski_upload_status" role="status"
                  t-attf-class="alert d-print-none #{'alert-success' if oski_upload_status == 'ok' else 'alert-warning'}">
                 <t t-if="oski_upload_status == 'ok'">
-                    Document bien reçu, merci.
+                    Document received, thank you.
                 </t>
                 <t t-elif="oski_upload_status == 'extension'">
-                    Ce type de fichier n'est pas accepté. Formats attendus :
+                    This file type is not accepted. Expected formats:
                     <t t-out="', '.join(request.env['oski.portal.document.request'].sudo()._oski_allowed_extensions())"/>.
                 </t>
                 <t t-elif="oski_upload_status == 'size'">
-                    Ce fichier est trop lourd pour être déposé ici.
+                    This file is too large to be uploaded here.
                 </t>
                 <t t-elif="oski_upload_status == 'closed'">
-                    Ce document a déjà été reçu ou n'est plus attendu.
+                    This document has already been received or is no longer expected.
                 </t>
                 <t t-else="">
-                    Aucun fichier n'a été choisi.
+                    No file was chosen.
                 </t>
             </div>
 
             <div t-if="oski_requests" id="oski_document_requests"
                  class="card mb-4 d-print-none">
                 <div class="card-header bg-transparent">
-                    <h5 class="mb-0">Documents attendus</h5>
+                    <h5 class="mb-0">Expected Documents</h5>
                 </div>
                 <div class="card-body pb-2">
                     <t t-foreach="oski_requests" t-as="oski_request">
@@ -44,7 +44,7 @@
                             <div class="d-flex flex-wrap justify-content-between">
                                 <strong t-out="oski_request.name"/>
                                 <span t-if="oski_request.deadline" class="text-muted">
-                                    attendu pour <span t-field="oski_request.deadline"/>
+                                    expected by <span t-field="oski_request.deadline"/>
                                 </span>
                             </div>
                             <p t-if="oski_request.note" class="text-muted mb-2"
@@ -61,15 +61,14 @@
                                 </div>
                                 <div class="col-12 col-sm-auto">
                                     <button type="submit" class="btn btn-primary btn-sm">
-                                        Déposer
+                                        Upload
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </t>
                     <p class="text-muted small mb-2">
-                        Le document déposé rejoint votre dossier et nous est signalé
-                        aussitôt.
+                        The uploaded document joins your file and we are notified right away.
                     </p>
                 </div>
             </div>

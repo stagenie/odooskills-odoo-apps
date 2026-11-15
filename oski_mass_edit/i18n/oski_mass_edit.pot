@@ -1,0 +1,268 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_mass_edit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:28+0000\n"
+"PO-Revision-Date: 2026-11-15 04:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__selection_hint
+msgid "Accepted Values"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__active
+msgid "Active"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model_terms:ir.ui.view,arch_db:oski_mass_edit.view_oski_mass_edit_wizard_form
+msgid "Apply"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model_terms:ir.ui.view,arch_db:oski_mass_edit.view_oski_mass_edit_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__value_bool
+msgid "Checked"
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "Choose the record to link, or switch to “Clear the field”."
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields.selection,name:oski_mass_edit.selection__oski_mass_edit_wizard__operation__clear
+msgid "Clear the field"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__create_uid model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__create_date model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__value_date
+msgid "Date"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__value_datetime
+msgid "Date and Time"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_ir_model_fields__display_name model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__display_name model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__field_id
+msgid "Field to Change"
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "Field “%(field)s” does not belong to model “%(model)s”."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "Field “%s” does not exist on “%s”."
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model,name:oski_mass_edit.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__action_id
+msgid "Generated Action"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_ir_model_fields__id model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__id model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__write_uid model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__write_date model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__value_reference
+msgid "Linked Record"
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/models/oski_mass_edit_config.py:0 model:ir.actions.act_window,name:oski_mass_edit.action_oski_mass_edit_config model:ir.model,name:oski_mass_edit.model_oski_mass_edit_wizard model:ir.ui.menu,name:oski_mass_edit.menu_oski_mass_edit_config model_terms:ir.ui.view,arch_db:oski_mass_edit.view_oski_mass_edit_wizard_form
+msgid "Mass Edit"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model,name:oski_mass_edit.model_oski_mass_edit_config model_terms:ir.ui.view,arch_db:oski_mass_edit.view_oski_mass_edit_config_form
+msgid "Mass Edit Model"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model_terms:ir.ui.view,arch_db:oski_mass_edit.view_oski_mass_edit_config_list
+msgid "Mass Edit Models"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__model_id model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__model_name
+msgid "Model"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,help:oski_mass_edit.field_oski_mass_edit_config__model_id
+msgid "Model whose list view will offer mass editing."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/models/oski_mass_edit_config.py:0
+msgid "Model “%s” does not exist on this server."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "Model “%s” does not exist."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "No record selected."
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__value_number
+msgid "Numeric Value"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model_terms:ir.ui.view,arch_db:oski_mass_edit.view_oski_mass_edit_config_form
+msgid ""
+"Once saved, “Mass Edit” appears in the\n"
+"                        <b>Actions</b> menu of this model's list view."
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__operation
+msgid "Operation"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__record_count
+msgid "Selected Records"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields.selection,name:oski_mass_edit.selection__oski_mass_edit_wizard__operation__set
+msgid "Set a value"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__model_name
+msgid "Technical Name"
+msgstr ""
+
+#. module: oski_mass_edit
+#: model_terms:ir.ui.view,arch_db:oski_mass_edit.view_oski_mass_edit_wizard_form
+msgid "The change applies to the records selected in the list, under your own access rights."
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.constraint,message:oski_mass_edit.constraint_oski_mass_edit_config_model_uniq
+msgid "This model is already open to mass editing."
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__field_ttype
+msgid "Type"
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "Unsupported field type: “%s”. The wizard writes text, numbers, booleans, dates and simple relations."
+msgstr ""
+
+#. module: oski_mass_edit
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__value_char
+msgid "Value"
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "“%(field)s” expects a record of type “%(expected)s”, not “%(given)s”."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "“%(value)s” is not an accepted value. Possible values: %(keys)s"
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/models/oski_mass_edit_config.py:0
+msgid "“%s” is an abstract or transient model: it has no lasting list view to equip."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "“%s” is computed and has no inverse: it cannot be written."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "“%s” is not stored in the database: it is recomputed and cannot be written."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "“%s” is read-only."
+msgstr ""
+
+#. module: oski_mass_edit
+#. odoo-python
+#: code:addons/oski_mass_edit/wizards/oski_mass_edit_wizard.py:0
+msgid "“%s” is required: it cannot be cleared."
+msgstr ""

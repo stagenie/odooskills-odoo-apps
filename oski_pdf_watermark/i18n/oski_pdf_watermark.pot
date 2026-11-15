@@ -1,0 +1,234 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_pdf_watermark
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:28+0000\n"
+"PO-Revision-Date: 2026-11-15 04:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.actions.act_window,help:oski_pdf_watermark.action_oski_report_watermark
+msgid "A watermark marks the document itself: DRAFT while a quotation is unconfirmed, COPY on a reprint, CANCELLED on what no longer stands."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__active
+msgid "Active"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__angle
+msgid "Angle"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Archived"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_search
+msgid "Archived Watermarks"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__color
+msgid "Color"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__filter_domain
+msgid "Condition"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.actions.act_window,help:oski_pdf_watermark.action_oski_report_watermark
+msgid "Create a first watermark"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0 model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "DRAFT"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_ir_actions_report__display_name model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,help:oski_pdf_watermark.field_oski_report_watermark__filter_domain
+msgid "Domain evaluated on the printed record. Empty, the rule applies to every print of the report."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,help:oski_pdf_watermark.field_oski_report_watermark__company_id
+msgid "Empty, the rule applies to all companies."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_ir_actions_report__id model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__model_name
+msgid "Model"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__name
+msgid "Name"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__opacity
+msgid "Opacity"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__report_id model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_search
+msgid "Report"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model,name:oski_pdf_watermark.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model,name:oski_pdf_watermark.model_oski_report_watermark
+msgid "Report Watermark"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.actions.act_window,name:oski_pdf_watermark.action_oski_report_watermark model:ir.ui.menu,name:oski_pdf_watermark.menu_oski_report_watermark
+msgid "Report Watermarks"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Several rules can target the same report: the first one in the list that accepts the document wins. When a print groups documents that call for different watermarks, none is applied — a fixed element repeats on every page and would wrongly mark the others."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__font_size
+msgid "Size"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The angle must be between -90 and 90 degrees. Received: %s."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The color must be hexadecimal, for example #B02A37. Received: %s."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The condition does not apply to model %(model)s: %(error)s"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The condition is not a readable domain: %s"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The condition must be a list, for example [('state', '=', 'draft')]."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The opacity must be between 0 and 1 — 0.12 for a discreet watermark. Received: %s."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The size must be between 10 and 400 points. Received: %s."
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Unconfirmed quotation"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Watermark"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_list model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_search
+msgid "Watermarks"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "What"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "When"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__text
+msgid "Word"
+msgstr ""
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "[('state', '=', 'draft')]"
+msgstr ""

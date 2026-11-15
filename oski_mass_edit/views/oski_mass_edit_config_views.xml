@@ -4,7 +4,7 @@
         <field name="name">oski.mass.edit.config.list</field>
         <field name="model">oski.mass.edit.config</field>
         <field name="arch" type="xml">
-            <list string="Modèles ouverts à l'édition en masse" editable="bottom">
+            <list string="Mass Edit Models" editable="bottom">
                 <field name="model_id"/>
                 <field name="model_name"/>
                 <field name="active" widget="boolean_toggle"/>
@@ -16,7 +16,7 @@
         <field name="name">oski.mass.edit.config.form</field>
         <field name="model">oski.mass.edit.config</field>
         <field name="arch" type="xml">
-            <form string="Modèle ouvert à l'édition en masse">
+            <form string="Mass Edit Model">
                 <sheet>
                     <group>
                         <field name="model_id"/>
@@ -25,8 +25,8 @@
                         <field name="action_id" readonly="1"/>
                     </group>
                     <p class="text-muted">
-                        Une fois enregistré, « Édition en masse » apparaît dans le menu
-                        <b>Actions</b> de la vue liste de ce modèle.
+                        Once saved, “Mass Edit” appears in the
+                        <b>Actions</b> menu of this model's list view.
                     </p>
                 </sheet>
             </form>
@@ -34,13 +34,13 @@
     </record>
 
     <record id="action_oski_mass_edit_config" model="ir.actions.act_window">
-        <field name="name">Édition en masse</field>
+        <field name="name">Mass Edit</field>
         <field name="res_model">oski.mass.edit.config</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_oski_mass_edit_config"
-              name="Édition en masse"
+              name="Mass Edit"
               parent="base.menu_custom"
               action="action_oski_mass_edit_config"
               sequence="52"/>

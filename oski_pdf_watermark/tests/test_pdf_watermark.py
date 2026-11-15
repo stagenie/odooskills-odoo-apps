@@ -51,6 +51,13 @@ class TestPdfWatermark(TransactionCase):
         self.assertEqual(self._watermark(self.company)["text"], "COPIE")
         self.assertEqual(self._watermark(self.person)["text"], "COPIE")
 
+    def test_the_default_word_speaks_the_author_language(self):
+        """Le mot proposé suit la langue de qui crée la règle."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        Rule = self.env["oski.report.watermark"]
+        self.assertEqual(Rule.with_context(lang="en_US").default_get(["text"])["text"], "DRAFT")
+        self.assertEqual(Rule.with_context(lang="fr_FR").default_get(["text"])["text"], "BROUILLON")
+
     def test_no_rule_leaves_the_print_bare(self):
         self.assertFalse(self._watermark(self.company))
 

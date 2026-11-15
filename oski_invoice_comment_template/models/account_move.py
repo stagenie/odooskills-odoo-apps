@@ -8,15 +8,15 @@ class AccountMove(models.Model):
 
     oski_comment_template_id = fields.Many2one(
         comodel_name="oski.invoice.comment.template",
-        string="Modèle de remarque",
+        string="Note Template",
         copy=False,
         domain="[('move_types', 'in', ('all', oski_comment_direction))]",
     )
     oski_comment_direction = fields.Selection(
-        selection=[("out", "Client"), ("in", "Fournisseur")],
-        string="Sens de la facture (remarques)",
+        selection=[("out", "Customer"), ("in", "Vendor")],
+        string="Invoice Direction (Notes)",
         compute="_compute_oski_comment_direction",
-        help="Sert à ne proposer que les modèles prévus pour ce type de facture.",
+        help="Used to offer only the templates meant for this type of invoice.",
     )
 
     @api.depends("move_type")
@@ -39,7 +39,7 @@ class AccountMove(models.Model):
             if template and template.move_types != "all" \
                     and template.move_types != move.oski_comment_direction:
                 raise ValidationError(_(
-                    "Le modèle de remarque « %(template)s » est réservé aux %(types)s.",
+                    "Note template “%(template)s” is reserved for %(types)s.",
                     template=template.name,
                     types=dict(template._fields["move_types"]._description_selection(
                         self.env))[template.move_types].lower(),

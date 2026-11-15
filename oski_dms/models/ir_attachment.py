@@ -9,7 +9,7 @@ class IrAttachment(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': "Classer dans la GED",
+            'name': self.env.ref("oski_dms.action_ir_attachment_file_dms").name,
             'res_model': 'oski.dms.file.wizard',
             'view_mode': 'form',
             'target': 'new',

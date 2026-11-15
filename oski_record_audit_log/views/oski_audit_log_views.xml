@@ -4,7 +4,7 @@
         <field name="name">oski.audit.log.list</field>
         <field name="model">oski.audit.log</field>
         <field name="arch" type="xml">
-            <list string="Journal des modifications" create="false" edit="false"
+            <list string="Change Log" create="false" edit="false"
                   decoration-danger="operation == 'unlink'"
                   decoration-success="operation == 'create'">
                 <field name="create_date"/>
@@ -23,31 +23,31 @@
         <field name="name">oski.audit.log.search</field>
         <field name="model">oski.audit.log</field>
         <field name="arch" type="xml">
-            <search string="Journal des modifications">
+            <search string="Change Log">
                 <field name="res_name"/>
                 <field name="model_name"/>
                 <field name="user_id"/>
                 <field name="changes"/>
-                <filter name="creations" string="Créations" domain="[('operation', '=', 'create')]"/>
-                <filter name="writes" string="Modifications" domain="[('operation', '=', 'write')]"/>
-                <filter name="deletions" string="Suppressions" domain="[('operation', '=', 'unlink')]"/>
+                <filter name="creations" string="Creations" domain="[('operation', '=', 'create')]"/>
+                <filter name="writes" string="Updates" domain="[('operation', '=', 'write')]"/>
+                <filter name="deletions" string="Deletions" domain="[('operation', '=', 'unlink')]"/>
                 <group>
-                    <filter name="group_model" string="Modèle" domain="[]" context="{'group_by': 'model_name'}"/>
-                    <filter name="group_user" string="Auteur" domain="[]" context="{'group_by': 'user_id'}"/>
-                    <filter name="group_operation" string="Opération" domain="[]" context="{'group_by': 'operation'}"/>
+                    <filter name="group_model" string="Model" domain="[]" context="{'group_by': 'model_name'}"/>
+                    <filter name="group_user" string="Author" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_operation" string="Operation" domain="[]" context="{'group_by': 'operation'}"/>
                 </group>
             </search>
         </field>
     </record>
 
     <record id="action_oski_audit_log" model="ir.actions.act_window">
-        <field name="name">Journal des modifications</field>
+        <field name="name">Change Log</field>
         <field name="res_model">oski.audit.log</field>
         <field name="view_mode">list</field>
     </record>
 
     <menuitem id="menu_oski_audit_log"
-              name="Journal des modifications"
+              name="Change Log"
               parent="base.menu_custom"
               action="action_oski_audit_log"
               sequence="57"/>

@@ -1,0 +1,506 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:37+0000\n"
+"PO-Revision-Date: 2026-11-15 04:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.res_config_settings_view_form_dms
+msgid "0 = unlimited"
+msgstr "0 = illimité"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_workspace_form
+msgid "Access Rights"
+msgstr "Droits"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_needaction model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__active model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Indicateur d’exception d’activité"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_state
+msgid "Activity State"
+msgstr "Statut de l'activité"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône de type d'activité"
+
+#. module: oski_dms
+#: model:ir.model,name:oski_dms.model_ir_attachment model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__attachment_id model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__attachment_id
+msgid "Attachment"
+msgstr "Pièce jointe"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_attachment_count model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_file_wizard_form model_terms:ir.ui.view,arch_db:oski_dms.view_dms_version_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__parent_id
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_file_wizard_form
+msgid "Classify"
+msgstr "Classer"
+
+#. module: oski_dms
+#: model:ir.model,name:oski_dms.model_oski_dms_file_wizard
+msgid "Classify an Attachment in the DMS"
+msgstr "Classer une pièce jointe dans la GED"
+
+#. module: oski_dms
+#: model:ir.actions.server,name:oski_dms.action_ir_attachment_file_dms model_terms:ir.ui.view,arch_db:oski_dms.view_dms_file_wizard_form
+msgid "Classify in DMS"
+msgstr "Classer dans la GED"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__color
+msgid "Color"
+msgstr "Couleur"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__company_id model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oski_dms
+#: model:ir.model,name:oski_dms.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: oski_dms
+#: model:ir.ui.menu,name:oski_dms.menu_dms_config
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_version_wizard_form
+msgid "Create Version"
+msgstr "Créer la version"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__create_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__create_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__create_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__create_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__create_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__create_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__create_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__create_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_search
+msgid "Creation Date"
+msgstr "Date de création"
+
+#. module: oski_dms
+#: model:ir.model,name:oski_dms.model_oski_dms_document
+msgid "DMS Document"
+msgstr "Document GED"
+
+#. module: oski_dms
+#: model:ir.model,name:oski_dms.model_oski_dms_tag
+msgid "DMS Tag"
+msgstr "Étiquette GED"
+
+#. module: oski_dms
+#: model:ir.model,name:oski_dms.model_oski_dms_workspace
+msgid "DMS Workspace"
+msgstr "Espace GED"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_res_config_settings__dms_default_workspace_id model_terms:ir.ui.view,arch_db:oski_dms.res_config_settings_view_form_dms
+msgid "Default Workspace"
+msgstr "Espace par défaut"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_ir_attachment__display_name model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__display_name model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__display_name model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__display_name model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__display_name model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__display_name model:ir.model.fields,field_description:oski_dms.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__document_id model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_form
+msgid "Document"
+msgstr "Document"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__document_count
+msgid "Document Count"
+msgstr "Nb documents"
+
+#. module: oski_dms
+#: model:ir.actions.act_window,name:oski_dms.action_dms_document model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__document_ids model:ir.module.category,name:oski_dms.module_category_dms model:ir.ui.menu,name:oski_dms.menu_dms_document model:ir.ui.menu,name:oski_dms.menu_dms_root model:res.groups.privilege,name:oski_dms.privilege_dms model_terms:ir.ui.view,arch_db:oski_dms.res_config_settings_view_form_dms model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_list model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_search
+msgid "Documents"
+msgstr "Documents"
+
+#. module: oski_dms
+#: model:res.groups,name:oski_dms.group_dms_manager
+msgid "Documents / Manager"
+msgstr "Documents / Responsable"
+
+#. module: oski_dms
+#: model:res.groups,name:oski_dms.group_dms_user
+msgid "Documents / User"
+msgstr "Documents / Utilisateur"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__file
+msgid "File"
+msgstr "Fichier"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__file_name model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__file_name
+msgid "File Name"
+msgstr "Nom du fichier"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__mimetype
+msgid "File Type"
+msgstr "Type de fichier"
+
+#. module: oski_dms
+#. odoo-python
+#: code:addons/oski_dms/models/dms_document.py:0
+msgid "File too large (max %s MB)."
+msgstr "Fichier trop volumineux (max %s Mo)."
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_follower_ids model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_partner_ids model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome par ex. fa-tasks"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__complete_name
+msgid "Full Name"
+msgstr "Nom complet"
+
+#. module: oski_dms
+#. odoo-python
+#: code:addons/oski_dms/__init__.py:0 model_terms:ir.ui.view,arch_db:oski_dms.res_config_settings_view_form_dms
+msgid "General"
+msgstr "Général"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__has_message model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_ir_attachment__id model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__id model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__id model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__id model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__id model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__id model:ir.model.fields,field_description:oski_dms.field_res_config_settings__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour indiquer une activité d'exception."
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__message_needaction model:ir.model.fields,help:oski_dms.field_oski_dms_workspace__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__message_has_error model:ir.model.fields,help:oski_dms.field_oski_dms_workspace__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur de livraison."
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_search
+msgid "Images"
+msgstr "Images"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_is_follower model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__write_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__write_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__write_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__write_uid model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__write_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__write_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__write_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__write_date model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__res_model
+msgid "Linked Model"
+msgstr "Modèle lié"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__res_id
+msgid "Linked Record"
+msgstr "Enregistrement lié"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__res_name
+msgid "Linked Record Name"
+msgstr "Nom lié"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_form
+msgid "Linked To"
+msgstr "Rattachement"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__manage_group_ids
+msgid "Manage Groups"
+msgstr "Groupes gestion"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_res_config_settings__dms_max_upload_mb model_terms:ir.ui.view,arch_db:oski_dms.res_config_settings_view_form_dms
+msgid "Max Upload Size (MB)"
+msgstr "Taille max upload (Mo)"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_has_error model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_ids model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Échéance de mon activité"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_search
+msgid "My Documents"
+msgstr "Mes documents"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__name model:ir.model.fields,field_description:oski_dms.field_oski_dms_tag__name model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: oski_dms
+#: model:ir.model,name:oski_dms.model_oski_dms_version_wizard
+msgid "New Document Version"
+msgstr "Nouvelle version de document"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_version_wizard__file
+msgid "New File"
+msgstr "Nouveau fichier"
+
+#. module: oski_dms
+#. odoo-python
+#: code:addons/oski_dms/models/dms_document.py:0 model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_form model_terms:ir.ui.view,arch_db:oski_dms.view_dms_version_wizard_form
+msgid "New Version"
+msgstr "Nouvelle version"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'activité à venir"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de l'activité suivante"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'activités à venir"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__version_ids
+msgid "Next Versions"
+msgstr "Versions suivantes"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_needaction_counter model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__message_has_error_counter model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__message_needaction_counter model:ir.model.fields,help:oski_dms.field_oski_dms_workspace__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__message_has_error_counter model:ir.model.fields,help:oski_dms.field_oski_dms_workspace__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_form
+msgid "Open Linked Record"
+msgstr "Ouvrir l'enregistrement lié"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__owner_id model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_search
+msgid "Owner"
+msgstr "Propriétaire"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_search
+msgid "PDF"
+msgstr "PDF"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__parent_path
+msgid "Parent Path"
+msgstr "Chemin parent"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__parent_id
+msgid "Parent Workspace"
+msgstr "Espace parent"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__previous_version_id
+msgid "Previous Version"
+msgstr "Version précédente"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__read_group_ids
+msgid "Read Groups"
+msgstr "Groupes lecture"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_form
+msgid "Restore This Version"
+msgstr "Restaurer cette version"
+
+#. module: oski_dms
+#: model:ir.actions.act_window,name:oski_dms.action_dms_config_settings model:ir.ui.menu,name:oski_dms.menu_dms_settings
+msgid "Settings"
+msgstr "Paramètres"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__file_size
+msgid "Size (bytes)"
+msgstr "Taille (octets)"
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__child_ids
+msgid "Sub-workspaces"
+msgstr "Sous-espaces"
+
+#. module: oski_dms
+#: model:ir.actions.act_window,name:oski_dms.action_dms_tag model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__tag_ids model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__tag_ids model:ir.ui.menu,name:oski_dms.menu_dms_tag model_terms:ir.ui.view,arch_db:oski_dms.view_dms_tag_list
+msgid "Tags"
+msgstr "Étiquettes"
+
+#. module: oski_dms
+#: model:ir.model.constraint,message:oski_dms.constraint_oski_dms_tag_name_uniq
+msgid "This tag already exists."
+msgstr "Cette étiquette existe déjà."
+
+#. module: oski_dms
+#: model:ir.model.fields,help:oski_dms.field_oski_dms_document__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type d'activité d'exception enregistrée."
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__version_no model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_form
+msgid "Version"
+msgstr "Version"
+
+#. module: oski_dms
+#. odoo-python
+#: code:addons/oski_dms/models/dms_document.py:0
+msgid "Versions"
+msgstr "Versions"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_document__workspace_id model:ir.model.fields,field_description:oski_dms.field_oski_dms_file_wizard__workspace_id model_terms:ir.ui.view,arch_db:oski_dms.view_dms_document_search model_terms:ir.ui.view,arch_db:oski_dms.view_dms_workspace_form
+msgid "Workspace"
+msgstr "Espace"
+
+#. module: oski_dms
+#: model_terms:ir.ui.view,arch_db:oski_dms.res_config_settings_view_form_dms
+msgid "Workspace offered by default when classifying"
+msgstr "Espace proposé par défaut au classement"
+
+#. module: oski_dms
+#: model:ir.actions.act_window,name:oski_dms.action_dms_workspace model:ir.ui.menu,name:oski_dms.menu_dms_workspace model_terms:ir.ui.view,arch_db:oski_dms.view_dms_workspace_list
+msgid "Workspaces"
+msgstr "Espaces"
+
+#. module: oski_dms
+#: model:ir.model.fields,field_description:oski_dms.field_oski_dms_workspace__write_group_ids
+msgid "Write Groups"
+msgstr "Groupes écriture"

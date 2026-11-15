@@ -1,0 +1,240 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:28+0000\n"
+"PO-Revision-Date: 2026-11-15 04:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.actions.act_window,help:oski_pdf_watermark.action_oski_report_watermark
+msgid "A watermark marks the document itself: DRAFT while a quotation is unconfirmed, COPY on a reprint, CANCELLED on what no longer stands."
+msgstr ""
+"Un filigrane marque le document lui-même : BROUILLON tant qu'un\n"
+"                devis n'est pas confirmé, COPIE sur une réimpression, ANNULÉ sur\n"
+"                ce qui ne vaut plus."
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__angle
+msgid "Angle"
+msgstr "Inclinaison"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_search
+msgid "Archived Watermarks"
+msgstr "Archivés"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__color
+msgid "Color"
+msgstr "Couleur"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__filter_domain
+msgid "Condition"
+msgstr "Condition"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.actions.act_window,help:oski_pdf_watermark.action_oski_report_watermark
+msgid "Create a first watermark"
+msgstr "Poser un premier filigrane"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0 model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "DRAFT"
+msgstr "BROUILLON"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_ir_actions_report__display_name model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,help:oski_pdf_watermark.field_oski_report_watermark__filter_domain
+msgid "Domain evaluated on the printed record. Empty, the rule applies to every print of the report."
+msgstr "Domaine évalué sur l'enregistrement imprimé. Vide, la règle s'applique à toutes les impressions du rapport."
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,help:oski_pdf_watermark.field_oski_report_watermark__company_id
+msgid "Empty, the rule applies to all companies."
+msgstr "Vide, la règle vaut pour toutes les sociétés."
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_ir_actions_report__id model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__model_name
+msgid "Model"
+msgstr "Modèle"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__opacity
+msgid "Opacity"
+msgstr "Opacité"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__report_id model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_search
+msgid "Report"
+msgstr "Rapport"
+
+#. module: oski_pdf_watermark
+#: model:ir.model,name:oski_pdf_watermark.model_ir_actions_report
+msgid "Report Action"
+msgstr "Action de rapport"
+
+#. module: oski_pdf_watermark
+#: model:ir.model,name:oski_pdf_watermark.model_oski_report_watermark
+msgid "Report Watermark"
+msgstr "Filigrane de rapport"
+
+#. module: oski_pdf_watermark
+#: model:ir.actions.act_window,name:oski_pdf_watermark.action_oski_report_watermark model:ir.ui.menu,name:oski_pdf_watermark.menu_oski_report_watermark
+msgid "Report Watermarks"
+msgstr "Filigranes de rapport"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Several rules can target the same report: the first one in the list that accepts the document wins. When a print groups documents that call for different watermarks, none is applied — a fixed element repeats on every page and would wrongly mark the others."
+msgstr ""
+"Plusieurs règles peuvent viser le même rapport : la première\n"
+"                        de la liste qui accepte le document l'emporte. Quand une\n"
+"                        impression groupe des documents qui appellent des filigranes\n"
+"                        différents, aucun n'est posé — un élément fixe se répète sur\n"
+"                        toutes les pages et marquerait les autres à tort."
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__font_size
+msgid "Size"
+msgstr "Taille"
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The angle must be between -90 and 90 degrees. Received: %s."
+msgstr "L'inclinaison se donne entre -90 et 90 degrés. Reçu : %s."
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The color must be hexadecimal, for example #B02A37. Received: %s."
+msgstr "La couleur se donne en hexadécimal, par exemple #B02A37. Reçu : %s."
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The condition does not apply to model %(model)s: %(error)s"
+msgstr "La condition ne s'applique pas au modèle %(model)s : %(error)s"
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The condition is not a readable domain: %s"
+msgstr "La condition n'est pas un domaine lisible : %s"
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The condition must be a list, for example [('state', '=', 'draft')]."
+msgstr "La condition doit être une liste, par exemple [('state', '=', 'draft')]."
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The opacity must be between 0 and 1 — 0.12 for a discreet watermark. Received: %s."
+msgstr "L'opacité se donne entre 0 et 1 — 0,12 pour un filigrane discret. Reçu : %s."
+
+#. module: oski_pdf_watermark
+#. odoo-python
+#: code:addons/oski_pdf_watermark/models/oski_report_watermark.py:0
+msgid "The size must be between 10 and 400 points. Received: %s."
+msgstr "La taille se donne entre 10 et 400 points. Reçu : %s."
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Unconfirmed quotation"
+msgstr "Devis non confirmé"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "Watermark"
+msgstr "Filigrane"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_list model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_search
+msgid "Watermarks"
+msgstr "Filigranes"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "What"
+msgstr "Quoi"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "When"
+msgstr "Quand"
+
+#. module: oski_pdf_watermark
+#: model:ir.model.fields,field_description:oski_pdf_watermark.field_oski_report_watermark__text
+msgid "Word"
+msgstr "Mot"
+
+#. module: oski_pdf_watermark
+#: model_terms:ir.ui.view,arch_db:oski_pdf_watermark.view_oski_report_watermark_form
+msgid "[('state', '=', 'draft')]"
+msgstr "[('state', '=', 'draft')]"

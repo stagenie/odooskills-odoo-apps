@@ -9,6 +9,7 @@
     'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
     'depends': ['base', 'mail', 'web'],
+    'post_init_hook': '_oski_dms_post_init',
     'data': [
         'security/dms_security.xml',
         'security/ir.model.access.csv',

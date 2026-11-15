@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_analytic_required
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:24+0000\n"
+"PO-Revision-Date: 2026-11-15 04:24+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_analytic_required
+#: model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_search_oski_analytic
+msgid "Account"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__account_prefix
+msgid "Account Prefixes"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__active
+msgid "Active"
+msgstr ""
+
+#. module: oski_analytic_required
+#. odoo-python
+#: code:addons/oski_analytic_required/models/oski_analytic_journal_rule.py:0
+msgid "An account prefix contains digits only: “%s” is not one."
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.ui.view,arch_db:oski_analytic_required.view_oski_analytic_rule_search
+msgid "Archived"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.actions.act_window,help:oski_analytic_required.action_oski_analytic_rule
+msgid "Choose a journal: its entries can no longer be posted without an analytic distribution. Account prefixes restrict the requirement to part of the chart of accounts."
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,help:oski_analytic_required.field_oski_analytic_journal_rule__company_id
+msgid "Company related to this journal"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.actions.act_window,help:oski_analytic_required.action_oski_analytic_rule
+msgid "Create a first rule"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_list_oski_analytic
+msgid "Credit"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_list_oski_analytic
+msgid "Debit"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_account_move__display_name model:ir.model.fields,field_description:oski_analytic_required.field_account_move_line__display_name model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_search_oski_analytic
+msgid "Drafts"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.actions.act_window,name:oski_analytic_required.action_oski_analytic_missing_lines model:ir.ui.menu,name:oski_analytic_required.menu_oski_analytic_missing
+msgid "Entries without Analytic"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_account_move__id model:ir.model.fields,field_description:oski_analytic_required.field_account_move_line__id model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__journal_id model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_search_oski_analytic model_terms:ir.ui.view,arch_db:oski_analytic_required.view_oski_analytic_rule_search
+msgid "Journal"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model,name:oski_analytic_required.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model,name:oski_analytic_required.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_oski_analytic_journal_rule__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_list_oski_analytic model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_search_oski_analytic
+msgid "Lines without Analytic"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.ui.menu,name:oski_analytic_required.menu_oski_analytic_rule model_terms:ir.ui.view,arch_db:oski_analytic_required.view_oski_analytic_rule_form model_terms:ir.ui.view,arch_db:oski_analytic_required.view_oski_analytic_rule_list model_terms:ir.ui.view,arch_db:oski_analytic_required.view_oski_analytic_rule_search
+msgid "Mandatory Analytic"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.actions.act_window,name:oski_analytic_required.action_oski_analytic_rule model:ir.model,name:oski_analytic_required.model_oski_analytic_journal_rule
+msgid "Mandatory Analytic per Journal"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,field_description:oski_analytic_required.field_account_move_line__oski_analytic_missing model_terms:ir.ui.view,arch_db:oski_analytic_required.view_move_line_search_oski_analytic
+msgid "Missing Analytic"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.actions.act_window,help:oski_analytic_required.action_oski_analytic_missing_lines
+msgid "No draft entry lacks a distribution where a journal requires one."
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.actions.act_window,help:oski_analytic_required.action_oski_analytic_missing_lines
+msgid "Nothing will be blocked"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model_terms:ir.ui.view,arch_db:oski_analytic_required.view_oski_analytic_rule_form
+msgid "Odoo can already require analytics by business domain, account prefix and product category, in the applicability of analytic plans. This rule adds the one criterion missing there — the journal — and flags faulty entries <b>before</b> posting."
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,help:oski_analytic_required.field_oski_analytic_journal_rule__account_prefix
+msgid "Restricts the requirement to accounts whose code starts with one of these comma-separated prefixes. Empty: all income and expense accounts of the journal."
+msgstr ""
+
+#. module: oski_analytic_required
+#. odoo-python
+#: code:addons/oski_analytic_required/models/account_move.py:0
+msgid ""
+"These lines need an analytic distribution before posting:\n"
+"%s"
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.constraint,message:oski_analytic_required.constraint_oski_analytic_journal_rule_unique_journal_prefix
+msgid "This journal already has a rule for these prefixes."
+msgstr ""
+
+#. module: oski_analytic_required
+#: model:ir.model.fields,help:oski_analytic_required.field_account_move_line__oski_analytic_missing
+msgid "True when a journal requires a distribution this line lacks. Not stored: the rule can change at any time, and a stored value would grow stale with nothing to refresh it."
+msgstr ""

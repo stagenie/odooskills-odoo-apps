@@ -11,21 +11,21 @@
                  l'utilisateur les cherche. -->
             <xpath expr="//setting[@id='reminder_allow']" position="after">
                 <setting id="oski_timesheet_reminder"
-                         string="Rappel de saisie"
-                         help="Chaque semaine, les heures saisies sont comparées aux heures attendues. L'employé en retard reçoit une activité — jamais un courriel.">
+                         string="Timesheet Reminder"
+                         help="Every week, logged hours are compared with expected hours. An employee who is behind receives an activity — never an email.">
                     <field name="oski_timesheet_reminder_active"/>
                     <div class="content-group" invisible="not oski_timesheet_reminder_active">
                         <div class="mt8">
-                            <span>À défaut d'horaire de travail, attendre</span>
+                            <span>Without a working schedule, expect</span>
                             <field name="oski_timesheet_expected_hours"
                                    class="col-1 oe_inline mx-2"/>
-                            <span>heures par semaine</span>
+                            <span>hours per week</span>
                         </div>
                         <div class="mt8">
-                            <span>Ne pas déranger en deçà de</span>
+                            <span>Do not disturb below</span>
                             <field name="oski_timesheet_tolerance"
                                    class="col-1 oe_inline mx-2"/>
-                            <span>heure(s) d'écart</span>
+                            <span>hour(s) of gap</span>
                         </div>
                     </div>
                 </setting>
