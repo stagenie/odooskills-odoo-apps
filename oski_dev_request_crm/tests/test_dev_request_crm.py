@@ -42,6 +42,24 @@ class TestDevRequestCrm(TransactionCase):
         second = self._make_request(subject="Autre besoin")
         self.assertNotEqual(first.lead_id, second.lead_id)
 
+    def test_lead_is_written_in_the_company_language(self):
+        """Formulaire public (langue du visiteur) : l'opportunité est lue par
+        l'équipe commerciale, dans la langue de la société."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        self.env.company.partner_id.lang = "fr_FR"
+        request = self._make_request()
+        body = request.with_context(lang="en_US").lead_id.description or ""
+        self.assertIn("Version Odoo visée", body)
+        self.assertNotIn("Target Odoo version", body)
+        self.env.company.partner_id.lang = "en_US"
+        request = self.env["oski.dev.request"].with_context(lang="fr_FR").create({
+            "requester_name": "Awa Diop", "email": "awa@example.com",
+            "subject": "Other need", "description": "Need.",
+        })
+        body = request.lead_id.description or ""
+        self.assertIn("Target Odoo version", body)
+        self.assertNotIn("Version Odoo visée", body)
+
     def test_editing_a_request_does_not_duplicate_the_lead(self):
         request = self._make_request()
         lead = request.lead_id

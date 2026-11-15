@@ -1,13 +1,13 @@
 {
-    "name": "Demande de développement — Opportunités CRM",
+    "name": "Development Request — CRM Opportunities",
     "version": "19.0.2.0.0",
     "category": "Website",
-    "summary": "Chaque demande de module ouvre une opportunité dans le pipeline commercial.",
+    "summary": "Each module request opens an opportunity in the sales pipeline.",
     "description": """
-Une demande de développement est d'abord une affaire à gagner. Ce pont crée
-l'opportunité CRM correspondante dès la soumission du formulaire public, avec
-le contact, le besoin, la version d'Odoo visée et le budget annoncé — sans
-retirer la demande de son propre pipeline technique.
+A development request is first a deal to win. This bridge creates the matching
+CRM opportunity as soon as the public form is submitted, with the contact, the
+need, the target Odoo version and the stated budget — without removing the
+request from its own technical pipeline.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",

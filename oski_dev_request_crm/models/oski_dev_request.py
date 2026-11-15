@@ -6,10 +6,10 @@ class OskiDevRequest(models.Model):
 
     lead_id = fields.Many2one(
         "crm.lead",
-        string="Opportunité",
+        string="Opportunity",
         readonly=True,
         copy=False,
-        help="Opportunité ouverte à la soumission de la demande.",
+        help="Opportunity opened when the request was submitted.",
     )
 
     def _selection_label(self, fname):
@@ -23,20 +23,37 @@ class OskiDevRequest(models.Model):
         labels = dict(self._fields[fname]._description_selection(self.env))
         return labels.get(value, value or "")
 
+    def _oski_crm_reader_lang(self):
+        """Langue de l'équipe commerciale qui lit l'opportunité.
+
+        La demande naît d'un formulaire public : la langue de la requête est
+        celle du visiteur, pas celle de qui traitera l'affaire. On écrit donc
+        dans la langue de la société, à défaut celle de l'administrateur.
+        """
+        admin = self.env.ref("base.user_admin", raise_if_not_found=False)
+        return (self.env.company.partner_id.lang
+                or (admin and admin.sudo().lang) or "en_US")
+
     def _prepare_crm_lead_values(self):
         """Valeurs de l'opportunité ouverte pour cette demande."""
         self.ensure_one()
-        version = self._selection_label("odoo_version")
-        budget = self._selection_label("budget_range")
-        mode = self._selection_label("delivery_mode")
+        rec = self.with_context(lang=self._oski_crm_reader_lang())
+        version = rec._selection_label("odoo_version")
+        budget = rec._selection_label("budget_range")
+        mode = rec._selection_label("delivery_mode")
+        category = rec.category_id.name
         lines = [
             "<p><b>%s</b> — %s</p>" % (self.name or "", self.subject or ""),
             "<p>%s</p>" % (self.description or "").replace("\n", "<br/>"),
             "<ul>",
-            "<li>Version Odoo visée : %s</li>" % (version or "non précisée"),
-            "<li>Budget annoncé : %s</li>" % (budget or "non précisé"),
-            "<li>Mode de livraison : %s</li>" % (mode or "non précisé"),
-            "<li>Catégorie : %s</li>" % (self.category_id.name or "non précisée"),
+            "<li>%s</li>" % (rec.env._("Target Odoo version: %s", version) if version
+                             else rec.env._("Target Odoo version: not specified")),
+            "<li>%s</li>" % (rec.env._("Stated budget: %s", budget) if budget
+                             else rec.env._("Stated budget: not specified")),
+            "<li>%s</li>" % (rec.env._("Delivery mode: %s", mode) if mode
+                             else rec.env._("Delivery mode: not specified")),
+            "<li>%s</li>" % (rec.env._("Category: %s", category) if category
+                             else rec.env._("Category: not specified")),
             "</ul>",
         ]
         return {
@@ -64,7 +81,7 @@ class OskiDevRequest(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Opportunité"),
+            "name": _("Opportunity"),
             "res_model": "crm.lead",
             "res_id": self.lead_id.id,
             "view_mode": "form",

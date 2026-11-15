@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_dev_request_crm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 19:00+0000\n"
+"PO-Revision-Date: 2026-11-15 19:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Category: %s"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Category: not specified"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Delivery mode: %s"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Delivery mode: not specified"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#: model:ir.model.fields,field_description:oski_dev_request_crm.field_oski_dev_request__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#: model:ir.model.fields,field_description:oski_dev_request_crm.field_oski_dev_request__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#: model:ir.model,name:oski_dev_request_crm.model_oski_dev_request
+msgid "Module development request"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0 model:ir.model.fields,field_description:oski_dev_request_crm.field_oski_dev_request__lead_id
+msgid "Opportunity"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#: model:ir.model.fields,help:oski_dev_request_crm.field_oski_dev_request__lead_id
+msgid "Opportunity opened when the request was submitted."
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Stated budget: %s"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Stated budget: not specified"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Target Odoo version: %s"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#. odoo-python
+#: code:addons/oski_dev_request_crm/models/oski_dev_request.py:0
+msgid "Target Odoo version: not specified"
+msgstr ""
+
+#. module: oski_dev_request_crm
+#: model_terms:ir.ui.view,arch_db:oski_dev_request_crm.oski_dev_request_view_form_crm
+msgid "View Opportunity"
+msgstr ""

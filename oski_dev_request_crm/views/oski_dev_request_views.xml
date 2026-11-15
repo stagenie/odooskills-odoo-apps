@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <header position="inside">
                 <button name="action_open_lead" type="object"
-                        string="Voir l'opportunité" class="btn-secondary"
+                        string="View Opportunity" class="btn-secondary"
                         invisible="not lead_id"/>
             </header>
             <field name="email" position="after">
