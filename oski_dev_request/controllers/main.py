@@ -34,7 +34,7 @@ class OskiDevRequestController(http.Controller):
         Req = env["oski.dev.request"]
         return request.render("oski_dev_request.form_page", {
             "categories": categories,
-            "budget_options": Req._fields["budget_range"].selection,
+            "budget_options": Req._fields["budget_range"]._description_selection(env),
             "version_options": Req._selection_odoo_version(),
             "default_version": env["oski.odoo.version"].sudo().get_default(),
             "values": values or {},

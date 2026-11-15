@@ -2,7 +2,7 @@
 <odoo>
     <!-- Portail : voir uniquement ses propres demandes -->
     <record id="rule_dev_request_portal_own" model="ir.rule">
-        <field name="name">Demandes de dev : portail voit les siennes</field>
+        <field name="name">Dev requests: portal users see their own</field>
         <field name="model_id" ref="model_oski_dev_request"/>
         <field name="domain_force">[('user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
@@ -14,7 +14,7 @@
 
     <!-- Utilisateurs internes non-gestionnaires : voir les siennes -->
     <record id="rule_dev_request_user_own" model="ir.rule">
-        <field name="name">Demandes de dev : interne voit les siennes</field>
+        <field name="name">Dev requests: internal users see their own</field>
         <field name="model_id" ref="model_oski_dev_request"/>
         <field name="domain_force">[('user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
@@ -26,7 +26,7 @@
 
     <!-- Gestionnaires : accès à toutes les demandes -->
     <record id="rule_dev_request_manager_all" model="ir.rule">
-        <field name="name">Demandes de dev : gestionnaire voit tout</field>
+        <field name="name">Dev requests: managers see all</field>
         <field name="model_id" ref="model_oski_dev_request"/>
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('oski_app_store.group_manager'))]"/>

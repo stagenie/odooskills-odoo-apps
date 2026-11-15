@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills — Demande de développement",
-    "version": "19.0.4.0.1",
+    "version": "19.0.4.0.2",
     "category": "Website",
     "summary": "Centralisez les demandes de modules sur-mesure dans un pipeline structuré — plus aucun email de specs perdu.",
     "description": """

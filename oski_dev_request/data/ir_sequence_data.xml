@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
     <record id="seq_oski_dev_request" model="ir.sequence">
-        <field name="name">Demande de développement</field>
+        <field name="name">Development Request</field>
         <field name="code">oski.dev.request</field>
         <field name="prefix">DR</field>
         <field name="padding">5</field>

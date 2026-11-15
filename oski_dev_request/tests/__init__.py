@@ -4,3 +4,4 @@ from . import test_public_form
 from . import test_i18n_source
 from . import test_cta_placement
 from . import test_menu_adoption
+from . import test_notify_mail

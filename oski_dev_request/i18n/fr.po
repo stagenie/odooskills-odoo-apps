@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-03 04:49+0000\n"
-"PO-Revision-Date: 2026-09-03 04:49+0000\n"
+"POT-Creation-Date: 2026-11-15 19:19+0000\n"
+"PO-Revision-Date: 2026-11-15 19:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -24,8 +24,8 @@ msgid ""
 "                    <li>Email: <t t-out=\"object.email or ''\"/></li>\n"
 "                    <li>Subject: <t t-out=\"object.subject or ''\"/></li>\n"
 "                    <li>Category: <t t-out=\"object.category_id.name or '—'\"/></li>\n"
-"                    <li>Budget: <t t-out=\"object.budget_range or '—'\"/></li>\n"
-"                    <li>Mode: <t t-out=\"object.delivery_mode or ''\"/></li>\n"
+"                    <li>Budget: <t t-out=\"dict(object.fields_get(['budget_range'])['budget_range']['selection']).get(object.budget_range) or '—'\"/></li>\n"
+"                    <li>Mode: <t t-out=\"dict(object.fields_get(['delivery_mode'])['delivery_mode']['selection']).get(object.delivery_mode) or ''\"/></li>\n"
 "                    <li>Version: <t t-out=\"object.odoo_version or '—'\"/></li>\n"
 "                </ul>\n"
 "            </div>\n"
@@ -39,8 +39,8 @@ msgstr ""
 "                    <li>Email : <t t-out=\"object.email or ''\"/></li>\n"
 "                    <li>Objet : <t t-out=\"object.subject or ''\"/></li>\n"
 "                    <li>Catégorie : <t t-out=\"object.category_id.name or '—'\"/></li>\n"
-"                    <li>Budget : <t t-out=\"object.budget_range or '—'\"/></li>\n"
-"                    <li>Mode : <t t-out=\"object.delivery_mode or ''\"/></li>\n"
+"                    <li>Budget : <t t-out=\"dict(object.fields_get(['budget_range'])['budget_range']['selection']).get(object.budget_range) or '—'\"/></li>\n"
+"                    <li>Mode : <t t-out=\"dict(object.fields_get(['delivery_mode'])['delivery_mode']['selection']).get(object.delivery_mode) or ''\"/></li>\n"
 "                    <li>Version : <t t-out=\"object.odoo_version or '—'\"/></li>\n"
 "                </ul>\n"
 "            </div>\n"
@@ -448,11 +448,6 @@ msgid "New dev request {{ object.name }} — {{ object.subject }}"
 msgstr "Nouvelle demande de dev {{ object.name }} — {{ object.subject }}"
 
 #. module: oski_dev_request
-#: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
-msgstr "Prochain événement d'activité au calendrier"
-
-#. module: oski_dev_request
 #: model:ir.model.fields,field_description:oski_dev_request.field_oski_dev_request__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "Échéance de la prochaine activité"
@@ -725,12 +720,8 @@ msgstr "Votre demande"
 msgid "has been recorded."
 msgstr "a bien été enregistrée."
 
-#. module: oski_dev_request
-#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__b_1500_5000
 msgid "€1,500 – €5,000"
 msgstr "1 500 – 5 000 €"
 
-#. module: oski_dev_request
-#: model:ir.model.fields.selection,name:oski_dev_request.selection__oski_dev_request__budget_range__b_500_1500
 msgid "€500 – €1,500"
 msgstr "500 – 1 500 €"

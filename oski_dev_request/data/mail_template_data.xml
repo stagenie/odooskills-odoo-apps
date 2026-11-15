@@ -34,6 +34,11 @@
         <field name="subject">New dev request {{ object.name }} — {{ object.subject }}</field>
         <field name="email_from">{{ (object.env.company.email_formatted or user.email_formatted) }}</field>
         <field name="email_to">{{ object.env['ir.config_parameter'].sudo().get_param('oski_dev_request.notify_email') }}</field>
+        <!-- 19/20 : use_default_to vaut True par défaut et remplace email_to par le
+             destinataire par défaut de la demande (le DEMANDEUR). Lecteur = l'équipe :
+             langue de la société, pas celle du visiteur qui soumet. -->
+        <field name="use_default_to" eval="False"/>
+        <field name="lang">{{ object.env.company.partner_id.lang }}</field>
         <field name="auto_delete" eval="False"/>
         <field name="body_html" type="html">
             <div style="font-family:Arial,sans-serif;">
@@ -44,8 +49,8 @@
                     <li>Email: <t t-out="object.email or ''"/></li>
                     <li>Subject: <t t-out="object.subject or ''"/></li>
                     <li>Category: <t t-out="object.category_id.name or '—'"/></li>
-                    <li>Budget: <t t-out="object.budget_range or '—'"/></li>
-                    <li>Mode: <t t-out="object.delivery_mode or ''"/></li>
+                    <li>Budget: <t t-out="dict(object.fields_get(['budget_range'])['budget_range']['selection']).get(object.budget_range) or '—'"/></li>
+                    <li>Mode: <t t-out="dict(object.fields_get(['delivery_mode'])['delivery_mode']['selection']).get(object.delivery_mode) or ''"/></li>
                     <li>Version: <t t-out="object.odoo_version or '—'"/></li>
                 </ul>
             </div>
