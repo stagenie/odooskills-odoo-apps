@@ -5,24 +5,23 @@ from odoo.exceptions import ValidationError
 
 class OskiAccessLineMixin(models.AbstractModel):
     _name = "oski.access.line.mixin"
-    _description = "Ligne d'accès Oski (abstrait)"
+    _description = "Oski Access Line (abstract)"
 
     level = fields.Selection(
-        selection=[("read", "Lecture seule"), ("full", "Complet")],
-        string="Niveau",
+        selection=[("read", "Read Only"), ("full", "Full")],
+        string="Level",
         required=True,
         default="full",
     )
-    user_id = fields.Many2one("res.users", string="Utilisateur", ondelete="cascade")
-    group_id = fields.Many2one("res.groups", string="Groupe", ondelete="cascade")
+    user_id = fields.Many2one("res.users", string="User", ondelete="cascade")
+    group_id = fields.Many2one("res.groups", string="Group", ondelete="cascade")
 
     @api.constrains("user_id", "group_id", "level")
     def _check_user_xor_group(self):
         for line in self:
             if bool(line.user_id) == bool(line.group_id):
                 raise ValidationError(
-                    "Renseignez soit un utilisateur, soit un groupe "
-                    "(exactement l'un des deux)."
+                    self.env._("Set either a user or a group (exactly one of the two).")
                 )
 
     @api.model_create_multi
