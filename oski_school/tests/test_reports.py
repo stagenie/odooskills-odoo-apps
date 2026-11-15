@@ -1,3 +1,4 @@
+from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests import tagged
 from .common import SchoolCase
@@ -39,3 +40,21 @@ class TestReports(SchoolCase):
         html = self.env['ir.actions.report']._render_qweb_html(report.id, self.class_6a.ids)[0]
         self.assertIn(b'Sam Student', html)
         self.assertIn(b'Pat Parent', html)
+
+    def test_certificate_in_family_language(self):
+        """The certificate is handed to the family: rendered in the primary
+        guardian's language, not in the language of whoever prints it, and the
+        issue date is formatted (no raw ISO date)."""
+        self.env['res.lang']._activate_lang('fr_FR')
+        self.env['ir.module.module']._load_module_terms(['oski_school'], ['fr_FR'], overwrite=True)
+        report = self.env.ref('oski_school.action_report_enrollment_certificate')
+        Report = self.env['ir.actions.report']
+        self.parent_partner.lang = 'fr_FR'
+        html = Report.with_context(lang='en_US')._render_qweb_html(report.id, self.enrollment.ids)[0]
+        self.assertIn('Certificat de scolarité'.encode(), html)
+        self.assertNotIn(b'Enrollment certificate', html)
+        self.parent_partner.lang = 'en_US'
+        html = Report.with_context(lang='fr_FR')._render_qweb_html(report.id, self.enrollment.ids)[0]
+        self.assertIn(b'Enrollment certificate', html)
+        self.assertNotIn('Certificat de scolarité'.encode(), html)
+        self.assertNotIn(fields.Date.context_today(self.enrollment).isoformat().encode(), html)
