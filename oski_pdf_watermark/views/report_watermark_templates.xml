@@ -2,10 +2,10 @@
 <odoo>
 
     <!--
-        Le filigrane s'ajoute dans le corps du rapport, pas par-dessus le PDF
-        produit : un élément en position fixe est répété par le moteur
-        d'impression sur chacune des pages, ce qu'un dessin posé après coup ne
-        garantit pas.
+        Filigrane du rendu HTML (aperçu à l'écran). Le PDF ne le reçoit pas
+        d'ici : _prepare_html ne garde que les div.article, et wkhtmltopdf ne
+        répète pas un élément fixe sur les pages suivantes. Chaque page du PDF
+        est tamponnée après le rendu (models/ir_actions_report.py).
     -->
     <template id="html_container_watermark" inherit_id="web.html_container">
         <xpath expr="//t[@t-call='web.report_layout']" position="inside">
