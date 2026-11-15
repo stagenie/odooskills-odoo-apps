@@ -10,19 +10,19 @@ _UNIT_KEY = {"day": "days", "week": "weeks", "month": "months", "year": "years"}
 
 class SaleSubscriptionPlan(models.Model):
     _name = "sale.subscription.plan"
-    _description = "Plan d'abonnement"
+    _description = "Subscription Plan"
     _order = "name"
 
-    name = fields.Char(string="Nom", required=True)
+    name = fields.Char(string="Name", required=True, translate=True)
     billing_unit = fields.Selection(
-        [("day", "Jour"), ("week", "Semaine"), ("month", "Mois"), ("year", "Année")],
-        string="Unité de facturation",
+        [("day", "Day"), ("week", "Week"), ("month", "Month"), ("year", "Year")],
+        string="Billing Unit",
         default="month",
         required=True,
     )
-    billing_interval = fields.Integer(string="Intervalle", default=1, required=True)
+    billing_interval = fields.Integer(string="Interval", default=1, required=True)
     auto_post_invoice = fields.Boolean(
-        string="Poster automatiquement la facture", default=False
+        string="Auto-post Invoice", default=False
     )
     active = fields.Boolean(default=True)
 
@@ -30,7 +30,7 @@ class SaleSubscriptionPlan(models.Model):
     def _check_interval(self):
         for plan in self:
             if plan.billing_interval < 1:
-                raise ValidationError("L'intervalle de facturation doit être >= 1.")
+                raise ValidationError(self.env._("The billing interval must be at least 1."))
 
     def _get_next_date(self, from_date, anchor=None):
         """Échéance suivant ``from_date``.

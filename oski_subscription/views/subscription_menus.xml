@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_subscription_root" name="Abonnements"
+    <menuitem id="menu_subscription_root" name="Subscriptions"
               web_icon="oski_subscription,static/description/icon.png"
               groups="group_subscription_user" sequence="60"/>
 
-    <menuitem id="menu_subscription_main" name="Abonnements"
+    <menuitem id="menu_subscription_main" name="Subscriptions"
               parent="menu_subscription_root"
               action="action_sale_subscription"
               groups="group_subscription_user" sequence="10"/>
