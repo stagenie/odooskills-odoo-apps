@@ -3,6 +3,14 @@
     <template id="report_enrollment_certificate">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
+                <t t-call="oski_school.report_enrollment_certificate_document"
+                   t-lang="(doc.student_id.primary_guardian_id.partner_id or doc.student_id.partner_id).lang"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_enrollment_certificate_document">
+        <t t-set="doc" t-value="doc.with_context(lang=(doc.student_id.primary_guardian_id.partner_id or doc.student_id.partner_id).lang)"/>
                 <t t-call="web.external_layout">
                     <div class="page">
                         <h2 class="text-center mt-4">Enrollment certificate</h2>
@@ -16,7 +24,7 @@
                             (<span t-field="doc.period_id.date_start"/> – <span t-field="doc.period_id.date_end"/>).
                         </p>
                         <p>Status: <span t-field="doc.state"/>.</p>
-                        <p class="mt-5">Issued on <span t-out="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>.</p>
+                        <p class="mt-5">Issued on <span t-out="context_timestamp(datetime.datetime.now()).date()" t-options="{'widget': 'date'}"/>.</p>
                         <div class="row mt-5">
                             <div class="col-6 offset-6 text-center">
                                 <p>The Director</p>
@@ -24,7 +32,5 @@
                         </div>
                     </div>
                 </t>
-            </t>
-        </t>
     </template>
 </odoo>
