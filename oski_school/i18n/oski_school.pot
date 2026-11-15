@@ -1,0 +1,1404 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_school
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 17:14+0000\n"
+"PO-Revision-Date: 2026-11-15 17:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
+msgid "%(count)s confirmed or active enrollments of %(period)s have no result yet. Run the promotion wizard first."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "%(student)s already has an open enrollment in %(program)s for %(period)s."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.report,print_report_name:oski_school.action_report_enrollment_certificate
+msgid "'Certificate - %s' % object.student_id.name"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.report,print_report_name:oski_school.action_report_class_list
+msgid "'Class list - %s' % object.name"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid "(registration number"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid ""
+")\n"
+"                            is enrolled in"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid ""
+",\n"
+"                            for the period"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid ""
+",\n"
+"                            level"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid ", born on"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_class__capacity
+msgid "0 = unlimited"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "A certificate is issued for active or completed enrollments only."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
+msgid "A closed period cannot be reopened."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/student.py:0
+msgid "A student has a single paying guardian."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/student.py:0
+msgid "A student has a single primary guardian."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_class_subject_class_subject_uniq
+msgid "A subject appears once per class."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
+msgid "A term must stay inside its period."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_class__suffix
+msgid "A, B, Morning…"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_level__cefr_code__a1
+msgid "A1"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_level__cefr_code__a2
+msgid "A2"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_needaction model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_needaction model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_needaction model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_needaction model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form
+msgid "Activate"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__active model:ir.model.fields,field_description:oski_school.field_oski_school_room__active model:ir.model.fields,field_description:oski_school.field_oski_school_subject__active model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__active model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__state__active model:ir.model.fields.selection,name:oski_school.selection__oski_school_student__state__active model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_search model_terms:ir.ui.view,arch_db:oski_school.view_school_student_search
+msgid "Active"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_ids model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_ids model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_exception_decoration model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_exception_decoration model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_plans_ids model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_plans_ids model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_plans_ids
+msgid "Activity Plans"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_state model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_state model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_type_icon model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_type_icon model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_student__state__alumni
+msgid "Alumni"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_promotion_wizard_form
+msgid "Apply"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_promotion_wizard_form
+msgid "Apply these decisions? New enrollments will be created."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_attachment_count model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_attachment_count model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_attachment_count model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_attachment_count model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_level__cefr_code__b1
+msgid "B1"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_level__cefr_code__b2
+msgid "B2"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__billing_partner_id
+msgid "Billing Partner"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__birth_date
+msgid "Birth Date"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
+msgid "Birth date"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__promotion_mode__credits
+msgid "By credits"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_level__cefr_code__c1
+msgid "C1"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_level__cefr_code__c2
+msgid "C2"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__subject_ids model_terms:ir.ui.view,arch_db:oski_school.view_school_teacher_form
+msgid "Can teach"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_withdraw_wizard_form model_terms:ir.ui.view,arch_db:oski_school.view_school_promotion_wizard_form model_terms:ir.ui.view,arch_db:oski_school.view_school_structure_duplicate_wizard_form model_terms:ir.ui.view,arch_db:oski_school.view_school_term_generate_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__capacity model:ir.model.fields,field_description:oski_school.field_oski_school_room__capacity
+msgid "Capacity"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_level__cefr_code
+msgid "Cefr Code"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form
+msgid "Certificate"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_class model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__class_id model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__class_id model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__class_id model:ir.model.fields,field_description:oski_school.field_oski_school_student__current_class_id model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_search model_terms:ir.ui.view,arch_db:oski_school.view_school_student_search
+msgid "Class"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.report,name:oski_school.action_report_class_list
+msgid "Class list"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_class model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__class_ids model:ir.ui.menu,name:oski_school.menu_school_structure_classes
+msgid "Classes"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_class_form model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
+msgid "Close"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
+msgid "Close this period? Active enrollments become completed."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_class__state__closed model:ir.model.fields.selection,name:oski_school.selection__oski_school_period__state__closed
+msgid "Closed"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_level__code model:ir.model.fields,field_description:oski_school.field_oski_school_period__code model:ir.model.fields,field_description:oski_school.field_oski_school_program__code model:ir.model.fields,field_description:oski_school.field_oski_school_room__code model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__code model:ir.model.fields,field_description:oski_school.field_oski_school_subject__code
+msgid "Code"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__coefficient model:ir.model.fields,field_description:oski_school.field_oski_school_subject__coefficient
+msgid "Coefficient"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_level__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_period__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_program__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_room__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_student__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__company_id model:ir.model.fields,field_description:oski_school.field_oski_school_term__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__state__completed
+msgid "Completed"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.ui.menu,name:oski_school.menu_school_config
+msgid "Configuration"
+msgstr ""
+
+#. module: oski_school
+#: model:res.groups,comment:oski_school.group_school_manager
+msgid "Configures periods, programs and runs the promotion."
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form
+msgid "Confirm"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__state__confirmed
+msgid "Confirmed"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_student_form model_terms:ir.ui.view,arch_db:oski_school.view_school_teacher_form
+msgid "Contact"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__copy_classes
+msgid "Copy Classes"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__copy_terms
+msgid "Copy Terms"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__count
+msgid "Count"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.actions.act_window,help:oski_school.action_school_period
+msgid "Create your first school year, semester or session."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_level__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_period__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_program__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_room__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_student__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_subject__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_term__create_uid model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_level__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_period__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_program__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_room__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_student__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_subject__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_term__create_date model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_subject__credits
+msgid "Credits"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_level__credits_required
+msgid "Credits Required"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__current_enrollment_id
+msgid "Current Enrollment"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__cycle_type model:ir.model.fields,field_description:oski_school.field_oski_school_level__cycle_type model:ir.model.fields,field_description:oski_school.field_oski_school_program__cycle_type
+msgid "Cycle Type"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__date
+msgid "Date"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_period__date_end model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__date_end model:ir.model.fields,field_description:oski_school.field_oski_school_term__date_end
+msgid "Date End"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_period__date_start model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__date_start model:ir.model.fields,field_description:oski_school.field_oski_school_term__date_start
+msgid "Date Start"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__decision
+msgid "Decision"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form
+msgid "Delete this draft enrollment?"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__description model_terms:ir.ui.view,arch_db:oski_school.view_school_program_form
+msgid "Description"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_level__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_period__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_program__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_room__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_student__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_subject__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_term__display_name model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_class__state__draft model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__state__draft model:ir.model.fields.selection,name:oski_school.selection__oski_school_period__state__draft model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_search
+msgid "Draft"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_structure_duplicate_wizard_form
+msgid "Duplicate"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0 model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
+msgid "Duplicate structure"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_structure_duplicate_wizard
+msgid "Duplicate the structure into a new period"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__email model:ir.model.fields,field_description:oski_school.field_oski_school_student__email model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__email
+msgid "Email"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__employee_code
+msgid "Employee Code"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_enrollment model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__enrollment_id model:ir.model.fields,field_description:oski_school.field_oski_school_program__enrollment_ids model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__enrollment_id
+msgid "Enrollment"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__enrollment_count model:ir.model.fields,field_description:oski_school.field_oski_school_student__enrollment_count
+msgid "Enrollment Count"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.report,name:oski_school.action_report_enrollment_certificate model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid "Enrollment certificate"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_enrollment model:ir.model.fields,field_description:oski_school.field_oski_school_class__enrollment_ids model:ir.model.fields,field_description:oski_school.field_oski_school_student__enrollment_ids model:ir.ui.menu,name:oski_school.menu_school_enrollments model_terms:ir.ui.view,arch_db:oski_school.view_school_student_form
+msgid "Enrollments"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_guardian__relation__father
+msgid "Father"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_student__gender__female
+msgid "Female"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_follower_ids model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_follower_ids model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_follower_ids model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_follower_ids model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_partner_ids model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_partner_ids model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_partner_ids model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_partner_ids model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__gender
+msgid "Gender"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_term_generate_wizard_form
+msgid "Generate"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_term_generate_wizard
+msgid "Generate Terms"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0 model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
+msgid "Generate terms"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_guardian
+msgid "Guardian"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__guardian_required
+msgid "Guardian Required"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_guardian model:ir.model.fields,field_description:oski_school.field_oski_school_student__guardian_ids model:ir.ui.menu,name:oski_school.menu_school_students_guardians model_terms:ir.ui.view,arch_db:oski_school.view_school_student_form
+msgid "Guardians"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__has_message model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__has_message model:ir.model.fields,field_description:oski_school.field_oski_school_program__has_message model:ir.model.fields,field_description:oski_school.field_oski_school_student__has_message model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__has_portal_access
+msgid "Has Portal Access"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__cycle_type__high
+msgid "High school"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__cycle_type__higher
+msgid "Higher education"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__homeroom_teacher_id
+msgid "Homeroom teacher"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__id model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__id model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__id model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__id model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__id model:ir.model.fields,field_description:oski_school.field_oski_school_level__id model:ir.model.fields,field_description:oski_school.field_oski_school_period__id model:ir.model.fields,field_description:oski_school.field_oski_school_program__id model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__id model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__id model:ir.model.fields,field_description:oski_school.field_oski_school_room__id model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__id model:ir.model.fields,field_description:oski_school.field_oski_school_student__id model:ir.model.fields,field_description:oski_school.field_oski_school_subject__id model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__id model:ir.model.fields,field_description:oski_school.field_oski_school_term__id model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__id_number
+msgid "ID number"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_exception_icon model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_exception_icon model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_enrollment__activity_exception_icon model:ir.model.fields,help:oski_school.field_oski_school_student__activity_exception_icon model:ir.model.fields,help:oski_school.field_oski_school_teacher__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_class__message_needaction model:ir.model.fields,help:oski_school.field_oski_school_enrollment__message_needaction model:ir.model.fields,help:oski_school.field_oski_school_program__message_needaction model:ir.model.fields,help:oski_school.field_oski_school_student__message_needaction model:ir.model.fields,help:oski_school.field_oski_school_teacher__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_class__message_has_error model:ir.model.fields,help:oski_school.field_oski_school_enrollment__message_has_error model:ir.model.fields,help:oski_school.field_oski_school_program__message_has_error model:ir.model.fields,help:oski_school.field_oski_school_student__message_has_error model:ir.model.fields,help:oski_school.field_oski_school_teacher__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__image_1920
+msgid "Image"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__image_128 model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__image_1920
+msgid "Image 1920"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_teacher__user_id
+msgid "Internal user given the Teacher group."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_period__is_current
+msgid "Is Current"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_is_follower model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_is_follower model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_is_follower model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_is_follower model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid "Issued on"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__label
+msgid "Label"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__cycle_type__language
+msgid "Language school"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_level__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_period__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_program__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_room__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_student__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_subject__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_term__write_uid model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_level__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_period__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_program__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_room__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_student__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_subject__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_term__write_date model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__result__left model:ir.model.fields.selection,name:oski_school.selection__oski_school_promotion_wizard_line__decision__left model:ir.model.fields.selection,name:oski_school.selection__oski_school_student__state__left
+msgid "Left"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "Left at year end"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_guardian__relation__legal
+msgid "Legal guardian"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__level_id model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__level_id model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__level_id
+msgid "Level"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__level_count
+msgid "Level Count"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__level_ids model_terms:ir.ui.view,arch_db:oski_school.view_school_program_form
+msgid "Levels"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__line_ids
+msgid "Line"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__line_count
+msgid "Line Count"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_student__gender__male
+msgid "Male"
+msgstr ""
+
+#. module: oski_school
+#: model:res.groups,name:oski_school.group_school_manager
+msgid "Manager"
+msgstr ""
+
+#. module: oski_school
+#: model:res.groups,comment:oski_school.group_school_officer
+msgid "Manages students, guardians and enrollments."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__promotion_mode__manual
+msgid "Manual"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_level__manual_next_level
+msgid "Manual Next Level"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_enrollment__activity_type_icon model:ir.model.fields,help:oski_school.field_oski_school_student__activity_type_icon model:ir.model.fields,help:oski_school.field_oski_school_teacher__activity_type_icon
+msgid "Material Symbols icon e.g. checklist"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_has_error model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_has_error model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_has_error model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_has_error model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_ids model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_ids model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_ids model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_ids model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_program_form
+msgid "Middle School"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__cycle_type__middle
+msgid "Middle school"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_guardian__relation__mother
+msgid "Mother"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__my_activity_date_deadline model:ir.model.fields,field_description:oski_school.field_oski_school_student__my_activity_date_deadline model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__name model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__name model:ir.model.fields,field_description:oski_school.field_oski_school_level__name model:ir.model.fields,field_description:oski_school.field_oski_school_period__name model:ir.model.fields,field_description:oski_school.field_oski_school_program__name model:ir.model.fields,field_description:oski_school.field_oski_school_room__name model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__name model:ir.model.fields,field_description:oski_school.field_oski_school_student__name model:ir.model.fields,field_description:oski_school.field_oski_school_subject__name model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__name model:ir.model.fields,field_description:oski_school.field_oski_school_term__name
+msgid "Name"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__nationality_id
+msgid "Nationality"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_date_deadline model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_date_deadline model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_summary model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_summary model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_type_id model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_type_id model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__next_enrollment_id
+msgid "Next Enrollment"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_level__next_level_id
+msgid "Next Level"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__promotion_mode__level
+msgid "Next level"
+msgstr ""
+
+#. module: oski_school
+#: model:res.groups.privilege,placeholder:oski_school.res_groups_privilege_school
+msgid "No"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "No decision for %s."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "No target class for %s."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__result__none
+msgid "Not decided"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__note
+msgid "Note"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_student_form
+msgid "Notes"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_needaction_counter model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_needaction_counter model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_needaction_counter model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_needaction_counter model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_has_error_counter model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_has_error_counter model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_has_error_counter model:ir.model.fields,field_description:oski_school.field_oski_school_student__message_has_error_counter model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_class__message_needaction_counter model:ir.model.fields,help:oski_school.field_oski_school_enrollment__message_needaction_counter model:ir.model.fields,help:oski_school.field_oski_school_program__message_needaction_counter model:ir.model.fields,help:oski_school.field_oski_school_student__message_needaction_counter model:ir.model.fields,help:oski_school.field_oski_school_teacher__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_class__message_has_error_counter model:ir.model.fields,help:oski_school.field_oski_school_enrollment__message_has_error_counter model:ir.model.fields,help:oski_school.field_oski_school_program__message_has_error_counter model:ir.model.fields,help:oski_school.field_oski_school_student__message_has_error_counter model:ir.model.fields,help:oski_school.field_oski_school_teacher__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: oski_school
+#: model:res.groups,name:oski_school.group_school_officer
+msgid "Officer"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "Only confirmed enrollments can be activated."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "Only confirmed or active enrollments can be withdrawn."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "Only draft enrollments can be cancelled. Withdraw instead."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "Only draft enrollments can be confirmed."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "Only draft enrollments can be deleted. Withdraw instead."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_class__state__open model:ir.model.fields.selection,name:oski_school.selection__oski_school_period__state__open model_terms:ir.ui.view,arch_db:oski_school.view_school_class_form model_terms:ir.ui.view,arch_db:oski_school.view_school_class_search model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
+msgid "Open"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_guardian__relation__other model:ir.model.fields.selection,name:oski_school.selection__oski_school_student__gender__other
+msgid "Other"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form
+msgid "Outcome"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__partner_id model:ir.model.fields,field_description:oski_school.field_oski_school_student__partner_id model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__is_billing
+msgid "Pays the fees"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__period_id model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__period_id model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__period_id model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__period_id model:ir.model.fields,field_description:oski_school.field_oski_school_structure_duplicate_wizard__period_id model:ir.model.fields,field_description:oski_school.field_oski_school_term__period_id model:ir.model.fields,field_description:oski_school.field_oski_school_term_generate_wizard__period_id model_terms:ir.ui.view,arch_db:oski_school.view_school_class_search model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_search
+msgid "Period"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_period__period_type
+msgid "Period Type"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_period model:ir.ui.menu,name:oski_school.menu_school_structure_periods
+msgid "Periods"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__phone model:ir.model.fields,field_description:oski_school.field_oski_school_student__phone model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__phone model_terms:ir.ui.view,arch_db:oski_school.report_class_list
+msgid "Phone"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__previous_enrollment_id
+msgid "Previous Enrollment"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__cycle_type__primary
+msgid "Primary"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__primary_guardian_id
+msgid "Primary Guardian"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__is_primary
+msgid "Primary contact"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
+msgid "Primary guardian"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__program_id model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__program_id model:ir.model.fields,field_description:oski_school.field_oski_school_level__program_id model_terms:ir.ui.view,arch_db:oski_school.view_school_class_search
+msgid "Program"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_program model:ir.ui.menu,name:oski_school.menu_school_structure_programs
+msgid "Programs"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__result__promoted model:ir.model.fields.selection,name:oski_school.selection__oski_school_promotion_wizard_line__decision__promoted
+msgid "Promoted"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "Promotion"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "Promotion %(period)s: %(decision)s%(target)s"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__promotion_mode
+msgid "Promotion Mode"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_promotion_wizard_line
+msgid "Promotion line"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_student__state__prospect
+msgid "Prospect"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_student_search
+msgid "Prospects"
+msgstr ""
+
+#. module: oski_school
+#: model:res.groups,comment:oski_school.group_school_teacher
+msgid "Reads the structure and the students of their own classes."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment_withdraw_wizard__reason
+msgid "Reason"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
+msgid "Registration"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__registration_number
+msgid "Registration Number"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__relation
+msgid "Relation"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_promotion_wizard_form
+msgid "Reload proposal"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__result__repeated model:ir.model.fields.selection,name:oski_school.selection__oski_school_promotion_wizard_line__decision__repeated
+msgid "Repeated"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_user_id model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_user_id model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__result
+msgid "Result"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__room_id
+msgid "Room"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_room model:ir.ui.menu,name:oski_school.menu_school_config_rooms
+msgid "Rooms"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
+msgid "Run promotion"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.ui.menu,name:oski_school.menu_school_root model:res.groups.privilege,name:oski_school.res_groups_privilege_school
+msgid "School"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_level
+msgid "School Level"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_period
+msgid "School Period"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_program
+msgid "School Program"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_room
+msgid "School Room"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_subject
+msgid "School Subject"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_term
+msgid "School Term"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_period__period_type__year
+msgid "School year"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__seats_available
+msgid "Seats Available"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_period__period_type__semester
+msgid "Semester"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_level__sequence model:ir.model.fields,field_description:oski_school.field_oski_school_term__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_period__period_type__session
+msgid "Session"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__state model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__state model:ir.model.fields,field_description:oski_school.field_oski_school_period__state model:ir.model.fields,field_description:oski_school.field_oski_school_student__state
+msgid "State"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_search model_terms:ir.ui.view,arch_db:oski_school.view_school_student_search
+msgid "Status"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_enrollment__activity_state model:ir.model.fields,help:oski_school.field_oski_school_student__activity_state model:ir.model.fields,help:oski_school.field_oski_school_teacher__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid "Status:"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.ui.menu,name:oski_school.menu_school_structure
+msgid "Structure"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_student model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__student_id model:ir.model.fields,field_description:oski_school.field_oski_school_guardian__student_id model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__student_id model_terms:ir.ui.view,arch_db:oski_school.report_class_list
+msgid "Student"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__student_count
+msgid "Student Count"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_student model:ir.ui.menu,name:oski_school.menu_school_students model:ir.ui.menu,name:oski_school.menu_school_students_students model_terms:ir.ui.view,arch_db:oski_school.view_school_class_form
+msgid "Students"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__subject_id
+msgid "Subject"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_class_subject
+msgid "Subject taught in a class"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_subject model:ir.model.fields,field_description:oski_school.field_oski_school_class__subject_line_ids model:ir.model.fields,field_description:oski_school.field_oski_school_level__subject_ids model:ir.model.fields,field_description:oski_school.field_oski_school_program__subject_ids model:ir.ui.menu,name:oski_school.menu_school_config_subjects model_terms:ir.ui.view,arch_db:oski_school.view_school_program_form
+msgid "Subjects"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_class_form
+msgid "Subjects & teachers"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_class__suffix
+msgid "Suffix"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__target_class_id
+msgid "Target Class"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard__target_period_id
+msgid "Target Period"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_teacher model:ir.model.fields,field_description:oski_school.field_oski_school_class_subject__teacher_id model:res.groups,name:oski_school.group_school_teacher
+msgid "Teacher"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.actions.act_window,name:oski_school.action_school_teacher model:ir.ui.menu,name:oski_school.menu_school_structure_teachers
+msgid "Teachers"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__class_subject_ids model_terms:ir.ui.view,arch_db:oski_school.view_school_teacher_form
+msgid "Teaches"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_period__term_ids model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
+msgid "Terms"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid "The Director"
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "The class %s is closed: no enrollment can be confirmed in it."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "The class %s is full."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/school_class.py:0
+msgid "The class, its period and its program must belong to the same company."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/program.py:0
+msgid "The coefficient must be positive."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/program.py:0
+msgid "The cycle type of %s is locked: students are already enrolled."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_level_code_program_uniq
+msgid "The level code must be unique inside a program."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/term_generate_wizard.py:0
+msgid "The number of terms must be at least 1."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "The period %s is closed."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "The period %s is not open."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_period_code_company_uniq
+msgid "The period code must be unique per company."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "The program %s requires a primary guardian on the student."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_program_code_company_uniq
+msgid "The program code must be unique per company."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_room_code_company_uniq
+msgid "The room code must be unique per company."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
+msgid "The start date must be before the end date."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "The student and the class of %s can no longer be changed: the enrollment is no longer a draft. Withdraw it and create a new one."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_subject_code_uniq
+msgid "The subject code must be unique."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
+msgid "The term start date must be before its end date."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_guardian_student_partner_uniq
+msgid "This contact is already a guardian of this student."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_student_partner_uniq
+msgid "This contact is already a student."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.constraint,message:oski_school.constraint_oski_school_teacher_partner_uniq
+msgid "This contact is already a teacher."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/wizard/term_generate_wizard.py:0
+msgid "This period already has terms."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_program__image_128
+msgid "Thumbnail"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_level__manual_next_level
+msgid "Tick to set the next level by hand instead of following the sequence."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_enrollment__activity_exception_decoration model:ir.model.fields,help:oski_school.field_oski_school_student__activity_exception_decoration model:ir.model.fields,help:oski_school.field_oski_school_teacher__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__user_id
+msgid "User"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_program__cycle_type__vocational
+msgid "Vocational training"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_student__billing_partner_id
+msgid "Who receives the invoices: the billing guardian, else the student."
+msgstr ""
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0 model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_withdraw_wizard_form
+msgid "Withdraw"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_enrollment_withdraw_wizard
+msgid "Withdraw an enrollment"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__withdrawal_reason
+msgid "Withdrawal Reason"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields.selection,name:oski_school.selection__oski_school_enrollment__state__withdrawn
+msgid "Withdrawn"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_promotion_wizard_line__wizard_id
+msgid "Wizard"
+msgstr ""
+
+#. module: oski_school
+#: model:ir.model,name:oski_school.model_oski_school_promotion_wizard
+msgid "Year-end promotion"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid "certifies that"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_program_kanban
+msgid "enrollments"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.view_school_program_kanban
+msgid "levels ·"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
+msgid "of the program"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
+msgid "students"
+msgstr ""
+
+#. module: oski_school
+#: model_terms:ir.ui.view,arch_db:oski_school.report_class_list
+msgid "· Homeroom:"
+msgstr ""

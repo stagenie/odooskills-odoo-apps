@@ -1,15 +1,12 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# 	* oski_school
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: Odoo Server 20.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-23 10:33+0000\n"
-"PO-Revision-Date: 2026-08-23 10:33+0000\n"
+"POT-Creation-Date: 2026-11-15 17:14+0000\n"
+"PO-Revision-Date: 2026-11-15 17:14+0000\n"
 "Last-Translator: \n"
-"Language-Team: French\n"
+"Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,11 +17,11 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_school/models/period.py:0
 msgid ""
-"%(count)s active enrollments of %(period)s have no result yet. Run the "
-"promotion wizard first."
+"%(count)s confirmed or active enrollments of %(period)s have no result yet. "
+"Run the promotion wizard first."
 msgstr ""
-"%(count)s inscriptions actives de %(period)s n'ont pas encore de résultat. "
-"Lancez d'abord l'assistant de passage d'année."
+"%(count)s inscriptions confirmées ou actives de %(period)s n'ont pas encore "
+"de résultat. Lancez d'abord l'assistant de passage d'année."
 
 #. module: oski_school
 #. odoo-python
@@ -45,12 +42,12 @@ msgid "'Class list - %s' % object.name"
 msgstr "'Liste de classe - %s' % object.name"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid "(registration number"
 msgstr "(numéro d’inscription"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid ""
 ")\n"
 "                            is enrolled in"
@@ -59,7 +56,7 @@ msgstr ""
 "                            est inscrit(e) dans"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid ""
 ",\n"
 "                            for the period"
@@ -68,7 +65,7 @@ msgstr ""
 "                            pour la période"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid ""
 ",\n"
 "                            level"
@@ -77,14 +74,14 @@ msgstr ""
 "                            niveau"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid ", born on"
 msgstr ", né(e) le"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
-msgid "2026-2027"
-msgstr "2026-2027"
+#: model:ir.model.fields,help:oski_school.field_oski_school_class__capacity
+msgid "0 = unlimited"
+msgstr "0 = illimité"
 
 #. module: oski_school
 #. odoo-python
@@ -92,6 +89,12 @@ msgstr "2026-2027"
 msgid "A certificate is issued for active or completed enrollments only."
 msgstr ""
 "Un certificat n'est délivré que pour les inscriptions actives ou terminées."
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
+msgid "A closed period cannot be reopened."
+msgstr "Une période clôturée ne peut pas être rouverte."
 
 #. module: oski_school
 #. odoo-python
@@ -170,6 +173,13 @@ msgstr "Activités"
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_exception_decoration
 msgid "Activity Exception Decoration"
 msgstr "Décoration d'exception d'activité"
+
+#. module: oski_school
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_plans_ids
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_student__activity_plans_ids
+#: model:ir.model.fields,field_description:oski_school.field_oski_school_teacher__activity_plans_ids
+msgid "Activity Plans"
+msgstr "Plans d'activité"
 
 #. module: oski_school
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__activity_state
@@ -540,6 +550,8 @@ msgid "Duplicate"
 msgstr "Dupliquer"
 
 #. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
 #: model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
 msgid "Duplicate structure"
 msgstr "Dupliquer la structure"
@@ -577,7 +589,7 @@ msgstr "Nombre d'inscriptions"
 
 #. module: oski_school
 #: model:ir.actions.report,name:oski_school.action_report_enrollment_certificate
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid "Enrollment certificate"
 msgstr "Certificat de scolarité"
 
@@ -619,13 +631,6 @@ msgid "Followers (Partners)"
 msgstr "Abonnés (Partenaires)"
 
 #. module: oski_school
-#: model:ir.model.fields,help:oski_school.field_oski_school_enrollment__activity_type_icon
-#: model:ir.model.fields,help:oski_school.field_oski_school_student__activity_type_icon
-#: model:ir.model.fields,help:oski_school.field_oski_school_teacher__activity_type_icon
-msgid "Font awesome icon e.g. fa-tasks"
-msgstr "Icône Font Awesome, par exemple fa-tasks"
-
-#. module: oski_school
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_student__gender
 msgid "Gender"
 msgstr "Genre"
@@ -641,6 +646,8 @@ msgid "Generate Terms"
 msgstr "Générer les sous-périodes"
 
 #. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/period.py:0
 #: model_terms:ir.ui.view,arch_db:oski_school.view_school_period_form
 msgid "Generate terms"
 msgstr "Générer les sous-périodes"
@@ -786,7 +793,7 @@ msgid "Is Follower"
 msgstr "Est abonné"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid "Issued on"
 msgstr "Délivré le"
 
@@ -914,6 +921,13 @@ msgid "Manual Next Level"
 msgstr "Niveau suivant manuel"
 
 #. module: oski_school
+#: model:ir.model.fields,help:oski_school.field_oski_school_enrollment__activity_type_icon
+#: model:ir.model.fields,help:oski_school.field_oski_school_student__activity_type_icon
+#: model:ir.model.fields,help:oski_school.field_oski_school_teacher__activity_type_icon
+msgid "Material Symbols icon e.g. checklist"
+msgstr "Material Symbols icon e.g. checklist"
+
+#. module: oski_school
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_class__message_has_error
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_enrollment__message_has_error
 #: model:ir.model.fields,field_description:oski_school.field_oski_school_program__message_has_error
@@ -1010,6 +1024,11 @@ msgid "Next level"
 msgstr "Niveau suivant"
 
 #. module: oski_school
+#: model:res.groups.privilege,placeholder:oski_school.res_groups_privilege_school
+msgid "No"
+msgstr "Non"
+
+#. module: oski_school
 #. odoo-python
 #: code:addons/oski_school/wizard/promotion_wizard.py:0
 msgid "No decision for %s."
@@ -1102,6 +1121,14 @@ msgstr ""
 #: code:addons/oski_school/models/enrollment.py:0
 msgid "Only draft enrollments can be confirmed."
 msgstr "Seules les inscriptions en brouillon peuvent être confirmées."
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "Only draft enrollments can be deleted. Withdraw instead."
+msgstr ""
+"Seules les inscriptions en brouillon peuvent être supprimées. Retirez-les "
+"plutôt."
 
 #. module: oski_school
 #: model:ir.model.fields.selection,name:oski_school.selection__oski_school_class__state__open
@@ -1400,7 +1427,7 @@ msgstr ""
 "Planifiée : activités futures."
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid "Status:"
 msgstr "Statut :"
 
@@ -1497,9 +1524,16 @@ msgid "Terms"
 msgstr "Sous-périodes"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid "The Director"
 msgstr "Le Directeur"
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid "The class %s is closed: no enrollment can be confirmed in it."
+msgstr ""
+"La classe %s est clôturée : aucune inscription ne peut y être confirmée."
 
 #. module: oski_school
 #. odoo-python
@@ -1540,6 +1574,12 @@ msgstr "Le nombre de sous-périodes doit être au moins 1."
 
 #. module: oski_school
 #. odoo-python
+#: code:addons/oski_school/wizard/promotion_wizard.py:0
+msgid "The period %s is closed."
+msgstr "La période %s est clôturée."
+
+#. module: oski_school
+#. odoo-python
 #: code:addons/oski_school/models/enrollment.py:0
 msgid "The period %s is not open."
 msgstr "La période %s n’est pas ouverte."
@@ -1570,6 +1610,16 @@ msgstr "Le code de la salle doit être unique par société."
 #: code:addons/oski_school/models/period.py:0
 msgid "The start date must be before the end date."
 msgstr "La date de début doit être antérieure à la date de fin."
+
+#. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
+msgid ""
+"The student and the class of %s can no longer be changed: the enrollment is "
+"no longer a draft. Withdraw it and create a new one."
+msgstr ""
+"L'élève et la classe de %s ne peuvent plus être modifiés : l'inscription "
+"n'est plus en brouillon. Retirez-la et créez-en une nouvelle."
 
 #. module: oski_school
 #: model:ir.model.constraint,message:oski_school.constraint_oski_school_subject_code_uniq
@@ -1639,6 +1689,8 @@ msgid "Who receives the invoices: the billing guardian, else the student."
 msgstr "Qui reçoit les factures : le tuteur payeur, sinon l'étudiant."
 
 #. module: oski_school
+#. odoo-python
+#: code:addons/oski_school/models/enrollment.py:0
 #: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_form
 #: model_terms:ir.ui.view,arch_db:oski_school.view_school_enrollment_withdraw_wizard_form
 msgid "Withdraw"
@@ -1670,7 +1722,7 @@ msgid "Year-end promotion"
 msgstr "Passage d'année"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid "certifies that"
 msgstr "certifie que"
 
@@ -1685,7 +1737,7 @@ msgid "levels ·"
 msgstr "niveaux ·"
 
 #. module: oski_school
-#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate
+#: model_terms:ir.ui.view,arch_db:oski_school.report_enrollment_certificate_document
 msgid "of the program"
 msgstr "du programme"
 
