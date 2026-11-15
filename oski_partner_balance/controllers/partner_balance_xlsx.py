@@ -34,11 +34,16 @@ def _columns(env):
     ]
 
 
-_SECTION_LABELS = {
-    'receivable': 'Customer',
-    'payable': 'Vendor',
-    'net': 'Net',
-}
+def _section_labels(env):
+    """Section titles of the export, translated against the given env.
+
+    `env._()` on a variable is never extracted to the .pot, so the former
+    module-level dict came out in English on a French export."""
+    return {
+        'receivable': env._('Customer'),
+        'payable': env._('Vendor'),
+        'net': env._('Net'),
+    }
 
 
 def build_xlsx(wizard):
@@ -53,6 +58,7 @@ def build_xlsx(wizard):
     date_fmt = workbook.add_format({'num_format': 'yyyy-mm-dd'})
 
     columns = _columns(env)
+    section_labels = _section_labels(env)
     for index, (title, _key, width) in enumerate(columns):
         sheet.write(0, index, title, header)
         sheet.set_column(index, index, width)
@@ -61,7 +67,7 @@ def build_xlsx(wizard):
     for row_index, line in enumerate(wizard.line_ids, start=1):
         values = {
             'partner': line.partner_id.display_name,
-            'section': env._(_SECTION_LABELS.get(line.section, line.section)),
+            'section': section_labels.get(line.section, line.section),
             'date': line.date,
             'journal': line.journal_id.code or '',
             'name': line.name or '',
