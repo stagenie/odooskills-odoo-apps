@@ -16,8 +16,8 @@
                     <div class="page">
                         <h2>Partner Balance</h2>
                         <p>
-                            From <span t-out="wizard.date_from"/>
-                            to <span t-out="wizard.date_to"/> —
+                            From <span t-field="wizard.date_from"/>
+                            to <span t-field="wizard.date_to"/> —
                             <span t-field="wizard.scope"/> —
                             <span t-field="wizard.target_moves"/>
                             — opening balance:
@@ -26,7 +26,7 @@
                             <t t-if="wizard.journal_filter != 'all'">
                                 — journals:
                                 <span t-out="', '.join(wizard.journal_ids.mapped('name'))"/>
-                                (<span t-out="wizard.journal_filter"/>)
+                                (<span t-field="wizard.journal_filter"/>)
                             </t>
                         </p>
                         <t t-set="group_partners" t-value="wizard.line_ids.mapped('group_partner_id')"/>
@@ -64,11 +64,11 @@
                                     <tbody>
                                         <tr t-foreach="section_lines" t-as="line">
                                             <td t-if="is_consolidated"><span t-out="line.partner_id.display_name"/></td>
-                                            <td><span t-out="line.date"/></td>
+                                            <td><span t-field="line.date"/></td>
                                             <td><span t-out="line.journal_id.code"/></td>
                                             <td><span t-out="line.name"/></td>
                                             <td><span t-out="line.label"/></td>
-                                            <td><span t-out="line.date_maturity"/></td>
+                                            <td><span t-field="line.date_maturity"/></td>
                                             <td class="text-end">
                                                 <span t-out="line.debit"
                                                       t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
