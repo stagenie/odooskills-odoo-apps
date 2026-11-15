@@ -1,0 +1,60 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 13:47+0000\n"
+"PO-Revision-Date: 2026-11-15 13:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_access_core
+#: model:ir.model.fields.selection,name:oski_access_core.selection__oski_access_line_mixin__level__full
+msgid "Full"
+msgstr "Complet"
+
+#. module: oski_access_core
+#: model:ir.module.category,description:oski_access_core.module_category_oski_access
+msgid "Granular access restriction by dimension."
+msgstr "Restriction d'accès granulaire par dimension."
+
+#. module: oski_access_core
+#: model:ir.model.fields,field_description:oski_access_core.field_oski_access_line_mixin__group_id
+msgid "Group"
+msgstr "Groupe"
+
+#. module: oski_access_core
+#: model:ir.model.fields,field_description:oski_access_core.field_oski_access_line_mixin__level
+msgid "Level"
+msgstr "Niveau"
+
+#. module: oski_access_core
+#: model:ir.module.category,name:oski_access_core.module_category_oski_access
+msgid "Oski Access"
+msgstr "Oski Access"
+
+#. module: oski_access_core
+#: model:ir.model,name:oski_access_core.model_oski_access_line_mixin
+msgid "Oski Access Line (abstract)"
+msgstr "Ligne d'accès Oski (abstrait)"
+
+#. module: oski_access_core
+#: model:ir.model.fields.selection,name:oski_access_core.selection__oski_access_line_mixin__level__read
+msgid "Read Only"
+msgstr "Lecture seule"
+
+#. module: oski_access_core
+#. odoo-python
+#: code:addons/oski_access_core/models/access_line_mixin.py:0
+msgid "Set either a user or a group (exactly one of the two)."
+msgstr "Renseignez soit un utilisateur, soit un groupe (exactement l'un des deux)."
+
+#. module: oski_access_core
+#: model:ir.model.fields,field_description:oski_access_core.field_oski_access_line_mixin__user_id
+msgid "User"
+msgstr "Utilisateur"
