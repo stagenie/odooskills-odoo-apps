@@ -51,7 +51,8 @@
                         <span class="o_sf_row_name" t-out="o.name"/>
                         <span class="o_sf_row_sub" t-out="o.product_name"/>
                     </span>
-                    <span class="o_sf_row_state" t-out="o.state === 'progress' ? 'En cours' : 'À faire'"/>
+                    <span class="o_sf_row_state" t-if="o.state === 'progress'">In Progress</span>
+                    <span class="o_sf_row_state" t-else="">To Do</span>
                 </button>
                 <div class="o_sf_empty" t-if="!props.orders.length">No work order on this work center.</div>
             </div>
