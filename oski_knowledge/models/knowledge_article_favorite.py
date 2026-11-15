@@ -3,11 +3,11 @@ from odoo import api, fields, models
 
 class KnowledgeArticleFavorite(models.Model):
     _name = 'knowledge.article.favorite'
-    _description = "Favori d'article"
+    _description = "Article Favorite"
     _order = 'sequence, id'
 
     user_id = fields.Many2one(
-        'res.users', string="Utilisateur", required=True, ondelete='cascade',
+        'res.users', string="User", required=True, ondelete='cascade',
         default=lambda self: self.env.user, index=True)
     article_id = fields.Many2one(
         'knowledge.article', string="Article", required=True,
@@ -16,7 +16,7 @@ class KnowledgeArticleFavorite(models.Model):
 
     _sql_constraints = [
         ('unique_user_article', 'UNIQUE (user_id, article_id)',
-         "Cet article est déjà dans vos favoris."),
+         "This article is already in your favorites."),
     ]
 
     @api.model_create_multi

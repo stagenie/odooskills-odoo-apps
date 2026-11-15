@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="1">
         <record id="ir_cron_rental_late_alert" model="ir.cron">
-            <field name="name">Location : alerte retards</field>
+            <field name="name">Rental: Late Return Alert</field>
             <field name="model_id" ref="model_oski_rental_order"/>
             <field name="state">code</field>
             <field name="code">model._cron_late_alert()</field>

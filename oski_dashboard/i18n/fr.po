@@ -1,0 +1,533 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 07:29+0000\n"
+"PO-Revision-Date: 2026-11-15 07:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/widgets/kpi_widget.xml:0
+msgid "% vs prev. period"
+msgstr "% vs période préc."
+
+#. module: oski_dashboard
+#: model:ir.model.fields,help:oski_dashboard.field_oski_dashboard__refresh_interval
+msgid "0 = manual. Otherwise, automatic reload every N seconds."
+msgstr "0 = manuel. Sinon, re-lecture automatique toutes les N secondes."
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/widgets/chart_widget.js:0
+msgid "Achieved"
+msgstr "Réalisé"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.js:0
+msgid "Add Dashboard to Favorites"
+msgstr "Ajouter aux favoris"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__measure_agg
+msgid "Aggregate"
+msgstr "Agrégat"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__all
+msgid "All"
+msgstr "Tout"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__area
+msgid "Area"
+msgstr "Aires"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__measure_agg__avg
+msgid "Average"
+msgstr "Moyenne"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__bar
+msgid "Bar"
+msgstr "Barres"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0 model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__compare_previous
+msgid "Compare to Previous Period"
+msgstr "Comparer à la période précédente"
+
+#. module: oski_dashboard
+#: model:ir.ui.menu,name:oski_dashboard.menu_oski_dashboard_config
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.js:0
+msgid "Could not save the layout: your latest moves are not saved."
+msgstr "Échec de l'enregistrement de la disposition — vos derniers déplacements ne sont pas sauvegardés."
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.xml:0
+msgid "Create the first one"
+msgstr "Créer le premier"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__create_uid model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__create_date model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_dashboard
+#: model:ir.model,name:oski_dashboard.model_oski_dashboard model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__dashboard_id
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#. module: oski_dashboard
+#: model:ir.actions.act_window,name:oski_dashboard.action_oski_dashboard_config
+msgid "Dashboard Configuration"
+msgstr "Configuration des dashboards"
+
+#. module: oski_dashboard
+#: model:ir.model,name:oski_dashboard.model_oski_dashboard_widget
+msgid "Dashboard Widget"
+msgstr "Widget de tableau de bord"
+
+#. module: oski_dashboard
+#: model:ir.actions.client,name:oski_dashboard.action_oski_dashboard model:ir.module.category,name:oski_dashboard.module_category_dashboard model:ir.ui.menu,name:oski_dashboard.menu_oski_dashboard_root
+msgid "Dashboards"
+msgstr "Tableaux de bord"
+
+#. module: oski_dashboard
+#: model:res.groups,name:oski_dashboard.group_dashboard_manager
+msgid "Dashboards Manager"
+msgstr "Responsable Dashboards"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__group_by_granularity__day
+msgid "Day"
+msgstr "Jour"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/widgets/widget_shell.xml:0
+msgid "Delete"
+msgstr "Supprimer"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__display_name model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__donut
+msgid "Donut"
+msgstr "Donut"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/widgets/widget_shell.xml:0
+msgid "Edit"
+msgstr "Modifier"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.xml:0
+msgid "Edit Dashboard"
+msgstr "Éditer"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,help:oski_dashboard.field_oski_dashboard_widget__measure_field_id
+msgid "Empty = record count."
+msgstr "Vide = comptage d'enregistrements."
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__favorite_user_ids
+msgid "Favorite of"
+msgstr "Favori de"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__group_by_field_name
+msgid "Field Name"
+msgstr "Nom de champ"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__domain
+msgid "Filter"
+msgstr "Filtre"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "Filter (domain)"
+msgstr "Filtre (domaine)"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__gauge
+msgid "Gauge"
+msgstr "Jauge"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0 model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__group_by_field_id
+msgid "Group By Field"
+msgstr "Grouper par"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__group_by_granularity
+msgid "Group By Granularity"
+msgstr "Group By Granularity"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__id model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard_widget.py:0
+msgid "Invalid filter for model %s."
+msgstr "Filtre invalide pour le modèle %s."
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard.py:0
+msgid "Invalid layout (JSON expected)."
+msgstr "Disposition invalide (JSON attendu)."
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard.py:0
+msgid "Invalid layout (JSON object expected)."
+msgstr "Disposition invalide (objet JSON attendu)."
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__kpi
+msgid "KPI"
+msgstr "KPI"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__last_12m
+msgid "Last 12 Months"
+msgstr "12 derniers mois"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__last_30d
+msgid "Last 30 Days"
+msgstr "30 derniers jours"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__last_7d
+msgid "Last 7 Days"
+msgstr "7 derniers jours"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__last_90d
+msgid "Last 90 Days"
+msgstr "90 derniers jours"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__write_uid model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__write_date model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__layout_json
+msgid "Layout"
+msgstr "Disposition"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/widgets/chart_widget.js:0
+msgid "Left to Achieve"
+msgstr "Restant"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__line
+msgid "Line"
+msgstr "Lignes"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__list
+msgid "List"
+msgstr "Liste"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__measure_agg__max
+msgid "Max"
+msgstr "Max"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0 model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__measure_field_id
+msgid "Measure"
+msgstr "Mesure"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__measure_agg__min
+msgid "Min"
+msgstr "Min"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0 model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__model_id model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__model_name
+msgid "Model"
+msgstr "Modèle"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__group_by_granularity__month
+msgid "Month"
+msgstr "Mois"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.xml:0
+msgid "New"
+msgstr "Nouveau"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.js:0
+msgid "New Dashboard"
+msgstr "Nouveau dashboard"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.js:0
+msgid "New Widget"
+msgstr "Nouveau widget"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.xml:0
+msgid "No dashboard yet."
+msgstr "Aucun tableau de bord."
+
+#. module: oski_dashboard
+#: model:ir.model.fields,help:oski_dashboard.field_oski_dashboard_widget__domain
+msgid "Odoo domain. Variables: uid (the viewing user), context_today(), relativedelta."
+msgstr "Domaine Odoo. Variables : uid (l'utilisateur qui regarde), context_today(), relativedelta."
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__options
+msgid "Options"
+msgstr "Options"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__user_id
+msgid "Owner"
+msgstr "Propriétaire"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__period
+msgid "Period"
+msgstr "Période"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__date_field_id
+msgid "Period Field"
+msgstr "Champ de période"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "Period Field / Period"
+msgstr "Champ de période / Période"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__pie
+msgid "Pie"
+msgstr "Camembert"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__group_by_granularity__quarter
+msgid "Quarter"
+msgstr "Trimestre"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "Record count"
+msgstr "Nombre d'enregistrements"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__refresh_interval
+msgid "Refresh Interval (s)"
+msgstr "Rafraîchissement (s)"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.xml:0
+msgid "Refresh Widgets"
+msgstr "Rafraîchir"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.js:0
+msgid "Remove Dashboard from Favorites"
+msgstr "Retirer des favoris"
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard_widget.py:0
+msgid "Reserved for internal users."
+msgstr "Réservé aux utilisateurs internes."
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "Save"
+msgstr "Enregistrer"
+
+#. module: oski_dashboard
+#: model:res.groups,comment:oski_dashboard.group_dashboard_manager
+msgid "Sees and manages all dashboards."
+msgstr "Voit et gère tous les tableaux de bord."
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__group_ids
+msgid "Shared With (Read)"
+msgstr "Partagé avec (lecture)"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__measure_agg__sum
+msgid "Sum"
+msgstr "Somme"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__widget_type__text
+msgid "Text"
+msgstr "Texte"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "The preview is shown after saving (v1)."
+msgstr "L'aperçu s'affiche après enregistrement (v1)."
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__this_month
+msgid "This Month"
+msgstr "Ce mois"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__this_quarter
+msgid "This Quarter"
+msgstr "Ce trimestre"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__this_week
+msgid "This Week"
+msgstr "Cette semaine"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__this_year
+msgid "This Year"
+msgstr "Cette année"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0 model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__name
+msgid "Title"
+msgstr "Titre"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__period__today
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__limit
+msgid "Top N"
+msgstr "Top N"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "Type"
+msgstr "Type"
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard_widget.py:0
+msgid "Undefined"
+msgstr "Indéfini"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__group_by_granularity__week
+msgid "Week"
+msgstr "Semaine"
+
+#. module: oski_dashboard
+#. odoo-javascript
+#: code:addons/oski_dashboard/static/src/dashboard_action.xml:0 code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
+msgid "Widget"
+msgstr "Widget"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard_widget__widget_type
+msgid "Widget Type"
+msgstr "Widget Type"
+
+#. module: oski_dashboard
+#: model:ir.model.fields,field_description:oski_dashboard.field_oski_dashboard__widget_ids model_terms:ir.ui.view,arch_db:oski_dashboard.view_oski_dashboard_form
+msgid "Widgets"
+msgstr "Widgets"
+
+#. module: oski_dashboard
+#: model:ir.model.fields.selection,name:oski_dashboard.selection__oski_dashboard_widget__group_by_granularity__year
+msgid "Year"
+msgstr "Année"
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard_widget.py:0
+msgid "“Top N” must be positive or zero (0 = all groups)."
+msgstr "Le « Top N » doit être positif ou nul (0 = tous les groupes)."

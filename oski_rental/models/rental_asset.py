@@ -13,32 +13,32 @@ PRICE_TIERS = [
 
 class RentalAsset(models.Model):
     _name = 'oski.rental.asset'
-    _description = 'Ressource de location'
+    _description = 'Rental Resource'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name'
 
-    name = fields.Char(string='Nom', required=True, tracking=True)
-    code = fields.Char(string='Code', readonly=True, copy=False, default='Nouveau')
-    category_id = fields.Many2one('oski.rental.category', string='Catégorie')
+    name = fields.Char(string='Name', required=True, tracking=True)
+    code = fields.Char(string='Code', readonly=True, copy=False, default=lambda self: self.env._('New'))
+    category_id = fields.Many2one('oski.rental.category', string='Category')
     image_1920 = fields.Image(string='Image')
     description = fields.Html(string='Description')
     active = fields.Boolean(default=True)
     company_id = fields.Many2one(
-        'res.company', string='Société', required=True,
+        'res.company', string='Company', required=True,
         default=lambda self: self.env.company)
     currency_id = fields.Many2one(related='company_id.currency_id')
-    price_hour = fields.Monetary(string='Prix / heure')
-    price_day = fields.Monetary(string='Prix / jour')
-    price_week = fields.Monetary(string='Prix / semaine')
-    price_month = fields.Monetary(string='Prix / mois')
-    deposit_amount = fields.Monetary(string='Caution')
+    price_hour = fields.Monetary(string='Price / Hour')
+    price_day = fields.Monetary(string='Price / Day')
+    price_week = fields.Monetary(string='Price / Week')
+    price_month = fields.Monetary(string='Price / Month')
+    deposit_amount = fields.Monetary(string='Deposit')
     product_id = fields.Many2one(
-        'product.product', string='Article de facturation',
+        'product.product', string='Invoicing Product',
         domain=[('type', '=', 'service')],
-        help="Article porté sur les lignes de facture. "
-             "À défaut, l'article configuré dans les paramètres est utilisé.")
+        help="Product used on the invoice lines. Defaults to the product "
+             "set in the settings.")
     is_available_now = fields.Boolean(
-        string='Disponible', compute='_compute_is_available_now')
+        string='Available', compute='_compute_is_available_now')
     order_line_ids = fields.One2many('oski.rental.order.line', 'asset_id')
     order_count = fields.Integer(compute='_compute_counts')
     unavailability_ids = fields.One2many('oski.rental.unavailability', 'asset_id')
@@ -46,15 +46,15 @@ class RentalAsset(models.Model):
 
     _sql_constraints = [
         ('code_company_uniq', 'UNIQUE (code, company_id)',
-         "Ce code de ressource est déjà utilisé."),
+         "This resource code is already in use."),
     ]
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if not vals.get('code') or vals['code'] == 'Nouveau':
+            if not vals.get('code') or vals['code'] in ('New', 'Nouveau', self.env._('New')):
                 vals['code'] = self.env['ir.sequence'].sudo().next_by_code(
-                    'oski.rental.asset') or 'Nouveau'
+                    'oski.rental.asset') or self.env._('New')
         return super().create(vals_list)
 
     def _compute_is_available_now(self):
@@ -70,9 +70,10 @@ class RentalAsset(models.Model):
 
     def action_view_orders(self):
         self.ensure_one()
+        name = self.env._("Rentals")
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Locations',
+            'name': name,
             'res_model': 'oski.rental.order',
             'view_mode': 'list,form',
             'domain': [('line_ids.asset_id', '=', self.id)],
@@ -80,9 +81,10 @@ class RentalAsset(models.Model):
 
     def action_view_unavailabilities(self):
         self.ensure_one()
+        name = self.env._("Unavailabilities")
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Indisponibilités',
+            'name': name,
             'res_model': 'oski.rental.unavailability',
             'view_mode': 'list,form',
             'domain': [('asset_id', '=', self.id)],

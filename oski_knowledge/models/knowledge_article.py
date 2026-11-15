@@ -11,33 +11,33 @@ class KnowledgeArticle(models.Model):
     _order = 'sequence, id'
 
     name = fields.Char(
-        string="Titre", required=True, default="Nouvel article", tracking=True)
-    icon = fields.Char(string="Icône", default="📄")
-    body = fields.Html(string="Contenu")
+        string="Title", required=True, default=lambda self: self.env._("New Article"), tracking=True)
+    icon = fields.Char(string="Icon", default="📄")
+    body = fields.Html(string="Content")
     body_text = fields.Text(
-        string="Texte", compute='_compute_body_text', store=True)
+        string="Plain Text", compute='_compute_body_text', store=True)
     parent_id = fields.Many2one(
-        'knowledge.article', string="Article parent",
+        'knowledge.article', string="Parent Article",
         ondelete='cascade', index=True)
     parent_path = fields.Char(index=True)
     child_ids = fields.One2many(
-        'knowledge.article', 'parent_id', string="Sous-articles")
+        'knowledge.article', 'parent_id', string="Sub-articles")
     root_article_id = fields.Many2one(
-        'knowledge.article', string="Article racine",
+        'knowledge.article', string="Root Article",
         compute='_compute_root_article_id', store=True, recursive=True)
     section = fields.Selection(
-        [('workspace', "Espace de travail"), ('private', "Privé")],
-        string="Espace", required=True, default='workspace',
+        [('workspace', "Workspace"), ('private', "Private")],
+        string="Section", required=True, default='workspace',
         compute='_compute_section', store=True, readonly=False, recursive=True)
     owner_id = fields.Many2one(
-        'res.users', string="Propriétaire", required=True, tracking=True,
+        'res.users', string="Owner", required=True, tracking=True,
         default=lambda self: self.env.user)
     active = fields.Boolean(default=True)
     sequence = fields.Integer(default=10)
     child_count = fields.Integer(
-        string="Nombre de sous-articles", compute='_compute_child_count')
+        string="Sub-article Count", compute='_compute_child_count')
     is_user_favorite = fields.Boolean(
-        string="Favori", compute='_compute_is_user_favorite',
+        string="Favorite", compute='_compute_is_user_favorite',
         search='_search_is_user_favorite')
 
     @api.depends('body')
@@ -95,7 +95,7 @@ class KnowledgeArticle(models.Model):
             ancestor_ids.add(new_parent.id)
             if ancestor_ids & set(self.ids):
                 raise ValidationError(
-                    self.env._("Un article ne peut pas être son propre ancêtre."))
+                    self.env._("An article cannot be its own ancestor."))
         return super().write(vals)
 
     @api.constrains('section', 'owner_id')
@@ -103,7 +103,7 @@ class KnowledgeArticle(models.Model):
         for article in self:
             if article.section == 'private' and not article.owner_id:
                 raise ValidationError(
-                    self.env._("Un article privé doit avoir un propriétaire."))
+                    self.env._("A private article must have an owner."))
 
     @api.depends_context('uid')
     def _compute_is_user_favorite(self):
@@ -119,7 +119,7 @@ class KnowledgeArticle(models.Model):
         # v18 : l'ORM transmet l'opérateur tel quel ('=', '!=') — pas de
         # normalisation en 'in' comme en v19 (patron project.project v18).
         if operator not in ('=', '!=') or not isinstance(value, bool):
-            raise NotImplementedError(self.env._("Opération non prise en charge"))
+            raise NotImplementedError(self.env._("Unsupported operation"))
         favorites = self.env['knowledge.article.favorite'].search(
             [('user_id', '=', self.env.uid)])
         in_favorites = (operator == '=') == value

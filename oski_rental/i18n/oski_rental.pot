@@ -1,0 +1,904 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_rental
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 07:00+0000\n"
+"PO-Revision-Date: 2026-11-15 07:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "%(resource)s — from %(start)s to %(end)s"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_kanban
+msgid "/day"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_needaction model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__active
+msgid "Active"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_ids model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_exception_decoration model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_state model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_type_icon model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__actual_return_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__actual_return_date
+msgid "Actual Return"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Add at least one rental line."
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_search
+msgid "Archived"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_attachment_count model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__is_available_now
+msgid "Available"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.actions.act_window,name:oski_rental.action_rental_calendar model:ir.ui.menu,name:oski_rental.menu_rental_calendar
+msgid "Calendar"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_checkin_wizard_form model_terms:ir.ui.view,arch_db:oski_rental.view_rental_checkout_wizard_form model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Cancel"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.actions.act_window,name:oski_rental.action_rental_category model:ir.ui.menu,name:oski_rental.menu_rental_categories
+msgid "Categories"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__category_id model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_search
+msgid "Category"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__code
+msgid "Code"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__deposit_state__collected
+msgid "Collected"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__company_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__company_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__company_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__company_id
+msgid "Company"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__checkout_note model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__checkout_note
+msgid "Condition Report: Pickup"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__checkin_note model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__checkin_note
+msgid "Condition Report: Return"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Condition Reports"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_checkout_wizard_form
+msgid "Condition of the resource at pickup…"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_checkin_wizard_form
+msgid "Condition of the resource at return…"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.ui.menu,name:oski_rental.menu_rental_config
+msgid "Configuration"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_checkout_wizard_form
+msgid "Confirm Pickup"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_checkin_wizard_form
+msgid "Confirm Return"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/wizards/rental_checkout_wizard.py:0
+msgid "Confirm that the deposit (%s) has been collected before pickup."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Conflict: “%s” is unavailable from %s to %s (existing booking or unavailability)."
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Create Invoice"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.actions.act_window,help:oski_rental.action_rental_asset
+msgid "Create your first rentable resource"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.actions.act_window,help:oski_rental.action_rental_order
+msgid "Create your first rental"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__create_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__create_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__create_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__create_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__create_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__create_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__create_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__create_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__create_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__create_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__create_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__create_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__currency_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__currency_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__currency_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__partner_id model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_search
+msgid "Customer"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__res_config_settings__rental_min_granularity__day
+msgid "Day"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__deposit_amount model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__deposit_state model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__deposit
+msgid "Deposit"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__deposit_collected
+msgid "Deposit Collected"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__description model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__description model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_form
+msgid "Description"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__display_name model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__display_name model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__display_name model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__display_name model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__display_name model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__display_name model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_unavailability__reason__immobilization
+msgid "Downtime"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__date_end
+msgid "End"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_follower_ids model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_partner_ids model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__activity_type_icon model:ir.model.fields,help:oski_rental.field_oski_rental_order__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__date_start
+msgid "From"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__has_message model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__res_config_settings__rental_min_granularity__hour
+msgid "Hour"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__id model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__id model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__id model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__id model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_exception_icon model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__activity_exception_icon model:ir.model.fields,help:oski_rental.field_oski_rental_order__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__message_needaction model:ir.model.fields,help:oski_rental.field_oski_rental_order__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__message_has_error model:ir.model.fields,help:oski_rental.field_oski_rental_asset__message_has_sms_error model:ir.model.fields,help:oski_rental.field_oski_rental_order__message_has_error model:ir.model.fields,help:oski_rental.field_oski_rental_order__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__image_1920 model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__image_128
+msgid "Image"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "In Day mode, the hourly rate is ignored"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Internal conflict: “%s” appears twice on overlapping periods."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__invoice_count
+msgid "Invoice Count"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__invoice_late
+msgid "Invoice Late Return"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_res_config_settings__rental_late_invoicing model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "Invoice Late Returns by Default"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__state__done
+msgid "Invoiced"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0 model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__invoice_ids model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Invoices"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "Invoicing"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__product_id model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "Invoicing Product"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_is_follower model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__write_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__write_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__write_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__write_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__write_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__write_uid model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__write_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__write_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__write_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__write_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__write_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__write_date model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__is_late model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_search
+msgid "Late"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__late_amount
+msgid "Late Fee"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__late_notified
+msgid "Late Notified"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Late rental: %s"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Late return — %s"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__line_ids model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Lines"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_unavailability__reason__maintenance
+msgid "Maintenance"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__origin__manual
+msgid "Manual"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_has_error model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_ids model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_res_config_settings__rental_min_granularity model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "Minimum Granularity"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__my_activity_date_deadline model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__name model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__name
+msgid "Name"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_asset.py:0 code:addons/oski_rental/models/rental_order.py:0
+msgid "New"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_date_deadline model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_summary model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_type_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__deposit_state__none
+msgid "No Deposit"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "No invoicing product configured (Settings > Rental)."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__note
+msgid "Note"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_needaction_counter model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_has_error_counter model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__message_needaction_counter model:ir.model.fields,help:oski_rental.field_oski_rental_order__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__message_has_error_counter model:ir.model.fields,help:oski_rental.field_oski_rental_order__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__state__ongoing model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_search
+msgid "Ongoing"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Only a quotation can be reserved."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Only a quotation or cancelled rental can be deleted."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Only a quotation or reserved rental can be cancelled."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/wizards/rental_checkout_wizard.py:0
+msgid "Only a reserved rental can be picked up."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Only a returned rental can be invoiced."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/wizards/rental_checkin_wizard.py:0
+msgid "Only an ongoing rental can be returned."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkin_wizard__order_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__order_id
+msgid "Order"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__order_count
+msgid "Order Count"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__order_line_ids
+msgid "Order Line"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__origin
+msgid "Origin"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_unavailability__reason__other
+msgid "Other"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Pickup"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Pickup: Condition Report"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__date_end
+msgid "Planned End"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__price_unit
+msgid "Price"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__price_day
+msgid "Price / Day"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__price_hour
+msgid "Price / Hour"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__price_month
+msgid "Price / Month"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__price_week
+msgid "Price / Week"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "Pricing"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__product_id
+msgid "Product used on the invoice lines. Defaults to the product set in the settings."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__state__draft
+msgid "Quotation"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_form
+msgid "Rates"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__reason
+msgid "Reason"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__name
+msgid "Reference"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Refund Deposit"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__deposit_state__refunded
+msgid "Refunded"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_oski_rental_order model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__order_id model:ir.module.category,name:oski_rental.module_category_rental model:ir.ui.menu,name:oski_rental.menu_rental_root model:product.template,name:oski_rental.product_rental_default_product_template model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "Rental"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Rental %(name)s (customer %(customer)s) was due back on %(date)s."
+msgstr ""
+
+#. module: oski_rental
+#: model:res.groups,name:oski_rental.group_rental_manager
+msgid "Rental / Manager"
+msgstr ""
+
+#. module: oski_rental
+#: model:res.groups,name:oski_rental.group_rental_user
+msgid "Rental / User"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_res_config_settings__rental_default_product_id
+msgid "Rental Invoicing Product"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_oski_rental_order_line
+msgid "Rental Line"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.actions.act_window,name:oski_rental.action_rental_order model:ir.ui.menu,name:oski_rental.menu_rental_orders
+msgid "Rental Orders"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_oski_rental_checkout_wizard
+msgid "Rental Pickup"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_oski_rental_asset
+msgid "Rental Resource"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_oski_rental_category
+msgid "Rental Resource Category"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_oski_rental_checkin_wizard
+msgid "Rental Return"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.actions.server,name:oski_rental.ir_cron_rental_late_alert_ir_actions_server
+msgid "Rental: Late Return Alert"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_asset.py:0 model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_form
+msgid "Rentals"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Reserve"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__state__reserved
+msgid "Reserved"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_search
+msgid "Reserved Orders"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__asset_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__asset_id
+msgid "Resource"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model,name:oski_rental.model_oski_rental_unavailability
+msgid "Resource Unavailability"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_form
+msgid "Resource name"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.actions.act_window,name:oski_rental.action_rental_asset model:ir.ui.menu,name:oski_rental.menu_rental_assets
+msgid "Resources"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__user_id
+msgid "Responsible"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__activity_user_id model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_form
+msgid "Return"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "Return: Condition Report"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__state__returned
+msgid "Returned"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__message_has_sms_error model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_category__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.res_config_settings_view_form_rental
+msgid "Service product used by default on rental invoices"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.actions.act_window,name:oski_rental.action_rental_config_settings model:ir.ui.menu,name:oski_rental.menu_rental_settings
+msgid "Settings"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__date_start model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__date_start
+msgid "Start"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__state model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__state model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_search
+msgid "Status"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__activity_state model:ir.model.fields,help:oski_rental.field_oski_rental_order__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__amount_subtotal model:ir.model.fields,field_description:oski_rental.field_oski_rental_order_line__price_subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0
+msgid "The deposit can only be refunded after return, if it was collected."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_order.py:0 code:addons/oski_rental/models/rental_order_line.py:0 code:addons/oski_rental/models/rental_unavailability.py:0
+msgid "The end date must be after the start date."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/wizards/rental_checkin_wizard.py:0
+msgid "The return cannot precede the pickup."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.constraint,message:oski_rental.constraint_oski_rental_asset_code_company_uniq
+msgid "This resource code is already in use."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_unavailability__date_end
+msgid "To"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__deposit_state__to_collect
+msgid "To Collect"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__amount_total model_terms:ir.ui.view,arch_db:oski_rental.view_rental_order_list
+msgid "Total"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_checkout_wizard__deposit_total model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__deposit_total
+msgid "Total Deposit"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__activity_exception_decoration model:ir.model.fields,help:oski_rental.field_oski_rental_order__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: oski_rental
+#. odoo-python
+#: code:addons/oski_rental/models/rental_asset.py:0 model:ir.actions.act_window,name:oski_rental.action_rental_unavailability model:ir.ui.menu,name:oski_rental.menu_rental_unavailabilities
+msgid "Unavailabilities"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__unavailability_ids
+msgid "Unavailability"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__unavailability_count
+msgid "Unavailability Count"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.ui.view,arch_db:oski_rental.view_rental_asset_form
+msgid "Unavailable"
+msgstr ""
+
+#. module: oski_rental
+#: model_terms:ir.actions.act_window,help:oski_rental.action_rental_asset
+msgid "Vehicle, room, machine, equipment: anything that can be rented."
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields.selection,name:oski_rental.selection__oski_rental_order__origin__website
+msgid "Website"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,field_description:oski_rental.field_oski_rental_asset__website_message_ids model:ir.model.fields,field_description:oski_rental.field_oski_rental_order__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: oski_rental
+#: model:ir.model.fields,help:oski_rental.field_oski_rental_asset__website_message_ids model:ir.model.fields,help:oski_rental.field_oski_rental_order__website_message_ids
+msgid "Website communication history"
+msgstr ""

@@ -61,8 +61,19 @@ class TestRentalInvoice(AccountTestInvoicingCommon):
         move = order.invoice_ids
         self.assertEqual(len(move.invoice_line_ids), 2)
         late_line = move.invoice_line_ids.filtered(
-            lambda l: 'Retard' in (l.name or ''))
+            lambda l: 'Late return' in (l.name or ''))
         self.assertEqual(late_line.price_unit, 150.0)
+
+    def test_invoice_labels_speak_the_customer_language(self):
+        """Les libellés de facture sont écrits dans la langue du client."""
+        self.env['res.lang']._activate_lang('fr_FR')
+        order = self._returned_order(late_amount=150.0)
+        order.partner_id.lang = 'fr_FR'
+        order.action_create_invoice()
+        names = ' '.join(order.invoice_ids.invoice_line_ids.mapped('name'))
+        self.assertIn('Retard', names)
+        self.assertIn(' du ', names)
+        self.assertNotIn('Late return', names)
 
     def test_invoice_wrong_state(self):
         order = self.env['oski.rental.order'].create({
@@ -94,4 +105,4 @@ class TestRentalInvoice(AccountTestInvoicingCommon):
         order = self._returned_order()
         order.action_create_invoice()
         label = order.invoice_ids.invoice_line_ids.name
-        self.assertIn('du 01/08/2026 10:00 au 05/08/2026 10:00', label)
+        self.assertIn('from 01/08/2026 10:00 to 05/08/2026 10:00', label)

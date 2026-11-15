@@ -4,23 +4,23 @@ from odoo.exceptions import ValidationError
 
 class RentalOrderLine(models.Model):
     _name = 'oski.rental.order.line'
-    _description = 'Ligne de location'
+    _description = 'Rental Line'
     _check_company_auto = True
 
     order_id = fields.Many2one(
-        'oski.rental.order', string='Location', required=True, ondelete='cascade')
+        'oski.rental.order', string='Rental', required=True, ondelete='cascade')
     asset_id = fields.Many2one(
-        'oski.rental.asset', string='Ressource', required=True,
+        'oski.rental.asset', string='Resource', required=True,
         check_company=True)
-    date_start = fields.Datetime(string='Début', required=True)
-    date_end = fields.Datetime(string='Fin', required=True)
+    date_start = fields.Datetime(string='Start', required=True)
+    date_end = fields.Datetime(string='End', required=True)
     price_unit = fields.Monetary(
-        string='Prix', compute='_compute_price_unit', store=True, readonly=False)
+        string='Price', compute='_compute_price_unit', store=True, readonly=False)
     price_subtotal = fields.Monetary(
-        string='Sous-total', compute='_compute_price_subtotal', store=True)
+        string='Subtotal', compute='_compute_price_subtotal', store=True)
     deposit = fields.Monetary(
-        string='Caution', compute='_compute_deposit', store=True, readonly=False)
-    late_amount = fields.Monetary(string='Montant retard', copy=False)
+        string='Deposit', compute='_compute_deposit', store=True, readonly=False)
+    late_amount = fields.Monetary(string='Late Fee', copy=False)
     state = fields.Selection(related='order_id.state', store=True)
     company_id = fields.Many2one(related='order_id.company_id', store=True)
     currency_id = fields.Many2one(related='order_id.currency_id')
@@ -50,7 +50,7 @@ class RentalOrderLine(models.Model):
         for line in self:
             if line.date_end <= line.date_start:
                 raise ValidationError(
-                    "La date de fin doit être postérieure à la date de début.")
+                    self.env._("The end date must be after the start date."))
 
     @api.model_create_multi
     def create(self, vals_list):

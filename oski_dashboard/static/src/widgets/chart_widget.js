@@ -3,6 +3,7 @@ import { Component, onWillStart, onWillUnmount, useRef, useEffect } from "@odoo/
 import { loadBundle } from "@web/core/assets";
 import { dashboardWidgetRegistry } from "../core/widget_registry";
 import { buildChartConfig } from "../core/chart_config";
+import { _t } from "@web/core/l10n/translation";
 
 export class ChartWidget extends Component {
     static template = "oski_dashboard.ChartWidget";
@@ -28,7 +29,8 @@ export class ChartWidget extends Component {
     renderChart() {
         this.destroyChart();
         const config = buildChartConfig(
-            this.props.widget.widget_type, this.props.payload, this.props.payload.options);
+            this.props.widget.widget_type, this.props.payload,
+            { ...this.props.payload.options, gaugeLabels: [_t("Achieved"), _t("Left to Achieve")] });
         if (config && this.canvasRef.el) {
             this.chart = new Chart(this.canvasRef.el, config);
             this.chart.options.onClick = (_ev, elements) => {
