@@ -2,9 +2,9 @@
     "name": "OdooSkills App Store",
     "version": "19.0.7.7.2",
     "category": "Website/eCommerce",
-    "summary": "Boutique de modules OdooSkills (gratuits + premium)",
-    "description": "Surcouche mince de website_sale exposant les modules oski_* "
-                   "avec matrice multi-versions et livraison .zip.",
+    "summary": "OdooSkills module store (free + premium)",
+    "description": "Thin layer over website_sale exposing the oski_* modules "
+                   "with a multi-version matrix and .zip delivery.",
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
     "license": "LGPL-3",

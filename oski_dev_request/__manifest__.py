@@ -1,14 +1,14 @@
 {
-    "name": "OdooSkills — Demande de développement",
+    "name": "OdooSkills — Development Request",
     "version": "19.0.4.0.2",
     "category": "Website",
-    "summary": "Centralisez les demandes de modules sur-mesure dans un pipeline structuré — plus aucun email de specs perdu.",
+    "summary": "Gather custom module requests in a structured pipeline — no more specs lost in emails.",
     "description": """
-Vos clients veulent des modules spécifiques mais les échanges par email s'éparpillent.
-Ce module ajoute un formulaire public /apps/demande-developpement et un pipeline Kanban
-backend pour suivre chaque demande (Nouveau → En analyse → Devis → Accepté → Livré).
-Budget, version Odoo cible et pièces jointes capturés dès la soumission.
-Accusé de réception automatique. Lien vers le module livré à la clôture.
+Your customers want specific modules, but email exchanges get scattered.
+This module adds a public form /apps/demande-developpement and a backend Kanban
+pipeline to follow each request (New → Under review → Quote sent → Accepted → Delivered).
+Budget, target Odoo version and attachments are captured at submission.
+Automatic acknowledgement. Link to the delivered module at closing.
 """,
     "author": "OdooSkills",
     "website": "https://apps.odooskills.com",
