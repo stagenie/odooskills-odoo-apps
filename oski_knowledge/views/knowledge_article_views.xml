@@ -7,26 +7,26 @@
             <form>
                 <header>
                     <button name="action_archive_to_trash" type="object"
-                            string="Archiver" icon="fa-trash"
+                            string="Archive" icon="fa-trash"
                             invisible="not active"/>
                     <button name="action_restore" type="object"
-                            string="Restaurer" icon="fa-undo"
+                            string="Restore" icon="fa-undo"
                             invisible="active"/>
                     <button name="action_toggle_favorite" type="object"
-                            string="Favori" icon="fa-star-o"/>
+                            string="Favorite" icon="fa-star-o"/>
                 </header>
                 <sheet>
                     <div class="oe_title d-flex align-items-center gap-2">
                         <field name="icon" placeholder="📄"
                                class="oe_inline" style="width: 3ch;"/>
                         <h1 class="mb-0 flex-grow-1">
-                            <field name="name" placeholder="Titre de l'article"/>
+                            <field name="name" placeholder="Article title"/>
                         </h1>
                     </div>
                     <field name="body" nolabel="1"
                            options="{'collaborative': false}"/>
                     <notebook>
-                        <page string="Sous-articles" name="children">
+                        <page string="Sub-articles" name="children">
                             <field name="child_ids" readonly="1">
                                 <list>
                                     <field name="icon"/>
@@ -35,7 +35,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Infos" name="info">
+                        <page string="Info" name="info">
                             <group>
                                 <field name="owner_id"/>
                                 <field name="section"
@@ -74,20 +74,20 @@
             <search>
                 <field name="name"
                        filter_domain="['|', ('name', 'ilike', self), ('body_text', 'ilike', self)]"/>
-                <filter name="my_articles" string="Mes articles"
+                <filter name="my_articles" string="My Articles"
                         domain="[('owner_id', '=', uid)]"/>
-                <filter name="my_favorites" string="Mes favoris"
+                <filter name="my_favorites" string="My Favorites"
                         domain="[('is_user_favorite', '=', True)]"/>
                 <separator/>
-                <filter name="workspace" string="Espace de travail"
+                <filter name="workspace" string="Workspace"
                         domain="[('section', '=', 'workspace')]"/>
-                <filter name="private" string="Privé"
+                <filter name="private" string="Private"
                         domain="[('section', '=', 'private')]"/>
                 <separator/>
-                <filter name="archived" string="Archivés"
+                <filter name="archived" string="Archived"
                         domain="[('active', '=', False)]"/>
                 <group name="group_by">
-                    <filter name="group_section" string="Espace"
+                    <filter name="group_section" string="Section"
                             context="{'group_by': 'section'}"/>
                 </group>
             </search>
@@ -95,14 +95,14 @@
     </record>
 
     <record id="action_article_all" model="ir.actions.act_window">
-        <field name="name">Tous les articles</field>
+        <field name="name">All Articles</field>
         <field name="res_model">knowledge.article</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_article_search"/>
     </record>
 
     <record id="action_article_trash" model="ir.actions.act_window">
-        <field name="name">Corbeille</field>
+        <field name="name">Trash</field>
         <field name="res_model">knowledge.article</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[('active', '=', False)]</field>

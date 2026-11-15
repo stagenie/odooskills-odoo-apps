@@ -4,6 +4,7 @@ import { useService } from "@web/core/utils/hooks";
 import { user } from "@web/core/user";
 import { DashboardGrid } from "./grid/dashboard_grid";
 import { WidgetEditorDialog } from "./editor/widget_editor_dialog";
+import { _t } from "@web/core/l10n/translation";
 
 // Champs lus par selectDashboard() sur oski.dashboard.widget. Exporté : le
 // module pro pousse filter_emit/filter_listen dans CE tableau partagé — même
@@ -53,6 +54,12 @@ export class DashboardAction extends Component {
 
     get current() {
         return this.state.dashboards.find((d) => d.id === this.state.currentId) || null;
+    }
+
+    get favoriteTitle() {
+        return this.isFavorite
+            ? _t("Remove Dashboard from Favorites")
+            : _t("Add Dashboard to Favorites");
     }
 
     get isFavorite() {
@@ -145,7 +152,7 @@ export class DashboardAction extends Component {
     }
 
     async createDashboard() {
-        const id = await this.orm.create("oski.dashboard", [{ name: "Nouveau dashboard" }]);
+        const id = await this.orm.create("oski.dashboard", [{ name: _t("New Dashboard") }]);
         await this.loadDashboards();
         await this.selectDashboard(id[0]);
         this.state.editMode = true;
@@ -168,7 +175,7 @@ export class DashboardAction extends Component {
                 [dashboardId, JSON.stringify(this.state.layout)]);
         }).catch(() => {
             this.notification.add(
-                "Échec de l'enregistrement de la disposition — vos derniers déplacements ne sont pas sauvegardés.",
+                _t("Could not save the layout: your latest moves are not saved."),
                 { type: "warning" });
         });
     }

@@ -48,6 +48,20 @@ class TestCronSettings(RentalCase):
         self.env['oski.rental.order']._cron_late_alert()
         self.assertFalse(order.late_notified)
 
+    def test_cron_activity_speaks_the_assignee_language(self):
+        """La tâche planifiée tourne sans langue : l'activité est écrite dans
+        la langue du responsable de la location."""
+        self.env['res.lang']._activate_lang('fr_FR')
+        order = self._ongoing_overdue_order()
+        order.user_id.lang = 'fr_FR'
+        self.env['oski.rental.order'].with_context(lang=None)._cron_late_alert()
+        activity = self.env['mail.activity'].search([
+            ('res_model', '=', 'oski.rental.order'),
+            ('res_id', '=', order.id),
+        ])
+        self.assertIn('Location en retard', activity.summary)
+        self.assertNotIn('Late rental', activity.summary)
+
     def test_settings_roundtrip(self):
         settings = self.env['res.config.settings'].create({
             'rental_late_invoicing': True,

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="mb-2">
-                    <label class="form-label">Titre</label>
+                    <label class="form-label">Title</label>
                     <input class="form-control o_oski_editor_name" t-model="state.values.name"/>
                 </div>
                 <div class="mb-2">
@@ -16,7 +16,7 @@
                     </select>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label">Modèle</label>
+                    <label class="form-label">Model</label>
                     <select class="form-select o_oski_editor_model"
                             t-model.number="state.values.model_id" t-on-change="loadFields">
                         <option value="">—</option>
@@ -25,11 +25,11 @@
                     </select>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label">Filtre (domaine)</label>
+                    <label class="form-label">Filter (domain)</label>
                     <input class="form-control font-monospace" t-model="state.values.domain"/>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label">Grouper par</label>
+                    <label class="form-label">Group By Field</label>
                     <select class="form-select" t-model.number="state.values.group_by_field_id">
                         <option value="">—</option>
                         <option t-foreach="state.fields" t-as="field" t-key="field.id"
@@ -37,15 +37,15 @@
                     </select>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label">Mesure</label>
+                    <label class="form-label">Measure</label>
                     <select class="form-select" t-model.number="state.values.measure_field_id">
-                        <option value="">Nombre d'enregistrements</option>
+                        <option value="">Record count</option>
                         <option t-foreach="measureFields" t-as="field" t-key="field.id"
                                 t-att-value="field.id" t-out="field.field_description"/>
                     </select>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label">Champ de période / Période</label>
+                    <label class="form-label">Period Field / Period</label>
                     <div class="d-flex gap-2">
                         <select class="form-select" t-model.number="state.values.date_field_id">
                             <option value="">—</option>
@@ -61,16 +61,16 @@
                 <div class="form-check mb-2">
                     <input type="checkbox" class="form-check-input" id="oski_cmp"
                            t-model="state.values.compare_previous"/>
-                    <label class="form-check-label" for="oski_cmp">Comparer à la période précédente</label>
+                    <label class="form-check-label" for="oski_cmp">Compare to Previous Period</label>
                 </div>
             </div>
             <div class="col-6 border-start">
-                <p class="text-muted small">L'aperçu s'affiche après enregistrement (v1).</p>
+                <p class="text-muted small">The preview is shown after saving (v1).</p>
             </div>
         </div>
         <t t-set-slot="footer">
-            <button class="btn btn-primary o_oski_editor_save" t-on-click="save">Enregistrer</button>
-            <button class="btn btn-secondary" t-on-click="props.close">Annuler</button>
+            <button class="btn btn-primary o_oski_editor_save" t-on-click="save">Save</button>
+            <button class="btn btn-secondary" t-on-click="props.close">Cancel</button>
         </t>
     </Dialog>
 </t>

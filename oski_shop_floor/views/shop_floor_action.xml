@@ -2,12 +2,12 @@
 <odoo>
 
     <record id="action_shop_floor" model="ir.actions.client">
-        <field name="name">Atelier</field>
+        <field name="name">Shop Floor</field>
         <field name="tag">oski_shop_floor.app</field>
     </record>
 
     <menuitem id="menu_shop_floor_root"
-              name="Atelier"
+              name="Shop Floor"
               web_icon="oski_shop_floor,static/description/icon.png"
               action="action_shop_floor"
               groups="mrp.group_mrp_user"

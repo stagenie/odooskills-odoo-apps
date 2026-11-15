@@ -27,18 +27,18 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_reserve" type="object" string="Réserver"
+                    <button name="action_reserve" type="object" string="Reserve"
                             class="btn-primary" invisible="state != 'draft'"/>
-                    <button name="action_open_checkout" type="object" string="Départ"
+                    <button name="action_open_checkout" type="object" string="Pickup"
                             class="btn-primary" invisible="state != 'reserved'"/>
-                    <button name="action_open_checkin" type="object" string="Retour"
+                    <button name="action_open_checkin" type="object" string="Return"
                             class="btn-primary" invisible="state != 'ongoing'"/>
-                    <button name="action_create_invoice" type="object" string="Facturer"
+                    <button name="action_create_invoice" type="object" string="Create Invoice"
                             class="btn-primary" invisible="state != 'returned'"/>
                     <button name="action_refund_deposit" type="object"
-                            string="Rembourser la caution"
+                            string="Refund Deposit"
                             invisible="state not in ('returned', 'done') or deposit_state != 'collected'"/>
-                    <button name="action_cancel" type="object" string="Annuler"
+                    <button name="action_cancel" type="object" string="Cancel"
                             invisible="state not in ('draft', 'reserved')"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,reserved,ongoing,returned,done"/>
@@ -49,10 +49,10 @@
                                 class="oe_stat_button" icon="fa-pencil-square-o"
                                 invisible="invoice_count == 0">
                             <field name="invoice_count" widget="statinfo"
-                                   string="Factures"/>
+                                   string="Invoices"/>
                         </button>
                     </div>
-                    <widget name="web_ribbon" title="En retard" bg_color="text-bg-danger"
+                    <widget name="web_ribbon" title="Late" bg_color="text-bg-danger"
                             invisible="not is_late"/>
                     <div class="oe_title"><h1><field name="name"/></h1></div>
                     <group>
@@ -73,7 +73,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="lines" string="Lignes">
+                        <page name="lines" string="Lines">
                             <field name="line_ids"
                                    context="{'default_date_start': date_start, 'default_date_end': date_end}"
                                    readonly="state not in ('draft', 'reserved')">
@@ -95,7 +95,7 @@
                                 <field name="currency_id" invisible="1"/>
                             </group>
                         </page>
-                        <page name="notes" string="États des lieux"
+                        <page name="notes" string="Condition Reports"
                               invisible="not checkout_note and not checkin_note">
                             <group>
                                 <field name="checkout_note"/>
@@ -116,16 +116,16 @@
             <search>
                 <field name="name"/>
                 <field name="partner_id"/>
-                <filter name="filter_ongoing" string="En cours"
+                <filter name="filter_ongoing" string="Ongoing"
                         domain="[('state', '=', 'ongoing')]"/>
-                <filter name="filter_reserved" string="Réservées"
+                <filter name="filter_reserved" string="Reserved Orders"
                         domain="[('state', '=', 'reserved')]"/>
-                <filter name="filter_late" string="En retard"
+                <filter name="filter_late" string="Late"
                         domain="[('state', '=', 'ongoing'), ('date_end', '&lt;', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))]"/>
                 <group name="group_by">
-                    <filter name="group_state" string="État"
+                    <filter name="group_state" string="Status"
                             context="{'group_by': 'state'}"/>
-                    <filter name="group_partner" string="Client"
+                    <filter name="group_partner" string="Customer"
                             context="{'group_by': 'partner_id'}"/>
                 </group>
             </search>
@@ -158,16 +158,16 @@
     </record>
 
     <record id="action_rental_order" model="ir.actions.act_window">
-        <field name="name">Réservations</field>
+        <field name="name">Rental Orders</field>
         <field name="res_model">oski.rental.order</field>
         <field name="view_mode">list,form,pivot,graph</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Créez votre première location</p>
+            <p class="o_view_nocontent_smiling_face">Create your first rental</p>
         </field>
     </record>
 
     <record id="action_rental_calendar" model="ir.actions.act_window">
-        <field name="name">Calendrier</field>
+        <field name="name">Calendar</field>
         <field name="res_model">oski.rental.order.line</field>
         <field name="view_mode">calendar</field>
         <field name="domain">[('state', 'not in', ('cancelled',))]</field>

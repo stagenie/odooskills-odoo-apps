@@ -2,6 +2,7 @@ import { Component, useState, onWillStart } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { View } from "@web/views/view";
+import { _t } from "@web/core/l10n/translation";
 
 const ARTICLE_FIELDS = ["id", "name", "icon", "child_count", "section", "parent_id"];
 
@@ -70,6 +71,12 @@ export class KnowledgeApp extends Component {
         this.state.currentId = node.id;
     }
 
+    favoriteTitle(node) {
+        return this.isFavorite(node)
+            ? _t("Remove Article from Favorites")
+            : _t("Add Article to Favorites");
+    }
+
     isFavorite(node) {
         return this.state.favorites.some((f) => f.id === node.id);
     }
@@ -81,7 +88,7 @@ export class KnowledgeApp extends Component {
 
     async createRoot(section) {
         const id = await this.orm.create("knowledge.article", [{
-            name: "Nouvel article", section: section,
+            name: _t("New Article"), section: section,
         }]);
         await this.reload();
         this.state.currentId = id[0];
@@ -89,7 +96,7 @@ export class KnowledgeApp extends Component {
 
     async createChild(parentNode) {
         const id = await this.orm.create("knowledge.article", [{
-            name: "Nouvel article", parent_id: parentNode.id,
+            name: _t("New Article"), parent_id: parentNode.id,
         }]);
         if (!this.isExpanded(parentNode.id)) {
             await this.loadChildren(parentNode.id);

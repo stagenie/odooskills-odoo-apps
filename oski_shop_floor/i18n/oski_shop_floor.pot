@@ -1,0 +1,203 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_shop_floor
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 07:42+0000\n"
+"PO-Revision-Date: 2026-11-15 07:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-python
+#: code:addons/oski_shop_floor/models/mrp_workorder.py:0
+msgid "Cannot finish a work order that is not in progress."
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-python
+#: code:addons/oski_shop_floor/models/mrp_workorder.py:0
+msgid "Component not found for this work order."
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Component tracked by lot or serial number: enter it in the manufacturing order."
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Components"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Consumed quantity is higher than the planned quantity."
+msgstr ""
+
+#. module: oski_shop_floor
+#: model:ir.model.fields,field_description:oski_shop_floor.field_mrp_workcenter__display_name model:ir.model.fields,field_description:oski_shop_floor.field_mrp_workorder__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Error"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Finish"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Finished"
+msgstr ""
+
+#. module: oski_shop_floor
+#: model:ir.model.fields,field_description:oski_shop_floor.field_mrp_workcenter__id model:ir.model.fields,field_description:oski_shop_floor.field_mrp_workorder__id
+msgid "ID"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "In Progress"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "No work order on this work center."
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Pause"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Produced Quantity"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Scan error"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Scan or type a barcode"
+msgstr ""
+
+#. module: oski_shop_floor
+#: model:ir.actions.client,name:oski_shop_floor.action_shop_floor model:ir.ui.menu,name:oski_shop_floor.menu_shop_floor_root
+msgid "Shop Floor"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Start Work"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-python
+#: code:addons/oski_shop_floor/models/mrp_workorder.py:0
+msgid "Start the work order before entering quantities."
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-python
+#: code:addons/oski_shop_floor/models/mrp_workorder.py:0
+msgid "The quantity cannot be negative."
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "To Do"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Unrecognized code: %s"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "Waiting"
+msgstr ""
+
+#. module: oski_shop_floor
+#: model:ir.model,name:oski_shop_floor.model_mrp_workcenter
+msgid "Work Center"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Work Centers"
+msgstr ""
+
+#. module: oski_shop_floor
+#: model:ir.model,name:oski_shop_floor.model_mrp_workorder
+msgid "Work Order"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "Work Orders"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "in progress"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "to do"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "← Orders"
+msgstr ""
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
+msgid "← Work Centers"
+msgstr ""

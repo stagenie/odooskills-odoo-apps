@@ -39,7 +39,7 @@ export function buildChartConfig(widgetType, payload, options = {}) {
             const done = Math.min(total, target);
             return {
                 type: "doughnut",
-                data: { labels: ["Réalisé", "Restant"],
+                data: { labels: options.gaugeLabels || ["Achieved", "Left to Achieve"],
                         datasets: [{ data: [done, Math.max(target - done, 0)],
                                      backgroundColor: [PALETTE[2], "#e9ecef"] }] },
                 options: { responsive: true, maintainAspectRatio: false,

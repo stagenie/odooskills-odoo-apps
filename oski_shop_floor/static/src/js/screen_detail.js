@@ -4,6 +4,7 @@ import { Component, useState } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { useShopFloorScan } from "./use_shop_floor_scan";
 import { scanFeedback } from "./scan_feedback";
+import { _t } from "@web/core/l10n/translation";
 
 export class ScreenDetail extends Component {
     static template = "oski_shop_floor.ScreenDetail";
@@ -22,12 +23,12 @@ export class ScreenDetail extends Component {
 
     get stateLabel() {
         const labels = {
-            ready: "À faire",
-            progress: "En cours",
-            done: "Terminé",
-            cancel: "Annulé",
-            pending: "En attente",
-            waiting: "En attente",
+            ready: _t("To Do"),
+            progress: _t("In Progress"),
+            done: _t("Finished"),
+            cancel: _t("Cancelled"),
+            pending: _t("Waiting"),
+            waiting: _t("Waiting"),
         };
         return labels[this.wo.state] || this.wo.state;
     }
@@ -39,17 +40,17 @@ export class ScreenDetail extends Component {
             );
             this._warnConsumption(this.state.detail);
         } catch (e) {
-            this.notification.add(e.data?.message || e.message || "Erreur", { type: "danger" });
+            this.notification.add(e.data?.message || e.message || _t("Error"), { type: "danger" });
         }
     }
 
     _warnConsumption(detail) {
         if (detail?.over_demand) {
-            this.notification.add("Quantité consommée supérieure à la quantité prévue.", { type: "warning" });
+            this.notification.add(_t("Consumed quantity is higher than the planned quantity."), { type: "warning" });
         }
         if (detail?.needs_lot) {
             this.notification.add(
-                "Composant suivi par lot ou numéro de série : renseignez-le dans l'ordre de fabrication.",
+                _t("Component tracked by lot or serial number: enter it in the manufacturing order."),
                 { type: "warning" }
             );
         }
@@ -70,7 +71,7 @@ export class ScreenDetail extends Component {
             );
             this.props.onBack();
         } catch (e) {
-            this.notification.add(e.data?.message || e.message || "Erreur", { type: "danger" });
+            this.notification.add(e.data?.message || e.message || _t("Error"), { type: "danger" });
         }
     }
     setQty(ev) { return this._call("sf_set_qty", [parseFloat(ev.target.value) || 0]); }
@@ -91,11 +92,11 @@ export class ScreenDetail extends Component {
                 this._warnConsumption(res.detail);
             } else {
                 scanFeedback(false);
-                this.notification.add(`Code non reconnu : ${code}`, { type: "warning" });
+                this.notification.add(_t("Unrecognized code: %s", code), { type: "warning" });
             }
         } catch (e) {
             scanFeedback(false);
-            this.notification.add(e.data?.message || e.message || "Erreur scan", { type: "danger" });
+            this.notification.add(e.data?.message || e.message || _t("Scan error"), { type: "danger" });
         }
     }
 }

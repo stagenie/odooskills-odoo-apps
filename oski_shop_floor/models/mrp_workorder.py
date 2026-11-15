@@ -61,9 +61,9 @@ class MrpWorkorder(models.Model):
         """Saisie de quantité : OT en cours et quantité positive ou nulle."""
         self.ensure_one()
         if self.state != 'progress':
-            raise UserError(_("Démarrez l'ordre de travail avant de saisir des quantités."))
+            raise UserError(_("Start the work order before entering quantities."))
         if qty is None or qty < 0:
-            raise UserError(_("La quantité ne peut pas être négative."))
+            raise UserError(_("The quantity cannot be negative."))
 
     def sf_start(self):
         self.ensure_one()
@@ -101,7 +101,7 @@ class MrpWorkorder(models.Model):
         # Floor exige explicitement un démarrage préalable : on impose la
         # règle nous-mêmes plutôt que de compter sur le natif.
         if self.state != 'progress':
-            raise UserError(_("Impossible de terminer un ordre de travail qui n'est pas en cours."))
+            raise UserError(_("Cannot finish a work order that is not in progress."))
         self.button_finish()
         self.invalidate_recordset(self._SF_STALE_COMPUTE_FIELDS)
         next_order = self.search([
@@ -128,7 +128,7 @@ class MrpWorkorder(models.Model):
         self._sf_check_input(qty)
         move = self.move_raw_ids.filtered(lambda m: m.id == move_id)
         if not move:
-            raise UserError(_("Composant introuvable pour cet ordre de travail."))
+            raise UserError(_("Component not found for this work order."))
         # La quantité affichée est la SOMME des lignes : la quantité saisie
         # devient ce total (première ligne = qty, les autres à 0), sinon
         # « +1 » s'ajoutait aux autres lignes réservées et gonflait le total.

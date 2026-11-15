@@ -47,7 +47,7 @@
         </field>
     </record>
     <record id="action_oski_dashboard_config" model="ir.actions.act_window">
-        <field name="name">Configuration des dashboards</field>
+        <field name="name">Dashboard Configuration</field>
         <field name="res_model">oski.dashboard</field>
         <field name="view_mode">list,form</field>
     </record>
