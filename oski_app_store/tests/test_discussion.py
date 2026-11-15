@@ -42,7 +42,9 @@ class TestDiscussion(HttpCase):
 
     def test_module_is_a_thread_open_to_readers(self):
         Module = self.env["oski.module"]
-        self.assertIn("mail.thread", Module._inherit)
+        # Le modèle final peut être étendu (statistiques…) : on vérifie l'héritage
+        # effectif, pas le seul `_inherit` de la dernière extension.
+        self.assertIsInstance(Module, self.env.registry["mail.thread"])
         self.assertEqual(Module._mail_post_access, "read")
 
     def test_public_gets_sign_in_invitation_not_chatter(self):

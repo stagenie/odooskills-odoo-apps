@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Carte du catalogue : nombre d'achats à côté des téléchargements
+         (modules payants seulement, même seuil d'affichage). -->
+    <template id="module_card_stats" inherit_id="oski_app_store.module_card"
+              name="Carte module : compteur d'achats">
+        <xpath expr="//span[hasclass('oski-card-go')]" position="before">
+            <span t-if="module.counters_visible('purchase')" class="oski-count oski-count-buy"
+                  title="Purchases">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.8a1 1 0 0 0 1-.8L21 7H6"/></svg>
+                <t t-out="module.purchase_count"/>
+            </span>
+        </xpath>
+    </template>
+
+    <!-- Fiche module : « 12 downloads » / « 3 purchases » en toutes lettres,
+         icône panier pour les achats. -->
+    <template id="module_page_stats" inherit_id="oski_app_store.module_page"
+              name="Fiche module : compteurs en toutes lettres">
+        <xpath expr="//tr[@t-if=&quot;module.counters_visible('download')&quot;]/td" position="replace">
+            <td>
+                <span class="oski-count" title="Downloads">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M6 12l6 6 6-6"/><path d="M4 20h16"/></svg>
+                    <t t-out="module.download_count"/>
+                    <t t-if="module.download_count == 1">download</t>
+                    <t t-else="">downloads</t>
+                </span>
+            </td>
+        </xpath>
+        <xpath expr="//tr[@t-if=&quot;module.counters_visible('purchase')&quot;]/td" position="replace">
+            <td>
+                <span class="oski-count oski-count-buy" title="Purchases">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.8a1 1 0 0 0 1-.8L21 7H6"/></svg>
+                    <t t-out="module.purchase_count"/>
+                    <t t-if="module.purchase_count == 1">purchase</t>
+                    <t t-else="">purchases</t>
+                </span>
+            </td>
+        </xpath>
+    </template>
+</odoo>

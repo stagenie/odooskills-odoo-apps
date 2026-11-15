@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Statistiques du store : lecture réservée aux gestionnaires du store.
+         Les vues de fiche s'écrivent en SQL (sudo) depuis le contrôleur public. -->
+    <record id="access_oski_module_view_daily_manager" model="ir.model.access">
+        <field name="name">oski.module.view.daily manager</field>
+        <field name="model_id" ref="model_oski_module_view_daily"/>
+        <field name="group_id" ref="oski_app_store.group_manager"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="access_oski_module_stats_report_manager" model="ir.model.access">
+        <field name="name">oski.module.stats.report manager</field>
+        <field name="model_id" ref="model_oski_module_stats_report"/>
+        <field name="group_id" ref="oski_app_store.group_manager"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>

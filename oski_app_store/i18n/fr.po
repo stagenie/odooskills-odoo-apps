@@ -634,7 +634,9 @@ msgstr "Catégories"
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__category_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__category_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
 msgid "Category"
 msgstr "Catégorie"
@@ -715,8 +717,11 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__country_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__country_id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__country_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_view_daily__country_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
 msgid "Country"
@@ -778,6 +783,7 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__currency_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__currency_id
 msgid "Currency"
 msgstr "Devise"
 
@@ -799,7 +805,9 @@ msgstr "Pays du client"
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__date
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__date
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 msgid "Date"
 msgstr "Date"
 
@@ -835,9 +843,11 @@ msgstr "Discussion"
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__display_name
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_view_daily__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__display_name
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__display_name
@@ -875,10 +885,12 @@ msgstr "Télécharger les modules achetés, toutes versions"
 #. module: oski_app_store
 #: model:ir.actions.act_window,name:oski_app_store.oski_module_download_action
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__download_count
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__download_count
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__download_count
 #: model:ir.ui.menu,name:oski_app_store.menu_oski_downloads
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page_stats
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_graph
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_list
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_pivot
@@ -1021,10 +1033,12 @@ msgstr "Abonnés (partenaires)"
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_free
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__is_free
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__pricing__free
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_stats_report__pricing__free
 #: model:oski.module.tag,name:oski_app_store.tag_demo_gratuit
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_kanban
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
 msgid "Free"
@@ -1098,9 +1112,11 @@ msgstr "J'accepte les"
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_category__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_tag__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_view_daily__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_trial_nonce__id
 #: model:ir.model.fields,field_description:oski_app_store.field_product_template__id
@@ -1356,9 +1372,12 @@ msgstr "Minutes restantes"
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__module_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__module_id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__module_id
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__module_id
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_view_daily__module_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Module"
@@ -1398,6 +1417,7 @@ msgstr "Modules"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
 msgid "Month"
 msgstr "Mois"
@@ -1405,6 +1425,8 @@ msgstr "Mois"
 #. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_action_most_downloaded
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_analysis_most_downloaded
 msgid "Most downloaded"
 msgstr "Les plus téléchargés"
 
@@ -1611,10 +1633,12 @@ msgstr "Modules Odoo — page %(page)s sur %(count)s"
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__odoo_version
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__odoo_version
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__odoo_version
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__odoo_version_id
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
 msgid "Odoo version"
@@ -1753,7 +1777,9 @@ msgstr "Commande"
 
 #. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__pricing__paid
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_stats_report__pricing__paid
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 msgid "Paid"
 msgstr "Payant"
 
@@ -1824,7 +1850,9 @@ msgstr "Prix"
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__pricing
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__pricing
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 msgid "Pricing"
 msgstr "Tarif"
 
@@ -1904,7 +1932,9 @@ msgstr "Lien d'achat"
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__purchase_count
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_card_stats
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page_stats
 msgid "Purchases"
 msgstr "Achats"
 
@@ -2649,6 +2679,8 @@ msgstr "Signature de webhook d'essai reçue"
 
 #. module: oski_app_store
 #: model:ir.actions.act_window,name:oski_app_store.oski_module_trial_action
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__stat_trial_count
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__trial_count
 #: model:ir.ui.menu,name:oski_app_store.menu_oski_trials
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_list
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_pivot
@@ -3170,3 +3202,320 @@ msgstr "← Retour au module"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "⬇ Download ("
 msgstr "⬇ Télécharger ("
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__stat_trial_count
+msgid ""
+"1-hour trials requested (trials that could not start excluded). Refreshed "
+"every hour."
+msgstr ""
+"Essais d'1 heure demandés (hors essais qui n'ont pas pu démarrer). Mis à "
+"jour toutes les heures."
+
+#. module: oski_app_store
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_analysis
+msgid "Analysis"
+msgstr "Analyse"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__stat_download_count
+msgid ""
+"Archives served and recorded in the download log. Refreshed every hour."
+msgstr ""
+"Archives servies et inscrites au journal des téléchargements. Mis à jour "
+"toutes les heures."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form_stats
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list_stats
+msgid "Buyers"
+msgstr "Acheteurs"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__company_currency_id
+msgid "Company currency"
+msgstr "Devise de la société"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__stat_purchase_count
+msgid ""
+"Confirmed paid order lines for this module (quotations, cancelled orders and"
+" zero-amount lines excluded). Refreshed every hour."
+msgstr ""
+"Lignes de commande confirmées et payantes de ce module (hors devis, "
+"commandes annulées et lignes à montant nul). Mis à jour toutes les heures."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form_stats
+msgid "Conversion"
+msgstr "Conversion"
+
+#. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_action_conversion
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_analysis_conversion
+msgid "Conversion rates"
+msgstr "Taux de conversion"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_view_daily__day
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "Day"
+msgstr "Jour"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form_stats
+msgid "Detailed statistics"
+msgstr "Statistiques détaillées"
+
+#. module: oski_app_store
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_analysis_downloads
+msgid "Download log"
+msgstr "Journal des téléchargements"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_conversion
+msgid ""
+"Downloads and sales per 100 page views. Statistics are refreshed every hour."
+msgstr ""
+"Téléchargements et ventes pour 100 vues de fiche. Les statistiques sont "
+"mises à jour toutes les heures."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "Last 30 days"
+msgstr "30 derniers jours"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "Last 7 days"
+msgstr "7 derniers jours"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__stat_download_count
+msgid "Logged downloads"
+msgstr "Téléchargements journalisés"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__stat_download_rate
+msgid "Logged downloads per 100 page views."
+msgstr "Téléchargements journalisés pour 100 vues de fiche."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list_ranking
+msgid "Module statistics"
+msgstr "Statistiques des modules"
+
+#. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_action_most_purchased
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_analysis_most_purchased
+msgid "Most purchased"
+msgstr "Les plus achetés"
+
+#. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_action_most_viewed
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_analysis_most_viewed
+msgid "Most viewed"
+msgstr "Les plus consultés"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_stats_report_action
+msgid "No activity yet"
+msgstr "Aucune activité pour l'instant"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_most_downloaded
+msgid "No download recorded yet"
+msgstr "Aucun téléchargement enregistré pour l'instant"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_conversion
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_most_viewed
+msgid "No page view recorded yet"
+msgstr "Aucune vue de fiche enregistrée pour l'instant"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_most_purchased
+msgid "No premium module yet"
+msgstr "Aucun module premium pour l'instant"
+
+#. module: oski_app_store
+#: model:ir.actions.server,name:oski_app_store.ir_cron_oski_stats_refresh_ir_actions_server
+msgid "OdooSkills Store: refresh module statistics"
+msgstr "Store OdooSkills : mise à jour des statistiques des modules"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__stat_view_count
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__view_count
+msgid "Page views"
+msgstr "Vues de fiche"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_stats_report_action
+msgid ""
+"Page views, downloads, sales and 1-hour trials of the store modules, per "
+"day, country and Odoo version. Robots and internal users are not counted."
+msgstr ""
+"Vues de fiche, téléchargements, ventes et essais d'1 heure des modules du "
+"store, par jour, pays et version d'Odoo. Les robots et les utilisateurs "
+"internes ne sont pas comptés."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form_stats
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list_ranking
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list_stats
+msgid "Public downloads"
+msgstr "Téléchargements publics"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list_ranking
+msgid "Refresh statistics"
+msgstr "Mettre à jour les statistiques"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form_stats
+msgid "Refreshed every hour. Robots and internal users are not counted."
+msgstr ""
+"Mis à jour toutes les heures. Les robots et les utilisateurs internes ne "
+"sont pas comptés."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__stat_revenue
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__revenue
+msgid "Revenue"
+msgstr "Chiffre d'affaires"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__stat_purchase_count
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__purchase_count
+msgid "Sales"
+msgstr "Ventes"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__stat_purchase_rate
+msgid "Sales per 100 page views."
+msgstr "Ventes pour 100 vues de fiche."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form_stats
+msgid "Statistics"
+msgstr "Statistiques"
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_most_downloaded
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_most_purchased
+msgid "Statistics are refreshed every hour."
+msgstr "Les statistiques sont mises à jour toutes les heures."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form_stats
+msgid "Store activity"
+msgstr "Activité sur le store"
+
+#. module: oski_app_store
+#: model:ir.model,name:oski_app_store.model_oski_module_view_daily
+msgid "Store module page views per day"
+msgstr "Vues des fiches de modules par jour"
+
+#. module: oski_app_store
+#: model:ir.actions.act_window,name:oski_app_store.oski_module_stats_report_action
+#: model:ir.model,name:oski_app_store.model_oski_module_stats_report
+#: model:ir.ui.menu,name:oski_app_store.menu_oski_analysis_stats
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_graph
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_list
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_pivot
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "Store statistics"
+msgstr "Statistiques du store"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "This month"
+msgstr "Ce mois-ci"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_list
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_list_ranking
+msgid "Total"
+msgstr "Total"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__stat_revenue
+msgid ""
+"Untaxed amount of the confirmed sales, in the company currency. Refreshed "
+"every hour."
+msgstr ""
+"Montant hors taxes des ventes confirmées, en devise de la société. Mis à "
+"jour toutes les heures."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__stat_download_rate
+msgid "View → download (%)"
+msgstr "Vue → téléchargement (%)"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__stat_purchase_rate
+msgid "View → sale (%)"
+msgstr "Vue → vente (%)"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_view_daily__view_count
+msgid "Views"
+msgstr "Vues"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__stat_view_count
+msgid ""
+"Views of the public module page (robots and internal users excluded). "
+"Refreshed every hour."
+msgstr ""
+"Vues de la fiche publique du module (hors robots et utilisateurs internes). "
+"Mis à jour toutes les heures."
+
+#. module: oski_app_store
+#: model_terms:ir.actions.act_window,help:oski_app_store.oski_module_action_most_viewed
+msgid ""
+"Views of the public module pages, robots and internal users excluded. "
+"Statistics are refreshed every hour."
+msgstr ""
+"Vues des fiches publiques des modules, hors robots et utilisateurs internes."
+" Les statistiques sont mises à jour toutes les heures."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "Week"
+msgstr "Semaine"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "With downloads"
+msgstr "Avec téléchargements"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "With sales"
+msgstr "Avec ventes"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "With views"
+msgstr "Avec vues"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page_stats
+msgid "download"
+msgstr "téléchargement"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page_stats
+msgid "downloads"
+msgstr "téléchargements"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page_stats
+msgid "purchase"
+msgstr "achat"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page_stats
+msgid "purchases"
+msgstr "achats"

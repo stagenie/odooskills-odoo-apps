@@ -20,3 +20,4 @@ from . import test_download_country
 from . import test_launch_price
 from . import test_trial
 from . import test_catalog_pager
+from . import test_store_stats

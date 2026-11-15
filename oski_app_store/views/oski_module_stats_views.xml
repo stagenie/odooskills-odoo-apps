@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ===== Rapport SQL : module × jour × pays × version Odoo ===== -->
+    <record id="oski_module_stats_report_view_pivot" model="ir.ui.view">
+        <field name="name">oski.module.stats.report.pivot</field>
+        <field name="model">oski.module.stats.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Store statistics" sample="1">
+                <field name="module_id" type="row"/>
+                <field name="date" interval="month" type="col"/>
+                <field name="view_count" type="measure"/>
+                <field name="download_count" type="measure"/>
+                <field name="purchase_count" type="measure"/>
+                <field name="trial_count" type="measure"/>
+                <field name="revenue" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="oski_module_stats_report_view_graph" model="ir.ui.view">
+        <field name="name">oski.module.stats.report.graph</field>
+        <field name="model">oski.module.stats.report</field>
+        <field name="arch" type="xml">
+            <graph string="Store statistics" type="line" sample="1">
+                <field name="date" interval="day"/>
+                <field name="download_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="oski_module_stats_report_view_list" model="ir.ui.view">
+        <field name="name">oski.module.stats.report.list</field>
+        <field name="model">oski.module.stats.report</field>
+        <field name="arch" type="xml">
+            <list string="Store statistics" create="0" edit="0" delete="0">
+                <field name="date"/>
+                <field name="module_id"/>
+                <field name="category_id" optional="hide"/>
+                <field name="pricing" optional="show"/>
+                <field name="odoo_version" optional="show"/>
+                <field name="country_id" optional="show"/>
+                <field name="view_count" sum="Total"/>
+                <field name="download_count" sum="Total"/>
+                <field name="purchase_count" sum="Total"/>
+                <field name="trial_count" sum="Total"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="revenue" sum="Total" widget="monetary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_module_stats_report_view_search" model="ir.ui.view">
+        <field name="name">oski.module.stats.report.search</field>
+        <field name="model">oski.module.stats.report</field>
+        <field name="arch" type="xml">
+            <search string="Store statistics">
+                <field name="module_id"/>
+                <field name="category_id"/>
+                <field name="country_id"/>
+                <field name="odoo_version"/>
+                <filter name="filter_7_days" string="Last 7 days"
+                        domain="[('date', '&gt;=', (context_today() - relativedelta(days=6)).strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_30_days" string="Last 30 days"
+                        domain="[('date', '&gt;=', (context_today() - relativedelta(days=29)).strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_this_month" string="This month"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-%m-01'))]"/>
+                <separator/>
+                <filter name="filter_date" string="Date" date="date"/>
+                <separator/>
+                <filter name="filter_free" string="Free" domain="[('pricing', '=', 'free')]"/>
+                <filter name="filter_paid" string="Paid" domain="[('pricing', '=', 'paid')]"/>
+                <separator/>
+                <filter name="filter_viewed" string="With views" domain="[('view_count', '&gt;', 0)]"/>
+                <filter name="filter_downloaded" string="With downloads" domain="[('download_count', '&gt;', 0)]"/>
+                <filter name="filter_sold" string="With sales" domain="[('purchase_count', '&gt;', 0)]"/>
+                <group>
+                    <filter name="group_module" string="Module" context="{'group_by': 'module_id'}"/>
+                    <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
+                    <filter name="group_pricing" string="Pricing" context="{'group_by': 'pricing'}"/>
+                    <filter name="group_country" string="Country" context="{'group_by': 'country_id'}"/>
+                    <filter name="group_odoo_version" string="Odoo version" context="{'group_by': 'odoo_version'}"/>
+                    <filter name="group_day" string="Day" context="{'group_by': 'date:day'}"/>
+                    <filter name="group_week" string="Week" context="{'group_by': 'date:week'}"/>
+                    <filter name="group_month" string="Month" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oski_module_stats_report_action" model="ir.actions.act_window">
+        <field name="name">Store statistics</field>
+        <field name="res_model">oski.module.stats.report</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="oski_module_stats_report_view_search"/>
+        <field name="context">{'search_default_filter_30_days': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No activity yet</p>
+            <p>Page views, downloads, sales and 1-hour trials of the store modules, per day, country and Odoo version. Robots and internal users are not counted.</p>
+        </field>
+    </record>
+
+    <!-- ===== Classements des modules (compteurs stockés, triables) ===== -->
+    <record id="oski_module_view_list_ranking" model="ir.ui.view">
+        <field name="name">oski.module.list.ranking</field>
+        <field name="model">oski.module</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="Module statistics" create="0" delete="0"
+                  default_order="stat_download_count desc">
+                <header>
+                    <button name="action_stats_refresh" type="object" string="Refresh statistics"
+                            display="always" class="btn-secondary"/>
+                </header>
+                <field name="name"/>
+                <field name="technical_name" optional="hide"/>
+                <field name="category_id" optional="show"/>
+                <field name="is_free" optional="show"/>
+                <field name="company_currency_id" column_invisible="1"/>
+                <field name="stat_view_count" sum="Total"/>
+                <field name="stat_download_count" sum="Total"/>
+                <field name="stat_purchase_count" sum="Total"/>
+                <field name="stat_trial_count" sum="Total" optional="show"/>
+                <field name="stat_revenue" sum="Total" widget="monetary"/>
+                <field name="stat_download_rate" optional="show"/>
+                <field name="stat_purchase_rate" optional="show"/>
+                <field name="download_count" string="Public downloads" optional="hide"/>
+                <field name="is_published" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_module_action_most_downloaded" model="ir.actions.act_window">
+        <field name="name">Most downloaded</field>
+        <field name="res_model">oski.module</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('stat_download_count', '&gt;', 0)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No download recorded yet</p>
+            <p>Statistics are refreshed every hour.</p>
+        </field>
+    </record>
+    <record id="oski_module_action_most_downloaded_list" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="oski_module_view_list_ranking"/>
+        <field name="act_window_id" ref="oski_module_action_most_downloaded"/>
+    </record>
+
+    <record id="oski_module_view_list_ranking_purchase" model="ir.ui.view">
+        <field name="name">oski.module.list.ranking.purchase</field>
+        <field name="model">oski.module</field>
+        <field name="inherit_id" ref="oski_module_view_list_ranking"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="default_order">stat_purchase_count desc, stat_revenue desc</attribute>
+            </list>
+        </field>
+    </record>
+    <record id="oski_module_action_most_purchased" model="ir.actions.act_window">
+        <field name="name">Most purchased</field>
+        <field name="res_model">oski.module</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_free', '=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No premium module yet</p>
+            <p>Statistics are refreshed every hour.</p>
+        </field>
+    </record>
+    <record id="oski_module_action_most_purchased_list" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="oski_module_view_list_ranking_purchase"/>
+        <field name="act_window_id" ref="oski_module_action_most_purchased"/>
+    </record>
+
+    <record id="oski_module_view_list_ranking_view" model="ir.ui.view">
+        <field name="name">oski.module.list.ranking.view</field>
+        <field name="model">oski.module</field>
+        <field name="inherit_id" ref="oski_module_view_list_ranking"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="default_order">stat_view_count desc</attribute>
+            </list>
+        </field>
+    </record>
+    <record id="oski_module_action_most_viewed" model="ir.actions.act_window">
+        <field name="name">Most viewed</field>
+        <field name="res_model">oski.module</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('stat_view_count', '&gt;', 0)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No page view recorded yet</p>
+            <p>Views of the public module pages, robots and internal users excluded. Statistics are refreshed every hour.</p>
+        </field>
+    </record>
+    <record id="oski_module_action_most_viewed_list" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="oski_module_view_list_ranking_view"/>
+        <field name="act_window_id" ref="oski_module_action_most_viewed"/>
+    </record>
+
+    <record id="oski_module_view_list_ranking_conversion" model="ir.ui.view">
+        <field name="name">oski.module.list.ranking.conversion</field>
+        <field name="model">oski.module</field>
+        <field name="inherit_id" ref="oski_module_view_list_ranking"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="default_order">stat_download_rate desc, stat_view_count desc</attribute>
+            </list>
+        </field>
+    </record>
+    <record id="oski_module_action_conversion" model="ir.actions.act_window">
+        <field name="name">Conversion rates</field>
+        <field name="res_model">oski.module</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('stat_view_count', '&gt;', 0)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No page view recorded yet</p>
+            <p>Downloads and sales per 100 page views. Statistics are refreshed every hour.</p>
+        </field>
+    </record>
+    <record id="oski_module_action_conversion_list" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="oski_module_view_list_ranking_conversion"/>
+        <field name="act_window_id" ref="oski_module_action_conversion"/>
+    </record>
+
+    <!-- ===== Liste et formulaire des modules : compteurs triables ===== -->
+    <record id="oski_module_view_list_stats" model="ir.ui.view">
+        <field name="name">oski.module.list.stats</field>
+        <field name="model">oski.module</field>
+        <field name="inherit_id" ref="oski_app_store.oski_module_view_list"/>
+        <field name="arch" type="xml">
+            <field name="download_count" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="string">Public downloads</attribute>
+            </field>
+            <field name="purchase_count" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="string">Buyers</attribute>
+            </field>
+            <field name="purchase_count" position="after">
+                <field name="company_currency_id" column_invisible="1"/>
+                <field name="stat_view_count" optional="show"/>
+                <field name="stat_download_count" optional="show"/>
+                <field name="stat_purchase_count" optional="show"/>
+                <field name="stat_trial_count" optional="hide"/>
+                <field name="stat_revenue" optional="show" widget="monetary"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="oski_module_view_form_stats" model="ir.ui.view">
+        <field name="name">oski.module.form.stats</field>
+        <field name="model">oski.module</field>
+        <field name="inherit_id" ref="oski_app_store.oski_module_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Statistics" name="statistics">
+                    <group>
+                        <group string="Store activity">
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="stat_view_count"/>
+                            <field name="stat_download_count"/>
+                            <field name="stat_purchase_count"/>
+                            <field name="stat_trial_count"/>
+                            <field name="stat_revenue" widget="monetary"/>
+                        </group>
+                        <group string="Conversion">
+                            <field name="stat_download_rate"/>
+                            <field name="stat_purchase_rate"/>
+                            <field name="download_count" string="Public downloads"/>
+                            <field name="purchase_count" string="Buyers"/>
+                        </group>
+                    </group>
+                    <button name="%(oski_app_store.oski_module_stats_report_action)d" type="action"
+                            string="Detailed statistics" class="btn-secondary"
+                            context="{'search_default_module_id': id, 'search_default_filter_30_days': 0}"/>
+                    <div class="text-muted small mt-2">
+                        Refreshed every hour. Robots and internal users are not counted.
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ===== Menu Analyse ===== -->
+    <menuitem id="menu_oski_analysis" name="Analysis"
+              parent="menu_oski_app_store_root" sequence="45"
+              groups="oski_app_store.group_manager"/>
+    <menuitem id="menu_oski_analysis_stats" name="Store statistics"
+              parent="menu_oski_analysis" action="oski_module_stats_report_action" sequence="10"/>
+    <menuitem id="menu_oski_analysis_most_viewed" name="Most viewed"
+              parent="menu_oski_analysis" action="oski_module_action_most_viewed" sequence="20"/>
+    <menuitem id="menu_oski_analysis_most_downloaded" name="Most downloaded"
+              parent="menu_oski_analysis" action="oski_module_action_most_downloaded" sequence="30"/>
+    <menuitem id="menu_oski_analysis_most_purchased" name="Most purchased"
+              parent="menu_oski_analysis" action="oski_module_action_most_purchased" sequence="40"/>
+    <menuitem id="menu_oski_analysis_conversion" name="Conversion rates"
+              parent="menu_oski_analysis" action="oski_module_action_conversion" sequence="50"/>
+    <menuitem id="menu_oski_analysis_downloads" name="Download log"
+              parent="menu_oski_analysis" action="oski_module_download_action" sequence="60"/>
+</odoo>

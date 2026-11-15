@@ -1,6 +1,6 @@
 {
     "name": "OdooSkills App Store",
-    "version": "19.0.7.7.3",
+    "version": "19.0.7.7.4",
     "category": "Website/eCommerce",
     "summary": "OdooSkills module store (free + premium)",
     "description": "Thin layer over website_sale exposing the oski_* modules "
@@ -13,10 +13,12 @@
         "security/oski_app_store_groups.xml",
         "security/ir.model.access.csv",
         "security/oski_app_store_rules.xml",
+        "security/oski_stats_security.xml",
         "data/oski_module_category_data.xml",
         "data/oski_module_tag_demo.xml",
         "data/oski_odoo_version_data.xml",
         "data/oski_trial_data.xml",
+        "data/oski_stats_cron.xml",
         "views/oski_module_category_views.xml",
         "views/oski_module_tag_views.xml",
         "views/oski_module_views.xml",
@@ -27,6 +29,7 @@
         "views/oski_module_trial_views.xml",
         "views/sale_order_views.xml",
         "views/oski_app_store_menus.xml",
+        "views/oski_module_stats_views.xml",
         "templates/catalog_templates.xml",
         "templates/module_page_templates.xml",
         "templates/portal_templates.xml",
@@ -35,6 +38,7 @@
         "templates/faq_templates.xml",
         "templates/support_templates.xml",
         "templates/trial_templates.xml",
+        "templates/stats_templates.xml",
     ],
     "assets": {
         "web.assets_frontend": [
