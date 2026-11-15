@@ -11,35 +11,47 @@ class OskiMassEditConfig(models.Model):
     """
 
     _name = "oski.mass.edit.config"
-    _description = "Modèle ouvert à l'édition en masse"
+    _description = "Mass Edit Model"
     _order = "model_name"
 
     model_id = fields.Many2one(
-        "ir.model", string="Modèle", required=True, ondelete="cascade",
-        help="Modèle dont la vue liste proposera l'édition en masse.",
+        "ir.model", string="Model", required=True, ondelete="cascade",
+        help="Model whose list view will offer mass editing.",
     )
-    model_name = fields.Char(related="model_id.model", store=True, string="Nom technique")
+    model_name = fields.Char(related="model_id.model", store=True, string="Technical Name")
     active = fields.Boolean(default=True)
     action_id = fields.Many2one(
-        "ir.actions.act_window", string="Action générée", readonly=True,
+        "ir.actions.act_window", string="Generated Action", readonly=True,
         ondelete="set null",
     )
 
     _model_uniq = models.Constraint(
         "UNIQUE (model_id)",
-        "Ce modèle est déjà ouvert à l'édition en masse.",
+        "This model is already open to mass editing.",
     )
 
     def _action_vals(self):
         self.ensure_one()
         return {
-            "name": _("Édition en masse"),
+            "name": _("Mass Edit"),
             "res_model": "oski.mass.edit.wizard",
             "binding_model_id": self.model_id.id,
             "binding_view_types": "list",
             "view_mode": "form",
             "target": "new",
         }
+
+    def _action_name_translations(self):
+        """Le libellé de l'entrée du menu Actions dans chaque langue installée.
+
+        en_US toujours compris : en 20, quand en_US n'est pas active, écrire
+        une autre langue recopie sa valeur dans en_US (``fields_textual.py``).
+        """
+        self.ensure_one()
+        codes = {code for code, _label in self.env["res.lang"].get_installed()}
+        return {
+            code: self.with_context(lang=code)._action_vals()["name"]
+            for code in codes | {"en_US"}}
 
     def _sync_action(self):
         for config in self:
@@ -49,11 +61,17 @@ class OskiMassEditConfig(models.Model):
                 if config.action_id:
                     config.action_id.binding_model_id = False
                 continue
-            vals = config._action_vals()
+            # Écrite en en_US (la source), puis traduite dans chaque langue
+            # installée : le libellé du menu Actions ne dépend pas de la
+            # langue de qui enregistre la configuration.
+            vals = config.with_context(lang="en_US")._action_vals()
             if config.action_id:
-                config.action_id.write(vals)
+                config.action_id.with_context(lang="en_US").write(vals)
             else:
-                config.action_id = self.env["ir.actions.act_window"].create(vals)
+                config.action_id = self.env["ir.actions.act_window"].with_context(
+                    lang="en_US").create(vals)
+            config.action_id.update_field_translations(
+                "name", config._action_name_translations())
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -77,10 +95,10 @@ class OskiMassEditConfig(models.Model):
             model = self.env.get(config.model_name)
             if model is None:
                 raise ValidationError(
-                    _("Le modèle « %s » n'existe pas dans ce serveur.", config.model_name)
+                    _("Model “%s” does not exist on this server.", config.model_name)
                 )
             if model._abstract or model._transient:
                 raise ValidationError(
-                    _("« %s » est un modèle abstrait ou transitoire : il n'a pas de "
-                      "vue liste durable à équiper.", config.model_name)
+                    _("“%s” is an abstract or transient model: it has no lasting "
+                      "list view to equip.", config.model_name)
                 )

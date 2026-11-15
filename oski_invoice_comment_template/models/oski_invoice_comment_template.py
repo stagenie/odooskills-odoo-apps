@@ -10,20 +10,20 @@ class OskiInvoiceCommentTemplate(models.Model):
     """
 
     _name = "oski.invoice.comment.template"
-    _description = "Modèle de remarque de facture"
+    _description = "Invoice Note Template"
     _order = "sequence, name"
 
-    name = fields.Char(string="Nom", required=True)
-    body = fields.Html(string="Remarque", required=True, sanitize=True)
-    sequence = fields.Integer(string="Séquence", default=10)
-    active = fields.Boolean(string="Actif", default=True)
+    name = fields.Char(string="Name", required=True)
+    body = fields.Html(string="Note", required=True, sanitize=True)
+    sequence = fields.Integer(string="Sequence", default=10)
+    active = fields.Boolean(string="Active", default=True)
     move_types = fields.Selection(
         selection=[
-            ("out", "Factures clients"),
-            ("in", "Factures fournisseurs"),
-            ("all", "Toutes"),
+            ("out", "Customer Invoices"),
+            ("in", "Vendor Bills"),
+            ("all", "All"),
         ],
-        string="Types de facture",
+        string="Invoice Types",
         default="all",
         required=True,
     )

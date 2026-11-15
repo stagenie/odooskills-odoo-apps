@@ -4,16 +4,16 @@
         <field name="name">oski.dms.version.wizard.form</field>
         <field name="model">oski.dms.version.wizard</field>
         <field name="arch" type="xml">
-            <form string="Nouvelle version">
+            <form string="New Version">
                 <group>
                     <field name="document_id" readonly="1"/>
                     <field name="file_name" invisible="1"/>
                     <field name="file" filename="file_name"/>
                 </group>
                 <footer>
-                    <button name="action_create_version" type="object" string="Créer la version"
+                    <button name="action_create_version" type="object" string="Create Version"
                             class="btn-primary"/>
-                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>

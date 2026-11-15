@@ -4,7 +4,7 @@
         <field name="name">oski.mass.edit.wizard.form</field>
         <field name="model">oski.mass.edit.wizard</field>
         <field name="arch" type="xml">
-            <form string="Édition en masse">
+            <form string="Mass Edit">
                 <group>
                     <field name="model_name"/>
                     <field name="record_count"/>
@@ -28,12 +28,11 @@
                            invisible="operation == 'clear' or field_ttype != 'many2one'"/>
                 </group>
                 <p class="text-muted">
-                    La modification s'applique aux enregistrements sélectionnés dans la liste,
-                    sous vos propres droits d'accès.
+                    The change applies to the records selected in the list, under your own access rights.
                 </p>
                 <footer>
-                    <button name="action_apply" type="object" string="Appliquer" class="btn-primary"/>
-                    <button special="cancel" string="Annuler" class="btn-secondary"/>
+                    <button name="action_apply" type="object" string="Apply" class="btn-primary"/>
+                    <button special="cancel" string="Cancel" class="btn-secondary"/>
                 </footer>
             </form>
         </field>

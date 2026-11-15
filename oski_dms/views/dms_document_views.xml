@@ -23,13 +23,13 @@
             <form string="Document">
                 <header>
                     <button name="action_restore_version" type="object"
-                            string="Restaurer cette version"
+                            string="Restore This Version"
                             invisible="active" class="btn-primary"/>
                     <button name="action_open_linked_record" type="object"
-                            string="Ouvrir l'enregistrement lié"
+                            string="Open Linked Record"
                             invisible="not res_id"/>
                     <button name="action_open_version_wizard" type="object"
-                            string="Nouvelle version" invisible="not active"/>
+                            string="New Version" invisible="not active"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -54,7 +54,7 @@
                             <field name="version_no"/>
                         </group>
                     </group>
-                    <group string="Rattachement" name="link">
+                    <group string="Linked To" name="link">
                         <field name="res_model"/>
                         <field name="res_id"/>
                         <field name="res_name"/>
@@ -95,7 +95,7 @@
                 <field name="workspace_id"/>
                 <field name="tag_ids"/>
                 <field name="owner_id"/>
-                <filter name="my_docs" string="Mes documents"
+                <filter name="my_docs" string="My Documents"
                         domain="[('owner_id', '=', uid)]"/>
                 <separator/>
                 <filter name="type_pdf" string="PDF"
@@ -104,11 +104,11 @@
                         domain="[('mimetype', 'like', 'image/')]"/>
                 <!-- Regrouper par -->
                 <group>
-                    <filter name="gb_workspace" string="Espace"
+                    <filter name="gb_workspace" string="Workspace"
                             context="{'group_by': 'workspace_id'}"/>
-                    <filter name="gb_owner" string="Propriétaire"
+                    <filter name="gb_owner" string="Owner"
                             context="{'group_by': 'owner_id'}"/>
-                    <filter name="gb_date" string="Date de création"
+                    <filter name="gb_date" string="Creation Date"
                             context="{'group_by': 'create_date'}"/>
                 </group>
             </search>

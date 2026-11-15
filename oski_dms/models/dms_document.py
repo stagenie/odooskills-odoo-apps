@@ -4,42 +4,42 @@ from odoo.exceptions import AccessError, ValidationError
 
 class DmsDocument(models.Model):
     _name = 'oski.dms.document'
-    _description = "Document GED"
+    _description = "DMS Document"
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'create_date desc'
 
-    name = fields.Char(string="Nom", required=True, tracking=True)
+    name = fields.Char(string="Name", required=True, tracking=True)
     workspace_id = fields.Many2one(
-        'oski.dms.workspace', string="Espace", required=True,
+        'oski.dms.workspace', string="Workspace", required=True,
         ondelete='restrict', tracking=True,
         default=lambda self: self._default_workspace())
     attachment_id = fields.Many2one(
-        'ir.attachment', string="Pièce jointe", ondelete='cascade', copy=False)
+        'ir.attachment', string="Attachment", ondelete='cascade', copy=False)
 
     file = fields.Binary(
-        string="Fichier", compute='_compute_file', inverse='_inverse_file')
-    file_name = fields.Char(string="Nom du fichier")
+        string="File", compute='_compute_file', inverse='_inverse_file')
+    file_name = fields.Char(string="File Name")
 
-    tag_ids = fields.Many2many('oski.dms.tag', string="Étiquettes")
-    res_model = fields.Char(string="Modèle lié")
+    tag_ids = fields.Many2many('oski.dms.tag', string="Tags")
+    res_model = fields.Char(string="Linked Model")
     res_id = fields.Many2oneReference(
-        string="Enregistrement lié", model_field='res_model')
+        string="Linked Record", model_field='res_model')
     res_name = fields.Char(
-        compute='_compute_res_name', string="Nom lié", store=False)
+        compute='_compute_res_name', string="Linked Record Name", store=False)
     owner_id = fields.Many2one(
-        'res.users', string="Propriétaire", default=lambda s: s.env.user)
+        'res.users', string="Owner", default=lambda s: s.env.user)
 
     mimetype = fields.Char(
-        related='attachment_id.mimetype', store=True, string="Type de fichier")
+        related='attachment_id.mimetype', store=True, string="File Type")
     file_size = fields.Integer(
-        related='attachment_id.file_size', store=True, string="Taille (octets)")
+        related='attachment_id.file_size', store=True, string="Size (bytes)")
 
     version_no = fields.Integer(string="Version", default=1, copy=False)
     previous_version_id = fields.Many2one(
-        'oski.dms.document', string="Version précédente", copy=False)
+        'oski.dms.document', string="Previous Version", copy=False)
     active = fields.Boolean(default=True)
     company_id = fields.Many2one(
-        related='workspace_id.company_id', store=True, string="Société")
+        related='workspace_id.company_id', store=True, string="Company")
 
     @api.model
     def _default_workspace(self):
@@ -65,7 +65,7 @@ class DmsDocument(models.Model):
                 size_mb = doc.file.size / (1024 * 1024)
                 if size_mb > max_mb:
                     raise ValidationError(
-                        self.env._("Fichier trop volumineux (max %s Mo).", max_mb))
+                        self.env._("File too large (max %s MB).", max_mb))
             fname = doc.file_name or doc.name
             # Un document peut pointer vers un attachment EXTERNE partagé
             # (classé via « Classer une PJ existante », res_model='res.partner'
@@ -100,7 +100,7 @@ class DmsDocument(models.Model):
             doc.res_name = name
 
     version_ids = fields.One2many(
-        'oski.dms.document', 'previous_version_id', string="Versions suivantes")
+        'oski.dms.document', 'previous_version_id', string="Next Versions")
 
     def action_new_version(self, datas, file_name=None):
         """Crée une nouvelle version courante ; archive la version actuelle.
@@ -153,9 +153,12 @@ class DmsDocument(models.Model):
     def action_view_versions(self):
         self.ensure_one()
         chain = self._version_chain()
+        # Hors du dict : l'extracteur Python d'Odoo 19/20 prendrait aussi le
+        # tuple du domaine qui suit.
+        name = self.env._("Versions")
         return {
             'type': 'ir.actions.act_window',
-            'name': "Versions",
+            'name': name,
             'res_model': 'oski.dms.document',
             'view_mode': 'list,form',
             'domain': [('id', 'in', chain.ids)],
@@ -167,7 +170,7 @@ class DmsDocument(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': "Nouvelle version",
+            'name': self.env._("New Version"),
             'res_model': 'oski.dms.version.wizard',
             'view_mode': 'form',
             'target': 'new',

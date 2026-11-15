@@ -53,8 +53,8 @@ class IrActionsReport(models.Model):
             return False
         if len({rule.id for rule in matched}) > 1:
             _logger.info(
-                "oski_pdf_watermark : %s documents du rapport %s appellent des "
-                "filigranes différents, aucun n'est posé.",
+                "oski_pdf_watermark: %s documents of report %s call for "
+                "different watermarks, none is applied.",
                 len(matched), report.report_name)
             return False
         return matched[0]._oski_values()

@@ -1,0 +1,207 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:36+0000\n"
+"PO-Revision-Date: 2026-11-15 04:36+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_record_audit_log
+#. odoo-python
+#: code:addons/oski_record_audit_log/models/base.py:0
+msgid "%(field)s: %(old)s → %(new)s"
+msgstr "%(field)s : %(old)s → %(new)s"
+
+#. module: oski_record_audit_log
+#. odoo-python
+#: code:addons/oski_record_audit_log/models/base.py:0
+msgid "%(field)s: %(value)s"
+msgstr "%(field)s : %(value)s"
+
+#. module: oski_record_audit_log
+#. odoo-python
+#: code:addons/oski_record_audit_log/models/base.py:0
+msgid "(empty)"
+msgstr "(vide)"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__user_id model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search
+msgid "Author"
+msgstr "Auteur"
+
+#. module: oski_record_audit_log
+#: model:ir.model,name:oski_record_audit_log.model_base
+msgid "Base"
+msgstr "Base"
+
+#. module: oski_record_audit_log
+#: model:ir.actions.act_window,name:oski_record_audit_log.action_oski_audit_log model:ir.model,name:oski_record_audit_log.model_oski_audit_log model:ir.ui.menu,name:oski_record_audit_log.menu_oski_audit_log model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_list model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search
+msgid "Change Log"
+msgstr "Journal des modifications"
+
+#. module: oski_record_audit_log
+#: model:ir.actions.act_window,name:oski_record_audit_log.action_oski_audit_rule
+msgid "Change Logging"
+msgstr "Journalisation"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__create_uid model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields.selection,name:oski_record_audit_log.selection__oski_audit_log__operation__create
+msgid "Creation"
+msgstr "Création"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__log_create model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search
+msgid "Creations"
+msgstr "Créations"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__create_date
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields.selection,name:oski_record_audit_log.selection__oski_audit_log__operation__unlink
+msgid "Deletion"
+msgstr "Suppression"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__log_unlink model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search
+msgid "Deletions"
+msgstr "Suppressions"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__changes
+msgid "Details"
+msgstr "Détail"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__display_name model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__id model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__write_uid model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__write_date model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_record_audit_log
+#: model:ir.model,name:oski_record_audit_log.model_oski_audit_rule model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_form
+msgid "Logging Rule"
+msgstr "Règle de journalisation"
+
+#. module: oski_record_audit_log
+#: model:ir.ui.menu,name:oski_record_audit_log.menu_oski_audit_rule model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_list
+msgid "Logging Rules"
+msgstr "Règles de journalisation"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__model_name model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__model_id model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_form
+msgid "Model"
+msgstr "Modèle"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__model_label
+msgid "Model Label"
+msgstr "Intitulé du modèle"
+
+#. module: oski_record_audit_log
+#. odoo-python
+#: code:addons/oski_record_audit_log/models/base.py:0
+msgid "No"
+msgstr "Non"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__operation model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search
+msgid "Operation"
+msgstr "Opération"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__res_name
+msgid "Record"
+msgstr "Enregistrement"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__res_id
+msgid "Record ID"
+msgstr "Identifiant"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,help:oski_record_audit_log.field_oski_audit_rule__field_ids
+msgid "Restricts update logging to these fields. Leave empty to watch all stored fields."
+msgstr "Limite la journalisation des modifications à ces champs. Laisser vide surveille tous les champs stockés."
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__model_name
+msgid "Technical Name"
+msgstr "Nom technique"
+
+#. module: oski_record_audit_log
+#: model:ir.model.constraint,message:oski_record_audit_log.constraint_oski_audit_rule_model_uniq
+msgid "This model already has a logging rule."
+msgstr "Ce modèle a déjà une règle de journalisation."
+
+#. module: oski_record_audit_log
+#: model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_form
+msgid "Tracked Operations"
+msgstr "Opérations suivies"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields.selection,name:oski_record_audit_log.selection__oski_audit_log__operation__write
+msgid "Update"
+msgstr "Modification"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__log_write model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search
+msgid "Updates"
+msgstr "Modifications"
+
+#. module: oski_record_audit_log
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__field_ids model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_form
+msgid "Watched Fields"
+msgstr "Champs surveillés"
+
+#. module: oski_record_audit_log
+#: model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_form
+msgid "With no field selected, updates to all stored fields are logged. Attachments, images and linked lists are ignored: their content does not fit on a log line."
+msgstr ""
+"Sans champ désigné, toutes les modifications de champs stockés sont\n"
+"                        journalisées. Les pièces jointes, images et listes liées sont ignorées :\n"
+"                        leur contenu ne tient pas sur une ligne de journal."
+
+#. module: oski_record_audit_log
+#. odoo-python
+#: code:addons/oski_record_audit_log/models/base.py:0
+msgid "Yes"
+msgstr "Oui"

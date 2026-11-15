@@ -122,6 +122,19 @@ class TestPortalDocumentRequest(PortalUploadCommon, TransactionCase):
         self.assertIn("bon.pdf", message.body)
         self.assertEqual(message.attachment_ids, attachment)
 
+    def test_the_deposit_note_speaks_the_requester_language(self):
+        """Le visiteur du portail n'est pas le lecteur : la note suit la
+        langue de qui a demandé le document."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        self.env.user.lang = "fr_FR"
+        document_request = self._request()
+        attachment = self.env["ir.attachment"].create({
+            "name": "bon.pdf", "raw": b"contenu",
+            "res_model": self.task._name, "res_id": self.task.id})
+        document_request.with_context(lang="en_US")._oski_receive(attachment)
+        self.assertIn("Document déposé depuis le portail",
+                      str(self.task.message_ids[0].body))
+
     def test_a_received_request_cannot_be_reopened(self):
         document_request = self._request()
         attachment = self.env["ir.attachment"].create({
@@ -198,7 +211,8 @@ class TestPortalUploadRoute(PortalUploadCommon, HttpCase):
         super().setUpClass()
         cls._skip_without_portal_model()
         cls.customer = cls.env["res.partner"].create({
-            "name": "Client Portail", "email": "client.portail@example.com"})
+            "name": "Client Portail", "email": "client.portail@example.com",
+            "lang": "en_US"})
         cls.portal_user = cls.env["res.users"].create({
             "name": "Client Portail", "login": "oski_portal_client",
             "password": "oski_portal_client",
@@ -237,14 +251,14 @@ class TestPortalUploadRoute(PortalUploadCommon, HttpCase):
         self._request()
         page = self._page()
         self.assertEqual(page.status_code, 200)
-        self.assertIn("Documents attendus", page.text)
+        self.assertIn("Expected Documents", page.text)
 
     def test_the_page_shows_what_is_expected(self):
         self._request(note="Le bon signé et daté.")
         self.authenticate("oski_portal_client", "oski_portal_client")
         page = self._page()
         self.assertEqual(page.status_code, 200)
-        self.assertIn("Documents attendus", page.text)
+        self.assertIn("Expected Documents", page.text)
         self.assertIn("Bon signé", page.text)
         self.assertIn("Le bon signé et daté.", page.text)
 
@@ -252,7 +266,7 @@ class TestPortalUploadRoute(PortalUploadCommon, HttpCase):
         self.authenticate("oski_portal_client", "oski_portal_client")
         page = self._page()
         self.assertEqual(page.status_code, 200)
-        self.assertNotIn("Documents attendus", page.text)
+        self.assertNotIn("Expected Documents", page.text)
 
     def test_the_customer_deposits_the_document(self):
         document_request = self._request()
@@ -272,7 +286,7 @@ class TestPortalUploadRoute(PortalUploadCommon, HttpCase):
         self.assertIn("oski_upload=extension", response.url)
         document_request.invalidate_recordset()
         self.assertEqual(document_request.state, "pending")
-        self.assertIn("n'est pas accepté", response.text)
+        self.assertIn("is not accepted", response.text)
 
     def test_a_file_beyond_the_limit_is_sent_back(self):
         self.env["ir.config_parameter"].sudo().set_str(

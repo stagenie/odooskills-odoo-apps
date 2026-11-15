@@ -4,16 +4,16 @@
         <field name="name">oski.dms.file.wizard.form</field>
         <field name="model">oski.dms.file.wizard</field>
         <field name="arch" type="xml">
-            <form string="Classer dans la GED">
+            <form string="Classify in DMS">
                 <group>
                     <field name="attachment_id" readonly="1"/>
                     <field name="workspace_id"/>
                     <field name="tag_ids" widget="many2many_tags"/>
                 </group>
                 <footer>
-                    <button name="action_file" type="object" string="Classer"
+                    <button name="action_file" type="object" string="Classify"
                             class="btn-primary"/>
-                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>

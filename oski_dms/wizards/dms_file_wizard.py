@@ -3,14 +3,14 @@ from odoo import fields, models
 
 class DmsFileWizard(models.TransientModel):
     _name = 'oski.dms.file.wizard'
-    _description = "Classer une pièce jointe dans la GED"
+    _description = "Classify an Attachment in the DMS"
 
     attachment_id = fields.Many2one(
-        'ir.attachment', string="Pièce jointe", required=True)
+        'ir.attachment', string="Attachment", required=True)
     workspace_id = fields.Many2one(
-        'oski.dms.workspace', string="Espace", required=True,
+        'oski.dms.workspace', string="Workspace", required=True,
         default=lambda self: self.env['oski.dms.document']._default_workspace())
-    tag_ids = fields.Many2many('oski.dms.tag', string="Étiquettes")
+    tag_ids = fields.Many2many('oski.dms.tag', string="Tags")
 
     def action_file(self):
         """Classe la pièce jointe existante dans la GED sans dupliquer l'octet.

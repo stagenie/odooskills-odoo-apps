@@ -5,7 +5,7 @@
         <field name="name">oski.report.watermark.list</field>
         <field name="model">oski.report.watermark</field>
         <field name="arch" type="xml">
-            <list string="Filigranes">
+            <list string="Watermarks">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="report_id"/>
@@ -21,16 +21,16 @@
         <field name="name">oski.report.watermark.form</field>
         <field name="model">oski.report.watermark</field>
         <field name="arch" type="xml">
-            <form string="Filigrane">
+            <form string="Watermark">
                 <sheet>
-                    <widget name="web_ribbon" title="Archivé" bg_color="text-bg-danger"
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
                             invisible="active"/>
                     <div class="oe_title">
                         <label for="name"/>
-                        <h1><field name="name" placeholder="Devis non confirmé"/></h1>
+                        <h1><field name="name" placeholder="Unconfirmed quotation"/></h1>
                     </div>
                     <group>
-                        <group string="Quand">
+                        <group string="When">
                             <field name="report_id" options="{'no_create': True}"/>
                             <field name="model_name"/>
                             <field name="filter_domain"
@@ -39,8 +39,8 @@
                             <field name="sequence"/>
                             <field name="active" invisible="1"/>
                         </group>
-                        <group string="Quoi">
-                            <field name="text" placeholder="BROUILLON"/>
+                        <group string="What">
+                            <field name="text" placeholder="DRAFT"/>
                             <field name="color" widget="color"/>
                             <field name="opacity"/>
                             <field name="angle"/>
@@ -48,11 +48,7 @@
                         </group>
                     </group>
                     <div class="text-muted">
-                        Plusieurs règles peuvent viser le même rapport : la première
-                        de la liste qui accepte le document l'emporte. Quand une
-                        impression groupe des documents qui appellent des filigranes
-                        différents, aucun n'est posé — un élément fixe se répète sur
-                        toutes les pages et marquerait les autres à tort.
+                        Several rules can target the same report: the first one in the list that accepts the document wins. When a print groups documents that call for different watermarks, none is applied — a fixed element repeats on every page and would wrongly mark the others.
                     </div>
                 </sheet>
             </form>
@@ -63,13 +59,13 @@
         <field name="name">oski.report.watermark.search</field>
         <field name="model">oski.report.watermark</field>
         <field name="arch" type="xml">
-            <search string="Filigranes">
+            <search string="Watermarks">
                 <field name="name"/>
                 <field name="report_id"/>
                 <field name="text"/>
-                <filter name="inactive" string="Archivés" domain="[('active', '=', False)]"/>
+                <filter name="inactive" string="Archived Watermarks" domain="[('active', '=', False)]"/>
                 <group>
-                    <filter name="group_report" string="Rapport" domain="[]"
+                    <filter name="group_report" string="Report" domain="[]"
                             context="{'group_by': 'report_id'}"/>
                 </group>
             </search>
@@ -77,22 +73,20 @@
     </record>
 
     <record id="action_oski_report_watermark" model="ir.actions.act_window">
-        <field name="name">Filigranes de rapport</field>
+        <field name="name">Report Watermarks</field>
         <field name="res_model">oski.report.watermark</field>
         <field name="view_mode">list,form</field>
         <field name="context">{}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Poser un premier filigrane</p>
+            <p class="o_view_nocontent_smiling_face">Create a first watermark</p>
             <p>
-                Un filigrane marque le document lui-même : BROUILLON tant qu'un
-                devis n'est pas confirmé, COPIE sur une réimpression, ANNULÉ sur
-                ce qui ne vaut plus.
+                A watermark marks the document itself: DRAFT while a quotation is unconfirmed, COPY on a reprint, CANCELLED on what no longer stands.
             </p>
         </field>
     </record>
 
     <menuitem id="menu_oski_report_watermark"
-              name="Filigranes de rapport"
+              name="Report Watermarks"
               parent="base.next_id_6"
               action="action_oski_report_watermark"
               sequence="35"/>

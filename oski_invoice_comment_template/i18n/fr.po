@@ -1,0 +1,162 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-15 04:27+0000\n"
+"PO-Revision-Date: 2026-11-15 04:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: oski_invoice_comment_template
+#: model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_search
+msgid "Active Templates"
+msgstr "Actifs"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields.selection,name:oski_invoice_comment_template.selection__oski_invoice_comment_template__move_types__all
+msgid "All"
+msgstr "Toutes"
+
+#. module: oski_invoice_comment_template
+#: model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_search
+msgid "Archived"
+msgstr "Archivés"
+
+#. module: oski_invoice_comment_template
+#: model_terms:ir.actions.act_window,help:oski_invoice_comment_template.oski_invoice_comment_template_action
+msgid "Create a reusable note template"
+msgstr "Créez un modèle de remarque réutilisable"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields.selection,name:oski_invoice_comment_template.selection__account_move__oski_comment_direction__out
+msgid "Customer"
+msgstr "Client"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields.selection,name:oski_invoice_comment_template.selection__oski_invoice_comment_template__move_types__out
+msgid "Customer Invoices"
+msgstr "Factures clients"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_account_move__display_name model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_account_move__id model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_account_bank_statement_line__oski_comment_direction model:ir.model.fields,field_description:oski_invoice_comment_template.field_account_move__oski_comment_direction
+msgid "Invoice Direction (Notes)"
+msgstr "Sens de la facture (remarques)"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model,name:oski_invoice_comment_template.model_oski_invoice_comment_template
+msgid "Invoice Note Template"
+msgstr "Modèle de remarque de facture"
+
+#. module: oski_invoice_comment_template
+#: model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_search
+msgid "Invoice Type"
+msgstr "Type de facture"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__move_types
+msgid "Invoice Types"
+msgstr "Types de facture"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model,name:oski_invoice_comment_template.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__body model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_form
+msgid "Note"
+msgstr "Remarque"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_account_bank_statement_line__oski_comment_template_id model:ir.model.fields,field_description:oski_invoice_comment_template.field_account_move__oski_comment_template_id model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_form
+msgid "Note Template"
+msgstr "Modèle de remarque"
+
+#. module: oski_invoice_comment_template
+#: model:ir.actions.act_window,name:oski_invoice_comment_template.oski_invoice_comment_template_action model:ir.ui.menu,name:oski_invoice_comment_template.oski_invoice_comment_template_menu model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_list model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_search
+msgid "Note Templates"
+msgstr "Modèles de remarque"
+
+#. module: oski_invoice_comment_template
+#. odoo-python
+#: code:addons/oski_invoice_comment_template/models/account_move.py:0
+msgid "Note template “%(template)s” is reserved for %(types)s."
+msgstr "Le modèle de remarque « %(template)s » est réservé aux %(types)s."
+
+#. module: oski_invoice_comment_template
+#: model_terms:ir.actions.act_window,help:oski_invoice_comment_template.oski_invoice_comment_template_action
+msgid "Note templates let you quickly insert recurring text into an invoice note, which is printed on the PDF."
+msgstr ""
+"Les modèles de remarque permettent d'insérer rapidement un texte\n"
+"                récurrent dans la note d'une facture, qui sera imprimée dans le PDF."
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,field_description:oski_invoice_comment_template.field_oski_invoice_comment_template__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields,help:oski_invoice_comment_template.field_account_bank_statement_line__oski_comment_direction model:ir.model.fields,help:oski_invoice_comment_template.field_account_move__oski_comment_direction
+msgid "Used to offer only the templates meant for this type of invoice."
+msgstr "Sert à ne proposer que les modèles prévus pour ce type de facture."
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields.selection,name:oski_invoice_comment_template.selection__account_move__oski_comment_direction__in
+msgid "Vendor"
+msgstr "Fournisseur"
+
+#. module: oski_invoice_comment_template
+#: model:ir.model.fields.selection,name:oski_invoice_comment_template.selection__oski_invoice_comment_template__move_types__in
+msgid "Vendor Bills"
+msgstr "Factures fournisseurs"
+
+#. module: oski_invoice_comment_template
+#: model_terms:ir.ui.view,arch_db:oski_invoice_comment_template.oski_invoice_comment_template_view_form
+msgid "e.g. Legal Notices"
+msgstr "Ex. : Mentions légales"

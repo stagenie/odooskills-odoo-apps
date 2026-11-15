@@ -37,15 +37,15 @@ class Base(models.AbstractModel):
     def _oski_audit_format(self, field, value):
         if field.type == "boolean":
             # Un booléen à False n'est pas « vide » : c'est « Non ».
-            return "Oui" if value else "Non"
+            return self.env._("Yes") if value else self.env._("No")
         if value is False or value is None:
-            return "(vide)"
+            return self.env._("(empty)")
         if field.type == "selection":
             # Le libellé, pas la clé technique.
             labels = dict(field._description_selection(self.env))
             return str(labels.get(value, value))
         if field.type == "many2one":
-            return self.env[field.comodel_name].browse(value).display_name if isinstance(value, int) else (value.display_name if value else "(vide)")
+            return self.env[field.comodel_name].browse(value).display_name if isinstance(value, int) else (value.display_name if value else self.env._("(empty)"))
         text = str(value)
         return text if len(text) <= VALUE_MAX else text[:VALUE_MAX] + "…"
 
@@ -90,9 +90,10 @@ class Base(models.AbstractModel):
         for record, vals in zip(records, vals_list):
             names = record._oski_audit_watched_names(rule_fields, vals.keys())
             detail = "\n".join(
-                "%s : %s" % (
-                    record._fields[name].string,
-                    record._oski_audit_format(record._fields[name], record[name]),
+                record.env._(
+                    "%(field)s: %(value)s",
+                    field=record._fields[name]._description_string(record.env),
+                    value=record._oski_audit_format(record._fields[name], record[name]),
                 )
                 for name in names
             )
@@ -121,10 +122,11 @@ class Base(models.AbstractModel):
                     old, new = before[record.id][name], record[name]
                     if old == new:
                         continue
-                    lines.append("%s : %s → %s" % (
-                        field.string,
-                        record._oski_audit_format(field, old),
-                        record._oski_audit_format(field, new),
+                    lines.append(record.env._(
+                        "%(field)s: %(old)s → %(new)s",
+                        field=field._description_string(record.env),
+                        old=record._oski_audit_format(field, old),
+                        new=record._oski_audit_format(field, new),
                     ))
                 if lines:
                     entries.append((record.id, record.display_name, "\n".join(lines)))
