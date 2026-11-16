@@ -64,6 +64,8 @@
                         domain="[('date', '&gt;=', (context_today() - relativedelta(days=29)).strftime('%Y-%m-%d'))]"/>
                 <filter name="filter_this_month" string="This month"
                         domain="[('date', '&gt;=', context_today().strftime('%Y-%m-01'))]"/>
+                <filter name="filter_public_period" string="Since public counter start"
+                        domain="[('public_period', '=', True)]"/>
                 <separator/>
                 <filter name="filter_date" string="Date" date="date"/>
                 <separator/>

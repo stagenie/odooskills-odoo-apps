@@ -3519,3 +3519,18 @@ msgstr "achat"
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page_stats
 msgid "purchases"
 msgstr "achats"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_stats_report__public_period
+msgid ""
+"Day on or after the start of the public counters (system parameter "
+"oski_app_store.public_counter_since)."
+msgstr ""
+"Jour égal ou postérieur au début des compteurs publics (paramètre système "
+"oski_app_store.public_counter_since)."
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__public_period
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "Since public counter start"
+msgstr "Depuis le début des compteurs publics"

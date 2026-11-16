@@ -127,6 +127,63 @@ class OskiModule(models.Model):
             return False
         return super().counters_visible(kind)
 
+    # ---- Compteurs publics : point de départ ---------------------------
+    # `oski_app_store.public_counter_since` (UTC, posé par la migration 19.0.7.7.4) :
+    # les compteurs PUBLICS ne comptent que ce qui est journalisé après cette date.
+    # Rien n'est effacé : journal, `oski.module.version.download_count` et rapport
+    # d'analyse gardent tout l'historique. Sans paramètre (installation neuve),
+    # comportement d'origine : somme des compteurs des archives.
+
+    @api.model
+    def _public_counter_since(self):
+        value = self.env["ir.config_parameter"].sudo().get_param(
+            "oski_app_store.public_counter_since"
+        )
+        if not value:
+            return False
+        try:
+            return fields.Datetime.to_datetime(value)
+        except ValueError:
+            _logger.warning("Invalid oski_app_store.public_counter_since: %r", value)
+            return False
+
+    def _compute_download_count(self):
+        since = self._public_counter_since()
+        if not since:
+            return super()._compute_download_count()
+        groups = self.env["oski.module.download"].sudo()._read_group(
+            [("module_id", "in", self.ids), ("date", ">=", since)],
+            ["module_id"],
+            ["__count"],
+        )
+        counts = {module.id: count for module, count in groups}
+        for record in self:
+            record.download_count = counts.get(record.id, 0)
+
+    def _compute_purchase_count(self):
+        since = self._public_counter_since()
+        if not since:
+            return super()._compute_purchase_count()
+        paid = self.filtered(lambda m: not m.is_free and m.product_tmpl_id)
+        (self - paid).purchase_count = 0
+        if not paid:
+            return
+        groups = self.env["sale.order.line"].sudo()._read_group(
+            [
+                ("product_id.product_tmpl_id", "in", paid.product_tmpl_id.ids),
+                ("state", "=", "sale"),
+                ("order_id.date_order", ">=", since),
+            ],
+            ["product_id", "order_partner_id"],
+            [],
+        )
+        buyers = {}
+        for product, partner in groups:
+            if product and partner:
+                buyers.setdefault(product.product_tmpl_id.id, set()).add(partner.id)
+        for record in paid:
+            record.purchase_count = len(buyers.get(record.product_tmpl_id.id, ()))
+
     @api.model
     def _stats_refresh(self):
         """Recalcule tous les compteurs `stat_*` en une requête (depuis le rapport SQL)."""

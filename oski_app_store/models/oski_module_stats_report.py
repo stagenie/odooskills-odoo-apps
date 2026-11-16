@@ -47,6 +47,12 @@ class OskiModuleStatsReport(models.Model):
     revenue = fields.Monetary(
         string="Revenue", currency_field="currency_id", readonly=True
     )
+    public_period = fields.Boolean(
+        string="Since public counter start",
+        readonly=True,
+        help="Day on or after the start of the public counters "
+             "(system parameter oski_app_store.public_counter_since).",
+    )
 
     def _stats_sql(self):
         """Lignes brutes (non regroupées) des quatre sources — réutilisées par le
@@ -83,6 +89,10 @@ class OskiModuleStatsReport(models.Model):
     @property
     def _table_query(self):
         currency_id = self.env.company.currency_id.id or "NULL"
+        since = self.env["oski.module"]._public_counter_since()
+        public_period = (
+            "(r.date >= DATE '%s')" % since.date().isoformat() if since else "FALSE"
+        )
         return """
             SELECT row_number() OVER (ORDER BY r.date, r.module_id) AS id,
                    r.date,
@@ -96,9 +106,14 @@ class OskiModuleStatsReport(models.Model):
                    SUM(r.purchase_count) AS purchase_count,
                    SUM(r.trial_count)    AS trial_count,
                    %s AS currency_id,
-                   SUM(r.revenue)        AS revenue
+                   SUM(r.revenue)        AS revenue,
+                   %s AS public_period
               FROM (%s) r
               JOIN oski_module m ON m.id = r.module_id
           GROUP BY r.date, r.module_id, m.category_id, m.is_free,
                    r.odoo_version, r.country_id
-        """ % (int(currency_id) if currency_id != "NULL" else "NULL", self._stats_sql())
+        """ % (
+            int(currency_id) if currency_id != "NULL" else "NULL",
+            public_period,
+            self._stats_sql(),
+        )

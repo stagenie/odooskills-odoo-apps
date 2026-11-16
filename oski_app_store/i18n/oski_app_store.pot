@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 21:35+0000\n"
-"PO-Revision-Date: 2026-11-15 21:35+0000\n"
+"POT-Creation-Date: 2026-11-16 01:29+0000\n"
+"PO-Revision-Date: 2026-11-16 01:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -781,6 +781,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_view_daily__day
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 msgid "Day"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module_stats_report__public_period
+msgid ""
+"Day on or after the start of the public counters (system parameter "
+"oski_app_store.public_counter_since)."
 msgstr ""
 
 #. module: oski_app_store
@@ -2224,6 +2231,12 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.constraint,message:oski_app_store.constraint_oski_trial_nonce_signature_uniq
 msgid "Signature already received."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__public_period
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+msgid "Since public counter start"
 msgstr ""
 
 #. module: oski_app_store

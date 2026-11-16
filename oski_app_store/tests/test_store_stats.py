@@ -295,3 +295,65 @@ class TestStoreStats(HttpCase):
         version.write({"download_count": 5})
         page = " ".join(self._open("/fr" + module.website_url).text.split())
         self.assertIn("5 téléchargements", page)
+
+    # ---- Point de départ des compteurs publics (décision du 16/11) -----
+
+    def test_public_counters_start_date(self):
+        module, version = self._module("oski_st_since", is_free=False, price=30.0)
+        Download = self.env["oski.module.download"]
+        since = fields.Datetime.now() - timedelta(hours=1)
+        old_log = Download._log(version)
+        old_log.date = since - timedelta(days=2)
+        Download._log(version)
+        version.write({"download_count": 48})   # historique du compteur des archives
+        old_buyer = self.env["res.partner"].create({"name": "Old buyer"})
+        new_buyer = self.env["res.partner"].create({"name": "New buyer"})
+        self._order(module, old_buyer).date_order = since - timedelta(days=2)
+        self._order(module, new_buyer)
+        self.env.flush_all()
+
+        # Sans point de départ : comportement d'origine (compteur des archives).
+        module.invalidate_recordset(["download_count", "purchase_count"])
+        self.assertEqual((module.download_count, module.purchase_count), (48, 2))
+
+        self.env["ir.config_parameter"].sudo().set_param(
+            "oski_app_store.public_counter_since", fields.Datetime.to_string(since))
+        module.invalidate_recordset(["download_count", "purchase_count"])
+        self.assertEqual((module.download_count, module.purchase_count), (1, 1))
+        # Rien n'est effacé : compteur d'archive, journal et analyse gardent l'historique.
+        self.assertEqual(version.download_count, 48)
+        self.assertEqual(len(Download.search([("module_id", "=", module.id)])), 2)
+        Report = self.env["oski.module.stats.report"]
+        rows = Report.search([("module_id", "=", module.id)])
+        self.assertEqual(sum(rows.mapped("download_count")), 2)
+        self.assertEqual(sum(rows.mapped("purchase_count")), 2)
+        recent = Report.search([("module_id", "=", module.id), ("public_period", "=", True)])
+        self.assertEqual(sum(recent.mapped("download_count")), 1)
+        self.assertEqual(sum(recent.mapped("purchase_count")), 1)
+        # Affichage : 1 < seuil 10 → rien ; seuil 0 → « 1 download ».
+        self._set_counters(True, minimum=10)
+        self.assertNotIn("oski-count", self._open(module.website_url).text)
+        self._set_counters(True, minimum=0)
+        page = " ".join(self._open(module.website_url).text.split())
+        self.assertIn("1 download", page)
+        self.assertIn("1 purchase", page)
+
+    def test_migration_sets_public_start(self):
+        import importlib.util
+        from odoo.modules.module import get_module_path
+        path = get_module_path("oski_app_store") + "/migrations/19.0.7.7.4/post-migration.py"
+        spec = importlib.util.spec_from_file_location("oski_mig_19_0_7_7_4", path)
+        mig = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mig)
+        Param = self.env["ir.config_parameter"].sudo()
+        for key in ("public_counter_since", "show_counters", "counters_min"):
+            Param.search([("key", "=", "oski_app_store." + key)]).unlink()
+        mig.migrate(self.env.cr, "19.0.7.7.3")
+        self.assertTrue(Param.get_param("oski_app_store.public_counter_since"))
+        self.assertEqual(Param.get_param("oski_app_store.show_counters"), "True")
+        self.assertEqual(Param.get_param("oski_app_store.counters_min"), "10")
+        # Relancée : la date de départ ne bouge pas.
+        Param.set_param("oski_app_store.public_counter_since", "2026-11-16 10:00:00")
+        mig.migrate(self.env.cr, "19.0.7.7.3")
+        self.assertEqual(Param.get_param("oski_app_store.public_counter_since"),
+                         "2026-11-16 10:00:00")
