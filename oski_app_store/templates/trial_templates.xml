@@ -40,26 +40,14 @@
                                    placeholder="you@company.com" t-att-value="form.get('email')"/>
                             <div class="form-text">We send you one e-mail when the trial ends, nothing else.</div>
                         </div>
-                        <div class="row g-3 mb-3">
-                            <div class="col-sm-5">
-                                <label for="oski_trial_version" class="form-label">Odoo version</label>
-                                <select id="oski_trial_version" name="version" class="form-select">
-                                    <t t-foreach="versions" t-as="v">
-                                        <option t-att-value="v" t-att-selected="v == form.get('version')"
-                                                t-out="'Odoo %s' % v.split('.')[0]"/>
-                                    </t>
-                                </select>
-                            </div>
-                            <div class="col-sm-7">
-                                <label for="oski_trial_country" class="form-label">Country</label>
-                                <select id="oski_trial_country" name="country_id" class="form-select">
-                                    <option value="">—</option>
-                                    <t t-foreach="countries" t-as="c">
-                                        <option t-att-value="c.id" t-att-selected="c.id == form.get('country_id')"
-                                                t-out="c.name"/>
-                                    </t>
-                                </select>
-                            </div>
+                        <div class="mb-3">
+                            <label for="oski_trial_version" class="form-label">Odoo version</label>
+                            <select id="oski_trial_version" name="version" class="form-select">
+                                <t t-foreach="versions" t-as="v">
+                                    <option t-att-value="v" t-att-selected="v == form.get('version')"
+                                            t-out="'Odoo %s' % v.split('.')[0]"/>
+                                </t>
+                            </select>
                         </div>
                         <div class="form-check mb-4">
                             <input type="checkbox" id="oski_trial_terms" name="accept_terms" value="1"

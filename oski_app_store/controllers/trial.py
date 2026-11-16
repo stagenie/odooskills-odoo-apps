@@ -111,13 +111,9 @@ class OskiAppStoreTrial(OskiAppStore):
 
     def _render_form(self, module, versions, values=None, error=None, status=200,
                      active_url=False):
-        Country = request.env["res.country"].sudo()
         user = request.env.user
         partner = user.partner_id if not user._is_public() else False
         values = dict(values or {})
-        if "country_id" not in values:
-            country, _source = self._download_country(partner)
-            values["country_id"] = country.id if country else False
         if "email" not in values and partner:
             values["email"] = partner.email or ""
         if values.get("version") not in versions:
@@ -130,7 +126,6 @@ class OskiAppStoreTrial(OskiAppStore):
             {
                 "module": module,
                 "versions": versions,
-                "countries": Country.search([]),
                 "form": values,
                 "error": error,
                 "active_url": active_url,
@@ -171,10 +166,6 @@ class OskiAppStoreTrial(OskiAppStore):
             "version": post.get("version"),
             "accept_terms": bool(post.get("accept_terms")),
         }
-        try:
-            values["country_id"] = int(post.get("country_id") or 0)
-        except ValueError:
-            values["country_id"] = 0
 
         # Robots : champ piège rempli ou formulaire envoyé trop vite / jamais affiché.
         if post.get(HONEYPOT_FIELD) or not self._form_stamp_ok(
@@ -217,12 +208,9 @@ class OskiAppStoreTrial(OskiAppStore):
 
         user = request.env.user
         partner = user.partner_id if not user._is_public() else False
-        geo_country, source = self._download_country(partner)
-        country = request.env["res.country"].sudo().browse(values["country_id"]).exists()
-        if country and country != geo_country:
-            source = "form"
-        elif not country:
-            country = geo_country
+        # Pays déterminé côté serveur seulement (partenaire connecté, sinon GeoIP) :
+        # un « country_id » envoyé par le navigateur est ignoré.
+        country, source = self._download_country(partner)
         lang = self._page_lang()
         if not partner:
             partner = Trial._find_or_create_partner(email, country=country, lang=lang)

@@ -723,7 +723,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_trial_view_search
-#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
 msgid "Country"
 msgstr "Pays"
 

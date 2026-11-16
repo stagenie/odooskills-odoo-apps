@@ -9,10 +9,11 @@ import json
 import re
 import time
 from datetime import datetime, timedelta
-from unittest.mock import patch
+from unittest.mock import PropertyMock, patch
 
 from odoo import Command, fields
 from odoo.tests import tagged
+from odoo.http import GeoIP
 from odoo.tests.common import HttpCase
 from odoo.tools.misc import hmac as odoo_hmac
 
@@ -241,11 +242,16 @@ class TestTrial(HttpCase):
         self.assertIn('value="19.0"', body)
         self.assertNotIn('value="18.0"', body)
         self.assertIn(HONEYPOT_FIELD, body)
+        # Le pays n'est plus demandé : il est déterminé côté serveur.
+        self.assertIn('id="oski_trial_version"', body)
+        self.assertNotIn("oski_trial_country", body)
+        self.assertNotIn('name="country_id"', body)
 
     # -- création ---------------------------------------------------------------
 
     def test_create_trial_calls_signed_service(self):
-        resp = self._submit()
+        with patch.object(GeoIP, "country_code", new_callable=PropertyMock, return_value="FR"):
+            resp = self._submit()
         self.assertEqual(resp.status_code, 303)
         trial = self._trials()
         self.assertEqual(len(trial), 1)
@@ -254,6 +260,7 @@ class TestTrial(HttpCase):
         self.assertEqual(trial.email, "visitor@example.com")
         self.assertEqual(trial.partner_id.email, "visitor@example.com")
         self.assertEqual(trial.country_id, self.env.ref("base.fr"))
+        self.assertEqual(trial.country_source, "geoip")
         self.assertEqual(trial.state, "queued")
         self.assertEqual(trial.remote_trial_id, "remote123")
         self.assertEqual(trial.lang, "en_US")
@@ -269,6 +276,25 @@ class TestTrial(HttpCase):
         self.assertEqual(call["payload"]["store_trial_id"], str(trial.id))
         self.assertEqual(call["payload"]["email"], "visitor@example.com")
         self.assertTrue(call["payload"]["buy_url"].startswith("https://apps.odooskills.com/apps/"))
+
+    def test_posted_country_is_ignored_geoip_wins(self):
+        """Un country_id envoyé (ici France, par _submit) est ignoré : GeoIP fait foi."""
+        with patch.object(GeoIP, "country_code", new_callable=PropertyMock, return_value="BE"):
+            resp = self._submit(email="geo@example.com")
+        self.assertEqual(resp.status_code, 303)
+        trial = self._trials()
+        self.assertEqual(trial.country_id, self.env.ref("base.be"))
+        self.assertEqual(trial.country_source, "geoip")
+        self.assertEqual(trial.partner_id.country_id, self.env.ref("base.be"))
+
+    def test_posted_country_is_ignored_without_geoip(self):
+        """Sans géolocalisation, pays inconnu même si le navigateur en envoie un."""
+        with patch.object(GeoIP, "country_code", new_callable=PropertyMock, return_value=None):
+            resp = self._submit(email="nogeo@example.com")
+        self.assertEqual(resp.status_code, 303)
+        trial = self._trials()
+        self.assertFalse(trial.country_id)
+        self.assertEqual(trial.country_source, "unknown")
 
     def test_create_trial_in_french_sends_french_lang(self):
         activate_french(self.env)
