@@ -5,7 +5,7 @@
     'summary': "Run a private school: periods, programs, classes, students and "
                "guardians, enrollments with seat control, year-end promotion.",
     'description': """
-Free core of the School suite — for primary, middle school, high school,
+Open-source core of the School suite — for primary, middle school, high school,
 higher education, a language center or a vocational training center.
 
 - Periods (school year, semester, session) with generated terms.
