@@ -77,8 +77,8 @@ class TestOpenCompatibilityWording(HttpCase):
         html = self._catalog()
         self.assertIn("is-on-request", html)
         self.assertTrue(
-            re.search(r'dropdown-item[^>]*>\s*16\.0\s*<[^>]*oski-opt-note[^>]*>\s*on request', html),
-            "la 16.0 doit porter la mention « on request » dans le sélecteur",
+            re.search(r'title="Odoo 16\.0 — on request"[^>]*class="oski-spectrum-node[^"]*is-on-request', html),
+            "la 16.0 doit porter la mention « on request » dans la frise des versions",
         )
 
     def test_meta_description_is_open(self):

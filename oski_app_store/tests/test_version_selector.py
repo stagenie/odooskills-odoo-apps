@@ -91,10 +91,10 @@ class TestCatalogVersionSelector(HttpCase):
         self.assertIn("oski_only19", resp.text)
 
     def test_pill_active_marked(self):
-        """La version sélectionnée est marquée active dans le dropdown Version."""
+        """La version sélectionnée est marquée active dans la frise des versions."""
         self.authenticate(None, None)
         resp = self.url_open("/apps?v=17.0")
-        self.assertIn("dropdown-item active", resp.text)
+        self.assertRegex(resp.text, r'title="[^"]*17\.0[^"]*"[^>]*class="oski-spectrum-node is-active')
 
     def test_card_pastilles_on_off(self):
         """Carte : dot 'on' pour version présente, 'off' pour absente."""

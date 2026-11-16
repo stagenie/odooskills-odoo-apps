@@ -17,11 +17,11 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
     background: #fff;
     color: $oski-ink;
 
-    // ---- Hero pleine largeur ----
+    // ---- Hero compact (16/11/2026) : la liste des modules visible dès l'ouverture ----
     .oski-hero {
         position: relative; overflow: hidden;
         background: radial-gradient(120% 140% at 15% 0%, #3a1f4d 0%, $oski-ink-deep 55%, #190b22 100%);
-        color: #fff; padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 4.5rem);
+        color: #fff; padding: clamp(1.6rem, 3.5vw, 2.6rem) 0;
         text-align: center;
     }
     .oski-hero-glow {
@@ -30,68 +30,71 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         pointer-events: none;
     }
     .oski-hero-inner { position: relative; z-index: 1; }
-    .oski-eyebrow {
-        display: inline-block; font-size: .78rem; font-weight: 600;
-        letter-spacing: .22em; text-transform: uppercase;
-        color: $oski-pink; margin-bottom: 1.1rem;
-    }
     .oski-hero-title {
         font-family: $oski-display; font-weight: 700;
-        font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.02;
-        letter-spacing: -.03em; margin: 0 0 1.1rem;
+        font-size: clamp(1.65rem, 3.4vw, 2.6rem); line-height: 1.1;
+        letter-spacing: -.025em; margin: 0 0 .55rem;
         em { font-style: normal; color: $oski-pink; }
     }
     .oski-hero-lead {
-        max-width: 620px; margin: 0 auto 2rem; font-size: 1.08rem;
-        line-height: 1.6; color: rgba(255,255,255,.78);
+        max-width: 680px; margin: 0 auto 1.2rem; font-size: 1rem;
+        line-height: 1.5; color: rgba(255,255,255,.78);
+        @media (max-width: 575.98px) { font-size: .9rem; margin-bottom: 1rem; }
     }
     .oski-search { max-width: 560px; margin: 0 auto;
         .form-control {
             border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08);
-            color: #fff; border-radius: 12px 0 0 12px; padding: .7rem 1rem;
+            color: #fff; border-radius: 12px 0 0 12px; padding: .6rem 1rem;
             &::placeholder { color: rgba(255,255,255,.55); }
             &:focus { background: rgba(255,255,255,.14); border-color: $oski-pink;
                 box-shadow: none; color: #fff; }
         }
         .btn { background: $oski-pink; color: $oski-ink-deep; font-weight: 700;
-            border-radius: 0 12px 12px 0; padding: .7rem 1.4rem;
+            border-radius: 0 12px 12px 0; padding: .6rem 1.3rem;
             &:hover { background: #fff; color: $oski-ink-deep; } }
     }
 
-    // ---- Signature : spectre de versions ----
+    // ---- Signature : frise des versions, dans la barre de filtres (fond clair) ----
     .oski-spectrum {
-        display: inline-flex; align-items: center; gap: 1rem;
-        margin-top: 2.4rem;
+        display: inline-flex; align-items: center; gap: .55rem;
     }
     .oski-spectrum-label {
-        font-size: .72rem; font-weight: 600; letter-spacing: .18em;
-        text-transform: uppercase; color: rgba(255,255,255,.5);
+        font-size: .72rem; font-weight: 600; letter-spacing: .14em;
+        text-transform: uppercase; color: $oski-muted;
     }
-    .oski-spectrum-scale { display: inline-flex; align-items: center; gap: .4rem; }
+    // Mobile : 2 lignes — « Catégorie · Prix · Tri », puis « versions + compteur ».
+    @media (max-width: 575.98px) {
+        .oski-toolbar .oski-filter { order: 0; }
+        .oski-toolbar-break { order: 1; flex-basis: 100%; height: 0; }
+        .oski-toolbar .oski-spectrum { order: 2; }
+        .oski-toolbar .oski-spectrum-label { display: none; }
+        .oski-toolbar-end { order: 3; }
+    }
+    .oski-spectrum-scale { display: inline-flex; align-items: center; gap: .3rem; flex-wrap: wrap; }
     .oski-spectrum-node {
         display: inline-flex; align-items: center; justify-content: center;
-        min-width: 2.6rem; height: 2.6rem; border-radius: 10px;
-        font-family: $oski-display; font-weight: 600; font-size: .95rem;
-        text-decoration: none; color: rgba(255,255,255,.7);
-        background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-        transition: transform .15s ease, background .15s ease, color .15s ease;
-        &:hover { background: rgba(255,255,255,.14); color: #fff; transform: translateY(-2px); }
+        min-width: 2.35rem; height: 2.35rem; border-radius: 10px;
+        font-family: $oski-display; font-weight: 600; font-size: .9rem;
+        text-decoration: none; color: $oski-ink;
+        background: #fff; border: 1px solid $oski-line;
+        transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+        &:hover { border-color: $oski-plum; color: $oski-plum; transform: translateY(-1px); }
         &.is-active {
-            background: $oski-pink; color: $oski-ink-deep; border-color: $oski-pink;
-            box-shadow: 0 8px 22px rgba($oski-pink, .35); transform: translateY(-2px);
+            background: $oski-plum; color: #fff; border-color: $oski-plum;
+            box-shadow: 0 6px 16px rgba($oski-plum, .25);
         }
         // Version ancienne servie à la demande : présente, mais en retrait.
-        &.is-on-request { opacity: .6; &.is-active, &:hover { opacity: 1; } }
+        &.is-on-request { opacity: .55; &.is-active, &:hover { opacity: 1; } }
         // Version dont les archives arrivent : contour pointillé, pas de plein.
         &.is-soon {
-            border-style: dashed; border-color: rgba($oski-pink, .55);
-            color: rgba(255,255,255,.55); background: transparent;
-            &.is-active { background: rgba($oski-pink, .18); color: #fff;
-                border-color: $oski-pink; box-shadow: none; }
+            border-style: dashed; border-color: rgba($oski-plum, .55);
+            color: $oski-muted; background: transparent;
+            &.is-active { background: rgba($oski-plum, .1); color: $oski-plum;
+                border-color: $oski-plum; box-shadow: none; }
         }
     }
     .oski-hero-soon {
-        margin: 1.2rem 0 0; font-size: .95rem; color: rgba(255,255,255,.72);
+        margin: .9rem 0 0; font-size: .95rem; color: rgba(255,255,255,.72);
     }
     .oski-soon-flag {
         display: inline-block; margin-right: .4rem; padding: .12rem .5rem;
@@ -129,7 +132,7 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         &:hover { color: $oski-plum; } }
 
     // ---- Compteur de résultats + pager du catalogue ----
-    .oski-result-count { color: $oski-muted; font-size: .88rem; margin: 0 0 .9rem; }
+    .oski-result-count { color: $oski-muted; font-size: .88rem; margin: 0; white-space: nowrap; }
     .oski-pager {
         margin-top: 2.5rem;
         .pagination { gap: .35rem; row-gap: .5rem; }

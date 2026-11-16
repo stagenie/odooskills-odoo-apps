@@ -203,7 +203,6 @@ class OskiAppStore(http.Controller):
                 "href": build_query(cats, tags, pricing, sort, search, pv, default_version),
             }
 
-        version_pills = [_version_option(pv) for pv in supported_versions]
         version_spectrum = [_version_option(pv) for pv in supported_versions]
         OskiModule = request.env["oski.module"].sudo()
 
@@ -244,7 +243,6 @@ class OskiAppStore(http.Controller):
             "category_options": category_options,
             "pricing_options": pricing_options,
             "sort_options": sort_options,
-            "version_pills": version_pills,
             # Pastilles de compatibilité des cartes : uniquement les versions
             # sorties (une pastille toujours éteinte sur chaque carte n'apprend
             # rien au visiteur).

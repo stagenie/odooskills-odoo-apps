@@ -88,12 +88,12 @@
             <link rel="stylesheet"
                   href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;display=swap"/>
             <div class="oski-store">
-                <!-- Hero pleine largeur : thèse + recherche + spectre de versions. Une seule action ici : chercher. -->
+                <!-- Hero compact (16/11/2026) : la liste des modules doit se voir dès l'ouverture.
+                     Une seule action ici : chercher. Les versions sont dans la barre de filtres. -->
                 <header class="oski-hero">
                     <div class="oski-hero-glow" aria-hidden="true"/>
                     <div class="container oski-hero-inner">
-                        <span class="oski-eyebrow">OdooSkills marketplace</span>
-                        <h1 class="oski-hero-title">Give Odoo<br/><em>what it's missing.</em></h1>
+                        <h1 class="oski-hero-title">Give Odoo <em>what it's missing.</em></h1>
                         <p class="oski-hero-lead">A collection of modules by OdooSkills — for Odoo <t t-out="oldest_standard"/> and later, open source and premium, ready to install.<t t-if="on_request_label"> Odoo <t t-out="on_request_label"/> on request.</t></p>
                         <form method="get" action="/apps" class="oski-search">
                             <div class="input-group">
@@ -103,8 +103,23 @@
                                 <button type="submit" class="btn oski-btn-primary">Search</button>
                             </div>
                         </form>
-                        <div class="oski-spectrum" aria-label="Compatible Odoo versions">
-                            <span class="oski-spectrum-label">Compatibility</span>
+                        <p t-if="upcoming_versions" class="oski-hero-soon">
+                            <span class="oski-soon-flag">Odoo <t t-out="upcoming_versions[0].split('.')[0]"/></span>
+                            is out: archives on the way, module by module.
+                        </p>
+                    </div>
+                </header>
+
+                <div class="container oski-catalog pt-4 pb-5">
+                    <!-- Barre unique : catégorie, version (frise, 1 clic, montre la version choisie),
+                         prix, tri, puis compteur et « Clear all » à droite. -->
+                    <div class="oski-toolbar d-flex flex-wrap align-items-center gap-2 mb-4">
+                        <t t-call="oski_app_store.filter_dropdown">
+                            <t t-set="filter_label">Category</t>
+                            <t t-set="filter_options" t-value="category_options"/>
+                        </t>
+                        <div class="oski-spectrum" role="group" aria-label="Odoo version">
+                            <span class="oski-spectrum-label">Odoo</span>
                             <div class="oski-spectrum-scale">
                                 <t t-foreach="version_spectrum" t-as="sv">
                                     <a t-att-href="sv['href']"
@@ -115,23 +130,6 @@
                                 </t>
                             </div>
                         </div>
-                        <p t-if="upcoming_versions" class="oski-hero-soon">
-                            <span class="oski-soon-flag">Odoo <t t-out="upcoming_versions[0].split('.')[0]"/></span>
-                            is out: archives on the way, module by module.
-                        </p>
-                    </div>
-                </header>
-
-                <div class="container oski-catalog py-5">
-                    <div class="oski-toolbar d-flex flex-wrap align-items-center gap-2 mb-4">
-                        <t t-call="oski_app_store.filter_dropdown">
-                            <t t-set="filter_label">Category</t>
-                            <t t-set="filter_options" t-value="category_options"/>
-                        </t>
-                        <t t-call="oski_app_store.filter_dropdown">
-                            <t t-set="filter_label">Version</t>
-                            <t t-set="filter_options" t-value="version_pills"/>
-                        </t>
                         <t t-call="oski_app_store.filter_dropdown">
                             <t t-set="filter_label">Price</t>
                             <t t-set="filter_options" t-value="pricing_options"/>
@@ -140,18 +138,20 @@
                             <t t-set="filter_label">Sort</t>
                             <t t-set="filter_options" t-value="sort_options"/>
                         </t>
-                        <a t-if="has_filters" t-att-href="clear_url"
-                           class="oski-clear ms-auto">Clear all</a>
+                        <span class="oski-toolbar-break d-sm-none" aria-hidden="true"/>
+                        <div class="oski-toolbar-end ms-auto d-flex align-items-center gap-3">
+                            <span t-if="modules" class="oski-result-count" role="status">
+                                <t t-out="result_count_label"/>
+                            </span>
+                            <a t-if="has_filters" t-att-href="clear_url"
+                               class="oski-clear">Clear all</a>
+                        </div>
                     </div>
 
                     <div t-if="version_is_upcoming" class="oski-notice" role="status">
                         <strong>Odoo <t t-out="version.split('.')[0]"/> archives are on the way.</strong>
                         Only some modules have their <t t-out="version"/> archive today&#160;; the others ship in their latest available version.
                     </div>
-
-                    <p t-if="modules" class="oski-result-count" role="status">
-                        <t t-out="result_count_label"/>
-                    </p>
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3">
                         <t t-foreach="modules" t-as="module">

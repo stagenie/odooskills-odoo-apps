@@ -18,15 +18,14 @@ class TestVersionOrder(HttpCase):
         cls.env.registry.clear_cache("routing")
         cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
 
-    def test_filter_dropdown_starts_with_20(self):
-        """Sélecteur Version : 20.0 en tête, 15.0 en queue."""
+    def test_no_version_dropdown(self):
+        """16/11/2026 : la frise de la barre de filtres remplace le menu Version (doublon)."""
         self.authenticate(None, None)
         html = self.url_open("/apps").text
-        listed = re.findall(r"dropdown-item[^>]*>\s*([0-9]{2}\.0)", html)
-        self.assertEqual(listed, EXPECTED_ORDER)
+        self.assertEqual(re.findall(r"dropdown-item[^>]*>\s*([0-9]{2}\.0)", html), [])
 
     def test_spectrum_starts_with_20(self):
-        """Frise du hero : même ordre, 20 d'abord."""
+        """Frise des versions (barre de filtres) : 20 d'abord, 15 en queue."""
         self.authenticate(None, None)
         html = self.url_open("/apps").text
         listed = re.findall(r"oski-spectrum-node[^>]*>\s*<span>([0-9]{2})</span>", html)
@@ -47,12 +46,12 @@ class TestVersionOrder(HttpCase):
         self.assertNotIn("oski-notice", html)
 
     def test_upcoming_marked_soon(self):
-        """Une version à venir se distingue : classe is-soon + mention dans le sélecteur."""
+        """Une version à venir se distingue : classe is-soon + mention dans la frise des versions."""
         self._flag_20_upcoming()
         self.authenticate(None, None)
         html = self.url_open("/apps").text
         self.assertIn("is-soon", html)
-        self.assertIn("oski-opt-note", html)
+        self.assertIn('title="Odoo 20.0 — archives on the way"', html)
         self.assertIn("archives on the way", html)
 
     def test_card_dots_skip_upcoming(self):

@@ -1041,8 +1041,8 @@ msgstr "Géolocalisation"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "Give Odoo<br/><em>what it's missing.</em>"
-msgstr "Donnez à Odoo<br/><em>ce qui lui manque.</em>"
+msgid "Give Odoo <em>what it's missing.</em>"
+msgstr "Donnez à Odoo <em>ce qui lui manque.</em>"
 
 #. module: oski_app_store
 #: model:ir.model,name:oski_app_store.model_ir_http
