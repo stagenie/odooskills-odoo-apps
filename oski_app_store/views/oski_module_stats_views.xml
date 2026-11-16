@@ -69,7 +69,7 @@
                 <separator/>
                 <filter name="filter_date" string="Date" date="date"/>
                 <separator/>
-                <filter name="filter_free" string="Free" domain="[('pricing', '=', 'free')]"/>
+                <filter name="filter_free" string="Open source" domain="[('pricing', '=', 'free')]"/>
                 <filter name="filter_paid" string="Paid" domain="[('pricing', '=', 'paid')]"/>
                 <separator/>
                 <filter name="filter_viewed" string="With views" domain="[('view_count', '&gt;', 0)]"/>

@@ -35,7 +35,7 @@ class OskiModuleStatsReport(models.Model):
         "oski.module.category", string="Category", readonly=True
     )
     pricing = fields.Selection(
-        [("free", "Free"), ("paid", "Paid")], string="Pricing", readonly=True
+        [("free", "Open source"), ("paid", "Paid")], string="Pricing", readonly=True
     )
     odoo_version = fields.Char(string="Odoo version", readonly=True)
     country_id = fields.Many2one("res.country", string="Country", readonly=True)

@@ -23,9 +23,8 @@ class TestCatalogPager(HttpCase):
         cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
         # Catalogue maîtrisé : seuls les modules du test sont publiés.
         cls.env["oski.module"].search([]).write({"is_published": False})
-        cls.tag = cls.env["oski.module.tag"].create({"name": "Pagetag"})
         cls.mods = [
-            _make_module(cls.env, "oski_pg_%02d" % i, tags=[cls.tag])
+            _make_module(cls.env, "oski_pg_%02d" % i)
             for i in range(1, TOTAL + 1)
         ]
 
@@ -72,12 +71,12 @@ class TestCatalogPager(HttpCase):
         self.assertIn("page 2 of 2", t2)
 
     def test_filters_kept_in_pager_links(self):
-        url = "/apps?tag=%s&pricing=free&search=oski_pg&sort=recent" % self.tag.id
+        url = "/apps?pricing=free&search=oski_pg&sort=recent"
         html = self._get(url).text
         links = re.findall(r'href="(/apps/page/2\?[^"]*)"', html)
         self.assertTrue(links, "lien vers la page 2 absent")
         for link in links:
-            for part in ("tag=%s" % self.tag.id, "pricing=free",
+            for part in ("pricing=free",
                          "search=oski_pg", "sort=recent"):
                 self.assertIn(part, link.replace("&amp;", "&"))
         p2 = self._get(links[0].replace("&amp;", "&"))
@@ -85,13 +84,13 @@ class TestCatalogPager(HttpCase):
 
     def test_filter_link_returns_to_page_one(self):
         html = self._get("/apps/page/2").text
-        self.assertIn('href="/apps?tag=%s"' % self.tag.id, html)
+        self.assertIn('href="/apps?pricing=free"', html)
 
     def test_out_of_range_redirects_to_last_page(self):
-        resp = self._get("/apps/page/9?tag=%s" % self.tag.id, allow_redirects=False)
+        resp = self._get("/apps/page/9?pricing=free", allow_redirects=False)
         self.assertIn(resp.status_code, (302, 303))
         self.assertTrue(resp.headers["Location"].endswith(
-            "/apps/page/2?tag=%s" % self.tag.id), resp.headers["Location"])
+            "/apps/page/2?pricing=free"), resp.headers["Location"])
         resp = self._get("/apps/page/1", allow_redirects=False)
         self.assertEqual(resp.status_code, 301)
         self.assertTrue(resp.headers["Location"].endswith("/apps"))
@@ -142,9 +141,9 @@ class TestCatalogPager(HttpCase):
 
     def test_back_link_returns_to_the_same_page(self):
         module = self.mods[-1]
-        referer = self.base_url() + "/apps/page/2?tag=%s" % self.tag.id
+        referer = self.base_url() + "/apps/page/2?pricing=free"
         html = self._get(module.website_url, headers={"Referer": referer}).text
-        self.assertIn('class="oski-back" href="/apps/page/2?tag=%s"' % self.tag.id, html)
+        self.assertIn('class="oski-back" href="/apps/page/2?pricing=free"', html)
         referer = self.base_url() + "/apps/page/2/../../../evil"
         html = self._get(module.website_url, headers={"Referer": referer}).text
         self.assertIn('class="oski-back" href="/apps"', html)

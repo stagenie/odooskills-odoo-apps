@@ -48,7 +48,7 @@
                 <field name="country_id"/>
                 <field name="partner_id"/>
                 <field name="odoo_version"/>
-                <filter name="filter_free" string="Free" domain="[('pricing', '=', 'free')]"/>
+                <filter name="filter_free" string="Open source" domain="[('pricing', '=', 'free')]"/>
                 <filter name="filter_paid" string="Paid" domain="[('pricing', '=', 'paid')]"/>
                 <separator/>
                 <filter name="filter_unknown_country" string="Unknown country"

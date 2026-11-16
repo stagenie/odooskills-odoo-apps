@@ -26,7 +26,7 @@ class OskiModule(models.Model):
         default="lgpl-3",
         required=True,
     )
-    is_free = fields.Boolean(string="Free", default=True)
+    is_free = fields.Boolean(string="Open source", default=True)
     currency_id = fields.Many2one(
         "res.currency",
         string="Currency",
@@ -35,7 +35,7 @@ class OskiModule(models.Model):
     price = fields.Monetary(
         string="Price",
         currency_field="currency_id",
-        help="Sale price of the premium module (from the manifest). Empty when free.",
+        help="Sale price of the premium module (from the manifest). Empty for open-source modules.",
     )
     author = fields.Char(string="Author", default="OdooSkills")
     maintainer = fields.Char(string="Maintainer", default="ADICOPS")

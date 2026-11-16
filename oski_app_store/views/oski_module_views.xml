@@ -38,7 +38,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <strong class="text-truncate"><field name="name"/></strong>
                                     <span t-if="record.is_free.raw_value"
-                                          class="badge text-bg-success ms-1">Free</span>
+                                          class="badge text-bg-success ms-1">Open source</span>
                                     <span t-else="" class="badge text-bg-primary ms-1">Premium</span>
                                 </div>
                                 <small class="text-muted d-block text-truncate">
@@ -142,7 +142,7 @@
                 <field name="category_id"/>
                 <field name="tag_ids"/>
                 <filter name="published" string="Published" domain="[('is_published', '=', True)]"/>
-                <filter name="free" string="Free" domain="[('is_free', '=', True)]"/>
+                <filter name="free" string="Open source" domain="[('is_free', '=', True)]"/>
                 <group>
                     <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
                 </group>

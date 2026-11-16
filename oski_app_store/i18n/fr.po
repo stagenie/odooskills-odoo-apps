@@ -251,11 +251,6 @@ msgstr ""
 "                        appartiennent à leurs titulaires respectifs."
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
-msgid "<option value=\"\">—</option>"
-msgstr "<option value=\"\">—</option>"
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 msgid "<span class=\"oski-card-go\" aria-hidden=\"true\">View →</span>"
 msgstr "<span class=\"oski-card-go\" aria-hidden=\"true\">Voir →</span>"
@@ -503,8 +498,8 @@ msgstr "Après l'achat"
 #. module: oski_app_store
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
-msgid "All"
-msgstr "Tous"
+msgid "All prices"
+msgstr "Tous les prix"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
@@ -992,11 +987,6 @@ msgstr ""
 "                        les conditions de vente, avant l'ouverture des ventes."
 
 #. module: oski_app_store
-#: model:oski.module.tag,name:oski_app_store.tag_demo_exemple
-msgid "Example"
-msgstr "Exemple"
-
-#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__expires_at
 msgid "Expires at"
 msgstr "Expire le"
@@ -1025,23 +1015,6 @@ msgstr "Abonnés"
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Abonnés (partenaires)"
-
-#. module: oski_app_store
-#. odoo-python
-#: code:addons/oski_app_store/controllers/main.py:0
-#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_free
-#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__is_free
-#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__pricing__free
-#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_stats_report__pricing__free
-#: model:oski.module.tag,name:oski_app_store.tag_demo_gratuit
-#: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
-#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
-#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
-#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
-#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_kanban
-#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
-msgid "Free"
-msgstr "Gratuit"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.trial_form_page
@@ -1720,11 +1693,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.support_page
 msgid ""
 "One address for the whole store —\n"
-"                        free modules as well as paid ones, a question before purchase as well\n"
+"                        open-source modules as well as premium ones, a question before purchase as well\n"
 "                        as a failure after installation."
 msgstr ""
 "Une seule adresse pour tout le store —\n"
-"                        modules gratuits comme payants, question avant achat comme panne\n"
+"                        modules open source comme premium, question avant achat comme panne\n"
 "                        après installation."
 
 #. module: oski_app_store
@@ -1768,6 +1741,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.trial_wait_page
 msgid "Open my trial database"
 msgstr "Ouvrir ma base d'essai"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_free
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module_download__is_free
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_download__pricing__free
+#: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_stats_report__pricing__free
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_kanban
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
+msgid "Open source"
+msgstr "Open source"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
@@ -1966,10 +1955,10 @@ msgstr "Prête le"
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid ""
-"Ready-to-install Odoo modules, free and premium, by OdooSkills — for Odoo %s"
-" and later."
+"Ready-to-install Odoo modules, open source and premium, by OdooSkills — for "
+"Odoo %s and later."
 msgstr ""
-"Modules Odoo prêts à installer, gratuits et premium, signés OdooSkills — "
+"Modules Odoo prêts à installer, open source et premium, signés OdooSkills — "
 "pour Odoo %s et suivantes."
 
 #. module: oski_app_store
@@ -2091,8 +2080,12 @@ msgstr "Erreur de livraison SMS"
 
 #. module: oski_app_store
 #: model:ir.model.fields,help:oski_app_store.field_oski_module__price
-msgid "Sale price of the premium module (from the manifest). Empty when free."
-msgstr "Prix de vente du module premium (issu du manifeste). Vide si gratuit."
+msgid ""
+"Sale price of the premium module (from the manifest). Empty for open-source "
+"modules."
+msgstr ""
+"Prix de vente du module premium (issu du manifeste). Vide pour les modules "
+"open source."
 
 #. module: oski_app_store
 #: model:oski.module.category,name:oski_app_store.cat_sales
@@ -2407,11 +2400,11 @@ msgstr "The full relative URL to access the document through the website."
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid ""
 "The license is shown on the module's listing and in its archive:\n"
-"                            free modules are under an open-source license, paid modules under\n"
+"                            open-source modules are under the LGPL-3 license, premium modules under\n"
 "                            a proprietary Odoo license."
 msgstr ""
 "La licence figure sur la fiche du module et dans son archive : les\n"
-"                            modules gratuits sont sous licence libre, les modules payants sous\n"
+"                            modules open source sont sous licence LGPL-3, les modules premium sous\n"
 "                            licence propriétaire Odoo."
 
 #. module: oski_app_store
@@ -2526,12 +2519,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.terms_of_use
 msgid ""
 "The site presents a catalog of modules for the Odoo software. Some\n"
-"                        modules are available for free download, others after purchase. Odoo\n"
+"                        modules are open source and can be downloaded directly, others after purchase. Odoo\n"
 "                        is a trademark of Odoo S.A.; this site is not published by Odoo S.A. and\n"
 "                        does not bind that company."
 msgstr ""
 "Le site présente un catalogue de modules pour le logiciel Odoo. Certains\n"
-"                        modules sont téléchargeables gratuitement, d'autres après achat. Odoo\n"
+"                        modules sont open source et se téléchargent directement, d'autres après achat. Odoo\n"
 "                        est une marque d'Odoo S.A. ; ce site n'est pas édité par Odoo S.A. et\n"
 "                        n'engage pas cette société."
 
@@ -2983,8 +2976,8 @@ msgstr "et"
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "and later, free to premium, ready to install."
-msgstr "et suivantes, du gratuit au premium, prêts à installer."
+msgid "and later, open source and premium, ready to install."
+msgstr "et suivantes, open source et premium, prêts à installer."
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page

@@ -17,7 +17,7 @@
                                 <div>
                                     <h1 class="oski-module-title" t-out="module.name"/>
                                     <span class="oski-badges">
-                                        <span t-if="module.is_free" class="oski-badge oski-badge-free">Free</span>
+                                        <span t-if="module.is_free" class="oski-badge oski-badge-free">Open source</span>
                                         <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
                                         <t t-if="ribbon and ribbon.style == 'tag'" t-call="oski_app_store.module_ribbon"/>
                                     </span>
@@ -54,11 +54,6 @@
                                        t-att-title="pv['title']"
                                        t-attf-class="oski-vpill #{'on' if pv['version'] in avail else 'off'} #{'sel' if pv['version'] == version else ''} #{'soon' if pv['version'] in upcoming_versions else ''}"
                                        t-out="pv['version']"/>
-                                </t>
-                            </div>
-                            <div class="oski-chips mb-3" t-if="module.tag_ids">
-                                <t t-foreach="module.tag_ids" t-as="tag">
-                                    <a t-attf-href="/apps?tag=#{tag.id}" class="oski-chip" t-out="tag.name"/>
                                 </t>
                             </div>
                             <!-- Dépendances catalogue : lien si la fiche cible est

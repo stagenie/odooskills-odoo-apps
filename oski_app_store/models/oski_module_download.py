@@ -27,9 +27,9 @@ class OskiModuleDownload(models.Model):
     date = fields.Datetime(
         string="Date", required=True, default=fields.Datetime.now, index=True
     )
-    is_free = fields.Boolean(string="Free")
+    is_free = fields.Boolean(string="Open source")
     pricing = fields.Selection(
-        [("free", "Free"), ("paid", "Paid")],
+        [("free", "Open source"), ("paid", "Paid")],
         string="Pricing",
         compute="_compute_pricing",
         store=True,

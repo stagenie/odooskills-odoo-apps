@@ -1,6 +1,8 @@
 from odoo.tests import tagged
 from odoo.tests.common import HttpCase, TransactionCase
 
+from odoo.addons.oski_app_store.tests.common_i18n import activate_french
+
 
 def _ver(env, name):
     rec = env["oski.odoo.version"].search([("name", "=", name)], limit=1)
@@ -53,7 +55,8 @@ class TestFacets(HttpCase):
         cls.env.registry.clear_cache("routing")
         cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
 
-    def test_filter_single_tag(self):
+    def test_no_tag_row_in_catalog(self):
+        """19.0.7.7.6 : plus de rangée d'étiquettes, même si des étiquettes existent."""
         self.authenticate(None, None)
         tag = self.env["oski.module.tag"].create({"name": "Tlinch"})
         _make_module(self.env, "oski_has_tag", tags=[tag])
@@ -61,19 +64,47 @@ class TestFacets(HttpCase):
         resp = self.url_open("/apps")
         self.assertIn("oski_has_tag", resp.text)
         self.assertIn("oski_no_tag", resp.text)
-        resp = self.url_open("/apps?tag=%s" % tag.id)
-        self.assertIn("oski_has_tag", resp.text)
-        self.assertNotIn("oski_no_tag", resp.text)
+        self.assertNotIn("oski-tag-chips", resp.text)
+        self.assertNotIn("Tlinch", resp.text)
+        self.assertNotIn("?tag=", resp.text)
 
-    def test_filter_or_two_tags(self):
+    def test_old_tag_link_redirects_without_tag(self):
+        """Un ancien lien `?tag=` ne casse rien : 301 vers la même vue sans étiquette."""
         self.authenticate(None, None)
-        ta = self.env["oski.module.tag"].create({"name": "Tora"})
-        tb = self.env["oski.module.tag"].create({"name": "Torb"})
-        _make_module(self.env, "oski_ta", tags=[ta])
-        _make_module(self.env, "oski_tb", tags=[tb])
-        resp = self.url_open("/apps?tag=%s&tag=%s" % (ta.id, tb.id))
+        tag = self.env["oski.module.tag"].create({"name": "Tora"})
+        _make_module(self.env, "oski_ta", tags=[tag])
+        _make_module(self.env, "oski_tb")
+        for raw in (str(tag.id), "1", "abc"):
+            resp = self.url_open("/apps?tag=%s&pricing=free" % raw, allow_redirects=False)
+            self.assertEqual(resp.status_code, 301, raw)
+            location = resp.headers["Location"]
+            self.assertNotIn("tag=", location)
+            self.assertTrue(location.endswith("/apps?pricing=free"), location)
+        resp = self.url_open("/apps?tag=%s" % tag.id)
+        self.assertEqual(resp.status_code, 200)
         self.assertIn("oski_ta", resp.text)
         self.assertIn("oski_tb", resp.text)
+
+    def test_pricing_labels_open_source(self):
+        """Sélecteur Prix : All prices / Open source / Premium ; badge Open source."""
+        self.authenticate(None, None)
+        _make_module(self.env, "oski_os_badge", is_free=True)
+        html = self.url_open("/apps").text
+        for label in ("All prices", "Open source", "Premium"):
+            self.assertIn(label, html)
+        self.assertIn('oski-badge-free">Open source<', html)
+        self.assertNotRegex(html, r">\s*Free\s*<")
+
+    def test_pricing_labels_open_source_french(self):
+        activate_french(self.env)
+        self.authenticate(None, None)
+        _make_module(self.env, "oski_os_badge_fr", is_free=True)
+        html = self.url_open("/fr/apps").text
+        for label in ("Tous les prix", "Open source", "Premium"):
+            self.assertIn(label, html)
+        self.assertIn('oski-badge-free">Open source<', html)
+        self.assertNotIn("Gratuit", html)
+        self.assertNotIn("gratuits", html)
 
     def test_filter_pricing_free(self):
         self.authenticate(None, None)
@@ -105,12 +136,15 @@ class TestFacets(HttpCase):
 
     def test_and_across_groups(self):
         self.authenticate(None, None)
-        tag = self.env["oski.module.tag"].create({"name": "Tand"})
         c1 = self.env["oski.module.category"].create({"name": "CatA"})
         c2 = self.env["oski.module.category"].create({"name": "CatB"})
-        _make_module(self.env, "oski_tag_c1", category=c1, tags=[tag])
-        resp = self.url_open("/apps?tag=%s&category=%s" % (tag.id, c2.id))
-        self.assertNotIn("oski_tag_c1", resp.text)
+        _make_module(self.env, "oski_free_c1", category=c1, is_free=True)
+        _make_module(self.env, "oski_paid_c1", category=c1, is_free=False)
+        _make_module(self.env, "oski_free_c2", category=c2, is_free=True)
+        resp = self.url_open("/apps?pricing=free&category=%s" % c1.id)
+        self.assertIn("oski_free_c1", resp.text)
+        self.assertNotIn("oski_paid_c1", resp.text)
+        self.assertNotIn("oski_free_c2", resp.text)
 
     def test_sort_recent(self):
         self.authenticate(None, None)
@@ -129,20 +163,11 @@ class TestFacets(HttpCase):
         # le plus récent (oski_new) apparaît avant oski_old
         self.assertLess(resp.text.index("oski_new"), resp.text.index("oski_old"))
 
-    def test_chip_present_and_linked(self):
-        self.authenticate(None, None)
-        tag = self.env["oski.module.tag"].create({"name": "Tchip"})
-        _make_module(self.env, "oski_chipmod", tags=[tag])
-        resp = self.url_open("/apps")
-        self.assertIn("oski-chip", resp.text)
-        self.assertIn('href="/apps?tag=%s"' % tag.id, resp.text)
-
     def test_active_filters_bar(self):
         """Quand des filtres sont actifs, le lien 'Tout effacer' est affiché."""
         self.authenticate(None, None)
-        tag = self.env["oski.module.tag"].create({"name": "Tactive"})
-        _make_module(self.env, "oski_af", tags=[tag])
-        resp = self.url_open("/apps?tag=%s" % tag.id)
+        _make_module(self.env, "oski_af")
+        resp = self.url_open("/apps?pricing=free")
         self.assertIn("oski-clear", resp.text)
 
     def test_facet_panel_rendered(self):
@@ -167,11 +192,13 @@ class TestModulePageChips(HttpCase):
         cls.env.registry.clear_cache("routing")
         cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
 
-    def test_page_shows_tag_chips(self):
+    def test_page_shows_no_tag_chips(self):
+        """19.0.7.7.6 : la fiche n'affiche plus d'étiquettes ; badge Open source."""
         self.authenticate(None, None)
         tag = self.env["oski.module.tag"].create({"name": "Tpage"})
         module = _make_module(self.env, "oski_pagetag", tags=[tag])
         resp = self.url_open(module.website_url)
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("oski-chip", resp.text)
-        self.assertIn('href="/apps?tag=%s"' % tag.id, resp.text)
+        self.assertNotIn("Tpage", resp.text)
+        self.assertNotIn("/apps?tag=", resp.text)
+        self.assertIn('oski-badge-free">Open source<', resp.text)

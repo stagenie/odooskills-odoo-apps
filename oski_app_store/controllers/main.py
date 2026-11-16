@@ -52,7 +52,7 @@ class OskiAppStore(http.Controller):
     @http.route(["/apps", "/apps/page/<int:page>"], type="http", auth="public",
                 website=True, sitemap=True)
     def apps_catalog(self, page=1, **kw):
-        """Catalogue public avec facettes (catégorie/tags/prix), tri et version.
+        """Catalogue public avec facettes (catégorie/prix), tri et version.
 
         Behavior B : aucun module masqué par la version (pills + tri compatibles-d'abord).
         Filtrage : OR intra-groupe (ORM `in`), AND inter-groupes (conjonction).
@@ -85,7 +85,9 @@ class OskiAppStore(http.Controller):
             return out
 
         cats = _ints("category")
-        tags = _ints("tag")
+        # Les étiquettes ne filtrent plus le catalogue (19.0.7.7.6) : un ancien
+        # lien `?tag=` est redirigé vers la même vue sans ce paramètre.
+        tags = []
         pricing = args.get("pricing", "all")
         sort = args.get("sort", "name")
         search = args.get("search", "").strip()[:120]
@@ -95,8 +97,6 @@ class OskiAppStore(http.Controller):
         domain = [("is_published", "=", True)]
         if cats:
             domain.append(("category_id", "in", cats))
-        if tags:
-            domain.append(("tag_ids", "in", tags))
         if pricing == "free":
             domain.append(("is_free", "=", True))
         elif pricing == "premium":
@@ -125,6 +125,10 @@ class OskiAppStore(http.Controller):
         filter_args = query_params(cats, tags, pricing, sort, search, version, default_version)
         total = len(modules)
         page_count = max(1, -(-total // CATALOG_PAGE_SIZE))
+        if "tag" in args:
+            target = "/apps/page/%d" % page if page > 1 else "/apps"
+            return request.redirect(request.env["ir.http"]._url_for(build_query(
+                cats, tags, pricing, sort, search, version, default_version, path=target)), code=301)
         if page == 1 and request.httprequest.path.rstrip("/").endswith("/page/1"):
             # /apps/page/1 doublonne /apps : une seule URL pour la page 1.
             # _url_for garde le préfixe de langue (/fr/...).
@@ -144,7 +148,6 @@ class OskiAppStore(http.Controller):
         modules = modules[pager["offset"]:pager["offset"] + CATALOG_PAGE_SIZE]
 
         categories = request.env["oski.module.category"].search([])
-        all_tags = request.env["oski.module.tag"].search([])
 
         category_options = [
             {
@@ -155,16 +158,6 @@ class OskiAppStore(http.Controller):
             }
             for c in categories
         ]
-        tag_options = [
-            {
-                "id": t.id,
-                "name": t.name,
-                "color": t.color,
-                "selected": t.id in tags,
-                "href": build_query(cats, toggle(tags, t.id), pricing, sort, search, version, default_version),
-            }
-            for t in all_tags
-        ]
         pricing_options = [
             {
                 "key": key,
@@ -172,7 +165,7 @@ class OskiAppStore(http.Controller):
                 "selected": pricing == key,
                 "href": build_query(cats, tags, key, sort, search, version, default_version),
             }
-            for key, label in (("all", _("All")), ("free", _("Free")), ("premium", _("Premium")))
+            for key, label in (("all", _("All prices")), ("free", _("Open source")), ("premium", _("Premium")))
         ]
         sort_choices = [("name", _("Name")), ("recent", _("Recent"))]
         if show_counters:
@@ -220,7 +213,7 @@ class OskiAppStore(http.Controller):
             pv.split(".")[0] for pv in reversed(on_request_versions)
         )
         meta_description = _(
-            "Ready-to-install Odoo modules, free and premium, by OdooSkills — "
+            "Ready-to-install Odoo modules, open source and premium, by OdooSkills — "
             "for Odoo %s and later."
         ) % oldest_standard
         if on_request_label:
@@ -249,7 +242,6 @@ class OskiAppStore(http.Controller):
             "catalog_count": OskiModule.search_count([]),
             "free_count": OskiModule.search_count([("is_free", "=", True)]),
             "category_options": category_options,
-            "tag_options": tag_options,
             "pricing_options": pricing_options,
             "sort_options": sort_options,
             "version_pills": version_pills,

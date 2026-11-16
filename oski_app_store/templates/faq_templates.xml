@@ -111,7 +111,7 @@
                     <details class="oski-faq-item">
                         <summary>Under what license&#160;?</summary>
                         <p>The license is shown on the module's listing and in its archive:
-                            free modules are under an open-source license, paid modules under
+                            open-source modules are under the LGPL-3 license, premium modules under
                             a proprietary Odoo license.</p>
                     </details>
                     <details class="oski-faq-item">
