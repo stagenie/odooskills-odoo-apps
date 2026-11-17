@@ -27,6 +27,12 @@ class TreasurySafeOperation(models.Model):
     ], string='Type', required=True, tracking=True)
     amount = fields.Monetary(
         string='Amount', required=True, currency_field='currency_id',
+        aggregator=None,
+    )
+    # Entrées en +, sorties en - (cf. _signed_amount) : total de liste qui a un sens
+    signed_amount = fields.Monetary(
+        string='Net Amount', currency_field='currency_id',
+        compute='_compute_signed_amount', store=True,
     )
     currency_id = fields.Many2one(
         'res.currency', related='safe_id.currency_id', store=True,
@@ -94,6 +100,11 @@ class TreasurySafeOperation(models.Model):
             op.balance_after = balance + (
                 op._signed_amount() if op.state == 'done' else 0.0
             )
+
+    @api.depends('amount', 'operation_type')
+    def _compute_signed_amount(self):
+        for op in self:
+            op.signed_amount = op._signed_amount()
 
     def _signed_amount(self):
         """Signed contribution of this operation to the safe's balance.

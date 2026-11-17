@@ -115,6 +115,26 @@ class TestTreasuryIntegration(TransactionCase):
         cash.invalidate_recordset()
         self.assertEqual(cash.current_balance, 7000)
 
+    def test_10b_signed_amount_for_list_totals(self):
+        """Outgoing operations count negatively in the net amount, and the raw
+        amount is not summed (a total mixing in and out means nothing)."""
+        cash = self.env['oski.treasury.cash'].create({
+            'name': 'Cash Net', 'code': 'NET1',
+            'journal_id': self.journal_cash.id,
+        })
+        Op = self.env['oski.treasury.cash.operation']
+        ops = Op.create([
+            {'cash_id': cash.id, 'operation_type': 'in',
+             'category_id': self.category_in.id, 'amount': 1000},
+            {'cash_id': cash.id, 'operation_type': 'out',
+             'category_id': self.category_out.id, 'amount': 300},
+        ])
+        self.assertEqual(ops.mapped('signed_amount'), [1000, -300])
+        self.assertEqual(sum(ops.mapped('signed_amount')), 700)
+        self.assertFalse(Op._fields['amount'].aggregator)
+        self.assertEqual(Op._fields['signed_amount'].aggregator, 'sum')
+        self.assertFalse(self.env['oski.treasury.safe.operation']._fields['amount'].aggregator)
+
     def test_11_operation_amount_positive(self):
         """The amount must be > 0"""
         cash = self.env['oski.treasury.cash'].create({

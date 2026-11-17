@@ -1947,3 +1947,16 @@ msgstr ""
 #: model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_closing__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_cash_operation__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_safe_operation__website_message_ids model:ir.model.fields,help:oski_treasury.field_oski_treasury_transfer__website_message_ids
 msgid "Website communication history"
 msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__signed_amount
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__signed_amount
+msgid "Net Amount"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_list
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_list
+msgid "Net"
+msgstr ""
