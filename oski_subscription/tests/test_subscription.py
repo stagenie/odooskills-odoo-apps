@@ -198,3 +198,8 @@ class TestSubscription(TransactionCase):
             {"name": "Mgr Plan", "billing_unit": "month"}
         )
         self.assertTrue(plan.id)
+
+    def test_admin_is_subscription_manager(self):
+        # sans démo, l'administrateur doit voir le Reporting et la configuration
+        admin = self.env.ref("base.user_admin")
+        self.assertTrue(admin.has_group("oski_subscription.group_subscription_manager"))

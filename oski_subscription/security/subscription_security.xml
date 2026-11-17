@@ -17,6 +17,8 @@
         <field name="name">Subscriptions / Manager</field>
         <field name="category_id" ref="module_category_subscription"/>
         <field name="implied_ids" eval="[(4, ref('group_subscription_user'))]"/>
+        <!-- sans démo, l'administrateur n'aurait ni le menu Reporting ni la configuration -->
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 
     <!-- Multi-société : chaque utilisateur ne voit que les abonnements des

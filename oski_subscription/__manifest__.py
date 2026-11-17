@@ -1,6 +1,6 @@
 {
     "name": "Subscriptions",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Sales/Subscriptions",
     "summary": "Manage your subscriptions and invoice each customer automatically at the right pace — without Enterprise.",
     "author": "OdooSkills",
@@ -19,7 +19,7 @@
         "views/subscription_menus.xml",
     ],
     "demo": ["demo/subscription_demo.xml"],
-    "images": ["static/description/screenshot_01_liste_abonnements.png"],
+    "images": ["static/description/screenshot_01_subscriptions.png"],
     "installable": True,
     "application": True,
 }
