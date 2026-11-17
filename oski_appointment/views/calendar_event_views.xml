@@ -4,14 +4,19 @@
         <field name="name">calendar.event.appointment.list</field>
         <field name="model">calendar.event</field>
         <field name="arch" type="xml">
-            <list>
+            <list decoration-success="appointment_state == 'done'"
+                  decoration-danger="appointment_state == 'no_show'"
+                  decoration-muted="appointment_state == 'cancelled'">
                 <field name="name"/>
                 <field name="start"/>
                 <field name="stop"/>
                 <field name="user_id"/>
                 <field name="appointment_partner_id" optional="show"/>
                 <field name="appointment_type_id"/>
-                <field name="appointment_state"/>
+                <field name="appointment_state" widget="badge"
+                       decoration-info="appointment_state == 'booked'"
+                       decoration-success="appointment_state == 'done'"
+                       decoration-danger="appointment_state == 'no_show'"/>
             </list>
         </field>
     </record>
@@ -23,8 +28,18 @@
             <search>
                 <field name="appointment_type_id"/>
                 <field name="user_id"/>
+                <field name="appointment_partner_id"/>
+                <filter name="upcoming" string="Upcoming"
+                        domain="[('start', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
                 <filter name="booked" string="Booked Appointments"
                         domain="[('appointment_state', '=', 'booked')]"/>
+                <filter name="attended" string="Attended"
+                        domain="[('appointment_state', '=', 'done')]"/>
+                <filter name="no_show" string="No Show"
+                        domain="[('appointment_state', '=', 'no_show')]"/>
+                <filter name="cancelled" string="Cancelled"
+                        domain="[('appointment_state', '=', 'cancelled')]"/>
                 <separator/>
                 <filter name="group_type" string="Type"
                         context="{'group_by': 'appointment_type_id'}"/>
@@ -34,12 +49,57 @@
         </field>
     </record>
 
+    <record id="view_calendar_event_form_appointment" model="ir.ui.view">
+        <field name="name">calendar.event.form.appointment</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="appointment_type_id" invisible="1"/>
+                <button name="action_appointment_done" type="object" string="Attended"
+                        class="btn-secondary"
+                        invisible="not appointment_type_id or appointment_state != 'booked'"/>
+                <button name="action_appointment_no_show" type="object" string="No Show"
+                        class="btn-secondary"
+                        invisible="not appointment_type_id or appointment_state != 'booked'"/>
+                <button name="action_appointment_cancel" type="object" string="Cancel Appointment"
+                        class="btn-secondary"
+                        invisible="not appointment_type_id or appointment_state != 'booked'"/>
+                <field name="appointment_state" widget="statusbar"
+                       statusbar_visible="booked,done"
+                       invisible="not appointment_type_id"/>
+            </xpath>
+            <xpath expr="//field[@name='location']" position="before">
+                <field name="appointment_partner_id" invisible="not appointment_type_id"
+                       readonly="not user_can_edit"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Agenda des rendez-vous : TOUT le personnel, une couleur par praticien (le calendrier
+         standard ne montre que les réunions dont on est participant). -->
+    <record id="view_appointment_event_calendar" model="ir.ui.view">
+        <field name="name">calendar.event.appointment.calendar</field>
+        <field name="model">calendar.event</field>
+        <field name="priority" eval="100"/>
+        <field name="arch" type="xml">
+            <calendar string="Appointments" date_start="start" date_stop="stop"
+                      color="user_id" mode="week" event_open_popup="false" quick_create="false">
+                <field name="user_id" filters="1" avatar_field="avatar_128"/>
+                <field name="appointment_partner_id"/>
+                <field name="appointment_type_id" filters="1"/>
+                <field name="appointment_state"/>
+                <field name="location"/>
+            </calendar>
+        </field>
+    </record>
+
     <record id="action_appointment_event" model="ir.actions.act_window">
         <field name="name">Appointments</field>
         <field name="res_model">calendar.event</field>
         <field name="view_mode">list,calendar,form</field>
         <field name="domain">[('appointment_type_id', '!=', False)]</field>
         <field name="search_view_id" ref="view_appointment_event_search"/>
-        <field name="context">{'list_view_ref': 'oski_appointment.view_appointment_event_list'}</field>
+        <field name="context">{'list_view_ref': 'oski_appointment.view_appointment_event_list', 'calendar_view_ref': 'oski_appointment.view_appointment_event_calendar'}</field>
     </record>
 </odoo>
