@@ -1,6 +1,6 @@
 {
     "name": "Appointment Booking",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Services/Appointment",
     "summary": "Book time slots with no double booking — structured appointment scheduling for Odoo Community",
     "author": "OdooSkills",
@@ -17,7 +17,7 @@
         "views/calendar_event_views.xml",
         "views/appointment_menus.xml",
     ],
-    "images": ["static/description/screenshot_01_type_form.png"],
+    "images": ["static/description/screenshot_01_appointments.png"],
     "application": True,
     "installable": True,
 }

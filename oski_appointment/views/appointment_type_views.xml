@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
-                <field name="duration"/>
+                <field name="duration" widget="float_time"/>
                 <field name="staff_user_ids" widget="many2many_tags"/>
                 <field name="appointment_count"/>
             </list>
@@ -29,7 +29,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="duration"/>
+                            <field name="duration" widget="float_time"/>
                             <field name="resource_calendar_id"/>
                             <field name="min_notice_hours"/>
                             <field name="max_days_ahead"/>
