@@ -1,6 +1,6 @@
 {
     "name": "Helpdesk",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Services/Helpdesk",
     "summary": "Handle customer requests without losing a single one: numbered tickets, email alias, balanced assignment, kanban by stage.",
     "author": "OdooSkills",

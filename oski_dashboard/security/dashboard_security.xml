@@ -8,6 +8,8 @@
         <field name="name">Dashboards Manager</field>
         <field name="category_id" ref="module_category_dashboard"/>
         <field name="comment">Sees and manages all dashboards.</field>
+        <!-- sans démo, l'administrateur n'aurait pas les droits du responsable -->
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 
     <record id="rule_dashboard_own_or_shared" model="ir.rule">
