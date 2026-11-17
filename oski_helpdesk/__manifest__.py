@@ -18,10 +18,10 @@
         "views/helpdesk_stage_views.xml",
         "views/helpdesk_team_views.xml",
         "views/helpdesk_ticket_views.xml",
-        "views/helpdesk_menus.xml",
+        "views/helpdesk_menus.xml"
     ],
     "demo": ["demo/helpdesk_demo.xml"],
-    "images": ["static/description/screenshot_01_kanban-pipeline.png"],
+    "images": ["static/description/screenshot_01_pipeline.png"],
     "installable": True,
     "application": True,
 }
