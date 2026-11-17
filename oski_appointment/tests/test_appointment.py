@@ -302,6 +302,28 @@ class TestAppointment(TransactionCase):
         types_main = self.env["appointment.type"].search([("id", "=", t.id)])
         self.assertEqual(types_main, t)
 
+    def test_state_buttons(self):
+        """Honoré / absent / annulé depuis la fiche ; une réunion ordinaire n'a pas d'état."""
+        t = self._make_type(duration=1.0, n_staff=1)
+        d = self._future_date()
+        event = self._book(t, self._get_first_slot(t, d))
+        self.assertEqual(event.appointment_state, "booked")
+        event.action_appointment_done()
+        self.assertEqual(event.appointment_state, "done")
+        event.action_appointment_no_show()
+        self.assertEqual(event.appointment_state, "no_show")
+        event.action_appointment_cancel()
+        self.assertEqual(event.appointment_state, "cancelled")
+        meeting = self.env["calendar.event"].create({
+            "name": "Réunion", "start": event.start, "stop": event.stop})
+        meeting.action_appointment_done()
+        self.assertFalse(meeting.appointment_state)
+
+    def test_admin_is_appointment_manager(self):
+        # sans démo, l'administrateur doit voir les types de rendez-vous
+        admin = self.env.ref("base.user_admin")
+        self.assertTrue(admin.has_group("oski_appointment.group_appointment_manager"))
+
 
 class TestAppointmentConcurrency(TransactionCase):
     """Deux réservations simultanées du même créneau : une seule aboutit.

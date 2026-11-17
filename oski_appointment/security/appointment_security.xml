@@ -20,5 +20,7 @@
         <field name="name">Appointments / Manager</field>
         <field name="privilege_id" ref="privilege_appointment"/>
         <field name="implied_ids" eval="[(4, ref('group_appointment_user'))]"/>
+        <!-- sans démo, l'administrateur n'aurait ni les types de rendez-vous ni la configuration -->
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 </odoo>
