@@ -12,6 +12,8 @@
         <field name="name">Dashboards Manager</field>
         <field name="privilege_id" ref="privilege_dashboard"/>
         <field name="comment">Sees and manages all dashboards.</field>
+        <!-- sans démo, l'administrateur n'aurait pas les droits du responsable -->
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
     <!-- Droits et règles : security/ir.access.csv (modèle ir.access, Odoo 20). -->
 </odoo>

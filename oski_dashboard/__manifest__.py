@@ -1,6 +1,6 @@
 {
     'name': "OSKI Dashboard",
-    'version': '20.0.1.0.0',
+    'version': '20.0.1.0.1',
     'category': 'Productivity',
     'summary': "Drag-and-drop dashboard builder",
     'description': """Build your Odoo dashboards without code: drag-and-drop grid,
