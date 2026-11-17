@@ -462,6 +462,7 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
         p, li { color: #374151; line-height: 1.65; }
         img { max-width: 100%; border-radius: 10px; border: 1px solid $oski-line;
             box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: .8rem 0; }
+        img.oski-desc-zoom { cursor: zoom-in; }
         code { background: $oski-bg-soft; padding: .1rem .35rem;
             border-radius: 5px; }
     }

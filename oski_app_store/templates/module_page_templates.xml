@@ -166,9 +166,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- Lightbox plein écran (hors colonne : évite tout ancêtre transformé
+                <!-- Lightbox plein écran, toujours rendue : elle sert aussi aux
+                     images de la description (oski_lightbox.js les rend cliquables).
+                     (hors colonne : évite tout ancêtre transformé
                      qui piégerait le backdrop position:fixed du modal) -->
-                <div t-if="has_shots" class="modal fade oski-lightbox" id="oskiLightbox" tabindex="-1">
+                <div class="modal fade oski-lightbox" id="oskiLightbox" tabindex="-1">
                     <div class="modal-dialog modal-fullscreen">
                         <div class="modal-content">
                             <button type="button" class="btn-close" data-bs-dismiss="modal"/>

@@ -314,6 +314,27 @@ class OskiModule(models.Model):
             self._sync_screenshots_public()
         return res
 
+    _FR_SHOT_SUFFIXES = ("_fr.png", "_fr.jpg", "_fr.jpeg")
+
+    def _screenshots_for_lang(self, lang):
+        """Captures de la galerie dans la langue de la page.
+
+        Convention des dépôts : `screenshot_NN_x.png` = interface anglaise
+        (référencée par index.html), `screenshot_NN_x_fr.png` = interface
+        française (référencée par store_fr.json). L'importeur rattache les
+        deux séries ; la galerie n'en montre qu'une. Un module sans série
+        française garde ses captures sur la page française.
+        """
+        self.ensure_one()
+        shots = self.sudo().screenshot_ids.sorted("name")
+        is_fr = shots.filtered(
+            lambda a: (a.name or "").lower().endswith(self._FR_SHOT_SUFFIXES)
+        )
+        others = shots - is_fr
+        if (lang or "").startswith("fr") and is_fr:
+            return is_fr
+        return others or shots
+
     def _sync_screenshots_public(self):
         """Les captures de la galerie publique doivent être servies aux visiteurs."""
         shots = self.sudo().screenshot_ids.filtered(lambda a: not a.public)

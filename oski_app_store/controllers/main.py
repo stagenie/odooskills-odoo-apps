@@ -292,6 +292,36 @@ class OskiAppStore(http.Controller):
         return "/apps"
 
     @http.route(
+        ["/apps/m/<string:technical_name>"],
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=False,
+    )
+    def apps_module_by_name(self, technical_name, **kw):
+        """Lien stable vers la fiche d'un module, par son nom technique.
+
+        L'URL canonique porte l'id de la base (`/apps/oski-school-fee-173`) :
+        une fiche qui cite un autre module (la liste « What the suite
+        installs » d'une suite) ne peut pas l'écrire dans son index.html.
+        Elle pointe ici ; la route renvoie en 301 sur l'URL canonique, dans
+        la langue de la requête. Module inconnu ou non publié → 404.
+        """
+        module = request.env["oski.module"].sudo().search(
+            [("technical_name", "=", technical_name)], limit=1
+        )
+        if not module or not (
+            module.is_published
+            or request.env.user.has_group("oski_app_store.group_manager")
+        ):
+            return request.not_found()
+        # request.redirect ne pose pas le préfixe de langue : /fr/apps/m/x
+        # doit mener à /fr/apps/<slug>, pas à la page anglaise.
+        return request.redirect(
+            request.env["ir.http"]._url_for(module.website_url), code=301
+        )
+
+    @http.route(
         ['/apps/<model("oski.module"):module>'],
         type="http",
         auth="public",
@@ -368,7 +398,7 @@ class OskiAppStore(http.Controller):
                 "main_object": module,
                 "additional_title": module.name,
                 "website_meta_description": module._seo_description(),
-                "screenshots": module.sudo().screenshot_ids.sorted("name"),
+                "screenshots": module._screenshots_for_lang(request.env.lang),
                 "back_url": self._catalog_back_url(),
             },
         )
