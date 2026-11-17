@@ -174,7 +174,8 @@
                 <field name="name"/>
                 <field name="safe_id"/>
                 <field name="operation_type"/>
-                <field name="amount" widget="monetary" sum="Total"/>
+                <field name="amount" widget="monetary"/>
+                <field name="signed_amount" widget="monetary" sum="Net" optional="show"/>
                 <field name="state" widget="badge"/>
             </list>
         </field>

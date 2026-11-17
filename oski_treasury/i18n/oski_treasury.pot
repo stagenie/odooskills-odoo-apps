@@ -1942,3 +1942,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_transfer__control_warning
 msgid "Warnings"
 msgstr ""
+
+#. module: oski_treasury
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_cash_operation__signed_amount
+#: model:ir.model.fields,field_description:oski_treasury.field_oski_treasury_safe_operation__signed_amount
+msgid "Net Amount"
+msgstr ""
+
+#. module: oski_treasury
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_closing_form
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_cash_operation_list
+#: model_terms:ir.ui.view,arch_db:oski_treasury.view_treasury_safe_operation_list
+msgid "Net"
+msgstr ""

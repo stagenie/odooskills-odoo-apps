@@ -73,7 +73,8 @@
                                     <field name="operation_type"/>
                                     <field name="category_id"/>
                                     <field name="currency_id" column_invisible="True"/>
-                                    <field name="amount" widget="monetary" sum="Total"/>
+                                    <field name="amount" widget="monetary"/>
+                                    <field name="signed_amount" widget="monetary" sum="Net" optional="show"/>
                                     <field name="partner_id" optional="hide"/>
                                     <field name="description" optional="hide"/>
                                     <field name="state" widget="badge"/>
