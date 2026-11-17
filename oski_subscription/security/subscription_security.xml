@@ -22,5 +22,7 @@
         <field name="name">Subscriptions / Manager</field>
         <field name="privilege_id" ref="privilege_subscription"/>
         <field name="implied_ids" eval="[(4, ref('group_subscription_user'))]"/>
+        <!-- sans démo, l'administrateur n'aurait ni le menu Reporting ni la configuration -->
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 </odoo>
