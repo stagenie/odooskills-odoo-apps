@@ -1,6 +1,6 @@
 {
     'name': "Treasury — Cash & Safes",
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.0.2',
     'category': 'Accounting/Treasury',
     'summary': 'Cash registers, safes, closings, transfers, configurable GL entries',
     'description': 'Complete physical treasury management: cash registers with running '
@@ -25,10 +25,8 @@
     'license': 'LGPL-3',
     'images': [
         'static/description/banner.png',
-        'static/description/screenshot_01_caisses.png',
+        'static/description/screenshot_01_cash_registers.png',
         'static/description/screenshot_02_operations.png',
-        'static/description/screenshot_03_cloture.png',
-        'static/description/screenshot_04_transfert.png',
     ],
     'depends': ['account', 'mail'],
     'data': [

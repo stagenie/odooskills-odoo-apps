@@ -26,7 +26,13 @@ class TreasuryCashOperation(models.Model):
     )
     amount = fields.Monetary(
         string='Amount', required=True, tracking=True,
-        currency_field='currency_id',
+        currency_field='currency_id', aggregator=None,
+    )
+    # Entrées en +, sorties en - : le total d'une liste qui mêle entrées et
+    # sorties n'a de sens que sur ce montant signé, pas sur `amount`.
+    signed_amount = fields.Monetary(
+        string='Net Amount', currency_field='currency_id',
+        compute='_compute_signed_amount', store=True,
     )
     currency_id = fields.Many2one(
         'res.currency', related='cash_id.currency_id', store=True,
@@ -72,6 +78,11 @@ class TreasuryCashOperation(models.Model):
     company_id = fields.Many2one(
         'res.company', related='cash_id.company_id', store=True,
     )
+
+    @api.depends('amount', 'operation_type')
+    def _compute_signed_amount(self):
+        for op in self:
+            op.signed_amount = op.amount if op.operation_type == 'in' else -op.amount
 
     # --- Time-based computed fields ---
     is_today = fields.Boolean(compute='_compute_date_filters')
