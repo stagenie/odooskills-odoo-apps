@@ -22,5 +22,7 @@
         <field name="name">Helpdesk / Manager</field>
         <field name="privilege_id" ref="privilege_helpdesk"/>
         <field name="implied_ids" eval="[(4, ref('group_helpdesk_user'))]"/>
+        <!-- sans démo, l'administrateur n'aurait pas les droits du responsable -->
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 </odoo>
