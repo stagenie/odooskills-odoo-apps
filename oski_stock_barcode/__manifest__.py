@@ -1,6 +1,6 @@
 {
     'name': "Stock Barcode",
-    'version': '20.0.1.0.0',
+    'version': '20.0.1.0.1',
     'category': 'Inventory/Stock',
     'summary': "Touch barcode scanning interface for stock operations: receipt, delivery, inventory count, transfer, lookup",
     'description': """Mobile-first touch barcode scanning app for Odoo 19 CE.
