@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_oski_module_feedback" model="ir.sequence">
+        <field name="name">Module change request</field>
+        <field name="code">oski.module.feedback</field>
+        <field name="prefix">FB</field>
+        <field name="padding">5</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <record id="param_notify_email" model="ir.config_parameter">
+        <field name="key">oski_module_feedback.notify_email</field>
+        <field name="value">info@odooskills.com</field>
+    </record>
+    <record id="param_max_per_day" model="ir.config_parameter">
+        <field name="key">oski_module_feedback.max_per_day</field>
+        <field name="value">5</field>
+    </record>
+</odoo>

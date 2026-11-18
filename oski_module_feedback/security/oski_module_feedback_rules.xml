@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Portail : seulement les demandes de sa société (ou les siennes). -->
+    <record id="rule_module_feedback_portal_own" model="ir.rule">
+        <field name="name">Module change requests: portal users see their own</field>
+        <field name="model_id" ref="model_oski_module_feedback"/>
+        <field name="domain_force">[('partner_id', 'child_of', user.commercial_partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>
