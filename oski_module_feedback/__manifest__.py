@@ -15,7 +15,14 @@
         "data/mail_template_data.xml",
         "views/oski_module_feedback_views.xml",
         "views/oski_module_views.xml",
+        "templates/feedback_form_templates.xml",
     ],
+    "assets": {
+        "web.assets_frontend": [
+            "oski_module_feedback/static/src/scss/feedback.scss",
+            "oski_module_feedback/static/src/js/feedback_form.js",
+        ],
+    },
     "installable": True,
     "application": False,
 }

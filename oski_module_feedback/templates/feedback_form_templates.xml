@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bouton sur la fiche d'un module payant, sous l'achat et l'essai. -->
+    <template id="module_page_feedback_cta" inherit_id="oski_app_store.module_page"
+              name="Module page: request a change">
+        <xpath expr="//div[@t-if='trial_url']" position="after">
+            <div t-if="not module.is_free" class="oski-fb-cta">
+                <p class="oski-fb-cta-note">Missing a feature or found a bug?</p>
+                <a t-attf-href="/apps/m/#{module.technical_name}/feedback"
+                   class="btn oski-btn-fb w-100">Request a change</a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="feedback_form_page" name="Module change request form">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Request a change</t>
+            <div class="oski-store">
+                <div class="container oski-fb my-4 my-md-5">
+                    <a t-att-href="module_url" class="oski-fb-back">← <t t-out="module.name"/></a>
+                    <div class="oski-fb-card">
+                        <div class="oski-fb-head">
+                            <t t-call="oski_app_store.module_icon"/>
+                            <div>
+                                <div class="oski-fb-eyebrow">Request a change</div>
+                                <h1 class="oski-fb-title" t-out="module.name"/>
+                            </div>
+                        </div>
+                        <p class="oski-fb-lead">
+                            Tell us what is missing or what goes wrong. We read every request
+                            ourselves and you can follow it in your account.
+                        </p>
+
+                        <div t-if="error" class="alert alert-danger" role="alert" t-out="error"/>
+
+                        <form t-att-action="submit_url" method="post" enctype="multipart/form-data"
+                              class="oski-fb-form">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <t t-foreach="request.params" t-as="param">
+                                <input t-if="param in ('source', 'trial')" type="hidden"
+                                       t-att-name="param" t-att-value="request.params[param]"/>
+                            </t>
+
+                            <fieldset class="mb-4">
+                                <legend class="form-label">What is it about? <span class="text-danger">*</span></legend>
+                                <div class="oski-fb-types">
+                                    <t t-foreach="[
+                                        ('bug', 'Bug', 'Something does not work as expected.'),
+                                        ('change', 'Change request', 'Adapt an existing behaviour.'),
+                                        ('improvement', 'Improvement', 'A new feature or option.'),
+                                        ('other', 'Other', 'A question, an idea, anything else.')]" t-as="opt">
+                                        <label t-attf-class="oski-fb-type oski-fb-type-#{opt[0]}">
+                                            <input type="radio" name="request_type" t-att-value="opt[0]"
+                                                   required="required"
+                                                   t-att-checked="'checked' if values.get('request_type') == opt[0] else None"/>
+                                            <span class="oski-fb-type-name" t-out="opt[1]"/>
+                                            <span class="oski-fb-type-help" t-out="opt[2]"/>
+                                        </label>
+                                    </t>
+                                </div>
+                            </fieldset>
+
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label class="form-label" for="fb_title">Title <span class="text-danger">*</span></label>
+                                    <input type="text" id="fb_title" name="title" class="form-control"
+                                           maxlength="200" required="required"
+                                           placeholder="e.g. Export rental contracts to Excel"
+                                           t-att-value="values.get('title', '')"/>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="fb_version">Your Odoo version</label>
+                                    <select id="fb_version" name="odoo_version_id" class="form-select">
+                                        <t t-foreach="versions" t-as="ver">
+                                            <option t-att-value="ver.id"
+                                                    t-att-selected="'selected' if values.get('odoo_version_id') == str(ver.id) else None"
+                                                    t-out="ver.name"/>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="fb_description">Description <span class="text-danger">*</span></label>
+                                <textarea id="fb_description" name="description" class="form-control" rows="6"
+                                          required="required"
+                                          placeholder="What do you need, and why? An example helps a lot."><t t-out="values.get('description', '')"/></textarea>
+                            </div>
+
+                            <div class="mb-3 oski-fb-steps">
+                                <label class="form-label" for="fb_steps">Steps to reproduce</label>
+                                <textarea id="fb_steps" name="steps" class="form-control" rows="4"
+                                          placeholder="1. Open …&#10;2. Click …&#10;3. You see … instead of …"><t t-out="values.get('steps', '')"/></textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label" for="fb_files">Screenshots or documents</label>
+                                <input type="file" id="fb_files" name="attachments" class="form-control"
+                                       multiple="multiple" accept=".png,.jpg,.jpeg,.gif,.webp,.pdf"/>
+                                <small class="text-muted">
+                                    Up to <t t-out="max_files"/> files, 5 MB each (<t t-out="allowed_ext"/>).
+                                </small>
+                            </div>
+
+                            <button type="submit" class="btn oski-btn-buy oski-fb-submit">Send my request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="feedback_thanks_page" name="Module change request sent">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Request sent</t>
+            <div class="oski-store">
+                <div class="container oski-fb my-4 my-md-5">
+                    <div class="oski-fb-card text-center">
+                        <div class="oski-fb-eyebrow">Request sent</div>
+                        <h1 class="oski-fb-title">Thank you!</h1>
+                        <p class="oski-fb-lead">
+                            Your request <strong t-out="feedback.name"/> on
+                            <strong t-out="module.name"/> has been received.
+                            We will e-mail you when its status changes.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            <a href="/my/module-requests" class="btn oski-btn-buy">Follow my requests</a>
+                            <a t-att-href="module_url" class="btn oski-btn-fb">Back to the module</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

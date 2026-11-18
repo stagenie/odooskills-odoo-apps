@@ -1,0 +1,51 @@
+// Demande d'évolution : bouton de la fiche module, formulaire, remerciement.
+$oski-fb-plum: #714B67;
+$oski-fb-muted: #6b7280;
+$oski-fb-line: #e5e7eb;
+
+.oski-store {
+    .oski-fb-cta { margin-top: 1rem; padding-top: .85rem; border-top: 1px dashed $oski-fb-line; }
+    .oski-fb-cta-note { color: $oski-fb-muted; font-size: .8rem; margin: 0 0 .4rem; }
+    .oski-btn-fb { background: transparent; color: $oski-fb-plum; font-weight: 600;
+        border: 1px solid $oski-fb-line; border-radius: 10px; padding: .5rem .9rem;
+        &:hover { border-color: $oski-fb-plum; background: #faf5f9; color: $oski-fb-plum; } }
+
+    .oski-fb { max-width: 760px; }
+    .oski-fb-back { display: inline-block; color: $oski-fb-muted; font-size: .9rem;
+        margin-bottom: .5rem; text-decoration: none; &:hover { color: $oski-fb-plum; } }
+    .oski-fb-card { border: 1px solid $oski-fb-line; border-radius: 16px; padding: 1.75rem;
+        background: #fff; box-shadow: 0 6px 24px rgba(17, 24, 39, .06); }
+    .oski-fb-head { display: flex; align-items: center; gap: .9rem; margin-bottom: .75rem;
+        .oski-icon, .oski-monogram { width: 56px; height: 56px; border-radius: 12px; flex: 0 0 56px; } }
+    .oski-fb-eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .14em;
+        text-transform: uppercase; color: $oski-fb-plum; }
+    .oski-fb-title { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.6rem; margin: 0; }
+    .oski-fb-lead { color: $oski-fb-muted; margin-bottom: 1.25rem; }
+
+    .oski-fb-types { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+    @media (min-width: 768px) { .oski-fb-types { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .oski-fb-type { position: relative; display: flex; flex-direction: column; gap: .2rem;
+        border: 1px solid $oski-fb-line; border-radius: 12px; padding: .75rem .8rem .75rem 2.1rem;
+        cursor: pointer; margin: 0; transition: border-color .15s, background .15s;
+        input { position: absolute; left: .8rem; top: .95rem; accent-color: $oski-fb-plum; }
+        &:hover { border-color: $oski-fb-plum; }
+        &:has(input:checked) { border-color: $oski-fb-plum; background: #faf5f9;
+            box-shadow: 0 0 0 1px $oski-fb-plum inset; } }
+    .oski-fb-type-name { font-weight: 600; }
+    .oski-fb-type-help { color: $oski-fb-muted; font-size: .8rem; line-height: 1.3; }
+    // Liseré de couleur par type (mêmes couleurs que les badges du back-office).
+    .oski-fb-type { border-top-width: 3px; }
+    .oski-fb-type-bug { border-top-color: #dc3545; }
+    .oski-fb-type-change { border-top-color: #0dcaf0; }
+    .oski-fb-type-improvement { border-top-color: #2e7d32; }
+    .oski-fb-type-other { border-top-color: #adb5bd; }
+    .oski-fb-form legend.form-label { font-size: 1rem; font-weight: 500; margin-bottom: .5rem; }
+
+    // Étapes de reproduction : seulement pour un bug.
+    .oski-fb-form:not(:has(input[name="request_type"][value="bug"]:checked)) .oski-fb-steps { display: none; }
+    .oski-fb-submit { min-width: 220px; padding: .65rem 1.2rem; border-radius: 10px; }
+    @media (max-width: 575px) {
+        .oski-fb-card { padding: 1.15rem; }
+        .oski-fb-submit { width: 100%; }
+    }
+}
