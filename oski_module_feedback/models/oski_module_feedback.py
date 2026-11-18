@@ -151,3 +151,13 @@ class OskiModuleFeedback(models.Model):
 
     def action_reset_new(self):
         self.write({"state": "new"})
+
+    def _send_new_notifications(self):
+        """Accusé au demandeur + notification à l'équipe (file d'envoi)."""
+        ack = self.env.ref("oski_module_feedback.mail_template_feedback_ack", raise_if_not_found=False)
+        new = self.env.ref("oski_module_feedback.mail_template_feedback_new", raise_if_not_found=False)
+        for rec in self:
+            if ack:
+                ack.sudo().send_mail(rec.id, force_send=False)
+            if new and new.sudo().email_to:
+                new.sudo().send_mail(rec.id, force_send=False)

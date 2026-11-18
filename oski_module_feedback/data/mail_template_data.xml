@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Accusé de réception au demandeur, dans sa langue. -->
+    <record id="mail_template_feedback_ack" model="mail.template">
+        <field name="name">Module request: acknowledgement</field>
+        <field name="model_id" ref="model_oski_module_feedback"/>
+        <field name="subject">We received your request {{ object.name }}</field>
+        <field name="email_from">{{ (object.env.company.email_formatted or user.email_formatted) }}</field>
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field name="use_default_to" eval="False"/>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+    <p>Hello <t t-out="object.partner_id.name or ''">Customer</t>,</p>
+    <p>
+        Thank you for your request <strong t-out="object.name or ''">FB00001</strong>
+        on <strong t-out="object.module_id.name or ''">Module</strong>:
+        "<t t-out="object.title or ''">Title</t>".
+    </p>
+    <p>We read every request ourselves. You will receive an e-mail when its status changes.</p>
+    <p style="margin: 24px 0px;">
+        <a t-att-href="object.get_base_url() + object.access_url"
+           style="background-color: #714B67; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+            Follow my request
+        </a>
+    </p>
+    <p>The OdooSkills team</p>
+</div>
+        </field>
+    </record>
+
+    <!-- Notification à l'équipe. use_default_to=False sinon le courriel part au demandeur. -->
+    <record id="mail_template_feedback_new" model="mail.template">
+        <field name="name">Module request: internal notification</field>
+        <field name="model_id" ref="model_oski_module_feedback"/>
+        <field name="subject">New module request {{ object.name }} — {{ object.module_id.name }}</field>
+        <field name="email_from">{{ (object.env.company.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ object.env['ir.config_parameter'].sudo().get_param('oski_module_feedback.notify_email') }}</field>
+        <field name="reply_to">{{ object.partner_id.email_formatted }}</field>
+        <field name="use_default_to" eval="False"/>
+        <field name="lang">{{ object.env.company.partner_id.lang }}</field>
+        <field name="auto_delete" eval="False"/>
+        <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+    <p>New request <strong t-out="object.name or ''">FB00001</strong>.</p>
+    <ul>
+        <li>Module: <t t-out="object.module_id.name or ''">Module</t> (<t t-out="object.module_id.technical_name or ''">oski_x</t>)</li>
+        <li>Odoo version: <t t-out="object.odoo_version_id.name or '—'">19.0</t></li>
+        <li>Type: <t t-out="dict(object.fields_get(['request_type'])['request_type']['selection']).get(object.request_type) or ''">Bug</t></li>
+        <li>From: <t t-out="object.partner_id.name or ''">Customer</t> &lt;<t t-out="object.partner_id.email or ''">mail</t>&gt;</li>
+        <li>Source: <t t-out="dict(object.fields_get(['source'])['source']['selection']).get(object.source) or ''">Module page</t></li>
+    </ul>
+    <p><strong t-out="object.title or ''">Title</strong></p>
+    <p style="white-space: pre-wrap;" t-out="object.description or ''">Description</p>
+    <t t-if="object.steps">
+        <p><strong>Steps to reproduce</strong></p>
+        <p style="white-space: pre-wrap;" t-out="object.steps">Steps</p>
+    </t>
+    <p>
+        <a t-att-href="object.get_base_url() + '/odoo/action-oski_module_feedback.action_oski_module_feedback/%s' % object.id">Open the request</a>
+    </p>
+</div>
+        </field>
+    </record>
+</odoo>

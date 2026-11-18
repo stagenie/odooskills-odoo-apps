@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_module_feedback_view_kanban" model="ir.ui.view">
+        <field name="name">oski.module.feedback.kanban</field>
+        <field name="model">oski.module.feedback</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column" quick_create="false"
+                    records_draggable="true">
+                <field name="state"/>
+                <field name="request_type"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="text-muted small"/>
+                            <field name="request_type" widget="badge"
+                                   decoration-danger="request_type == 'bug'"
+                                   decoration-info="request_type == 'change'"
+                                   decoration-success="request_type == 'improvement'"/>
+                        </div>
+                        <field name="title" class="fw-bold"/>
+                        <field name="module_id" class="small"/>
+                        <footer class="pt-1">
+                            <field name="partner_id" class="small text-muted"/>
+                            <div class="ms-auto d-flex align-items-center gap-1">
+                                <field name="released_version" class="small text-success"
+                                       invisible="not released_version"/>
+                                <field name="priority" widget="priority"/>
+                                <field name="user_id" widget="many2one_avatar_user"/>
+                            </div>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="oski_module_feedback_view_list" model="ir.ui.view">
+        <field name="name">oski.module.feedback.list</field>
+        <field name="model">oski.module.feedback</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="create_date" string="Date" widget="date"/>
+                <field name="module_id"/>
+                <field name="request_type" widget="badge"/>
+                <field name="title"/>
+                <field name="partner_id"/>
+                <field name="odoo_version_id" optional="show"/>
+                <field name="source" optional="hide"/>
+                <field name="priority" widget="priority" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'new'" decoration-warning="state == 'analysis'"
+                       decoration-primary="state == 'planned'" decoration-success="state == 'done'"
+                       decoration-muted="state == 'rejected'"/>
+                <field name="released_version" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="oski_module_feedback_view_form" model="ir.ui.view">
+        <field name="name">oski.module.feedback.form</field>
+        <field name="model">oski.module.feedback</field>
+        <field name="arch" type="xml">
+            <form string="Change request">
+                <header>
+                    <button name="action_set_analysis" type="object" string="Start review"
+                            class="btn-primary" invisible="state != 'new'"/>
+                    <button name="action_set_planned" type="object" string="Plan"
+                            class="btn-primary" invisible="state not in ('new', 'analysis')"/>
+                    <button name="action_set_done" type="object" string="Mark delivered"
+                            class="btn-primary" invisible="state != 'planned'"/>
+                    <button name="action_reject" type="object" string="Decline"
+                            invisible="state in ('done', 'rejected')"/>
+                    <button name="action_reset_new" type="object" string="Reopen"
+                            invisible="state not in ('done', 'rejected')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="new,analysis,planned,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <field name="name" class="text-muted"/>
+                        <h1><field name="title" placeholder="What is asked"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="module_id"/>
+                            <field name="is_pack" invisible="not is_pack"/>
+                            <field name="odoo_version_id"/>
+                            <field name="request_type"/>
+                            <field name="priority" widget="priority"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                            <field name="source"/>
+                            <field name="trial_id" invisible="not trial_id"/>
+                            <field name="released_version"
+                                   required="state == 'done'"
+                                   placeholder="e.g. 19.0.1.2.0"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Request" name="request">
+                            <field name="description"/>
+                            <separator string="Steps to reproduce" invisible="request_type != 'bug'"/>
+                            <field name="steps" invisible="request_type != 'bug'"/>
+                            <separator string="Attachments" invisible="not attachment_ids"/>
+                            <field name="attachment_ids" widget="many2many_binary"
+                                   invisible="not attachment_ids"/>
+                        </page>
+                        <page string="Answer to the customer" name="answer">
+                            <field name="decision_note"
+                                   placeholder="Shown in the customer's portal: what is planned, or why it is declined."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="oski_module_feedback_view_pivot" model="ir.ui.view">
+        <field name="name">oski.module.feedback.pivot</field>
+        <field name="model">oski.module.feedback</field>
+        <field name="arch" type="xml">
+            <pivot string="Change requests">
+                <field name="module_id" type="row"/>
+                <field name="request_type" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="oski_module_feedback_view_search" model="ir.ui.view">
+        <field name="name">oski.module.feedback.search</field>
+        <field name="model">oski.module.feedback</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="title"/>
+                <field name="name"/>
+                <field name="module_id"/>
+                <field name="partner_id"/>
+                <filter name="filter_bug" string="Bugs" domain="[('request_type', '=', 'bug')]"/>
+                <filter name="filter_change" string="Change requests" domain="[('request_type', '=', 'change')]"/>
+                <filter name="filter_improvement" string="Improvements" domain="[('request_type', '=', 'improvement')]"/>
+                <separator/>
+                <filter name="filter_packs" string="Packs" domain="[('is_pack', '=', True)]"/>
+                <filter name="filter_from_trial" string="From a trial" domain="[('source', '=', 'trial')]"/>
+                <separator/>
+                <filter name="filter_open" string="Open" domain="[('state', 'in', ('new', 'analysis', 'planned'))]"/>
+                <group>
+                    <filter name="group_module" string="Module" context="{'group_by': 'module_id'}"/>
+                    <filter name="group_type" string="Type" context="{'group_by': 'request_type'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_oski_module_feedback" model="ir.actions.act_window">
+        <field name="name">Module requests</field>
+        <field name="res_model">oski.module.feedback</field>
+        <field name="view_mode">kanban,list,form,pivot</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No change request yet</p>
+            <p>Customers send them from the page of a paid module, with the
+                "Request a change" button.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_oski_module_feedback" name="Module requests"
+              parent="oski_app_store.menu_oski_app_store_root"
+              action="action_oski_module_feedback" sequence="18"/>
+</odoo>

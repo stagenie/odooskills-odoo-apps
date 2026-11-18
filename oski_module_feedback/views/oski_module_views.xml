@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="oski_module_view_form_feedback" model="ir.ui.view">
+        <field name="name">oski.module.form.feedback</field>
+        <field name="model">oski.module</field>
+        <field name="inherit_id" ref="oski_app_store.oski_module_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/widget[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_feedback" type="object"
+                            class="oe_stat_button" icon="fa-comments-o">
+                        <field name="feedback_count" widget="statinfo" string="Requests"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

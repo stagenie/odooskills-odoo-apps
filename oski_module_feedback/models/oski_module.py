@@ -8,7 +8,7 @@ class OskiModule(models.Model):
         "oski.module.feedback", "module_id", string="Change requests",
     )
     feedback_count = fields.Integer(
-        string="Change requests", compute="_compute_feedback_count",
+        string="Request count", compute="_compute_feedback_count",
     )
 
     @api.depends("feedback_ids")
