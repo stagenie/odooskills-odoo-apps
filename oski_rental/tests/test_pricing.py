@@ -10,10 +10,18 @@ class TestPricing(RentalCase):
         from datetime import timedelta
         return asset._get_rental_price(start, start + timedelta(days=days, hours=hours))
 
-    def test_greedy_no_best_price(self):
-        # 6 jours = 6 × 100 = 600 (glouton pur, pas d'optimisation semaine)
+    def test_never_more_than_the_next_tier(self):
+        """6 jours au tarif jour (600) coûtent plus qu'une semaine (500) : on
+        facture la semaine."""
         asset = self._make_asset(price_day=100, price_week=500)
-        self.assertEqual(self._price(asset, days=6), 600.0)
+        self.assertEqual(self._price(asset, days=6), 500.0)
+        self.assertEqual(self._price(asset, days=4), 400.0)
+
+    def test_hours_capped_at_one_more_day(self):
+        """47 h à 120/jour et 35/heure : 2 jours (240), pas 1 jour + 23 h (925)."""
+        asset = self._make_asset(price_hour=35, price_day=120, price_week=480)
+        self.assertEqual(self._price(asset, days=1, hours=23), 240.0)
+        self.assertEqual(self._price(asset, days=1, hours=2), 190.0)
 
     def test_week_plus_days(self):
         asset = self._make_asset(price_day=100, price_week=500)
