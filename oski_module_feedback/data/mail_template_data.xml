@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
-    <!-- Accusé de réception au demandeur, dans sa langue. -->
+    <!-- Accusé de réception au demandeur : langue de la visite (formulaire
+         envoyé depuis /fr → français), sinon celle de son compte. -->
     <record id="mail_template_feedback_ack" model="mail.template">
         <field name="name">Module request: acknowledgement</field>
         <field name="model_id" ref="model_oski_module_feedback"/>
@@ -8,7 +9,7 @@
         <field name="email_from">{{ (object.env.company.email_formatted or user.email_formatted) }}</field>
         <field name="partner_to">{{ object.partner_id.id }}</field>
         <field name="use_default_to" eval="False"/>
-        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="lang">{{ ctx.get('feedback_visit_lang') or object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
         <field name="body_html" type="html">
 <div style="margin: 0px; padding: 0px; font-size: 14px;">

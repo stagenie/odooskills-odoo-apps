@@ -160,7 +160,8 @@ class OskiModuleFeedback(models.Model):
             if ack:
                 ack.sudo().send_mail(rec.id, force_send=False)
             if new and new.sudo().email_to:
-                new.sudo().send_mail(rec.id, force_send=False)
+                # L'équipe lit dans la langue de la société, pas celle du visiteur.
+                new.sudo().with_context(feedback_visit_lang=False).send_mail(rec.id, force_send=False)
 
     def _track_subtype(self, init_values):
         self.ensure_one()

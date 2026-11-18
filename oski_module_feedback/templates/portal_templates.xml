@@ -18,7 +18,7 @@
         </xpath>
         <div id="portal_client_category" position="inside">
             <t t-call="portal.portal_docs_entry">
-                <t t-set="icon" t-value="'/oski_module_feedback/static/description/icon.png'"/>
+                <t t-set="icon" t-value="'/oski_module_feedback/static/src/img/module-requests.svg'"/>
                 <t t-set="title">Module requests</t>
                 <t t-set="text">Follow your change requests and bug reports</t>
                 <t t-set="url" t-value="'/my/module-requests'"/>

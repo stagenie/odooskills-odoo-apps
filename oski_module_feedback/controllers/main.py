@@ -157,7 +157,7 @@ class OskiModuleFeedbackController(http.Controller):
         } for name, data, mimetype in files])
         if attachments:
             rec.attachment_ids = [(6, 0, attachments.ids)]
-        rec._send_new_notifications()
+        rec.with_context(feedback_visit_lang=request.lang.code)._send_new_notifications()
         return request.redirect(
             request.env["ir.http"]._url_for("/apps/feedback/thanks/%s" % rec.id), local=True)
 

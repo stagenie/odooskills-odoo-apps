@@ -162,3 +162,15 @@ class TestFeedbackForm(HttpCase):
         free_page = self.url_open(self.free.website_url).text
         self.assertIn(self.form_url, paid_page)
         self.assertNotIn("/feedback", free_page)
+
+    def test_ack_follows_visit_language(self):
+        self.env["ir.module.module"]._load_module_terms(["oski_module_feedback"], ["fr_FR"], overwrite=True)
+        self._login()
+        csrf = self._csrf("/fr" + self.form_url)
+        self.opener.post(self.base_url() + "/fr" + self.submit_url, data=self._payload(csrf),
+                         timeout=30, allow_redirects=False)
+        rec = self.env["oski.module.feedback"].sudo().search(
+            [("partner_id", "=", self.portal_user.partner_id.id)])
+        mails = self.env["mail.mail"].sudo().search([("model", "=", rec._name), ("res_id", "=", rec.id)])
+        ack = mails.filtered(lambda m: self.portal_user.partner_id in m.recipient_ids)
+        self.assertIn("Nous avons bien reçu votre demande", ack.subject)
