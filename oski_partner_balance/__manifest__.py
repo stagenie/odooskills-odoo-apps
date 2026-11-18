@@ -20,7 +20,7 @@ every line.
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",
     "license": "LGPL-3",
-    "images": ["static/description/banner.png"],
+    "images": ["static/description/banner.png", "static/description/screenshot_01_assistant.png"],
     "depends": ["account"],
     "data": [
         "security/partner_balance_groups.xml",
