@@ -10,8 +10,7 @@ PAGE_SIZE = 20
 class OskiModuleFeedbackPortal(CustomerPortal):
 
     def _feedback_domain(self):
-        partner = request.env.user.partner_id
-        return [("partner_id", "child_of", partner.commercial_partner_id.id)]
+        return [("partner_id", "=", request.env.user.partner_id.id)]
 
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)

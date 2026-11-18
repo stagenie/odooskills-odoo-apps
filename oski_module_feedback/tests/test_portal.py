@@ -54,3 +54,20 @@ class TestFeedbackPortal(HttpCase):
         self.assertIn("19.0.1.2.0", page)
         self.assertIn("Update the module to get it.", page)
         self.assertIn("Mine one", page)
+
+    def test_colleague_does_not_see_my_request(self):
+        """Deux contacts portail d'une même société : chacun ne voit que les siennes."""
+        company = self.env["res.partner"].create({"name": "Atelier Nord", "is_company": True})
+        self.portal_user.partner_id.parent_id = company
+        self.other_user.partner_id.parent_id = company
+        Feedback = self.env["oski.module.feedback"].with_user(self.other_user)
+        self.assertNotIn(self.mine, Feedback.search([]))
+        page = self.url_open("/my/module-requests").text
+        self.assertNotIn("Secret of Ben", page)
+
+    def test_requester_can_post_in_portal_chatter(self):
+        Feedback = self.env["oski.module.feedback"].with_user(self.portal_user)
+        thread = Feedback._get_thread_with_access(self.mine.id, mode=Feedback._mail_post_access)
+        self.assertEqual(thread, self.mine)
+        foreign = Feedback._get_thread_with_access(self.theirs.id, mode=Feedback._mail_post_access)
+        self.assertFalse(foreign)

@@ -18,6 +18,8 @@ class OskiModuleFeedback(models.Model):
     _description = "Module change request"
     _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
     _order = "id desc"
+    # Le demandeur (portail, lecture seule) répond dans le fil de sa demande.
+    _mail_post_access = "read"
 
     name = fields.Char(
         string="Reference", required=True, copy=False, readonly=True,

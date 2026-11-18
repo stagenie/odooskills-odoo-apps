@@ -129,3 +129,10 @@ class TestTrialLink(HttpCase):
         location = unquote(resp.headers["Location"])
         self.assertIn("/web/login", location)
         self.assertIn("login=known@example.com", location)
+
+    def test_trial_link_keeps_trial_language(self):
+        trial = self._trial()
+        trial.lang = "fr_FR"
+        self.assertIn("/fr/apps/m/%s/feedback" % self.paid.technical_name, trial._feedback_url())
+        trial.lang = "en_US"
+        self.assertNotIn("/fr/", trial._feedback_url())
