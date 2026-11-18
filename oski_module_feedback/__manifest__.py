@@ -18,6 +18,7 @@
         "views/oski_module_views.xml",
         "templates/feedback_form_templates.xml",
         "templates/portal_templates.xml",
+        "templates/trial_templates.xml",
     ],
     "assets": {
         "web.assets_frontend": [
@@ -25,6 +26,8 @@
             "oski_module_feedback/static/src/js/feedback_form.js",
         ],
     },
+    "post_init_hook": "post_init_hook",
+    "uninstall_hook": "uninstall_hook",
     "installable": True,
     "application": False,
 }

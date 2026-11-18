@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Page d'essai (prêt ou terminé) : proposer une demande d'évolution. -->
+    <template id="trial_wait_page_feedback" inherit_id="oski_app_store.trial_wait_page"
+              name="Trial page: request a change">
+        <xpath expr="//p[hasclass('oski-trial-foot')]" position="before">
+            <p t-if="trial.state in ('ready', 'expired') and not module.is_free" class="oski-fb-trial-note">
+                Missing something in this module?
+                <a t-att-href="trial._feedback_url()">Request a change</a>
+            </p>
+        </xpath>
+    </template>
+</odoo>

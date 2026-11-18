@@ -1,3 +1,4 @@
+import hmac as py_hmac
 import os
 
 from werkzeug.urls import url_encode
@@ -29,7 +30,7 @@ class OskiModuleFeedbackController(http.Controller):
     def _versions(self, module):
         return module.version_line_ids.mapped("odoo_version_id").sorted("sequence", reverse=True)
 
-    def _login_redirect(self, extra=None):
+    def _login_redirect(self, extra=None, signup=False):
         """Anonyme → page de connexion, retour au formulaire (langue gardée)."""
         # Le routage du site a réécrit le chemin sans le préfixe /fr ;
         # REQUEST_URI garde l'adresse d'origine (Request.reroute ne la touche pas).
@@ -38,7 +39,8 @@ class OskiModuleFeedbackController(http.Controller):
         target = environ.get("REQUEST_URI") or request.httprequest.full_path.rstrip("?")
         params = {"redirect": target}
         params.update(extra or {})
-        return request.redirect("/web/login?" + url_encode(params), local=True)
+        page = "/web/signup" if signup else "/web/login"
+        return request.redirect(page + "?" + url_encode(params), local=True)
 
     def _render_form(self, module, values=None, error=None, status=200):
         versions = self._versions(module)
@@ -90,9 +92,23 @@ class OskiModuleFeedbackController(http.Controller):
         module = self._feedback_module(technical_name)
         if not module:
             return request.not_found()
+        trial = self._trial_from_token(kw.get("trial"), module)
         if request.env.user._is_public():
-            return self._login_redirect()
-        return self._render_form(module)
+            if not trial:
+                return self._login_redirect()
+            # Venu de l'essai sans être connecté : e-mail de l'essai pré-rempli,
+            # inscription s'il n'a pas encore de compte.
+            email = (trial.email or "").strip().lower()
+            known = request.env["res.users"].sudo().with_context(active_test=False).search_count(
+                [("login", "=ilike", email)])
+            return self._login_redirect({"login": email}, signup=not known)
+        values = {}
+        trial = self._own_trial(kw.get("trial"), module)
+        if trial:
+            version = self._versions(module).filtered(lambda v: v.name == trial.odoo_version)[:1]
+            if version:
+                values["odoo_version_id"] = str(version.id)
+        return self._render_form(module, values)
 
     @http.route(
         ["/apps/m/<string:technical_name>/feedback/submit"],
@@ -133,7 +149,7 @@ class OskiModuleFeedbackController(http.Controller):
             "partner_id": partner.id,
             "source": "module_page",
         }
-        vals.update(self._trial_vals(post))
+        vals.update(self._trial_vals(post, module))
         rec = Feedback.sudo().create(vals)
         attachments = request.env["ir.attachment"].sudo().create([{
             "name": name, "raw": data, "mimetype": mimetype,
@@ -145,9 +161,34 @@ class OskiModuleFeedbackController(http.Controller):
         return request.redirect(
             request.env["ir.http"]._url_for("/apps/feedback/thanks/%s" % rec.id), local=True)
 
-    def _trial_vals(self, post):
-        """Rattachement à un essai (tâche 5)."""
-        return {}
+    def _trial_from_token(self, token, module=None):
+        """Essai désigné par « <id>-<jeton> », jeton vérifié, sinon vide."""
+        trial_id, _sep, secret = (token or "").partition("-")
+        if not trial_id.isdigit() or not secret:
+            return request.env["oski.module.trial"]
+        trial = request.env["oski.module.trial"].sudo().browse(int(trial_id)).exists()
+        if not trial or not py_hmac.compare_digest(trial.access_token or "", secret):
+            return request.env["oski.module.trial"]
+        if module and trial.module_id != module:
+            return request.env["oski.module.trial"]
+        return trial
+
+    def _own_trial(self, token, module):
+        """Essai du jeton, seulement s'il appartient à l'utilisateur connecté."""
+        trial = self._trial_from_token(token, module)
+        user = request.env.user
+        if trial and (
+            (trial.partner_id and trial.partner_id == user.partner_id)
+            or (trial.email or "").strip().lower() == (user.email or user.login or "").strip().lower()
+        ):
+            return trial
+        return request.env["oski.module.trial"]
+
+    def _trial_vals(self, post, module):
+        trial = self._own_trial(post.get("trial"), module)
+        if not trial:
+            return {}
+        return {"source": "trial", "trial_id": trial.id}
 
     @http.route(
         ["/apps/feedback/thanks/<int:feedback_id>"],
