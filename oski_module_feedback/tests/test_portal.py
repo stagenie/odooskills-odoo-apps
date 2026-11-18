@@ -4,7 +4,7 @@ import json
 from odoo.tests import tagged
 from odoo.tests.common import HttpCase
 
-from .common import feedback_vals, make_store_data
+from .common import feedback_vals, make_store_data, prod_languages
 
 
 @tagged("post_install", "-at_install")
@@ -16,6 +16,7 @@ class TestFeedbackPortal(HttpCase):
         cls.env.registry.clear_cache("routing")
         cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
         make_store_data(cls)
+        prod_languages(cls.env)
         Feedback = cls.env["oski.module.feedback"]
         cls.mine = Feedback.create(feedback_vals(cls, title="Mine one"))
         cls.mine2 = Feedback.create(feedback_vals(cls, title="Mine two"))

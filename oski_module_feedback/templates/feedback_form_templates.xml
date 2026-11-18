@@ -12,6 +12,16 @@
         </xpath>
     </template>
 
+    <!-- Carte d'un type de demande (libellés écrits en clair : traduisibles). -->
+    <template id="feedback_type_card" name="Module change request: type card">
+        <label t-attf-class="oski-fb-type oski-fb-type-#{code}">
+            <input type="radio" name="request_type" t-att-value="code" required="required"
+                   t-att-checked="'checked' if values.get('request_type') == code else None"/>
+            <span class="oski-fb-type-name" t-out="label"/>
+            <span class="oski-fb-type-help" t-out="hint"/>
+        </label>
+    </template>
+
     <template id="feedback_form_page" name="Module change request form">
         <t t-call="website.layout">
             <t t-set="additional_title">Request a change</t>
@@ -44,18 +54,25 @@
                             <fieldset class="mb-4">
                                 <legend class="form-label">What is it about? <span class="text-danger">*</span></legend>
                                 <div class="oski-fb-types">
-                                    <t t-foreach="[
-                                        ('bug', 'Bug', 'Something does not work as expected.'),
-                                        ('change', 'Change request', 'Adapt an existing behaviour.'),
-                                        ('improvement', 'Improvement', 'A new feature or option.'),
-                                        ('other', 'Other', 'A question, an idea, anything else.')]" t-as="opt">
-                                        <label t-attf-class="oski-fb-type oski-fb-type-#{opt[0]}">
-                                            <input type="radio" name="request_type" t-att-value="opt[0]"
-                                                   required="required"
-                                                   t-att-checked="'checked' if values.get('request_type') == opt[0] else None"/>
-                                            <span class="oski-fb-type-name" t-out="opt[1]"/>
-                                            <span class="oski-fb-type-help" t-out="opt[2]"/>
-                                        </label>
+                                    <t t-call="oski_module_feedback.feedback_type_card">
+                                        <t t-set="code" t-value="'bug'"/>
+                                        <t t-set="label">Bug</t>
+                                        <t t-set="hint">Something does not work as expected.</t>
+                                    </t>
+                                    <t t-call="oski_module_feedback.feedback_type_card">
+                                        <t t-set="code" t-value="'change'"/>
+                                        <t t-set="label">Change request</t>
+                                        <t t-set="hint">Adapt an existing behaviour.</t>
+                                    </t>
+                                    <t t-call="oski_module_feedback.feedback_type_card">
+                                        <t t-set="code" t-value="'improvement'"/>
+                                        <t t-set="label">Improvement</t>
+                                        <t t-set="hint">A new feature or option.</t>
+                                    </t>
+                                    <t t-call="oski_module_feedback.feedback_type_card">
+                                        <t t-set="code" t-value="'other'"/>
+                                        <t t-set="label">Other</t>
+                                        <t t-set="hint">A question, an idea, anything else.</t>
                                     </t>
                                 </div>
                             </fieldset>

@@ -29,12 +29,12 @@ def make_store_data(cls):
         })
     cls.portal_user = env["res.users"].with_context(no_reset_password=True).create({
         "name": "Awa Diop", "login": "awa_fb", "password": "awa_fb_12345",
-        "email": "awa@example.com",
+        "email": "awa@example.com", "lang": "en_US",
         "group_ids": [Command.set([env.ref("base.group_portal").id])],
     })
     cls.other_user = env["res.users"].with_context(no_reset_password=True).create({
         "name": "Ben Other", "login": "ben_fb", "password": "ben_fb_12345",
-        "email": "ben@example.com",
+        "email": "ben@example.com", "lang": "en_US",
         "group_ids": [Command.set([env.ref("base.group_portal").id])],
     })
 
@@ -48,3 +48,12 @@ def feedback_vals(cls, **kw):
     }
     vals.update(kw)
     return vals
+
+
+def prod_languages(env):
+    """Comme la prod : anglais par défaut, français sous /fr."""
+    fr = env["res.lang"]._activate_lang("fr_FR")
+    en = env["res.lang"]._activate_lang("en_US")
+    env["website"].get_current_website().write({
+        "language_ids": [(4, fr.id), (4, en.id)], "default_lang_id": en.id})
+    env.registry.clear_cache()

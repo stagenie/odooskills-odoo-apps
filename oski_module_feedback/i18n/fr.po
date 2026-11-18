@@ -1,0 +1,884 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oski_module_feedback
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-18 18:42+0000\n"
+"PO-Revision-Date: 2026-11-18 18:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__source__trial
+msgid "1-hour trial"
+msgstr "Essai d'1 h"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid ""
+"1. Open …\n"
+"2. Click …\n"
+"3. You see … instead of …"
+msgstr ""
+"1. Ouvrez …\n"
+"2. Cliquez sur …\n"
+"3. Vous voyez … au lieu de …"
+
+#. module: oski_module_feedback
+#: model:mail.template,body_html:oski_module_feedback.mail_template_feedback_ack
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 14px;\">\n"
+"    <p>Hello <t t-out=\"object.partner_id.name or ''\">Customer</t>,</p>\n"
+"    <p>\n"
+"        Thank you for your request <strong t-out=\"object.name or ''\">FB00001</strong>\n"
+"        on <strong t-out=\"object.module_id.name or ''\">Module</strong>:\n"
+"        \"<t t-out=\"object.title or ''\">Title</t>\".\n"
+"    </p>\n"
+"    <p>We read every request ourselves. You will receive an e-mail when its status changes.</p>\n"
+"    <p style=\"margin: 24px 0px;\">\n"
+"        <a t-att-href=\"object.get_base_url() + object.access_url\" style=\"background-color: #714B67; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 8px; font-weight: bold;\">\n"
+"            Follow my request\n"
+"        </a>\n"
+"    </p>\n"
+"    <p>The OdooSkills team</p>\n"
+"</div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 14px;\">\n"
+"    <p>Bonjour <t t-out=\"object.partner_id.name or ''\">Customer</t>,</p>\n"
+"    <p>\n"
+"        Merci pour votre demande <strong t-out=\"object.name or ''\">FB00001</strong>\n"
+"        sur <strong t-out=\"object.module_id.name or ''\">Module</strong>:\n"
+"        \"<t t-out=\"object.title or ''\">Title</t>\".\n"
+"    </p>\n"
+"    <p>Nous lisons chaque demande nous-mêmes. Vous recevrez un courriel à chaque changement de statut.</p>\n"
+"    <p style=\"margin: 24px 0px;\">\n"
+"        <a t-att-href=\"object.get_base_url() + object.access_url\" style=\"background-color: #714B67; color: #ffffff; padding: 10px 18px; text-decoration: none; border-radius: 8px; font-weight: bold;\">\n"
+"            Suivre ma demande\n"
+"        </a>\n"
+"    </p>\n"
+"    <p>L'équipe OdooSkills</p>\n"
+"</div>\n"
+"        "
+
+#. module: oski_module_feedback
+#: model:mail.template,body_html:oski_module_feedback.mail_template_feedback_new
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 14px;\">\n"
+"    <p>New request <strong t-out=\"object.name or ''\">FB00001</strong>.</p>\n"
+"    <ul>\n"
+"        <li>Module: <t t-out=\"object.module_id.name or ''\">Module</t> (<t t-out=\"object.module_id.technical_name or ''\">oski_x</t>)</li>\n"
+"        <li>Odoo version: <t t-out=\"object.odoo_version_id.name or '—'\">19.0</t></li>\n"
+"        <li>Type: <t t-out=\"dict(object.fields_get(['request_type'])['request_type']['selection']).get(object.request_type) or ''\">Bug</t></li>\n"
+"        <li>From: <t t-out=\"object.partner_id.name or ''\">Customer</t> &lt;<t t-out=\"object.partner_id.email or ''\">mail</t>&gt;</li>\n"
+"        <li>Source: <t t-out=\"dict(object.fields_get(['source'])['source']['selection']).get(object.source) or ''\">Module page</t></li>\n"
+"    </ul>\n"
+"    <p><strong t-out=\"object.title or ''\">Title</strong></p>\n"
+"    <p style=\"white-space: pre-wrap;\" t-out=\"object.description or ''\">Description</p>\n"
+"    <t t-if=\"object.steps\">\n"
+"        <p><strong>Steps to reproduce</strong></p>\n"
+"        <p style=\"white-space: pre-wrap;\" t-out=\"object.steps\">Steps</p>\n"
+"    </t>\n"
+"    <p>\n"
+"        <a t-att-href=\"object.get_base_url() + '/odoo/action-oski_module_feedback.action_oski_module_feedback/%s' % object.id\">Open the request</a>\n"
+"    </p>\n"
+"</div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 14px;\">\n"
+"    <p>Nouvelle demande <strong t-out=\"object.name or ''\">FB00001</strong>.</p>\n"
+"    <ul>\n"
+"        <li>Module : <t t-out=\"object.module_id.name or ''\">Module</t> (<t t-out=\"object.module_id.technical_name or ''\">oski_x</t>)</li>\n"
+"        <li>Version d'Odoo : <t t-out=\"object.odoo_version_id.name or '—'\">19.0</t></li>\n"
+"        <li>Type : <t t-out=\"dict(object.fields_get(['request_type'])['request_type']['selection']).get(object.request_type) or ''\">Bug</t></li>\n"
+"        <li>De : <t t-out=\"object.partner_id.name or ''\">Customer</t> &lt;<t t-out=\"object.partner_id.email or ''\">mail</t>&gt;</li>\n"
+"        <li>Origine : <t t-out=\"dict(object.fields_get(['source'])['source']['selection']).get(object.source) or ''\">Module page</t></li>\n"
+"    </ul>\n"
+"    <p><strong t-out=\"object.title or ''\">Title</strong></p>\n"
+"    <p style=\"white-space: pre-wrap;\" t-out=\"object.description or ''\">Description</p>\n"
+"    <t t-if=\"object.steps\">\n"
+"        <p><strong>Étapes pour reproduire</strong></p>\n"
+"        <p style=\"white-space: pre-wrap;\" t-out=\"object.steps\">Steps</p>\n"
+"    </t>\n"
+"    <p>\n"
+"        <a t-att-href=\"object.get_base_url() + '/odoo/action-oski_module_feedback.action_oski_module_feedback/%s' % object.id\">Ouvrir la demande</a>\n"
+"    </p>\n"
+"</div>\n"
+"        "
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "A new feature or option."
+msgstr "Une nouvelle fonction ou option."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "A question, an idea, anything else."
+msgstr "Une question, une idée, autre chose."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__access_warning
+msgid "Access warning"
+msgstr "Avertissement d'accès"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_needaction
+msgid "Action Needed"
+msgstr "Action requise"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Décoration d'exception d'activité"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_state
+msgid "Activity State"
+msgstr "État de l'activité"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône de type d'activité"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Adapt an existing behaviour."
+msgstr "Adapter un comportement existant."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__decision_note
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Answer to the customer"
+msgstr "Réponse au client"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__user_id
+msgid "Assigned to"
+msgstr "Assignée à"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__attachment_ids
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Attachments"
+msgstr "Pièces jointes"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_thanks_page
+msgid "Back to the module"
+msgstr "Retour au module"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__request_type__bug
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Bug"
+msgstr "Bug"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+msgid "Bugs"
+msgstr "Bugs"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__request_type__change
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Change request"
+msgstr "Modification"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module__feedback_ids
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_pivot
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+msgid "Change requests"
+msgstr "Demandes de modification"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__create_uid
+msgid "Created by"
+msgstr "Créée par"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__create_date
+msgid "Created on"
+msgstr "Créée le"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__access_url
+msgid "Customer Portal URL"
+msgstr "URL du portail client"
+
+#. module: oski_module_feedback
+#: model_terms:ir.actions.act_window,help:oski_module_feedback.action_oski_module_feedback
+msgid ""
+"Customers send them from the page of a paid module, with the\n"
+"                \"Request a change\" button."
+msgstr ""
+"Les clients les envoient depuis la page d'un module payant, avec le\n"
+"                bouton « Demander une évolution »."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_list
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback
+msgid "Date"
+msgstr "Date"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Decline"
+msgstr "Refuser"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__state__rejected
+msgid "Declined"
+msgstr "Refusée"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__state__done
+msgid "Delivered"
+msgstr "Livrée"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__released_version
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Delivered in version"
+msgstr "Livrée en version"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__description
+msgid "Description"
+msgstr "Description"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Description <span class=\"text-danger\">*</span>"
+msgstr "Description <span class=\"text-danger\">*</span>"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module__display_name
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__display_name
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_trial__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: oski_module_feedback
+#. odoo-python
+#: code:addons/oski_module_feedback/models/oski_module_feedback.py:0
+msgid ""
+"Enter the module version that delivers request %s before marking it "
+"delivered."
+msgstr "Indiquez la version du module qui livre la demande %s avant de la marquer livrée."
+
+#. module: oski_module_feedback
+#. odoo-python
+#: code:addons/oski_module_feedback/controllers/main.py:0
+msgid "File too large: %s (max 5 MB)."
+msgstr "Fichier trop volumineux : %s (5 Mo maximum)."
+
+#. module: oski_module_feedback
+#. odoo-python
+#: code:addons/oski_module_feedback/controllers/main.py:0
+msgid "File type not allowed: %(filename)s. Allowed: %(allowed)s."
+msgstr "Type de fichier non autorisé : %(filename)s. Autorisés : %(allowed)s."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_thanks_page
+msgid "Follow my requests"
+msgstr "Suivre mes demandes"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_home_feedback
+msgid "Follow your change requests and bug reports"
+msgstr "Suivez vos demandes d'évolution et vos signalements de bugs"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (partenaires)"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome, p. ex. fa-tasks"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+msgid "From a trial"
+msgstr "Depuis un essai"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__priority__1
+msgid "High"
+msgstr "Haute"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module__id
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__id
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_trial__id
+msgid "ID"
+msgstr "ID"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône indiquant une activité en exception."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__message_has_error
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur d'envoi."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__request_type__improvement
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Improvement"
+msgstr "Amélioration"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+msgid "Improvements"
+msgstr "Améliorations"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_is_follower
+msgid "Is Follower"
+msgstr "Est abonné"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__write_date
+msgid "Last Updated on"
+msgstr "Dernière modification le"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Mark delivered"
+msgstr "Marquer livrée"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_ids
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Messages"
+msgstr "Messages"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.module_page_feedback_cta
+msgid "Missing a feature or found a bug?"
+msgstr "Une fonction vous manque ou un bug ?"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.trial_wait_page_feedback
+msgid "Missing something in this module?"
+msgstr "Il manque quelque chose à ce module ?"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__module_id
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Module"
+msgstr "Module"
+
+#. module: oski_module_feedback
+#: model:ir.model,name:oski_module_feedback.model_oski_module_feedback
+msgid "Module change request"
+msgstr "Demande d'évolution de module"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__source__module_page
+msgid "Module page"
+msgstr "Page du module"
+
+#. module: oski_module_feedback
+#: model:mail.template,name:oski_module_feedback.mail_template_feedback_ack
+msgid "Module request: acknowledgement"
+msgstr "Demande d'évolution : accusé de réception"
+
+#. module: oski_module_feedback
+#: model:mail.template,name:oski_module_feedback.mail_template_feedback_new
+msgid "Module request: internal notification"
+msgstr "Demande d'évolution : notification interne"
+
+#. module: oski_module_feedback
+#: model:ir.actions.act_window,name:oski_module_feedback.action_oski_module_feedback
+#: model:ir.ui.menu,name:oski_module_feedback.menu_oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_breadcrumbs_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_home_feedback
+msgid "Module requests"
+msgstr "Demandes d'évolution"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__released_version
+msgid "Module version that ships the change, e.g. 19.0.1.2.0."
+msgstr "Version du module qui apporte le changement, p. ex. 19.0.1.2.0."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Échéance de mon activité"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__state__new
+msgid "New"
+msgstr "Nouvelle"
+
+#. module: oski_module_feedback
+#: model:mail.template,subject:oski_module_feedback.mail_template_feedback_new
+msgid "New module request {{ object.name }} — {{ object.module_id.name }}"
+msgstr "Nouvelle demande d'évolution {{ object.name }} — {{ object.module_id.name }}"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Échéance de la prochaine activité"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de la prochaine activité"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type de la prochaine activité"
+
+#. module: oski_module_feedback
+#: model_terms:ir.actions.act_window,help:oski_module_feedback.action_oski_module_feedback
+msgid "No change request yet"
+msgstr "Aucune demande d'évolution pour l'instant"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__priority__0
+msgid "Normal"
+msgstr "Normale"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages demandant une action"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages en erreur d'envoi"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__odoo_version_id
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Odoo version"
+msgstr "Version d'Odoo"
+
+#. module: oski_module_feedback
+#: model:ir.model,name:oski_module_feedback.model_oski_module
+msgid "OdooSkills store module"
+msgstr "Module du store OdooSkills"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+msgid "Open"
+msgstr "Ouvertes"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__request_type__other
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Other"
+msgstr "Autre"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Our answer"
+msgstr "Notre réponse"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__is_pack
+msgid "Pack"
+msgstr "Pack"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+msgid "Packs"
+msgstr "Packs"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Plan"
+msgstr "Planifier"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__state__planned
+msgid "Planned"
+msgstr "Planifiée"
+
+#. module: oski_module_feedback
+#. odoo-python
+#: code:addons/oski_module_feedback/controllers/main.py:0
+msgid "Please fill in the type, the title and the description."
+msgstr "Indiquez le type, le titre et la description."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__access_url
+msgid "Portal Access URL"
+msgstr "URL d'accès au portail"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__priority
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__rating_ids
+msgid "Ratings"
+msgstr "Évaluations"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__name
+msgid "Reference"
+msgstr "Référence"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Reopen"
+msgstr "Rouvrir"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback
+msgid "Request"
+msgstr "Demande"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.module_page_feedback_cta
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.trial_wait_page_feedback
+msgid "Request a change"
+msgstr "Demander une évolution"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module__feedback_count
+msgid "Request count"
+msgstr "Nombre de demandes"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_thanks_page
+msgid "Request sent"
+msgstr "Demande envoyée"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__partner_id
+msgid "Requester"
+msgstr "Demandeur"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_view_form_feedback
+msgid "Requests"
+msgstr "Demandes"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Screenshots or documents"
+msgstr "Captures d'écran ou documents"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__access_token
+msgid "Security Token"
+msgstr "Jeton de sécurité"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Send my request"
+msgstr "Envoyer ma demande"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Sent on"
+msgstr "Envoyée le"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid ""
+"Shown in the customer's portal: what is planned, or why it is declined."
+msgstr "Affichée dans l'espace du client : ce qui est prévu, ou pourquoi la demande est refusée."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__decision_note
+msgid ""
+"Shown to the customer in their portal: what is planned, or why it is "
+"declined."
+msgstr "Affichée au client dans son espace : ce qui est prévu, ou pourquoi la demande est refusée."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Something does not work as expected."
+msgstr "Quelque chose ne marche pas comme prévu."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__source
+msgid "Source"
+msgstr "Origine"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "Start review"
+msgstr "Analyser"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__state
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback
+msgid "Status"
+msgstr "Statut"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut selon les activités\n"
+"En retard : l'échéance est dépassée\n"
+"Aujourd'hui : l'activité est pour aujourd'hui\n"
+"Planifiée : activités à venir."
+
+#. module: oski_module_feedback
+#: model:mail.message.subtype,description:oski_module_feedback.mt_feedback_state
+#: model:mail.message.subtype,name:oski_module_feedback.mt_feedback_state
+msgid "Status changed"
+msgstr "Statut modifié"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__steps
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Steps to reproduce"
+msgstr "Étapes pour reproduire"
+
+#. module: oski_module_feedback
+#: model:ir.model,name:oski_module_feedback.model_oski_module_trial
+msgid "Store 1-hour trial"
+msgstr "Essai d'1 h du store"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid ""
+"Tell us what is missing or what goes wrong. We read every request\n"
+"                            ourselves and you can follow it in your account."
+msgstr ""
+"Dites-nous ce qui manque ou ce qui ne va pas. Nous lisons chaque demande\n"
+"                            nous-mêmes et vous la suivez depuis votre compte."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_thanks_page
+msgid "Thank you!"
+msgstr "Merci !"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__is_pack
+msgid "The module is a suite that installs several modules."
+msgstr "Le module est une suite qui installe plusieurs modules."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__title
+msgid "Title"
+msgstr "Titre"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Title <span class=\"text-danger\">*</span>"
+msgstr "Titre <span class=\"text-danger\">*</span>"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__trial_id
+msgid "Trial"
+msgstr "Essai"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__request_type
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_search
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Type"
+msgstr "Type"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type de l'activité en exception sur l'enregistrement."
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__state__analysis
+msgid "Under review"
+msgstr "En analyse"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Up to"
+msgstr "Jusqu'à"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields.selection,name:oski_module_feedback.selection__oski_module_feedback__priority__2
+msgid "Urgent"
+msgstr "Urgente"
+
+#. module: oski_module_feedback
+#: model:mail.template,subject:oski_module_feedback.mail_template_feedback_ack
+msgid "We received your request {{ object.name }}"
+msgstr "Nous avons bien reçu votre demande {{ object.name }}"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,field_description:oski_module_feedback.field_oski_module_feedback__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: oski_module_feedback
+#: model:ir.model.fields,help:oski_module_feedback.field_oski_module_feedback__website_message_ids
+msgid "Website communication history"
+msgstr "Historique des échanges sur le site web"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "What do you need, and why? An example helps a lot."
+msgstr "De quoi avez-vous besoin, et pourquoi ? Un exemple aide beaucoup."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "What is asked"
+msgstr "Ce qui est demandé"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "What is it about? <span class=\"text-danger\">*</span>"
+msgstr "De quoi s'agit-il ? <span class=\"text-danger\">*</span>"
+
+#. module: oski_module_feedback
+#. odoo-python
+#: code:addons/oski_module_feedback/controllers/main.py:0
+msgid "You can attach up to %s files."
+msgstr "Vous pouvez joindre jusqu'à %s fichiers."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback
+msgid ""
+"You have not sent any request yet. Use the <strong>Request a change</strong>\n"
+"                button on the page of a module."
+msgstr ""
+"Vous n'avez encore envoyé aucune demande. Utilisez le bouton\n"
+"                <strong>Demander une évolution</strong> sur la page d'un module."
+
+#. module: oski_module_feedback
+#. odoo-python
+#: code:addons/oski_module_feedback/controllers/main.py:0
+msgid ""
+"You have sent many requests today. Please try again tomorrow, or reply to "
+"one of your open requests."
+msgstr "Vous avez envoyé beaucoup de demandes aujourd'hui. Réessayez demain, ou répondez à l'une de vos demandes en cours."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "Your Odoo version"
+msgstr "Votre version d'Odoo"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_thanks_page
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.portal_my_feedback_detail
+msgid "Your request"
+msgstr "Votre demande"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.oski_module_feedback_view_form
+msgid "e.g. 19.0.1.2.0"
+msgstr "p. ex. 19.0.1.2.0"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "e.g. Export rental contracts to Excel"
+msgstr "p. ex. Exporter les contrats de location vers Excel"
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_form_page
+msgid "files, 5 MB each ("
+msgstr "fichiers, 5 Mo chacun ("
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_thanks_page
+msgid ""
+"has been received.\n"
+"                            We will e-mail you when its status changes."
+msgstr ""
+"a bien été reçue.\n"
+"                            Nous vous écrirons à chaque changement de statut."
+
+#. module: oski_module_feedback
+#: model_terms:ir.ui.view,arch_db:oski_module_feedback.feedback_thanks_page
+msgid "on"
+msgstr "sur"

@@ -6,7 +6,7 @@ from urllib.parse import unquote
 from odoo.tests import tagged
 from odoo.tests.common import HttpCase
 
-from .common import feedback_vals, make_store_data
+from .common import feedback_vals, make_store_data, prod_languages
 
 PNG = b"\x89PNG\r\n\x1a\n" + b"0" * 64
 
@@ -20,6 +20,7 @@ class TestFeedbackForm(HttpCase):
         cls.env.registry.clear_cache("routing")
         cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
         make_store_data(cls)
+        prod_languages(cls.env)
         cls.form_url = "/apps/m/%s/feedback" % cls.paid.technical_name
         cls.submit_url = cls.form_url + "/submit"
 

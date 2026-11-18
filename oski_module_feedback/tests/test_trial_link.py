@@ -9,7 +9,7 @@ from odoo.tests import tagged
 from odoo.tests.common import HttpCase
 
 from ..hooks import MARKER, post_init_hook, uninstall_hook
-from .common import make_store_data
+from .common import make_store_data, prod_languages
 
 
 @tagged("post_install", "-at_install")
@@ -21,6 +21,7 @@ class TestTrialLink(HttpCase):
         cls.env.registry.clear_cache("routing")
         cls.addClassCleanup(cls.env.registry.clear_cache, "routing")
         make_store_data(cls)
+        prod_languages(cls.env)
         cls.template = cls.env.ref("oski_app_store.mail_template_trial_ended")
 
     def _trial(self, email="awa@example.com", state="expired"):
