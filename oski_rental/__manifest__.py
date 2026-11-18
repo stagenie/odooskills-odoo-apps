@@ -1,6 +1,6 @@
 {
     'name': "Rental Management",
-    'version': '20.0.1.0.0',
+    'version': '20.0.1.0.1',
     'category': 'Services/Rental',
     'summary': "Rent out any type of resource: vehicles, rooms, machinery, equipment",
     'description': """
@@ -28,7 +28,7 @@ Generic rental management: individual resources, bookings, pickup/return with co
     'demo': [
         'demo/rental_demo.xml',
     ],
-    'images': ['static/description/banner.png'],
+    'images': ['static/description/banner.png', 'static/description/screenshot_01_rental_order.png'],
     'installable': True,
     'application': True,
 }
