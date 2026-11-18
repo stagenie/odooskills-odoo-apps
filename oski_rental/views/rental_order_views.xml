@@ -83,7 +83,8 @@
                                     <field name="date_end"/>
                                     <field name="price_unit"/>
                                     <field name="deposit" optional="show"/>
-                                    <field name="late_amount" optional="hide"/>
+                                    <field name="late_amount" optional="show"
+                                           column_invisible="parent.state not in ('returned', 'done')"/>
                                     <field name="price_subtotal"/>
                                     <field name="currency_id" column_invisible="1"/>
                                 </list>

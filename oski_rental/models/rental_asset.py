@@ -112,8 +112,12 @@ class RentalAsset(models.Model):
         ])
 
     def _get_rental_price(self, date_start, date_end):
-        """Prix glouton par paliers de durée. Reste arrondi au palier
-        le plus fin disponible (+1 unité). Pas d'optimisation meilleur-prix (v1)."""
+        """Prix par paliers de durée (mois, semaine, jour, heure), plafonné :
+        à chaque palier, si le reste facturé aux paliers plus fins coûte plus
+        qu'une unité de plus de ce palier, on facture cette unité. 47 h à
+        120/jour et 35/heure = 2 jours (240), pas 1 jour + 23 h (925) ; 6 jours
+        à 100/jour avec une semaine à 500 = 500. Le reste du palier le plus fin
+        est arrondi à l'unité supérieure."""
         self.ensure_one()
         if not date_start or not date_end:
             return 0.0
@@ -123,21 +127,23 @@ class RentalAsset(models.Model):
         granularity = self.env['ir.config_parameter'].sudo().get_param(
             'oski_rental.min_granularity', 'hour')
         tiers = [
-            (field_name, duration)
+            (self[field_name], duration)
             for field_name, duration in PRICE_TIERS
             if self[field_name] > 0
             and not (granularity == 'day' and field_name == 'price_hour')
         ]
         if not tiers:
             return 0.0
-        amount = 0.0
-        remaining = seconds
-        for field_name, duration in tiers:
+
+        def cost(remaining, index):
+            if remaining <= 0:
+                return 0.0
+            price, duration = tiers[index]
             count = int(remaining // duration)
-            if count:
-                amount += count * self[field_name]
-                remaining -= count * duration
-        if remaining > 0:
-            finest_field = tiers[-1][0]
-            amount += self[finest_field]
-        return amount
+            if index == len(tiers) - 1:
+                return (count + (1 if remaining - count * duration > 0 else 0)) * price
+            rest = remaining - count * duration
+            return min(count * price + cost(rest, index + 1),
+                       (count + 1) * price if rest > 0 else count * price)
+
+        return cost(seconds, 0)
