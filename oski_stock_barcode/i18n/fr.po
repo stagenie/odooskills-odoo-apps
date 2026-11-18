@@ -220,7 +220,7 @@ msgstr "Créé le"
 #. odoo-javascript
 #: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
 msgid "DELIVERY"
-msgstr "EXPEDITION"
+msgstr "EXPÉDITION"
 
 #. module: oski_stock_barcode
 #. odoo-javascript
@@ -690,7 +690,7 @@ msgstr "Quantité"
 #. odoo-javascript
 #: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
 msgid "RECEIPT"
-msgstr "RECEPTION"
+msgstr "RÉCEPTION"
 
 #. module: oski_stock_barcode
 #. odoo-javascript
@@ -743,7 +743,7 @@ msgstr "Réservé"
 #. odoo-javascript
 #: code:addons/oski_stock_barcode/static/src/xml/barcode_templates.xml:0
 msgid "STOCK OPERATIONS"
-msgstr "OPERATIONS STOCK"
+msgstr "OPÉRATIONS DE STOCK"
 
 #. module: oski_stock_barcode
 #. odoo-javascript

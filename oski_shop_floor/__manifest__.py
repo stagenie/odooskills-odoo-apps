@@ -1,6 +1,6 @@
 {
     'name': "Shop Floor",
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'category': 'Manufacturing',
     'summary': "Touch-friendly, responsive shop floor execution for work orders — the Shop Floor experience in Community.",
     'description': """

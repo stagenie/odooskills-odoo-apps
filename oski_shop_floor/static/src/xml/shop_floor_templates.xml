@@ -93,7 +93,7 @@
             </div>
 
             <div class="o_sf_components">
-                <h2>Components</h2>
+                <h2 t-if="wo.components.length">Components</h2>
                 <div class="o_sf_comp_row" t-foreach="wo.components" t-as="comp" t-key="comp.move_id">
                     <span class="o_sf_comp_name" t-out="comp.product_name"/>
                     <span class="o_sf_comp_qty"><t t-out="comp.qty_done"/> / <t t-out="comp.qty_demand"/></span>
