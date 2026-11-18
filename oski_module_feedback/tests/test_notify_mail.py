@@ -69,3 +69,15 @@ class TestNotifyMail(TransactionCase):
         self.assertIn("action_view_feedback", arch)
         action = self.paid.action_view_feedback()
         self.assertEqual(action["domain"], [("module_id", "=", self.paid.id)])
+
+    def test_status_change_reaches_requester(self):
+        rec = self.env["oski.module.feedback"].create(feedback_vals(self))
+        self.env.flush_all()
+        self.env.cr.precommit.run()   # le suivi est écrit au commit
+        rec.write({"state": "planned"})
+        self.env.flush_all()
+        self.env.cr.precommit.run()
+        msg = rec.message_ids.filtered(lambda m: m.tracking_value_ids)[:1]
+        self.assertTrue(msg, "no tracking message for the status change")
+        self.assertFalse(msg.subtype_id.internal, "status change must be visible to the customer")
+        self.assertIn(self.portal_user.partner_id, msg.notified_partner_ids)

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_breadcrumbs_feedback" inherit_id="portal.portal_breadcrumbs" priority="35"
+              name="Portal: module requests breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'module_requests'" class="breadcrumb-item active">Module requests</li>
+            <li t-if="page_name == 'module_request'" class="breadcrumb-item">
+                <a href="/my/module-requests">Module requests</a>
+            </li>
+            <li t-if="page_name == 'module_request'" class="breadcrumb-item active" t-out="feedback.name"/>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_feedback" inherit_id="portal.portal_my_home" priority="35"
+              name="Portal: module requests entry" customize_show="True">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/oski_module_feedback/static/description/icon.png'"/>
+                <t t-set="title">Module requests</t>
+                <t t-set="text">Follow your change requests and bug reports</t>
+                <t t-set="url" t-value="'/my/module-requests'"/>
+                <t t-set="placeholder_count" t-value="'feedback_count'"/>
+            </t>
+        </div>
+    </template>
+
+    <template id="feedback_state_badge" name="Module request: status badge">
+        <t t-set="badge_class" t-value="{
+            'new': 'text-bg-info', 'analysis': 'text-bg-warning', 'planned': 'text-bg-primary',
+            'done': 'text-bg-success', 'rejected': 'text-bg-secondary'}.get(feedback.state, 'text-bg-light')"/>
+        <span t-attf-class="badge rounded-pill #{badge_class}" t-field="feedback.state"/>
+    </template>
+
+    <template id="portal_my_feedback" name="My module requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Module requests</t>
+            </t>
+            <div t-if="not requests" class="alert alert-info mt-3" role="alert">
+                You have not sent any request yet. Use the <strong>Request a change</strong>
+                button on the page of a module.
+            </div>
+            <t t-else="" t-call="portal.portal_table">
+                <thead>
+                    <tr>
+                        <th>Request</th>
+                        <th>Module</th>
+                        <th class="d-none d-md-table-cell">Type</th>
+                        <th class="d-none d-md-table-cell">Date</th>
+                        <th class="text-end">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="requests" t-as="feedback">
+                        <td>
+                            <a t-att-href="feedback.access_url">
+                                <span class="text-muted me-1" t-out="feedback.name"/>
+                                <t t-out="feedback.title"/>
+                            </a>
+                        </td>
+                        <td t-out="feedback.module_id.name"/>
+                        <td class="d-none d-md-table-cell"><span t-field="feedback.request_type"/></td>
+                        <td class="d-none d-md-table-cell"><span t-field="feedback.create_date" t-options="{'widget': 'date'}"/></td>
+                        <td class="text-end"><t t-call="oski_module_feedback.feedback_state_badge"/></td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_feedback_detail" name="My module request">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert" groups="oski_app_store.group_manager">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url" t-value="'/odoo/action-oski_module_feedback.action_oski_module_feedback/%s' % feedback.id"/>
+                </t>
+            </t>
+            <div class="card mt-3">
+                <div class="card-header d-flex flex-wrap align-items-center gap-2">
+                    <span class="text-muted" t-out="feedback.name"/>
+                    <h5 class="mb-0 flex-grow-1" t-out="feedback.title"/>
+                    <t t-call="oski_module_feedback.feedback_state_badge"/>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3 small">
+                        <div class="col-6 col-md-3"><div class="text-muted">Module</div>
+                            <a t-att-href="feedback.module_id.website_url" t-out="feedback.module_id.name"/></div>
+                        <div class="col-6 col-md-3"><div class="text-muted">Type</div>
+                            <span t-field="feedback.request_type"/></div>
+                        <div class="col-6 col-md-3"><div class="text-muted">Odoo version</div>
+                            <t t-out="feedback.odoo_version_id.name or '—'"/></div>
+                        <div class="col-6 col-md-3"><div class="text-muted">Sent on</div>
+                            <span t-field="feedback.create_date" t-options="{'widget': 'date'}"/></div>
+                    </div>
+                    <div t-if="feedback.state == 'done' and feedback.released_version"
+                         class="alert alert-success">
+                        Delivered in version <strong t-out="feedback.released_version"/>.
+                    </div>
+                    <div t-if="feedback.decision_note" class="alert alert-light border">
+                        <div class="fw-semibold mb-1">Our answer</div>
+                        <div style="white-space: pre-wrap;" t-out="feedback.decision_note"/>
+                    </div>
+                    <h6>Your request</h6>
+                    <p style="white-space: pre-wrap;" t-out="feedback.description"/>
+                    <t t-if="feedback.steps">
+                        <h6>Steps to reproduce</h6>
+                        <p style="white-space: pre-wrap;" t-out="feedback.steps"/>
+                    </t>
+                </div>
+            </div>
+            <div class="mt-4">
+                <h4>Messages</h4>
+                <t t-call="portal.message_thread"/>
+            </div>
+        </t>
+    </template>
+</odoo>

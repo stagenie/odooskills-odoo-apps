@@ -12,10 +12,12 @@
         "security/ir.model.access.csv",
         "security/oski_module_feedback_rules.xml",
         "data/ir_sequence_data.xml",
+        "data/mail_message_subtype_data.xml",
         "data/mail_template_data.xml",
         "views/oski_module_feedback_views.xml",
         "views/oski_module_views.xml",
         "templates/feedback_form_templates.xml",
+        "templates/portal_templates.xml",
     ],
     "assets": {
         "web.assets_frontend": [

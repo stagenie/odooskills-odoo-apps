@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Public : le demandeur (suiveur) reçoit chaque changement de statut. -->
+    <record id="mt_feedback_state" model="mail.message.subtype">
+        <field name="name">Status changed</field>
+        <field name="res_model">oski.module.feedback</field>
+        <field name="default" eval="True"/>
+        <field name="internal" eval="False"/>
+        <field name="description">Status changed</field>
+    </record>
+</odoo>

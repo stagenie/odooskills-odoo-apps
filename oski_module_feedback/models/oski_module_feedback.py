@@ -161,3 +161,9 @@ class OskiModuleFeedback(models.Model):
                 ack.sudo().send_mail(rec.id, force_send=False)
             if new and new.sudo().email_to:
                 new.sudo().send_mail(rec.id, force_send=False)
+
+    def _track_subtype(self, init_values):
+        self.ensure_one()
+        if "state" in init_values:
+            return self.env.ref("oski_module_feedback.mt_feedback_state")
+        return super()._track_subtype(init_values)
