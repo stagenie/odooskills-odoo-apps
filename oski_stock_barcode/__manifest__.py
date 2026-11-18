@@ -1,6 +1,6 @@
 {
     'name': 'Stock Barcode',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Inventory/Stock',
     'summary': "Touch barcode scanning interface for stock operations: "
                "receipt, delivery, inventory count, transfer, lookup",
