@@ -17,7 +17,14 @@
         "views/calendar_event_views.xml",
         "views/appointment_menus.xml",
     ],
-    "images": ["static/description/screenshot_01_appointments.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_appointments.png",
+        "static/description/screenshot_02_calendar.png",
+        "static/description/screenshot_03_type.png",
+        "static/description/screenshot_04_appointment.png",
+        "static/description/screenshot_05_book_wizard.png",
+    ],
     "application": True,
     "installable": True,
 }

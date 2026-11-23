@@ -28,7 +28,15 @@ Generic rental management: individual resources, bookings, pickup/return with co
     'demo': [
         'demo/rental_demo.xml',
     ],
-    'images': ['static/description/banner.png', 'static/description/screenshot_01_rental_order.png'],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_rental_order.png",
+        "static/description/screenshot_02_rentals.png",
+        "static/description/screenshot_03_fleet.png",
+        "static/description/screenshot_04_calendar.png",
+        "static/description/screenshot_05_late_return.png",
+        "static/description/screenshot_06_resource.png",
+    ],
     'installable': True,
     'application': True,
 }

@@ -19,7 +19,13 @@
         "views/subscription_menus.xml",
     ],
     "demo": ["demo/subscription_demo.xml"],
-    "images": ["static/description/screenshot_01_subscriptions.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_subscriptions.png",
+        "static/description/screenshot_02_subscription.png",
+        "static/description/screenshot_03_invoices.png",
+        "static/description/screenshot_04_plans.png",
+    ],
     "installable": True,
     "application": True,
 }
