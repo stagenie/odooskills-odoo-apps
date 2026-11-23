@@ -74,7 +74,7 @@ msgid "Last Updated on"
 msgstr "Mis à jour le"
 
 #. module: oski_export_log
-#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__model_name model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_search
+#: model:ir.model.fields,field_description:oski_export_log.field_oski_export_log__model_name model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_search model_terms:ir.ui.view,arch_db:oski_export_log.view_oski_export_log_list
 msgid "Model"
 msgstr "Modèle"
 

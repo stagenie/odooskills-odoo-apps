@@ -1,6 +1,6 @@
 {
     "name": "Mass Edit",
-    "version": "18.0.1.0.1",
+    "version": "18.0.1.0.2",
     "category": "Technical",
     "summary": "Change a field on an entire selection from the list view, without going through each record.",
     "description": """
@@ -16,9 +16,10 @@ normally — the module never writes in sudo.
     "license": "LGPL-3",
     "depends": ["base", "web"],
     "images": [
-        "static/description/screenshot_01_menu_actions.png",
-        "static/description/screenshot_02_assistant.png",
-        "static/description/screenshot_03_modeles_ouverts.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_actions_menu.png",
+        "static/description/screenshot_02_wizard.png",
+        "static/description/screenshot_03_enabled_models.png",
     ],
     "data": [
         "security/ir.model.access.csv",

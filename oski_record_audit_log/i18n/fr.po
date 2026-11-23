@@ -127,7 +127,7 @@ msgid "Logging Rules"
 msgstr "Règles de journalisation"
 
 #. module: oski_record_audit_log
-#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__model_name model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__model_id model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_form
+#: model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_log__model_name model:ir.model.fields,field_description:oski_record_audit_log.field_oski_audit_rule__model_id model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_search model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_rule_form model_terms:ir.ui.view,arch_db:oski_record_audit_log.view_oski_audit_log_list
 msgid "Model"
 msgstr "Modèle"
 

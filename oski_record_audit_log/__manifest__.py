@@ -1,6 +1,6 @@
 {
     "name": "Record Audit Log",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Technical",
     "summary": "Who created, changed or deleted what, on the models you choose, without writing a line of code.",
     "description": """
@@ -21,8 +21,9 @@ the log keeps track of human actions, not of maintenance.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
-        "static/description/screenshot_01_journal.png",
-        "static/description/screenshot_02_regles.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_change_log.png",
+        "static/description/screenshot_02_rule_form.png",
     ],
     "data": [
         "security/ir.model.access.csv",

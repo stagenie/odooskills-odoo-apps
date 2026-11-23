@@ -138,7 +138,7 @@ msgid "Mass Edit Models"
 msgstr "Modèles ouverts à l'édition en masse"
 
 #. module: oski_mass_edit
-#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__model_id model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__model_name
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__model_id model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__model_label
 msgid "Model"
 msgstr "Modèle"
 
@@ -195,7 +195,7 @@ msgid "Set a value"
 msgstr "Définir une valeur"
 
 #. module: oski_mass_edit
-#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__model_name
+#: model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_config__model_name model:ir.model.fields,field_description:oski_mass_edit.field_oski_mass_edit_wizard__model_name
 msgid "Technical Name"
 msgstr "Nom technique"
 

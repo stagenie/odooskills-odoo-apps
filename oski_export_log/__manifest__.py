@@ -1,6 +1,6 @@
 {
     "name": "Export Log",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Technical",
     "summary": "Know who takes which data out of your database: model, fields, number of rows, date.",
     "description": """
@@ -21,7 +21,8 @@ actually left the database.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
-        "static/description/screenshot_01_journal.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_export_log.png",
     ],
     "data": [
         "security/ir.model.access.csv",

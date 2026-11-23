@@ -13,7 +13,8 @@ class OskiMassEditWizard(models.TransientModel):
     _name = "oski.mass.edit.wizard"
     _description = "Mass Edit"
 
-    model_name = fields.Char(string="Model", readonly=True, required=True)
+    model_name = fields.Char(string="Technical Name", readonly=True, required=True)
+    model_label = fields.Char(string="Model", compute="_compute_model_label")
     record_count = fields.Integer(string="Selected Records", readonly=True)
     field_id = fields.Many2one(
         "ir.model.fields", string="Field to Change", required=True,
@@ -49,6 +50,12 @@ class OskiMassEditWizard(models.TransientModel):
             vals.setdefault("model_name", active_model)
         vals.setdefault("record_count", len(active_ids))
         return vals
+
+    @api.depends("model_name")
+    def _compute_model_label(self):
+        for wizard in self:
+            wizard.model_label = (
+                self.env["ir.model"].sudo()._get(wizard.model_name).name if wizard.model_name else False)
 
     @api.depends("field_id")
     def _compute_selection_hint(self):

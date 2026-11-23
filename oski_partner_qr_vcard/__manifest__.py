@@ -19,7 +19,10 @@ in one tap — no third-party app required.
     "data": [
         "views/res_partner_views.xml",
     ],
-    "images": ["static/description/screenshot_01_qr_vcard_tab.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_qr_vcard_tab.png",
+    ],
     "installable": True,
     "application": False,
 }
