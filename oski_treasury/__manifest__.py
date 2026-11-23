@@ -13,10 +13,14 @@ Design notes
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
-    'images': [
-        'static/description/banner.png',
-        'static/description/screenshot_01_cash_registers.png',
-        'static/description/screenshot_02_operations.png',
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_cash_registers.png",
+        "static/description/screenshot_02_operations.png",
+        "static/description/screenshot_03_closing.png",
+        "static/description/screenshot_04_transfers.png",
+        "static/description/screenshot_05_safe_operations.png",
+        "static/description/screenshot_06_cash_register.png",
     ],
     'depends': ['account', 'mail'],
     'data': [
