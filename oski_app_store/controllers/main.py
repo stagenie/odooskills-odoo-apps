@@ -16,7 +16,7 @@ from babel.dates import format_date as babel_format_date
 
 from odoo import _, http
 from odoo.http import request
-from odoo.tools.misc import babel_locale_parse
+from odoo.tools.misc import babel_locale_parse, formatLang
 from odoo.addons.oski_app_store.controllers.url_state import build_query, query_params, toggle
 
 # Un visiteur qui rafraîchit la page ou relance le téléchargement ne doit pas
@@ -29,6 +29,8 @@ DOWNLOAD_COUNT_GUARD_SECONDS = 6 * 3600
 # de 2, 3 et 4 au-delà de 12 : chaque page pleine remplit toutes ses rangées,
 # quel que soit l'écran (6 rangées de 4, 8 de 3, 12 de 2).
 CATALOG_PAGE_SIZE = 24
+# Suites montrées dans le bandeau du catalogue (les autres : filtre « Suites »).
+SUITE_BAND_SIZE = 8
 
 _logger = logging.getLogger(__name__)
 
@@ -101,6 +103,8 @@ class OskiAppStore(http.Controller):
             domain.append(("is_free", "=", True))
         elif pricing == "premium":
             domain.append(("is_free", "=", False))
+        elif pricing == "suite":
+            domain.append(("is_suite", "=", True))
         if search:
             domain.append(("name", "ilike", search))
 
@@ -165,7 +169,10 @@ class OskiAppStore(http.Controller):
                 "selected": pricing == key,
                 "href": build_query(cats, tags, key, sort, search, version, default_version),
             }
-            for key, label in (("all", _("All prices")), ("free", _("Open source")), ("premium", _("Premium")))
+            for key, label in (
+                ("all", _("All prices")), ("free", _("Open source")),
+                ("premium", _("Premium")), ("suite", _("Suites")),
+            )
         ]
         sort_choices = [("name", _("Name")), ("recent", _("Recent"))]
         if show_counters:
@@ -225,7 +232,22 @@ class OskiAppStore(http.Controller):
                 "page": page, "count": page_count,
             }
 
+        has_filters = bool(cats or tags or pricing != "all" or search)
+        # Bandeau « Suites » : en tête de la page 1 du catalogue non filtré
+        # (une recherche ou un filtre dit déjà ce que le visiteur veut voir).
+        # Ordre : « Suite order » du backend, puis les plus grandes familles
+        # d'abord (une nouvelle série prend sa place sans réglage).
+        all_suites = OskiModule.search(
+            [("is_suite", "=", True), ("is_published", "=", True)],
+        ).sorted(lambda s: (s.suite_sequence, -len(s._suite_members()), s.name.lower()))
+        featured_suites = (
+            self._suite_offers(all_suites[:SUITE_BAND_SIZE])
+            if page == 1 and not has_filters else []
+        )
         values = {
+            "featured_suites": featured_suites,
+            "suites_all_label": _("All %s suites →") % len(all_suites),
+            "suites_url": build_query([], [], "suite", "name", "", version, default_version),
             "modules": modules,
             "pager": pager,
             "result_total": total,
@@ -256,7 +278,7 @@ class OskiAppStore(http.Controller):
             "search": search,
             "sort": sort,
             "show_counters": show_counters,
-            "has_filters": bool(cats or tags or pricing != "all" or search),
+            "has_filters": has_filters,
             "clear_url": "/apps",
             # Une seule phrase traduisible : mélanger un msgid tronqué avec un
             # nœud texte statique produirait un français aux guillemets
@@ -400,8 +422,84 @@ class OskiAppStore(http.Controller):
                 "website_meta_description": module._seo_description(),
                 "screenshots": module._screenshots_for_lang(request.env.lang),
                 "back_url": self._catalog_back_url(),
+                # Fiche d'une app : les suites qui l'installent (encart de vente).
+                # Fiche d'une suite : son propre prix face aux apps une à une.
+                "parent_suite_offers": self._suite_offers(module._published_suites_including()),
+                "own_suite_offer": (
+                    self._suite_offers(module)[0] if module.is_suite and module.is_published else None
+                ),
             },
         )
+
+    def _suite_offers(self, suites):
+        """Une offre par suite : apps incluses, prix et économie.
+
+        Les deux prix viennent de la liste de prix du site (le prix que le
+        panier facturera, remise de lancement comprise) : la suite et ses apps
+        sont comparées sur la même base. L'économie n'est donnée que si elle
+        existe vraiment (≥ 5 %) — jamais de « −0 % » ni de suite plus chère
+        affichée comme une affaire.
+        """
+        if not suites:
+            return []
+        website = request.website
+        currency = website.currency_id
+        pricelist = request.pricelist or request.env["product.pricelist"]
+        rows = []
+        products = request.env["product.product"].sudo()
+        for suite in suites:
+            members = suite._suite_members().filtered("is_published")
+            paid = members.filtered(lambda m: not m.is_free)
+            rows.append((suite, members, paid))
+            for m in (suite | paid):
+                if m.product_tmpl_id.product_variant_id:
+                    products |= m.product_tmpl_id.product_variant_id
+        prices = pricelist.sudo()._get_products_price(products, 1.0, currency=currency) if products else {}
+
+        def _price(module):
+            variant = module.product_tmpl_id.product_variant_id
+            if variant and variant.id in prices:
+                return prices[variant.id]
+            return module.price or 0.0
+
+        def _money(amount):
+            return formatLang(request.env, amount, currency_obj=currency)
+
+        offers = []
+        for suite, members, paid in rows:
+            price = _price(suite)
+            separate = sum(_price(m) for m in paid)
+            saving = round(100.0 * (1.0 - price / separate)) if separate else 0
+            if saving < 5:
+                saving, separate = 0, 0.0
+            count = len(members)
+            values = {
+                "count": count, "price": _money(price),
+                "separate": _money(separate), "saving": saving,
+            }
+            offers.append({
+                "suite": suite,
+                "count": count,
+                "price": price,
+                "separate": separate,
+                "saving": saving,
+                "price_label": values["price"],
+                "separate_label": values["separate"] if separate else "",
+                "apps_label": _("%(count)s apps included", **values),
+                "saving_label": _("Save %(saving)s%%", **values) if saving else "",
+                # Encart de la fiche d'une app de la suite.
+                "pitch": (
+                    _("%(count)s apps for %(price)s instead of %(separate)s "
+                      "bought one by one.", **values) if saving
+                    else _("%(count)s apps for %(price)s.", **values)
+                ),
+                # Fiche de la suite elle-même.
+                "own_pitch": (
+                    _("Bought one by one, these %(count)s apps cost %(separate)s: "
+                      "the suite saves you %(saving)s%%.", **values) if saving else ""
+                ),
+            })
+        return offers
 
     def _price_offer(self, product):
         """Remise de la liste de prix du site sur ce produit, ou None.

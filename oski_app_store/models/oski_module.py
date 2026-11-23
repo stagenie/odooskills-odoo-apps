@@ -56,6 +56,19 @@ class OskiModule(models.Model):
         "tag_id",
         string="Tags",
     )
+    # Suites : un module `oski_<famille>_suite` installe toute une famille.
+    # Reconnu à son nom technique, donc sans réglage pour les prochaines séries ;
+    # la case reste modifiable au backend (stockée, readonly=False).
+    is_suite = fields.Boolean(
+        string="Suite", compute="_compute_is_suite", store=True, readonly=False,
+        help="Bundle module that installs a whole family of apps: shown in the "
+             "Suites band of the catalog, the Suites filter and on the page of "
+             "each app it includes.",
+    )
+    suite_sequence = fields.Integer(
+        string="Suite order", default=10,
+        help="Order of the suite in the catalog band (lowest first).",
+    )
     image_1920 = fields.Image(string="Icon")
     screenshot_ids = fields.Many2many(
         "ir.attachment",
@@ -109,6 +122,45 @@ class OskiModule(models.Model):
         "UNIQUE(technical_name)",
         "The module technical name must be unique.",
     )
+
+    @api.depends("technical_name")
+    def _compute_is_suite(self):
+        for module in self:
+            module.is_suite = bool(
+                module.technical_name and module.technical_name.endswith("_suite")
+            )
+
+    def _suite_members(self):
+        """Apps qu'installe la suite, dépendances en cascade comprises.
+
+        Une sous-suite (l'Hôpital installe la suite Clinique) n'est pas une app
+        de plus : on la traverse sans la compter, sinon son prix serait compté
+        deux fois avec celui des apps qu'elle installe.
+        """
+        self.ensure_one()
+        seen = self.browse()
+        members = self.browse()
+        todo = list(self.sudo().dependency_ids)
+        while todo:
+            dep = todo.pop()
+            if dep in seen or dep == self:
+                continue
+            seen |= dep
+            todo.extend(dep.dependency_ids)
+            if not dep.is_suite:
+                members |= dep
+        return members
+
+    def _published_suites_including(self):
+        """Suites publiées qui installent ce module (fiche de chaque app)."""
+        self.ensure_one()
+        if self.is_suite:
+            return self.browse()
+        suites = self.sudo().search(
+            [("is_suite", "=", True), ("is_published", "=", True)],
+            order="suite_sequence, name",
+        )
+        return suites.filtered(lambda s: self in s._suite_members())
 
     @api.depends("ribbon_id", "ribbon_date_from", "ribbon_date_to")
     def _compute_ribbon_display_id(self):

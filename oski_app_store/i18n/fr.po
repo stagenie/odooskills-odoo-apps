@@ -266,16 +266,6 @@ msgid "<span class=\"oski-deps-label\">Requires:</span>"
 msgstr "<span class=\"oski-deps-label\">Nécessite :</span>"
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "<span class=\"oski-eyebrow\">OdooSkills marketplace</span>"
-msgstr "<span class=\"oski-eyebrow\">Marketplace OdooSkills</span>"
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "<span class=\"oski-spectrum-label\">Compatibility</span>"
-msgstr "<span class=\"oski-spectrum-label\">Compatibilité</span>"
-
-#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.footer_legal_links
 msgid "<span class=\"sep\" aria-hidden=\"true\">·</span>"
 msgstr "<span class=\"sep\" aria-hidden=\"true\">·</span>"
@@ -660,11 +650,6 @@ msgstr "Bientôt en vente."
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
 msgid "Compatibility"
 msgstr "Compatibilité"
-
-#. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "Compatible Odoo versions"
-msgstr "Versions Odoo compatibles"
 
 #. module: oski_app_store
 #: model:ir.model,name:oski_app_store.model_res_config_settings
@@ -3526,3 +3511,95 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 msgid "Since public counter start"
 msgstr "Depuis le début des compteurs publics"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid ""
+"%(count)s apps for %(price)s instead of %(separate)s bought one by one."
+msgstr "%(count)s apps pour %(price)s au lieu de %(separate)s à l'unité."
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "%(count)s apps for %(price)s."
+msgstr "%(count)s apps pour %(price)s."
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "%(count)s apps included"
+msgstr "%(count)s apps incluses"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "<span class=\"oski-suite-callout-go\">See the suite →</span>"
+msgstr "<span class=\"oski-suite-callout-go\">Voir la suite →</span>"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "<span class=\"oski-suite-callout-kicker\">Also in a suite</span>"
+msgstr "<span class=\"oski-suite-callout-kicker\">Existe aussi en suite</span>"
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.suites_band
+msgid ""
+"A whole trade in one install: every app of the family, for less than buying "
+"them one by one."
+msgstr ""
+"Tout un métier en une installation : toutes les apps de la famille, pour "
+"moins cher qu'à l'unité."
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "All %s suites →"
+msgstr "Les %s suites →"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid ""
+"Bought one by one, these %(count)s apps cost %(separate)s: the suite saves "
+"you %(saving)s%%."
+msgstr ""
+"Achetées une à une, ces %(count)s apps coûtent %(separate)s : la suite vous "
+"fait économiser %(saving)s %%."
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__is_suite
+msgid ""
+"Bundle module that installs a whole family of apps: shown in the Suites band"
+" of the catalog, the Suites filter and on the page of each app it includes."
+msgstr ""
+"Module qui installe toute une famille d'apps : affiché dans le bandeau des "
+"suites du catalogue, le filtre Suites et sur la fiche de chaque app incluse."
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.suites_band
+msgid "Complete suites"
+msgstr "Suites complètes"
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__suite_sequence
+msgid "Order of the suite in the catalog band (lowest first)."
+msgstr ""
+"Ordre de la suite dans le bandeau du catalogue (le plus petit d'abord)."
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Save %(saving)s%%"
+msgstr "−%(saving)s %%"
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__suite_sequence
+msgid "Suite order"
+msgstr "Ordre de la suite"
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
+msgid "Suites"
+msgstr "Suites"

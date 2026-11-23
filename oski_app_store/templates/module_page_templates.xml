@@ -18,6 +18,7 @@
                                     <h1 class="oski-module-title" t-out="module.name"/>
                                     <span class="oski-badges">
                                         <span t-if="module.is_free" class="oski-badge oski-badge-free">Open source</span>
+                                        <span t-elif="module.is_suite" class="oski-badge oski-badge-suite">Suite</span>
                                         <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
                                         <t t-if="ribbon and ribbon.style == 'tag'" t-call="oski_app_store.module_ribbon"/>
                                     </span>
@@ -128,6 +129,24 @@
                             </t>
                             <t t-else="">
                                 <p class="text-muted">No archive available.</p>
+                            </t>
+                            <!-- Fiche d'une suite : ce qu'elle fait économiser. -->
+                            <p t-if="own_suite_offer and own_suite_offer['own_pitch']"
+                               class="oski-suite-own" t-out="own_suite_offer['own_pitch']"/>
+                            <!-- Fiche d'une app : la (les) suite(s) qui l'installent. -->
+                            <t t-foreach="parent_suite_offers" t-as="offer">
+                                <a t-att-href="offer['suite'].website_url" class="oski-suite-callout">
+                                    <span class="oski-suite-callout-kicker">Also in a suite</span>
+                                    <span class="oski-suite-callout-head">
+                                        <t t-call="oski_app_store.module_icon">
+                                            <t t-set="module" t-value="offer['suite']"/>
+                                        </t>
+                                        <strong t-out="offer['suite'].name"/>
+                                        <span t-if="offer['saving_label']" class="oski-suite-saving" t-out="offer['saving_label']"/>
+                                    </span>
+                                    <span class="oski-suite-callout-pitch" t-out="offer['pitch']"/>
+                                    <span class="oski-suite-callout-go">See the suite →</span>
+                                </a>
                             </t>
                         </div>
                     </div>

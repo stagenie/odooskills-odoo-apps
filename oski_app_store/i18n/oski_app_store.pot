@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 07:30+0000\n"
-"PO-Revision-Date: 2026-11-16 07:30+0000\n"
+"POT-Creation-Date: 2026-11-23 19:28+0000\n"
+"PO-Revision-Date: 2026-11-23 19:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,25 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_app_store/controllers/main.py:0
 msgid " Odoo %s on request."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid ""
+"%(count)s apps for %(price)s instead of %(separate)s bought one by one."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "%(count)s apps for %(price)s."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "%(count)s apps included"
 msgstr ""
 
 #. module: oski_app_store
@@ -243,12 +262,17 @@ msgstr ""
 
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "<span class=\"oski-eyebrow\">OdooSkills marketplace</span>"
+msgid "<span class=\"oski-spectrum-label\">Odoo</span>"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "<span class=\"oski-spectrum-label\">Compatibility</span>"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "<span class=\"oski-suite-callout-go\">See the suite →</span>"
+msgstr ""
+
+#. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "<span class=\"oski-suite-callout-kicker\">Also in a suite</span>"
 msgstr ""
 
 #. module: oski_app_store
@@ -384,6 +408,13 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#: model_terms:ir.ui.view,arch_db:oski_app_store.suites_band
+msgid ""
+"A whole trade in one install: every app of the family, for less than buying "
+"them one by one."
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__access_token
 msgid "Access token"
 msgstr ""
@@ -437,6 +468,12 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.faq_page
 msgid "After the purchase"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "All %s suites →"
 msgstr ""
 
 #. module: oski_app_store
@@ -512,6 +549,14 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid ""
+"Bought one by one, these %(count)s apps cost %(separate)s: the suite saves "
+"you %(saving)s%%."
+msgstr ""
+
+#. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.portal_my_apps
 #: model_terms:ir.ui.view,arch_db:oski_app_store.store_404
 msgid "Browse the catalog"
@@ -525,6 +570,13 @@ msgstr ""
 #. module: oski_app_store
 #: model:ir.model.fields.selection,name:oski_app_store.selection__oski_module_trial__state__building
 msgid "Building"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__is_suite
+msgid ""
+"Bundle module that installs a whole family of apps: shown in the Suites band"
+" of the catalog, the Suites filter and on the page of each app it includes."
 msgstr ""
 
 #. module: oski_app_store
@@ -619,8 +671,8 @@ msgid "Compatibility"
 msgstr ""
 
 #. module: oski_app_store
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
-msgid "Compatible Odoo versions"
+#: model_terms:ir.ui.view,arch_db:oski_app_store.suites_band
+msgid "Complete suites"
 msgstr ""
 
 #. module: oski_app_store
@@ -1622,6 +1674,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_stats_report__odoo_version
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_trial__odoo_version
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module_version__odoo_version_id
+#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_download_view_search
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
@@ -1759,6 +1812,11 @@ msgstr ""
 #. module: oski_app_store
 #: model_terms:ir.ui.view,arch_db:oski_app_store.privacy_policy
 msgid "Order"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_oski_module__suite_sequence
+msgid "Order of the suite in the catalog band (lowest first)."
 msgstr ""
 
 #. module: oski_app_store
@@ -2138,6 +2196,12 @@ msgid ""
 msgstr ""
 
 #. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "Save %(saving)s%%"
+msgstr ""
+
+#. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_module__screenshot_ids
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_form
 msgid "Screenshots"
@@ -2327,6 +2391,25 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_pivot
 #: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_stats_report_view_search
 msgid "Store statistics"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__is_suite
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_card
+#: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
+msgid "Suite"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_oski_module__suite_sequence
+msgid "Suite order"
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+#: model_terms:ir.ui.view,arch_db:oski_app_store.oski_module_view_search
+msgid "Suites"
 msgstr ""
 
 #. module: oski_app_store
@@ -2762,7 +2845,6 @@ msgstr ""
 
 #. module: oski_app_store
 #: model:ir.model.fields,field_description:oski_app_store.field_oski_odoo_version__name
-#: model_terms:ir.ui.view,arch_db:oski_app_store.catalog_page
 msgid "Version"
 msgstr ""
 
@@ -3176,6 +3258,12 @@ msgstr ""
 msgid ""
 "server logs (IP address, page requested,\n"
 "                            date), session and cart cookies."
+msgstr ""
+
+#. module: oski_app_store
+#. odoo-python
+#: code:addons/oski_app_store/controllers/main.py:0
+msgid "suite"
 msgstr ""
 
 #. module: oski_app_store

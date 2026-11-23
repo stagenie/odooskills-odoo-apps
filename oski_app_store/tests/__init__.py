@@ -22,3 +22,4 @@ from . import test_trial
 from . import test_catalog_pager
 from . import test_store_stats
 from . import test_module_link
+from . import test_suites

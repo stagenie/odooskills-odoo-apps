@@ -31,6 +31,7 @@
                 <span class="oski-badges">
                     <t t-if="ribbon and ribbon.style == 'tag'" t-call="oski_app_store.module_ribbon"/>
                     <span t-if="module.is_free" class="oski-badge oski-badge-free">Open source</span>
+                    <span t-elif="module.is_suite" class="oski-badge oski-badge-suite">Suite</span>
                     <span t-else="" class="oski-badge oski-badge-premium">Premium</span>
                 </span>
             </div>
@@ -51,6 +52,44 @@
                 <span class="oski-card-go" aria-hidden="true">View →</span>
             </div>
         </a>
+    </template>
+
+    <!-- Carte du bandeau « Suites » : `offer` vient de _suite_offers(). -->
+    <template id="suite_card" name="Carte suite (bandeau)">
+        <t t-set="module" t-value="offer['suite']"/>
+        <a t-att-href="module.website_url" class="oski-suite-card">
+            <div class="oski-suite-card-top">
+                <t t-call="oski_app_store.module_icon"/>
+                <span t-if="offer['saving_label']" class="oski-suite-saving" t-out="offer['saving_label']"/>
+            </div>
+            <h3 class="oski-suite-card-name" t-out="module.name"/>
+            <p class="oski-suite-card-summary" t-out="module.summary"/>
+            <div class="oski-suite-card-foot">
+                <span class="oski-suite-card-apps" t-out="offer['apps_label']"/>
+                <span class="oski-suite-card-price">
+                    <del t-if="offer['separate_label']" t-out="offer['separate_label']"/>
+                    <strong t-out="offer['price_label']"/>
+                </span>
+            </div>
+        </a>
+    </template>
+
+    <!-- Bandeau « Suites » en tête du catalogue (page 1, sans filtre). -->
+    <template id="suites_band" name="Bandeau des suites">
+        <section class="oski-suites" aria-labelledby="oski-suites-title">
+            <div class="oski-suites-head">
+                <div>
+                    <h2 id="oski-suites-title" class="oski-suites-title">Complete suites</h2>
+                    <p class="oski-suites-lead">A whole trade in one install: every app of the family, for less than buying them one by one.</p>
+                </div>
+                <a t-att-href="suites_url" class="oski-suites-all" t-out="suites_all_label"/>
+            </div>
+            <div class="oski-suites-row">
+                <t t-foreach="featured_suites" t-as="offer">
+                    <t t-call="oski_app_store.suite_card"/>
+                </t>
+            </div>
+        </section>
     </template>
 
     <!-- Dropdown de filtre (groupe d'options pré-calculées). -->
@@ -147,6 +186,8 @@
                                class="oski-clear">Clear all</a>
                         </div>
                     </div>
+
+                    <t t-if="featured_suites" t-call="oski_app_store.suites_band"/>
 
                     <div t-if="version_is_upcoming" class="oski-notice" role="status">
                         <strong>Odoo <t t-out="version.split('.')[0]"/> archives are on the way.</strong>

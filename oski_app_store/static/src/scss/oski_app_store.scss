@@ -215,6 +215,88 @@ $oski-display: 'Space Grotesk', system-ui, sans-serif;
     }
     .oski-badge-free { background: rgba($oski-green, .12); color: $oski-green; }
     .oski-badge-premium { background: rgba($oski-plum, .12); color: $oski-plum; }
+    .oski-badge-suite { background: $oski-pink; color: $oski-ink-deep; }
+
+    // ---- Suites : bandeau du catalogue, encart des fiches (23/11/2026) ----
+    // Le bandeau reprend le fond du hero : il se détache de la grille blanche.
+    .oski-suites {
+        margin: 0 0 1.8rem; padding: 1.3rem 1.3rem 1.4rem; border-radius: 18px;
+        background: radial-gradient(120% 160% at 0% 0%, #3a1f4d 0%, $oski-ink-deep 60%, #190b22 100%);
+        color: #fff;
+    }
+    .oski-suites-head {
+        display: flex; align-items: flex-end; justify-content: space-between;
+        gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .oski-suites-title {
+        font-family: $oski-display; font-weight: 700; font-size: 1.45rem;
+        letter-spacing: -.02em; margin: 0 0 .25rem; color: #fff;
+    }
+    .oski-suites-lead { margin: 0; color: rgba(255,255,255,.75); font-size: .93rem; }
+    .oski-suites-all {
+        color: $oski-pink; font-weight: 600; text-decoration: none; white-space: nowrap;
+        &:hover { color: #fff; }
+    }
+    // 4 cartes par ligne sur grand écran, défilement horizontal sur mobile.
+    .oski-suites-row {
+        display: grid; gap: .9rem; grid-template-columns: repeat(4, minmax(0, 1fr));
+        @media (max-width: 1199.98px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        @media (max-width: 575.98px) {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            margin: 0 -1.3rem; padding: 0 1.3rem .3rem;
+            .oski-suite-card { flex: 0 0 78%; scroll-snap-align: start; }
+        }
+    }
+    .oski-suite-card {
+        display: flex; flex-direction: column; gap: .45rem; padding: 1rem;
+        border-radius: 14px; background: #fff; color: $oski-ink; text-decoration: none;
+        border-top: 4px solid $oski-pink;
+        transition: transform .15s ease, box-shadow .15s ease;
+        &:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,0,0,.25); color: $oski-ink; }
+        .oski-icon, .oski-monogram { width: 44px; height: 44px; }
+    }
+    .oski-suite-card-top { display: flex; align-items: center; justify-content: space-between; }
+    .oski-suite-saving {
+        padding: .2rem .55rem; border-radius: 999px; font-size: .74rem; font-weight: 700;
+        background: rgba($oski-green, .12); color: $oski-green; white-space: nowrap;
+    }
+    .oski-suite-card-name {
+        font-family: $oski-display; font-weight: 700; font-size: 1.05rem; margin: .1rem 0 0;
+    }
+    .oski-suite-card-summary {
+        color: $oski-muted; font-size: .84rem; line-height: 1.45; margin: 0 0 auto;
+        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .oski-suite-card-foot {
+        display: flex; align-items: baseline; justify-content: space-between; gap: .5rem;
+        padding-top: .55rem; border-top: 1px solid $oski-line; flex-wrap: wrap;
+    }
+    .oski-suite-card-apps { font-size: .8rem; font-weight: 600; color: $oski-plum; }
+    .oski-suite-card-price {
+        white-space: nowrap;
+        del { color: $oski-muted; font-size: .8rem; margin-right: .35rem; }
+        strong { font-family: $oski-display; font-size: 1.05rem; }
+    }
+    // Fiche d'une app : la suite qui l'installe, juste sous le bouton d'achat.
+    .oski-suite-callout {
+        display: flex; flex-direction: column; gap: .35rem; margin-top: 1rem; padding: .9rem 1rem;
+        border-radius: 12px; text-decoration: none; color: $oski-ink;
+        background: rgba($oski-pink-light, .45); border: 1px solid rgba($oski-plum, .25);
+        &:hover { border-color: $oski-plum; color: $oski-ink;
+            .oski-suite-callout-go { text-decoration: underline; } }
+        .oski-icon, .oski-monogram { width: 32px; height: 32px; }
+    }
+    .oski-suite-callout-kicker {
+        font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+        color: $oski-plum;
+    }
+    .oski-suite-callout-head { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
+    .oski-suite-callout-pitch { font-size: .9rem; line-height: 1.45; }
+    .oski-suite-callout-go { font-weight: 600; color: $oski-plum; font-size: .88rem; }
+    .oski-suite-own {
+        margin: .8rem 0 0; padding: .6rem .8rem; border-radius: 10px; font-size: .9rem;
+        background: rgba($oski-green, .08); color: $oski-green; font-weight: 600;
+    }
     .oski-opt-note {
         margin-left: .45rem; font-size: .72rem; font-weight: 600;
         letter-spacing: .04em; text-transform: uppercase; color: $oski-muted;

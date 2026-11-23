@@ -9,6 +9,8 @@
                 <field name="technical_name"/>
                 <field name="category_id"/>
                 <field name="is_free"/>
+                <field name="is_suite" optional="show"/>
+                <field name="suite_sequence" optional="hide"/>
                 <field name="currency_id" column_invisible="1"/>
                 <field name="price" widget="monetary" optional="show"/>
                 <field name="download_count" optional="show"/>
@@ -86,6 +88,8 @@
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             <field name="license"/>
                             <field name="is_free"/>
+                            <field name="is_suite"/>
+                            <field name="suite_sequence" invisible="not is_suite"/>
                         </group>
                         <group>
                             <field name="author"/>
@@ -143,6 +147,7 @@
                 <field name="tag_ids"/>
                 <filter name="published" string="Published" domain="[('is_published', '=', True)]"/>
                 <filter name="free" string="Open source" domain="[('is_free', '=', True)]"/>
+                <filter name="suite" string="Suites" domain="[('is_suite', '=', True)]"/>
                 <group>
                     <filter name="group_category" string="Category" context="{'group_by': 'category_id'}"/>
                 </group>
