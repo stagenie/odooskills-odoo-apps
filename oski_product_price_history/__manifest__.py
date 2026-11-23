@@ -30,6 +30,7 @@ answer the only question anyone asks it.
     "license": "LGPL-3",
     "depends": ["product"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_history.png",
         "static/description/screenshot_02_product.png",
     ],

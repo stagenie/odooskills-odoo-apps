@@ -30,8 +30,10 @@ Both requirements are set per company, in the CRM settings.
     "license": "LGPL-3",
     "depends": ["crm"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_reasons.png",
         "static/description/screenshot_02_wizard.png",
+        "static/description/screenshot_03_settings.png",
     ],
     "data": [
         "views/crm_views.xml",
