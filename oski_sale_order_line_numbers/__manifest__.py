@@ -25,7 +25,11 @@ installed.
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",
     "license": "LGPL-3",
-    "images": ["static/description/screenshot_01_devis_colonne_numero.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_order_lines.png",
+        "static/description/screenshot_02_pdf.png",
+    ],
     "depends": ["sale_management"],
     "data": [
         "views/sale_order_views.xml",

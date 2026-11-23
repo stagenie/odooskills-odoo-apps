@@ -13,7 +13,12 @@ printed natively in the PDF — no QWeb report change required.
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",
     "license": "LGPL-3",
-    "images": ["static/description/screenshot_01_config_modeles.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_templates.png",
+        "static/description/screenshot_02_invoice_select.png",
+        "static/description/screenshot_03_pdf.png",
+    ],
     "depends": ["account"],
     "data": [
         "security/ir.model.access.csv",
