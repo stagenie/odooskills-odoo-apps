@@ -28,8 +28,10 @@ produce anything.
     "license": "LGPL-3",
     "depends": ["account"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_rules.png",
         "static/description/screenshot_02_missing.png",
+        "static/description/screenshot_03_refusal.png",
     ],
     "data": [
         "security/ir.model.access.csv",

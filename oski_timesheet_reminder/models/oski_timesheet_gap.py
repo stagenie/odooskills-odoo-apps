@@ -3,6 +3,7 @@ from datetime import timedelta
 from markupsafe import Markup
 
 from odoo import _, api, fields, models
+from odoo.tools.misc import format_date, formatLang
 
 
 class OskiTimesheetGap(models.Model):
@@ -107,6 +108,12 @@ class OskiTimesheetGap(models.Model):
         gap._oski_remind()
         return gap
 
+    @api.model
+    def _oski_hours(self, env, hours):
+        """Heures au format de la langue du lecteur, sans décimales inutiles."""
+        hours = round(hours or 0.0, 2)
+        return formatLang(env, hours, digits=0 if hours == int(hours) else 2)
+
     def _oski_remind(self):
         """Une activité sur la fiche employé, jamais un courriel.
 
@@ -132,9 +139,10 @@ class OskiTimesheetGap(models.Model):
                 "note": Markup("<p>%s</p>") % reader.env._(
                     "Week from %(from)s to %(to)s: %(logged)s h logged out of "
                     "%(expected)s h expected.",
-                    **{"from": self.date_from, "to": self.date_to,
-                       "logged": round(self.logged_hours, 2),
-                       "expected": round(self.expected_hours, 2)}),
+                    **{"from": format_date(reader.env, self.date_from),
+                       "to": format_date(reader.env, self.date_to),
+                       "logged": self._oski_hours(reader.env, self.logged_hours),
+                       "expected": self._oski_hours(reader.env, self.expected_hours)}),
             })
         self.sudo().reminded_on = fields.Datetime.now()
         return activity

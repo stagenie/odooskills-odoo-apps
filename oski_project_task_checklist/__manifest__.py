@@ -23,7 +23,11 @@ No configuration required: works right after installation.
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",
     "license": "LGPL-3",
-    "images": ["static/description/screenshot_01_onglet_checklist.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_checklist_tab.png",
+        "static/description/screenshot_02_list_progress.png",
+    ],
     "depends": ["project"],
     "data": [
         "security/ir.model.access.csv",
