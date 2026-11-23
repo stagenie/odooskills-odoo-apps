@@ -107,6 +107,18 @@ class TestShopFloorServer(TransactionCase):
         detail = self.wo.sf_set_qty(1.0)
         self.assertEqual(detail['qty_producing'], 1.0)
 
+    def test_the_timer_runs_while_working(self):
+        """L'écran affiche un chronomètre : le serveur lui donne le temps
+        déjà passé et dit si le pointage est ouvert."""
+        idle = self.wo.sf_get_detail()
+        self.assertFalse(idle['running'])
+        self.assertEqual(idle['elapsed'], 0)
+        started = self.wo.sf_start()
+        self.assertTrue(started['running'])
+        self.assertGreaterEqual(started['elapsed'], 0)
+        paused = self.wo.sf_pause()
+        self.assertFalse(paused['running'])
+
     def test_pause_then_finish(self):
         self.wo.sf_start()
         paused = self.wo.sf_pause()

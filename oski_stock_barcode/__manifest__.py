@@ -1,6 +1,6 @@
 {
     'name': 'Stock Barcode',
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.0.2',
     'category': 'Inventory/Stock',
     'summary': "Touch barcode scanning interface for stock operations: "
                "receipt, delivery, inventory count, transfer, lookup",
@@ -14,7 +14,13 @@ Works with any keyboard-wedge scanner (USB/Bluetooth) or the camera.""",
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
-    'images': ['static/description/banner.png'],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_home.png",
+        "static/description/screenshot_02_receipt.png",
+        "static/description/screenshot_03_inventory.png",
+        "static/description/screenshot_04_lookup.png",
+    ],
     'depends': ['stock', 'barcodes'],
     'data': [
         'security/ir.model.access.csv',

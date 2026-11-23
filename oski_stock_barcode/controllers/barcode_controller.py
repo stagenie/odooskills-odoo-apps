@@ -2,6 +2,7 @@ import logging
 
 from odoo import fields, http
 from odoo.http import request
+from odoo.tools.misc import format_date, format_datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -114,6 +115,9 @@ class AdiStockBarcodeController(http.Controller):
             'partner_name': picking.partner_id.name if picking.partner_id else '',
             'origin': picking.origin or '',
             'scheduled_date': picking.scheduled_date.isoformat() if picking.scheduled_date else '',
+            # Date lue par l'opérateur : dans son fuseau et le format de sa langue.
+            'scheduled_label': format_date(request.env, fields.Datetime.context_timestamp(
+                picking, picking.scheduled_date).date()) if picking.scheduled_date else '',
             'state': picking.state,
             'total_lines': total_lines,
             'done_lines': done_lines,
@@ -434,7 +438,7 @@ class AdiStockBarcodeController(http.Controller):
         moves = []
         for ml in lines:
             moves.append({
-                'date': ml.date.strftime('%Y-%m-%d %H:%M') if ml.date else '',
+                'date': format_datetime(request.env, ml.date, dt_format='short') if ml.date else '',
                 'quantity': ml.quantity,
                 'location': ml.location_id.complete_name,
                 'location_dest': ml.location_dest_id.complete_name,
@@ -768,7 +772,7 @@ class AdiStockBarcodeController(http.Controller):
                 'lot_name': r.lot_id.name if r.lot_id else '',
                 'quantity': r.quantity,
                 'picking_name': r.picking_id.name if r.picking_id else '',
-                'time': r.create_date.strftime('%H:%M') if r.create_date else '',
+                'time': format_datetime(request.env, r.create_date, dt_format='HH:mm') if r.create_date else '',
             })
             s = summary.setdefault(r.action, {'count': 0, 'total_qty': 0.0,
                                               'label': labels.get(r.action, r.action)})

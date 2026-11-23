@@ -71,6 +71,11 @@
                 <span class="o_sf_state" t-out="stateLabel"/>
             </div>
 
+            <div class="o_sf_timer" t-att-class="{ 'o_sf_timer_running': wo.running }">
+                <span class="o_sf_timer_value" t-out="timer"/>
+                <span class="o_sf_timer_expected" t-if="wo.duration_expected">/ <t t-out="expected"/></span>
+            </div>
+
             <div class="o_sf_actions">
                 <button class="o_sf_btn o_sf_start" t-if="!wo.is_user_working and wo.state !== 'done' and wo.state !== 'cancel'"
                         t-on-click="() => this.start()">Start Work</button>

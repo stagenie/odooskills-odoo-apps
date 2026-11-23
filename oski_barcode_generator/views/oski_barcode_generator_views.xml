@@ -25,6 +25,22 @@
         </field>
     </record>
 
+    <!-- La liste rendue après génération : ce qu'on vient d'attribuer doit se
+         lire, code compris (la liste standard des variantes le cache). -->
+    <record id="view_oski_barcode_served_list" model="ir.ui.view">
+        <field name="name">product.product.list.oski.barcode.served</field>
+        <field name="model">product.product</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="Barcoded Products" create="false">
+                <field name="default_code"/>
+                <field name="name"/>
+                <field name="product_template_variant_value_ids" widget="many2many_tags"/>
+                <field name="barcode"/>
+            </list>
+        </field>
+    </record>
+
     <record id="action_oski_barcode_generator" model="ir.actions.act_window">
         <field name="name">Generate Barcodes</field>
         <field name="res_model">oski.barcode.generator</field>

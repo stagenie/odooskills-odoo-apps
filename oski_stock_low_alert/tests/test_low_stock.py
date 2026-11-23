@@ -104,3 +104,15 @@ class TestOskiLowStock(TransactionCase):
             ("summary", "=", "Low Stock"),
         ])
         self.assertEqual(len(activities), 1, "Le cron ne doit pas créer de doublon")
+
+    def test_the_alert_quantities_are_readable(self):
+        """La note donne des quantités lisibles, avec l'unité : « 1 Units »,
+        pas le flottant brut « 1.0 »."""
+        low = self._make_product("Cron lisible", threshold=10.0, qty=1.0)
+        self.ProductTemplate._oski_cron_low_stock_alert()
+        activity = self.env["mail.activity"].search([
+            ("res_model", "=", "product.template"), ("res_id", "=", low.id)])
+        unit = low.uom_id.name
+        self.assertIn("available: 1 %s" % unit, str(activity.note))
+        self.assertIn("threshold: 10 %s" % unit, str(activity.note))
+        self.assertNotIn("1.0", str(activity.note))

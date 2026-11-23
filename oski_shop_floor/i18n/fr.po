@@ -199,3 +199,9 @@ msgstr "← Ordres"
 #: code:addons/oski_shop_floor/static/src/xml/shop_floor_templates.xml:0
 msgid "← Work Centers"
 msgstr "← Postes"
+
+#. module: oski_shop_floor
+#. odoo-javascript
+#: code:addons/oski_shop_floor/static/src/js/screen_detail.js:0
+msgid "%s expected"
+msgstr "%s prévu"
