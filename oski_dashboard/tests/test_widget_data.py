@@ -236,3 +236,25 @@ class TestWidgetData(TransactionCase):
             ('create_date', '>=', tz.localize(start).astimezone(pytz.utc).replace(tzinfo=None)),
             ('create_date', '<', tz.localize(stop).astimezone(pytz.utc).replace(tzinfo=None)),
         ])
+
+    def test_group_by_month_reads_as_a_month(self):
+        """Un groupement mensuel affiche « Nov 2026 », pas la date brute
+        « 2026-11-01 00:00:00 » du début de période."""
+        widget = self._make_widget(
+            widget_type='bar',
+            group_by_field_id=self.env['ir.model.fields']._get('res.partner', 'create_date').id,
+            group_by_granularity='month')
+        data = self.env['oski.dashboard.widget'].with_user(self.user).get_widget_data(widget.id)
+        self.assertTrue(data['labels'])
+        for label in data['labels']:
+            self.assertNotIn(':', label)
+            self.assertRegex(label, r'^\w+\.? \d{4}$')
+
+    def test_period_labels_by_granularity(self):
+        from datetime import date, datetime
+        widget = self._make_widget().with_context(lang='en_US')
+        self.assertEqual(widget._format_group_label(datetime(2025, 12, 1), 'month'), 'Dec 2025')
+        self.assertEqual(widget._format_group_label(date(2025, 11, 1), 'quarter'), 'Q4 2025')
+        self.assertEqual(widget._format_group_label(date(2025, 1, 1), 'year'), '2025')
+        self.assertEqual(widget._format_group_label(date(2025, 12, 1), 'week'), 'W49 2025')
+

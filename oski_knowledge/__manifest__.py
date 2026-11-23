@@ -8,7 +8,12 @@
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
-    'images': ['static/description/banner.png'],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_article.png",
+        "static/description/screenshot_02_procedure.png",
+        "static/description/screenshot_03_trash.png",
+    ],
     'depends': ['base', 'mail', 'web', 'web_tour'],
     'data': [
         'security/knowledge_security.xml',

@@ -1,11 +1,12 @@
 import json
-from datetime import datetime, time, timedelta
+from datetime import date, datetime, time, timedelta
 
 import pytz
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.tools.misc import format_date, format_datetime
 from odoo.tools.safe_eval import safe_eval
 
 # Plafond du repli Python : quand le group by (ou la mesure) porte sur un champ
@@ -369,7 +370,9 @@ class OskiDashboardWidget(models.Model):
             # sélection stockée : _read_group rend la clé brute ('draft') -> libellé traduit
             selection_labels = (dict(odoo_field._description_selection(self.env))
                                 if odoo_field.type == 'selection' else {})
-            pairs = [(selection_labels.get(key) or self._format_group_label(key),
+            granularity = (self.group_by_granularity or "month"
+                           if odoo_field.type in ('date', 'datetime') else None)
+            pairs = [(selection_labels.get(key) or self._format_group_label(key, granularity),
                       value or 0, self._raw_key(key))
                      for key, value in groups]
         else:
@@ -438,7 +441,7 @@ class OskiDashboardWidget(models.Model):
             return max(values)
         return sum(values)
 
-    def _format_group_label(self, key):
+    def _format_group_label(self, key, granularity=None):
         if key is None or key is False:
             return self.env._("Undefined")
         if isinstance(key, models.BaseModel):
@@ -448,4 +451,27 @@ class OskiDashboardWidget(models.Model):
             # d'une autre société) peut lui être interdit — sans sudo,
             # AccessError et widget entier en erreur.
             return key.sudo().display_name or self.env._("Undefined")
+        if isinstance(key, (date, datetime)):
+            return self._format_period_label(key, granularity)
         return str(key)
+
+    def _format_period_label(self, value, granularity=None):
+        """Libellé d'une période lisible dans la langue de l'utilisateur.
+
+        _read_group rend le DÉBUT de la période (datetime à minuit pour un
+        champ datetime) : l'afficher tel quel donnait « 2025-12-01 00:00:00 »
+        sous chaque barre d'un graphique mensuel.
+        """
+        day = value.date() if isinstance(value, datetime) else value
+        if granularity == 'year':
+            return str(day.year)
+        if granularity == 'quarter':
+            return self.env._("Q%(quarter)s %(year)s", quarter=(day.month - 1) // 3 + 1, year=day.year)
+        if granularity == 'month':
+            return format_date(self.env, day, date_format='MMM yyyy')
+        if granularity == 'week':
+            year, week, _weekday = day.isocalendar()
+            return self.env._("W%(week)s %(year)s", week=week, year=year)
+        if granularity == 'day' or not isinstance(value, datetime):
+            return format_date(self.env, day)
+        return format_datetime(self.env, value)
