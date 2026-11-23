@@ -3,6 +3,7 @@ import logging
 from markupsafe import Markup
 
 from odoo import api, fields, models
+from odoo.tools.misc import format_date
 
 _logger = logging.getLogger(__name__)
 
@@ -69,7 +70,7 @@ class SaleOrder(models.Model):
             order.message_post(
                 body=Markup("<p>%s</p>") % order._oski_reader_env()._(
                     "Quotation expired on %(date)s: its expiration date "
-                    "had passed.", date=order.validity_date),
+                    "had passed.", date=format_date(order._oski_reader_env(), order.validity_date)),
                 subtype_xmlid="mail.mt_note")
         if stale:
             stale._action_cancel()
@@ -107,5 +108,5 @@ class SaleOrder(models.Model):
                 "date_deadline": self.validity_date,
                 "summary": reader._("Follow up on the quotation before it expires"),
                 "note": Markup("<p>%s</p>") % reader._(
-                    "This quotation expires on %(date)s.", date=self.validity_date),
+                    "This quotation expires on %(date)s.", date=format_date(reader, self.validity_date)),
             })

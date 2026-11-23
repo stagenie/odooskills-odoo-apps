@@ -1,6 +1,6 @@
 {
     "name": "Quotation Auto-Expiry",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Sales",
     "summary": "Expired quotations cancel themselves, and the salesperson gets a reminder before the deadline.",
     "description": """
@@ -31,8 +31,10 @@ Locked quotations are never touched.
     "license": "LGPL-3",
     "depends": ["sale"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_expired.png",
         "static/description/screenshot_02_settings.png",
+        "static/description/screenshot_03_expired_filter.png",
     ],
     "data": [
         "data/ir_cron.xml",

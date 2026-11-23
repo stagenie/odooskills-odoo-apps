@@ -25,7 +25,13 @@ isolates the deals to follow up on.
         "views/crm_lead_views.xml",
         "views/res_config_settings_views.xml",
     ],
-    "images": ["static/description/screenshot_02_pipeline_dormantes.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_pipeline.png",
+        "static/description/screenshot_02_idle_filter.png",
+        "static/description/screenshot_03_badge.png",
+        "static/description/screenshot_04_settings.png",
+    ],
     "installable": True,
     "application": False,
 }
