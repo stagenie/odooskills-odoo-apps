@@ -21,6 +21,7 @@ server.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_graph.png",
     ],
     "data": [

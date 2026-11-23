@@ -21,7 +21,8 @@ and a record written in the login's transaction would disappear along with it.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
-        "static/description/screenshot_01_journal.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_login_log.png",
     ],
     "data": [
         "security/ir.access.csv",

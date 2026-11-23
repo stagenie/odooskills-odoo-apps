@@ -48,7 +48,7 @@
                         </group>
                     </group>
                     <group string="Details">
-                        <field name="note" nolabel="1" readonly="1"/>
+                        <field name="note" nolabel="1" readonly="1" colspan="2"/>
                     </group>
                 </sheet>
                 <chatter/>

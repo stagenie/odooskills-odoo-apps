@@ -1,6 +1,6 @@
 {
     "name": "Login Page Branding",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "category": "Technical",
     "summary": "Show your brand from the login screen: custom background color, accent color and logo, without code.",
     "description": """
@@ -20,8 +20,9 @@ an accent color (buttons, links) and a logo for each company
         "views/login_templates.xml",
     ],
     "images": [
-        "static/description/screenshot_01_login_branded.png",
-        "static/description/screenshot_02_settings_branding.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_login_page.png",
+        "static/description/screenshot_02_settings.png",
     ],
     "installable": True,
     "application": False,

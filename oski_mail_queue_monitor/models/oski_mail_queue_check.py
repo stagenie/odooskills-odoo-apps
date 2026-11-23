@@ -1,6 +1,7 @@
 import logging
 
 from odoo import _, api, fields, models
+from odoo.tools.misc import format_datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -31,6 +32,13 @@ class OskiMailQueueCheck(models.Model):
         # get_float rend le défaut quand le paramètre manque ou n'est pas un nombre.
         return self.env["ir.config_parameter"].sudo().get_float(
             "oski_mail_queue_monitor.max_pending_hours", DEFAULT_MAX_PENDING_HOURS)
+
+    @api.depends("checked_on")
+    def _compute_display_name(self):
+        # Le nom affiché (fil d'Ariane, liens) : la date du relevé dans la langue et
+        # le fuseau du lecteur, pas la valeur UTC brute du champ.
+        for check in self:
+            check.display_name = format_datetime(self.env, check.checked_on) if check.checked_on else ""
 
     @api.model
     def _measure_queue(self):

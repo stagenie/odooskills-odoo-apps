@@ -10,7 +10,7 @@
             <t t-set="oski_logo"
                t-value="request.env['res.company'].sudo().search([], limit=1).oski_login_logo"/>
             <style t-if="oski_bg or oski_accent">
-                <t t-if="oski_bg">body { background-color: <t t-out="oski_bg"/> !important; }</t>
+                <t t-if="oski_bg">body.bg-100, body #wrapwrap { background-color: <t t-out="oski_bg"/> !important; }</t>
                 <t t-if="oski_accent">.btn-primary { background-color: <t t-out="oski_accent"/> !important; border-color: <t t-out="oski_accent"/> !important; }
                 a { color: <t t-out="oski_accent"/>; }</t>
             </style>

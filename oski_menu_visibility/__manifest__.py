@@ -19,8 +19,9 @@ rights — that is the job of the OdooSkills partitioning modules.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
-        "static/description/screenshot_01_onglet_utilisateur.png",
-        "static/description/screenshot_02_choix_des_menus.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_user_tab.png",
+        "static/description/screenshot_02_menu_search.png",
     ],
     "data": ["views/res_users_views.xml"],
     "installable": True,
