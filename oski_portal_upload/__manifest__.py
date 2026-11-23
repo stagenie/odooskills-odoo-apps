@@ -31,6 +31,7 @@ their page with the reason, never to an error page.
     "license": "LGPL-3",
     "depends": ["portal"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_portal.png",
         "static/description/screenshot_02_requests.png",
     ],

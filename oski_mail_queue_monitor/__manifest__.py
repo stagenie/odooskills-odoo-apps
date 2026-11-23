@@ -1,6 +1,6 @@
 {
     "name": "Email Queue Monitor",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Technical",
     "summary": "Find out the same day that your emails have stopped going out, not three months later.",
     "description": """
@@ -23,8 +23,10 @@ deliver their own diagnosis.
     "license": "LGPL-3",
     "depends": ["mail"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_checks.png",
-        "static/description/screenshot_02_failed.png",
+        "static/description/screenshot_02_check.png",
+        "static/description/screenshot_03_failed.png",
     ],
     "data": [
         "security/ir.model.access.csv",

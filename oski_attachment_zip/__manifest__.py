@@ -29,6 +29,7 @@ the latter have no content to archive.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_menu.png",
         "static/description/screenshot_02_models.png",
     ],
