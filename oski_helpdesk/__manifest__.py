@@ -21,7 +21,12 @@
         "views/helpdesk_menus.xml"
     ],
     "demo": ["demo/helpdesk_demo.xml"],
-    "images": ["static/description/screenshot_01_pipeline.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_pipeline.png",
+        "static/description/screenshot_02_ticket.png",
+        "static/description/screenshot_03_tickets.png",
+    ],
     "installable": True,
     "application": True,
 }

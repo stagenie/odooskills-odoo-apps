@@ -41,7 +41,15 @@ report cards, teacher workspace, dashboard and communication.
         'reports/report_class_list.xml',
     ],
     'demo': ['demo/school_demo.xml'],
-    'images': ['static/description/banner.png'],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_students.png",
+        "static/description/screenshot_02_student_form.png",
+        "static/description/screenshot_03_classes.png",
+        "static/description/screenshot_04_class_form.png",
+        "static/description/screenshot_05_promotion.png",
+        "static/description/screenshot_06_certificate.png",
+    ],
     'installable': True,
     'application': True,
 }
