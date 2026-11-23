@@ -154,3 +154,8 @@ class TestBarcodeGenerator(TransactionCase):
         counter = 10 ** 5 - 1
         with self.assertRaises(UserError):
             wizard._oski_next_code(counter, taken)
+
+    def test_the_served_list_shows_the_codes(self):
+        """La liste rendue après génération montre le code attribué."""
+        view = self.env.ref("oski_barcode_generator.view_oski_barcode_served_list")
+        self.assertIn('name="barcode"', view.arch)

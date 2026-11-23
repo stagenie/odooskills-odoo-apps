@@ -44,6 +44,7 @@ msgstr ""
 #. module: oski_barcode_generator
 #. odoo-python
 #: code:addons/oski_barcode_generator/wizards/oski_barcode_generator.py:0
+#: model_terms:ir.ui.view,arch_db:oski_barcode_generator.view_oski_barcode_served_list
 msgid "Barcoded Products"
 msgstr ""
 

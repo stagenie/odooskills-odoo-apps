@@ -47,6 +47,12 @@
     // Détail
     .o_sf_meta { color: #6b7280; margin: 8px 0 16px; }
     .o_sf_state { margin-left: 8px; font-weight: 700; color: var(--sf-accent); }
+    .o_sf_timer {
+        display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px;
+        .o_sf_timer_value { font-size: 2.4rem; font-weight: 700; font-variant-numeric: tabular-nums; color: #6b7280; }
+        .o_sf_timer_expected { color: #6b7280; }
+        &.o_sf_timer_running .o_sf_timer_value { color: #2f8f5b; }
+    }
     .o_sf_actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
     .o_sf_btn {
         flex: 1 1 120px; min-height: 56px; border: 0; border-radius: 12px;
