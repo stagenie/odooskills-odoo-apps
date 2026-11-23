@@ -1,6 +1,6 @@
 {
     "name": "Timesheet Reminder",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Services/Timesheets",
     "summary": "The table of missing timesheet hours, week by week, and the reminder that goes with it.",
     "description": """
@@ -29,8 +29,11 @@ exist yet.
     "license": "LGPL-3",
     "depends": ["hr_timesheet"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_gaps.png",
-        "static/description/screenshot_02_settings.png",
+        "static/description/screenshot_02_pivot.png",
+        "static/description/screenshot_03_settings.png",
+        "static/description/screenshot_04_activity.png",
     ],
     "data": [
         "security/ir.model.access.csv",
