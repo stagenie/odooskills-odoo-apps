@@ -37,6 +37,11 @@ class MrpWorkorder(models.Model):
             'is_user_working': self.is_user_working,
             'duration_expected': self.duration_expected,
             'duration': self.duration,
+            # Chronomètre de l'écran : minutes déjà passées (pauses exclues,
+            # temps en cours inclus) et pointage ouvert ou non. L'écran fait
+            # tourner les secondes lui-même à partir de ces deux valeurs.
+            'elapsed': self.get_duration(),
+            'running': bool(self.time_ids.filtered(lambda time: not time.date_end)),
         }
 
     def sf_get_detail(self):

@@ -146,6 +146,9 @@ class OskiBarcodeGenerator(models.TransientModel):
             "name": _("Barcoded Products"),
             "res_model": "product.product",
             "view_mode": "list,form",
+            "views": [(self.env.ref(
+                "oski_barcode_generator.view_oski_barcode_served_list").id, "list"),
+                (False, "form")],
             "domain": [("id", "in", candidates.ids)],
             "context": {"create": False},
         }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Low Stock Alert",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "category": "Inventory/Inventory",
     "summary": "Avoid silent stockouts: an alert threshold per product, red rows and a daily activity for the inventory manager.",
     "description": """
@@ -15,7 +15,12 @@ technical setup required.
     "website": "https://apps.odooskills.com",
     "support": "apps@odooskills.com",
     "license": "LGPL-3",
-    "images": ["static/description/screenshot_01_seuil_produit.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_threshold.png",
+        "static/description/screenshot_02_low_filter.png",
+        "static/description/screenshot_03_activity.png",
+    ],
     "depends": ["stock", "mail"],
     "data": [
         "data/ir_cron.xml",

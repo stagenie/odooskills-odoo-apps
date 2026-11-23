@@ -155,7 +155,7 @@
                                 </span>
                             </div>
                             <span class="o_picking_date text-muted" t-if="p.scheduled_date"
-                                  t-out="p.scheduled_date.substring(0, 10)"/>
+                                  t-out="p.scheduled_label"/>
                         </div>
                     </div>
                 </t>

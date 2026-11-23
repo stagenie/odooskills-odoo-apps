@@ -1,6 +1,6 @@
 {
     "name": "Bulk EAN13 Barcodes",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "category": "Inventory/Inventory",
     "summary": "Assign valid EAN13 codes to every product that has none, in one go.",
     "description": """
@@ -27,8 +27,9 @@ already taken in the range are skipped, including those from an import.
     "license": "LGPL-3",
     "depends": ["product"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_wizard.png",
-        "static/description/screenshot_02_products.png",
+        "static/description/screenshot_02_served.png",
     ],
     "data": [
         "security/ir.access.csv",

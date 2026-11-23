@@ -2,6 +2,7 @@
 import logging
 
 from odoo import api, fields, models
+from odoo.tools.misc import formatLang
 
 _logger = logging.getLogger(__name__)
 
@@ -74,6 +75,12 @@ class ProductTemplate(models.Model):
             return manager
         return self.env.ref("base.user_admin")
 
+    def _oski_qty(self, env, qty):
+        """Quantité au format de la langue du lecteur, avec son unité."""
+        qty = round(qty or 0.0, 2)
+        number = formatLang(env, qty, digits=0 if qty == int(qty) else 2)
+        return "%s %s" % (number, self.uom_id.with_env(env).name)
+
     @api.model
     def _oski_alert_summaries(self):
         """Le libellé de l'alerte dans chaque langue installée.
@@ -113,8 +120,8 @@ class ProductTemplate(models.Model):
                 "Product “%(product)s” fell below its alert threshold "
                 "(available: %(available)s, threshold: %(threshold)s).",
                 product=product.with_context(lang=reader.env.lang).display_name,
-                available=product.qty_available,
-                threshold=product.oski_alert_threshold,
+                available=product._oski_qty(reader.env, product.qty_available),
+                threshold=product._oski_qty(reader.env, product.oski_alert_threshold),
             )
             product.activity_schedule(
                 "mail.mail_activity_data_todo",

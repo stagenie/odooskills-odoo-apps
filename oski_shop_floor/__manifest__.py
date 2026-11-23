@@ -1,6 +1,6 @@
 {
     'name': "Shop Floor",
-    'version': '20.0.1.0.1',
+    'version': '20.0.1.0.2',
     'category': 'Manufacturing',
     'summary': "Touch-friendly, responsive shop floor execution for work orders — the Shop Floor experience in Community.",
     'description': """
@@ -32,7 +32,13 @@ consumption. No Enterprise license required.
             'oski_shop_floor/static/tests/tours/shop_floor_tour.js',
         ],
     },
-    'images': ['static/description/banner.png'],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_workcenters.png",
+        "static/description/screenshot_02_orders.png",
+        "static/description/screenshot_03_order_running.png",
+        "static/description/screenshot_04_scan_component.png",
+    ],
     'installable': True,
     'application': True,
 }

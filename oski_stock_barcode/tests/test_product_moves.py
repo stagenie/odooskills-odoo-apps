@@ -39,6 +39,8 @@ class TestProductMoves(HttpCase):
                 (date, line.move_id.id))
         self.env.invalidate_all()
 
+        # L'opérateur lit l'heure dans son fuseau, au format de sa langue.
+        self.env.ref('base.user_admin').write({'tz': 'Europe/Paris', 'lang': 'en_US'})
         self.authenticate('admin', 'admin')
         r = self.url_open('/oski_stock_barcode/get_product_moves',
             data=json.dumps({'jsonrpc': '2.0', 'method': 'call',
@@ -47,4 +49,6 @@ class TestProductMoves(HttpCase):
         res = json.loads(r.content)['result']
         self.assertGreaterEqual(len(res['moves']), 2)
         self.assertIn('quantity', res['moves'][0])
-        self.assertTrue(res['moves'][0]['date'].startswith('2026-06-01'))
+        # 08:00 UTC le 1er juin = 10:00 à Paris (heure d'été), format de la langue en_US
+        self.assertRegex(res['moves'][0]['date'], r'^0?6/0?1/(20)?26')
+        self.assertIn('10:00', res['moves'][0]['date'])
