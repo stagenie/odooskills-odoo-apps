@@ -1,5 +1,6 @@
 import { Component } from "@odoo/owl";
 import { dashboardWidgetRegistry } from "../core/widget_registry";
+import { formatFloat } from "@web/core/utils/numbers";
 
 export class ListWidget extends Component {
     static template = "oski_dashboard.ListWidget";
@@ -10,7 +11,16 @@ export class ListWidget extends Component {
 
     get rows() {
         const { labels, values } = this.props.payload;
-        return labels.map((label, index) => ({ label, value: values[index] }));
+        // Valeurs au format de la langue de l'utilisateur (séparateur de milliers, 2 décimales au plus).
+        return labels.map((label, index) => {
+            const value = values[index];
+            return {
+                label,
+                value: typeof value === "number"
+                    ? formatFloat(value, { digits: [false, 2], trailingZeros: false })
+                    : value,
+            };
+        });
     }
 
     // No-op par défaut (FREE) : le module pro patche cette méthode pour émettre

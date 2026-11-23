@@ -1,6 +1,6 @@
 {
     'name': "OSKI Dashboard",
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.0.2',
     'category': 'Productivity',
     'summary': "Drag-and-drop dashboard builder",
     'description': """Build your Odoo dashboards without code: drag-and-drop grid,
@@ -12,7 +12,12 @@ Each widget reads its data with the logged-in user's access rights
     'website': 'https://apps.odooskills.com',
     'support': 'apps@odooskills.com',
     'license': 'LGPL-3',
-    'images': ['static/description/screenshot_01_tableau_de_bord.png'],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_dashboard.png",
+        "static/description/screenshot_02_edit_mode.png",
+        "static/description/screenshot_03_widget_editor.png",
+    ],
     'depends': ['web', 'web_tour'],
     'data': [
         'security/dashboard_security.xml',
