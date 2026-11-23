@@ -27,6 +27,7 @@ selected minimum age.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_scan.png",
         "static/description/screenshot_02_purges.png",
     ],

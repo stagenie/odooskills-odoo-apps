@@ -27,6 +27,7 @@ is applied: better to mark nothing than to mark wrongly.
     "license": "LGPL-3",
     "depends": ["web"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_report.png",
         "static/description/screenshot_02_rules.png",
     ],

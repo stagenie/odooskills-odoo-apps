@@ -22,6 +22,7 @@ rolled back when it fails, and the failure is precisely what must be kept.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
+        "static/description/banner.png",
         "static/description/screenshot_01_runs.png",
         "static/description/screenshot_02_cron_tab.png",
     ],
