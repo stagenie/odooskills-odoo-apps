@@ -24,7 +24,11 @@ Key features:
         "security/ir.access.csv",
         "wizards/archive_reason_wizard_views.xml",
     ],
-    "images": ["static/description/screenshot_01_wizard_archivage.png", "static/description/screenshot_02_chatter_motif.png"],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_reason_wizard.png",
+        "static/description/screenshot_02_reason_in_chatter.png",
+    ],
     "installable": True,
     "application": False,
 }

@@ -19,9 +19,10 @@ Works on any Odoo model, Community or Enterprise.
         "views/oski_row_color_rule_views.xml",
     ],
     "images": [
-        "static/description/screenshot_01_sale_orders_colored.png",
-        "static/description/screenshot_02_rule_form_config.png",
-        "static/description/screenshot_03_rules_list.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_colored_quotations.png",
+        "static/description/screenshot_02_rule_form.png",
+        "static/description/screenshot_03_rules.png",
     ],
     "installable": True,
     "application": False,

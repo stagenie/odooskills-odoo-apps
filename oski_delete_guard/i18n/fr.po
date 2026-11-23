@@ -110,7 +110,7 @@ msgid "Mode"
 msgstr "Mode"
 
 #. module: oski_delete_guard
-#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__model_name model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__model_id model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_search
+#: model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_log__model_name model:ir.model.fields,field_description:oski_delete_guard.field_oski_delete_rule__model_id model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_search model_terms:ir.ui.view,arch_db:oski_delete_guard.view_oski_delete_log_list
 msgid "Model"
 msgstr "Modèle"
 
