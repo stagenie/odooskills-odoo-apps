@@ -1,6 +1,6 @@
 {
     'name': "Documents — DMS",
-    'version': '20.0.1.0.0',
+    'version': '20.0.1.0.1',
     'category': 'Productivity/Documents',
     'summary': "Electronic document management: workspaces, versioning, links to business records, per-workspace access rights",
     'description': "Odoo 19 DMS: organize your attachments and files in isolated workspaces, with versioning, preview, links to business records and per-workspace access rights.",
@@ -25,7 +25,14 @@
     'demo': [
         'demo/dms_demo.xml',
     ],
-    'images': ['static/description/banner.png'],
+    "images": [
+        "static/description/banner.png",
+        "static/description/screenshot_01_workspaces.png",
+        "static/description/screenshot_02_document.png",
+        "static/description/screenshot_03_by_workspace.png",
+        "static/description/screenshot_04_versions.png",
+        "static/description/screenshot_05_image_preview.png",
+    ],
     'installable': True,
     'application': True,
 }

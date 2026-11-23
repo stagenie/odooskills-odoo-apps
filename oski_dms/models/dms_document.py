@@ -31,6 +31,10 @@ class DmsDocument(models.Model):
 
     mimetype = fields.Char(
         related='attachment_id.mimetype', store=True, string="File Type")
+    # Aperçu dans le formulaire : un PDF s'affiche dans la visionneuse, une
+    # image en grand ; les autres types restent un fichier à télécharger.
+    is_pdf = fields.Boolean(compute='_compute_preview_kind')
+    is_image = fields.Boolean(compute='_compute_preview_kind')
     file_size = fields.Integer(
         related='attachment_id.file_size', store=True, string="Size (bytes)")
 
@@ -101,6 +105,13 @@ class DmsDocument(models.Model):
 
     version_ids = fields.One2many(
         'oski.dms.document', 'previous_version_id', string="Next Versions")
+
+    @api.depends('mimetype')
+    def _compute_preview_kind(self):
+        for doc in self:
+            mimetype = doc.mimetype or ''
+            doc.is_pdf = mimetype == 'application/pdf'
+            doc.is_image = mimetype.startswith('image/') and mimetype != 'image/svg+xml'
 
     def action_new_version(self, datas, file_name=None):
         """Crée une nouvelle version courante ; archive la version actuelle.

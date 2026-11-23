@@ -1,5 +1,6 @@
 import { Component, t, useProps } from "@odoo/owl";
 import { dashboardWidgetRegistry } from "../core/widget_registry";
+import { formatFloat } from "@web/core/utils/numbers";
 
 export class KpiWidget extends Component {
     static template = "oski_dashboard.KpiWidget";
@@ -13,7 +14,7 @@ export class KpiWidget extends Component {
         return delta === null ? "" : delta >= 0 ? "text-success" : "text-danger";
     }
     get formattedTotal() {
-        return new Intl.NumberFormat().format(this.props.payload.total || 0);
+        return formatFloat(this.props.payload.total || 0, { digits: [false, 2], trailingZeros: false });
     }
     get thresholdClass() {
         const { total, thresholds } = this.props.payload;

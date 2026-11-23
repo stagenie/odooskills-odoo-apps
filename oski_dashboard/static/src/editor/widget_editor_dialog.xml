@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="col-6 border-start">
-                <p class="text-muted small">The preview is shown after saving (v1).</p>
+                <p class="text-muted small">The preview is shown after saving.</p>
             </div>
         </div>
         <t t-set-slot="footer">

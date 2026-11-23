@@ -456,7 +456,7 @@ msgstr ""
 #. module: oski_dashboard
 #. odoo-javascript
 #: code:addons/oski_dashboard/static/src/editor/widget_editor_dialog.xml:0
-msgid "The preview is shown after saving (v1)."
+msgid "The preview is shown after saving."
 msgstr ""
 
 #. module: oski_dashboard
@@ -537,4 +537,16 @@ msgstr ""
 #. odoo-python
 #: code:addons/oski_dashboard/models/oski_dashboard_widget.py:0
 msgid "“Top N” must be positive or zero (0 = all groups)."
+msgstr ""
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard_widget.py:0
+msgid "Q%(quarter)s %(year)s"
+msgstr ""
+
+#. module: oski_dashboard
+#. odoo-python
+#: code:addons/oski_dashboard/models/oski_dashboard_widget.py:0
+msgid "W%(week)s %(year)s"
 msgstr ""

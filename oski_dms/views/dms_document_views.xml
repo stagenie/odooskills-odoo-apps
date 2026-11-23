@@ -54,6 +54,14 @@
                             <field name="version_no"/>
                         </group>
                     </group>
+                    <field name="is_pdf" invisible="1"/>
+                    <field name="is_image" invisible="1"/>
+                    <div name="preview_pdf" class="o_dms_preview mb-3" invisible="not is_pdf">
+                        <field name="file" widget="pdf_viewer" readonly="1" nolabel="1"/>
+                    </div>
+                    <div name="preview_image" class="o_dms_preview mb-3 text-center" invisible="not is_image">
+                        <field name="file" widget="image" readonly="1" nolabel="1" options="{'size': [0, 420]}"/>
+                    </div>
                     <group string="Linked To" name="link">
                         <field name="res_model"/>
                         <field name="res_id"/>

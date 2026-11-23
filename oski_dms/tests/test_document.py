@@ -48,3 +48,19 @@ class TestDocument(DmsCommon):
         doc = self._make_doc()
         doc.write({'res_model': 'modele.inexistant', 'res_id': 1})
         self.assertFalse(doc.res_name)
+
+    def test_preview_kind(self):
+        """Un PDF et une image ont un aperçu ; un texte reste à télécharger."""
+        pdf = self._make_doc(name='plan.pdf', data=b'%PDF-1.4\n1 0 obj<<>>endobj\n%%EOF')
+        self.assertTrue(pdf.is_pdf)
+        self.assertFalse(pdf.is_image)
+        png = self._make_doc(name='logo.png', data=(
+            b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01'
+            b'\x08\x06\x00\x00\x00\x1f\x15\xc4\x89'))
+        self.assertTrue(png.is_image)
+        txt = self._make_doc()
+        self.assertFalse(txt.is_pdf or txt.is_image)
+
+    def test_form_shows_a_preview(self):
+        arch = self.env.ref('oski_dms.view_dms_document_form').arch
+        self.assertIn('pdf_viewer', arch)
