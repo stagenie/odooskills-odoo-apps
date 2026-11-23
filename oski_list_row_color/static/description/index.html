@@ -30,24 +30,17 @@
 
   <!-- 4. APERÇUS RÉELS -->
   <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Real screenshots</h2>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">1. Lists that speak for themselves</h3>
+  <p style="line-height: 1.6; color: #374151;">Large orders in blue, quotations waiting for an answer in orange, cancelled orders greyed out: three rules, no view edited by hand.</p>
+  <p><img src="screenshot_01_colored_quotations.png" alt="Quotation list colored by three rules" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">1. Quotation list colored by two business rules</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">In red, orders above €5,000 (Wood Corner, Lumber Grand, Azure Interior); in orange, quotations still in the Quotation state (S00002, S00009) — instant visual spotting with no extra filter.</p>
-  <img src="screenshot_01_sale_orders_colored.png"
-       alt="Odoo quotation list with rows in red (amount above €5,000) and in orange (unconfirmed quotation) — customers Azure Interior, Deco Addict, Wood Corner, Lumber Grand"
-       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">2. A model, a condition, a color</h3>
+  <p style="line-height: 1.6; color: #374151;">The condition is a short Python expression on the fields of the list (amount_total &gt; 5000). The inherited view is generated and kept up to date for you.</p>
+  <p><img src="screenshot_02_rule_form.png" alt="Color rule form for large sales orders" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">2. Rule configuration form</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">Three fields are enough: the target model (Sales Order), the triggering Python expression (<code style="background:#f8f9fb;padding:2px 6px;border-radius:5px;">amount_total &gt; 5000</code>) and the color — the inherited view is created automatically and shown read-only.</p>
-  <img src="screenshot_02_rule_form_config.png"
-       alt="Color rule form: Sales Order model, condition amount_total > 5000, color Red (danger), generated view oski.row.color.sale.order.1"
-       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
-
-  <h3 style="font-size: 17px; font-weight: 600; margin: 20px 0 8px; color: #111827;">3. Overview of active rules</h3>
-  <p style="line-height: 1.6; color: #374151; margin-bottom: 8px;">The interface lists all rules with their model, condition and color — each rule can be enabled or disabled in one click without deleting it.</p>
-  <img src="screenshot_03_rules_list.png"
-       alt="List of the two color rules: Red danger for amount_total > 5000 and Orange warning for state == 'draft', both active on Sales Order"
-       style="max-width:100%;border-radius:8px;border:1px solid #e5e7eb;box-shadow:0 4px 14px rgba(0,0,0,.07);margin:10px 0;"/>
+  <h3 style="font-size: 18px; font-weight: 600; margin: 20px 0 8px; color: #374151;">3. All the rules on one screen</h3>
+  <p style="line-height: 1.6; color: #374151;">Rules are ordered by sequence and can be switched off without being deleted.</p>
+  <p><img src="screenshot_03_rules.png" alt="List of the row color rules" style="max-width: 100%; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.07); margin: 10px 0;"/></p>
 
   <!-- 5. POURQUOI L'ADOPTER -->
   <h2 style="font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: #714B67;">Why install it</h2>

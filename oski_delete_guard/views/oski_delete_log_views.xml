@@ -7,7 +7,7 @@
             <list string="Deletion Log" create="false" edit="false">
                 <field name="create_date"/>
                 <field name="user_id"/>
-                <field name="model_label"/>
+                <field name="model_label" string="Model"/>
                 <field name="model_name" optional="hide"/>
                 <field name="res_id"/>
                 <field name="res_name"/>

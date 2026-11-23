@@ -1,4 +1,5 @@
 from odoo import api, models
+from odoo.tools.misc import format_date, format_datetime
 
 # Le journal et sa configuration ne se journalisent pas : purger le registre
 # le remplirait, et écrire une règle produirait une ligne à chaque réglage.
@@ -46,6 +47,10 @@ class Base(models.AbstractModel):
             return str(labels.get(value, value))
         if field.type == "many2one":
             return self.env[field.comodel_name].browse(value).display_name if isinstance(value, int) else (value.display_name if value else self.env._("(empty)"))
+        if field.type == "date":
+            return format_date(self.env, value)
+        if field.type == "datetime":
+            return format_datetime(self.env, value)
         text = str(value)
         return text if len(text) <= VALUE_MAX else text[:VALUE_MAX] + "…"
 

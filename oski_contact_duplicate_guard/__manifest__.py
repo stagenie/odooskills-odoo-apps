@@ -20,9 +20,10 @@ Settings.
         "views/res_partner_views.xml",
     ],
     "images": [
-        "static/description/screenshot_01_bandeau_doublon.png",
-        "static/description/screenshot_02_alerte_email_doublon.png",
-        "static/description/screenshot_03_liste_doublons.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_duplicate_banner.png",
+        "static/description/screenshot_02_alert_while_typing.png",
+        "static/description/screenshot_03_settings.png",
     ],
     "installable": True,
     "application": False,

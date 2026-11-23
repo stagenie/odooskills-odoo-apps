@@ -1,6 +1,6 @@
 {
     "name": "Delete Guard",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Technical",
     "summary": "Block deletion model by model, reserve it for a few groups, and keep a record of every deletion.",
     "description": """
@@ -18,9 +18,10 @@ never blocked: the guard protects the interface, not maintenance.
     "license": "LGPL-3",
     "depends": ["base"],
     "images": [
-        "static/description/screenshot_01_regles.png",
-        "static/description/screenshot_02_refus.png",
-        "static/description/screenshot_03_journal.png",
+        "static/description/banner.png",
+        "static/description/screenshot_01_rules.png",
+        "static/description/screenshot_02_refusal.png",
+        "static/description/screenshot_03_deletion_log.png",
     ],
     "data": [
         "security/ir.model.access.csv",
