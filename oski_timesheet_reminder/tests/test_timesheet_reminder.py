@@ -153,8 +153,11 @@ class TestTimesheetReminder(TransactionCase):
         self._log(10.0)
         self._run()
         activity = self._activities()
-        self.assertIn("10.0", activity.note)
-        self.assertIn(str(round(self.expected, 2)), activity.note)
+        self.assertIn("10 h logged", str(activity.note))
+        expected = self.gaps._oski_hours(self.env, self.expected)
+        self.assertIn("out of %s h" % expected, str(activity.note))
+        self.assertNotIn(str(self.monday), str(activity.note),
+                         "the week is written in the reader's date format, not ISO")
 
     def test_the_reminder_speaks_the_employee_language(self):
         """La tâche planifiée tourne sans langue : le rappel est écrit dans
@@ -165,6 +168,7 @@ class TestTimesheetReminder(TransactionCase):
         activity = self._activities()
         self.assertEqual(activity.summary, "Feuille de temps incomplète")
         self.assertIn("h saisies sur", str(activity.note))
+        self.assertIn(self.monday.strftime("%d/%m/%Y"), str(activity.note))
 
     # -- Qui voit quoi ----------------------------------------------------
 
