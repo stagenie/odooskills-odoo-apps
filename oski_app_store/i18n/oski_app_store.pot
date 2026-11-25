@@ -3334,3 +3334,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:oski_app_store.module_page
 msgid "⬇ Download ("
 msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,field_description:oski_app_store.field_sale_order__oski_geo_country_id
+msgid "Visitor country (geolocation)"
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_sale_order__oski_geo_country_id
+msgid ""
+"Country of the visitor who clicked Buy, from geolocation. No IP address is "
+"stored."
+msgstr ""
+
+#. module: oski_app_store
+#: model:ir.model.fields,help:oski_app_store.field_sale_order__oski_country_id
+msgid ""
+"Customer's country when known, otherwise the country of the visitor who "
+"clicked Buy."
+msgstr ""

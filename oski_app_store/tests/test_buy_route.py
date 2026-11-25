@@ -5,6 +5,11 @@ qui en Odoo 19 est une route **jsonrpc en POST**. Un lien GET n'y ajoutait
 rien — le visiteur atterrissait sur « Votre panier est vide ! » sans le
 moindre message d'erreur, et aucune vente n'était possible.
 """
+import re
+from unittest.mock import PropertyMock, patch
+
+from odoo import http
+from odoo.http import GeoIP
 from odoo.tests import tagged
 from odoo.tests.common import HttpCase
 
@@ -64,6 +69,13 @@ class TestBuyRoute(HttpCase):
         )
         return module, product
 
+    def _buy(self, module_id):
+        """Clic sur le bouton : POST du formulaire de la fiche, jeton CSRF compris."""
+        return self.url_open(
+            "/apps/buy/%s" % module_id,
+            data={"csrf_token": http.Request.csrf_token(self)},
+        )
+
     def _cart_lines(self, product):
         """Lignes de panier portant ce produit, toutes commandes confondues.
 
@@ -79,7 +91,7 @@ class TestBuyRoute(HttpCase):
     def test_buy_route_fills_the_cart(self):
         module, product = self._make_paid_module("oski_buy_ok")
         self.authenticate(None, None)
-        resp = self.url_open("/apps/buy/%s" % module.id)
+        resp = self._buy(module.id)
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp.url.endswith("/shop/cart"), resp.url)
         lines = self._cart_lines(product)
@@ -91,8 +103,8 @@ class TestBuyRoute(HttpCase):
         """Un rafraîchissement ne doit pas facturer le module deux fois."""
         module, product = self._make_paid_module("oski_buy_twice")
         self.authenticate(None, None)
-        self.url_open("/apps/buy/%s" % module.id)
-        self.url_open("/apps/buy/%s" % module.id)
+        self._buy(module.id)
+        self._buy(module.id)
         order = self.env["sale.order"].search(
             [("order_line.product_id.product_tmpl_id", "=", product.id)], limit=1
         )
@@ -108,7 +120,7 @@ class TestBuyRoute(HttpCase):
     def test_buy_route_refuses_unpublished_module(self):
         module, _ = self._make_paid_module("oski_buy_unpub_mod", published=False)
         self.authenticate(None, None)
-        resp = self.url_open("/apps/buy/%s" % module.id)
+        resp = self._buy(module.id)
         self.assertEqual(resp.status_code, 404)
 
     def test_buy_route_refuses_unpublished_product(self):
@@ -116,19 +128,19 @@ class TestBuyRoute(HttpCase):
             "oski_buy_unpub_prod", product_published=False
         )
         self.authenticate(None, None)
-        resp = self.url_open("/apps/buy/%s" % module.id)
+        resp = self._buy(module.id)
         self.assertTrue(resp.url.rstrip("/").endswith(module.website_url), resp.url)
         self.assertFalse(self._cart_lines(product))
 
     def test_buy_route_refuses_module_without_product(self):
         module, _ = self._make_paid_module("oski_buy_orphan", with_product=False)
         self.authenticate(None, None)
-        resp = self.url_open("/apps/buy/%s" % module.id)
+        resp = self._buy(module.id)
         self.assertTrue(resp.url.rstrip("/").endswith(module.website_url), resp.url)
 
     def test_buy_route_404_on_unknown_module(self):
         self.authenticate(None, None)
-        self.assertEqual(self.url_open("/apps/buy/999999").status_code, 404)
+        self.assertEqual(self._buy(999999).status_code, 404)
 
     # --- la fiche pointe sur la bonne route ---------------------------------
 
@@ -136,8 +148,67 @@ class TestBuyRoute(HttpCase):
         module, _ = self._make_paid_module("oski_buy_cta")
         self.authenticate(None, None)
         body = self.url_open(module.website_url).text
-        self.assertIn("/apps/buy/%s" % module.id, body)
+        form = re.search(r'<form[^>]*action="/apps/buy/%s"[^>]*>' % module.id, body)
+        self.assertTrue(form, "formulaire d'achat absent")
+        self.assertIn('method="post"', form.group(0))
+        self.assertIn('name="csrf_token"', body)
+        self.assertNotIn('href="/apps/buy/', body)
         self.assertNotIn("/shop/cart/update", body)
+
+    # --- les robots ne créent plus de panier --------------------------------
+
+    def test_get_creates_no_cart(self):
+        """Un lien GET (robot, ancien lien) renvoie sur la fiche, sans panier."""
+        module, product = self._make_paid_module("oski_buy_get")
+        self.authenticate(None, None)
+        before = self.env["sale.order"].search_count([])
+        resp = self.url_open("/apps/buy/%s" % module.id)
+        self.assertTrue(resp.url.rstrip("/").endswith(module.website_url), resp.url)
+        self.assertFalse(self._cart_lines(product))
+        self.assertEqual(self.env["sale.order"].search_count([]), before)
+
+    def test_post_without_csrf_is_refused(self):
+        module, product = self._make_paid_module("oski_buy_nocsrf")
+        self.authenticate(None, None)
+        resp = self.url_open("/apps/buy/%s" % module.id, data={"x": "1"})
+        self.assertEqual(resp.status_code, 400)
+        self.assertFalse(self._cart_lines(product))
+
+    # --- pays du clic ----------------------------------------------------------
+
+    def test_anonymous_cart_gets_click_country(self):
+        """Le client d'un panier anonyme (« Public user ») n'a pas de pays :
+        le devis prend celui de la géolocalisation du clic."""
+        module, product = self._make_paid_module("oski_buy_geo")
+        self.authenticate(None, None)
+        with patch.object(GeoIP, "country_code", new_callable=PropertyMock, return_value="CM"):
+            self._buy(module.id)
+        order = self._cart_lines(product).order_id
+        cm = self.env.ref("base.cm")
+        self.assertEqual(order.oski_geo_country_id, cm)
+        self.assertEqual(order.oski_country_id, cm)
+
+    def test_no_geolocation_leaves_country_empty(self):
+        module, product = self._make_paid_module("oski_buy_nogeo")
+        self.authenticate(None, None)
+        with patch.object(GeoIP, "country_code", new_callable=PropertyMock, return_value=None):
+            resp = self._buy(module.id)
+        self.assertTrue(resp.url.endswith("/shop/cart"), resp.url)
+        order = self._cart_lines(product).order_id
+        self.assertFalse(order.oski_country_id)
+
+    def test_customer_country_wins_over_click_country(self):
+        module, product = self._make_paid_module("oski_buy_partner_geo")
+        self.authenticate(None, None)
+        with patch.object(GeoIP, "country_code", new_callable=PropertyMock, return_value="CM"):
+            self._buy(module.id)
+        order = self._cart_lines(product).order_id
+        partner = self.env["res.partner"].create(
+            {"name": "Client Belge", "country_id": self.env.ref("base.be").id}
+        )
+        order.partner_id = partner
+        self.assertEqual(order.oski_country_id, self.env.ref("base.be"))
+        self.assertEqual(order.oski_geo_country_id, self.env.ref("base.cm"))
 
     # --- la mention de possession ne vaut que pour un module payé ----------
 

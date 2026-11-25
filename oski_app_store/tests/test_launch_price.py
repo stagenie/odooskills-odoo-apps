@@ -3,6 +3,7 @@ import html
 from datetime import datetime
 
 from odoo import Command
+from odoo import http
 from odoo.tests import freeze_time, tagged
 from odoo.tests.common import HttpCase
 
@@ -96,7 +97,7 @@ class TestLaunchPrice(HttpCase):
     def test_cart_bills_launch_price(self):
         self._launch_pricelist()
         self.authenticate(None, None)
-        self.url_open("/apps/buy/%s" % self.module.id)
+        self.url_open("/apps/buy/%s" % self.module.id, data={"csrf_token": http.Request.csrf_token(self)})
         line = self._cart_line()
         self.assertTrue(line)
         self.assertAlmostEqual(line.price_subtotal, 70.0)
@@ -110,6 +111,6 @@ class TestLaunchPrice(HttpCase):
         body = self.url_open(self.module.website_url).text
         self.assertNotIn("oski-price-offer", body)
         self.assertNotIn("Launch price", body)
-        self.url_open("/apps/buy/%s" % self.module.id)
+        self.url_open("/apps/buy/%s" % self.module.id, data={"csrf_token": http.Request.csrf_token(self)})
         line = self._cart_line()
         self.assertAlmostEqual(line.price_subtotal, 100.0)

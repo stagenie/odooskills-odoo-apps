@@ -556,6 +556,7 @@ class OskiAppStore(http.Controller):
         ["/apps/buy/<int:module_id>"],
         type="http",
         auth="public",
+        methods=["GET", "POST"],
         website=True,
         sitemap=False,
     )
@@ -564,12 +565,20 @@ class OskiAppStore(http.Controller):
 
         En Odoo 19, `/shop/cart/update` est une route **jsonrpc en POST** : le
         lien GET que portait la fiche n'ajoutait rien et le visiteur voyait un
-        panier vide, sans erreur. Le store a besoin d'un lien franc, d'où cette
-        route maison qui applique la même règle de vente que la fiche.
+        panier vide, sans erreur. D'où cette route maison qui applique la même
+        règle de vente que la fiche.
+
+        Seul le **POST** (formulaire de la fiche, jeton CSRF vérifié par Odoo)
+        remplit le panier. Quand le bouton était un lien GET, chaque robot qui
+        le suivait ouvrait un panier : 1 882 devis anonymes en 11 jours, aucun
+        humain derrière. Un GET (ancien lien, robot) renvoie sur la fiche sans
+        rien créer.
         """
         module = request.env["oski.module"].sudo().browse(module_id).exists()
         if not module or not module.is_published:
             return request.not_found()
+        if request.httprequest.method != "POST":
+            return request.redirect(module.website_url, code=303)
 
         product = module.product_tmpl_id
         variant = product.product_variant_id
@@ -586,6 +595,12 @@ class OskiAppStore(http.Controller):
             order_sudo.with_context(skip_cart_verification=True)._cart_add(
                 product_id=variant.id, quantity=1
             )
+        if not order_sudo.oski_geo_country_id:
+            # Pays du clic, pour les paniers anonymes dont le client (« Public
+            # user ») n'a pas de pays. Jamais d'adresse IP conservée.
+            country = self._geoip_country()
+            if country:
+                order_sudo.oski_geo_country_id = country
 
         return request.redirect("/shop/cart")
 
@@ -616,21 +631,30 @@ class OskiAppStore(http.Controller):
         de la requête (`request.geoip`). Sans base GeoLite2 sur le serveur,
         `country_code` vaut None : pays vide (« Inconnu »), sans erreur.
         """
-        Country = request.env["res.country"].sudo()
         if partner:
             country = partner.country_id or partner.commercial_partner_id.country_id
             if country:
                 return country, "partner"
+        country = self._geoip_country()
+        if country:
+            return country, "geoip"
+        return country, "unknown"
+
+    def _geoip_country(self):
+        """Pays de la requête par géolocalisation (GeoLite2), sinon vide.
+
+        Jamais bloquant : sans base GeoLite2 ou sur une IP inconnue, renvoie un
+        `res.country` vide. L'adresse IP n'est lue que pour ce calcul.
+        """
+        Country = request.env["res.country"].sudo()
         try:
             code = request.geoip.country_code
-        except Exception:  # noqa: BLE001 — la géoloc ne doit jamais bloquer le zip
+        except Exception:  # noqa: BLE001 — la géoloc ne doit jamais bloquer
             _logger.debug("Geolocation unavailable", exc_info=True)
             code = None
-        if code:
-            country = Country.search([("code", "=", code.upper())], limit=1)
-            if country:
-                return country, "geoip"
-        return Country, "unknown"
+        if not code:
+            return Country
+        return Country.search([("code", "=", code.upper())], limit=1)
 
     def _log_download(self, version):
         """Trace le téléchargement servi (module, version, pays). Jamais bloquant."""

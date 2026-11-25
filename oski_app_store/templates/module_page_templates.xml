@@ -89,21 +89,29 @@
                                                 t-out="price_offer['price']"
                                                 t-options='{"widget": "monetary", "display_currency": price_offer["currency"]}'/>
                                     </p>
-                                    <a t-att-href="buy_url"
-                                       class="btn oski-btn-buy w-100">
-                                        Buy —
-                                        <span t-out="price_offer['price']"
+                                    <!-- Formulaire POST et non lien : un robot qui suit les liens
+                                         ne crée plus de panier. -->
+                                    <form t-att-action="buy_url" method="post" class="oski-buy-form m-0">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <button type="submit" class="btn oski-btn-buy w-100">
+                                            Buy —
+                                            <span t-out="price_offer['price']"
                                               t-options='{"widget": "monetary", "display_currency": price_offer["currency"]}'/>
-                                    </a>
+                                        </button>
+                                    </form>
                                     <p class="oski-price-offer-note" t-out="price_offer['note']"/>
                                 </t>
                                 <t t-elif="is_sellable">
-                                    <a t-att-href="buy_url"
-                                       class="btn oski-btn-buy w-100">
-                                        Buy —
-                                        <span t-field="module.price"
+                                    <!-- Formulaire POST et non lien : un robot qui suit les liens
+                                         ne crée plus de panier. -->
+                                    <form t-att-action="buy_url" method="post" class="oski-buy-form m-0">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <button type="submit" class="btn oski-btn-buy w-100">
+                                            Buy —
+                                            <span t-field="module.price"
                                               t-options='{"widget": "monetary", "display_currency": module.currency_id}'/>
-                                    </a>
+                                        </button>
+                                    </form>
                                 </t>
                                 <p t-else="" class="text-muted mb-0">
                                     Coming soon for sale.
